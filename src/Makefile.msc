@@ -1,0 +1,118 @@
+!ifndef BOOSTDIR
+BOOSTDIR = ../../boost_1_32_0
+!endif
+
+!ifdef WARNINGS
+CXXFLAGS = -nologo -O2 -GX -GR -MT -W3 -I. -I../include -I$(BOOSTDIR)
+!else
+CXXFLAGS = -nologo -O2 -GX -GR -MT -I. -I../include -I$(BOOSTDIR)
+!endif
+LDFLAGS = -nologo -O2 -GX -GR -MT
+LIBS = ws2_32.lib
+
+all: \
+	tests\performance\client.exe \
+	tests\performance\server.exe \
+	tests\unit\demuxer_test.exe \
+	tests\unit\dgram_socket_test.exe \
+	tests\unit\error_handler_test.exe \
+	tests\unit\fixed_buffer_test.exe \
+	tests\unit\is_recv_buffered_test.exe \
+	tests\unit\is_send_buffered_test.exe \
+	tests\unit\locking_dispatcher_test.exe \
+	tests\unit\recv_test.exe \
+	tests\unit\send_test.exe \
+	tests\unit\socket_acceptor_test.exe \
+	tests\unit\timer_test.exe \
+	examples\chat\chat_client.exe \
+	examples\chat\chat_server.exe \
+	examples\echo\async_tcp_echo_server.exe \
+	examples\echo\async_udp_echo_server.exe \
+	examples\echo\blocking_tcp_echo_client.exe \
+	examples\echo\blocking_tcp_echo_server.exe \
+	examples\echo\blocking_udp_echo_client.exe \
+	examples\echo\blocking_udp_echo_server.exe \
+	examples\timeouts\accept_timeout.exe \
+	examples\timeouts\connect_timeout.exe \
+	examples\timeouts\dgram_recv_timeout.exe \
+	examples\tutorial\timer1\timer.exe \
+	examples\tutorial\timer2\timer.exe \
+	examples\tutorial\timer3\timer.exe \
+	examples\tutorial\timer4\timer.exe \
+	examples\tutorial\timer5\timer.exe \
+	examples\tutorial\daytime1\client.exe \
+	examples\tutorial\daytime2\server.exe \
+	examples\tutorial\daytime3\server.exe \
+	examples\tutorial\daytime4\client.exe \
+	examples\tutorial\daytime5\server.exe \
+	examples\tutorial\daytime6\server.exe \
+	examples\tutorial\daytime7\server.exe
+
+tests\performance\client.exe: tests\performance\client.obj
+tests\performance\server.exe: tests\performance\server.obj
+tests\unit\demuxer_test.exe: tests\unit\demuxer_test.obj
+tests\unit\dgram_socket_test.exe: tests\unit\dgram_socket_test.obj
+tests\unit\error_handler_test.exe: tests\unit\error_handler_test.obj
+tests\unit\fixed_buffer_test.exe: tests\unit\fixed_buffer_test.obj
+tests\unit\is_recv_buffered_test.exe: tests\unit\is_recv_buffered_test.obj
+tests\unit\is_send_buffered_test.exe: tests\unit\is_send_buffered_test.obj
+tests\unit\locking_dispatcher_test.exe: tests\unit\locking_dispatcher_test.obj
+tests\unit\recv_test.exe: tests\unit\recv_test.obj
+tests\unit\send_test.exe: tests\unit\send_test.obj
+tests\unit\socket_acceptor_test.exe: tests\unit\socket_acceptor_test.obj
+tests\unit\timer_test.exe: tests\unit\timer_test.obj
+examples\chat\chat_client.exe: examples\chat\chat_client.obj
+examples\chat\chat_server.exe: examples\chat\chat_server.obj
+examples\echo\async_tcp_echo_server.exe: examples\echo\async_tcp_echo_server.obj
+examples\echo\async_udp_echo_server.exe: examples\echo\async_udp_echo_server.obj
+examples\echo\blocking_tcp_echo_client.exe: examples\echo\blocking_tcp_echo_client.obj
+examples\echo\blocking_tcp_echo_server.exe: examples\echo\blocking_tcp_echo_server.obj
+examples\echo\blocking_udp_echo_client.exe: examples\echo\blocking_udp_echo_client.obj
+examples\echo\blocking_udp_echo_server.exe: examples\echo\blocking_udp_echo_server.obj
+examples\timeouts\accept_timeout.exe: examples\timeouts\accept_timeout.obj
+examples\timeouts\connect_timeout.exe: examples\timeouts\connect_timeout.obj
+examples\timeouts\dgram_recv_timeout.exe: examples\timeouts\dgram_recv_timeout.obj
+examples\tutorial\timer1\timer.exe: examples\tutorial\timer1\timer.obj
+examples\tutorial\timer2\timer.exe: examples\tutorial\timer2\timer.obj
+examples\tutorial\timer3\timer.exe: examples\tutorial\timer3\timer.obj
+examples\tutorial\timer4\timer.exe: examples\tutorial\timer4\timer.obj
+examples\tutorial\timer5\timer.exe: examples\tutorial\timer5\timer.obj
+examples\tutorial\daytime1\client.exe: examples\tutorial\daytime1\client.obj
+examples\tutorial\daytime2\server.exe: examples\tutorial\daytime2\server.obj
+examples\tutorial\daytime3\server.exe: examples\tutorial\daytime3\server.obj
+examples\tutorial\daytime4\client.exe: examples\tutorial\daytime4\client.obj
+examples\tutorial\daytime5\server.exe: examples\tutorial\daytime5\server.obj
+examples\tutorial\daytime6\server.exe: examples\tutorial\daytime6\server.obj
+examples\tutorial\daytime7\server.exe: examples\tutorial\daytime7\server.obj
+
+check: all
+	@tests\unit\demuxer_test.exe && \
+	tests\unit\dgram_socket_test.exe && \
+	tests\unit\error_handler_test.exe && \
+	tests\unit\fixed_buffer_test.exe && \
+	tests\unit\is_recv_buffered_test.exe && \
+	tests\unit\is_send_buffered_test.exe && \
+	tests\unit\locking_dispatcher_test.exe && \
+	tests\unit\recv_test.exe && \
+	tests\unit\send_test.exe && \
+	tests\unit\socket_acceptor_test.exe && \
+	tests\unit\timer_test.exe
+
+clean:
+	-del /q /s tests\*.exe
+	-del /q /s tests\*.exp
+	-del /q /s tests\*.ilk
+	-del /q /s tests\*.pdb
+	-del /q /s tests\*.obj
+	-del /q /s examples\*.exe
+	-del /q /s examples\*.exp
+	-del /q /s examples\*.ilk
+	-del /q /s examples\*.pdb
+	-del /q /s examples\*.obj
+	-del /q /s *.pdb
+
+.obj.exe:
+	cl -Fe$@ $(LDFLAGS) $< $(LIBS) -link -opt:ref
+
+.cpp.obj:
+	cl -Fo$@ -c $(CXXFLAGS) $<
