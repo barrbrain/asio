@@ -2,7 +2,7 @@
 // posix_thread.hpp
 // ~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003, 2004 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -16,6 +16,7 @@
 #if !defined(_WIN32)
 
 #include "asio/detail/push_options.hpp"
+#include <new>
 #include <boost/noncopyable.hpp>
 #include <pthread.h>
 #include "asio/detail/pop_options.hpp"
@@ -37,7 +38,8 @@ public:
     : joined_(false)
   {
     func_base* arg = new func<Function>(f);
-    ::pthread_create(&thread_, 0, asio_detail_posix_thread_function, arg);
+    if (::pthread_create(&thread_, 0, asio_detail_posix_thread_function, arg))
+      throw std::bad_alloc();
   }
 
   // Destructor.

@@ -2,7 +2,7 @@
 // stream_socket.hpp
 // ~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003, 2004 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -18,6 +18,7 @@
 #if defined(_WIN32)
 # include "asio/detail/win_iocp_stream_socket_service.hpp"
 #else
+# include "asio/detail/epoll_reactor.hpp"
 # include "asio/detail/select_reactor.hpp"
 # include "asio/detail/reactive_stream_socket_service.hpp"
 #endif
@@ -34,6 +35,15 @@ typedef basic_stream_socket
 typedef basic_stream_socket
   <
     detail::win_iocp_stream_socket_service
+  > stream_socket;
+#elif defined(ASIO_HAS_EPOLL_REACTOR)
+typedef basic_stream_socket
+  <
+    detail::reactive_stream_socket_service
+      <
+        demuxer,
+        detail::epoll_reactor
+      >
   > stream_socket;
 #else
 typedef basic_stream_socket

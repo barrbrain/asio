@@ -2,7 +2,7 @@
 // win_tss_bool.hpp
 // ~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003, 2004 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -16,7 +16,7 @@
 #if defined(_WIN32)
 
 #include "asio/detail/push_options.hpp"
-#include <stdexcept>
+#include <new>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/detail/socket_types.hpp"
@@ -32,7 +32,7 @@ public:
   {
     tss_key_ = ::TlsAlloc();
     if (tss_key_ == TLS_OUT_OF_INDEXES)
-      throw std::runtime_error("Cannot create thread-local storage");
+      throw std::bad_alloc();
   }
 
   // Destructor.

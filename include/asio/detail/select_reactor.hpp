@@ -2,7 +2,7 @@
 // select_reactor.hpp
 // ~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003, 2004 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -26,6 +26,7 @@
 #include "asio/detail/reactor_op_queue.hpp"
 #include "asio/detail/reactor_timer_queue.hpp"
 #include "asio/detail/select_interrupter.hpp"
+#include "asio/detail/signal_blocker.hpp"
 #include "asio/detail/socket_types.hpp"
 #include "asio/detail/time.hpp"
 
@@ -47,14 +48,17 @@ public:
       except_op_queue_(),
       pending_cancellations_(),
       stop_thread_(false),
-      thread_(new asio::detail::thread(
-            bind_handler(&select_reactor::call_run_thread, this)))
+      thread_(0)
   {
+    asio::detail::signal_blocker sb;
+    thread_ = new asio::detail::thread(
+        bind_handler(&select_reactor::call_run_thread, this));
   }
 
   // Constructor when running as a demuxer task.
   select_reactor(basic_demuxer<task_demuxer_service<select_reactor> >&)
     : mutex_(),
+      select_in_progress_(false),
       interrupter_(),
       read_op_queue_(),
       write_op_queue_(),
@@ -96,17 +100,6 @@ public:
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
     if (write_op_queue_.enqueue_operation(descriptor, handler))
-      interrupter_.interrupt();
-  }
-
-  // Start a new exception operation. The do_operation function of the
-  // select_op object will be invoked when the given descriptor has exception
-  // information available.
-  template <typename Handler>
-  void start_except_op(socket_type descriptor, Handler handler)
-  {
-    asio::detail::mutex::scoped_lock lock(mutex_);
-    if (except_op_queue_.enqueue_operation(descriptor, handler))
       interrupter_.interrupt();
   }
 
@@ -271,8 +264,11 @@ private:
       lock.lock();
       select_in_progress_ = false;
 
+      // Block signals while dispatching operations.
+      asio::detail::signal_blocker sb;
+
       // Reset the interrupter.
-      if (read_fds.is_set(interrupter_.read_descriptor()))
+      if (retval > 0 && read_fds.is_set(interrupter_.read_descriptor()))
         stop = interrupter_.reset();
 
       // Dispatch all ready operations.

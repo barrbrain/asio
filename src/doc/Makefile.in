@@ -137,15 +137,15 @@ target_alias = @target_alias@
 @HAVE_DOXYGEN_TRUE@	asio.css \
 @HAVE_DOXYGEN_TRUE@	asio_dox.txt \
 @HAVE_DOXYGEN_TRUE@	release_checklist.htm \
-@HAVE_DOXYGEN_TRUE@  concepts/Async_Object.hpp \
-@HAVE_DOXYGEN_TRUE@  concepts/Async_Recv_Stream.hpp \
-@HAVE_DOXYGEN_TRUE@  concepts/Async_Send_Stream.hpp \
-@HAVE_DOXYGEN_TRUE@  concepts/Dispatcher.hpp \
-@HAVE_DOXYGEN_TRUE@  concepts/Endpoint.hpp \
-@HAVE_DOXYGEN_TRUE@  concepts/Protocol.hpp \
-@HAVE_DOXYGEN_TRUE@  concepts/Stream.hpp \
-@HAVE_DOXYGEN_TRUE@  concepts/Sync_Recv_Stream.hpp \
-@HAVE_DOXYGEN_TRUE@  concepts/Sync_Send_Stream.hpp \
+@HAVE_DOXYGEN_TRUE@	concepts/Async_Object.hpp \
+@HAVE_DOXYGEN_TRUE@	concepts/Async_Recv_Stream.hpp \
+@HAVE_DOXYGEN_TRUE@	concepts/Async_Send_Stream.hpp \
+@HAVE_DOXYGEN_TRUE@	concepts/Dispatcher.hpp \
+@HAVE_DOXYGEN_TRUE@	concepts/Endpoint.hpp \
+@HAVE_DOXYGEN_TRUE@	concepts/Protocol.hpp \
+@HAVE_DOXYGEN_TRUE@	concepts/Stream.hpp \
+@HAVE_DOXYGEN_TRUE@	concepts/Sync_Recv_Stream.hpp \
+@HAVE_DOXYGEN_TRUE@	concepts/Sync_Send_Stream.hpp \
 @HAVE_DOXYGEN_TRUE@	../examples/tutorial/daytime_dox.txt \
 @HAVE_DOXYGEN_TRUE@	../examples/tutorial/index_dox.txt \
 @HAVE_DOXYGEN_TRUE@	../examples/tutorial/timer_dox.txt

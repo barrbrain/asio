@@ -2,7 +2,7 @@
 // win_mutex.hpp
 // ~~~~~~~~~~~~~
 //
-// Copyright (c) 2003, 2004 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -16,7 +16,7 @@
 #if defined(_WIN32)
 
 #include "asio/detail/push_options.hpp"
-#include <stdexcept>
+#include <new>
 #include <boost/noncopyable.hpp>
 #include "asio/detail/pop_options.hpp"
 
@@ -36,7 +36,7 @@ public:
   win_mutex()
   {
     if (!do_init())
-      throw std::runtime_error("Unable to create mutex");
+      throw std::bad_alloc();
   }
 
   // Destructor.
@@ -49,7 +49,7 @@ public:
   void lock()
   {
     if (!do_lock())
-      throw std::runtime_error("Unable to lock mutex");
+      throw std::bad_alloc();
   }
 
   // Unlock the mutex.

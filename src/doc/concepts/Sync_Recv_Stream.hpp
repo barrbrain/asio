@@ -2,7 +2,7 @@
 // Sync_Recv_Stream.hpp
 // ~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003, 2004 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -22,7 +22,7 @@ public:
   /// Receive some data from the stream.
   /**
    * This function is used to receive data from the stream. The function call
-   * will block until data has received successfully or an error occurs.
+   * will block until data has been received successfully or an error occurs.
    *
    * @param data The buffer into which the received data will be written.
    *
@@ -38,7 +38,7 @@ public:
   /// Receive some data from the stream.
   /**
    * This function is used to receive data from the stream. The function call
-   * will block until data has received successfully or an error occurs.
+   * will block until data has been received successfully or an error occurs.
    *
    * @param data The buffer into which the received data will be written.
    *
