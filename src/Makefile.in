@@ -137,6 +137,7 @@ noinst_PROGRAMS = \
 	tests/unit/dgram_socket_test \
 	tests/unit/error_handler_test \
 	tests/unit/fixed_buffer_test \
+	tests/unit/ipv4_host_resolver_test \
 	tests/unit/is_recv_buffered_test \
 	tests/unit/is_send_buffered_test \
 	tests/unit/locking_dispatcher_test \
@@ -152,9 +153,12 @@ noinst_PROGRAMS = \
 	examples/echo/blocking_tcp_echo_server \
 	examples/echo/blocking_udp_echo_client \
 	examples/echo/blocking_udp_echo_server \
+	examples/multicast/receiver \
+	examples/multicast/sender \
 	examples/timeouts/accept_timeout \
 	examples/timeouts/connect_timeout \
 	examples/timeouts/dgram_recv_timeout \
+	examples/timeouts/stream_recv_timeout \
 	examples/tutorial/timer1/timer \
 	examples/tutorial/timer2/timer \
 	examples/tutorial/timer3/timer \
@@ -174,6 +178,7 @@ TESTS = \
 	tests/unit/dgram_socket_test \
 	tests/unit/error_handler_test \
 	tests/unit/fixed_buffer_test \
+	tests/unit/ipv4_host_resolver_test \
 	tests/unit/is_recv_buffered_test \
 	tests/unit/is_send_buffered_test \
 	tests/unit/locking_dispatcher_test \
@@ -195,6 +200,7 @@ tests_performance_server_SOURCES = tests/performance/server.cpp
 tests_unit_demuxer_test_SOURCES = tests/unit/demuxer_test.cpp
 tests_unit_dgram_socket_test_SOURCES = tests/unit/dgram_socket_test.cpp
 tests_unit_error_handler_test_SOURCES = tests/unit/error_handler_test.cpp
+tests_unit_ipv4_host_resolver_test_SOURCES = tests/unit/ipv4_host_resolver_test.cpp
 tests_unit_is_recv_buffered_test_SOURCES = tests/unit/is_recv_buffered_test.cpp
 tests_unit_is_send_buffered_test_SOURCES = tests/unit/is_send_buffered_test.cpp
 tests_unit_fixed_buffer_test_SOURCES = tests/unit/fixed_buffer_test.cpp
@@ -211,9 +217,12 @@ examples_echo_blocking_tcp_echo_client_SOURCES = examples/echo/blocking_tcp_echo
 examples_echo_blocking_tcp_echo_server_SOURCES = examples/echo/blocking_tcp_echo_server.cpp
 examples_echo_blocking_udp_echo_client_SOURCES = examples/echo/blocking_udp_echo_client.cpp
 examples_echo_blocking_udp_echo_server_SOURCES = examples/echo/blocking_udp_echo_server.cpp
+examples_multicast_receiver_SOURCES = examples/multicast/receiver.cpp
+examples_multicast_sender_SOURCES = examples/multicast/sender.cpp
 examples_timeouts_accept_timeout_SOURCES = examples/timeouts/accept_timeout.cpp
 examples_timeouts_connect_timeout_SOURCES = examples/timeouts/connect_timeout.cpp
 examples_timeouts_dgram_recv_timeout_SOURCES = examples/timeouts/dgram_recv_timeout.cpp
+examples_timeouts_stream_recv_timeout_SOURCES = examples/timeouts/stream_recv_timeout.cpp
 examples_tutorial_timer1_timer_SOURCES = examples/tutorial/timer1/timer.cpp
 examples_tutorial_timer2_timer_SOURCES = examples/tutorial/timer2/timer.cpp
 examples_tutorial_timer3_timer_SOURCES = examples/tutorial/timer3/timer.cpp
@@ -245,6 +254,7 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	tests/unit/dgram_socket_test$(EXEEXT) \
 	tests/unit/error_handler_test$(EXEEXT) \
 	tests/unit/fixed_buffer_test$(EXEEXT) \
+	tests/unit/ipv4_host_resolver_test$(EXEEXT) \
 	tests/unit/is_recv_buffered_test$(EXEEXT) \
 	tests/unit/is_send_buffered_test$(EXEEXT) \
 	tests/unit/locking_dispatcher_test$(EXEEXT) \
@@ -259,9 +269,12 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	examples/echo/blocking_tcp_echo_server$(EXEEXT) \
 	examples/echo/blocking_udp_echo_client$(EXEEXT) \
 	examples/echo/blocking_udp_echo_server$(EXEEXT) \
+	examples/multicast/receiver$(EXEEXT) \
+	examples/multicast/sender$(EXEEXT) \
 	examples/timeouts/accept_timeout$(EXEEXT) \
 	examples/timeouts/connect_timeout$(EXEEXT) \
 	examples/timeouts/dgram_recv_timeout$(EXEEXT) \
+	examples/timeouts/stream_recv_timeout$(EXEEXT) \
 	examples/tutorial/timer1/timer$(EXEEXT) \
 	examples/tutorial/timer2/timer$(EXEEXT) \
 	examples/tutorial/timer3/timer$(EXEEXT) \
@@ -332,6 +345,20 @@ examples_echo_blocking_udp_echo_server_OBJECTS = \
 examples_echo_blocking_udp_echo_server_LDADD = $(LDADD)
 examples_echo_blocking_udp_echo_server_DEPENDENCIES =
 examples_echo_blocking_udp_echo_server_LDFLAGS =
+am_examples_multicast_receiver_OBJECTS = \
+	examples/multicast/receiver.$(OBJEXT)
+examples_multicast_receiver_OBJECTS = \
+	$(am_examples_multicast_receiver_OBJECTS)
+examples_multicast_receiver_LDADD = $(LDADD)
+examples_multicast_receiver_DEPENDENCIES =
+examples_multicast_receiver_LDFLAGS =
+am_examples_multicast_sender_OBJECTS = \
+	examples/multicast/sender.$(OBJEXT)
+examples_multicast_sender_OBJECTS = \
+	$(am_examples_multicast_sender_OBJECTS)
+examples_multicast_sender_LDADD = $(LDADD)
+examples_multicast_sender_DEPENDENCIES =
+examples_multicast_sender_LDFLAGS =
 am_examples_timeouts_accept_timeout_OBJECTS = \
 	examples/timeouts/accept_timeout.$(OBJEXT)
 examples_timeouts_accept_timeout_OBJECTS = \
@@ -353,6 +380,13 @@ examples_timeouts_dgram_recv_timeout_OBJECTS = \
 examples_timeouts_dgram_recv_timeout_LDADD = $(LDADD)
 examples_timeouts_dgram_recv_timeout_DEPENDENCIES =
 examples_timeouts_dgram_recv_timeout_LDFLAGS =
+am_examples_timeouts_stream_recv_timeout_OBJECTS = \
+	examples/timeouts/stream_recv_timeout.$(OBJEXT)
+examples_timeouts_stream_recv_timeout_OBJECTS = \
+	$(am_examples_timeouts_stream_recv_timeout_OBJECTS)
+examples_timeouts_stream_recv_timeout_LDADD = $(LDADD)
+examples_timeouts_stream_recv_timeout_DEPENDENCIES =
+examples_timeouts_stream_recv_timeout_LDFLAGS =
 am_examples_tutorial_daytime1_client_OBJECTS = \
 	examples/tutorial/daytime1/client.$(OBJEXT)
 examples_tutorial_daytime1_client_OBJECTS = \
@@ -475,6 +509,13 @@ tests_unit_fixed_buffer_test_OBJECTS = \
 tests_unit_fixed_buffer_test_LDADD = $(LDADD)
 tests_unit_fixed_buffer_test_DEPENDENCIES =
 tests_unit_fixed_buffer_test_LDFLAGS =
+am_tests_unit_ipv4_host_resolver_test_OBJECTS = \
+	tests/unit/ipv4_host_resolver_test.$(OBJEXT)
+tests_unit_ipv4_host_resolver_test_OBJECTS = \
+	$(am_tests_unit_ipv4_host_resolver_test_OBJECTS)
+tests_unit_ipv4_host_resolver_test_LDADD = $(LDADD)
+tests_unit_ipv4_host_resolver_test_DEPENDENCIES =
+tests_unit_ipv4_host_resolver_test_LDFLAGS =
 am_tests_unit_is_recv_buffered_test_OBJECTS = \
 	tests/unit/is_recv_buffered_test.$(OBJEXT)
 tests_unit_is_recv_buffered_test_OBJECTS = \
@@ -530,9 +571,12 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	examples/echo/$(DEPDIR)/blocking_tcp_echo_server.Po \
 @AMDEP_TRUE@	examples/echo/$(DEPDIR)/blocking_udp_echo_client.Po \
 @AMDEP_TRUE@	examples/echo/$(DEPDIR)/blocking_udp_echo_server.Po \
+@AMDEP_TRUE@	examples/multicast/$(DEPDIR)/receiver.Po \
+@AMDEP_TRUE@	examples/multicast/$(DEPDIR)/sender.Po \
 @AMDEP_TRUE@	examples/timeouts/$(DEPDIR)/accept_timeout.Po \
 @AMDEP_TRUE@	examples/timeouts/$(DEPDIR)/connect_timeout.Po \
 @AMDEP_TRUE@	examples/timeouts/$(DEPDIR)/dgram_recv_timeout.Po \
+@AMDEP_TRUE@	examples/timeouts/$(DEPDIR)/stream_recv_timeout.Po \
 @AMDEP_TRUE@	examples/tutorial/daytime1/$(DEPDIR)/client.Po \
 @AMDEP_TRUE@	examples/tutorial/daytime2/$(DEPDIR)/server.Po \
 @AMDEP_TRUE@	examples/tutorial/daytime3/$(DEPDIR)/server.Po \
@@ -551,6 +595,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	tests/unit/$(DEPDIR)/dgram_socket_test.Po \
 @AMDEP_TRUE@	tests/unit/$(DEPDIR)/error_handler_test.Po \
 @AMDEP_TRUE@	tests/unit/$(DEPDIR)/fixed_buffer_test.Po \
+@AMDEP_TRUE@	tests/unit/$(DEPDIR)/ipv4_host_resolver_test.Po \
 @AMDEP_TRUE@	tests/unit/$(DEPDIR)/is_recv_buffered_test.Po \
 @AMDEP_TRUE@	tests/unit/$(DEPDIR)/is_send_buffered_test.Po \
 @AMDEP_TRUE@	tests/unit/$(DEPDIR)/locking_dispatcher_test.Po \
@@ -571,9 +616,12 @@ DIST_SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(examples_echo_blocking_tcp_echo_server_SOURCES) \
 	$(examples_echo_blocking_udp_echo_client_SOURCES) \
 	$(examples_echo_blocking_udp_echo_server_SOURCES) \
+	$(examples_multicast_receiver_SOURCES) \
+	$(examples_multicast_sender_SOURCES) \
 	$(examples_timeouts_accept_timeout_SOURCES) \
 	$(examples_timeouts_connect_timeout_SOURCES) \
 	$(examples_timeouts_dgram_recv_timeout_SOURCES) \
+	$(examples_timeouts_stream_recv_timeout_SOURCES) \
 	$(examples_tutorial_daytime1_client_SOURCES) \
 	$(examples_tutorial_daytime2_server_SOURCES) \
 	$(examples_tutorial_daytime3_server_SOURCES) \
@@ -592,6 +640,7 @@ DIST_SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(tests_unit_dgram_socket_test_SOURCES) \
 	$(tests_unit_error_handler_test_SOURCES) \
 	$(tests_unit_fixed_buffer_test_SOURCES) \
+	$(tests_unit_ipv4_host_resolver_test_SOURCES) \
 	$(tests_unit_is_recv_buffered_test_SOURCES) \
 	$(tests_unit_is_send_buffered_test_SOURCES) \
 	$(tests_unit_locking_dispatcher_test_SOURCES) \
@@ -608,7 +657,7 @@ RECURSIVE_TARGETS = info-recursive dvi-recursive pdf-recursive \
 	check-recursive installcheck-recursive
 DIST_COMMON = $(noinst_HEADERS) Makefile.am Makefile.in
 DIST_SUBDIRS = $(SUBDIRS)
-SOURCES = $(examples_chat_chat_client_SOURCES) $(examples_chat_chat_server_SOURCES) $(examples_echo_async_tcp_echo_server_SOURCES) $(examples_echo_async_udp_echo_server_SOURCES) $(examples_echo_blocking_tcp_echo_client_SOURCES) $(examples_echo_blocking_tcp_echo_server_SOURCES) $(examples_echo_blocking_udp_echo_client_SOURCES) $(examples_echo_blocking_udp_echo_server_SOURCES) $(examples_timeouts_accept_timeout_SOURCES) $(examples_timeouts_connect_timeout_SOURCES) $(examples_timeouts_dgram_recv_timeout_SOURCES) $(examples_tutorial_daytime1_client_SOURCES) $(examples_tutorial_daytime2_server_SOURCES) $(examples_tutorial_daytime3_server_SOURCES) $(examples_tutorial_daytime4_client_SOURCES) $(examples_tutorial_daytime5_server_SOURCES) $(examples_tutorial_daytime6_server_SOURCES) $(examples_tutorial_daytime7_server_SOURCES) $(examples_tutorial_timer1_timer_SOURCES) $(examples_tutorial_timer2_timer_SOURCES) $(examples_tutorial_timer3_timer_SOURCES) $(examples_tutorial_timer4_timer_SOURCES) $(examples_tutorial_timer5_timer_SOURCES) $(tests_performance_client_SOURCES) $(tests_performance_server_SOURCES) $(tests_unit_demuxer_test_SOURCES) $(tests_unit_dgram_socket_test_SOURCES) $(tests_unit_error_handler_test_SOURCES) $(tests_unit_fixed_buffer_test_SOURCES) $(tests_unit_is_recv_buffered_test_SOURCES) $(tests_unit_is_send_buffered_test_SOURCES) $(tests_unit_locking_dispatcher_test_SOURCES) $(tests_unit_recv_test_SOURCES) $(tests_unit_send_test_SOURCES) $(tests_unit_socket_acceptor_test_SOURCES) $(tests_unit_timer_test_SOURCES)
+SOURCES = $(examples_chat_chat_client_SOURCES) $(examples_chat_chat_server_SOURCES) $(examples_echo_async_tcp_echo_server_SOURCES) $(examples_echo_async_udp_echo_server_SOURCES) $(examples_echo_blocking_tcp_echo_client_SOURCES) $(examples_echo_blocking_tcp_echo_server_SOURCES) $(examples_echo_blocking_udp_echo_client_SOURCES) $(examples_echo_blocking_udp_echo_server_SOURCES) $(examples_multicast_receiver_SOURCES) $(examples_multicast_sender_SOURCES) $(examples_timeouts_accept_timeout_SOURCES) $(examples_timeouts_connect_timeout_SOURCES) $(examples_timeouts_dgram_recv_timeout_SOURCES) $(examples_timeouts_stream_recv_timeout_SOURCES) $(examples_tutorial_daytime1_client_SOURCES) $(examples_tutorial_daytime2_server_SOURCES) $(examples_tutorial_daytime3_server_SOURCES) $(examples_tutorial_daytime4_client_SOURCES) $(examples_tutorial_daytime5_server_SOURCES) $(examples_tutorial_daytime6_server_SOURCES) $(examples_tutorial_daytime7_server_SOURCES) $(examples_tutorial_timer1_timer_SOURCES) $(examples_tutorial_timer2_timer_SOURCES) $(examples_tutorial_timer3_timer_SOURCES) $(examples_tutorial_timer4_timer_SOURCES) $(examples_tutorial_timer5_timer_SOURCES) $(tests_performance_client_SOURCES) $(tests_performance_server_SOURCES) $(tests_unit_demuxer_test_SOURCES) $(tests_unit_dgram_socket_test_SOURCES) $(tests_unit_error_handler_test_SOURCES) $(tests_unit_fixed_buffer_test_SOURCES) $(tests_unit_ipv4_host_resolver_test_SOURCES) $(tests_unit_is_recv_buffered_test_SOURCES) $(tests_unit_is_send_buffered_test_SOURCES) $(tests_unit_locking_dispatcher_test_SOURCES) $(tests_unit_recv_test_SOURCES) $(tests_unit_send_test_SOURCES) $(tests_unit_socket_acceptor_test_SOURCES) $(tests_unit_timer_test_SOURCES)
 
 all: all-recursive
 
@@ -674,6 +723,22 @@ examples/echo/blocking_udp_echo_server.$(OBJEXT): \
 examples/echo/blocking_udp_echo_server$(EXEEXT): $(examples_echo_blocking_udp_echo_server_OBJECTS) $(examples_echo_blocking_udp_echo_server_DEPENDENCIES) examples/echo/.dirstamp
 	@rm -f examples/echo/blocking_udp_echo_server$(EXEEXT)
 	$(CXXLINK) $(examples_echo_blocking_udp_echo_server_LDFLAGS) $(examples_echo_blocking_udp_echo_server_OBJECTS) $(examples_echo_blocking_udp_echo_server_LDADD) $(LIBS)
+examples/multicast/.dirstamp:
+	@$(mkinstalldirs) examples/multicast
+	@: > examples/multicast/.dirstamp
+examples/multicast/$(DEPDIR)/.dirstamp:
+	@$(mkinstalldirs) examples/multicast/$(DEPDIR)
+	@: > examples/multicast/$(DEPDIR)/.dirstamp
+examples/multicast/receiver.$(OBJEXT): examples/multicast/.dirstamp \
+	examples/multicast/$(DEPDIR)/.dirstamp
+examples/multicast/receiver$(EXEEXT): $(examples_multicast_receiver_OBJECTS) $(examples_multicast_receiver_DEPENDENCIES) examples/multicast/.dirstamp
+	@rm -f examples/multicast/receiver$(EXEEXT)
+	$(CXXLINK) $(examples_multicast_receiver_LDFLAGS) $(examples_multicast_receiver_OBJECTS) $(examples_multicast_receiver_LDADD) $(LIBS)
+examples/multicast/sender.$(OBJEXT): examples/multicast/.dirstamp \
+	examples/multicast/$(DEPDIR)/.dirstamp
+examples/multicast/sender$(EXEEXT): $(examples_multicast_sender_OBJECTS) $(examples_multicast_sender_DEPENDENCIES) examples/multicast/.dirstamp
+	@rm -f examples/multicast/sender$(EXEEXT)
+	$(CXXLINK) $(examples_multicast_sender_LDFLAGS) $(examples_multicast_sender_OBJECTS) $(examples_multicast_sender_LDADD) $(LIBS)
 examples/timeouts/.dirstamp:
 	@$(mkinstalldirs) examples/timeouts
 	@: > examples/timeouts/.dirstamp
@@ -696,6 +761,12 @@ examples/timeouts/dgram_recv_timeout.$(OBJEXT): \
 examples/timeouts/dgram_recv_timeout$(EXEEXT): $(examples_timeouts_dgram_recv_timeout_OBJECTS) $(examples_timeouts_dgram_recv_timeout_DEPENDENCIES) examples/timeouts/.dirstamp
 	@rm -f examples/timeouts/dgram_recv_timeout$(EXEEXT)
 	$(CXXLINK) $(examples_timeouts_dgram_recv_timeout_LDFLAGS) $(examples_timeouts_dgram_recv_timeout_OBJECTS) $(examples_timeouts_dgram_recv_timeout_LDADD) $(LIBS)
+examples/timeouts/stream_recv_timeout.$(OBJEXT): \
+	examples/timeouts/.dirstamp \
+	examples/timeouts/$(DEPDIR)/.dirstamp
+examples/timeouts/stream_recv_timeout$(EXEEXT): $(examples_timeouts_stream_recv_timeout_OBJECTS) $(examples_timeouts_stream_recv_timeout_DEPENDENCIES) examples/timeouts/.dirstamp
+	@rm -f examples/timeouts/stream_recv_timeout$(EXEEXT)
+	$(CXXLINK) $(examples_timeouts_stream_recv_timeout_LDFLAGS) $(examples_timeouts_stream_recv_timeout_OBJECTS) $(examples_timeouts_stream_recv_timeout_LDADD) $(LIBS)
 examples/tutorial/daytime1/.dirstamp:
 	@$(mkinstalldirs) examples/tutorial/daytime1
 	@: > examples/tutorial/daytime1/.dirstamp
@@ -882,6 +953,11 @@ tests/unit/fixed_buffer_test.$(OBJEXT): tests/unit/.dirstamp \
 tests/unit/fixed_buffer_test$(EXEEXT): $(tests_unit_fixed_buffer_test_OBJECTS) $(tests_unit_fixed_buffer_test_DEPENDENCIES) tests/unit/.dirstamp
 	@rm -f tests/unit/fixed_buffer_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_fixed_buffer_test_LDFLAGS) $(tests_unit_fixed_buffer_test_OBJECTS) $(tests_unit_fixed_buffer_test_LDADD) $(LIBS)
+tests/unit/ipv4_host_resolver_test.$(OBJEXT): tests/unit/.dirstamp \
+	tests/unit/$(DEPDIR)/.dirstamp
+tests/unit/ipv4_host_resolver_test$(EXEEXT): $(tests_unit_ipv4_host_resolver_test_OBJECTS) $(tests_unit_ipv4_host_resolver_test_DEPENDENCIES) tests/unit/.dirstamp
+	@rm -f tests/unit/ipv4_host_resolver_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_ipv4_host_resolver_test_LDFLAGS) $(tests_unit_ipv4_host_resolver_test_OBJECTS) $(tests_unit_ipv4_host_resolver_test_LDADD) $(LIBS)
 tests/unit/is_recv_buffered_test.$(OBJEXT): tests/unit/.dirstamp \
 	tests/unit/$(DEPDIR)/.dirstamp
 tests/unit/is_recv_buffered_test$(EXEEXT): $(tests_unit_is_recv_buffered_test_OBJECTS) $(tests_unit_is_recv_buffered_test_DEPENDENCIES) tests/unit/.dirstamp
@@ -928,9 +1004,12 @@ mostlyclean-compile:
 	-rm -f examples/echo/blocking_tcp_echo_server.$(OBJEXT)
 	-rm -f examples/echo/blocking_udp_echo_client.$(OBJEXT)
 	-rm -f examples/echo/blocking_udp_echo_server.$(OBJEXT)
+	-rm -f examples/multicast/receiver.$(OBJEXT)
+	-rm -f examples/multicast/sender.$(OBJEXT)
 	-rm -f examples/timeouts/accept_timeout.$(OBJEXT)
 	-rm -f examples/timeouts/connect_timeout.$(OBJEXT)
 	-rm -f examples/timeouts/dgram_recv_timeout.$(OBJEXT)
+	-rm -f examples/timeouts/stream_recv_timeout.$(OBJEXT)
 	-rm -f examples/tutorial/daytime1/client.$(OBJEXT)
 	-rm -f examples/tutorial/daytime2/server.$(OBJEXT)
 	-rm -f examples/tutorial/daytime3/server.$(OBJEXT)
@@ -949,6 +1028,7 @@ mostlyclean-compile:
 	-rm -f tests/unit/dgram_socket_test.$(OBJEXT)
 	-rm -f tests/unit/error_handler_test.$(OBJEXT)
 	-rm -f tests/unit/fixed_buffer_test.$(OBJEXT)
+	-rm -f tests/unit/ipv4_host_resolver_test.$(OBJEXT)
 	-rm -f tests/unit/is_recv_buffered_test.$(OBJEXT)
 	-rm -f tests/unit/is_send_buffered_test.$(OBJEXT)
 	-rm -f tests/unit/locking_dispatcher_test.$(OBJEXT)
@@ -968,9 +1048,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@examples/echo/$(DEPDIR)/blocking_tcp_echo_server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/echo/$(DEPDIR)/blocking_udp_echo_client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/echo/$(DEPDIR)/blocking_udp_echo_server.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/multicast/$(DEPDIR)/receiver.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/multicast/$(DEPDIR)/sender.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/timeouts/$(DEPDIR)/accept_timeout.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/timeouts/$(DEPDIR)/connect_timeout.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/timeouts/$(DEPDIR)/dgram_recv_timeout.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/timeouts/$(DEPDIR)/stream_recv_timeout.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/tutorial/daytime1/$(DEPDIR)/client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/tutorial/daytime2/$(DEPDIR)/server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/tutorial/daytime3/$(DEPDIR)/server.Po@am__quote@
@@ -989,6 +1072,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/dgram_socket_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/error_handler_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/fixed_buffer_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/ipv4_host_resolver_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/is_recv_buffered_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/is_send_buffered_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/locking_dispatcher_test.Po@am__quote@
@@ -998,7 +1082,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/timer_test.Po@am__quote@
 
 distclean-depend:
-	-rm -rf examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR)
+	-rm -rf examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/multicast/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR)
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" \
@@ -1198,6 +1282,50 @@ examples/echo/blocking_udp_echo_server.obj: examples/echo/blocking_udp_echo_serv
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o examples/echo/blocking_udp_echo_server.obj `if test -f 'examples/echo/blocking_udp_echo_server.cpp'; then $(CYGPATH_W) 'examples/echo/blocking_udp_echo_server.cpp'; else $(CYGPATH_W) '$(srcdir)/examples/echo/blocking_udp_echo_server.cpp'; fi`
 
+examples/multicast/receiver.o: examples/multicast/receiver.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT examples/multicast/receiver.o -MD -MP -MF "examples/multicast/$(DEPDIR)/receiver.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o examples/multicast/receiver.o `test -f 'examples/multicast/receiver.cpp' || echo '$(srcdir)/'`examples/multicast/receiver.cpp; \
+@am__fastdepCXX_TRUE@	then mv "examples/multicast/$(DEPDIR)/receiver.Tpo" "examples/multicast/$(DEPDIR)/receiver.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "examples/multicast/$(DEPDIR)/receiver.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='examples/multicast/receiver.cpp' object='examples/multicast/receiver.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='examples/multicast/$(DEPDIR)/receiver.Po' tmpdepfile='examples/multicast/$(DEPDIR)/receiver.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o examples/multicast/receiver.o `test -f 'examples/multicast/receiver.cpp' || echo '$(srcdir)/'`examples/multicast/receiver.cpp
+
+examples/multicast/receiver.obj: examples/multicast/receiver.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT examples/multicast/receiver.obj -MD -MP -MF "examples/multicast/$(DEPDIR)/receiver.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o examples/multicast/receiver.obj `if test -f 'examples/multicast/receiver.cpp'; then $(CYGPATH_W) 'examples/multicast/receiver.cpp'; else $(CYGPATH_W) '$(srcdir)/examples/multicast/receiver.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv "examples/multicast/$(DEPDIR)/receiver.Tpo" "examples/multicast/$(DEPDIR)/receiver.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "examples/multicast/$(DEPDIR)/receiver.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='examples/multicast/receiver.cpp' object='examples/multicast/receiver.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='examples/multicast/$(DEPDIR)/receiver.Po' tmpdepfile='examples/multicast/$(DEPDIR)/receiver.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o examples/multicast/receiver.obj `if test -f 'examples/multicast/receiver.cpp'; then $(CYGPATH_W) 'examples/multicast/receiver.cpp'; else $(CYGPATH_W) '$(srcdir)/examples/multicast/receiver.cpp'; fi`
+
+examples/multicast/sender.o: examples/multicast/sender.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT examples/multicast/sender.o -MD -MP -MF "examples/multicast/$(DEPDIR)/sender.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o examples/multicast/sender.o `test -f 'examples/multicast/sender.cpp' || echo '$(srcdir)/'`examples/multicast/sender.cpp; \
+@am__fastdepCXX_TRUE@	then mv "examples/multicast/$(DEPDIR)/sender.Tpo" "examples/multicast/$(DEPDIR)/sender.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "examples/multicast/$(DEPDIR)/sender.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='examples/multicast/sender.cpp' object='examples/multicast/sender.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='examples/multicast/$(DEPDIR)/sender.Po' tmpdepfile='examples/multicast/$(DEPDIR)/sender.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o examples/multicast/sender.o `test -f 'examples/multicast/sender.cpp' || echo '$(srcdir)/'`examples/multicast/sender.cpp
+
+examples/multicast/sender.obj: examples/multicast/sender.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT examples/multicast/sender.obj -MD -MP -MF "examples/multicast/$(DEPDIR)/sender.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o examples/multicast/sender.obj `if test -f 'examples/multicast/sender.cpp'; then $(CYGPATH_W) 'examples/multicast/sender.cpp'; else $(CYGPATH_W) '$(srcdir)/examples/multicast/sender.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv "examples/multicast/$(DEPDIR)/sender.Tpo" "examples/multicast/$(DEPDIR)/sender.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "examples/multicast/$(DEPDIR)/sender.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='examples/multicast/sender.cpp' object='examples/multicast/sender.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='examples/multicast/$(DEPDIR)/sender.Po' tmpdepfile='examples/multicast/$(DEPDIR)/sender.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o examples/multicast/sender.obj `if test -f 'examples/multicast/sender.cpp'; then $(CYGPATH_W) 'examples/multicast/sender.cpp'; else $(CYGPATH_W) '$(srcdir)/examples/multicast/sender.cpp'; fi`
+
 examples/timeouts/accept_timeout.o: examples/timeouts/accept_timeout.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT examples/timeouts/accept_timeout.o -MD -MP -MF "examples/timeouts/$(DEPDIR)/accept_timeout.Tpo" \
 @am__fastdepCXX_TRUE@	  -c -o examples/timeouts/accept_timeout.o `test -f 'examples/timeouts/accept_timeout.cpp' || echo '$(srcdir)/'`examples/timeouts/accept_timeout.cpp; \
@@ -1263,6 +1391,28 @@ examples/timeouts/dgram_recv_timeout.obj: examples/timeouts/dgram_recv_timeout.c
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='examples/timeouts/$(DEPDIR)/dgram_recv_timeout.Po' tmpdepfile='examples/timeouts/$(DEPDIR)/dgram_recv_timeout.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o examples/timeouts/dgram_recv_timeout.obj `if test -f 'examples/timeouts/dgram_recv_timeout.cpp'; then $(CYGPATH_W) 'examples/timeouts/dgram_recv_timeout.cpp'; else $(CYGPATH_W) '$(srcdir)/examples/timeouts/dgram_recv_timeout.cpp'; fi`
+
+examples/timeouts/stream_recv_timeout.o: examples/timeouts/stream_recv_timeout.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT examples/timeouts/stream_recv_timeout.o -MD -MP -MF "examples/timeouts/$(DEPDIR)/stream_recv_timeout.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o examples/timeouts/stream_recv_timeout.o `test -f 'examples/timeouts/stream_recv_timeout.cpp' || echo '$(srcdir)/'`examples/timeouts/stream_recv_timeout.cpp; \
+@am__fastdepCXX_TRUE@	then mv "examples/timeouts/$(DEPDIR)/stream_recv_timeout.Tpo" "examples/timeouts/$(DEPDIR)/stream_recv_timeout.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "examples/timeouts/$(DEPDIR)/stream_recv_timeout.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='examples/timeouts/stream_recv_timeout.cpp' object='examples/timeouts/stream_recv_timeout.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='examples/timeouts/$(DEPDIR)/stream_recv_timeout.Po' tmpdepfile='examples/timeouts/$(DEPDIR)/stream_recv_timeout.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o examples/timeouts/stream_recv_timeout.o `test -f 'examples/timeouts/stream_recv_timeout.cpp' || echo '$(srcdir)/'`examples/timeouts/stream_recv_timeout.cpp
+
+examples/timeouts/stream_recv_timeout.obj: examples/timeouts/stream_recv_timeout.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT examples/timeouts/stream_recv_timeout.obj -MD -MP -MF "examples/timeouts/$(DEPDIR)/stream_recv_timeout.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o examples/timeouts/stream_recv_timeout.obj `if test -f 'examples/timeouts/stream_recv_timeout.cpp'; then $(CYGPATH_W) 'examples/timeouts/stream_recv_timeout.cpp'; else $(CYGPATH_W) '$(srcdir)/examples/timeouts/stream_recv_timeout.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv "examples/timeouts/$(DEPDIR)/stream_recv_timeout.Tpo" "examples/timeouts/$(DEPDIR)/stream_recv_timeout.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "examples/timeouts/$(DEPDIR)/stream_recv_timeout.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='examples/timeouts/stream_recv_timeout.cpp' object='examples/timeouts/stream_recv_timeout.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='examples/timeouts/$(DEPDIR)/stream_recv_timeout.Po' tmpdepfile='examples/timeouts/$(DEPDIR)/stream_recv_timeout.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o examples/timeouts/stream_recv_timeout.obj `if test -f 'examples/timeouts/stream_recv_timeout.cpp'; then $(CYGPATH_W) 'examples/timeouts/stream_recv_timeout.cpp'; else $(CYGPATH_W) '$(srcdir)/examples/timeouts/stream_recv_timeout.cpp'; fi`
 
 examples/tutorial/daytime1/client.o: examples/tutorial/daytime1/client.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT examples/tutorial/daytime1/client.o -MD -MP -MF "examples/tutorial/daytime1/$(DEPDIR)/client.Tpo" \
@@ -1659,6 +1809,28 @@ tests/unit/fixed_buffer_test.obj: tests/unit/fixed_buffer_test.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='tests/unit/$(DEPDIR)/fixed_buffer_test.Po' tmpdepfile='tests/unit/$(DEPDIR)/fixed_buffer_test.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o tests/unit/fixed_buffer_test.obj `if test -f 'tests/unit/fixed_buffer_test.cpp'; then $(CYGPATH_W) 'tests/unit/fixed_buffer_test.cpp'; else $(CYGPATH_W) '$(srcdir)/tests/unit/fixed_buffer_test.cpp'; fi`
+
+tests/unit/ipv4_host_resolver_test.o: tests/unit/ipv4_host_resolver_test.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT tests/unit/ipv4_host_resolver_test.o -MD -MP -MF "tests/unit/$(DEPDIR)/ipv4_host_resolver_test.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o tests/unit/ipv4_host_resolver_test.o `test -f 'tests/unit/ipv4_host_resolver_test.cpp' || echo '$(srcdir)/'`tests/unit/ipv4_host_resolver_test.cpp; \
+@am__fastdepCXX_TRUE@	then mv "tests/unit/$(DEPDIR)/ipv4_host_resolver_test.Tpo" "tests/unit/$(DEPDIR)/ipv4_host_resolver_test.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "tests/unit/$(DEPDIR)/ipv4_host_resolver_test.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='tests/unit/ipv4_host_resolver_test.cpp' object='tests/unit/ipv4_host_resolver_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='tests/unit/$(DEPDIR)/ipv4_host_resolver_test.Po' tmpdepfile='tests/unit/$(DEPDIR)/ipv4_host_resolver_test.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o tests/unit/ipv4_host_resolver_test.o `test -f 'tests/unit/ipv4_host_resolver_test.cpp' || echo '$(srcdir)/'`tests/unit/ipv4_host_resolver_test.cpp
+
+tests/unit/ipv4_host_resolver_test.obj: tests/unit/ipv4_host_resolver_test.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT tests/unit/ipv4_host_resolver_test.obj -MD -MP -MF "tests/unit/$(DEPDIR)/ipv4_host_resolver_test.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o tests/unit/ipv4_host_resolver_test.obj `if test -f 'tests/unit/ipv4_host_resolver_test.cpp'; then $(CYGPATH_W) 'tests/unit/ipv4_host_resolver_test.cpp'; else $(CYGPATH_W) '$(srcdir)/tests/unit/ipv4_host_resolver_test.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv "tests/unit/$(DEPDIR)/ipv4_host_resolver_test.Tpo" "tests/unit/$(DEPDIR)/ipv4_host_resolver_test.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "tests/unit/$(DEPDIR)/ipv4_host_resolver_test.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='tests/unit/ipv4_host_resolver_test.cpp' object='tests/unit/ipv4_host_resolver_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='tests/unit/$(DEPDIR)/ipv4_host_resolver_test.Po' tmpdepfile='tests/unit/$(DEPDIR)/ipv4_host_resolver_test.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o tests/unit/ipv4_host_resolver_test.obj `if test -f 'tests/unit/ipv4_host_resolver_test.cpp'; then $(CYGPATH_W) 'tests/unit/ipv4_host_resolver_test.cpp'; else $(CYGPATH_W) '$(srcdir)/tests/unit/ipv4_host_resolver_test.cpp'; fi`
 
 tests/unit/is_recv_buffered_test.o: tests/unit/is_recv_buffered_test.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT tests/unit/is_recv_buffered_test.o -MD -MP -MF "tests/unit/$(DEPDIR)/is_recv_buffered_test.Tpo" \
@@ -2088,6 +2260,7 @@ distclean-generic:
 	-rm -f examples/tutorial/timer5/$(DEPDIR)/.dirstamp
 	-rm -f tests/performance/$(DEPDIR)/.dirstamp
 	-rm -f examples/tutorial/timer2/$(DEPDIR)/.dirstamp
+	-rm -f examples/multicast/$(DEPDIR)/.dirstamp
 	-rm -f examples/tutorial/timer1/.dirstamp
 	-rm -f examples/tutorial/daytime3/.dirstamp
 	-rm -f examples/tutorial/timer4/.dirstamp
@@ -2112,6 +2285,7 @@ distclean-generic:
 	-rm -f examples/echo/.dirstamp
 	-rm -f examples/tutorial/timer2/.dirstamp
 	-rm -f examples/tutorial/daytime4/.dirstamp
+	-rm -f examples/multicast/.dirstamp
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
