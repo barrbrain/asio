@@ -49,7 +49,7 @@ void nested_decrement_to_zero(demuxer* d, int* count)
 
 void sleep_increment(demuxer* d, int* count)
 {
-  timer t(*d, asio::time::now() + 2);
+  deadline_timer t(*d, boost::posix_time::seconds(2));
   t.wait();
 
   if (++(*count) < 3)
@@ -59,7 +59,7 @@ void sleep_increment(demuxer* d, int* count)
 void start_sleep_increments(demuxer* d, int* count)
 {
   // Give all threads a chance to start.
-  timer t(*d, asio::time::now() + 2);
+  deadline_timer t(*d, boost::posix_time::seconds(2));
   t.wait();
 
   // Start the first of three increments.
@@ -183,6 +183,17 @@ void demuxer_test()
 
   // The run() call will not return until all work has finished.
   UNIT_TEST_CHECK(count == 0);
+
+#if !defined(BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION)
+  // Use a non-default allocator type.
+  typedef std::allocator<int> allocator_type;
+  typedef demuxer_service<allocator_type> demuxer_service_type;
+  typedef basic_demuxer<demuxer_service_type> demuxer_type;
+  allocator_type allocator;
+  service_factory<demuxer_service_type> factory(allocator);
+  demuxer_type d3(factory);
+  d3.run();
+#endif // !defined(BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION)
 }
 
 UNIT_TEST(demuxer_test)

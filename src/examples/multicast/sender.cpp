@@ -1,8 +1,9 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <boost/bind.hpp>
 #include "asio.hpp"
+#include "boost/bind.hpp"
+#include "boost/date_time/posix_time/posix_time_types.hpp"
 
 const short multicast_port = 30001;
 const std::string multicast_addr = "225.0.0.1";
@@ -21,17 +22,18 @@ public:
     message_ = os.str();
 
     asio::ipv4::udp::endpoint target(multicast_port, multicast_addr);
-    socket_.async_sendto(message_.data(), message_.length(), target,
-        boost::bind(&sender::handle_sendto, this, asio::arg::error));
+    socket_.async_send_to(message_.data(), message_.length(), 0, target,
+        boost::bind(&sender::handle_send_to, this, asio::placeholders::error));
   }
 
-  void handle_sendto(const asio::error& error)
+  void handle_send_to(const asio::error& error)
   {
     if (!error && message_count_ < max_message_count)
     {
-      timer_.expiry(asio::time::now() + 1);
+      timer_.expires_from_now(boost::posix_time::seconds(1));
       timer_.async_wait(
-          boost::bind(&sender::handle_timeout, this, asio::arg::error));
+          boost::bind(&sender::handle_timeout, this,
+            asio::placeholders::error));
     }
   }
 
@@ -44,14 +46,15 @@ public:
       message_ = os.str();
 
       asio::ipv4::udp::endpoint target(multicast_port, multicast_addr);
-      socket_.async_sendto(message_.data(), message_.length(), target,
-          boost::bind(&sender::handle_sendto, this, asio::arg::error));
+      socket_.async_send_to(message_.data(), message_.length(), 0, target,
+          boost::bind(&sender::handle_send_to, this,
+            asio::placeholders::error));
     }
   }
 
 private:
-  asio::dgram_socket socket_;
-  asio::timer timer_;
+  asio::datagram_socket socket_;
+  asio::deadline_timer timer_;
   int message_count_;
   std::string message_;
 };

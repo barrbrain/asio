@@ -3,10 +3,10 @@
 #include "boost/bind.hpp"
 #include "asio.hpp"
 
-void handle_tcp_send(asio::stream_socket* socket, char* send_buf)
+void handle_tcp_write(asio::stream_socket* socket, char* write_buf)
 {
   using namespace std; // For free.
-  free(send_buf);
+  free(write_buf);
   delete socket;
 }
 
@@ -17,16 +17,17 @@ void handle_tcp_accept(asio::socket_acceptor* acceptor,
   {
     using namespace std; // For time_t, time, ctime, strdup and strlen.
     time_t now = time(0);
-    char* send_buf = strdup(ctime(&now));
-    size_t send_length = strlen(send_buf);
+    char* write_buf = strdup(ctime(&now));
+    size_t write_length = strlen(write_buf);
 
-    asio::async_send_n(*socket, send_buf, send_length,
-        boost::bind(handle_tcp_send, socket, send_buf));
+    asio::async_write_n(*socket, write_buf, write_length,
+        boost::bind(handle_tcp_write, socket, write_buf));
 
     socket = new asio::stream_socket(acceptor->demuxer());
 
     acceptor->async_accept(*socket,
-        boost::bind(handle_tcp_accept, acceptor, socket, asio::arg::error));
+        boost::bind(handle_tcp_accept, acceptor, socket,
+          asio::placeholders::error));
   }
   else
   {
@@ -34,13 +35,13 @@ void handle_tcp_accept(asio::socket_acceptor* acceptor,
   }
 }
 
-void handle_udp_sendto(char* send_buf)
+void handle_udp_send_to(char* send_buf)
 {
   using namespace std; // For free.
   free(send_buf);
 }
 
-void handle_udp_recvfrom(asio::dgram_socket* socket, char* recv_buf,
+void handle_udp_receive_from(asio::datagram_socket* socket, char* recv_buf,
     size_t recv_length, asio::ipv4::udp::endpoint* remote_endpoint,
     const asio::error& error)
 {
@@ -51,12 +52,12 @@ void handle_udp_recvfrom(asio::dgram_socket* socket, char* recv_buf,
     char* send_buf = strdup(ctime(&now));
     size_t send_length = strlen(send_buf);
 
-    socket->async_sendto(send_buf, send_length, *remote_endpoint,
-        boost::bind(handle_udp_sendto, send_buf));
+    socket->async_send_to(send_buf, send_length, 0, *remote_endpoint,
+        boost::bind(handle_udp_send_to, send_buf));
 
-    socket->async_recvfrom(recv_buf, recv_length, *remote_endpoint,
-        boost::bind(handle_udp_recvfrom, socket, recv_buf, recv_length,
-          remote_endpoint, asio::arg::error));
+    socket->async_receive_from(recv_buf, recv_length, 0, *remote_endpoint,
+        boost::bind(handle_udp_receive_from, socket, recv_buf, recv_length,
+          remote_endpoint, asio::placeholders::error));
   }
 }
 
@@ -72,17 +73,17 @@ int main()
 
     tcp_acceptor.async_accept(*tcp_socket,
         boost::bind(handle_tcp_accept, &tcp_acceptor, tcp_socket,
-          asio::arg::error));
+          asio::placeholders::error));
 
-    asio::dgram_socket udp_socket(demuxer, asio::ipv4::udp::endpoint(13));
+    asio::datagram_socket udp_socket(demuxer, asio::ipv4::udp::endpoint(13));
 
     char recv_buf[1];
     size_t recv_length = sizeof(recv_buf);
     asio::ipv4::udp::endpoint remote_endpoint;
 
-    udp_socket.async_recvfrom(recv_buf, recv_length, remote_endpoint,
-        boost::bind(handle_udp_recvfrom, &udp_socket, recv_buf, recv_length,
-          &remote_endpoint, asio::arg::error));
+    udp_socket.async_receive_from(recv_buf, recv_length, 0, remote_endpoint,
+        boost::bind(handle_udp_receive_from, &udp_socket, recv_buf, recv_length,
+          &remote_endpoint, asio::placeholders::error));
 
     demuxer.run();
   }

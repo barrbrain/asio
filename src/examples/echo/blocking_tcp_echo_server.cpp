@@ -15,8 +15,8 @@ void session(stream_socket_ptr sock)
     char data[max_length];
 
     size_t length;
-    while ((length = sock->recv(data, max_length)) > 0)
-      if (asio::send_n(*sock, data, length) == 0)
+    while ((length = sock->read(data, max_length)) > 0)
+      if (asio::write_n(*sock, data, length) == 0)
         break;
   }
   catch (asio::error& e)
@@ -35,8 +35,12 @@ void server(asio::demuxer& d, short port)
   for (;;)
   {
     stream_socket_ptr sock(new asio::stream_socket(d));
-    a.accept(*sock);
-    asio::thread t(boost::bind(session, sock));
+    asio::error error;
+    a.accept(*sock,
+        asio::throw_error_if(asio::the_error != asio::error::connection_aborted)
+        || asio::set_error(error));
+    if (!error)
+      asio::thread t(boost::bind(session, sock));
   }
 }
 

@@ -11,6 +11,10 @@
 #ifndef ASIO_SOCKET_OPTION_HPP
 #define ASIO_SOCKET_OPTION_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "asio/detail/push_options.hpp"
 
 #include "asio/detail/socket_types.hpp"
@@ -18,20 +22,20 @@
 namespace asio {
 namespace socket_option {
 
-/// Helper template for implementing flag-based options.
+/// Helper template for implementing boolean-based options.
 template <int Level, int Name>
-class flag
+class boolean
 {
 public:
   /// Default constructor.
-  flag()
+  boolean()
     : value_(0)
   {
   }
 
-  /// Construct to be either enabled or disabled.
-  flag(bool enabled)
-    : value_(enabled ? 1 : 0)
+  /// Construct with a specific option value.
+  boolean(bool value)
+    : value_(value ? 1 : 0)
   {
   }
 
@@ -47,38 +51,37 @@ public:
     return Name;
   }
 
-  /// Set the value of the flag.
-  void set(bool enabled)
+  /// Set the value of the boolean.
+  void set(bool value)
   {
-    value_ = enabled ? 1 : 0;
+    value_ = value ? 1 : 0;
   }
 
-  /// Get the current value of the flag.
+  /// Get the current value of the boolean.
   bool get() const
   {
     return value_;
   }
 
-  /// Get the address of the flag data.
+  /// Get the address of the boolean data.
   void* data()
   {
     return &value_;
   }
 
-  /// Get the address of the flag data.
+  /// Get the address of the boolean data.
   const void* data() const
   {
     return &value_;
   }
 
-  /// Get the size of the flag data.
+  /// Get the size of the boolean data.
   size_t size() const
   {
     return sizeof(value_);
   }
 
 private:
-  /// The underlying value of the flag.
   int value_;
 };
 
@@ -142,39 +145,85 @@ public:
   }
 
 private:
-  /// The underlying value of the int option.
   int value_;
 };
 
-/// Permit sending of broadcast messages.
-typedef flag<SOL_SOCKET, SO_BROADCAST> broadcast;
+/// Helper template for implementing linger options.
+template <int Level, int Name>
+class linger
+{
+public:
+  /// Default constructor.
+  linger()
+  {
+    value_.l_onoff = 0;
+    value_.l_linger = 0;
+  }
 
-/// Prevent routing, use local interfaces only.
-typedef flag<SOL_SOCKET, SO_DONTROUTE> dont_route;
+  /// Construct with specific option values.
+  linger(bool value, unsigned short timeout)
+  {
+    value_.l_onoff = value ? 1 : 0;
+    value_.l_linger = timeout;
+  }
 
-/// Send keep-alives.
-typedef flag<SOL_SOCKET, SO_KEEPALIVE> keep_alive;
+  /// Get the level of the socket option.
+  int level() const
+  {
+    return Level;
+  }
 
-/// The receive buffer size for a socket.
-typedef integer<SOL_SOCKET, SO_SNDBUF> send_buffer_size;
+  /// Get the name of the socket option.
+  int name() const
+  {
+    return Name;
+  }
 
-/// Send low watermark.
-typedef integer<SOL_SOCKET, SO_SNDLOWAT> send_low_watermark;
+  /// Set the value for whether linger is enabled.
+  void enabled(bool value)
+  {
+    value_.l_onoff = value ? 1 : 0;
+  }
 
-/// Send timeout.
-typedef integer<SOL_SOCKET, SO_SNDTIMEO> send_timeout;
+  /// Get the value for whether linger is enabled.
+  bool enabled() const
+  {
+    return value_.l_onoff != 0;
+  }
 
-/// The send buffer size for a socket.
-typedef integer<SOL_SOCKET, SO_RCVBUF> recv_buffer_size;
+  /// Set the value for the linger timeout.
+  void timeout(unsigned short value)
+  {
+    value_.l_linger = value;
+  }
 
-/// Receive low watermark.
-typedef integer<SOL_SOCKET, SO_RCVLOWAT> recv_low_watermark;
+  /// Get the value for the linger timeout.
+  unsigned short timeout() const
+  {
+    return value_.l_linger;
+  }
 
-/// Receive timeout.
-typedef integer<SOL_SOCKET, SO_RCVTIMEO> recv_timeout;
+  /// Get the address of the int data.
+  void* data()
+  {
+    return &value_;
+  }
 
-/// Allow the socket to be bound to an address that is already in use.
-typedef flag<SOL_SOCKET, SO_REUSEADDR> reuse_address;
+  /// Get the address of the int data.
+  const void* data() const
+  {
+    return &value_;
+  }
+
+  /// Get the size of the int data.
+  size_t size() const
+  {
+    return sizeof(value_);
+  }
+
+private:
+  ::linger value_;
+};
 
 } // namespace socket_option
 } // namespace asio

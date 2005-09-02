@@ -1,5 +1,6 @@
 #include "asio.hpp"
 #include <boost/bind.hpp>
+#include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <iostream>
 
 using namespace asio;
@@ -10,15 +11,14 @@ public:
   connect_handler(demuxer& d)
     : demuxer_(d),
       timer_(d),
-      connector_(d),
       socket_(d)
   {
-    connector_.async_connect(socket_,
-        ipv4::tcp::endpoint(32123, ipv4::address::loopback()),
-        boost::bind(&connect_handler::handle_connect, this, asio::arg::error));
+    socket_.async_connect(ipv4::tcp::endpoint(32123, ipv4::address::loopback()),
+        boost::bind(&connect_handler::handle_connect, this,
+          asio::placeholders::error));
 
-    timer_.expiry(asio::time::now() + 5);
-    timer_.async_wait(boost::bind(&socket_connector::close, &connector_));
+    timer_.expires_from_now(boost::posix_time::seconds(5));
+    timer_.async_wait(boost::bind(&connect_handler::close, this));
   }
 
   void handle_connect(const error& err)
@@ -33,10 +33,14 @@ public:
     }
   }
 
+  void close()
+  {
+    socket_.close();
+  }
+
 private:
   demuxer& demuxer_;
-  timer timer_;
-  socket_connector connector_;
+  deadline_timer timer_;
   stream_socket socket_;
 };
 
@@ -59,6 +63,10 @@ int main()
     connect_handler ch9(d);
 
     d.run();
+  }
+  catch (asio::error& e)
+  {
+    std::cerr << "Exception: " << e << "\n";
   }
   catch (std::exception& e)
   {

@@ -11,6 +11,10 @@
 #ifndef ASIO_BASIC_DEMUXER_HPP
 #define ASIO_BASIC_DEMUXER_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "asio/detail/push_options.hpp"
 
 #include "asio/detail/push_options.hpp"
@@ -30,10 +34,9 @@ namespace asio {
 /**
  * The basic_demuxer class template provides the core event demultiplexing
  * functionality for users of the asynchronous I/O objects, including
- * asio::stream_socket, asio::dgram_socket, asio::socket_acceptor,
- * asio::socket_connector and asio::timer. The basic_demuxer class template
- * also includes facilities intended for developers of custom asynchronous
- * services.
+ * asio::stream_socket, asio::datagram_socket, asio::socket_acceptor and
+ * asio::deadline_timer. The basic_demuxer class template also includes
+ * facilities intended for developers of custom asynchronous services.
  *
  * Most applications will use the asio::demuxer typedef.
  *
@@ -57,6 +60,18 @@ public:
   basic_demuxer()
     : service_registry_(*this),
       service_(get_service(service_factory<Demuxer_Service>()))
+  {
+#if defined(_WIN32)
+    detail::winsock_init<>::use();
+#else
+    detail::signal_init<>::use();
+#endif // _WIN32
+  }
+
+  /// Construct using the supplied service_factory to get the demuxer service.
+  explicit basic_demuxer(const service_factory<Demuxer_Service>& factory)
+    : service_registry_(*this),
+      service_(get_service(factory))
   {
 #if defined(_WIN32)
     detail::winsock_init<>::use();

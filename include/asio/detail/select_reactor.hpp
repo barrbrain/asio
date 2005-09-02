@@ -11,14 +11,18 @@
 #ifndef ASIO_DETAIL_SELECT_REACTOR_HPP
 #define ASIO_DETAIL_SELECT_REACTOR_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "asio/detail/push_options.hpp"
 
 #include "asio/detail/push_options.hpp"
 #include <boost/noncopyable.hpp>
 #include "asio/detail/pop_options.hpp"
 
-#include "asio/basic_demuxer.hpp"
 #include "asio/detail/bind_handler.hpp"
+#include "asio/detail/fd_set_adapter.hpp"
 #include "asio/detail/hash_map.hpp"
 #include "asio/detail/mutex.hpp"
 #include "asio/detail/task_demuxer_service.hpp"
@@ -33,6 +37,7 @@
 namespace asio {
 namespace detail {
 
+template <bool Own_Thread>
 class select_reactor
   : private boost::noncopyable
 {
@@ -50,23 +55,12 @@ public:
       stop_thread_(false),
       thread_(0)
   {
-    asio::detail::signal_blocker sb;
-    thread_ = new asio::detail::thread(
-        bind_handler(&select_reactor::call_run_thread, this));
-  }
-
-  // Constructor when running as a demuxer task.
-  select_reactor(basic_demuxer<task_demuxer_service<select_reactor> >&)
-    : mutex_(),
-      select_in_progress_(false),
-      interrupter_(),
-      read_op_queue_(),
-      write_op_queue_(),
-      except_op_queue_(),
-      pending_cancellations_(),
-      stop_thread_(false),
-      thread_(0)
-  {
+    if (Own_Thread)
+    {
+      asio::detail::signal_blocker sb;
+      thread_ = new asio::detail::thread(
+          bind_handler(&select_reactor::call_run_thread, this));
+    }
   }
 
   // Destructor.
@@ -103,6 +97,17 @@ public:
       interrupter_.interrupt();
   }
 
+  // Start a new exception operation. The do_operation function of the select_op
+  // object will be invoked when the given descriptor has exception information
+  // available.
+  template <typename Handler>
+  void start_except_op(socket_type descriptor, Handler handler)
+  {
+    asio::detail::mutex::scoped_lock lock(mutex_);
+    if (except_op_queue_.enqueue_operation(descriptor, handler))
+      interrupter_.interrupt();
+  }
+
   // Start a new write and exception operations. The do_operation function of
   // the select_op object will be invoked when the given descriptor is ready
   // for writing or has exception information available.
@@ -135,63 +140,12 @@ public:
         pending_cancellations_map::value_type(descriptor, true));
   }
 
-  // Class template to adapt a close function as a timer handler.
-  template <typename Close_Function>
-  class close_handler
-  {
-  public:
-    close_handler(socket_type descriptor, Close_Function close_function)
-      : descriptor_(descriptor),
-        close_function_(close_function)
-    {
-    }
-
-    void do_operation()
-    {
-      close_function_(descriptor_);
-    }
-
-    void do_cancel()
-    {
-    }
-
-  private:
-    socket_type descriptor_;
-    Close_Function close_function_;
-  };
-
-  // Close the given descriptor and cancel any operations that are running
-  // against it. The given close function will be called to actually perform
-  // the closure of the resource.
-  template <typename Close_Function>
-  void close_descriptor(socket_type descriptor, Close_Function close_function)
+  // Cancel any operations that are running against the descriptor and remove
+  // its registration from the reactor.
+  void close_descriptor(socket_type descriptor)
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
-
-    // We need to interrupt the select if any operations were cancelled.
-    bool interrupt = read_op_queue_.cancel_operations(descriptor);
-    interrupt = write_op_queue_.cancel_operations(descriptor) || interrupt;
-    interrupt = except_op_queue_.cancel_operations(descriptor) || interrupt;
-
-    if (interrupt && select_in_progress_)
-    {
-      // The close function cannot be called on a descriptor while the select
-      // call is running with that descriptor in an fd_set, so we schedule a
-      // dummy timer to perform the socket close when the select has been
-      // interrupted.
-      void* token = 0;
-      interrupt = timer_queue_.enqueue_timer(detail::time(0, 0),
-          close_handler<Close_Function>(descriptor, close_function), token)
-        || interrupt;
-    }
-    else
-    {
-      // Not currently using the descriptor in select so we can close it now.
-      close_function(descriptor);
-    }
-
-    if (interrupt)
-      interrupter_.interrupt();
+    cancel_ops_unlocked(descriptor);
   }
 
   // Schedule a timer to expire at the specified absolute time. The
@@ -215,7 +169,7 @@ public:
   }
 
 private:
-  friend class task_demuxer_service<select_reactor>;
+  friend class task_demuxer_service<select_reactor<Own_Thread> >;
 
   // Reset the select loop before a new run.
   void reset()
@@ -240,12 +194,12 @@ private:
     while (!stop)
     {
       // Set up the descriptor sets.
-      fd_set_adaptor read_fds;
+      fd_set_adapter read_fds;
       read_fds.set(interrupter_.read_descriptor());
       read_op_queue_.get_descriptors(read_fds);
-      fd_set_adaptor write_fds;
+      fd_set_adapter write_fds;
       write_op_queue_.get_descriptors(write_fds);
-      fd_set_adaptor except_fds;
+      fd_set_adapter except_fds;
       except_op_queue_.get_descriptors(except_fds);
       socket_type max_fd = read_fds.max_descriptor();
       if (write_fds.max_descriptor() > max_fd)
@@ -354,43 +308,6 @@ private:
     if (interrupt)
       interrupter_.interrupt();
   }
-
-  // Adapts the FD_SET type to meet the Descriptor_Set concept's requirements.
-  class fd_set_adaptor
-  {
-  public:
-    fd_set_adaptor()
-      : max_descriptor_(invalid_socket)
-    {
-      FD_ZERO(&fd_set_);
-    }
-
-    void set(socket_type descriptor)
-    {
-      if (max_descriptor_ == invalid_socket || descriptor > max_descriptor_)
-        max_descriptor_ = descriptor;
-      FD_SET(descriptor, &fd_set_);
-    }
-
-    bool is_set(socket_type descriptor) const
-    {
-      return FD_ISSET(descriptor, &fd_set_) != 0;
-    }
-
-    operator fd_set*()
-    {
-      return &fd_set_;
-    }
-
-    socket_type max_descriptor() const
-    {
-      return max_descriptor_;
-    }
-
-  private:
-    fd_set fd_set_;
-    socket_type max_descriptor_;
-  };
 
   // Mutex to protect access to internal data.
   asio::detail::mutex mutex_;

@@ -17,23 +17,23 @@ int main(int argc, char* argv[])
 
     asio::demuxer d;
 
-    asio::dgram_socket s(d, asio::ipv4::udp::endpoint(0));
+    asio::datagram_socket s(d, asio::ipv4::udp::endpoint(0));
 
     asio::ipv4::host_resolver hr(d);
     asio::ipv4::host h;
     hr.get_host_by_name(h, argv[1]);
-    asio::ipv4::udp::endpoint receiver_endpoint(atoi(argv[2]), h.addresses[0]);
+    asio::ipv4::udp::endpoint receiver_endpoint(atoi(argv[2]), h.address(0));
 
     using namespace std; // For atoi and strlen.
     std::cout << "Enter message: ";
     char request[max_length];
     std::cin.getline(request, max_length);
     size_t request_length = strlen(request);
-    s.sendto(request, request_length, receiver_endpoint);
+    s.send_to(request, request_length, 0, receiver_endpoint);
 
     char reply[max_length];
     asio::ipv4::udp::endpoint sender_endpoint;
-    size_t reply_length = s.recvfrom(reply, max_length, sender_endpoint);
+    size_t reply_length = s.receive_from(reply, max_length, 0, sender_endpoint);
     std::cout << "Reply is: ";
     std::cout.write(reply, reply_length);
     std::cout << "\n";

@@ -11,6 +11,10 @@
 #ifndef ASIO_ERROR_HPP
 #define ASIO_ERROR_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "asio/detail/push_options.hpp"
 
 #include "asio/detail/push_options.hpp"
@@ -54,6 +58,9 @@ public:
 
     /// Operation already in progress.
     already_started = ASIO_SOCKET_ERROR(EALREADY),
+
+    /// A connection has been aborted.
+    connection_aborted = ASIO_SOCKET_ERROR(ECONNABORTED),
 
     /// Connection refused.
     connection_refused = ASIO_SOCKET_ERROR(ECONNREFUSED),

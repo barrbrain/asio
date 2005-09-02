@@ -11,27 +11,21 @@
 #ifndef ASIO_IPV4_HOST_RESOLVER_HPP
 #define ASIO_IPV4_HOST_RESOLVER_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "asio/detail/push_options.hpp"
 
-#include "asio/demuxer.hpp"
 #include "asio/ipv4/basic_host_resolver.hpp"
+#include "asio/ipv4/host_resolver_service.hpp"
 #include "asio/ipv4/detail/host_resolver_service.hpp"
 
 namespace asio {
 namespace ipv4 {
 
 /// Typedef for the typical usage of host_resolver.
-#if defined(GENERATING_DOCUMENTATION)
-typedef basic_host_resolver
-  <
-    implementation_defined
-  > host_resolver;
-#else
-typedef basic_host_resolver
-  <
-    asio::ipv4::detail::host_resolver_service<demuxer>
-  > host_resolver;
-#endif
+typedef basic_host_resolver<host_resolver_service<> > host_resolver;
 
 } // namespace ipv4
 } // namespace asio

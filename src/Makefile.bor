@@ -1,26 +1,27 @@
 !ifndef BOOSTDIR
-BOOSTDIR = ../../boost_1_32_0
+BOOSTDIR = ../../boost_1_33_0
 !endif
 
 CXXFLAGS = -q -O2 -v -vi -y -a8 -b -Ve- -Vx- -tWM -tWR -tWC -w-inl -w-par -I../include -I$(BOOSTDIR)
+DEFINES = -DBOOST_DATE_TIME_NO_LIB
 LDFLAGS = -q -O2 -v -vi -y -a8 -b -Ve- -Vx- -tWM -tWR -tWC
 LIBS = ws2_32.lib
 
 all: \
 	tests\performance\client.exe \
 	tests\performance\server.exe \
+	tests\unit\deadline_timer_test.exe \
 	tests\unit\demuxer_test.exe \
-	tests\unit\dgram_socket_test.exe \
+	tests\unit\datagram_socket_test.exe \
 	tests\unit\error_handler_test.exe \
 	tests\unit\fixed_buffer_test.exe \
 	tests\unit\ipv4_host_resolver_test.exe \
-	tests\unit\is_recv_buffered_test.exe \
-	tests\unit\is_send_buffered_test.exe \
+	tests\unit\is_read_buffered_test.exe \
+	tests\unit\is_write_buffered_test.exe \
 	tests\unit\locking_dispatcher_test.exe \
-	tests\unit\recv_test.exe \
-	tests\unit\send_test.exe \
+	tests\unit\read_test.exe \
+	tests\unit\write_test.exe \
 	tests\unit\socket_acceptor_test.exe \
-	tests\unit\timer_test.exe \
 	examples\chat\chat_client.exe \
 	examples\chat\chat_server.exe \
 	examples\echo\async_tcp_echo_server.exe \
@@ -33,8 +34,8 @@ all: \
 	examples\multicast\sender.exe \
 	examples\timeouts\accept_timeout.exe \
 	examples\timeouts\connect_timeout.exe \
-	examples\timeouts\dgram_recv_timeout.exe \
-	examples\timeouts\stream_recv_timeout.exe \
+	examples\timeouts\datagram_receive_timeout.exe \
+	examples\timeouts\stream_receive_timeout.exe \
 	examples\tutorial\timer1\timer.exe \
 	examples\tutorial\timer2\timer.exe \
 	examples\tutorial\timer3\timer.exe \
@@ -49,18 +50,18 @@ all: \
 	examples\tutorial\daytime7\server.exe
 
 check: all
+	@tests\unit\deadline_timer_test.exe
 	@tests\unit\demuxer_test.exe
-	@tests\unit\dgram_socket_test.exe
+	@tests\unit\datagram_socket_test.exe
 	@tests\unit\error_handler_test.exe
 	@tests\unit\fixed_buffer_test.exe
 	@tests\unit\ipv4_host_resolver_test.exe
-	@tests\unit\is_recv_buffered_test.exe
-	@tests\unit\is_send_buffered_test.exe
+	@tests\unit\is_read_buffered_test.exe
+	@tests\unit\is_write_buffered_test.exe
 	@tests\unit\locking_dispatcher_test.exe
-	@tests\unit\recv_test.exe
-	@tests\unit\send_test.exe
+	@tests\unit\read_test.exe
+	@tests\unit\write_test.exe
 	@tests\unit\socket_acceptor_test.exe
-	@tests\unit\timer_test.exe
 
 clean:
 	-del /q /s tests\*.exe
@@ -74,6 +75,6 @@ clean:
 	bcc32 -e$@ $(LDFLAGS) $< $(LIBS)
 
 .cpp.obj:
-	bcc32 -o$@ -c $(CXXFLAGS) $<
+	bcc32 -o$@ -c $(CXXFLAGS) $(DEFINES) $<
 
 .autodepend

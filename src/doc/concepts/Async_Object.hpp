@@ -11,14 +11,13 @@
 /// Asynchronous object concept.
 /**
  * @par Implemented By:
- * asio::basic_dgram_socket @n
+ * asio::basic_deadline_timer @n
+ * asio::basic_datagram_socket @n
  * asio::basic_locking_dispatcher @n
  * asio::basic_socket_acceptor @n
- * asio::basic_socket_connector @n
  * asio::basic_stream_socket @n
- * asio::basic_timer @n
- * asio::buffered_recv_stream @n
- * asio::buffered_send_stream @n
+ * asio::buffered_read_stream @n
+ * asio::buffered_write_stream @n
  * asio::buffered_stream
  */
 class Async_Object

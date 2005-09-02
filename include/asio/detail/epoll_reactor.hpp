@@ -11,6 +11,10 @@
 #ifndef ASIO_DETAIL_EPOLL_REACTOR_HPP
 #define ASIO_DETAIL_EPOLL_REACTOR_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "asio/detail/push_options.hpp"
 
 #if defined(__linux__) // This service is only supported on Linux.
@@ -30,7 +34,6 @@
 #include <boost/noncopyable.hpp>
 #include "asio/detail/pop_options.hpp"
 
-#include "asio/basic_demuxer.hpp"
 #include "asio/detail/bind_handler.hpp"
 #include "asio/detail/hash_map.hpp"
 #include "asio/detail/mutex.hpp"
@@ -46,6 +49,7 @@
 namespace asio {
 namespace detail {
 
+template <bool Own_Thread>
 class epoll_reactor
   : private boost::noncopyable
 {
@@ -65,33 +69,16 @@ public:
       stop_thread_(false),
       thread_(0)
   {
-    asio::detail::signal_blocker sb;
-    thread_ = new asio::detail::thread(
-        bind_handler(&epoll_reactor::call_run_thread, this));
+    // Start the reactor's internal thread only if needed.
+    if (Own_Thread)
+    {
+      asio::detail::signal_blocker sb;
+      thread_ = new asio::detail::thread(
+          bind_handler(&epoll_reactor::call_run_thread, this));
+    }
 
     // Add the interrupter's descriptor to epoll.
-    epoll_event ev;
-    ev.events = EPOLLIN | EPOLLERR;
-    ev.data.fd = interrupter_.read_descriptor();
-    epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, interrupter_.read_descriptor(), &ev);
-  }
-
-  // Constructor when running as a demuxer task.
-  epoll_reactor(basic_demuxer<task_demuxer_service<epoll_reactor> >&)
-    : mutex_(),
-      epoll_fd_(do_epoll_create()),
-      wait_in_progress_(false),
-      interrupter_(),
-      read_op_queue_(),
-      write_op_queue_(),
-      except_op_queue_(),
-      epoll_registrations_(),
-      pending_cancellations_(),
-      stop_thread_(false),
-      thread_(0)
-  {
-    // Add the interrupter's descriptor to epoll.
-    epoll_event ev;
+    epoll_event ev = { 0 };
     ev.events = EPOLLIN | EPOLLERR;
     ev.data.fd = interrupter_.read_descriptor();
     epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, interrupter_.read_descriptor(), &ev);
@@ -122,7 +109,7 @@ public:
 
     if (read_op_queue_.enqueue_operation(descriptor, handler))
     {
-      epoll_event ev;
+      epoll_event ev = { 0 };
       ev.events = EPOLLIN | EPOLLERR | EPOLLHUP;
       if (write_op_queue_.has_operation(descriptor))
         ev.events |= EPOLLOUT;
@@ -150,10 +137,41 @@ public:
 
     if (write_op_queue_.enqueue_operation(descriptor, handler))
     {
-      epoll_event ev;
+      epoll_event ev = { 0 };
       ev.events = EPOLLOUT | EPOLLERR | EPOLLHUP;
       if (read_op_queue_.has_operation(descriptor))
         ev.events |= EPOLLIN;
+      ev.data.fd = descriptor;
+
+      if (epoll_registrations_.find(descriptor) == epoll_registrations_.end())
+      {
+        epoll_registrations_.insert(
+            epoll_registration_map::value_type(descriptor, true));
+        epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
+      }
+      else
+      {
+        epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev);
+      }
+    }
+  }
+
+  // Start a new exception operation. The do_operation function of the select_op
+  // object will be invoked when the given descriptor has exception information
+  // available.
+  template <typename Handler>
+  void start_except_op(socket_type descriptor, Handler handler)
+  {
+    asio::detail::mutex::scoped_lock lock(mutex_);
+
+    if (except_op_queue_.enqueue_operation(descriptor, handler))
+    {
+      epoll_event ev = { 0 };
+      ev.events = EPOLLERR | EPOLLHUP;
+      if (read_op_queue_.has_operation(descriptor))
+        ev.events |= EPOLLIN;
+      if (write_op_queue_.has_operation(descriptor))
+        ev.events |= EPOLLOUT;
       ev.data.fd = descriptor;
 
       if (epoll_registrations_.find(descriptor) == epoll_registrations_.end())
@@ -182,7 +200,7 @@ public:
       && need_mod;
     if (need_mod)
     {
-      epoll_event ev;
+      epoll_event ev = { 0 };
       ev.events = EPOLLOUT | EPOLLERR | EPOLLHUP;
       if (read_op_queue_.has_operation(descriptor))
         ev.events |= EPOLLIN;
@@ -219,36 +237,9 @@ public:
         pending_cancellations_map::value_type(descriptor, true));
   }
 
-  // Class template to adapt a close function as a timer handler.
-  template <typename Close_Function>
-  class close_handler
-  {
-  public:
-    close_handler(socket_type descriptor, Close_Function close_function)
-      : descriptor_(descriptor),
-        close_function_(close_function)
-    {
-    }
-
-    void do_operation()
-    {
-      close_function_(descriptor_);
-    }
-
-    void do_cancel()
-    {
-    }
-
-  private:
-    socket_type descriptor_;
-    Close_Function close_function_;
-  };
-
-  // Close the given descriptor and cancel any operations that are running
-  // against it. The given close function will be called to actually perform
-  // the closure of the resource.
-  template <typename Close_Function>
-  void close_descriptor(socket_type descriptor, Close_Function close_function)
+  // Cancel any operations that are running against the descriptor and remove
+  // its registration from the reactor.
+  void close_descriptor(socket_type descriptor)
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
 
@@ -256,34 +247,13 @@ public:
     epoll_registration_map::iterator it = epoll_registrations_.find(descriptor);
     if (it != epoll_registrations_.end())
     {
-      epoll_event ev;
+      epoll_event ev = { 0 };
       epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, descriptor, &ev);
       epoll_registrations_.erase(it);
     }
 
     // Cancel any outstanding operations associated with the descriptor.
-    bool existing_ops = read_op_queue_.cancel_operations(descriptor);
-    existing_ops = write_op_queue_.cancel_operations(descriptor)
-      || existing_ops;
-    existing_ops = except_op_queue_.cancel_operations(descriptor)
-      || existing_ops;
-
-    if (existing_ops && wait_in_progress_)
-    {
-      // The close function is called using a dummy timer to ensure that the
-      // the descriptor cannot be reused and confused with the wrong events
-      // while the epoll_wait call is in progress.
-      void* token = 0;
-      bool interrupt = timer_queue_.enqueue_timer(detail::time(0, 0),
-          close_handler<Close_Function>(descriptor, close_function), token);
-      if (interrupt)
-        interrupter_.interrupt();
-    }
-    else
-    {
-      // Not currently using the descriptor in epoll_wait so close it now.
-      close_function(descriptor);
-    }
+    cancel_ops_unlocked(descriptor);
   }
 
   // Schedule a timer to expire at the specified absolute time. The
@@ -307,7 +277,7 @@ public:
   }
 
 private:
-  friend class task_demuxer_service<epoll_reactor>;
+  friend class task_demuxer_service<epoll_reactor<Own_Thread> >;
 
   // Reset the select loop before a new run.
   void reset()
@@ -361,7 +331,7 @@ private:
             read_op_queue_.dispatch_all_operations(descriptor);
             write_op_queue_.dispatch_all_operations(descriptor);
 
-            epoll_event ev;
+            epoll_event ev = { 0 };
             ev.events = 0;
             ev.data.fd = descriptor;
             epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev);
@@ -381,7 +351,7 @@ private:
             else
               more_writes = write_op_queue_.has_operation(descriptor);
 
-            epoll_event ev;
+            epoll_event ev = { 0 };
             ev.events = EPOLLERR | EPOLLHUP;
             if (more_reads)
               ev.events |= EPOLLIN;

@@ -11,9 +11,14 @@
 #ifndef ASIO_DETAIL_TASK_DEMUXER_SERVICE_HPP
 #define ASIO_DETAIL_TASK_DEMUXER_SERVICE_HPP
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+# pragma once
+#endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
+
 #include "asio/detail/push_options.hpp"
 
 #include "asio/basic_demuxer.hpp"
+#include "asio/demuxer_service.hpp"
 #include "asio/service_factory.hpp"
 #include "asio/detail/bind_handler.hpp"
 #include "asio/detail/event.hpp"
@@ -27,17 +32,10 @@ template <typename Task>
 class task_demuxer_service
 {
 public:
-  // The demuxer type for this service.
-  typedef basic_demuxer<task_demuxer_service<Task> > demuxer_type;
-
-  // Constructor. Taking a reference to the demuxer type as the parameter
-  // forces the compiler to ensure that this class can only be used as the
-  // demuxer service. It cannot be instantiated in the demuxer in any other
-  // case.
-  task_demuxer_service(
-      demuxer_type& demuxer)
-    : demuxer_(demuxer),
-      mutex_(),
+  // Constructor.
+  template <typename Demuxer>
+  task_demuxer_service(Demuxer& demuxer)
+    : mutex_(),
       task_(demuxer.get_service(service_factory<Task>())),
       task_is_running_(false),
       outstanding_work_(0),
@@ -49,13 +47,6 @@ public:
   {
   }
 
-  // Get the demuxer associated with the service.
-  demuxer_type& demuxer()
-  {
-    return demuxer_;
-  }
-
-  // Create a new dgram socket implementation.
   // Run the demuxer's event processing loop.
   void run()
   {
@@ -307,9 +298,6 @@ private:
   private:
     Handler handler_;
   };
-
-  // The demuxer that owns this service.
-  demuxer_type& demuxer_;
 
   // Mutex to protect access to internal data.
   asio::detail::mutex mutex_;

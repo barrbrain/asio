@@ -13,6 +13,7 @@
 #if defined (_MSC_VER)
 # pragma warning (disable:4103)
 # pragma warning (push)
+# pragma warning (disable:4244)
 # pragma warning (disable:4355)
 # pragma pack (push, 8)
 // Note that if the /Og optimisation flag is enabled with MSVC6, the compiler
@@ -23,10 +24,16 @@
 # if (_MSC_VER < 1300)
 #  pragma optimize ("g", off)
 # endif
+# if !defined(_MT)
+#  error Multithreaded RTL must be selected.
+# endif // !defined(_MT)
 #elif defined (__BORLANDC__)
 # pragma option push -a8 -b -Ve- -Vx- -w-inl
 # pragma nopushoptwarn
 # pragma nopackwarning
+# if !defined(__MT__)
+#  error Multithreaded RTL must be selected.
+# endif // !defined(__MT__)
 #elif defined (__MINGW32__)
 # pragma pack (push, 8)
 #endif
