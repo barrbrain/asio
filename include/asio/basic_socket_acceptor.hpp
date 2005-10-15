@@ -26,6 +26,7 @@
 #include "asio/default_error_handler.hpp"
 #include "asio/null_error_handler.hpp"
 #include "asio/service_factory.hpp"
+#include "asio/socket_base.hpp"
 
 namespace asio {
 
@@ -45,7 +46,8 @@ namespace asio {
  */
 template <typename Service>
 class basic_socket_acceptor
-  : private boost::noncopyable
+  : public socket_base,
+    private boost::noncopyable
 {
 public:
   /// The type of the service that will be used to provide accept operations.
@@ -87,6 +89,14 @@ public:
    * connections. A value of 0 means use the default queue length.
    *
    * @throws asio::error Thrown on failure.
+   *
+   * @note This constructor is equivalent to the following code:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * acceptor.open(endpoint.protocol());
+   * acceptor.bind(endpoint);
+   * acceptor.listen(listen_backlog);
+   * @endcode
    */
   template <typename Endpoint>
   basic_socket_acceptor(demuxer_type& d, const Endpoint& endpoint,

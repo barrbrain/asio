@@ -17,10 +17,18 @@
 
 #include "asio/detail/push_options.hpp"
 
-#if defined(_WIN32) // This service is only supported on Win32
+// This service is only supported on Win32 (NT4 and later).
+#if defined(_WIN32) && defined(_WIN32_WINNT) && (_WIN32_WINNT >= 0x0400)
 
+// Define this to indicate that IOCP is supported on the target platform.
+#define ASIO_HAS_IOCP_DEMUXER 1
+
+#include "asio/detail/push_options.hpp"
+#include <memory>
+#include "asio/detail/pop_options.hpp"
+
+#include "asio/detail/demuxer_run_call_stack.hpp"
 #include "asio/detail/socket_types.hpp"
-#include "asio/detail/tss_bool.hpp"
 #include "asio/detail/win_iocp_operation.hpp"
 
 namespace asio {
@@ -34,8 +42,7 @@ public:
   win_iocp_demuxer_service(Demuxer& demuxer)
     : iocp_(::CreateIoCompletionPort(INVALID_HANDLE_VALUE, 0, 0, 0)),
       outstanding_work_(0),
-      interrupted_(0),
-      current_thread_in_pool_()
+      interrupted_(0)
   {
   }
 
@@ -52,7 +59,7 @@ public:
     if (::InterlockedExchangeAdd(&outstanding_work_, 0) == 0)
       return;
 
-    current_thread_in_pool_ = true;
+    demuxer_run_call_stack<win_iocp_demuxer_service>::context ctx(this);
 
     for (;;)
     {
@@ -73,7 +80,7 @@ public:
       {
         // Dispatch the operation.
         win_iocp_operation* op = static_cast<win_iocp_operation*>(overlapped);
-        op->do_completion(*this, iocp_.handle, last_error, bytes_transferred);
+        op->do_completion(last_error, bytes_transferred);
       }
       else
       {
@@ -87,8 +94,6 @@ public:
         }
       }
     }
-
-    current_thread_in_pool_ = false;
   }
 
   // Interrupt the demuxer's event processing loop.
@@ -121,34 +126,33 @@ public:
   struct handler_operation
     : public win_iocp_operation
   {
-    handler_operation(Handler handler)
+    handler_operation(win_iocp_demuxer_service& demuxer_service,
+        Handler handler)
       : win_iocp_operation(&handler_operation<Handler>::do_completion_impl),
+        demuxer_service_(demuxer_service),
         handler_(handler)
     {
+      demuxer_service_.work_started();
     }
 
-    static void do_upcall(Handler& handler)
+    ~handler_operation()
     {
-      try
-      {
-        handler();
-      }
-      catch (...)
-      {
-      }
+      demuxer_service_.work_finished();
     }
 
   private:
-    static void do_completion_impl(win_iocp_operation* op,
-        win_iocp_demuxer_service& demuxer_service, HANDLE iocp, DWORD, size_t)
+    // Prevent copying and assignment.
+    handler_operation(const handler_operation&);
+    void operator=(const handler_operation&);
+    
+    static void do_completion_impl(win_iocp_operation* op, DWORD, size_t)
     {
-      handler_operation<Handler>* h =
-        static_cast<handler_operation<Handler>*>(op);
-      do_upcall(h->handler_);
-      demuxer_service.work_finished();
-      delete h;
+      std::auto_ptr<handler_operation<Handler> > h(
+          static_cast<handler_operation<Handler>*>(op));
+      h->handler_();
     }
 
+    win_iocp_demuxer_service& demuxer_service_;
     Handler handler_;
   };
 
@@ -156,8 +160,8 @@ public:
   template <typename Handler>
   void dispatch(Handler handler)
   {
-    if (current_thread_in_pool_)
-      handler_operation<Handler>::do_upcall(handler);
+    if (demuxer_run_call_stack<win_iocp_demuxer_service>::contains(this))
+      handler();
     else
       post(handler);
   }
@@ -166,8 +170,7 @@ public:
   template <typename Handler>
   void post(Handler handler)
   {
-    win_iocp_operation* op = new handler_operation<Handler>(handler);
-    work_started();
+    win_iocp_operation* op = new handler_operation<Handler>(*this, handler);
     ::PostQueuedCompletionStatus(iocp_.handle, 0, 0, op);
   }
 
@@ -185,15 +188,12 @@ private:
 
   // Flag to indicate whether the event loop has been interrupted.
   long interrupted_;
-
-  // Thread-specific flag to keep track of which threads are in the pool.
-  tss_bool current_thread_in_pool_;
 };
 
 } // namespace detail
 } // namespace asio
 
-#endif // defined(_WIN32)
+#endif // defined(_WIN32) && defined(_WIN32_WINNT) && (_WIN32_WINNT >= 0x0400)
 
 #include "asio/detail/pop_options.hpp"
 

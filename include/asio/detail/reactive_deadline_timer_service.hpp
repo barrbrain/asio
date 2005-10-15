@@ -155,27 +155,21 @@ public:
     wait_handler(impl_type& impl, Demuxer& demuxer, Handler handler)
       : impl_(impl),
         demuxer_(demuxer),
+        work_(demuxer),
         handler_(handler)
     {
     }
 
-    void do_operation()
+    void operator()(int result)
     {
-      asio::error e(asio::error::success);
+      asio::error e(result);
       demuxer_.post(detail::bind_handler(handler_, e));
-      demuxer_.work_finished();
-    }
-
-    void do_cancel()
-    {
-      asio::error e(asio::error::operation_aborted);
-      demuxer_.post(detail::bind_handler(handler_, e));
-      demuxer_.work_finished();
     }
 
   private:
     impl_type& impl_;
     Demuxer& demuxer_;
+    typename Demuxer::work work_;
     Handler handler_;
   };
 
@@ -183,7 +177,6 @@ public:
   template <typename Handler>
   void async_wait(impl_type& impl, Handler handler)
   {
-    demuxer_.work_started();
     reactor_.schedule_timer(impl->expiry.sec(), impl->expiry.usec(),
         wait_handler<Handler>(impl, demuxer_, handler), impl);
   }

@@ -17,10 +17,13 @@
 
 #include "asio/detail/push_options.hpp"
 
-#if defined(_WIN32) // This service is only supported on Win32
+// This service is only supported on Win32 (NT4 and later).
+#if defined(_WIN32) && defined(_WIN32_WINNT) && (_WIN32_WINNT >= 0x0400)
 
 #include "asio/detail/push_options.hpp"
+#include <memory>
 #include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/basic_demuxer.hpp"
@@ -42,15 +45,70 @@ template <typename Allocator>
 class win_iocp_socket_service
 {
 public:
-  // The native type of the socket. This type is dependent on the
-  // underlying implementation of the socket layer.
-  typedef socket_type impl_type;
+  typedef boost::shared_ptr<const socket_type> socket_shared_ptr_type;
+  typedef boost::weak_ptr<const socket_type> socket_weak_ptr_type;
+
+  // The native type of the socket. We use a custom class here rather than just
+  // SOCKET to workaround the broken Windows support for cancellation. MSDN says
+  // that when you call closesocket any outstanding WSARecv or WSASend
+  // operations will complete with the error ERROR_OPERATION_ABORTED. In
+  // practice they complete with ERROR_NETNAME_DELETED, which means you can't
+  // tell the difference between a local cancellation and the socket being
+  // hard-closed by the peer.
+  class impl_type
+  {
+  public:
+    // Default constructor.
+    impl_type()
+      : socket_(new socket_type(invalid_socket))
+    {
+    }
+
+    // Construct from socket type.
+    explicit impl_type(socket_type s)
+      : socket_(new socket_type(s))
+    {
+    }
+
+    // Copy constructor.
+    impl_type(const impl_type& other)
+      : socket_(other.socket_)
+    {
+    }
+
+    // Assignment operator.
+    impl_type& operator=(const impl_type& other)
+    {
+      socket_ = other.socket_;
+      return *this;
+    }
+
+    // Assign from socket type.
+    impl_type& operator=(socket_type s)
+    {
+      socket_ = socket_shared_ptr_type(new socket_type(s));
+      return *this;
+    }
+
+    // Convert to socket type.
+    operator socket_type() const
+    {
+      return *socket_;
+    }
+
+  private:
+    friend class win_iocp_socket_service<Allocator>;
+    socket_shared_ptr_type socket_;
+  };
 
   // The demuxer type for this service.
   typedef basic_demuxer<demuxer_service<Allocator> > demuxer_type;
 
   // The type of the reactor used for connect operations.
   typedef detail::select_reactor<true> reactor_type;
+
+  // The maximum number of buffers to support in a single operation.
+  enum { max_buffers = 16 };
 
   // Constructor. This socket service can only work if the demuxer is
   // using the win_iocp_demuxer_service. By using this type as the parameter we
@@ -73,7 +131,7 @@ public:
   // Return a null socket implementation.
   static impl_type null()
   {
-    return invalid_socket;
+    return impl_type();
   }
 
   // Open a new socket implementation.
@@ -125,6 +183,17 @@ public:
       error_handler(asio::error(socket_ops::get_error()));
   }
 
+  // Place the socket into the state where it will listen for new connections.
+  template <typename Error_Handler>
+  void listen(impl_type& impl, int backlog, Error_Handler error_handler)
+  {
+    if (backlog == 0)
+      backlog = SOMAXCONN;
+
+    if (socket_ops::listen(impl, backlog) == socket_error_retval)
+      error_handler(asio::error(socket_ops::get_error()));
+  }
+
   // Set a socket option.
   template <typename Option, typename Error_Handler>
   void set_option(impl_type& impl, const Option& option,
@@ -171,6 +240,21 @@ public:
     endpoint.size(addr_len);
   }
 
+  // Get the remote endpoint.
+  template <typename Endpoint, typename Error_Handler>
+  void get_remote_endpoint(const impl_type& impl, Endpoint& endpoint,
+      Error_Handler error_handler) const
+  {
+    socket_addr_len_type addr_len = endpoint.size();
+    if (socket_ops::getpeername(impl, endpoint.data(), &addr_len))
+    {
+      error_handler(asio::error(socket_ops::get_error()));
+      return;
+    }
+
+    endpoint.size(addr_len);
+  }
+
   /// Disable sends or receives on the socket.
   template <typename Error_Handler>
   void shutdown(impl_type& impl, socket_base::shutdown_type what,
@@ -182,17 +266,34 @@ public:
 
   // Send the given data to the peer. Returns the number of bytes sent or
   // 0 if the connection was closed cleanly.
-  template <typename Error_Handler>
-  size_t send(impl_type& impl, const void* data, size_t length,
+  template <typename Const_Buffers, typename Error_Handler>
+  size_t send(impl_type& impl, const Const_Buffers& buffers,
       socket_base::message_flags flags, Error_Handler error_handler)
   {
-    int bytes_sent = socket_ops::send(impl, data, length, flags);
-    if (bytes_sent < 0)
+    // Copy buffers into WSABUF array.
+    ::WSABUF bufs[max_buffers];
+    typename Const_Buffers::const_iterator iter = buffers.begin();
+    typename Const_Buffers::const_iterator end = buffers.end();
+    size_t i = 0;
+    for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      error_handler(asio::error(socket_ops::get_error()));
+      bufs[i].len = static_cast<u_long>(iter->size());
+      bufs[i].buf = static_cast<char*>(const_cast<void*>(iter->data()));
+    }
+
+    // Send the data.
+    DWORD bytes_transferred = 0;
+    int result = ::WSASend(impl, bufs, i, &bytes_transferred, flags, 0, 0);
+    if (result != 0)
+    {
+      DWORD last_error = ::WSAGetLastError();
+      if (last_error == ERROR_NETNAME_DELETED)
+        last_error = WSAECONNRESET;
+      error_handler(asio::error(last_error));
       return 0;
     }
-    return bytes_sent;
+
+    return bytes_transferred;
   }
 
   template <typename Handler>
@@ -200,76 +301,108 @@ public:
     : public win_iocp_operation
   {
   public:
-    send_operation(Handler handler)
+    send_operation(demuxer_type& demuxer,
+        socket_weak_ptr_type socket_ptr, Handler handler)
       : win_iocp_operation(&send_operation<Handler>::do_completion_impl),
+        work_(demuxer),
+        socket_ptr_(socket_ptr),
         handler_(handler)
     {
     }
 
   private:
     static void do_completion_impl(win_iocp_operation* op,
-        win_iocp_demuxer_service& demuxer_service, HANDLE iocp,
         DWORD last_error, size_t bytes_transferred)
     {
-      send_operation<Handler>* h = static_cast<send_operation<Handler>*>(op);
+      std::auto_ptr<send_operation<Handler> > h(
+          static_cast<send_operation<Handler>*>(op));
+
+      // Map ERROR_NETNAME_DELETED to more useful error.
+      if (last_error == ERROR_NETNAME_DELETED)
+      {
+        if (h->socket_ptr_.expired())
+          last_error = ERROR_OPERATION_ABORTED;
+        else
+          last_error = WSAECONNRESET;
+      }
+
       asio::error error(last_error);
-      try
-      {
-        h->handler_(error, bytes_transferred);
-      }
-      catch (...)
-      {
-      }
-      demuxer_service.work_finished();
-      delete h;
+      h->handler_(error, bytes_transferred);
     }
 
+    typename demuxer_type::work work_;
+    socket_weak_ptr_type socket_ptr_;
     Handler handler_;
   };
 
   // Start an asynchronous send. The data being sent must be valid for the
   // lifetime of the asynchronous operation.
-  template <typename Handler>
-  void async_send(impl_type& impl, const void* data, size_t length,
+  template <typename Const_Buffers, typename Handler>
+  void async_send(impl_type& impl, const Const_Buffers& buffers,
       socket_base::message_flags flags, Handler handler)
   {
-    send_operation<Handler>* op = new send_operation<Handler>(handler);
+    std::auto_ptr<send_operation<Handler> > op(
+        new send_operation<Handler>(demuxer_, impl.socket_, handler));
 
-    demuxer_service_.work_started();
+    // Copy buffers into WSABUF array.
+    ::WSABUF bufs[max_buffers];
+    typename Const_Buffers::const_iterator iter = buffers.begin();
+    typename Const_Buffers::const_iterator end = buffers.end();
+    size_t i = 0;
+    for (; iter != end && i < max_buffers; ++iter, ++i)
+    {
+      bufs[i].len = static_cast<u_long>(iter->size());
+      bufs[i].buf = static_cast<char*>(const_cast<void*>(iter->data()));
+    }
 
-    WSABUF buf;
-    buf.len = static_cast<u_long>(length);
-    buf.buf = static_cast<char*>(const_cast<void*>(data));
+    // Send the data.
     DWORD bytes_transferred = 0;
-
-    int result = ::WSASend(impl, &buf, 1, &bytes_transferred, flags, op, 0);
+    int result = ::WSASend(impl, bufs, i,
+        &bytes_transferred, flags, op.get(), 0);
     DWORD last_error = ::WSAGetLastError();
 
+    // Check if the operation completed immediately.
     if (result != 0 && last_error != WSA_IO_PENDING)
     {
-      delete op;
       asio::error error(last_error);
       demuxer_service_.post(bind_handler(handler, error, bytes_transferred));
-      demuxer_service_.work_finished();
+    }
+    else
+    {
+      op.release();
     }
   }
 
   // Send a datagram to the specified endpoint. Returns the number of bytes
   // sent.
-  template <typename Endpoint, typename Error_Handler>
-  size_t send_to(impl_type& impl, const void* data, size_t length,
+  template <typename Const_Buffers, typename Endpoint, typename Error_Handler>
+  size_t send_to(impl_type& impl, const Const_Buffers& buffers,
       socket_base::message_flags flags, const Endpoint& destination,
       Error_Handler error_handler)
   {
-    int bytes_sent = socket_ops::sendto(impl, data, length, flags,
-        destination.data(), destination.size());
-    if (bytes_sent < 0)
+    // Copy buffers into WSABUF array.
+    ::WSABUF bufs[max_buffers];
+    typename Const_Buffers::const_iterator iter = buffers.begin();
+    typename Const_Buffers::const_iterator end = buffers.end();
+    size_t i = 0;
+    for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      error_handler(asio::error(socket_ops::get_error()));
+      bufs[i].len = static_cast<u_long>(iter->size());
+      bufs[i].buf = static_cast<char*>(const_cast<void*>(iter->data()));
+    }
+
+    // Send the data.
+    DWORD bytes_transferred = 0;
+    int result = ::WSASendTo(impl, bufs, i, &bytes_transferred, flags,
+        destination.data(), destination.size(), 0, 0);
+    if (result != 0)
+    {
+      DWORD last_error = ::WSAGetLastError();
+      error_handler(asio::error(last_error));
       return 0;
     }
 
-    return bytes_sent;
+    return bytes_transferred;
   }
 
   template <typename Handler>
@@ -277,77 +410,98 @@ public:
     : public win_iocp_operation
   {
   public:
-    send_to_operation(Handler handler)
+    send_to_operation(demuxer_type& demuxer, Handler handler)
       : win_iocp_operation(&send_to_operation<Handler>::do_completion_impl),
+        work_(demuxer),
         handler_(handler)
     {
     }
 
   private:
     static void do_completion_impl(win_iocp_operation* op,
-        win_iocp_demuxer_service& demuxer_service, HANDLE iocp,
         DWORD last_error, size_t bytes_transferred)
     {
-      send_to_operation<Handler>* h =
-        static_cast<send_to_operation<Handler>*>(op);
+      std::auto_ptr<send_to_operation<Handler> > h(
+          static_cast<send_to_operation<Handler>*>(op));
       asio::error error(last_error);
-      try
-      {
-        h->handler_(error, bytes_transferred);
-      }
-      catch (...)
-      {
-      }
-      demuxer_service.work_finished();
-      delete h;
+      h->handler_(error, bytes_transferred);
     }
 
+    typename demuxer_type::work work_;
     Handler handler_;
   };
 
   // Start an asynchronous send. The data being sent must be valid for the
   // lifetime of the asynchronous operation.
-  template <typename Endpoint, typename Handler>
-  void async_send_to(impl_type& impl, const void* data, size_t length,
+  template <typename Const_Buffers, typename Endpoint, typename Handler>
+  void async_send_to(impl_type& impl, const Const_Buffers& buffers,
       socket_base::message_flags flags, const Endpoint& destination,
       Handler handler)
   {
-    send_to_operation<Handler>* send_to_op =
-      new send_to_operation<Handler>(handler);
+    std::auto_ptr<send_to_operation<Handler> > op(
+        new send_to_operation<Handler>(demuxer_, handler));
 
-    demuxer_service_.work_started();
+    // Copy buffers into WSABUF array.
+    ::WSABUF bufs[max_buffers];
+    typename Const_Buffers::const_iterator iter = buffers.begin();
+    typename Const_Buffers::const_iterator end = buffers.end();
+    size_t i = 0;
+    for (; iter != end && i < max_buffers; ++iter, ++i)
+    {
+      bufs[i].len = static_cast<u_long>(iter->size());
+      bufs[i].buf = static_cast<char*>(const_cast<void*>(iter->data()));
+    }
 
-    WSABUF buf;
-    buf.len = static_cast<u_long>(length);
-    buf.buf = static_cast<char*>(const_cast<void*>(data));
+    // Send the data.
     DWORD bytes_transferred = 0;
-
-    int result = ::WSASendTo(impl, &buf, 1, &bytes_transferred, flags,
-        destination.data(), destination.size(), send_to_op, 0);
+    int result = ::WSASendTo(impl, bufs, i, &bytes_transferred, flags,
+        destination.data(), destination.size(), op.get(), 0);
     DWORD last_error = ::WSAGetLastError();
 
+    // Check if the operation completed immediately.
     if (result != 0 && last_error != WSA_IO_PENDING)
     {
-      delete send_to_op;
       asio::error error(last_error);
       demuxer_service_.post(bind_handler(handler, error, bytes_transferred));
-      demuxer_service_.work_finished();
+    }
+    else
+    {
+      op.release();
     }
   }
 
   // Receive some data from the peer. Returns the number of bytes received or
   // 0 if the connection was closed cleanly.
-  template <typename Error_Handler>
-  size_t receive(impl_type& impl, void* data, size_t max_length,
+  template <typename Mutable_Buffers, typename Error_Handler>
+  size_t receive(impl_type& impl, const Mutable_Buffers& buffers,
       socket_base::message_flags flags, Error_Handler error_handler)
   {
-    int bytes_recvd = socket_ops::recv(impl, data, max_length, flags);
-    if (bytes_recvd < 0)
+    // Copy buffers into WSABUF array.
+    ::WSABUF bufs[max_buffers];
+    typename Mutable_Buffers::const_iterator iter = buffers.begin();
+    typename Mutable_Buffers::const_iterator end = buffers.end();
+    size_t i = 0;
+    for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      error_handler(asio::error(socket_ops::get_error()));
+      bufs[i].len = static_cast<u_long>(iter->size());
+      bufs[i].buf = static_cast<char*>(iter->data());
+    }
+
+    // Receive some data.
+    DWORD bytes_transferred = 0;
+    DWORD recv_flags = flags;
+    int result = ::WSARecv(impl, bufs, i,
+        &bytes_transferred, &recv_flags, 0, 0);
+    if (result != 0)
+    {
+      DWORD last_error = ::WSAGetLastError();
+      if (last_error == ERROR_NETNAME_DELETED)
+        last_error = WSAECONNRESET;
+      error_handler(asio::error(last_error));
       return 0;
     }
-    return bytes_recvd;
+
+    return bytes_transferred;
   }
 
   template <typename Handler>
@@ -355,83 +509,111 @@ public:
     : public win_iocp_operation
   {
   public:
-    receive_operation(Handler handler)
+    receive_operation(demuxer_type& demuxer,
+        socket_weak_ptr_type socket_ptr, Handler handler)
       : win_iocp_operation(&receive_operation<Handler>::do_completion_impl),
+        work_(demuxer),
+        socket_ptr_(socket_ptr),
         handler_(handler)
     {
     }
 
   private:
     static void do_completion_impl(win_iocp_operation* op,
-        win_iocp_demuxer_service& demuxer_service, HANDLE iocp,
         DWORD last_error, size_t bytes_transferred)
     {
-      receive_operation<Handler>* h
-        = static_cast<receive_operation<Handler>*>(op);
+      std::auto_ptr<receive_operation<Handler> > h(
+          static_cast<receive_operation<Handler>*>(op));
+
+      // Map ERROR_NETNAME_DELETED to more useful error.
+      if (last_error == ERROR_NETNAME_DELETED)
+      {
+        if (h->socket_ptr_.expired())
+          last_error = ERROR_OPERATION_ABORTED;
+        else
+          last_error = WSAECONNRESET;
+      }
+
       asio::error error(last_error);
-      try
-      {
-        h->handler_(error, bytes_transferred);
-      }
-      catch (...)
-      {
-      }
-      demuxer_service.work_finished();
-      delete h;
+      h->handler_(error, bytes_transferred);
     }
 
+    typename demuxer_type::work work_;
+    socket_weak_ptr_type socket_ptr_;
     Handler handler_;
   };
 
   // Start an asynchronous receive. The buffer for the data being received
   // must be valid for the lifetime of the asynchronous operation.
-  template <typename Handler>
-  void async_receive(impl_type& impl, void* data, size_t max_length,
+  template <typename Mutable_Buffers, typename Handler>
+  void async_receive(impl_type& impl, const Mutable_Buffers& buffers,
       socket_base::message_flags flags, Handler handler)
   {
-    receive_operation<Handler>* op = new receive_operation<Handler>(handler);
+    std::auto_ptr<receive_operation<Handler> > op(
+        new receive_operation<Handler>(demuxer_, impl.socket_, handler));
 
-    demuxer_service_.work_started();
+    // Copy buffers into WSABUF array.
+    ::WSABUF bufs[max_buffers];
+    typename Mutable_Buffers::const_iterator iter = buffers.begin();
+    typename Mutable_Buffers::const_iterator end = buffers.end();
+    size_t i = 0;
+    for (; iter != end && i < max_buffers; ++iter, ++i)
+    {
+      bufs[i].len = static_cast<u_long>(iter->size());
+      bufs[i].buf = static_cast<char*>(iter->data());
+    }
 
-    WSABUF buf;
-    buf.len = static_cast<u_long>(max_length);
-    buf.buf = static_cast<char*>(data);
+    // Receive some data.
     DWORD bytes_transferred = 0;
     DWORD recv_flags = flags;
-
-    int result = ::WSARecv(impl, &buf, 1,
-        &bytes_transferred, &recv_flags, op, 0);
+    int result = ::WSARecv(impl, bufs, i,
+        &bytes_transferred, &recv_flags, op.get(), 0);
     DWORD last_error = ::WSAGetLastError();
-
     if (result != 0 && last_error != WSA_IO_PENDING)
     {
-      delete op;
       asio::error error(last_error);
       demuxer_service_.post(bind_handler(handler, error, bytes_transferred));
-      demuxer_service_.work_finished();
+    }
+    else
+    {
+      op.release();
     }
   }
 
-
   // Receive a datagram with the endpoint of the sender. Returns the number of
   // bytes received.
-  template <typename Endpoint, typename Error_Handler>
-  size_t receive_from(impl_type& impl, void* data, size_t max_length,
+  template <typename Mutable_Buffers, typename Endpoint, typename Error_Handler>
+  size_t receive_from(impl_type& impl, const Mutable_Buffers& buffers,
       socket_base::message_flags flags, Endpoint& sender_endpoint,
       Error_Handler error_handler)
   {
-    socket_addr_len_type addr_len = sender_endpoint.size();
-    int bytes_recvd = socket_ops::recvfrom(impl, data, max_length, flags,
-        sender_endpoint.data(), &addr_len);
-    if (bytes_recvd < 0)
+    // Copy buffers into WSABUF array.
+    ::WSABUF bufs[max_buffers];
+    typename Mutable_Buffers::const_iterator iter = buffers.begin();
+    typename Mutable_Buffers::const_iterator end = buffers.end();
+    size_t i = 0;
+    for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      error_handler(asio::error(socket_ops::get_error()));
+      bufs[i].len = static_cast<u_long>(iter->size());
+      bufs[i].buf = static_cast<char*>(iter->data());
+    }
+
+    // Receive some data.
+    DWORD bytes_transferred = 0;
+    DWORD recv_flags = flags;
+    int endpoint_size = sender_endpoint.size();
+    int result = ::WSARecvFrom(impl, bufs, i, &bytes_transferred, &recv_flags,
+        sender_endpoint.data(), &endpoint_size, 0, 0);
+    if (result != 0)
+    {
+      DWORD last_error = ::WSAGetLastError();
+      error_handler(asio::error(last_error));
       return 0;
     }
 
-    sender_endpoint.size(addr_len);
+    sender_endpoint.size(endpoint_size);
 
-    return bytes_recvd;
+    return bytes_transferred;
   }
 
   template <typename Endpoint, typename Handler>
@@ -439,11 +621,13 @@ public:
     : public win_iocp_operation
   {
   public:
-    receive_from_operation(Endpoint& endpoint, Handler handler)
+    receive_from_operation(demuxer_type& demuxer, Endpoint& endpoint,
+        Handler handler)
       : win_iocp_operation(
           &receive_from_operation<Endpoint, Handler>::do_completion_impl),
         endpoint_(endpoint),
         endpoint_size_(endpoint.size()),
+        work_(demuxer),
         handler_(handler)
     {
     }
@@ -455,59 +639,235 @@ public:
 
   private:
     static void do_completion_impl(win_iocp_operation* op,
-        win_iocp_demuxer_service& demuxer_service, HANDLE iocp,
         DWORD last_error, size_t bytes_transferred)
     {
-      receive_from_operation<Endpoint, Handler>* h =
-        static_cast<receive_from_operation<Endpoint, Handler>*>(op);
+      std::auto_ptr<receive_from_operation<Endpoint, Handler> > h(
+          static_cast<receive_from_operation<Endpoint, Handler>*>(op));
       h->endpoint_.size(h->endpoint_size_);
       asio::error error(last_error);
-      try
-      {
-        h->handler_(error, bytes_transferred);
-      }
-      catch (...)
-      {
-      }
-      demuxer_service.work_finished();
-      delete h;
+      h->handler_(error, bytes_transferred);
     }
 
     Endpoint& endpoint_;
     int endpoint_size_;
+    typename demuxer_type::work work_;
     Handler handler_;
   };
 
   // Start an asynchronous receive. The buffer for the data being received and
   // the sender_endpoint object must both be valid for the lifetime of the
   // asynchronous operation.
-  template <typename Endpoint, typename Handler>
-  void async_receive_from(impl_type& impl, void* data, size_t max_length,
-      socket_base::message_flags flags, Endpoint& sender_endpoint,
-      Handler handler)
+  template <typename Mutable_Buffers, typename Endpoint, typename Handler>
+  void async_receive_from(impl_type& impl, const Mutable_Buffers& buffers,
+      socket_base::message_flags flags, Endpoint& sender_endp, Handler handler)
   {
-    receive_from_operation<Endpoint, Handler>* receive_from_op =
-      new receive_from_operation<Endpoint, Handler>(sender_endpoint, handler);
+    std::auto_ptr<receive_from_operation<Endpoint, Handler> > op(
+        new receive_from_operation<Endpoint, Handler>(
+          demuxer_, sender_endp, handler));
 
-    demuxer_service_.work_started();
+    // Copy buffers into WSABUF array.
+    ::WSABUF bufs[max_buffers];
+    typename Mutable_Buffers::const_iterator iter = buffers.begin();
+    typename Mutable_Buffers::const_iterator end = buffers.end();
+    size_t i = 0;
+    for (; iter != end && i < max_buffers; ++iter, ++i)
+    {
+      bufs[i].len = static_cast<u_long>(iter->size());
+      bufs[i].buf = static_cast<char*>(iter->data());
+    }
 
-    WSABUF buf;
-    buf.len = static_cast<u_long>(max_length);
-    buf.buf = static_cast<char*>(data);
+    // Receive some data.
     DWORD bytes_transferred = 0;
     DWORD recv_flags = flags;
-
-    int result = ::WSARecvFrom(impl, &buf, 1, &bytes_transferred, &recv_flags,
-        sender_endpoint.data(), &receive_from_op->endpoint_size(),
-        receive_from_op, 0);
+    int result = ::WSARecvFrom(impl, bufs, i, &bytes_transferred, &recv_flags,
+        sender_endp.data(), &op->endpoint_size(), op.get(), 0);
     DWORD last_error = ::WSAGetLastError();
-
     if (result != 0 && last_error != WSA_IO_PENDING)
     {
-      delete receive_from_op;
       asio::error error(last_error);
       demuxer_service_.post(bind_handler(handler, error, bytes_transferred));
-      demuxer_service_.work_finished();
+    }
+    else
+    {
+      op.release();
+    }
+  }
+
+  // Accept a new connection.
+  template <typename Socket, typename Error_Handler>
+  void accept(impl_type& impl, Socket& peer, Error_Handler error_handler)
+  {
+    // We cannot accept a socket that is already open.
+    if (peer.impl() != invalid_socket)
+    {
+      error_handler(asio::error(asio::error::already_connected));
+      return;
+    }
+
+    impl_type new_socket(socket_ops::accept(impl, 0, 0));
+    if (int err = socket_ops::get_error())
+    {
+      error_handler(asio::error(err));
+      return;
+    }
+
+    peer.set_impl(new_socket);
+  }
+
+  // Accept a new connection.
+  template <typename Socket, typename Endpoint, typename Error_Handler>
+  void accept_endpoint(impl_type& impl, Socket& peer, Endpoint& peer_endpoint,
+      Error_Handler error_handler)
+  {
+    // We cannot accept a socket that is already open.
+    if (peer.impl() != invalid_socket)
+    {
+      error_handler(asio::error(asio::error::already_connected));
+      return;
+    }
+
+    socket_addr_len_type addr_len = peer_endpoint.size();
+    impl_type new_socket(socket_ops::accept(impl,
+          peer_endpoint.data(), &addr_len));
+    if (int err = socket_ops::get_error())
+    {
+      error_handler(asio::error(err));
+      return;
+    }
+
+    peer_endpoint.size(addr_len);
+
+    peer.set_impl(new_socket);
+  }
+
+  template <typename Socket, typename Handler>
+  class accept_handler
+  {
+  public:
+    accept_handler(impl_type impl, demuxer_type& demuxer, Socket& peer,
+        Handler handler)
+      : impl_(impl),
+        demuxer_(demuxer),
+        peer_(peer),
+        work_(demuxer),
+        handler_(handler)
+    {
+    }
+
+    void operator()(int result)
+    {
+      // Check whether the operation was successful.
+      if (result != 0)
+      {
+        asio::error error(result);
+        demuxer_.post(bind_handler(handler_, error));
+        return;
+      }
+
+      // Accept the waiting connection.
+      impl_type new_socket(socket_ops::accept(impl_, 0, 0));
+      asio::error error(new_socket == invalid_socket
+          ? socket_ops::get_error() : asio::error::success);
+      peer_.set_impl(new_socket);
+      demuxer_.post(bind_handler(handler_, error));
+    }
+
+  private:
+    impl_type impl_;
+    demuxer_type& demuxer_;
+    Socket& peer_;
+    typename demuxer_type::work work_;
+    Handler handler_;
+  };
+
+  // Start an asynchronous accept. The peer object must be valid until the
+  // accept's handler is invoked.
+  template <typename Socket, typename Handler>
+  void async_accept(impl_type& impl, Socket& peer, Handler handler)
+  {
+    if (impl == null())
+    {
+      asio::error error(asio::error::bad_descriptor);
+      demuxer_.post(bind_handler(handler, error));
+    }
+    else if (peer.impl() != invalid_socket)
+    {
+      asio::error error(asio::error::already_connected);
+      demuxer_.post(bind_handler(handler, error));
+    }
+    else
+    {
+      reactor_.start_read_op(impl,
+          accept_handler<Socket, Handler>(impl, demuxer_, peer, handler));
+    }
+  }
+
+  template <typename Socket, typename Endpoint, typename Handler>
+  class accept_endp_handler
+  {
+  public:
+    accept_endp_handler(impl_type impl, demuxer_type& demuxer, Socket& peer,
+        Endpoint& peer_endpoint, Handler handler)
+      : impl_(impl),
+        demuxer_(demuxer),
+        peer_(peer),
+        peer_endpoint_(peer_endpoint),
+        work_(demuxer),
+        handler_(handler)
+    {
+    }
+
+    void operator()(int result)
+    {
+      // Check whether the operation was successful.
+      if (result != 0)
+      {
+        asio::error error(result);
+        demuxer_.post(bind_handler(handler_, error));
+        return;
+      }
+
+      // Accept the waiting connection.
+      socket_addr_len_type addr_len = peer_endpoint_.size();
+      impl_type new_socket(socket_ops::accept(impl_,
+            peer_endpoint_.data(), &addr_len));
+      asio::error error(new_socket == invalid_socket
+          ? socket_ops::get_error() : asio::error::success);
+      peer_endpoint_.size(addr_len);
+      peer_.set_impl(new_socket);
+      demuxer_.post(bind_handler(handler_, error));
+    }
+
+  private:
+    impl_type impl_;
+    demuxer_type& demuxer_;
+    Socket& peer_;
+    Endpoint& peer_endpoint_;
+    typename demuxer_type::work work_;
+    Handler handler_;
+  };
+
+  // Start an asynchronous accept. The peer and peer_endpoint objects
+  // must be valid until the accept's handler is invoked.
+  template <typename Socket, typename Endpoint, typename Handler>
+  void async_accept_endpoint(impl_type& impl, Socket& peer,
+      Endpoint& peer_endpoint, Handler handler)
+  {
+    if (impl == null())
+    {
+      asio::error error(asio::error::bad_descriptor);
+      demuxer_.post(bind_handler(handler, error));
+    }
+    else if (peer.impl() != invalid_socket)
+    {
+      asio::error error(asio::error::already_connected);
+      demuxer_.post(bind_handler(handler, error));
+    }
+    else
+    {
+      reactor_.start_read_op(impl,
+          accept_endp_handler<Socket, Endpoint, Handler>(
+            impl, demuxer_, peer, peer_endpoint, handler));
     }
   }
 
@@ -551,23 +911,29 @@ public:
         completed_(completed),
         demuxer_(demuxer),
         reactor_(reactor),
+        work_(demuxer),
         handler_(handler)
     {
     }
 
-    void do_operation()
+    void operator()(int result)
     {
       // Check whether a handler has already been called for the connection.
       // If it has, then we don't want to do anything in this handler.
       if (*completed_)
-      {
-        demuxer_.work_finished();
         return;
-      }
 
       // Cancel the other reactor operation for the connection.
       *completed_ = true;
       reactor_.enqueue_cancel_ops_unlocked(impl_);
+
+      // Check whether the operation was successful.
+      if (result != 0)
+      {
+        asio::error error(result);
+        demuxer_.post(bind_handler(handler_, error));
+        return;
+      }
 
       // Get the error code from the connect operation.
       int connect_error = 0;
@@ -602,31 +968,12 @@ public:
       demuxer_.post(bind_handler(handler_, error));
     }
 
-    void do_cancel()
-    {
-      // Check whether a handler has already been called for the connection.
-      // If it has, then we don't want to do anything in this handler.
-      if (*completed_)
-      {
-        demuxer_.work_finished();
-        return;
-      }
-
-      // Cancel the other reactor operation for the connection.
-      *completed_ = true;
-      reactor_.enqueue_cancel_ops_unlocked(impl_);
-
-      // The socket is closed when the reactor_.close_descriptor is called,
-      // so no need to close it here.
-      asio::error error(asio::error::operation_aborted);
-      demuxer_.post(bind_handler(handler_, error));
-    }
-
   private:
     impl_type& impl_;
     boost::shared_ptr<bool> completed_;
     demuxer_type& demuxer_;
     reactor_type& reactor_;
+    typename demuxer_type::work work_;
     Handler handler_;
   };
 
@@ -679,7 +1026,6 @@ public:
       // The connection is happening in the background, and we need to wait
       // until the socket becomes writeable.
       boost::shared_ptr<bool> completed(new bool(false));
-      demuxer_.work_started();
       reactor_.start_write_and_except_ops(impl, connect_handler<Handler>(
             impl, completed, demuxer_, reactor_, handler));
     }
@@ -700,14 +1046,14 @@ private:
   // dispatching handlers.
   win_iocp_demuxer_service& demuxer_service_;
 
-  // The reactor used for performing connect operations.
+  // The reactor used for performing accept and connect operations.
   reactor_type& reactor_;
 };
 
 } // namespace detail
 } // namespace asio
 
-#endif // defined(_WIN32)
+#endif // defined(_WIN32) && defined(_WIN32_WINNT) && (_WIN32_WINNT >= 0x0400)
 
 #include "asio/detail/pop_options.hpp"
 

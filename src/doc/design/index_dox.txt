@@ -1,0 +1,10 @@
+/**
+\mainpage asio Design
+
+Some design notes:
+
+\li \ref designservices
+\li \ref designhandlers
+\li \ref designcloseascancel
+
+*/

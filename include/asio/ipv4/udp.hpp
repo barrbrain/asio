@@ -18,6 +18,7 @@
 #include "asio/detail/push_options.hpp"
 
 #include "asio/error.hpp"
+#include "asio/ipv4/address.hpp"
 #include "asio/detail/socket_types.hpp"
 #include "asio/detail/socket_types.hpp"
 
@@ -198,6 +199,25 @@ private:
   // The underlying IPv4 socket address.
   asio::detail::inet_addr_v4_type addr_;
 };
+
+/// Output an endpoint as a string.
+/**
+ * Used to output a human-readable string for a specified endpoint.
+ *
+ * @param os The output stream to which the string will be written.
+ *
+ * @param endpoint The endpoint to be written.
+ *
+ * @return The output stream.
+ *
+ * @relates tcp::endpoint
+ */
+template <typename Ostream>
+Ostream& operator<<(Ostream& os, const udp::endpoint& endpoint)
+{
+  os << endpoint.address().to_string() << ':' << endpoint.port();
+  return os;
+}
 
 } // namespace ipv4
 } // namespace asio

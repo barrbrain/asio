@@ -26,8 +26,10 @@
 #include "asio/basic_stream_socket.hpp"
 #include "asio/demuxer_service.hpp"
 #include "asio/detail/epoll_reactor.hpp"
+#include "asio/detail/kqueue_reactor.hpp"
 #include "asio/detail/select_reactor.hpp"
 #include "asio/detail/reactive_socket_service.hpp"
+#include "asio/detail/win_iocp_socket_service.hpp"
 
 namespace asio {
 
@@ -42,12 +44,14 @@ public:
 
 private:
   // The type of the platform-specific implementation.
-#if defined(_WIN32)
-  typedef detail::reactive_socket_service<
-    demuxer_type, detail::select_reactor<true> > service_impl_type;
+#if defined(ASIO_HAS_IOCP_DEMUXER)
+  typedef detail::win_iocp_socket_service<Allocator> service_impl_type;
 #elif defined(ASIO_HAS_EPOLL_REACTOR)
   typedef detail::reactive_socket_service<
     demuxer_type, detail::epoll_reactor<false> > service_impl_type;
+#elif defined(ASIO_HAS_KQUEUE_REACTOR)
+  typedef detail::reactive_socket_service<
+    demuxer_type, detail::kqueue_reactor<false> > service_impl_type;
 #else
   typedef detail::reactive_socket_service<
     demuxer_type, detail::select_reactor<false> > service_impl_type;

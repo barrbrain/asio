@@ -100,8 +100,8 @@ public:
     close(epoll_fd_);
   }
 
-  // Start a new read operation. The do_operation function of the select_op
-  // object will be invoked when the given descriptor is ready to be read.
+  // Start a new read operation. The handler object will be invoked when the
+  // given descriptor is ready to be read, or an error has occurred.
   template <typename Handler>
   void start_read_op(socket_type descriptor, Handler handler)
   {
@@ -113,23 +113,32 @@ public:
       ev.events = EPOLLIN | EPOLLERR | EPOLLHUP;
       if (write_op_queue_.has_operation(descriptor))
         ev.events |= EPOLLOUT;
+      if (except_op_queue_.has_operation(descriptor))
+        ev.events |= EPOLLPRI;
       ev.data.fd = descriptor;
 
+      int result;
       if (epoll_registrations_.find(descriptor) == epoll_registrations_.end())
       {
         epoll_registrations_.insert(
             epoll_registration_map::value_type(descriptor, true));
-        epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
+        result = epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
       }
       else
       {
-        epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev);
+        result = epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev);
+      }
+
+      if (result != 0)
+      {
+        int error = errno;
+        read_op_queue_.dispatch_all_operations(descriptor, error);
       }
     }
   }
 
-  // Start a new write operation. The do_operation function of the select_op
-  // object will be invoked when the given descriptor is ready for writing.
+  // Start a new write operation. The handler object will be invoked when the
+  // given descriptor is ready to be written, or an error has occurred.
   template <typename Handler>
   void start_write_op(socket_type descriptor, Handler handler)
   {
@@ -141,24 +150,32 @@ public:
       ev.events = EPOLLOUT | EPOLLERR | EPOLLHUP;
       if (read_op_queue_.has_operation(descriptor))
         ev.events |= EPOLLIN;
+      if (except_op_queue_.has_operation(descriptor))
+        ev.events |= EPOLLPRI;
       ev.data.fd = descriptor;
 
+      int result;
       if (epoll_registrations_.find(descriptor) == epoll_registrations_.end())
       {
         epoll_registrations_.insert(
             epoll_registration_map::value_type(descriptor, true));
-        epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
+        result = epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
       }
       else
       {
-        epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev);
+        result = epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev);
+      }
+
+      if (result != 0)
+      {
+        int error = errno;
+        write_op_queue_.dispatch_all_operations(descriptor, error);
       }
     }
   }
 
-  // Start a new exception operation. The do_operation function of the select_op
-  // object will be invoked when the given descriptor has exception information
-  // available.
+  // Start a new exception operation. The handler object will be invoked when
+  // the given descriptor has exception information, or an error has occurred.
   template <typename Handler>
   void start_except_op(socket_type descriptor, Handler handler)
   {
@@ -167,29 +184,36 @@ public:
     if (except_op_queue_.enqueue_operation(descriptor, handler))
     {
       epoll_event ev = { 0 };
-      ev.events = EPOLLERR | EPOLLHUP;
+      ev.events = EPOLLPRI | EPOLLERR | EPOLLHUP;
       if (read_op_queue_.has_operation(descriptor))
         ev.events |= EPOLLIN;
       if (write_op_queue_.has_operation(descriptor))
         ev.events |= EPOLLOUT;
       ev.data.fd = descriptor;
 
+      int result;
       if (epoll_registrations_.find(descriptor) == epoll_registrations_.end())
       {
         epoll_registrations_.insert(
             epoll_registration_map::value_type(descriptor, true));
-        epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
+        result = epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
       }
       else
       {
-        epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev);
+        result = epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev);
+      }
+
+      if (result != 0)
+      {
+        int error = errno;
+        except_op_queue_.dispatch_all_operations(descriptor, error);
       }
     }
   }
 
-  // Start a new write and exception operations. The do_operation function of
-  // the select_op object will be invoked when the given descriptor is ready
-  // for writing or has exception information available.
+  // Start new write and exception operations. The handler object will be
+  // invoked when the given descriptor is ready for writing or has exception
+  // information available, or an error has occurred.
   template <typename Handler>
   void start_write_and_except_ops(socket_type descriptor, Handler handler)
   {
@@ -201,26 +225,35 @@ public:
     if (need_mod)
     {
       epoll_event ev = { 0 };
-      ev.events = EPOLLOUT | EPOLLERR | EPOLLHUP;
+      ev.events = EPOLLOUT | EPOLLPRI | EPOLLERR | EPOLLHUP;
       if (read_op_queue_.has_operation(descriptor))
         ev.events |= EPOLLIN;
       ev.data.fd = descriptor;
 
+      int result;
       if (epoll_registrations_.find(descriptor) == epoll_registrations_.end())
       {
         epoll_registrations_.insert(
             epoll_registration_map::value_type(descriptor, true));
-        epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
+        result = epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
       }
       else
       {
-        epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev);
+        result = epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev);
+      }
+
+      if (result != 0)
+      {
+        int error = errno;
+        write_op_queue_.dispatch_all_operations(descriptor, error);
+        except_op_queue_.dispatch_all_operations(descriptor, error);
       }
     }
   }
 
   // Cancel all operations associated with the given descriptor. The
-  // do_cancel function of the handler objects will be invoked.
+  // handlers associated with the descriptor will be invoked with the
+  // operation_aborted error.
   void cancel_ops(socket_type descriptor)
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
@@ -228,9 +261,10 @@ public:
   }
 
   // Enqueue cancellation of all operations associated with the given
-  // descriptor. The do_cancel function of the handler objects will be invoked.
-  // This function does not acquire the epoll_reactor's mutex, and so should
-  // only be used from within a reactor handler.
+  // descriptor. The handlers associated with the descriptor will be invoked
+  // with the operation_aborted error. This function does not acquire the
+  // select_reactor's mutex, and so should only be used from within a reactor
+  // handler.
   void enqueue_cancel_ops_unlocked(socket_type descriptor)
   {
     pending_cancellations_.insert(
@@ -256,10 +290,8 @@ public:
     cancel_ops_unlocked(descriptor);
   }
 
-  // Schedule a timer to expire at the specified absolute time. The
-  // do_operation function of the handler object will be invoked when the timer
-  // expires. Returns a token that may be used for cancelling the timer, but it
-  // is not valid after the timer expires.
+  // Schedule a timer to expire at the specified absolute time. The handler
+  // object will be invoked when the timer expires.
   template <typename Handler>
   void schedule_timer(long sec, long usec, Handler handler, void* token)
   {
@@ -299,7 +331,7 @@ private:
     except_op_queue_.dispatch_cancellations();
 
     bool stop = false;
-    while (!stop)
+    while (!stop && !stop_thread_)
     {
       int timeout = get_timeout();
       wait_in_progress_ = true;
@@ -327,9 +359,9 @@ private:
         {
           if (events[i].events & (EPOLLERR | EPOLLHUP))
           {
-            except_op_queue_.dispatch_all_operations(descriptor);
-            read_op_queue_.dispatch_all_operations(descriptor);
-            write_op_queue_.dispatch_all_operations(descriptor);
+            except_op_queue_.dispatch_all_operations(descriptor, 0);
+            read_op_queue_.dispatch_all_operations(descriptor, 0);
+            write_op_queue_.dispatch_all_operations(descriptor, 0);
 
             epoll_event ev = { 0 };
             ev.events = 0;
@@ -340,14 +372,22 @@ private:
           {
             bool more_reads = false;
             bool more_writes = false;
+            bool more_except = false;
+
+            // Exception operations must be processed first to ensure that any
+            // out-of-band data is read before normal data.
+            if (events[i].events & EPOLLPRI)
+              more_except = except_op_queue_.dispatch_operation(descriptor, 0);
+            else
+              more_except = except_op_queue_.has_operation(descriptor);
 
             if (events[i].events & EPOLLIN)
-              more_reads = read_op_queue_.dispatch_operation(descriptor);
+              more_reads = read_op_queue_.dispatch_operation(descriptor, 0);
             else
               more_reads = read_op_queue_.has_operation(descriptor);
 
             if (events[i].events & EPOLLOUT)
-              more_writes = write_op_queue_.dispatch_operation(descriptor);
+              more_writes = write_op_queue_.dispatch_operation(descriptor, 0);
             else
               more_writes = write_op_queue_.has_operation(descriptor);
 
@@ -357,8 +397,17 @@ private:
               ev.events |= EPOLLIN;
             if (more_writes)
               ev.events |= EPOLLOUT;
+            if (more_except)
+              ev.events |= EPOLLPRI;
             ev.data.fd = descriptor;
-            epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev);
+            int result = epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev);
+            if (result != 0)
+            {
+              int error = errno;
+              read_op_queue_.dispatch_all_operations(descriptor, error);
+              write_op_queue_.dispatch_all_operations(descriptor, error);
+              except_op_queue_.dispatch_all_operations(descriptor, error);
+            }
           }
         }
       }

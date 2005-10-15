@@ -1,6 +1,6 @@
 AC_INIT(include/asio.hpp)
 AM_MAINTAINER_MODE
-AM_INIT_AUTOMAKE(asio, [0.3.3])
+AM_INIT_AUTOMAKE(asio, [0.3.4])
 
 AC_CANONICAL_HOST
 AM_PROG_CC_C_O
@@ -28,6 +28,23 @@ AC_CHECK_HEADER([boost/noncopyable.hpp],,
   echo "distribution and rerun configure using the --with-boost=DIR option."
   exit 1
 ],[])
+
+AC_ARG_WITH(openssl,
+  AC_HELP_STRING([--with-openssl=DIR],[location of openssl]),
+[
+  CPPFLAGS="$CPPFLAGS -I${withval}"
+],[])
+
+AC_CHECK_HEADER([openssl/ssl.h],,
+[
+  OPENSSL_FOUND=no
+],[])
+
+if test x$OPENSSL_FOUND != xno; then
+  LIBS="$LIBS -lssl -lcrypto"
+fi
+
+AM_CONDITIONAL(HAVE_OPENSSL,test x$OPENSSL_FOUND != xno)
 
 case $host in
   *-*-linux*)
@@ -68,4 +85,9 @@ AC_OUTPUT([
   include/Makefile
   src/Makefile
   src/doc/Makefile
-  src/doc/asio.dox])
+  src/doc/design.dox
+  src/doc/examples.dox
+  src/doc/index.html
+  src/doc/building.html
+  src/doc/reference.dox
+  src/doc/tutorial.dox])

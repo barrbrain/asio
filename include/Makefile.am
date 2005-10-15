@@ -6,12 +6,15 @@ nobase_include_HEADERS = \
 	asio/basic_locking_dispatcher.hpp \
 	asio/basic_socket_acceptor.hpp \
 	asio/basic_stream_socket.hpp \
+	asio/buffer.hpp \
 	asio/buffered_read_stream_fwd.hpp \
 	asio/buffered_read_stream.hpp \
 	asio/buffered_stream_fwd.hpp \
 	asio/buffered_stream.hpp \
 	asio/buffered_write_stream_fwd.hpp \
 	asio/buffered_write_stream.hpp \
+	asio/buffers.hpp \
+	asio/consuming_buffers.hpp \
 	asio/datagram_socket.hpp \
 	asio/datagram_socket_service.hpp \
 	asio/deadline_timer.hpp \
@@ -21,10 +24,12 @@ nobase_include_HEADERS = \
 	asio/demuxer_service.hpp \
 	asio/detail/bind_handler.hpp \
 	asio/detail/buffer_resize_guard.hpp \
+	asio/detail/demuxer_run_call_stack.hpp \
 	asio/detail/epoll_reactor.hpp \
 	asio/detail/event.hpp \
 	asio/detail/fd_set_adapter.hpp \
 	asio/detail/hash_map.hpp \
+	asio/detail/kqueue_reactor.hpp \
 	asio/detail/locking_dispatcher_impl.hpp \
 	asio/detail/locking_dispatcher_service.hpp \
 	asio/detail/mutex.hpp \
@@ -35,7 +40,7 @@ nobase_include_HEADERS = \
 	asio/detail/posix_signal_blocker.hpp \
 	asio/detail/posix_thread.hpp \
 	asio/detail/posix_time.hpp \
-	asio/detail/posix_tss_bool.hpp \
+	asio/detail/posix_tss_ptr.hpp \
 	asio/detail/push_options.hpp \
 	asio/detail/reactive_deadline_timer_service.hpp \
 	asio/detail/reactive_socket_service.hpp \
@@ -54,7 +59,7 @@ nobase_include_HEADERS = \
 	asio/detail/task_demuxer_service.hpp \
 	asio/detail/thread.hpp \
 	asio/detail/time.hpp \
-	asio/detail/tss_bool.hpp \
+	asio/detail/tss_ptr.hpp \
 	asio/detail/win_event.hpp \
 	asio/detail/win_iocp_demuxer_service.hpp \
 	asio/detail/win_iocp_operation.hpp \
@@ -64,7 +69,7 @@ nobase_include_HEADERS = \
 	asio/detail/winsock_init.hpp \
 	asio/detail/win_thread.hpp \
 	asio/detail/win_time.hpp \
-	asio/detail/win_tss_bool.hpp \
+	asio/detail/win_tss_ptr.hpp \
 	asio/error_handler.hpp \
 	asio/error.hpp \
 	asio/fixed_buffer.hpp \
@@ -84,6 +89,7 @@ nobase_include_HEADERS = \
 	asio/locking_dispatcher.hpp \
 	asio/locking_dispatcher_service.hpp \
 	asio/null_error_handler.hpp \
+	asio/pch.hpp \
 	asio/placeholders.hpp \
 	asio/read.hpp \
 	asio/service_factory.hpp \
@@ -91,6 +97,19 @@ nobase_include_HEADERS = \
 	asio/socket_acceptor_service.hpp \
 	asio/socket_base.hpp \
 	asio/socket_option.hpp \
+  asio/ssl.hpp \
+  asio/ssl/basic_context.hpp \
+  asio/ssl/context.hpp \
+  asio/ssl/context_base.hpp \
+  asio/ssl/context_service.hpp \
+  asio/ssl/detail/openssl_context_service.hpp \
+  asio/ssl/detail/openssl_init.hpp \
+  asio/ssl/detail/openssl_operation.hpp \
+  asio/ssl/detail/openssl_stream_service.hpp \
+  asio/ssl/detail/openssl_types.hpp \
+  asio/ssl/stream.hpp \
+  asio/ssl/stream_base.hpp \
+  asio/ssl/stream_service.hpp \
 	asio/stream_socket.hpp \
 	asio/stream_socket_service.hpp \
 	asio/thread.hpp \

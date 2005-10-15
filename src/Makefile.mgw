@@ -2,25 +2,66 @@ ifndef BOOSTDIR
 BOOSTDIR = ../../boost_1_33_0
 endif
 
-CXXFLAGS = -g -O3 -Wall -mthreads -I../include -I$(BOOSTDIR)
-LDFLAGS = -g -O3 -mthreads
+CXXFLAGS = -g -O2 -Wall -mthreads -I../include -I$(BOOSTDIR)
+LDFLAGS = -g -O2 -mthreads
 LIBS = -lws2_32
+DEFINES = -D_WIN32_WINNT=0x0500
 
-TEST_EXES = \
+PERFORMANCE_TEST_EXES = \
 	tests/performance/client.exe \
-	tests/performance/server.exe \
-	tests/unit/deadline_timer_test.exe \
-	tests/unit/demuxer_test.exe \
+	tests/performance/server.exe
+
+UNIT_TEST_EXES = \
+	tests/unit/basic_datagram_socket_test.exe \
+	tests/unit/basic_deadline_timer_test.exe \
+	tests/unit/basic_demuxer_test.exe \
+	tests/unit/basic_locking_dispatcher_test.exe \
+	tests/unit/basic_socket_acceptor_test.exe \
+	tests/unit/basic_stream_socket_test.exe \
+	tests/unit/buffered_read_stream_test.exe \
+	tests/unit/buffered_stream_test.exe \
+	tests/unit/buffered_write_stream_test.exe \
+	tests/unit/buffers_test.exe \
+	tests/unit/buffer_test.exe \
+	tests/unit/consuming_buffers_test.exe \
+	tests/unit/datagram_socket_service_test.exe \
 	tests/unit/datagram_socket_test.exe \
+	tests/unit/deadline_timer_service_test.exe \
+	tests/unit/deadline_timer_test.exe \
+	tests/unit/default_error_handler_test.exe \
+	tests/unit/demuxer_service_test.exe \
+	tests/unit/demuxer_test.exe \
 	tests/unit/error_handler_test.exe \
+	tests/unit/error_test.exe \
 	tests/unit/fixed_buffer_test.exe \
-	tests/unit/ipv4_host_resolver_test.exe \
+	tests/unit/io_control_test.exe \
+	tests/unit/ipv4/address_test.exe \
+	tests/unit/ipv4/basic_host_resolver_test.exe \
+	tests/unit/ipv4/host_resolver_service_test.exe \
+	tests/unit/ipv4/host_resolver_test.exe \
+	tests/unit/ipv4/host_test.exe \
+	tests/unit/ipv4/multicast_test.exe \
+	tests/unit/ipv4/socket_option_test.exe \
+	tests/unit/ipv4/tcp_test.exe \
+	tests/unit/ipv4/udp_test.exe \
 	tests/unit/is_read_buffered_test.exe \
 	tests/unit/is_write_buffered_test.exe \
+	tests/unit/locking_dispatcher_service_test.exe \
 	tests/unit/locking_dispatcher_test.exe \
+	tests/unit/null_error_handler_test.exe \
+	tests/unit/placeholders_test.exe \
 	tests/unit/read_test.exe \
-	tests/unit/write_test.exe \
-	tests/unit/socket_acceptor_test.exe
+	tests/unit/service_factory_test.exe \
+	tests/unit/socket_acceptor_service_test.exe \
+	tests/unit/socket_acceptor_test.exe \
+	tests/unit/socket_base_test.exe \
+	tests/unit/socket_option_test.exe \
+	tests/unit/stream_socket_service_test.exe \
+	tests/unit/stream_socket_test.exe \
+	tests/unit/thread_test.exe \
+	tests/unit/time_traits_test.exe \
+	tests/unit/wrapped_handler_test.exe \
+	tests/unit/write_test.exe
 
 EXAMPLE_EXES = \
 	examples/chat/chat_client.exe \
@@ -50,16 +91,43 @@ EXAMPLE_EXES = \
 	examples/tutorial/daytime6/server.exe \
 	examples/tutorial/daytime7/server.exe
 
-all: $(TEST_EXES) $(EXAMPLE_EXES)
+HTTP_EXAMPLE_EXES = \
+	examples/http/server/http_server.exe
+
+all: \
+	$(PERFORMANCE_TEST_EXES) \
+	$(UNIT_TEST_EXES) \
+	$(EXAMPLE_EXES) \
+	$(HTTP_EXAMPLE_EXES)
+
+check: $(UNIT_TEST_EXES) $(addprefix run.,$(UNIT_TEST_EXES))
+
+$(addprefix run.,$(UNIT_TEST_EXES))::
+	@echo === Running $(@:run.%=%) ===
+	@$(@:run.%=%)
+	@echo.
 
 clean:
-	-rm -f $(TEST_EXES)
-	-rm -f $(TEST_EXES:.exe=.o)
+	-rm -f $(PERFORMANCE_TEST_EXES)
+	-rm -f $(PERFORMANCE_TEST_EXES:.exe=.o)
+	-rm -f $(UNIT_TEST_EXES)
+	-rm -f $(UNIT_TEST_EXES:.exe=.o)
 	-rm -f $(EXAMPLE_EXES)
 	-rm -f $(EXAMPLE_EXES:.exe=.o)
 
-$(TEST_EXES) $(EXAMPLE_EXES): %.exe: %.o
+$(PERFORMANCE_TEST_EXES) $(UNIT_TEST_EXES) $(EXAMPLE_EXES): %.exe: %.o
 	g++ -o$@ $(LDFLAGS) $< $(LIBS)
 
+examples/http/server/http_server.exe: \
+		examples/http/server/connection.o \
+		examples/http/server/connection_manager.o \
+		examples/http/server/mime_types.o \
+		examples/http/server/reply.o \
+		examples/http/server/request_handler.o \
+		examples/http/server/request_parser.o \
+		examples/http/server/server.o \
+		examples/http/server/win_main.o
+	g++ -o$@ $(LDFLAGS) $^ $(LIBS)
+
 .cpp.o:
-	g++ -o$@ -c $(CXXFLAGS) $<
+	g++ -o$@ -c $(CXXFLAGS) $(DEFINES) $<

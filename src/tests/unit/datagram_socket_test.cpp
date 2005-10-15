@@ -8,6 +8,9 @@
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
+// Test that header file is self-contained.
+#include "asio/datagram_socket.hpp"
+
 #include <boost/bind.hpp>
 #include <cstring>
 #include "asio.hpp"
@@ -18,15 +21,15 @@ using namespace asio;
 void handle_send(size_t expected_bytes_sent, const error& err,
     size_t bytes_sent)
 {
-  UNIT_TEST_CHECK(!err);
-  UNIT_TEST_CHECK(expected_bytes_sent == bytes_sent);
+  BOOST_CHECK(!err);
+  BOOST_CHECK(expected_bytes_sent == bytes_sent);
 }
 
 void handle_recv(size_t expected_bytes_recvd, const error& err,
     size_t bytes_recvd)
 {
-  UNIT_TEST_CHECK(!err);
-  UNIT_TEST_CHECK(expected_bytes_recvd == bytes_recvd);
+  BOOST_CHECK(!err);
+  BOOST_CHECK(expected_bytes_recvd == bytes_recvd);
 }
 
 void datagram_socket_test()
@@ -44,29 +47,34 @@ void datagram_socket_test()
   s2.open(ipv4::udp());
   s2.bind(ipv4::udp::endpoint(0));
   char send_msg[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-  s2.send_to(send_msg, sizeof(send_msg), 0, target_endpoint);
+  s2.send_to(buffers(send_msg, sizeof(send_msg)), 0, target_endpoint);
 
   char recv_msg[sizeof(send_msg)];
   ipv4::udp::endpoint sender_endpoint;
-  size_t bytes_recvd = s1.receive_from(recv_msg, sizeof(recv_msg), 0,
+  size_t bytes_recvd = s1.receive_from(buffers(recv_msg, sizeof(recv_msg)), 0,
       sender_endpoint);
 
-  UNIT_TEST_CHECK(bytes_recvd == sizeof(send_msg));
-  UNIT_TEST_CHECK(memcmp(send_msg, recv_msg, sizeof(send_msg)) == 0);
+  BOOST_CHECK(bytes_recvd == sizeof(send_msg));
+  BOOST_CHECK(memcmp(send_msg, recv_msg, sizeof(send_msg)) == 0);
 
   memset(recv_msg, 0, sizeof(recv_msg));
 
   target_endpoint = sender_endpoint;
-  s1.async_send_to(send_msg, sizeof(send_msg), 0, target_endpoint,
+  s1.async_send_to(buffers(send_msg, sizeof(send_msg)), 0, target_endpoint,
       boost::bind(handle_send, sizeof(send_msg),
         placeholders::error, placeholders::bytes_transferred));
-  s2.async_receive_from(recv_msg, sizeof(recv_msg), 0, sender_endpoint,
+  s2.async_receive_from(buffers(recv_msg, sizeof(recv_msg)), 0, sender_endpoint,
       boost::bind(handle_recv, sizeof(recv_msg),
         placeholders::error, placeholders::bytes_transferred));
 
   d.run();
 
-  UNIT_TEST_CHECK(memcmp(send_msg, recv_msg, sizeof(send_msg)) == 0);
+  BOOST_CHECK(memcmp(send_msg, recv_msg, sizeof(send_msg)) == 0);
 }
 
-UNIT_TEST(datagram_socket_test)
+test_suite* init_unit_test_suite(int argc, char* argv[])
+{
+  test_suite* test = BOOST_TEST_SUITE("datagram_socket");
+  test->add(BOOST_TEST_CASE(&datagram_socket_test));
+  return test;
+}

@@ -137,8 +137,30 @@ private:
 
     void operator()()
     {
-      do_upcall();
+      // Helper class to automatically enqueue next waiter on block exit.
+      class cleanup
+      {
+      public:
+        cleanup(waiter_handler& handler)
+          : handler_(handler)
+        {
+        }
 
+        ~cleanup()
+        {
+          handler_.post_next_waiter();
+        }
+
+      private:
+        waiter_handler& handler_;
+      } c(*this);
+
+      // Call the handler.
+      impl_.first_waiter_->call();
+    }
+
+    void post_next_waiter()
+    {
       asio::detail::mutex::scoped_lock lock(impl_.mutex_);
 
       waiter_base* tmp = impl_.first_waiter_;
@@ -167,17 +189,6 @@ private:
         // the dispatcher and so destroying the waiter will cause the
         // dispatcher to be destroyed.
         delete tmp;
-      }
-    }
-
-    void do_upcall()
-    {
-      try
-      {
-        impl_.first_waiter_->call();
-      }
-      catch (...)
-      {
       }
     }
 

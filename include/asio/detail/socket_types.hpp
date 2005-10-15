@@ -19,6 +19,16 @@
 
 #include "asio/detail/push_options.hpp"
 #if defined(_WIN32)
+# if !defined(_WIN32_WINNT) && !defined(_WIN32_WINDOWS)
+#  if defined(_MSC_VER) || defined(__BORLANDC__)
+#   pragma message("Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately")
+#   pragma message("Assuming _WIN32_WINNT=0x0500 (i.e. Windows 2000 target)")
+#  else // defined(_MSC_VER) || defined(__BORLANDC__)
+#   warning Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately
+#   warning Assuming _WIN32_WINNT=0x0500 (i.e. Windows 2000 target)
+#  endif // defined(_MSC_VER) || defined(__BORLANDC__)
+#  define _WIN32_WINNT 0x0500
+# endif // !defined(_WIN32_WINNT) && !defined(_WIN32_WINDOWS)
 # if defined(__BORLANDC__) && !defined(_WSPIAPI_H_)
 #  include <stdlib.h> // Needed for __errno
 #  define _WSPIAPI_H_
@@ -31,11 +41,15 @@
 #  undef _WSPIAPI_H_
 #  undef ASIO_WSPIAPI_H_DEFINED
 # endif // defined(ASIO_WSPIAPI_H_DEFINED)
+# if defined(_MSC_VER) || defined(__BORLANDC__)
+#  pragma comment(lib, "ws2_32.lib")
+# endif // defined(_MSC_VER) || defined(__BORLANDC__)
 #else
 # include <sys/ioctl.h>
 # include <sys/types.h>
 # include <sys/select.h>
 # include <sys/socket.h>
+# include <sys/uio.h>
 # include <netinet/in.h>
 # include <netinet/tcp.h>
 # include <arpa/inet.h>

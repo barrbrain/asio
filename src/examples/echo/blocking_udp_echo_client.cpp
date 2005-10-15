@@ -2,6 +2,7 @@
 #include <cstring>
 #include <iostream>
 #include "asio.hpp"
+#include <asio/buffers.hpp>
 
 enum { max_length = 1024 };
 
@@ -29,11 +30,13 @@ int main(int argc, char* argv[])
     char request[max_length];
     std::cin.getline(request, max_length);
     size_t request_length = strlen(request);
-    s.send_to(request, request_length, 0, receiver_endpoint);
+    s.connect(receiver_endpoint);
+    s.send(asio::buffers(request, request_length), 0);
 
     char reply[max_length];
     asio::ipv4::udp::endpoint sender_endpoint;
-    size_t reply_length = s.receive_from(reply, max_length, 0, sender_endpoint);
+    size_t reply_length = s.receive_from(
+        asio::buffers(reply, max_length), 0, sender_endpoint);
     std::cout << "Reply is: ";
     std::cout.write(reply, reply_length);
     std::cout << "\n";

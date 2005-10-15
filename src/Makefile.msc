@@ -2,30 +2,87 @@
 BOOSTDIR = ../../boost_1_33_0
 !endif
 
-!ifdef WARNINGS
-CXXFLAGS = -nologo -O2 -GX -GR -MT -W3 -I. -I../include -I$(BOOSTDIR)
-!else
-CXXFLAGS = -nologo -O2 -GX -GR -MT -I. -I../include -I$(BOOSTDIR)
-!endif
-DEFINES = -DBOOST_DATE_TIME_NO_LIB
-LDFLAGS = -nologo -O2 -GX -GR -MT
-LIBS = ws2_32.lib
+COMMON_CXXFLAGS = -nologo -EHac -GR -MT -I. -I../include -I$(BOOSTDIR)
+COMMON_LDFLAGS = -nologo -EHac -GR -MT
 
-all: \
+!ifdef WARNINGS
+WARNINGS_CXXFLAGS = -W3
+!endif
+
+!ifdef DEBUG
+DEBUG_CXXFLAGS = -Zi
+DEBUG_LDFLAGS = -Zi
+!else
+DEBUG_CXXFLAGS = -O2
+DEBUG_LDFLAGS = -O2
+!endif
+
+!ifdef WIN9X
+DEFINES = -D_WIN32_WINDOWS=0x0400 -DBOOST_DATE_TIME_NO_LIB
+!else
+DEFINES = -D_WIN32_WINNT=0x0500 -DBOOST_DATE_TIME_NO_LIB
+!endif
+
+CXXFLAGS = $(COMMON_CXXFLAGS) $(WARNINGS_CXXFLAGS) $(DEBUG_CXXFLAGS)
+LDFLAGS = $(COMMON_LDFLAGS) $(DEBUG_LDFLAGS)
+
+PERFORMANCE_TEST_EXES = \
 	tests\performance\client.exe \
-	tests\performance\server.exe \
-	tests\unit\deadline_timer_test.exe \
-	tests\unit\demuxer_test.exe \
+	tests\performance\server.exe
+
+UNIT_TEST_EXES = \
+	tests\unit\basic_datagram_socket_test.exe \
+	tests\unit\basic_deadline_timer_test.exe \
+	tests\unit\basic_demuxer_test.exe \
+	tests\unit\basic_locking_dispatcher_test.exe \
+	tests\unit\basic_socket_acceptor_test.exe \
+	tests\unit\basic_stream_socket_test.exe \
+	tests\unit\buffered_read_stream_test.exe \
+	tests\unit\buffered_stream_test.exe \
+	tests\unit\buffered_write_stream_test.exe \
+	tests\unit\buffers_test.exe \
+	tests\unit\buffer_test.exe \
+	tests\unit\consuming_buffers_test.exe \
+	tests\unit\datagram_socket_service_test.exe \
 	tests\unit\datagram_socket_test.exe \
+	tests\unit\deadline_timer_service_test.exe \
+	tests\unit\deadline_timer_test.exe \
+	tests\unit\default_error_handler_test.exe \
+	tests\unit\demuxer_service_test.exe \
+	tests\unit\demuxer_test.exe \
 	tests\unit\error_handler_test.exe \
+	tests\unit\error_test.exe \
 	tests\unit\fixed_buffer_test.exe \
-	tests\unit\ipv4_host_resolver_test.exe \
+	tests\unit\io_control_test.exe \
+	tests\unit\ipv4\address_test.exe \
+	tests\unit\ipv4\basic_host_resolver_test.exe \
+	tests\unit\ipv4\host_resolver_service_test.exe \
+	tests\unit\ipv4\host_resolver_test.exe \
+	tests\unit\ipv4\host_test.exe \
+	tests\unit\ipv4\multicast_test.exe \
+	tests\unit\ipv4\socket_option_test.exe \
+	tests\unit\ipv4\tcp_test.exe \
+	tests\unit\ipv4\udp_test.exe \
 	tests\unit\is_read_buffered_test.exe \
 	tests\unit\is_write_buffered_test.exe \
+	tests\unit\locking_dispatcher_service_test.exe \
 	tests\unit\locking_dispatcher_test.exe \
+	tests\unit\null_error_handler_test.exe \
+	tests\unit\placeholders_test.exe \
 	tests\unit\read_test.exe \
-	tests\unit\write_test.exe \
+	tests\unit\service_factory_test.exe \
+	tests\unit\socket_acceptor_service_test.exe \
 	tests\unit\socket_acceptor_test.exe \
+	tests\unit\socket_base_test.exe \
+	tests\unit\socket_option_test.exe \
+	tests\unit\stream_socket_service_test.exe \
+	tests\unit\stream_socket_test.exe \
+	tests\unit\thread_test.exe \
+	tests\unit\time_traits_test.exe \
+	tests\unit\wrapped_handler_test.exe \
+	tests\unit\write_test.exe
+
+EXAMPLE_EXES = \
 	examples\chat\chat_client.exe \
 	examples\chat\chat_server.exe \
 	examples\echo\async_tcp_echo_server.exe \
@@ -34,6 +91,7 @@ all: \
 	examples\echo\blocking_tcp_echo_server.exe \
 	examples\echo\blocking_udp_echo_client.exe \
 	examples\echo\blocking_udp_echo_server.exe \
+	examples\http\server\http_server.exe \
 	examples\multicast\receiver.exe \
 	examples\multicast\sender.exe \
 	examples\timeouts\accept_timeout.exe \
@@ -53,60 +111,81 @@ all: \
 	examples\tutorial\daytime6\server.exe \
 	examples\tutorial\daytime7\server.exe
 
-tests\performance\client.exe: tests\performance\client.obj
-tests\performance\server.exe: tests\performance\server.obj
-tests\unit\deadline_timer_test.exe: tests\unit\deadline_timer_test.obj
-tests\unit\demuxer_test.exe: tests\unit\demuxer_test.obj
-tests\unit\datagram_socket_test.exe: tests\unit\datagram_socket_test.obj
-tests\unit\error_handler_test.exe: tests\unit\error_handler_test.obj
-tests\unit\fixed_buffer_test.exe: tests\unit\fixed_buffer_test.obj
-tests\unit\ipv4_host_resolver_test.exe: tests\unit\ipv4_host_resolver_test.obj
-tests\unit\is_read_buffered_test.exe: tests\unit\is_read_buffered_test.obj
-tests\unit\is_write_buffered_test.exe: tests\unit\is_write_buffered_test.obj
-tests\unit\locking_dispatcher_test.exe: tests\unit\locking_dispatcher_test.obj
-tests\unit\read_test.exe: tests\unit\read_test.obj
-tests\unit\write_test.exe: tests\unit\write_test.obj
-tests\unit\socket_acceptor_test.exe: tests\unit\socket_acceptor_test.obj
-examples\chat\chat_client.exe: examples\chat\chat_client.obj
-examples\chat\chat_server.exe: examples\chat\chat_server.obj
-examples\echo\async_tcp_echo_server.exe: examples\echo\async_tcp_echo_server.obj
-examples\echo\async_udp_echo_server.exe: examples\echo\async_udp_echo_server.obj
-examples\echo\blocking_tcp_echo_client.exe: examples\echo\blocking_tcp_echo_client.obj
-examples\echo\blocking_tcp_echo_server.exe: examples\echo\blocking_tcp_echo_server.obj
-examples\echo\blocking_udp_echo_client.exe: examples\echo\blocking_udp_echo_client.obj
-examples\echo\blocking_udp_echo_server.exe: examples\echo\blocking_udp_echo_server.obj
-examples\multicast\receiver.exe: examples\multicast\receiver.obj
-examples\multicast\sender.exe: examples\multicast\sender.obj
-examples\timeouts\accept_timeout.exe: examples\timeouts\accept_timeout.obj
-examples\timeouts\connect_timeout.exe: examples\timeouts\connect_timeout.obj
-examples\timeouts\datagram_receive_timeout.exe: examples\timeouts\datagram_receive_timeout.obj
-examples\timeouts\stream_receive_timeout.exe: examples\timeouts\stream_receive_timeout.obj
-examples\tutorial\timer1\timer.exe: examples\tutorial\timer1\timer.obj
-examples\tutorial\timer2\timer.exe: examples\tutorial\timer2\timer.obj
-examples\tutorial\timer3\timer.exe: examples\tutorial\timer3\timer.obj
-examples\tutorial\timer4\timer.exe: examples\tutorial\timer4\timer.obj
-examples\tutorial\timer5\timer.exe: examples\tutorial\timer5\timer.obj
-examples\tutorial\daytime1\client.exe: examples\tutorial\daytime1\client.obj
-examples\tutorial\daytime2\server.exe: examples\tutorial\daytime2\server.obj
-examples\tutorial\daytime3\server.exe: examples\tutorial\daytime3\server.obj
-examples\tutorial\daytime4\client.exe: examples\tutorial\daytime4\client.obj
-examples\tutorial\daytime5\server.exe: examples\tutorial\daytime5\server.obj
-examples\tutorial\daytime6\server.exe: examples\tutorial\daytime6\server.obj
-examples\tutorial\daytime7\server.exe: examples\tutorial\daytime7\server.obj
+all: \
+	$(PERFORMANCE_TEST_EXES) \
+	$(UNIT_TEST_EXES) \
+	$(EXAMPLE_EXES)
 
-check: all
-	@tests\unit\deadline_timer_test.exe && \
-	tests\unit\demuxer_test.exe && \
-	tests\unit\datagram_socket_test.exe && \
-	tests\unit\error_handler_test.exe && \
-	tests\unit\fixed_buffer_test.exe && \
-	tests\unit\ipv4_host_resolver_test.exe && \
-	tests\unit\is_read_buffered_test.exe && \
-	tests\unit\is_write_buffered_test.exe && \
-	tests\unit\locking_dispatcher_test.exe && \
-	tests\unit\read_test.exe && \
-	tests\unit\write_test.exe && \
-	tests\unit\socket_acceptor_test.exe
+check: $(UNIT_TEST_EXES)
+	!@echo === Running $** === && $** && echo.
+
+{tests\performance}.cpp{tests\performance}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{tests\unit}.cpp{tests\unit}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{tests\unit\ipv4}.cpp{tests\unit\ipv4}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\chat}.cpp{examples\chat}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\echo}.cpp{examples\echo}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\multicast}.cpp{examples\multicast}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\timeouts}.cpp{examples\timeouts}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\tutorial\timer1}.cpp{examples\tutorial\timer1}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\tutorial\timer2}.cpp{examples\tutorial\timer2}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\tutorial\timer3}.cpp{examples\tutorial\timer3}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\tutorial\timer4}.cpp{examples\tutorial\timer4}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\tutorial\timer5}.cpp{examples\tutorial\timer5}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\tutorial\daytime1}.cpp{examples\tutorial\daytime1}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\tutorial\daytime2}.cpp{examples\tutorial\daytime2}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\tutorial\daytime3}.cpp{examples\tutorial\daytime3}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\tutorial\daytime4}.cpp{examples\tutorial\daytime4}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\tutorial\daytime5}.cpp{examples\tutorial\daytime5}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\tutorial\daytime6}.cpp{examples\tutorial\daytime6}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+{examples\tutorial\daytime7}.cpp{examples\tutorial\daytime7}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
+examples\http\server\http_server.exe: \
+		examples\http\server\connection.cpp \
+		examples\http\server\connection_manager.cpp \
+		examples\http\server\mime_types.cpp \
+		examples\http\server\reply.cpp \
+		examples\http\server\request_handler.cpp \
+		examples\http\server\request_parser.cpp \
+		examples\http\server\server.cpp \
+		examples\http\server\win_main.cpp
+	cl -Fe$@ -Foexamples\http\server\ $(CXXFLAGS) $(DEFINES) $** -link -opt:ref
 
 clean:
 	-del /q /s tests\*.exe
@@ -120,9 +199,3 @@ clean:
 	-del /q /s examples\*.pdb
 	-del /q /s examples\*.obj
 	-del /q /s *.pdb
-
-.obj.exe:
-	cl -Fe$@ $(LDFLAGS) $< $(LIBS) -link -opt:ref
-
-.cpp.obj:
-	cl -Fo$@ -c $(CXXFLAGS) $(DEFINES) $<

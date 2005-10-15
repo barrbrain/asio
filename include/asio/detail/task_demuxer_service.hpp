@@ -17,13 +17,17 @@
 
 #include "asio/detail/push_options.hpp"
 
+#include "asio/detail/push_options.hpp"
+#include <memory>
+#include "asio/detail/pop_options.hpp"
+
 #include "asio/basic_demuxer.hpp"
 #include "asio/demuxer_service.hpp"
 #include "asio/service_factory.hpp"
 #include "asio/detail/bind_handler.hpp"
+#include "asio/detail/demuxer_run_call_stack.hpp"
 #include "asio/detail/event.hpp"
 #include "asio/detail/mutex.hpp"
-#include "asio/detail/tss_bool.hpp"
 
 namespace asio {
 namespace detail {
@@ -42,7 +46,6 @@ public:
       handler_queue_(0),
       handler_queue_end_(0),
       interrupted_(false),
-      current_thread_in_pool_(),
       first_idle_thread_(0)
   {
   }
@@ -50,7 +53,7 @@ public:
   // Run the demuxer's event processing loop.
   void run()
   {
-    current_thread_in_pool_ = true;
+    typename demuxer_run_call_stack<task_demuxer_service>::context ctx(this);
 
     idle_thread_info this_idle_thread;
     this_idle_thread.prev = &this_idle_thread;
@@ -62,23 +65,67 @@ public:
     {
       if (handler_queue_)
       {
+        // Prepare to execute first handler from queue.
         handler_base* h = handler_queue_;
         handler_queue_ = h->next_;
         if (handler_queue_ == 0)
           handler_queue_end_ = 0;
         lock.unlock();
+
+        // Helper class to perform operations on block exit.
+        class cleanup
+        {
+        public:
+          cleanup(asio::detail::mutex::scoped_lock& lock, int& outstanding_work)
+            : lock_(lock),
+              outstanding_work_(outstanding_work)
+          {
+          }
+
+          ~cleanup()
+          {
+            lock_.lock();
+            --outstanding_work_;
+          }
+
+        private:
+          asio::detail::mutex::scoped_lock& lock_;
+          int& outstanding_work_;
+        } c(lock, outstanding_work_);
+
+        // Invoke the handler. May throw an exception.
         h->call(); // call() deletes the handler object
-        lock.lock();
-        --outstanding_work_;
       }
       else if (!task_is_running_)
       {
+        // Prepare to execute the task.
         task_is_running_ = true;
         task_.reset();
         lock.unlock();
+
+        // Helper class to perform operations on block exit.
+        class cleanup
+        {
+        public:
+          cleanup(asio::detail::mutex::scoped_lock& lock, bool& task_is_running)
+            : lock_(lock),
+              task_is_running_(task_is_running)
+          {
+          }
+
+          ~cleanup()
+          {
+            lock_.lock();
+            task_is_running_ = false;
+          }
+
+        private:
+          asio::detail::mutex::scoped_lock& lock_;
+          bool& task_is_running_;
+        } c(lock, task_is_running_);
+
+        // Run the task. May throw an exception.
         task_.run();
-        lock.lock();
-        task_is_running_ = false;
       }
       else 
       {
@@ -116,8 +163,6 @@ public:
       // No more work to do!
       interrupt_all_threads();
     }
-
-    current_thread_in_pool_ = false;
   }
 
   // Interrupt the demuxer's event processing loop.
@@ -153,8 +198,8 @@ public:
   template <typename Handler>
   void dispatch(Handler handler)
   {
-    if (current_thread_in_pool_)
-      handler_wrapper<Handler>::do_upcall(handler);
+    if (demuxer_run_call_stack<task_demuxer_service>::contains(this))
+      handler();
     else
       post(handler);
   }
@@ -278,21 +323,9 @@ private:
 
     static void do_call(handler_base* base)
     {
-      handler_wrapper<Handler>* h =
-        static_cast<handler_wrapper<Handler>*>(base);
-      h->do_upcall(h->handler_);
-      delete h;
-    }
-
-    static void do_upcall(Handler& handler)
-    {
-      try
-      {
-        handler();
-      }
-      catch (...)
-      {
-      }
+      std::auto_ptr<handler_wrapper<Handler> > h(
+          static_cast<handler_wrapper<Handler>*>(base));
+      h->handler_();
     }
 
   private:
@@ -319,9 +352,6 @@ private:
 
   // Flag to indicate that the dispatcher has been interrupted.
   bool interrupted_;
-
-  // Thread-specific flag to keep track of which threads are in the pool.
-  tss_bool current_thread_in_pool_;
 
   // Structure containing information about an idle thread.
   struct idle_thread_info

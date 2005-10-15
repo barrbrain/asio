@@ -61,11 +61,6 @@ public:
     : service_registry_(*this),
       service_(get_service(service_factory<Demuxer_Service>()))
   {
-#if defined(_WIN32)
-    detail::winsock_init<>::use();
-#else
-    detail::signal_init<>::use();
-#endif // _WIN32
   }
 
   /// Construct using the supplied service_factory to get the demuxer service.
@@ -73,11 +68,6 @@ public:
     : service_registry_(*this),
       service_(get_service(factory))
   {
-#if defined(_WIN32)
-    detail::winsock_init<>::use();
-#else
-    detail::signal_init<>::use();
-#endif // _WIN32
   }
 
   /// Run the demuxer's event processing loop.
@@ -125,33 +115,6 @@ public:
   void reset()
   {
     service_.reset();
-  }
-
-  /// Notify the demuxer that some work has started.
-  /**
-   * This function is used to inform the demuxer that some work has begun. This
-   * ensures that the run() function will not exit while the work is under way.
-   *
-   * A call to this function must be matched with a later corresponding
-   * call to work_finished().
-   */
-  void work_started()
-  {
-    service_.work_started();
-  }
-
-  /// Notify the demuxer that some work has finished.
-  /**
-   * This function is used to inform the demuxer that some work has finished.
-   * Once the count of unfinished work reaches zero, the demuxer's run()
-   * function is permitted to exit.
-   *
-   * A call to this function must be matched with an earlier corresponding call
-   * to work_started().
-   */
-  void work_finished()
-  {
-    service_.work_finished();
   }
 
   /// Request the demuxer to invoke the given handler.
@@ -228,9 +191,74 @@ public:
     return service_registry_.get_service(factory);
   }
 
+  class work;
+  friend class work;
+
 private:
+#if defined(_WIN32)
+  detail::winsock_init<> init_;
+#else
+  detail::signal_init<> init_;
+#endif
+
   /// The service registry.
   detail::service_registry<basic_demuxer<Demuxer_Service> > service_registry_;
+
+  /// The underlying demuxer service implementation.
+  Demuxer_Service& service_;
+};
+
+/// Class to inform the demuxer when it has work to do.
+/**
+ * The work class is used to inform the demuxer when work starts and finishes.
+ * This ensures that the demuxer's run() function will not exit while work is
+ * underway, and that it does exit when there is no unfinished work remaining.
+ *
+ * The work class is copy-constructible so that it may be used as a data member
+ * in a handler class. It is not assignable.
+ */
+template <typename Demuxer_Service>
+class basic_demuxer<Demuxer_Service>::work
+{
+public:
+  /// Constructor notifies the demuxer that work is starting.
+  /**
+   * The constructor is used to inform the demuxer that some work has begun.
+   * This ensures that the demuxer's run() function will not exit while the work
+   * is underway.
+   */
+  explicit work(basic_demuxer<Demuxer_Service>& demuxer)
+    : service_(demuxer.service_)
+  {
+    service_.work_started();
+  }
+
+  /// Copy constructor notifies the demuxer that work is starting.
+  /**
+   * The constructor is used to inform the demuxer that some work has begun.
+   * This ensures that the demuxer's run() function will not exit while the work
+   * is underway.
+   */
+  work(const work& other)
+    : service_(other.service_)
+  {
+    service_.work_started();
+  }
+
+  /// Destructor notifies the demuxer that the work is complete.
+  /**
+   * The destructor is used to inform the demuxer that some work has finished.
+   * Once the count of unfinished work reaches zero, the demuxer's run()
+   * function is permitted to exit.
+   */
+  ~work()
+  {
+    service_.work_finished();
+  }
+
+private:
+  // Prevent assignment.
+  void operator=(const work& other);
 
   /// The underlying demuxer service implementation.
   Demuxer_Service& service_;
