@@ -1,6 +1,6 @@
 AC_INIT(include/asio.hpp)
 AM_MAINTAINER_MODE
-AM_INIT_AUTOMAKE(asio, [0.3.4])
+AM_INIT_AUTOMAKE(asio, [0.3.5])
 
 AC_CANONICAL_HOST
 AM_PROG_CC_C_O
@@ -72,7 +72,7 @@ case $host in
 esac
 
 if test "$GXX" = yes; then
-  CXXFLAGS="$CXXFLAGS -ftemplate-depth-32"
+  CXXFLAGS="$CXXFLAGS -ftemplate-depth-256"
 fi
 
 AC_CHECK_PROG(DOXYGEN_FOUND,doxygen,yes)

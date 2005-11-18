@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -46,10 +46,11 @@ To implement a repeating timer using asio you need to change the timer's expiry 
 <li>A counter so that we can stop the program when the timer fires for the sixth time.</li>
 </ul>
 <div class="fragment"><pre class="fragment">
-<span class="keywordtype">void</span> print(<span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00138.html">asio::error</a>&amp; <span class="comment">/*e*/</span>, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html">asio::deadline_timer</a>* t, <span class="keywordtype">int</span>* count)
+<span class="keywordtype">void</span> print(<span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; <span class="comment">/*e*/</span>,
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html">asio::deadline_timer</a>* t, <span class="keywordtype">int</span>* count)
 {
 </pre></div><p>
-As mentioned above, this tutorial program uses a counter to stop running when the timer fires for the sixth time. However you will observe that there is no explicit call to ask the demuxer to stop. Recall that in tutorial Timer.2 we learnt that the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a> function completes when there is no more "work" to do. By not starting a new asynchronous wait on the timer when <code>count</code> reaches 5, the demuxer will run out of work and stop running.<p>
+As mentioned above, this tutorial program uses a counter to stop running when the timer fires for the sixth time. However you will observe that there is no explicit call to ask the demuxer to stop. Recall that in tutorial Timer.2 we learnt that the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a> function completes when there is no more "work" to do. By not starting a new asynchronous wait on the timer when <code>count</code> reaches 5, the demuxer will run out of work and stop running.<p>
 <div class="fragment"><pre class="fragment">  <span class="keywordflow">if</span> (*count &lt; 5)
   {
     std::cout &lt;&lt; *count &lt;&lt; <span class="stringliteral">"\n"</span>;
@@ -57,28 +58,30 @@ As mentioned above, this tutorial program uses a counter to stop running when th
 </pre></div><p>
 Next we move the expiry time for the timer along by one second from the previous expiry time. By calculating the new expiry time relative to the old, we can ensure that the timer does not drift away from the whole-second mark due to any delays in processing the handler.<p>
 <div class="fragment"><pre class="fragment">
-    t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html#a35d12da21dcd06aae41962914bbaa05">expires_at</a>(t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html#a35d12da21dcd06aae41962914bbaa05">expires_at</a>() + boost::posix_time::seconds(1));
+    t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#a35d12da21dcd06aae41962914bbaa05">expires_at</a>(t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#a35d12da21dcd06aae41962914bbaa05">expires_at</a>() + boost::posix_time::seconds(1));
 </pre></div><p>
-Then we start a new asynchronous wait on the timer. As you can see, the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a> function is used to associate the extra parameters with your callback handler. The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html#f3b204ec2d053712a8100aba55a6b3b2">asio::deadline_timer::async_wait()</a> function expects a handler function (or function object) with the signature <code>void(const asio::error&amp;)</code>. Binding the additional parameters converts your <code>print</code> function into a function object that matches the signature correctly.<p>
+Then we start a new asynchronous wait on the timer. As you can see, the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a> function is used to associate the extra parameters with your callback handler. The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#f3b204ec2d053712a8100aba55a6b3b2">asio::deadline_timer::async_wait()</a> function expects a handler function (or function object) with the signature <code>void(const asio::error&amp;)</code>. Binding the additional parameters converts your <code>print</code> function into a function object that matches the signature correctly.<p>
 See the <a href="http://www.boost.org/libs/bind/bind.html">Boost: bind.hpp documentation</a> for more information on how to use <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>.<p>
-In this example, the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00272.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a> argument to <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a> is a named placeholder for the error object passed to the handler. When initiating the asynchronous operation, and if using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>, you must specify only the arguments that match the handler's parameter list. In tutorial Timer.4 you will see that this placeholder may be elided if the parameter is not needed by the callback handler.<p>
-<div class="fragment"><pre class="fragment">    t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html#f3b204ec2d053712a8100aba55a6b3b2">async_wait</a>(boost::bind(print, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00272.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>, t, count));
+In this example, the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a> argument to <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a> is a named placeholder for the error object passed to the handler. When initiating the asynchronous operation, and if using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>, you must specify only the arguments that match the handler's parameter list. In tutorial Timer.4 you will see that this placeholder may be elided if the parameter is not needed by the callback handler.<p>
+<div class="fragment"><pre class="fragment">    t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#f3b204ec2d053712a8100aba55a6b3b2">async_wait</a>(boost::bind(print,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>, t, count));
   }
 }
 
 <span class="keywordtype">int</span> main()
 {
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::demuxer</a> d;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> d;
 </pre></div><p>
 A new <code>count</code> variable is added so that we can stop the program when the timer fires for the sixth time.<p>
 <div class="fragment"><pre class="fragment">
   <span class="keywordtype">int</span> count = 0;
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html">asio::deadline_timer</a> t(d, boost::posix_time::seconds(1));
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html">asio::deadline_timer</a> t(d, boost::posix_time::seconds(1));
 </pre></div><p>
-As in Step 4, when making the call to <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html#f3b204ec2d053712a8100aba55a6b3b2">asio::deadline_timer::async_wait()</a> from <code>main</code> we bind the additional parameters needed for the <code>print</code> function.<p>
-<div class="fragment"><pre class="fragment">  t.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html#f3b204ec2d053712a8100aba55a6b3b2">async_wait</a>(boost::bind(print, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00272.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>, &amp;t, &amp;count));
+As in Step 4, when making the call to <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#f3b204ec2d053712a8100aba55a6b3b2">asio::deadline_timer::async_wait()</a> from <code>main</code> we bind the additional parameters needed for the <code>print</code> function.<p>
+<div class="fragment"><pre class="fragment">  t.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#f3b204ec2d053712a8100aba55a6b3b2">async_wait</a>(boost::bind(print,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>, &amp;t, &amp;count));
 
-  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">run</a>();
+  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">run</a>();
 </pre></div><p>
 Finally, just to prove that the <code>count</code> variable was being used in the <code>print</code> handler function, we will print out its new value.<p>
 <div class="fragment"><pre class="fragment">
@@ -94,7 +97,7 @@ See the <a class="el" href="tuttimer3src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

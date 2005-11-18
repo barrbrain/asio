@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -39,7 +39,7 @@
 <span class="keyword">class </span>printer
 {
 <span class="keyword">public</span>:
-  printer(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::demuxer</a>&amp; d)
+  printer(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a>&amp; d)
     : dispatcher_(d),
       timer1_(d, boost::posix_time::seconds(1)),
       timer2_(d, boost::posix_time::seconds(1)),
@@ -79,18 +79,18 @@
   }
 
 <span class="keyword">private</span>:
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00118.html">asio::locking_dispatcher</a> dispatcher_;
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html">asio::deadline_timer</a> timer1_;
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html">asio::deadline_timer</a> timer2_;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html">asio::locking_dispatcher</a> dispatcher_;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html">asio::deadline_timer</a> timer1_;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html">asio::deadline_timer</a> timer2_;
   <span class="keywordtype">int</span> count_;
 };
 
 <span class="keywordtype">int</span> main()
 {
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::demuxer</a> d;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> d;
   printer p(d);
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00179.html">asio::thread</a> t(boost::bind(&amp;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run</a>, &amp;d));
-  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">run</a>();
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00141.html">asio::thread</a> t(boost::bind(&amp;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run</a>, &amp;d));
+  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">run</a>();
   t.join();
 
   <span class="keywordflow">return</span> 0;
@@ -99,7 +99,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

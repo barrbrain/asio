@@ -17,8 +17,13 @@
 
 #include "asio/detail/push_options.hpp"
 
+#include "asio/detail/push_options.hpp"
+#include <boost/config.hpp>
+#include "asio/detail/pop_options.hpp"
+
 // This service is only supported on Win32 (NT4 and later).
-#if defined(_WIN32) && defined(_WIN32_WINNT) && (_WIN32_WINNT >= 0x0400)
+#if defined(BOOST_WINDOWS)
+#if defined(_WIN32_WINNT) && (_WIN32_WINNT >= 0x0400)
 
 #include "asio/detail/push_options.hpp"
 #include <memory>
@@ -27,6 +32,7 @@
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/basic_demuxer.hpp"
+#include "asio/buffer.hpp"
 #include "asio/demuxer_service.hpp"
 #include "asio/error.hpp"
 #include "asio/service_factory.hpp"
@@ -274,11 +280,12 @@ public:
     ::WSABUF bufs[max_buffers];
     typename Const_Buffers::const_iterator iter = buffers.begin();
     typename Const_Buffers::const_iterator end = buffers.end();
-    size_t i = 0;
+    DWORD i = 0;
     for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      bufs[i].len = static_cast<u_long>(iter->size());
-      bufs[i].buf = static_cast<char*>(const_cast<void*>(iter->data()));
+      bufs[i].len = static_cast<u_long>(asio::buffer_size(*iter));
+      bufs[i].buf = const_cast<char*>(
+          asio::buffer_cast<const char*>(*iter));
     }
 
     // Send the data.
@@ -348,11 +355,12 @@ public:
     ::WSABUF bufs[max_buffers];
     typename Const_Buffers::const_iterator iter = buffers.begin();
     typename Const_Buffers::const_iterator end = buffers.end();
-    size_t i = 0;
+    DWORD i = 0;
     for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      bufs[i].len = static_cast<u_long>(iter->size());
-      bufs[i].buf = static_cast<char*>(const_cast<void*>(iter->data()));
+      bufs[i].len = static_cast<u_long>(asio::buffer_size(*iter));
+      bufs[i].buf = const_cast<char*>(
+          asio::buffer_cast<const char*>(*iter));
     }
 
     // Send the data.
@@ -384,11 +392,12 @@ public:
     ::WSABUF bufs[max_buffers];
     typename Const_Buffers::const_iterator iter = buffers.begin();
     typename Const_Buffers::const_iterator end = buffers.end();
-    size_t i = 0;
+    DWORD i = 0;
     for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      bufs[i].len = static_cast<u_long>(iter->size());
-      bufs[i].buf = static_cast<char*>(const_cast<void*>(iter->data()));
+      bufs[i].len = static_cast<u_long>(asio::buffer_size(*iter));
+      bufs[i].buf = const_cast<char*>(
+          asio::buffer_cast<const char*>(*iter));
     }
 
     // Send the data.
@@ -445,11 +454,12 @@ public:
     ::WSABUF bufs[max_buffers];
     typename Const_Buffers::const_iterator iter = buffers.begin();
     typename Const_Buffers::const_iterator end = buffers.end();
-    size_t i = 0;
+    DWORD i = 0;
     for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      bufs[i].len = static_cast<u_long>(iter->size());
-      bufs[i].buf = static_cast<char*>(const_cast<void*>(iter->data()));
+      bufs[i].len = static_cast<u_long>(asio::buffer_size(*iter));
+      bufs[i].buf = const_cast<char*>(
+          asio::buffer_cast<const char*>(*iter));
     }
 
     // Send the data.
@@ -480,11 +490,11 @@ public:
     ::WSABUF bufs[max_buffers];
     typename Mutable_Buffers::const_iterator iter = buffers.begin();
     typename Mutable_Buffers::const_iterator end = buffers.end();
-    size_t i = 0;
+    DWORD i = 0;
     for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      bufs[i].len = static_cast<u_long>(iter->size());
-      bufs[i].buf = static_cast<char*>(iter->data());
+      bufs[i].len = static_cast<u_long>(asio::buffer_size(*iter));
+      bufs[i].buf = asio::buffer_cast<char*>(*iter);
     }
 
     // Receive some data.
@@ -498,6 +508,11 @@ public:
       if (last_error == ERROR_NETNAME_DELETED)
         last_error = WSAECONNRESET;
       error_handler(asio::error(last_error));
+      return 0;
+    }
+    if (bytes_transferred == 0)
+    {
+      error_handler(asio::error(asio::error::eof));
       return 0;
     }
 
@@ -534,6 +549,12 @@ public:
           last_error = WSAECONNRESET;
       }
 
+      // Check for connection closed.
+      else if (last_error == 0 && bytes_transferred == 0)
+      {
+        last_error = asio::error::eof;
+      }
+
       asio::error error(last_error);
       h->handler_(error, bytes_transferred);
     }
@@ -556,11 +577,11 @@ public:
     ::WSABUF bufs[max_buffers];
     typename Mutable_Buffers::const_iterator iter = buffers.begin();
     typename Mutable_Buffers::const_iterator end = buffers.end();
-    size_t i = 0;
+    DWORD i = 0;
     for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      bufs[i].len = static_cast<u_long>(iter->size());
-      bufs[i].buf = static_cast<char*>(iter->data());
+      bufs[i].len = static_cast<u_long>(asio::buffer_size(*iter));
+      bufs[i].buf = asio::buffer_cast<char*>(*iter);
     }
 
     // Receive some data.
@@ -591,11 +612,11 @@ public:
     ::WSABUF bufs[max_buffers];
     typename Mutable_Buffers::const_iterator iter = buffers.begin();
     typename Mutable_Buffers::const_iterator end = buffers.end();
-    size_t i = 0;
+    DWORD i = 0;
     for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      bufs[i].len = static_cast<u_long>(iter->size());
-      bufs[i].buf = static_cast<char*>(iter->data());
+      bufs[i].len = static_cast<u_long>(asio::buffer_size(*iter));
+      bufs[i].buf = asio::buffer_cast<char*>(*iter);
     }
 
     // Receive some data.
@@ -608,6 +629,11 @@ public:
     {
       DWORD last_error = ::WSAGetLastError();
       error_handler(asio::error(last_error));
+      return 0;
+    }
+    if (bytes_transferred == 0)
+    {
+      error_handler(asio::error(asio::error::eof));
       return 0;
     }
 
@@ -643,6 +669,13 @@ public:
     {
       std::auto_ptr<receive_from_operation<Endpoint, Handler> > h(
           static_cast<receive_from_operation<Endpoint, Handler>*>(op));
+
+      // Check for connection closed.
+      if (last_error == 0 && bytes_transferred == 0)
+      {
+        last_error = asio::error::eof;
+      }
+
       h->endpoint_.size(h->endpoint_size_);
       asio::error error(last_error);
       h->handler_(error, bytes_transferred);
@@ -669,11 +702,11 @@ public:
     ::WSABUF bufs[max_buffers];
     typename Mutable_Buffers::const_iterator iter = buffers.begin();
     typename Mutable_Buffers::const_iterator end = buffers.end();
-    size_t i = 0;
+    DWORD i = 0;
     for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      bufs[i].len = static_cast<u_long>(iter->size());
-      bufs[i].buf = static_cast<char*>(iter->data());
+      bufs[i].len = static_cast<u_long>(asio::buffer_size(*iter));
+      bufs[i].buf = asio::buffer_cast<char*>(*iter);
     }
 
     // Receive some data.
@@ -1053,7 +1086,8 @@ private:
 } // namespace detail
 } // namespace asio
 
-#endif // defined(_WIN32) && defined(_WIN32_WINNT) && (_WIN32_WINNT >= 0x0400)
+#endif // defined(_WIN32_WINNT) && (_WIN32_WINNT >= 0x0400)
+#endif // defined(BOOST_WINDOWS)
 
 #include "asio/detail/pop_options.hpp"
 

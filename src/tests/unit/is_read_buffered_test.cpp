@@ -24,6 +24,8 @@ class test_stream
 public:
   typedef asio::demuxer demuxer_type;
 
+  typedef asio::error error_type;
+
   typedef test_stream lowest_layer_type;
 
   test_stream(asio::demuxer& d)
@@ -83,26 +85,27 @@ private:
 
 void is_read_buffered_test()
 {
-  BOOST_CHECK(!asio::is_read_buffered<asio::stream_socket>::value);
+  BOOST_CHECK(!asio::is_read_buffered<
+      asio::stream_socket>::value);
 
-  BOOST_CHECK(asio::is_read_buffered<
+  BOOST_CHECK(!!asio::is_read_buffered<
       asio::buffered_read_stream<asio::stream_socket> >::value);
 
   BOOST_CHECK(!asio::is_read_buffered<
       asio::buffered_write_stream<asio::stream_socket> >::value);
 
-  BOOST_CHECK(asio::is_read_buffered<
+  BOOST_CHECK(!!asio::is_read_buffered<
       asio::buffered_stream<asio::stream_socket> >::value);
 
   BOOST_CHECK(!asio::is_read_buffered<test_stream>::value);
 
-  BOOST_CHECK(asio::is_read_buffered<
+  BOOST_CHECK(!!asio::is_read_buffered<
       asio::buffered_read_stream<test_stream> >::value);
 
   BOOST_CHECK(!asio::is_read_buffered<
       asio::buffered_write_stream<test_stream> >::value);
 
-  BOOST_CHECK(asio::is_read_buffered<
+  BOOST_CHECK(!!asio::is_read_buffered<
       asio::buffered_stream<test_stream> >::value);
 }
 

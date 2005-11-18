@@ -10,7 +10,8 @@ typedef std::deque<chat_message> chat_message_queue;
 class chat_client
 {
 public:
-  chat_client(asio::demuxer& d, const asio::ipv4::tcp::endpoint& endpoint)
+  chat_client(asio::demuxer& d,
+      const asio::ipv4::tcp::endpoint& endpoint)
     : demuxer_(d),
       socket_(d)
   {
@@ -35,23 +36,21 @@ private:
   {
     if (!error)
     {
-      asio::async_read_n(socket_,
-          asio::buffers(read_msg_.data(), chat_message::header_length),
+      asio::async_read(socket_,
+          asio::buffer(read_msg_.data(), chat_message::header_length),
           boost::bind(&chat_client::handle_read_header, this,
-            asio::placeholders::error,
-            asio::placeholders::last_bytes_transferred));
+            asio::placeholders::error));
     }
   }
 
-  void handle_read_header(const asio::error& error, size_t last_length)
+  void handle_read_header(const asio::error& error)
   {
-    if (!error && last_length > 0 && read_msg_.decode_header())
+    if (!error && read_msg_.decode_header())
     {
-      asio::async_read_n(socket_,
-          asio::buffers(read_msg_.body(), read_msg_.body_length()),
+      asio::async_read(socket_,
+          asio::buffer(read_msg_.body(), read_msg_.body_length()),
           boost::bind(&chat_client::handle_read_body, this,
-            asio::placeholders::error,
-            asio::placeholders::last_bytes_transferred));
+            asio::placeholders::error));
     }
     else
     {
@@ -59,17 +58,16 @@ private:
     }
   }
 
-  void handle_read_body(const asio::error& error, size_t last_length)
+  void handle_read_body(const asio::error& error)
   {
-    if (!error && last_length > 0)
+    if (!error)
     {
       std::cout.write(read_msg_.body(), read_msg_.body_length());
       std::cout << "\n";
-      asio::async_read_n(socket_,
-          asio::buffers(read_msg_.data(), chat_message::header_length),
+      asio::async_read(socket_,
+          asio::buffer(read_msg_.data(), chat_message::header_length),
           boost::bind(&chat_client::handle_read_header, this,
-            asio::placeholders::error,
-            asio::placeholders::last_bytes_transferred));
+            asio::placeholders::error));
     }
     else
     {
@@ -83,28 +81,26 @@ private:
     write_msgs_.push_back(msg);
     if (!write_in_progress)
     {
-      asio::async_write_n(socket_,
-          asio::buffers(write_msgs_.front().data(),
+      asio::async_write(socket_,
+          asio::buffer(write_msgs_.front().data(),
             write_msgs_.front().length()),
           boost::bind(&chat_client::handle_write, this,
-            asio::placeholders::error,
-            asio::placeholders::last_bytes_transferred));
+            asio::placeholders::error));
     }
   }
 
-  void handle_write(const asio::error& error, size_t last_length)
+  void handle_write(const asio::error& error)
   {
-    if (!error && last_length > 0)
+    if (!error)
     {
       write_msgs_.pop_front();
       if (!write_msgs_.empty())
       {
-        asio::async_write_n(socket_,
-            asio::buffers(write_msgs_.front().data(),
+        asio::async_write(socket_,
+            asio::buffer(write_msgs_.front().data(),
               write_msgs_.front().length()),
             boost::bind(&chat_client::handle_write, this,
-              asio::placeholders::error,
-              asio::placeholders::last_bytes_transferred));
+              asio::placeholders::error));
       }
     }
     else
@@ -145,7 +141,7 @@ int main(int argc, char* argv[])
 
     chat_client c(d, ep);
 
-    asio::detail::thread t(boost::bind(&asio::demuxer::run, &d));
+    asio::thread t(boost::bind(&asio::demuxer::run, &d));
 
     char line[chat_message::max_body_length + 1];
     while (std::cin.getline(line, chat_message::max_body_length + 1))

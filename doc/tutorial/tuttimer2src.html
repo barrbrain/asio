@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -35,19 +35,19 @@
 <span class="preprocessor">#include "asio.hpp"</span>
 <span class="preprocessor">#include "boost/date_time/posix_time/posix_time.hpp"</span>
 
-<span class="keywordtype">void</span> print(<span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00138.html">asio::error</a>&amp; <span class="comment">/*e*/</span>)
+<span class="keywordtype">void</span> print(<span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; <span class="comment">/*e*/</span>)
 {
   std::cout &lt;&lt; <span class="stringliteral">"Hello, world!\n"</span>;
 }
 
 <span class="keywordtype">int</span> main()
 {
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::demuxer</a> d;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> d;
 
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html">asio::deadline_timer</a> t(d, boost::posix_time::seconds(5));
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html">asio::deadline_timer</a> t(d, boost::posix_time::seconds(5));
   t.async_wait(print);
 
-  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">run</a>();
+  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">run</a>();
 
   <span class="keywordflow">return</span> 0;
 }
@@ -55,7 +55,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

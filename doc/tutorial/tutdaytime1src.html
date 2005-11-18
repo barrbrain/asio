@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -44,21 +44,30 @@
       <span class="keywordflow">return</span> 1;
     }
 
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::demuxer</a> demuxer;
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> demuxer;
 
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00117.html">asio::ipv4::host_resolver</a> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00268.html#3f9f04ad3aa44d20278537ad34c3db0f">host_resolver</a>(demuxer);
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00144.html">asio::ipv4::host</a> host;
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00268.html#3f9f04ad3aa44d20278537ad34c3db0f">host_resolver</a>.get_host_by_name(host, argv[1]);
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00178.html">asio::ipv4::tcp::endpoint</a> remote_endpoint(13, host.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00144.html#89a8d838cb3c75d4b7b09576915713a1">address</a>(0));
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00092.html">asio::ipv4::host_resolver</a> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00222.html#3f9f04ad3aa44d20278537ad34c3db0f">host_resolver</a>(demuxer);
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00113.html">asio::ipv4::host</a> host;
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00222.html#3f9f04ad3aa44d20278537ad34c3db0f">host_resolver</a>.get_host_by_name(host, argv[1]);
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html">asio::ipv4::tcp::endpoint</a> remote_endpoint(13, host.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00113.html#89a8d838cb3c75d4b7b09576915713a1">address</a>(0));
 
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00120.html">asio::stream_socket</a> socket(demuxer);
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html">asio::stream_socket</a> socket(demuxer);
     socket.connect(remote_endpoint);
 
-    <span class="keywordtype">char</span> buf[128];
-    <span class="keywordflow">while</span> (size_t len = socket.read(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00277.html#6972033f869850d9a403f4434c991fe4">asio::buffers</a>(buf, <span class="keyword">sizeof</span>(buf))))
-      std::cout.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00285.html#g55e56cbc38c8f440ad297418ebfd563e">write</a>(buf, len);
+    <span class="keywordflow">for</span> (;;)
+    {
+      <span class="keywordtype">char</span> buf[128];
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a> error;
+      size_t len = socket.read_some(
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00230.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(buf), <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00232.html#6b246ec0bcb3c737dcd04e83348135cd">asio::assign_error</a>(error));
+      <span class="keywordflow">if</span> (error == <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html#2e51b1ab42e8a4a67f3445174be5191b">asio::error::eof</a>)
+        <span class="keywordflow">break</span>; <span class="comment">// Connection closed cleanly by peer.</span>
+      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (error)
+        <span class="keywordflow">throw</span> error; <span class="comment">// Some other error.</span>
+      std::cout.write(buf, len);
+    }
   }
-  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00138.html">asio::error</a>&amp; e)
+  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; e)
   {
     std::cerr &lt;&lt; e &lt;&lt; std::endl;
   }
@@ -69,7 +78,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

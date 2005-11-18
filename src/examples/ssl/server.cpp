@@ -28,8 +28,9 @@ public:
   {
     if (!error)
     {
-      socket_.async_read(asio::buffers(data_, max_length),
-          boost::bind(&session::handle_read, this, asio::placeholders::error,
+      socket_.async_read_some(asio::buffer(data_, max_length),
+          boost::bind(&session::handle_read, this,
+            asio::placeholders::error,
             asio::placeholders::bytes_transferred));
     }
     else
@@ -40,11 +41,12 @@ public:
 
   void handle_read(const asio::error& error, size_t bytes_transferred)
   {
-    if (!error && bytes_transferred > 0)
+    if (!error)
     {
-      asio::async_write_n(socket_, asio::buffers(data_, bytes_transferred),
-          boost::bind(&session::handle_write, this, asio::placeholders::error,
-            asio::placeholders::bytes_transferred));
+      asio::async_write(socket_,
+          asio::buffer(data_, bytes_transferred),
+          boost::bind(&session::handle_write, this,
+            asio::placeholders::error));
     }
     else
     {
@@ -52,12 +54,13 @@ public:
     }
   }
 
-  void handle_write(const asio::error& error, size_t last_bytes_transferred)
+  void handle_write(const asio::error& error)
   {
-    if (!error && last_bytes_transferred > 0)
+    if (!error)
     {
-      socket_.async_read(asio::buffers(data_, max_length),
-          boost::bind(&session::handle_read, this, asio::placeholders::error,
+      socket_.async_read_some(asio::buffer(data_, max_length),
+          boost::bind(&session::handle_read, this,
+            asio::placeholders::error,
             asio::placeholders::bytes_transferred));
     }
     else
@@ -80,8 +83,10 @@ public:
       acceptor_(d, asio::ipv4::tcp::endpoint(port)),
       context_(d, asio::ssl::context::sslv23)
   {
-    context_.set_options(asio::ssl::context::default_workarounds
-        | asio::ssl::context::no_sslv2 | asio::ssl::context::single_dh_use);
+    context_.set_options(
+        asio::ssl::context::default_workarounds
+        | asio::ssl::context::no_sslv2
+        | asio::ssl::context::single_dh_use);
     context_.use_certificate_chain_file("server.pem");
     context_.use_private_key_file("server.pem", asio::ssl::context::pem);
     context_.use_tmp_dh_file("dh512.pem");

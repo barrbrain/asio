@@ -21,6 +21,7 @@
 #include <boost/shared_ptr.hpp>
 #include "asio/detail/pop_options.hpp"
 
+#include "asio/buffer.hpp"
 #include "asio/error.hpp"
 #include "asio/service_factory.hpp"
 #include "asio/socket_base.hpp"
@@ -202,8 +203,9 @@ public:
     size_t i = 0;
     for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      bufs[i].size = iter->size();
-      bufs[i].data = const_cast<void*>(iter->data());
+      bufs[i].size = asio::buffer_size(*iter);
+      bufs[i].data = const_cast<void*>(
+          asio::buffer_cast<const void*>(*iter));
     }
 
     // Send the data.
@@ -248,8 +250,9 @@ public:
       size_t i = 0;
       for (; iter != end && i < max_buffers; ++iter, ++i)
       {
-        bufs[i].size = iter->size();
-        bufs[i].data = const_cast<void*>(iter->data());
+        bufs[i].size = asio::buffer_size(*iter);
+        bufs[i].data = const_cast<void*>(
+            asio::buffer_cast<const void*>(*iter));
       }
 
       // Send the data.
@@ -301,8 +304,9 @@ public:
     size_t i = 0;
     for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      bufs[i].size = iter->size();
-      bufs[i].data = const_cast<void*>(iter->data());
+      bufs[i].size = asio::buffer_size(*iter);
+      bufs[i].data = const_cast<void*>(
+          asio::buffer_cast<const void*>(*iter));
     }
 
     // Send the data.
@@ -350,8 +354,9 @@ public:
       size_t i = 0;
       for (; iter != end && i < max_buffers; ++iter, ++i)
       {
-        bufs[i].size = iter->size();
-        bufs[i].data = const_cast<void*>(iter->data());
+        bufs[i].size = asio::buffer_size(*iter);
+        bufs[i].data = const_cast<void*>(
+            asio::buffer_cast<const void*>(*iter));
       }
 
       // Send the data.
@@ -405,8 +410,8 @@ public:
     size_t i = 0;
     for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      bufs[i].size = iter->size();
-      bufs[i].data = iter->data();
+      bufs[i].size = asio::buffer_size(*iter);
+      bufs[i].data = asio::buffer_cast<void*>(*iter);
     }
 
     // Receive some data.
@@ -414,6 +419,11 @@ public:
     if (bytes_recvd < 0)
     {
       error_handler(asio::error(socket_ops::get_error()));
+      return 0;
+    }
+    if (bytes_recvd == 0)
+    {
+      error_handler(asio::error(asio::error::eof));
       return 0;
     }
     return bytes_recvd;
@@ -452,14 +462,18 @@ public:
       size_t i = 0;
       for (; iter != end && i < max_buffers; ++iter, ++i)
       {
-        bufs[i].size = iter->size();
-        bufs[i].data = iter->data();
+        bufs[i].size = asio::buffer_size(*iter);
+        bufs[i].data = asio::buffer_cast<void*>(*iter);
       }
 
       // Receive some data.
       int bytes = socket_ops::recv(impl_, bufs, i, flags_);
-      asio::error error(bytes < 0
-          ? socket_ops::get_error() : asio::error::success);
+      int error_code = asio::error::success;
+      if (bytes < 0)
+        error_code = socket_ops::get_error();
+      else if (bytes == 0)
+        error_code = asio::error::eof;
+      asio::error error(error_code);
       demuxer_.post(bind_handler(handler_, error, bytes < 0 ? 0 : bytes));
     }
 
@@ -514,8 +528,8 @@ public:
     size_t i = 0;
     for (; iter != end && i < max_buffers; ++iter, ++i)
     {
-      bufs[i].size = iter->size();
-      bufs[i].data = iter->data();
+      bufs[i].size = asio::buffer_size(*iter);
+      bufs[i].data = asio::buffer_cast<void*>(*iter);
     }
 
     // Receive some data.
@@ -525,6 +539,11 @@ public:
     if (bytes_recvd < 0)
     {
       error_handler(asio::error(socket_ops::get_error()));
+      return 0;
+    }
+    if (bytes_recvd == 0)
+    {
+      error_handler(asio::error(asio::error::eof));
       return 0;
     }
 
@@ -567,16 +586,20 @@ public:
       size_t i = 0;
       for (; iter != end && i < max_buffers; ++iter, ++i)
       {
-        bufs[i].size = iter->size();
-        bufs[i].data = iter->data();
+        bufs[i].size = asio::buffer_size(*iter);
+        bufs[i].data = asio::buffer_cast<void*>(*iter);
       }
 
       // Receive some data.
       socket_addr_len_type addr_len = sender_endpoint_.size();
       int bytes = socket_ops::recvfrom(impl_, bufs, i, flags_,
           sender_endpoint_.data(), &addr_len);
-      asio::error error(bytes < 0
-          ? socket_ops::get_error() : asio::error::success);
+      int error_code = asio::error::success;
+      if (bytes < 0)
+        error_code = socket_ops::get_error();
+      else if (bytes == 0)
+        error_code = asio::error::eof;
+      asio::error error(error_code);
       sender_endpoint_.size(addr_len);
       demuxer_.post(bind_handler(handler_, error, bytes < 0 ? 0 : bytes));
     }

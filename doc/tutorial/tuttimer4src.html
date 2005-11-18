@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -39,7 +39,7 @@
 <span class="keyword">class </span>printer
 {
 <span class="keyword">public</span>:
-  printer(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::demuxer</a>&amp; d)
+  printer(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a>&amp; d)
     : timer_(d, boost::posix_time::seconds(1)),
       count_(0)
   {
@@ -64,15 +64,15 @@
   }
 
 <span class="keyword">private</span>:
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html">asio::deadline_timer</a> timer_;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html">asio::deadline_timer</a> timer_;
   <span class="keywordtype">int</span> count_;
 };
 
 <span class="keywordtype">int</span> main()
 {
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::demuxer</a> d;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> d;
   printer p(d);
-  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">run</a>();
+  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">run</a>();
 
   <span class="keywordflow">return</span> 0;
 }
@@ -80,7 +80,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

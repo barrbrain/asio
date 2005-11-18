@@ -23,8 +23,8 @@
 #include <boost/noncopyable.hpp>
 #include "asio/detail/pop_options.hpp"
 
-#include "asio/default_error_handler.hpp"
-#include "asio/null_error_handler.hpp"
+#include "asio/error.hpp"
+#include "asio/error_handler.hpp"
 #include "asio/service_factory.hpp"
 #include "asio/socket_base.hpp"
 
@@ -42,7 +42,7 @@ namespace asio {
  * @e Shared @e objects: Unsafe.
  *
  * @par Concepts:
- * Async_Object.
+ * Async_Object, Error_Source.
  */
 template <typename Service>
 class basic_datagram_socket
@@ -58,6 +58,9 @@ public:
 
   /// The demuxer type for this asynchronous type.
   typedef typename service_type::demuxer_type demuxer_type;
+
+  /// The type used for reporting errors.
+  typedef asio::error error_type;
 
   /// A basic_datagram_socket is always the lowest layer.
   typedef basic_datagram_socket<service_type> lowest_layer_type;
@@ -96,14 +99,14 @@ public:
     : service_(d.get_service(service_factory<Service>())),
       impl_(service_.null())
   {
-    service_.open(impl_, endpoint.protocol(), default_error_handler());
-    service_.bind(impl_, endpoint, default_error_handler());
+    service_.open(impl_, endpoint.protocol(), throw_error());
+    service_.bind(impl_, endpoint, throw_error());
   }
 
   /// Destructor.
   ~basic_datagram_socket()
   {
-    service_.close(impl_, null_error_handler());
+    service_.close(impl_, ignore_error());
   }
 
   /// Get the demuxer associated with the asynchronous object.
@@ -131,7 +134,7 @@ public:
   template <typename Protocol>
   void open(const Protocol& protocol)
   {
-    service_.open(impl_, protocol, default_error_handler());
+    service_.open(impl_, protocol, throw_error());
   }
 
   /// Open the socket using the specified protocol.
@@ -166,7 +169,7 @@ public:
    */
   void close()
   {
-    service_.close(impl_, default_error_handler());
+    service_.close(impl_, throw_error());
   }
 
   /// Close the socket.
@@ -240,7 +243,7 @@ public:
   template <typename Endpoint>
   void bind(const Endpoint& endpoint)
   {
-    service_.bind(impl_, endpoint, default_error_handler());
+    service_.bind(impl_, endpoint, throw_error());
   }
 
   /// Bind the socket to the given local endpoint.
@@ -278,7 +281,7 @@ public:
   template <typename Endpoint>
   void connect(const Endpoint& peer_endpoint)
   {
-    service_.connect(impl_, peer_endpoint, default_error_handler());
+    service_.connect(impl_, peer_endpoint, throw_error());
   }
 
   /// Connect a datagram socket to the specified endpoint.
@@ -335,7 +338,7 @@ public:
   template <typename Socket_Option>
   void set_option(const Socket_Option& option)
   {
-    service_.set_option(impl_, option, default_error_handler());
+    service_.set_option(impl_, option, throw_error());
   }
 
   /// Set an option on the socket.
@@ -368,7 +371,7 @@ public:
   template <typename Socket_Option>
   void get_option(Socket_Option& option) const
   {
-    service_.get_option(impl_, option, default_error_handler());
+    service_.get_option(impl_, option, throw_error());
   }
 
   /// Get an option from the socket.
@@ -401,7 +404,7 @@ public:
   template <typename IO_Control_Command>
   void io_control(IO_Control_Command& command)
   {
-    service_.io_control(impl_, command, default_error_handler());
+    service_.io_control(impl_, command, throw_error());
   }
 
   /// Perform an IO control command on the socket.
@@ -435,7 +438,7 @@ public:
   template <typename Endpoint>
   void get_local_endpoint(Endpoint& endpoint) const
   {
-    service_.get_local_endpoint(impl_, endpoint, default_error_handler());
+    service_.get_local_endpoint(impl_, endpoint, throw_error());
   }
 
   /// Get the local endpoint of the socket.
@@ -470,7 +473,7 @@ public:
    */
   void shutdown(shutdown_type what)
   {
-    service_.shutdown(impl_, what, default_error_handler());
+    service_.shutdown(impl_, what, throw_error());
   }
 
   /// Disable sends or receives on the socket.
@@ -511,16 +514,16 @@ public:
    * the send_to function to send data on an unconnected datagram socket.
    *
    * @par Example:
-   * To send a single data buffer use the @ref buffers function as follows:
-   * @code socket.send(asio::buffers(data, size), 0); @endcode
-   * See the @ref buffers documentation for information on sending multiple
+   * To send a single data buffer use the @ref buffer function as follows:
+   * @code socket.send(asio::buffer(data, size), 0); @endcode
+   * See the @ref buffer documentation for information on sending multiple
    * buffers in one go, and how to use it with arrays, boost::array or
    * std::vector.
    */
   template <typename Const_Buffers>
   std::size_t send(const Const_Buffers& buffers, message_flags flags)
   {
-    return service_.send(impl_, buffers, flags, default_error_handler());
+    return service_.send(impl_, buffers, flags, throw_error());
   }
 
   /// Send some data on a connected socket.
@@ -578,9 +581,11 @@ public:
    * socket.
    *
    * @par Example:
-   * To send a single data buffer use the @ref buffers function as follows:
-   * @code socket.async_send(asio::buffers(data, size), 0, handler); @endcode
-   * See the @ref buffers documentation for information on sending multiple
+   * To send a single data buffer use the @ref buffer function as follows:
+   * @code
+   * socket.async_send(asio::buffer(data, size), 0, handler);
+   * @endcode
+   * See the @ref buffer documentation for information on sending multiple
    * buffers in one go, and how to use it with arrays, boost::array or
    * std::vector.
    */
@@ -608,9 +613,11 @@ public:
    * @throws asio::error Thrown on failure.
    *
    * @par Example:
-   * To send a single data buffer use the @ref buffers function as follows:
-   * @code socket.send_to(asio::buffers(data, size), 0, destination); @endcode
-   * See the @ref buffers documentation for information on sending multiple
+   * To send a single data buffer use the @ref buffer function as follows:
+   * @code
+   * socket.send_to(asio::buffer(data, size), 0, destination);
+   * @endcode
+   * See the @ref buffer documentation for information on sending multiple
    * buffers in one go, and how to use it with arrays, boost::array or
    * std::vector.
    */
@@ -618,8 +625,7 @@ public:
   std::size_t send_to(const Const_Buffers& buffers, message_flags flags,
       const Endpoint& destination)
   {
-    return service_.send_to(impl_, buffers, flags, destination,
-        default_error_handler());
+    return service_.send_to(impl_, buffers, flags, destination, throw_error());
   }
 
   /// Send a datagram to the specified endpoint.
@@ -674,10 +680,10 @@ public:
    * ); @endcode
    *
    * @par Example:
-   * To send a single data buffer use the @ref buffers function as follows:
+   * To send a single data buffer use the @ref buffer function as follows:
    * @code socket.async_send_to(
-   *     asio::buffers(data, size), 0, destination, handler); @endcode
-   * See the @ref buffers documentation for information on sending multiple
+   *     asio::buffer(data, size), 0, destination, handler); @endcode
+   * See the @ref buffer documentation for information on sending multiple
    * buffers in one go, and how to use it with arrays, boost::array or
    * std::vector.
    */
@@ -707,17 +713,17 @@ public:
    * socket.
    *
    * @par Example:
-   * To receive into a single data buffer use the @ref buffers function as
+   * To receive into a single data buffer use the @ref buffer function as
    * follows:
-   * @code socket.receive(asio::buffers(data, size), 0); @endcode
-   * See the @ref buffers documentation for information on receiving into
+   * @code socket.receive(asio::buffer(data, size), 0); @endcode
+   * See the @ref buffer documentation for information on receiving into
    * multiple buffers in one go, and how to use it with arrays, boost::array or
    * std::vector.
    */
   template <typename Mutable_Buffers>
   std::size_t receive(const Mutable_Buffers& buffers, message_flags flags)
   {
-    return service_.receive(impl_, buffers, flags, default_error_handler());
+    return service_.receive(impl_, buffers, flags, throw_error());
   }
 
   /// Receive some data on a connected socket.
@@ -775,10 +781,12 @@ public:
    * datagram socket.
    *
    * @par Example:
-   * To receive into a single data buffer use the @ref buffers function as
+   * To receive into a single data buffer use the @ref buffer function as
    * follows:
-   * @code socket.async_receive(asio::buffers(data, size), 0, handler); @endcode
-   * See the @ref buffers documentation for information on receiving into
+   * @code
+   * socket.async_receive(asio::buffer(data, size), 0, handler);
+   * @endcode
+   * See the @ref buffer documentation for information on receiving into
    * multiple buffers in one go, and how to use it with arrays, boost::array or
    * std::vector.
    */
@@ -806,11 +814,11 @@ public:
    * @throws asio::error Thrown on failure.
    *
    * @par Example:
-   * To receive into a single data buffer use the @ref buffers function as
+   * To receive into a single data buffer use the @ref buffer function as
    * follows:
    * @code socket.receive_from(
-   *     asio::buffers(data, size), 0, sender_endpoint); @endcode
-   * See the @ref buffers documentation for information on receiving into
+   *     asio::buffer(data, size), 0, sender_endpoint); @endcode
+   * See the @ref buffer documentation for information on receiving into
    * multiple buffers in one go, and how to use it with arrays, boost::array or
    * std::vector.
    */
@@ -819,7 +827,7 @@ public:
       Endpoint& sender_endpoint)
   {
     return service_.receive_from(impl_, buffers, flags, sender_endpoint,
-        default_error_handler());
+        throw_error());
   }
   
   /// Receive a datagram with the endpoint of the sender.
@@ -877,11 +885,11 @@ public:
    * ); @endcode
    *
    * @par Example:
-   * To receive into a single data buffer use the @ref buffers function as
+   * To receive into a single data buffer use the @ref buffer function as
    * follows:
    * @code socket.async_receive_from(
-   *     asio::buffers(data, size), 0, sender_endpoint, handler); @endcode
-   * See the @ref buffers documentation for information on receiving into
+   *     asio::buffer(data, size), 0, sender_endpoint, handler); @endcode
+   * See the @ref buffer documentation for information on receiving into
    * multiple buffers in one go, and how to use it with arrays, boost::array or
    * std::vector.
    */

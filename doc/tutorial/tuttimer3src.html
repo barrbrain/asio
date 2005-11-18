@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -36,27 +36,30 @@
 <span class="preprocessor">#include "boost/bind.hpp"</span>
 <span class="preprocessor">#include "boost/date_time/posix_time/posix_time.hpp"</span>
 
-<span class="keywordtype">void</span> print(<span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00138.html">asio::error</a>&amp; <span class="comment">/*e*/</span>, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html">asio::deadline_timer</a>* t, <span class="keywordtype">int</span>* count)
+<span class="keywordtype">void</span> print(<span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; <span class="comment">/*e*/</span>,
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html">asio::deadline_timer</a>* t, <span class="keywordtype">int</span>* count)
 {
   <span class="keywordflow">if</span> (*count &lt; 5)
   {
     std::cout &lt;&lt; *count &lt;&lt; <span class="stringliteral">"\n"</span>;
     ++(*count);
 
-    t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html#a35d12da21dcd06aae41962914bbaa05">expires_at</a>(t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html#a35d12da21dcd06aae41962914bbaa05">expires_at</a>() + boost::posix_time::seconds(1));
-    t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html#f3b204ec2d053712a8100aba55a6b3b2">async_wait</a>(boost::bind(print, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00272.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>, t, count));
+    t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#a35d12da21dcd06aae41962914bbaa05">expires_at</a>(t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#a35d12da21dcd06aae41962914bbaa05">expires_at</a>() + boost::posix_time::seconds(1));
+    t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#f3b204ec2d053712a8100aba55a6b3b2">async_wait</a>(boost::bind(print,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>, t, count));
   }
 }
 
 <span class="keywordtype">int</span> main()
 {
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::demuxer</a> d;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> d;
 
   <span class="keywordtype">int</span> count = 0;
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html">asio::deadline_timer</a> t(d, boost::posix_time::seconds(1));
-  t.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html#f3b204ec2d053712a8100aba55a6b3b2">async_wait</a>(boost::bind(print, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00272.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>, &amp;t, &amp;count));
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html">asio::deadline_timer</a> t(d, boost::posix_time::seconds(1));
+  t.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#f3b204ec2d053712a8100aba55a6b3b2">async_wait</a>(boost::bind(print,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>, &amp;t, &amp;count));
 
-  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">run</a>();
+  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">run</a>();
 
   std::cout &lt;&lt; <span class="stringliteral">"Final count is "</span> &lt;&lt; count &lt;&lt; <span class="stringliteral">"\n"</span>;
 
@@ -66,7 +69,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

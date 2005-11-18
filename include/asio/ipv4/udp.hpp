@@ -27,7 +27,7 @@ namespace ipv4 {
 
 /// Encapsulates the flags needed for UDP.
 /**
- * The asio::ipv4::udp class contains the flags necessary to use UDP sockets.
+ * The asio::ipv4::udp class contains flags necessary for UDP sockets.
  *
  * @par Thread Safety:
  * @e Distinct @e objects: Safe.@n
@@ -108,7 +108,8 @@ public:
   endpoint(unsigned short port_num)
   {
     addr_.sin_family = AF_INET;
-    addr_.sin_port = asio::detail::socket_ops::host_to_network_short(port_num);
+    addr_.sin_port =
+      asio::detail::socket_ops::host_to_network_short(port_num);
     addr_.sin_addr.s_addr = INADDR_ANY;
   }
 
@@ -118,7 +119,8 @@ public:
   endpoint(unsigned short port_num, const asio::ipv4::address& addr)
   {
     addr_.sin_family = AF_INET;
-    addr_.sin_port = asio::detail::socket_ops::host_to_network_short(port_num);
+    addr_.sin_port =
+      asio::detail::socket_ops::host_to_network_short(port_num);
     addr_.sin_addr.s_addr =
       asio::detail::socket_ops::host_to_network_long(addr.to_ulong());
   }
@@ -171,14 +173,16 @@ public:
   /// the host's byte order.
   unsigned short port() const
   {
-    return asio::detail::socket_ops::network_to_host_short(addr_.sin_port);
+    return asio::detail::socket_ops::network_to_host_short(
+        addr_.sin_port);
   }
 
   /// Set the port associated with the endpoint. The port number is always in
   /// the host's byte order.
   void port(unsigned short port_num)
   {
-    addr_.sin_port = asio::detail::socket_ops::host_to_network_short(port_num);
+    addr_.sin_port =
+      asio::detail::socket_ops::host_to_network_short(port_num);
   }
 
   /// Get the IP address associated with the endpoint.
@@ -193,6 +197,28 @@ public:
   {
     addr_.sin_addr.s_addr =
       asio::detail::socket_ops::host_to_network_long(addr.to_ulong());
+  }
+
+  /// Compare two endpoints for equality.
+  friend bool operator==(const endpoint& e1, const endpoint& e2)
+  {
+    return e1.address() == e2.address() && e1.port() == e2.port();
+  }
+
+  /// Compare two endpoints for inequality.
+  friend bool operator!=(const endpoint& e1, const endpoint& e2)
+  {
+    return e1.address() != e2.address() || e1.port() != e2.port();
+  }
+
+  /// Compare endpoints for ordering.
+  friend bool operator<(const endpoint& e1, const endpoint& e2)
+  {
+    if (e1.address() < e2.address())
+      return true;
+    if (e1.address() != e2.address())
+      return false;
+    return e1.port() < e2.port();
   }
 
 private:

@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -36,17 +36,16 @@
 <span class="preprocessor">#include "boost/bind.hpp"</span>
 <span class="preprocessor">#include "asio.hpp"</span>
 
-<span class="keywordtype">void</span> handle_write(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00120.html">asio::stream_socket</a>* socket, <span class="keywordtype">char</span>* write_buf,
-    <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00138.html">asio::error</a>&amp; <span class="comment">/*error*/</span>, size_t <span class="comment">/*last_bytes_transferred*/</span>,
-    size_t <span class="comment">/*total_bytes_transferred*/</span>)
+<span class="keywordtype">void</span> handle_write(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html">asio::stream_socket</a>* socket, <span class="keywordtype">char</span>* write_buf,
+    <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; <span class="comment">/*error*/</span>, size_t <span class="comment">/*bytes_transferred*/</span>)
 {
   <span class="keyword">using namespace </span>std; <span class="comment">// For free.</span>
   free(write_buf);
   <span class="keyword">delete</span> socket;
 }
 
-<span class="keywordtype">void</span> handle_accept(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00119.html">asio::socket_acceptor</a>* acceptor,
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00120.html">asio::stream_socket</a>* socket, <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00138.html">asio::error</a>&amp; error)
+<span class="keywordtype">void</span> handle_accept(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00094.html">asio::socket_acceptor</a>* acceptor,
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html">asio::stream_socket</a>* socket, <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; error)
 {
   <span class="keywordflow">if</span> (!error)
   {
@@ -55,17 +54,17 @@
     <span class="keywordtype">char</span>* write_buf = strdup(ctime(&amp;now));
     size_t write_length = strlen(write_buf);
 
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00288.html#f2921160d147610e131c3882a3964f90">asio::async_write_n</a>(*socket, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00277.html#6972033f869850d9a403f4434c991fe4">asio::buffers</a>(write_buf, write_length),
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00236.html#d7163fe4138ff3d02ff4a394fafae365">asio::async_write</a>(*socket,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00230.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(write_buf, write_length),
         boost::bind(handle_write, socket, write_buf,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00272.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00272.html#4d29b7c76c9efbdd9d6c849aa7d41bd3">asio::placeholders::last_bytes_transferred</a>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00272.html#bb2a13c9c363fad3a914008afc61c090">asio::placeholders::total_bytes_transferred</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#9f5c782222c58e35386e0cf28aa78d5a">asio::placeholders::bytes_transferred</a>));
 
-    socket = <span class="keyword">new</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00264.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">asio::stream_socket</a>(acceptor-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00119.html#6afeb5e9a5b1a4fbbc83e784e9d07a99">demuxer</a>());
+    socket = <span class="keyword">new</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">asio::stream_socket</a>(acceptor-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00094.html#6afeb5e9a5b1a4fbbc83e784e9d07a99">demuxer</a>());
 
-    acceptor-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00119.html#9a5542910afa53ecbb94b31115de053a">async_accept</a>(*socket,
+    acceptor-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00094.html#9a5542910afa53ecbb94b31115de053a">async_accept</a>(*socket,
         boost::bind(handle_accept, acceptor, socket,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00272.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
   }
   <span class="keywordflow">else</span>
   {
@@ -77,19 +76,21 @@
 {
   <span class="keywordflow">try</span>
   {
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::demuxer</a> demuxer;
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> demuxer;
 
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00119.html">asio::socket_acceptor</a> acceptor(demuxer, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00178.html">asio::ipv4::tcp::endpoint</a>(13));
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00094.html">asio::socket_acceptor</a> acceptor(demuxer,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html">asio::ipv4::tcp::endpoint</a>(13));
 
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00120.html">asio::stream_socket</a>* socket = <span class="keyword">new</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00264.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">asio::stream_socket</a>(demuxer);
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html">asio::stream_socket</a>* socket
+      = <span class="keyword">new</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">asio::stream_socket</a>(demuxer);
 
-    acceptor.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00119.html#9a5542910afa53ecbb94b31115de053a">async_accept</a>(*socket,
+    acceptor.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00094.html#9a5542910afa53ecbb94b31115de053a">async_accept</a>(*socket,
         boost::bind(handle_accept, &amp;acceptor, socket,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00272.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
 
-    demuxer.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">run</a>();
+    demuxer.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">run</a>();
   }
-  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00138.html">asio::error</a>&amp; e)
+  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; e)
   {
     std::cerr &lt;&lt; e &lt;&lt; std::endl;
   }
@@ -101,7 +102,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

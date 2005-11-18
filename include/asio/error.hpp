@@ -18,7 +18,10 @@
 #include "asio/detail/push_options.hpp"
 
 #include "asio/detail/push_options.hpp"
+#include <boost/config.hpp>
+#include <boost/noncopyable.hpp>
 #include <cerrno>
+#include <cstring>
 #include <exception>
 #include "asio/detail/pop_options.hpp"
 
@@ -26,14 +29,14 @@
 
 namespace asio {
 
-#if defined(_WIN32)
+#if defined(BOOST_WINDOWS)
 # define ASIO_SOCKET_ERROR(e) WSA ## e
 # define ASIO_NETDB_ERROR(e) WSA ## e
-# define ASIO_WIN_OR_POSIX_ERROR(e_win, e_posix) e_win
+# define ASIO_OS_ERROR(e_win, e_posix) e_win
 #else
 # define ASIO_SOCKET_ERROR(e) e
 # define ASIO_NETDB_ERROR(e) 16384 + e
-# define ASIO_WIN_OR_POSIX_ERROR(e_win, e_posix) e_posix
+# define ASIO_OS_ERROR(e_win, e_posix) e_posix
 #endif
 
 /// The error class is used to encapsulate system error codes.
@@ -70,6 +73,9 @@ public:
 
     /// Bad file descriptor.
     bad_descriptor = ASIO_SOCKET_ERROR(EBADF),
+
+    /// End of file or stream.
+    eof = ASIO_OS_ERROR(ERROR_HANDLE_EOF, -1),
 
     /// Bad address.
     fault = ASIO_SOCKET_ERROR(EFAULT),
@@ -114,10 +120,10 @@ public:
     no_host_data = ASIO_NETDB_ERROR(NO_DATA),
 
     /// Cannot allocate memory.
-    no_memory = ASIO_WIN_OR_POSIX_ERROR(ERROR_OUTOFMEMORY, ENOMEM),
+    no_memory = ASIO_OS_ERROR(ERROR_OUTOFMEMORY, ENOMEM),
 
     /// Operation not permitted.
-    no_permission = ASIO_WIN_OR_POSIX_ERROR(ERROR_ACCESS_DENIED, EPERM),
+    no_permission = ASIO_OS_ERROR(ERROR_ACCESS_DENIED, EPERM),
 
     /// Protocol not available.
     no_protocol_option = ASIO_SOCKET_ERROR(ENOPROTOOPT),
@@ -135,8 +141,7 @@ public:
     not_supported = ASIO_SOCKET_ERROR(EOPNOTSUPP),
 
     /// Operation cancelled.
-    operation_aborted =
-      ASIO_WIN_OR_POSIX_ERROR(ERROR_OPERATION_ABORTED, ECANCELED),
+    operation_aborted = ASIO_OS_ERROR(ERROR_OPERATION_ABORTED, ECANCELED),
 
     /// Cannot send after transport endpoint shutdown.
     shut_down = ASIO_SOCKET_ERROR(ESHUTDOWN),
@@ -148,7 +153,7 @@ public:
     timed_out = ASIO_SOCKET_ERROR(ETIMEDOUT),
 
     /// Resource temporarily unavailable.
-    try_again = ASIO_WIN_OR_POSIX_ERROR(ERROR_RETRY, EAGAIN),
+    try_again = ASIO_OS_ERROR(ERROR_RETRY, EAGAIN),
 
     /// The socket is marked non-blocking and the requested operation would
     /// block.
@@ -219,6 +224,22 @@ private:
   int code_;
 };
 
+#if defined(BOOST_WINDOWS)
+// Helper class to clean up buffer allocated by FormatMessageA in an
+// exception-safe manner.
+namespace detail {
+class local_free_on_block_exit
+  : private boost::noncopyable
+{
+public:
+  explicit local_free_on_block_exit(void* p) : p_(p) {}
+  ~local_free_on_block_exit() { ::LocalFree(p_); }
+private:
+  void* p_;
+};
+} // namespace detail
+#endif // defined(BOOST_WINDOWS)
+
 /// Output the string associated with an error.
 /**
  * Used to output a human-readable string that is associated with an error.
@@ -234,12 +255,13 @@ private:
 template <typename Ostream>
 Ostream& operator<<(Ostream& os, const error& e)
 {
-#if defined(_WIN32)
-  LPTSTR msg = 0;
-  DWORD length = ::FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER
+#if defined(BOOST_WINDOWS)
+  char* msg = 0;
+  DWORD length = ::FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER
       | FORMAT_MESSAGE_FROM_SYSTEM
       | FORMAT_MESSAGE_IGNORE_INSERTS, 0, e.code(),
-      MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR)&msg, 0, 0);
+      MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (char*)&msg, 0, 0);
+  detail::local_free_on_block_exit local_free_obj(msg);
   if (length && msg[length - 1] == '\n')
     msg[--length] = '\0';
   if (length && msg[length - 1] == '\r')
@@ -247,11 +269,13 @@ Ostream& operator<<(Ostream& os, const error& e)
   if (length)
     os << msg;
   else
-    os << e.what() << ' ' << e.code();
-  ::LocalFree(msg);
-#else // _WIN32
+    os << e.what() << " " << e.code();
+#else // defined(BOOST_WINDOWS)
   switch (e.code())
   {
+  case error::eof:
+    os << "End of file.";
+    break;
   case error::host_not_found:
     os << "Host not found (authoritative).";
     break;
@@ -268,7 +292,7 @@ Ostream& operator<<(Ostream& os, const error& e)
   case error::operation_aborted:
     os << "Operation aborted.";
     break;
-#endif // !__sun
+#endif // !defined(__sun)
   default:
 #if defined(__sun)
     os << strerror(e.code());
@@ -286,7 +310,7 @@ Ostream& operator<<(Ostream& os, const error& e)
 #endif
     break;
   }
-#endif // _WIN32
+#endif // defined(BOOST_WINDOWS)
   return os;
 }
 
@@ -294,7 +318,7 @@ Ostream& operator<<(Ostream& os, const error& e)
 
 #undef ASIO_SOCKET_ERROR
 #undef ASIO_NETDB_ERROR
-#undef ASIO_WIN_OR_POSIX_ERROR
+#undef ASIO_OS_ERROR
 
 #include "asio/detail/pop_options.hpp"
 

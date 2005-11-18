@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -39,25 +39,25 @@
 </pre></div><p>
 Using asio's asynchronous functionality means having a callback function that will be called when an asynchronous operation completes. In this program we define a function called <code>print</code> to be called when the asynchronous wait finishes.<p>
 <div class="fragment"><pre class="fragment">
-<span class="keywordtype">void</span> print(<span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00138.html">asio::error</a>&amp; <span class="comment">/*e*/</span>)
+<span class="keywordtype">void</span> print(<span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; <span class="comment">/*e*/</span>)
 {
   std::cout &lt;&lt; <span class="stringliteral">"Hello, world!\n"</span>;
 }
 
 <span class="keywordtype">int</span> main()
 {
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::demuxer</a> d;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> d;
 
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html">asio::deadline_timer</a> t(d, boost::posix_time::seconds(5));
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html">asio::deadline_timer</a> t(d, boost::posix_time::seconds(5));
 </pre></div><p>
-Next, instead of doing a blocking wait as in tutorial Timer.1, we call the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html#f3b204ec2d053712a8100aba55a6b3b2">asio::deadline_timer::async_wait()</a> function to perform an asynchronous wait. When calling this function we pass the <code>print</code> callback handler that was defined above.<p>
+Next, instead of doing a blocking wait as in tutorial Timer.1, we call the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#f3b204ec2d053712a8100aba55a6b3b2">asio::deadline_timer::async_wait()</a> function to perform an asynchronous wait. When calling this function we pass the <code>print</code> callback handler that was defined above.<p>
 <div class="fragment"><pre class="fragment">  t.async_wait(print);
 </pre></div><p>
-Finally, we must call the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a> member function on the demuxer object.<p>
-The asio library provides a guarantee that callback handlers will <b>only</b> be called from threads that are currently calling <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a>. Therefore unless the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a> function is called the callback for the asynchronous wait completion will never be invoked.<p>
-The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a> function will also continue to run while there is still "work" to do. In this example, the work is the asynchronous wait on the timer, so the call will not return until the timer has expired and the callback has completed.<p>
-It is important to remember to give the demuxer some work to do before calling <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a>. For example, if we had omitted the above call to <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00114.html#f3b204ec2d053712a8100aba55a6b3b2">asio::deadline_timer::async_wait()</a>, the demuxer would not have had any work to do, and consequently <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a> would have returned immediately.<p>
-<div class="fragment"><pre class="fragment">  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#7fd10941fde8cdff606799b100207712">run</a>();
+Finally, we must call the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a> member function on the demuxer object.<p>
+The asio library provides a guarantee that callback handlers will <b>only</b> be called from threads that are currently calling <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a>. Therefore unless the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a> function is called the callback for the asynchronous wait completion will never be invoked.<p>
+The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a> function will also continue to run while there is still "work" to do. In this example, the work is the asynchronous wait on the timer, so the call will not return until the timer has expired and the callback has completed.<p>
+It is important to remember to give the demuxer some work to do before calling <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a>. For example, if we had omitted the above call to <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#f3b204ec2d053712a8100aba55a6b3b2">asio::deadline_timer::async_wait()</a>, the demuxer would not have had any work to do, and consequently <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">asio::demuxer::run()</a> would have returned immediately.<p>
+<div class="fragment"><pre class="fragment">  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">run</a>();
 
   <span class="keywordflow">return</span> 0;
 }
@@ -69,7 +69,7 @@ See the <a class="el" href="tuttimer2src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.4</B>
+            <B>asio 0.3.5</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

@@ -14,7 +14,8 @@
  * asio::basic_stream_socket @n
  * asio::buffered_read_stream @n
  * asio::buffered_write_stream @n
- * asio::buffered_stream
+ * asio::buffered_stream @n
+ * asio::ssl::stream
  */
 class Stream
   : public Async_Read_Stream,

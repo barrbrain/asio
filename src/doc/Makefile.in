@@ -188,6 +188,7 @@ target_alias = @target_alias@
 @HAVE_DOXYGEN_TRUE@	concepts/Const_Buffers.hpp \
 @HAVE_DOXYGEN_TRUE@	concepts/Dispatcher.hpp \
 @HAVE_DOXYGEN_TRUE@	concepts/Endpoint.hpp \
+@HAVE_DOXYGEN_TRUE@	concepts/Error_Source.hpp \
 @HAVE_DOXYGEN_TRUE@	concepts/IO_Control_Command.hpp \
 @HAVE_DOXYGEN_TRUE@	concepts/Mutable_Buffers.hpp \
 @HAVE_DOXYGEN_TRUE@	concepts/Protocol.hpp \

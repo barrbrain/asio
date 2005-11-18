@@ -15,7 +15,7 @@
 @SET_MAKE@
 
 
-SOURCES = $(examples_chat_chat_client_SOURCES) $(examples_chat_chat_server_SOURCES) $(examples_echo_async_tcp_echo_server_SOURCES) $(examples_echo_async_udp_echo_server_SOURCES) $(examples_echo_blocking_tcp_echo_client_SOURCES) $(examples_echo_blocking_tcp_echo_server_SOURCES) $(examples_echo_blocking_udp_echo_client_SOURCES) $(examples_echo_blocking_udp_echo_server_SOURCES) $(examples_http_server_http_server_SOURCES) $(examples_iostreams_daytime_client_SOURCES) $(examples_multicast_receiver_SOURCES) $(examples_multicast_sender_SOURCES) $(examples_ssl_client_SOURCES) $(examples_ssl_server_SOURCES) $(examples_timeouts_accept_timeout_SOURCES) $(examples_timeouts_connect_timeout_SOURCES) $(examples_timeouts_datagram_receive_timeout_SOURCES) $(examples_timeouts_stream_receive_timeout_SOURCES) $(examples_tutorial_daytime1_client_SOURCES) $(examples_tutorial_daytime2_server_SOURCES) $(examples_tutorial_daytime3_server_SOURCES) $(examples_tutorial_daytime4_client_SOURCES) $(examples_tutorial_daytime5_server_SOURCES) $(examples_tutorial_daytime6_server_SOURCES) $(examples_tutorial_daytime7_server_SOURCES) $(examples_tutorial_timer1_timer_SOURCES) $(examples_tutorial_timer2_timer_SOURCES) $(examples_tutorial_timer3_timer_SOURCES) $(examples_tutorial_timer4_timer_SOURCES) $(examples_tutorial_timer5_timer_SOURCES) $(tests_performance_client_SOURCES) $(tests_performance_server_SOURCES) $(tests_unit_basic_datagram_socket_test_SOURCES) $(tests_unit_basic_deadline_timer_test_SOURCES) $(tests_unit_basic_demuxer_test_SOURCES) $(tests_unit_basic_locking_dispatcher_test_SOURCES) $(tests_unit_basic_socket_acceptor_test_SOURCES) $(tests_unit_basic_stream_socket_test_SOURCES) $(tests_unit_buffer_test_SOURCES) $(tests_unit_buffered_read_stream_test_SOURCES) $(tests_unit_buffered_stream_test_SOURCES) $(tests_unit_buffered_write_stream_test_SOURCES) $(tests_unit_buffers_test_SOURCES) $(tests_unit_consuming_buffers_test_SOURCES) $(tests_unit_datagram_socket_service_test_SOURCES) $(tests_unit_datagram_socket_test_SOURCES) $(tests_unit_deadline_timer_service_test_SOURCES) $(tests_unit_deadline_timer_test_SOURCES) $(tests_unit_default_error_handler_test_SOURCES) $(tests_unit_demuxer_service_test_SOURCES) $(tests_unit_demuxer_test_SOURCES) $(tests_unit_error_handler_test_SOURCES) $(tests_unit_error_test_SOURCES) $(tests_unit_fixed_buffer_test_SOURCES) $(tests_unit_io_control_test_SOURCES) $(tests_unit_ipv4_address_test_SOURCES) $(tests_unit_ipv4_basic_host_resolver_test_SOURCES) $(tests_unit_ipv4_host_resolver_service_test_SOURCES) $(tests_unit_ipv4_host_resolver_test_SOURCES) $(tests_unit_ipv4_host_test_SOURCES) $(tests_unit_ipv4_multicast_test_SOURCES) $(tests_unit_ipv4_socket_option_test_SOURCES) $(tests_unit_ipv4_tcp_test_SOURCES) $(tests_unit_ipv4_udp_test_SOURCES) $(tests_unit_is_read_buffered_test_SOURCES) $(tests_unit_is_write_buffered_test_SOURCES) $(tests_unit_locking_dispatcher_service_test_SOURCES) $(tests_unit_locking_dispatcher_test_SOURCES) $(tests_unit_null_error_handler_test_SOURCES) $(tests_unit_placeholders_test_SOURCES) $(tests_unit_read_test_SOURCES) $(tests_unit_service_factory_test_SOURCES) $(tests_unit_socket_acceptor_service_test_SOURCES) $(tests_unit_socket_acceptor_test_SOURCES) $(tests_unit_socket_base_test_SOURCES) $(tests_unit_socket_option_test_SOURCES) $(tests_unit_ssl_basic_context_test_SOURCES) $(tests_unit_ssl_context_base_test_SOURCES) $(tests_unit_ssl_context_service_test_SOURCES) $(tests_unit_ssl_context_test_SOURCES) $(tests_unit_ssl_stream_base_test_SOURCES) $(tests_unit_ssl_stream_service_test_SOURCES) $(tests_unit_ssl_stream_test_SOURCES) $(tests_unit_stream_socket_service_test_SOURCES) $(tests_unit_stream_socket_test_SOURCES) $(tests_unit_thread_test_SOURCES) $(tests_unit_time_traits_test_SOURCES) $(tests_unit_wrapped_handler_test_SOURCES) $(tests_unit_write_test_SOURCES)
+SOURCES = $(examples_chat_chat_client_SOURCES) $(examples_chat_chat_server_SOURCES) $(examples_echo_async_tcp_echo_server_SOURCES) $(examples_echo_async_udp_echo_server_SOURCES) $(examples_echo_blocking_tcp_echo_client_SOURCES) $(examples_echo_blocking_tcp_echo_server_SOURCES) $(examples_echo_blocking_udp_echo_client_SOURCES) $(examples_echo_blocking_udp_echo_server_SOURCES) $(examples_http_server_http_server_SOURCES) $(examples_iostreams_daytime_client_SOURCES) $(examples_multicast_receiver_SOURCES) $(examples_multicast_sender_SOURCES) $(examples_ssl_client_SOURCES) $(examples_ssl_server_SOURCES) $(examples_timeouts_accept_timeout_SOURCES) $(examples_timeouts_connect_timeout_SOURCES) $(examples_timeouts_datagram_receive_timeout_SOURCES) $(examples_timeouts_stream_receive_timeout_SOURCES) $(examples_tutorial_daytime1_client_SOURCES) $(examples_tutorial_daytime2_server_SOURCES) $(examples_tutorial_daytime3_server_SOURCES) $(examples_tutorial_daytime4_client_SOURCES) $(examples_tutorial_daytime5_server_SOURCES) $(examples_tutorial_daytime6_server_SOURCES) $(examples_tutorial_daytime7_server_SOURCES) $(examples_tutorial_timer1_timer_SOURCES) $(examples_tutorial_timer2_timer_SOURCES) $(examples_tutorial_timer3_timer_SOURCES) $(examples_tutorial_timer4_timer_SOURCES) $(examples_tutorial_timer5_timer_SOURCES) $(tests_performance_client_SOURCES) $(tests_performance_server_SOURCES) $(tests_unit_basic_datagram_socket_test_SOURCES) $(tests_unit_basic_deadline_timer_test_SOURCES) $(tests_unit_basic_demuxer_test_SOURCES) $(tests_unit_basic_locking_dispatcher_test_SOURCES) $(tests_unit_basic_socket_acceptor_test_SOURCES) $(tests_unit_basic_stream_socket_test_SOURCES) $(tests_unit_buffer_test_SOURCES) $(tests_unit_buffered_read_stream_test_SOURCES) $(tests_unit_buffered_stream_test_SOURCES) $(tests_unit_buffered_write_stream_test_SOURCES) $(tests_unit_completion_condition_test_SOURCES) $(tests_unit_datagram_socket_service_test_SOURCES) $(tests_unit_datagram_socket_test_SOURCES) $(tests_unit_deadline_timer_service_test_SOURCES) $(tests_unit_deadline_timer_test_SOURCES) $(tests_unit_demuxer_service_test_SOURCES) $(tests_unit_demuxer_test_SOURCES) $(tests_unit_error_handler_test_SOURCES) $(tests_unit_error_test_SOURCES) $(tests_unit_io_control_test_SOURCES) $(tests_unit_ipv4_address_test_SOURCES) $(tests_unit_ipv4_basic_host_resolver_test_SOURCES) $(tests_unit_ipv4_host_resolver_service_test_SOURCES) $(tests_unit_ipv4_host_resolver_test_SOURCES) $(tests_unit_ipv4_host_test_SOURCES) $(tests_unit_ipv4_multicast_test_SOURCES) $(tests_unit_ipv4_socket_option_test_SOURCES) $(tests_unit_ipv4_tcp_test_SOURCES) $(tests_unit_ipv4_udp_test_SOURCES) $(tests_unit_is_read_buffered_test_SOURCES) $(tests_unit_is_write_buffered_test_SOURCES) $(tests_unit_locking_dispatcher_service_test_SOURCES) $(tests_unit_locking_dispatcher_test_SOURCES) $(tests_unit_placeholders_test_SOURCES) $(tests_unit_read_test_SOURCES) $(tests_unit_service_factory_test_SOURCES) $(tests_unit_socket_acceptor_service_test_SOURCES) $(tests_unit_socket_acceptor_test_SOURCES) $(tests_unit_socket_base_test_SOURCES) $(tests_unit_socket_option_test_SOURCES) $(tests_unit_ssl_basic_context_test_SOURCES) $(tests_unit_ssl_context_base_test_SOURCES) $(tests_unit_ssl_context_service_test_SOURCES) $(tests_unit_ssl_context_test_SOURCES) $(tests_unit_ssl_stream_base_test_SOURCES) $(tests_unit_ssl_stream_service_test_SOURCES) $(tests_unit_ssl_stream_test_SOURCES) $(tests_unit_stream_socket_service_test_SOURCES) $(tests_unit_stream_socket_test_SOURCES) $(tests_unit_thread_test_SOURCES) $(tests_unit_time_traits_test_SOURCES) $(tests_unit_write_test_SOURCES)
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -50,19 +50,16 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	tests/unit/buffered_read_stream_test$(EXEEXT) \
 	tests/unit/buffered_stream_test$(EXEEXT) \
 	tests/unit/buffered_write_stream_test$(EXEEXT) \
-	tests/unit/buffers_test$(EXEEXT) \
 	tests/unit/buffer_test$(EXEEXT) \
-	tests/unit/consuming_buffers_test$(EXEEXT) \
+	tests/unit/completion_condition_test$(EXEEXT) \
 	tests/unit/datagram_socket_service_test$(EXEEXT) \
 	tests/unit/datagram_socket_test$(EXEEXT) \
 	tests/unit/deadline_timer_service_test$(EXEEXT) \
 	tests/unit/deadline_timer_test$(EXEEXT) \
-	tests/unit/default_error_handler_test$(EXEEXT) \
 	tests/unit/demuxer_service_test$(EXEEXT) \
 	tests/unit/demuxer_test$(EXEEXT) \
 	tests/unit/error_handler_test$(EXEEXT) \
 	tests/unit/error_test$(EXEEXT) \
-	tests/unit/fixed_buffer_test$(EXEEXT) \
 	tests/unit/io_control_test$(EXEEXT) \
 	tests/unit/ipv4/address_test$(EXEEXT) \
 	tests/unit/ipv4/basic_host_resolver_test$(EXEEXT) \
@@ -77,7 +74,6 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	tests/unit/is_write_buffered_test$(EXEEXT) \
 	tests/unit/locking_dispatcher_service_test$(EXEEXT) \
 	tests/unit/locking_dispatcher_test$(EXEEXT) \
-	tests/unit/null_error_handler_test$(EXEEXT) \
 	tests/unit/placeholders_test$(EXEEXT) \
 	tests/unit/read_test$(EXEEXT) \
 	tests/unit/service_factory_test$(EXEEXT) \
@@ -89,7 +85,6 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	tests/unit/stream_socket_test$(EXEEXT) \
 	tests/unit/thread_test$(EXEEXT) \
 	tests/unit/time_traits_test$(EXEEXT) \
-	tests/unit/wrapped_handler_test$(EXEEXT) \
 	tests/unit/write_test$(EXEEXT) \
 	examples/chat/chat_client$(EXEEXT) \
 	examples/chat/chat_server$(EXEEXT) \
@@ -375,16 +370,11 @@ am_tests_unit_buffered_write_stream_test_OBJECTS =  \
 tests_unit_buffered_write_stream_test_OBJECTS =  \
 	$(am_tests_unit_buffered_write_stream_test_OBJECTS)
 tests_unit_buffered_write_stream_test_LDADD = $(LDADD)
-am_tests_unit_buffers_test_OBJECTS =  \
-	tests/unit/buffers_test.$(OBJEXT)
-tests_unit_buffers_test_OBJECTS =  \
-	$(am_tests_unit_buffers_test_OBJECTS)
-tests_unit_buffers_test_LDADD = $(LDADD)
-am_tests_unit_consuming_buffers_test_OBJECTS =  \
-	tests/unit/consuming_buffers_test.$(OBJEXT)
-tests_unit_consuming_buffers_test_OBJECTS =  \
-	$(am_tests_unit_consuming_buffers_test_OBJECTS)
-tests_unit_consuming_buffers_test_LDADD = $(LDADD)
+am_tests_unit_completion_condition_test_OBJECTS =  \
+	tests/unit/completion_condition_test.$(OBJEXT)
+tests_unit_completion_condition_test_OBJECTS =  \
+	$(am_tests_unit_completion_condition_test_OBJECTS)
+tests_unit_completion_condition_test_LDADD = $(LDADD)
 am_tests_unit_datagram_socket_service_test_OBJECTS =  \
 	tests/unit/datagram_socket_service_test.$(OBJEXT)
 tests_unit_datagram_socket_service_test_OBJECTS =  \
@@ -405,11 +395,6 @@ am_tests_unit_deadline_timer_test_OBJECTS =  \
 tests_unit_deadline_timer_test_OBJECTS =  \
 	$(am_tests_unit_deadline_timer_test_OBJECTS)
 tests_unit_deadline_timer_test_LDADD = $(LDADD)
-am_tests_unit_default_error_handler_test_OBJECTS =  \
-	tests/unit/default_error_handler_test.$(OBJEXT)
-tests_unit_default_error_handler_test_OBJECTS =  \
-	$(am_tests_unit_default_error_handler_test_OBJECTS)
-tests_unit_default_error_handler_test_LDADD = $(LDADD)
 am_tests_unit_demuxer_service_test_OBJECTS =  \
 	tests/unit/demuxer_service_test.$(OBJEXT)
 tests_unit_demuxer_service_test_OBJECTS =  \
@@ -428,11 +413,6 @@ tests_unit_error_handler_test_LDADD = $(LDADD)
 am_tests_unit_error_test_OBJECTS = tests/unit/error_test.$(OBJEXT)
 tests_unit_error_test_OBJECTS = $(am_tests_unit_error_test_OBJECTS)
 tests_unit_error_test_LDADD = $(LDADD)
-am_tests_unit_fixed_buffer_test_OBJECTS =  \
-	tests/unit/fixed_buffer_test.$(OBJEXT)
-tests_unit_fixed_buffer_test_OBJECTS =  \
-	$(am_tests_unit_fixed_buffer_test_OBJECTS)
-tests_unit_fixed_buffer_test_LDADD = $(LDADD)
 am_tests_unit_io_control_test_OBJECTS =  \
 	tests/unit/io_control_test.$(OBJEXT)
 tests_unit_io_control_test_OBJECTS =  \
@@ -503,11 +483,6 @@ am_tests_unit_locking_dispatcher_test_OBJECTS =  \
 tests_unit_locking_dispatcher_test_OBJECTS =  \
 	$(am_tests_unit_locking_dispatcher_test_OBJECTS)
 tests_unit_locking_dispatcher_test_LDADD = $(LDADD)
-am_tests_unit_null_error_handler_test_OBJECTS =  \
-	tests/unit/null_error_handler_test.$(OBJEXT)
-tests_unit_null_error_handler_test_OBJECTS =  \
-	$(am_tests_unit_null_error_handler_test_OBJECTS)
-tests_unit_null_error_handler_test_LDADD = $(LDADD)
 am_tests_unit_placeholders_test_OBJECTS =  \
 	tests/unit/placeholders_test.$(OBJEXT)
 tests_unit_placeholders_test_OBJECTS =  \
@@ -605,11 +580,6 @@ am_tests_unit_time_traits_test_OBJECTS =  \
 tests_unit_time_traits_test_OBJECTS =  \
 	$(am_tests_unit_time_traits_test_OBJECTS)
 tests_unit_time_traits_test_LDADD = $(LDADD)
-am_tests_unit_wrapped_handler_test_OBJECTS =  \
-	tests/unit/wrapped_handler_test.$(OBJEXT)
-tests_unit_wrapped_handler_test_OBJECTS =  \
-	$(am_tests_unit_wrapped_handler_test_OBJECTS)
-tests_unit_wrapped_handler_test_LDADD = $(LDADD)
 am_tests_unit_write_test_OBJECTS = tests/unit/write_test.$(OBJEXT)
 tests_unit_write_test_OBJECTS = $(am_tests_unit_write_test_OBJECTS)
 tests_unit_write_test_LDADD = $(LDADD)
@@ -662,18 +632,15 @@ SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(tests_unit_buffered_read_stream_test_SOURCES) \
 	$(tests_unit_buffered_stream_test_SOURCES) \
 	$(tests_unit_buffered_write_stream_test_SOURCES) \
-	$(tests_unit_buffers_test_SOURCES) \
-	$(tests_unit_consuming_buffers_test_SOURCES) \
+	$(tests_unit_completion_condition_test_SOURCES) \
 	$(tests_unit_datagram_socket_service_test_SOURCES) \
 	$(tests_unit_datagram_socket_test_SOURCES) \
 	$(tests_unit_deadline_timer_service_test_SOURCES) \
 	$(tests_unit_deadline_timer_test_SOURCES) \
-	$(tests_unit_default_error_handler_test_SOURCES) \
 	$(tests_unit_demuxer_service_test_SOURCES) \
 	$(tests_unit_demuxer_test_SOURCES) \
 	$(tests_unit_error_handler_test_SOURCES) \
 	$(tests_unit_error_test_SOURCES) \
-	$(tests_unit_fixed_buffer_test_SOURCES) \
 	$(tests_unit_io_control_test_SOURCES) \
 	$(tests_unit_ipv4_address_test_SOURCES) \
 	$(tests_unit_ipv4_basic_host_resolver_test_SOURCES) \
@@ -688,7 +655,6 @@ SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(tests_unit_is_write_buffered_test_SOURCES) \
 	$(tests_unit_locking_dispatcher_service_test_SOURCES) \
 	$(tests_unit_locking_dispatcher_test_SOURCES) \
-	$(tests_unit_null_error_handler_test_SOURCES) \
 	$(tests_unit_placeholders_test_SOURCES) \
 	$(tests_unit_read_test_SOURCES) \
 	$(tests_unit_service_factory_test_SOURCES) \
@@ -707,7 +673,6 @@ SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(tests_unit_stream_socket_test_SOURCES) \
 	$(tests_unit_thread_test_SOURCES) \
 	$(tests_unit_time_traits_test_SOURCES) \
-	$(tests_unit_wrapped_handler_test_SOURCES) \
 	$(tests_unit_write_test_SOURCES)
 DIST_SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(examples_chat_chat_server_SOURCES) \
@@ -751,18 +716,15 @@ DIST_SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(tests_unit_buffered_read_stream_test_SOURCES) \
 	$(tests_unit_buffered_stream_test_SOURCES) \
 	$(tests_unit_buffered_write_stream_test_SOURCES) \
-	$(tests_unit_buffers_test_SOURCES) \
-	$(tests_unit_consuming_buffers_test_SOURCES) \
+	$(tests_unit_completion_condition_test_SOURCES) \
 	$(tests_unit_datagram_socket_service_test_SOURCES) \
 	$(tests_unit_datagram_socket_test_SOURCES) \
 	$(tests_unit_deadline_timer_service_test_SOURCES) \
 	$(tests_unit_deadline_timer_test_SOURCES) \
-	$(tests_unit_default_error_handler_test_SOURCES) \
 	$(tests_unit_demuxer_service_test_SOURCES) \
 	$(tests_unit_demuxer_test_SOURCES) \
 	$(tests_unit_error_handler_test_SOURCES) \
 	$(tests_unit_error_test_SOURCES) \
-	$(tests_unit_fixed_buffer_test_SOURCES) \
 	$(tests_unit_io_control_test_SOURCES) \
 	$(tests_unit_ipv4_address_test_SOURCES) \
 	$(tests_unit_ipv4_basic_host_resolver_test_SOURCES) \
@@ -777,7 +739,6 @@ DIST_SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(tests_unit_is_write_buffered_test_SOURCES) \
 	$(tests_unit_locking_dispatcher_service_test_SOURCES) \
 	$(tests_unit_locking_dispatcher_test_SOURCES) \
-	$(tests_unit_null_error_handler_test_SOURCES) \
 	$(tests_unit_placeholders_test_SOURCES) \
 	$(tests_unit_read_test_SOURCES) \
 	$(tests_unit_service_factory_test_SOURCES) \
@@ -796,7 +757,6 @@ DIST_SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(tests_unit_stream_socket_test_SOURCES) \
 	$(tests_unit_thread_test_SOURCES) \
 	$(tests_unit_time_traits_test_SOURCES) \
-	$(tests_unit_wrapped_handler_test_SOURCES) \
 	$(tests_unit_write_test_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
@@ -915,16 +875,14 @@ TESTS = tests/unit/basic_datagram_socket_test \
 	tests/unit/basic_stream_socket_test \
 	tests/unit/buffered_read_stream_test \
 	tests/unit/buffered_stream_test \
-	tests/unit/buffered_write_stream_test tests/unit/buffers_test \
-	tests/unit/buffer_test tests/unit/consuming_buffers_test \
+	tests/unit/buffered_write_stream_test tests/unit/buffer_test \
+	tests/unit/completion_condition_test \
 	tests/unit/datagram_socket_service_test \
 	tests/unit/datagram_socket_test \
 	tests/unit/deadline_timer_service_test \
-	tests/unit/deadline_timer_test \
-	tests/unit/default_error_handler_test \
-	tests/unit/demuxer_service_test tests/unit/demuxer_test \
-	tests/unit/error_handler_test tests/unit/error_test \
-	tests/unit/fixed_buffer_test tests/unit/io_control_test \
+	tests/unit/deadline_timer_test tests/unit/demuxer_service_test \
+	tests/unit/demuxer_test tests/unit/error_handler_test \
+	tests/unit/error_test tests/unit/io_control_test \
 	tests/unit/ipv4/address_test \
 	tests/unit/ipv4/basic_host_resolver_test \
 	tests/unit/ipv4/host_resolver_service_test \
@@ -935,7 +893,6 @@ TESTS = tests/unit/basic_datagram_socket_test \
 	tests/unit/is_write_buffered_test \
 	tests/unit/locking_dispatcher_service_test \
 	tests/unit/locking_dispatcher_test \
-	tests/unit/null_error_handler_test \
 	tests/unit/placeholders_test tests/unit/read_test \
 	tests/unit/service_factory_test \
 	tests/unit/socket_acceptor_service_test \
@@ -943,8 +900,8 @@ TESTS = tests/unit/basic_datagram_socket_test \
 	tests/unit/socket_option_test \
 	tests/unit/stream_socket_service_test \
 	tests/unit/stream_socket_test tests/unit/thread_test \
-	tests/unit/time_traits_test tests/unit/wrapped_handler_test \
-	tests/unit/write_test $(am__append_2)
+	tests/unit/time_traits_test tests/unit/write_test \
+	$(am__append_2)
 noinst_HEADERS = \
 	tests/unit/unit_test.hpp \
 	examples/chat/chat_message.hpp \
@@ -963,7 +920,6 @@ tests_unit_ipv4_multicast_test_SOURCES = tests/unit/ipv4/multicast_test.cpp
 tests_unit_ipv4_socket_option_test_SOURCES = tests/unit/ipv4/socket_option_test.cpp
 tests_unit_ipv4_tcp_test_SOURCES = tests/unit/ipv4/tcp_test.cpp
 tests_unit_ipv4_udp_test_SOURCES = tests/unit/ipv4/udp_test.cpp
-tests_unit_fixed_buffer_test_SOURCES = tests/unit/fixed_buffer_test.cpp
 tests_unit_locking_dispatcher_test_SOURCES = tests/unit/locking_dispatcher_test.cpp
 tests_unit_is_read_buffered_test_SOURCES = tests/unit/is_read_buffered_test.cpp
 tests_unit_socket_acceptor_test_SOURCES = tests/unit/socket_acceptor_test.cpp
@@ -974,8 +930,8 @@ tests_unit_is_write_buffered_test_SOURCES = tests/unit/is_write_buffered_test.cp
 tests_unit_basic_datagram_socket_test_SOURCES = tests/unit/basic_datagram_socket_test.cpp
 tests_unit_deadline_timer_test_SOURCES = tests/unit/deadline_timer_test.cpp
 tests_unit_buffer_test_SOURCES = tests/unit/buffer_test.cpp
+tests_unit_completion_condition_test_SOURCES = tests/unit/completion_condition_test.cpp
 tests_unit_error_handler_test_SOURCES = tests/unit/error_handler_test.cpp
-tests_unit_null_error_handler_test_SOURCES = tests/unit/null_error_handler_test.cpp
 tests_unit_basic_deadline_timer_test_SOURCES = tests/unit/basic_deadline_timer_test.cpp
 tests_unit_basic_demuxer_test_SOURCES = tests/unit/basic_demuxer_test.cpp
 tests_unit_basic_locking_dispatcher_test_SOURCES = tests/unit/basic_locking_dispatcher_test.cpp
@@ -984,11 +940,8 @@ tests_unit_basic_stream_socket_test_SOURCES = tests/unit/basic_stream_socket_tes
 tests_unit_buffered_read_stream_test_SOURCES = tests/unit/buffered_read_stream_test.cpp
 tests_unit_buffered_stream_test_SOURCES = tests/unit/buffered_stream_test.cpp
 tests_unit_buffered_write_stream_test_SOURCES = tests/unit/buffered_write_stream_test.cpp
-tests_unit_buffers_test_SOURCES = tests/unit/buffers_test.cpp
-tests_unit_consuming_buffers_test_SOURCES = tests/unit/consuming_buffers_test.cpp
 tests_unit_datagram_socket_service_test_SOURCES = tests/unit/datagram_socket_service_test.cpp
 tests_unit_deadline_timer_service_test_SOURCES = tests/unit/deadline_timer_service_test.cpp
-tests_unit_default_error_handler_test_SOURCES = tests/unit/default_error_handler_test.cpp
 tests_unit_demuxer_service_test_SOURCES = tests/unit/demuxer_service_test.cpp
 tests_unit_error_test_SOURCES = tests/unit/error_test.cpp
 tests_unit_io_control_test_SOURCES = tests/unit/io_control_test.cpp
@@ -1002,7 +955,6 @@ tests_unit_stream_socket_service_test_SOURCES = tests/unit/stream_socket_service
 tests_unit_stream_socket_test_SOURCES = tests/unit/stream_socket_test.cpp
 tests_unit_thread_test_SOURCES = tests/unit/thread_test.cpp
 tests_unit_time_traits_test_SOURCES = tests/unit/time_traits_test.cpp
-tests_unit_wrapped_handler_test_SOURCES = tests/unit/wrapped_handler_test.cpp
 examples_chat_chat_client_SOURCES = examples/chat/chat_client.cpp
 examples_chat_chat_server_SOURCES = examples/chat/chat_server.cpp
 examples_echo_async_tcp_echo_server_SOURCES = examples/echo/async_tcp_echo_server.cpp
@@ -1497,17 +1449,12 @@ tests/unit/buffered_write_stream_test.$(OBJEXT):  \
 tests/unit/buffered_write_stream_test$(EXEEXT): $(tests_unit_buffered_write_stream_test_OBJECTS) $(tests_unit_buffered_write_stream_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/buffered_write_stream_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_buffered_write_stream_test_LDFLAGS) $(tests_unit_buffered_write_stream_test_OBJECTS) $(tests_unit_buffered_write_stream_test_LDADD) $(LIBS)
-tests/unit/buffers_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
-	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/buffers_test$(EXEEXT): $(tests_unit_buffers_test_OBJECTS) $(tests_unit_buffers_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/buffers_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_buffers_test_LDFLAGS) $(tests_unit_buffers_test_OBJECTS) $(tests_unit_buffers_test_LDADD) $(LIBS)
-tests/unit/consuming_buffers_test.$(OBJEXT):  \
+tests/unit/completion_condition_test.$(OBJEXT):  \
 	tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/consuming_buffers_test$(EXEEXT): $(tests_unit_consuming_buffers_test_OBJECTS) $(tests_unit_consuming_buffers_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/consuming_buffers_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_consuming_buffers_test_LDFLAGS) $(tests_unit_consuming_buffers_test_OBJECTS) $(tests_unit_consuming_buffers_test_LDADD) $(LIBS)
+tests/unit/completion_condition_test$(EXEEXT): $(tests_unit_completion_condition_test_OBJECTS) $(tests_unit_completion_condition_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
+	@rm -f tests/unit/completion_condition_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_completion_condition_test_LDFLAGS) $(tests_unit_completion_condition_test_OBJECTS) $(tests_unit_completion_condition_test_LDADD) $(LIBS)
 tests/unit/datagram_socket_service_test.$(OBJEXT):  \
 	tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
@@ -1530,12 +1477,6 @@ tests/unit/deadline_timer_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 tests/unit/deadline_timer_test$(EXEEXT): $(tests_unit_deadline_timer_test_OBJECTS) $(tests_unit_deadline_timer_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/deadline_timer_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_deadline_timer_test_LDFLAGS) $(tests_unit_deadline_timer_test_OBJECTS) $(tests_unit_deadline_timer_test_LDADD) $(LIBS)
-tests/unit/default_error_handler_test.$(OBJEXT):  \
-	tests/unit/$(am__dirstamp) \
-	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/default_error_handler_test$(EXEEXT): $(tests_unit_default_error_handler_test_OBJECTS) $(tests_unit_default_error_handler_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/default_error_handler_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_default_error_handler_test_LDFLAGS) $(tests_unit_default_error_handler_test_OBJECTS) $(tests_unit_default_error_handler_test_LDADD) $(LIBS)
 tests/unit/demuxer_service_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/demuxer_service_test$(EXEEXT): $(tests_unit_demuxer_service_test_OBJECTS) $(tests_unit_demuxer_service_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
@@ -1556,11 +1497,6 @@ tests/unit/error_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 tests/unit/error_test$(EXEEXT): $(tests_unit_error_test_OBJECTS) $(tests_unit_error_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/error_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_error_test_LDFLAGS) $(tests_unit_error_test_OBJECTS) $(tests_unit_error_test_LDADD) $(LIBS)
-tests/unit/fixed_buffer_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
-	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/fixed_buffer_test$(EXEEXT): $(tests_unit_fixed_buffer_test_OBJECTS) $(tests_unit_fixed_buffer_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/fixed_buffer_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_fixed_buffer_test_LDFLAGS) $(tests_unit_fixed_buffer_test_OBJECTS) $(tests_unit_fixed_buffer_test_LDADD) $(LIBS)
 tests/unit/io_control_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/io_control_test$(EXEEXT): $(tests_unit_io_control_test_OBJECTS) $(tests_unit_io_control_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
@@ -1647,12 +1583,6 @@ tests/unit/locking_dispatcher_test.$(OBJEXT):  \
 tests/unit/locking_dispatcher_test$(EXEEXT): $(tests_unit_locking_dispatcher_test_OBJECTS) $(tests_unit_locking_dispatcher_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/locking_dispatcher_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_locking_dispatcher_test_LDFLAGS) $(tests_unit_locking_dispatcher_test_OBJECTS) $(tests_unit_locking_dispatcher_test_LDADD) $(LIBS)
-tests/unit/null_error_handler_test.$(OBJEXT):  \
-	tests/unit/$(am__dirstamp) \
-	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/null_error_handler_test$(EXEEXT): $(tests_unit_null_error_handler_test_OBJECTS) $(tests_unit_null_error_handler_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/null_error_handler_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_null_error_handler_test_LDFLAGS) $(tests_unit_null_error_handler_test_OBJECTS) $(tests_unit_null_error_handler_test_LDADD) $(LIBS)
 tests/unit/placeholders_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/placeholders_test$(EXEEXT): $(tests_unit_placeholders_test_OBJECTS) $(tests_unit_placeholders_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
@@ -1756,11 +1686,6 @@ tests/unit/time_traits_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 tests/unit/time_traits_test$(EXEEXT): $(tests_unit_time_traits_test_OBJECTS) $(tests_unit_time_traits_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/time_traits_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_time_traits_test_LDFLAGS) $(tests_unit_time_traits_test_OBJECTS) $(tests_unit_time_traits_test_LDADD) $(LIBS)
-tests/unit/wrapped_handler_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
-	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/wrapped_handler_test$(EXEEXT): $(tests_unit_wrapped_handler_test_OBJECTS) $(tests_unit_wrapped_handler_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/wrapped_handler_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_wrapped_handler_test_LDFLAGS) $(tests_unit_wrapped_handler_test_OBJECTS) $(tests_unit_wrapped_handler_test_LDADD) $(LIBS)
 tests/unit/write_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/write_test$(EXEEXT): $(tests_unit_write_test_OBJECTS) $(tests_unit_write_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
@@ -1818,18 +1743,15 @@ mostlyclean-compile:
 	-rm -f tests/unit/buffered_read_stream_test.$(OBJEXT)
 	-rm -f tests/unit/buffered_stream_test.$(OBJEXT)
 	-rm -f tests/unit/buffered_write_stream_test.$(OBJEXT)
-	-rm -f tests/unit/buffers_test.$(OBJEXT)
-	-rm -f tests/unit/consuming_buffers_test.$(OBJEXT)
+	-rm -f tests/unit/completion_condition_test.$(OBJEXT)
 	-rm -f tests/unit/datagram_socket_service_test.$(OBJEXT)
 	-rm -f tests/unit/datagram_socket_test.$(OBJEXT)
 	-rm -f tests/unit/deadline_timer_service_test.$(OBJEXT)
 	-rm -f tests/unit/deadline_timer_test.$(OBJEXT)
-	-rm -f tests/unit/default_error_handler_test.$(OBJEXT)
 	-rm -f tests/unit/demuxer_service_test.$(OBJEXT)
 	-rm -f tests/unit/demuxer_test.$(OBJEXT)
 	-rm -f tests/unit/error_handler_test.$(OBJEXT)
 	-rm -f tests/unit/error_test.$(OBJEXT)
-	-rm -f tests/unit/fixed_buffer_test.$(OBJEXT)
 	-rm -f tests/unit/io_control_test.$(OBJEXT)
 	-rm -f tests/unit/ipv4/address_test.$(OBJEXT)
 	-rm -f tests/unit/ipv4/basic_host_resolver_test.$(OBJEXT)
@@ -1844,7 +1766,6 @@ mostlyclean-compile:
 	-rm -f tests/unit/is_write_buffered_test.$(OBJEXT)
 	-rm -f tests/unit/locking_dispatcher_service_test.$(OBJEXT)
 	-rm -f tests/unit/locking_dispatcher_test.$(OBJEXT)
-	-rm -f tests/unit/null_error_handler_test.$(OBJEXT)
 	-rm -f tests/unit/placeholders_test.$(OBJEXT)
 	-rm -f tests/unit/read_test.$(OBJEXT)
 	-rm -f tests/unit/service_factory_test.$(OBJEXT)
@@ -1863,7 +1784,6 @@ mostlyclean-compile:
 	-rm -f tests/unit/stream_socket_test.$(OBJEXT)
 	-rm -f tests/unit/thread_test.$(OBJEXT)
 	-rm -f tests/unit/time_traits_test.$(OBJEXT)
-	-rm -f tests/unit/wrapped_handler_test.$(OBJEXT)
 	-rm -f tests/unit/write_test.$(OBJEXT)
 
 distclean-compile:
@@ -1918,24 +1838,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/buffered_read_stream_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/buffered_stream_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/buffered_write_stream_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/buffers_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/consuming_buffers_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/completion_condition_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/datagram_socket_service_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/datagram_socket_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/deadline_timer_service_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/deadline_timer_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/default_error_handler_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/demuxer_service_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/demuxer_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/error_handler_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/error_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/fixed_buffer_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/io_control_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/is_read_buffered_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/is_write_buffered_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/locking_dispatcher_service_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/locking_dispatcher_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/null_error_handler_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/placeholders_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/read_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/service_factory_test.Po@am__quote@
@@ -1947,7 +1863,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/stream_socket_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/thread_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/time_traits_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/wrapped_handler_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/write_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ipv4/$(DEPDIR)/address_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ipv4/$(DEPDIR)/basic_host_resolver_test.Po@am__quote@
