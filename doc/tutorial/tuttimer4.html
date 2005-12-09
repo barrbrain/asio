@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -34,9 +34,9 @@
 <h1><a class="anchor" name="tuttimer4">Timer.4 - Using a member function as a handler</a></h1>In this tutorial we will see how to use a class member function as a callback handler. The program should execute identically to the tutorial program from tutorial Timer.3.<p>
 <p>
 <div class="fragment"><pre class="fragment"><span class="preprocessor">#include &lt;iostream&gt;</span>
-<span class="preprocessor">#include "asio.hpp"</span>
-<span class="preprocessor">#include "boost/bind.hpp"</span>
-<span class="preprocessor">#include "boost/date_time/posix_time/posix_time.hpp"</span>
+<span class="preprocessor">#include &lt;asio.hpp&gt;</span>
+<span class="preprocessor">#include &lt;boost/bind.hpp&gt;</span>
+<span class="preprocessor">#include &lt;boost/date_time/posix_time/posix_time.hpp&gt;</span>
 </pre></div><p>
 Instead of defining a free function <code>print</code> as the callback handler, as we did in the earlier tutorial programs, we now define a class called <code>printer</code>.<p>
 <div class="fragment"><pre class="fragment">
@@ -45,13 +45,13 @@ Instead of defining a free function <code>print</code> as the callback handler, 
 <span class="keyword">public</span>:
 </pre></div><p>
 The constructor of this class will take a reference to the demuxer object and use it when initialising the <code>timer_</code> member. The counter used to shut down the program is now also a member of the class.<p>
-<div class="fragment"><pre class="fragment">  printer(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a>&amp; d)
+<div class="fragment"><pre class="fragment">  printer(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html">asio::demuxer</a>&amp; d)
     : timer_(d, boost::posix_time::seconds(1)),
       count_(0)
   {
 </pre></div><p>
-The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a> function works just as well with class member functions as with free functions. Since all non-static class member functions have an implicit <code>this</code> parameter, we need to bind <code>this</code> to the function. As in tutorial Timer.3, <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a> converts our callback handler (now a member function) into a function object that can be invoked as though it has the signature <code>void(const <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp;)</code>.<p>
-You will note that the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a> placeholder is not specified here, as the <code>print</code> member function does not accept an error object as a parameter.<p>
+The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a> function works just as well with class member functions as with free functions. Since all non-static class member functions have an implicit <code>this</code> parameter, we need to bind <code>this</code> to the function. As in tutorial Timer.3, <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a> converts our callback handler (now a member function) into a function object that can be invoked as though it has the signature <code>void(const <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>&amp;)</code>.<p>
+You will note that the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a> placeholder is not specified here, as the <code>print</code> member function does not accept an error object as a parameter.<p>
 <div class="fragment"><pre class="fragment">    timer_.async_wait(boost::bind(&amp;printer::print, <span class="keyword">this</span>));
   }
 </pre></div><p>
@@ -77,7 +77,7 @@ The <code>print</code> member function is very similar to the <code>print</code>
   }
 
 <span class="keyword">private</span>:
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html">asio::deadline_timer</a> timer_;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00092.html">asio::deadline_timer</a> timer_;
   <span class="keywordtype">int</span> count_;
 };
 </pre></div><p>
@@ -85,9 +85,9 @@ The <code>main</code> function is much simpler than before, as it now declares a
 <div class="fragment"><pre class="fragment">
 <span class="keywordtype">int</span> main()
 {
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> d;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html">asio::demuxer</a> d;
   printer p(d);
-  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">run</a>();
+  d.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html#7fd10941fde8cdff606799b100207712">run</a>();
 
   <span class="keywordflow">return</span> 0;
 }
@@ -100,7 +100,7 @@ See the <a class="el" href="tuttimer4src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

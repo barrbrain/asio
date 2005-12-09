@@ -2,7 +2,7 @@
 // socket_holder.hpp
 // ~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -17,10 +17,7 @@
 
 #include "asio/detail/push_options.hpp"
 
-#include "asio/detail/push_options.hpp"
-#include <boost/noncopyable.hpp>
-#include "asio/detail/pop_options.hpp"
-
+#include "asio/detail/noncopyable.hpp"
 #include "asio/detail/socket_ops.hpp"
 
 namespace asio {
@@ -28,7 +25,7 @@ namespace detail {
 
 // Implement the resource acquisition is initialisation idiom for sockets.
 class socket_holder
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   // Construct as an uninitialised socket.

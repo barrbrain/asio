@@ -2,7 +2,7 @@
 // service_registry.hpp
 // ~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -18,19 +18,20 @@
 #include "asio/detail/push_options.hpp"
 
 #include "asio/detail/push_options.hpp"
+#include <memory>
 #include <typeinfo>
-#include <boost/noncopyable.hpp>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/service_factory.hpp"
 #include "asio/detail/mutex.hpp"
+#include "asio/detail/noncopyable.hpp"
 
 namespace asio {
 namespace detail {
 
 template <typename Owner>
 class service_registry
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   // Constructor.
@@ -67,27 +68,31 @@ public:
       {
         service_holder<Service>* typed_service =
           static_cast<service_holder<Service>*>(service);
-        return typed_service->get_service(factory, owner_);
+        return typed_service->service();
       }
       service = service->next_;
     }
 
-    // We need to create a new service object.
-    service_holder<Service>* new_service = new service_holder<Service>;
-    new_service->next_ = first_service_;
-    first_service_ = new_service;
-
-    // Release the lock to allow calls back into get_service from the new
+    // Create a new service object. The service registry's mutex is not locked
+    // at this time to allow for nested calls into this function from the new
     // service's constructor.
     lock.unlock();
+    std::auto_ptr<service_holder<Service> > new_service(
+        new service_holder<Service>(factory, owner_));
+    Service& new_service_ref = new_service->service();
+    lock.lock();
 
-    return new_service->get_service(factory, owner_);
+    // Service was successfully initialised, pass ownership to registry.
+    new_service->next_ = first_service_;
+    first_service_ = new_service.release();
+
+    return new_service_ref;
   }
 
 private:
   // The base holder for a single service.
   class service_holder_base
-    : private boost::noncopyable
+    : private noncopyable
   {
   public:
     // Constructor.
@@ -115,14 +120,13 @@ private:
   {
   public:
     // Constructor.
-    service_holder()
-      : mutex_(),
-        service_(0)
+    service_holder(service_factory<Service>& factory, Owner& owner)
+      : service_(factory.create(owner))
     {
     }
 
     // Destructor.
-    ~service_holder()
+    virtual ~service_holder()
     {
       delete service_;
     }
@@ -134,18 +138,12 @@ private:
     }
 
     // Get a pointer to the contained service.
-    Service& get_service(service_factory<Service>& factory, Owner& owner)
+    Service& service()
     {
-      asio::detail::mutex::scoped_lock lock(mutex_);
-      if (!service_)
-        service_ = factory.create(owner);
       return *service_;
     }
 
   private:
-    // Mutex to protect access to the contained service object.
-    asio::detail::mutex mutex_;
-
     // The contained service object.
     Service* service_;
   };

@@ -2,7 +2,7 @@
 // udp.hpp
 // ~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -16,6 +16,14 @@
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
 #include "asio/detail/push_options.hpp"
+
+#include "asio/detail/push_options.hpp"
+#include <boost/throw_exception.hpp>
+#include <boost/detail/workaround.hpp>
+#if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
+# include <iostream>
+#endif // BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
+#include "asio/detail/pop_options.hpp"
 
 #include "asio/error.hpp"
 #include "asio/ipv4/address.hpp"
@@ -166,7 +174,10 @@ public:
   void size(size_type size)
   {
     if (size != sizeof(addr_))
-      throw asio::error(asio::error::invalid_argument);
+    {
+      asio::error e(asio::error::invalid_argument);
+      boost::throw_exception(e);
+    }
   }
 
   /// Get the port associated with the endpoint. The port number is always in
@@ -236,14 +247,22 @@ private:
  *
  * @return The output stream.
  *
- * @relates tcp::endpoint
+ * @relates udp::endpoint
  */
+#if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
+std::ostream& operator<<(std::ostream& os, const udp::endpoint& endpoint)
+{
+  os << endpoint.address().to_string() << ':' << endpoint.port();
+  return os;
+}
+#else // BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
 template <typename Ostream>
 Ostream& operator<<(Ostream& os, const udp::endpoint& endpoint)
 {
   os << endpoint.address().to_string() << ':' << endpoint.port();
   return os;
 }
+#endif // BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
 
 } // namespace ipv4
 } // namespace asio

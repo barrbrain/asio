@@ -2,7 +2,7 @@
 // socket_ops.hpp
 // ~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -22,6 +22,7 @@
 #include <cstring>
 #include <cerrno>
 #include <vector>
+#include <boost/detail/workaround.hpp>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/error.hpp"
@@ -458,7 +459,10 @@ inline int select(int nfds, fd_set* readfds, fd_set* writefds,
 #if defined(BOOST_WINDOWS)
   if (!readfds && !writefds && !exceptfds && timeout)
   {
-    ::Sleep(timeout->tv_sec * 1000 + timeout->tv_usec / 1000);
+    DWORD milliseconds = timeout->tv_sec * 1000 + timeout->tv_usec / 1000;
+    if (milliseconds == 0)
+      milliseconds = 1; // Force context switch.
+    ::Sleep(milliseconds);
     return 0;
   }
 #endif // defined(BOOST_WINDOWS)
@@ -483,7 +487,7 @@ inline const char* inet_ntop(int af, const void* src, char* dest,
   if (addr_str)
   {
     *dest = '\0';
-#if defined(_MSC_VER) && (_MSC_VER >= 1400)
+#if BOOST_WORKAROUND(BOOST_MSVC, >= 1400)
     strncat_s(dest, length, addr_str, length);
 #else
     strncat(dest, addr_str, length);
@@ -558,6 +562,7 @@ inline int translate_netdb_error(int error)
   case NO_DATA:
     return asio::error::no_host_data;
   default:
+    BOOST_ASSERT(false);
     return get_error();
   }
 }

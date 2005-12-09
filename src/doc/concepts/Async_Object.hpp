@@ -2,7 +2,7 @@
 // Async_Object.hpp
 // ~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -10,6 +10,12 @@
 
 /// Asynchronous object concept.
 /**
+ * The asynchronous object concept provides callers with access to the demuxer
+ * used to dispatch handlers for asynchronous operations. This allows the
+ * asynchronous object's operations to be wrapped in a higher-level operation,
+ * such that the handler for the higher-level operation be dispatched through
+ * the correct demuxer.
+ *
  * @par Implemented By:
  * asio::basic_deadline_timer @n
  * asio::basic_datagram_socket @n

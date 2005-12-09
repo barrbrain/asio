@@ -2,7 +2,7 @@
 // demuxer_service.hpp
 // ~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -19,13 +19,13 @@
 
 #include "asio/detail/push_options.hpp"
 #include <memory>
-#include <boost/noncopyable.hpp>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/basic_demuxer.hpp"
 #include "asio/service_factory.hpp"
 #include "asio/detail/epoll_reactor.hpp"
 #include "asio/detail/kqueue_reactor.hpp"
+#include "asio/detail/noncopyable.hpp"
 #include "asio/detail/select_reactor.hpp"
 #include "asio/detail/task_demuxer_service.hpp"
 #include "asio/detail/win_iocp_demuxer_service.hpp"
@@ -35,7 +35,7 @@ namespace asio {
 /// Default service implementation for a demuxer.
 template <typename Allocator = std::allocator<void> >
 class demuxer_service
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   /// The demuxer type for this service.
@@ -74,7 +74,7 @@ public:
   }
 
   /// Return a copy of the allocator associated with the service.
-  Allocator get_allocator() const
+  allocator_type get_allocator() const
   {
     return allocator_;
   }

@@ -2,7 +2,7 @@
 // posix_tss_ptr.hpp
 // ~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -21,27 +21,33 @@
 #include <boost/config.hpp>
 #include "asio/detail/pop_options.hpp"
 
-#if !defined(BOOST_WINDOWS)
+#if defined(BOOST_HAS_PTHREADS)
 
 #include "asio/detail/push_options.hpp"
-#include <new>
+#include <boost/throw_exception.hpp>
 #include <pthread.h>
-#include <boost/noncopyable.hpp>
 #include "asio/detail/pop_options.hpp"
+
+#include "asio/system_exception.hpp"
+#include "asio/detail/noncopyable.hpp"
 
 namespace asio {
 namespace detail {
 
 template <typename T>
 class posix_tss_ptr
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   // Constructor.
   posix_tss_ptr()
   {
-    if (::pthread_key_create(&tss_key_, 0) != 0)
-      throw std::bad_alloc();
+    int error = ::pthread_key_create(&tss_key_, 0);
+    if (error != 0)
+    {
+      system_exception e("tss", error);
+      boost::throw_exception(e);
+    }
   }
 
   // Destructor.
@@ -71,7 +77,7 @@ private:
 } // namespace detail
 } // namespace asio
 
-#endif // !defined(BOOST_WINDOWS)
+#endif // defined(BOOST_HAS_PTHREADS)
 
 #include "asio/detail/pop_options.hpp"
 

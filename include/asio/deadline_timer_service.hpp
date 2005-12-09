@@ -2,7 +2,7 @@
 // deadline_timer_service.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -20,9 +20,10 @@
 #include "asio/detail/socket_types.hpp" // Must come before posix_time.
 
 #include "asio/detail/push_options.hpp"
+#include <cstddef>
 #include <memory>
+#include <boost/config.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
-#include <boost/noncopyable.hpp>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/basic_demuxer.hpp"
@@ -30,6 +31,7 @@
 #include "asio/time_traits.hpp"
 #include "asio/detail/epoll_reactor.hpp"
 #include "asio/detail/kqueue_reactor.hpp"
+#include "asio/detail/noncopyable.hpp"
 #include "asio/detail/select_reactor.hpp"
 #include "asio/detail/reactive_deadline_timer_service.hpp"
 #include "asio/detail/win_iocp_demuxer_service.hpp"
@@ -41,7 +43,7 @@ template <typename Time_Type = boost::posix_time::ptime,
     typename Time_Traits = asio::time_traits<Time_Type>,
     typename Allocator = std::allocator<void> >
 class deadline_timer_service
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   /// The demuxer type.
@@ -73,7 +75,7 @@ private:
 #endif
 
 public:
-  /// The native type of the socket acceptor.
+  /// The native type of the deadline timer.
 #if defined(GENERATING_DOCUMENTATION)
   typedef implementation_defined impl_type;
 #else
@@ -92,7 +94,7 @@ public:
     return service_impl_.demuxer();
   }
 
-  /// Return a null socket acceptor implementation.
+  /// Return a null timer implementation.
   impl_type null() const
   {
     return service_impl_.null();
@@ -135,7 +137,7 @@ public:
   }
 
   /// Cancel any asynchronous wait operations associated with the timer.
-  int cancel(impl_type& impl)
+  std::size_t cancel(impl_type& impl)
   {
     return service_impl_.cancel(impl);
   }

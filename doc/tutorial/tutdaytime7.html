@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -37,39 +37,39 @@ The main() function</a></h2>
 {
   <span class="keywordflow">try</span>
   {
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> demuxer;
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html">asio::demuxer</a> demuxer;
 </pre></div><p>
-We will begin by creating an <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">asio::stream_socket</a> object to hold an accepted TCP client connection.<p>
+We will begin by creating an <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">asio::stream_socket</a> object to hold an accepted TCP client connection.<p>
 <div class="fragment"><pre class="fragment">
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00094.html">asio::socket_acceptor</a> tcp_acceptor(demuxer,
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html">asio::ipv4::tcp::endpoint</a>(13));
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00097.html">asio::socket_acceptor</a> tcp_acceptor(demuxer,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00146.html">asio::ipv4::tcp::endpoint</a>(13));
 
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html">asio::stream_socket</a>* tcp_socket
-      = <span class="keyword">new</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">asio::stream_socket</a>(demuxer);
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00098.html">asio::stream_socket</a>* tcp_socket
+      = <span class="keyword">new</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">asio::stream_socket</a>(demuxer);
 
     tcp_acceptor.async_accept(*tcp_socket,
         boost::bind(handle_tcp_accept, &amp;tcp_acceptor, tcp_socket,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
 </pre></div><p>
-Now we need an <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#215e8e0f020fae339fbe58ccd74e0cba">asio::datagram_socket</a> object for UDP client requests.<p>
+Now we need an <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#215e8e0f020fae339fbe58ccd74e0cba">asio::datagram_socket</a> object for UDP client requests.<p>
 <div class="fragment"><pre class="fragment">
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00088.html">asio::datagram_socket</a> udp_socket(demuxer,
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00144.html">asio::ipv4::udp::endpoint</a>(13));
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00091.html">asio::datagram_socket</a> udp_socket(demuxer,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00150.html">asio::ipv4::udp::endpoint</a>(13));
 
     <span class="keywordtype">char</span> recv_buf[1];
     size_t recv_length = <span class="keyword">sizeof</span>(recv_buf);
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00144.html">asio::ipv4::udp::endpoint</a> remote_endpoint;
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00150.html">asio::ipv4::udp::endpoint</a> remote_endpoint;
 
     udp_socket.async_receive_from(
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00230.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(recv_buf, recv_length), 0, remote_endpoint,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00237.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(recv_buf, recv_length), 0, remote_endpoint,
         boost::bind(handle_udp_receive_from, &amp;udp_socket, recv_buf, recv_length,
-          &amp;remote_endpoint, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
+          &amp;remote_endpoint, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
 </pre></div><p>
 We have created two lots of work for the demuxer to do.<p>
 <div class="fragment"><pre class="fragment">
-    demuxer.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">run</a>();
+    demuxer.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html#7fd10941fde8cdff606799b100207712">run</a>();
   }
-  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; e)
+  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>&amp; e)
   {
     std::cerr &lt;&lt; e &lt;&lt; std::endl;
   }
@@ -79,8 +79,8 @@ We have created two lots of work for the demuxer to do.<p>
 </pre></div><h2><a class="anchor" name="tutdaytime7funchandle_tcp">
 The handle_tcp_accept() and handle_tcp_write() functions</a></h2>
 The following two functions are identical to the <code>handle_accept()</code> and <code>handle_write()</code> from the tutorial Daytime.3.<p>
- <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_tcp_accept(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00094.html">asio::socket_acceptor</a>* acceptor,
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html">asio::stream_socket</a>* socket, <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; error)
+ <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_tcp_accept(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00097.html">asio::socket_acceptor</a>* acceptor,
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00098.html">asio::stream_socket</a>* socket, <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>&amp; error)
 {
   <span class="keywordflow">if</span> (!error)
   {
@@ -89,15 +89,15 @@ The following two functions are identical to the <code>handle_accept()</code> an
     <span class="keywordtype">char</span>* write_buf = strdup(ctime(&amp;now));
     size_t write_length = strlen(write_buf);
 
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00236.html#d7163fe4138ff3d02ff4a394fafae365">asio::async_write</a>(*socket,
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00230.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(write_buf, write_length),
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00243.html#d7163fe4138ff3d02ff4a394fafae365">asio::async_write</a>(*socket,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00237.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(write_buf, write_length),
         boost::bind(handle_tcp_write, socket, write_buf));
 
-    socket = <span class="keyword">new</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">asio::stream_socket</a>(acceptor-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00094.html#6afeb5e9a5b1a4fbbc83e784e9d07a99">demuxer</a>());
+    socket = <span class="keyword">new</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">asio::stream_socket</a>(acceptor-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00097.html#6afeb5e9a5b1a4fbbc83e784e9d07a99">demuxer</a>());
 
-    acceptor-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00094.html#9a5542910afa53ecbb94b31115de053a">async_accept</a>(*socket,
+    acceptor-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00097.html#9a5542910afa53ecbb94b31115de053a">async_accept</a>(*socket,
         boost::bind(handle_tcp_accept, acceptor, socket,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
   }
   <span class="keywordflow">else</span>
   {
@@ -105,7 +105,7 @@ The following two functions are identical to the <code>handle_accept()</code> an
   }
 }
 </pre></div><p>
- <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_tcp_write(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html">asio::stream_socket</a>* socket, <span class="keywordtype">char</span>* write_buf)
+ <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_tcp_write(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00098.html">asio::stream_socket</a>* socket, <span class="keywordtype">char</span>* write_buf)
 {
   <span class="keyword">using namespace </span>std; <span class="comment">// For free.</span>
   free(write_buf);
@@ -114,26 +114,26 @@ The following two functions are identical to the <code>handle_accept()</code> an
 </pre></div><h2><a class="anchor" name="tutdaytime7funchandle_udp">
 The handle_udp_receive_from() and handle_udp_send_to() functions</a></h2>
 Similarly, these next two functions are identical to the <code>handle_receive_from()</code> and <code>handle_send_to()</code> functions from the tutorial Daytime.6.<p>
- <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_udp_receive_from(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00088.html">asio::datagram_socket</a>* socket,
+ <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_udp_receive_from(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00091.html">asio::datagram_socket</a>* socket,
     <span class="keywordtype">char</span>* recv_buf, size_t recv_length,
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00144.html">asio::ipv4::udp::endpoint</a>* remote_endpoint,
-    <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; error)
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00150.html">asio::ipv4::udp::endpoint</a>* remote_endpoint,
+    <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>&amp; error)
 {
-  <span class="keywordflow">if</span> (!error || error == <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html#de5f4bc2f8a4690176e22e83196b9fd3">asio::error::message_size</a>)
+  <span class="keywordflow">if</span> (!error || error == <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#de5f4bc2f8a4690176e22e83196b9fd3">asio::error::message_size</a>)
   {
     <span class="keyword">using namespace </span>std; <span class="comment">// For time_t, time, ctime, strdup and strlen.</span>
     time_t now = time(0);
     <span class="keywordtype">char</span>* send_buf = strdup(ctime(&amp;now));
     size_t send_length = strlen(send_buf);
 
-    socket-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00088.html#89ce1cac628d3c1a4d3a14be0b74b8a1">async_send_to</a>(
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00230.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(send_buf, send_length), 0, *remote_endpoint,
+    socket-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00091.html#89ce1cac628d3c1a4d3a14be0b74b8a1">async_send_to</a>(
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00237.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(send_buf, send_length), 0, *remote_endpoint,
         boost::bind(handle_udp_send_to, send_buf));
 
-    socket-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00088.html#f2f3831201a148c263f86af81b72287d">async_receive_from</a>(
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00230.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(recv_buf, recv_length), 0, *remote_endpoint,
+    socket-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00091.html#f2f3831201a148c263f86af81b72287d">async_receive_from</a>(
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00237.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(recv_buf, recv_length), 0, *remote_endpoint,
         boost::bind(handle_udp_receive_from, socket, recv_buf, recv_length,
-          remote_endpoint, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
+          remote_endpoint, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
   }
 }
 </pre></div><p>
@@ -149,7 +149,7 @@ See the <a class="el" href="tutdaytime7src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

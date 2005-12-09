@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -36,23 +36,23 @@
 We start by including the necessary header files.<p>
 All of the asio classes can be used by simply including the <code>"asio.hpp"</code> header file.<p>
 <div class="fragment"><pre class="fragment"><span class="preprocessor">#include &lt;iostream&gt;</span>
-<span class="preprocessor">#include "asio.hpp"</span>
+<span class="preprocessor">#include &lt;asio.hpp&gt;</span>
 </pre></div><p>
 Since this example users timers, we need to include the appropriate Boost.Date_Time header file for manipulating times.<p>
-<div class="fragment"><pre class="fragment"><span class="preprocessor">#include "boost/date_time/posix_time/posix_time.hpp"</span>
+<div class="fragment"><pre class="fragment"><span class="preprocessor">#include &lt;boost/date_time/posix_time/posix_time.hpp&gt;</span>
 </pre></div><p>
-All programs that use asio need to have at least one <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#67d5317ccbb1bb5e0076e27a2b73c9b7">asio::demuxer</a> object. This class provides access to the event demultiplexing functionality. We declare an object of this type first thing in the main function.<p>
+All programs that use asio need to have at least one <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#67d5317ccbb1bb5e0076e27a2b73c9b7">asio::demuxer</a> object. This class provides access to the event demultiplexing functionality. We declare an object of this type first thing in the main function.<p>
 <div class="fragment"><pre class="fragment">
 <span class="keywordtype">int</span> main()
 {
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> d;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html">asio::demuxer</a> d;
 </pre></div><p>
-Next we declare an object of type <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#e6447142de4630fb97081cdf737aca0e">asio::deadline_timer</a>. The core asio classes that provide I/O functionality (or as in this case timer functionality) always take a reference to a demuxer as their first constructor argument. The second argument to the constructor sets the timer to expire 5 seconds from now.<p>
+Next we declare an object of type <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#e6447142de4630fb97081cdf737aca0e">asio::deadline_timer</a>. The core asio classes that provide I/O functionality (or as in this case timer functionality) always take a reference to a demuxer as their first constructor argument. The second argument to the constructor sets the timer to expire 5 seconds from now.<p>
 <div class="fragment"><pre class="fragment">
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html">asio::deadline_timer</a> t(d, boost::posix_time::seconds(5));
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00092.html">asio::deadline_timer</a> t(d, boost::posix_time::seconds(5));
 </pre></div><p>
-In this simple example we perform a blocking wait on the timer. That is, the call to <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#336cddbc74e58a525f92456de97e551b">asio::deadline_timer::wait()</a> will not return until the timer has expired, 5 seconds after it was created (i.e. <b>not</b> from when the wait starts).<p>
-A deadline timer is always in one of two states: "expired" or "not expired". If the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00089.html#336cddbc74e58a525f92456de97e551b">asio::deadline_timer::wait()</a> function is called on an expired timer, it will return immediately.<p>
+In this simple example we perform a blocking wait on the timer. That is, the call to <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00092.html#336cddbc74e58a525f92456de97e551b">asio::deadline_timer::wait()</a> will not return until the timer has expired, 5 seconds after it was created (i.e. <b>not</b> from when the wait starts).<p>
+A deadline timer is always in one of two states: "expired" or "not expired". If the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00092.html#336cddbc74e58a525f92456de97e551b">asio::deadline_timer::wait()</a> function is called on an expired timer, it will return immediately.<p>
 <div class="fragment"><pre class="fragment">  t.wait();
 </pre></div><p>
 Finally we print the obligatory <code>"Hello, world!"</code> message to show when the timer has expired.<p>
@@ -68,7 +68,7 @@ See the <a class="el" href="tuttimer1src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

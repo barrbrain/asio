@@ -24,14 +24,12 @@ noinst_PROGRAMS = \
 	tests/unit/demuxer_test \
 	tests/unit/error_handler_test \
 	tests/unit/error_test \
-	tests/unit/io_control_test \
 	tests/unit/ipv4/address_test \
 	tests/unit/ipv4/basic_host_resolver_test \
 	tests/unit/ipv4/host_resolver_service_test \
 	tests/unit/ipv4/host_resolver_test \
 	tests/unit/ipv4/host_test \
 	tests/unit/ipv4/multicast_test \
-	tests/unit/ipv4/socket_option_test \
 	tests/unit/ipv4/tcp_test \
 	tests/unit/ipv4/udp_test \
 	tests/unit/is_read_buffered_test \
@@ -44,7 +42,6 @@ noinst_PROGRAMS = \
 	tests/unit/socket_acceptor_service_test \
 	tests/unit/socket_acceptor_test \
 	tests/unit/socket_base_test \
-	tests/unit/socket_option_test \
 	tests/unit/stream_socket_service_test \
 	tests/unit/stream_socket_test \
 	tests/unit/thread_test \
@@ -62,6 +59,7 @@ noinst_PROGRAMS = \
 	examples/iostreams/daytime_client \
 	examples/multicast/receiver \
 	examples/multicast/sender \
+	examples/services/daytime_client \
 	examples/timeouts/accept_timeout \
 	examples/timeouts/connect_timeout \
 	examples/timeouts/datagram_receive_timeout \
@@ -114,14 +112,12 @@ TESTS = \
 	tests/unit/demuxer_test \
 	tests/unit/error_handler_test \
 	tests/unit/error_test \
-	tests/unit/io_control_test \
 	tests/unit/ipv4/address_test \
 	tests/unit/ipv4/basic_host_resolver_test \
 	tests/unit/ipv4/host_resolver_service_test \
 	tests/unit/ipv4/host_resolver_test \
 	tests/unit/ipv4/host_test \
 	tests/unit/ipv4/multicast_test \
-	tests/unit/ipv4/socket_option_test \
 	tests/unit/ipv4/tcp_test \
 	tests/unit/ipv4/udp_test \
 	tests/unit/is_read_buffered_test \
@@ -134,7 +130,6 @@ TESTS = \
 	tests/unit/socket_acceptor_service_test \
 	tests/unit/socket_acceptor_test \
 	tests/unit/socket_base_test \
-	tests/unit/socket_option_test \
 	tests/unit/stream_socket_service_test \
 	tests/unit/stream_socket_test \
 	tests/unit/thread_test \
@@ -157,7 +152,11 @@ endif
 noinst_HEADERS = \
 	tests/unit/unit_test.hpp \
 	examples/chat/chat_message.hpp \
-	examples/iostreams/socket_stream.hpp
+	examples/iostreams/socket_stream.hpp \
+	examples/services/basic_logger.hpp \
+	examples/services/logger.hpp \
+	examples/services/logger_service.hpp \
+	examples/services/stream_socket_service.hpp
 
 AM_CXXFLAGS = -I$(srcdir)/../include
 
@@ -170,7 +169,6 @@ tests_unit_ipv4_host_resolver_service_test_SOURCES = tests/unit/ipv4/host_resolv
 tests_unit_ipv4_host_resolver_test_SOURCES = tests/unit/ipv4/host_resolver_test.cpp
 tests_unit_ipv4_host_test_SOURCES = tests/unit/ipv4/host_test.cpp
 tests_unit_ipv4_multicast_test_SOURCES = tests/unit/ipv4/multicast_test.cpp
-tests_unit_ipv4_socket_option_test_SOURCES = tests/unit/ipv4/socket_option_test.cpp
 tests_unit_ipv4_tcp_test_SOURCES = tests/unit/ipv4/tcp_test.cpp
 tests_unit_ipv4_udp_test_SOURCES = tests/unit/ipv4/udp_test.cpp
 tests_unit_locking_dispatcher_test_SOURCES = tests/unit/locking_dispatcher_test.cpp
@@ -197,13 +195,11 @@ tests_unit_datagram_socket_service_test_SOURCES = tests/unit/datagram_socket_ser
 tests_unit_deadline_timer_service_test_SOURCES = tests/unit/deadline_timer_service_test.cpp
 tests_unit_demuxer_service_test_SOURCES = tests/unit/demuxer_service_test.cpp
 tests_unit_error_test_SOURCES = tests/unit/error_test.cpp
-tests_unit_io_control_test_SOURCES = tests/unit/io_control_test.cpp
 tests_unit_locking_dispatcher_service_test_SOURCES = tests/unit/locking_dispatcher_service_test.cpp
 tests_unit_placeholders_test_SOURCES = tests/unit/placeholders_test.cpp
 tests_unit_service_factory_test_SOURCES = tests/unit/service_factory_test.cpp
 tests_unit_socket_acceptor_service_test_SOURCES = tests/unit/socket_acceptor_service_test.cpp
 tests_unit_socket_base_test_SOURCES = tests/unit/socket_base_test.cpp
-tests_unit_socket_option_test_SOURCES = tests/unit/socket_option_test.cpp
 tests_unit_stream_socket_service_test_SOURCES = tests/unit/stream_socket_service_test.cpp
 tests_unit_stream_socket_test_SOURCES = tests/unit/stream_socket_test.cpp
 tests_unit_thread_test_SOURCES = tests/unit/thread_test.cpp
@@ -228,6 +224,7 @@ examples_http_server_http_server_SOURCES = \
 examples_iostreams_daytime_client_SOURCES = examples/iostreams/daytime_client.cpp
 examples_multicast_receiver_SOURCES = examples/multicast/receiver.cpp
 examples_multicast_sender_SOURCES = examples/multicast/sender.cpp
+examples_services_daytime_client_SOURCES = examples/services/daytime_client.cpp
 examples_timeouts_accept_timeout_SOURCES = examples/timeouts/accept_timeout.cpp
 examples_timeouts_connect_timeout_SOURCES = examples/timeouts/connect_timeout.cpp
 examples_timeouts_datagram_receive_timeout_SOURCES = examples/timeouts/datagram_receive_timeout.cpp
@@ -273,6 +270,10 @@ EXTRA_DIST = \
 	examples/http/server/request_parser.hpp \
 	examples/http/server/server.hpp \
 	examples/http/server/win_main.cpp \
+	examples/serialization/client.cpp \
+	examples/serialization/server.cpp \
+	examples/serialization/connection.hpp \
+	examples/serialization/stock.hpp \
 	examples/ssl/README \
 	examples/ssl/ca.pem \
 	examples/ssl/server.pem \

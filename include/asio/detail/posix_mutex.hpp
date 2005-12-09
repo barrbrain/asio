@@ -2,7 +2,7 @@
 // posix_mutex.hpp
 // ~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -21,20 +21,22 @@
 #include <boost/config.hpp>
 #include "asio/detail/pop_options.hpp"
 
-#if !defined(BOOST_WINDOWS)
+#if defined(BOOST_HAS_PTHREADS)
 
 #include "asio/detail/push_options.hpp"
-#include <boost/noncopyable.hpp>
+#include <boost/throw_exception.hpp>
 #include <pthread.h>
 #include "asio/detail/pop_options.hpp"
 
+#include "asio/system_exception.hpp"
+#include "asio/detail/noncopyable.hpp"
 #include "asio/detail/scoped_lock.hpp"
 
 namespace asio {
 namespace detail {
 
 class posix_mutex
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   typedef asio::detail::scoped_lock<posix_mutex> scoped_lock;
@@ -42,7 +44,12 @@ public:
   // Constructor.
   posix_mutex()
   {
-    ::pthread_mutex_init(&mutex_, 0);
+    int error = ::pthread_mutex_init(&mutex_, 0);
+    if (error != 0)
+    {
+      system_exception e("mutex", error);
+      boost::throw_exception(e);
+    }
   }
 
   // Destructor.
@@ -54,13 +61,23 @@ public:
   // Lock the mutex.
   void lock()
   {
-    ::pthread_mutex_lock(&mutex_);
+    int error = ::pthread_mutex_lock(&mutex_);
+    if (error != 0)
+    {
+      system_exception e("mutex", error);
+      boost::throw_exception(e);
+    }
   }
 
   // Unlock the mutex.
   void unlock()
   {
-    ::pthread_mutex_unlock(&mutex_);
+    int error = ::pthread_mutex_unlock(&mutex_);
+    if (error != 0)
+    {
+      system_exception e("mutex", error);
+      boost::throw_exception(e);
+    }
   }
 
 private:
@@ -70,7 +87,7 @@ private:
 } // namespace detail
 } // namespace asio
 
-#endif // !defined(BOOST_WINDOWS)
+#endif // defined(BOOST_HAS_PTHREADS)
 
 #include "asio/detail/pop_options.hpp"
 

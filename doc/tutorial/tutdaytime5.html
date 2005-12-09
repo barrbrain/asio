@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -36,26 +36,54 @@
 <div class="fragment"><pre class="fragment"><span class="preprocessor">#include &lt;ctime&gt;</span>
 <span class="preprocessor">#include &lt;iostream&gt;</span>
 <span class="preprocessor">#include &lt;string&gt;</span>
-<span class="preprocessor">#include "asio.hpp"</span>
+<span class="preprocessor">#include &lt;asio.hpp&gt;</span>
 
 <span class="keywordtype">int</span> main()
 {
   <span class="keywordflow">try</span>
   {
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> demuxer;
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html">asio::demuxer</a> demuxer;
 </pre></div><p>
-Create an <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#215e8e0f020fae339fbe58ccd74e0cba">asio::datagram_socket</a> object to receive requests on UDP port 13.<p>
+Create an <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#215e8e0f020fae339fbe58ccd74e0cba">asio::datagram_socket</a> object to receive requests on UDP port 13.<p>
 <div class="fragment"><pre class="fragment">
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00088.html">asio::datagram_socket</a> socket(demuxer,
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00091.html">asio::datagram_socket</a> socket(demuxer,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00150.html">asio::ipv4::udp::endpoint</a>(13));
 </pre></div><p>
-Wait for a client to initiate contact with us. The remote_endpoint object will be populated by <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00088.html#2faae3ceb919775123378ff378441728">asio::datagram_socket::receive_from()</a>.<p>
-<div class="fragment"><pre class="fragment"></pre></div><p>
+Wait for a client to initiate contact with us. The remote_endpoint object will be populated by <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00091.html#2faae3ceb919775123378ff378441728">asio::datagram_socket::receive_from()</a>.<p>
+<div class="fragment"><pre class="fragment">
+    <span class="keywordflow">for</span> (;;)
+    {
+      <span class="keywordtype">char</span> recv_buf[1];
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00150.html">asio::ipv4::udp::endpoint</a> remote_endpoint;
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a> error;
+      socket.receive_from(
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00237.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(recv_buf, <span class="keyword">sizeof</span>(recv_buf)),
+          0, remote_endpoint, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00239.html#6b246ec0bcb3c737dcd04e83348135cd">asio::assign_error</a>(error));
+      <span class="keywordflow">if</span> (error &amp;&amp; error != <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#de5f4bc2f8a4690176e22e83196b9fd3">asio::error::message_size</a>)
+        <span class="keywordflow">throw</span> error;
+</pre></div><p>
 Determine what we are going to send back to the client.<p>
-<div class="fragment"><pre class="fragment"></pre></div><p>
+<div class="fragment"><pre class="fragment">
+      <span class="keyword">using namespace </span>std; <span class="comment">// For time_t, time and ctime.</span>
+      time_t now = time(0);
+      std::string msg = ctime(&amp;now);
+</pre></div><p>
 Send the response to the remote_endpoint.<p>
-<div class="fragment"><pre class="fragment"></pre></div><p>
+<div class="fragment"><pre class="fragment">
+      socket.send_to(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00237.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(msg.c_str(), msg.length()),
+          0, remote_endpoint, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00239.html#9bcebec2b0b4b2a14f4bc7e35df2b8b4">asio::ignore_error</a>());
+    }
+  }
+</pre></div><p>
 Finally, handle any exceptions.<p>
-<div class="fragment"><pre class="fragment"></pre></div><p>
+<div class="fragment"><pre class="fragment">  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>&amp; e)
+  {
+    std::cerr &lt;&lt; e &lt;&lt; std::endl;
+  }
+
+  <span class="keywordflow">return</span> 0;
+}
+</pre></div><p>
 See the <a class="el" href="tutdaytime5src.html">full source listing</a> <br>
  Return to the <a class="el" href="index.html#index">tutorial index</a> <br>
  Previous: <a class="el" href="tutdaytime4.html">Daytime.4 - A synchronous UDP daytime client</a> <br>
@@ -63,7 +91,7 @@ See the <a class="el" href="tutdaytime5src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

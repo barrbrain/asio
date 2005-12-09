@@ -1,5 +1,5 @@
 !ifndef BOOSTDIR
-BOOSTDIR = ../../boost_1_33_0
+BOOSTDIR = ../../boost_1_33_1
 !endif
 
 COMMON_CXXFLAGS = -nologo -EHac -GR -MT -I. -I../include -I$(BOOSTDIR)
@@ -60,14 +60,12 @@ UNIT_TEST_EXES = \
 	tests\unit\demuxer_test.exe \
 	tests\unit\error_handler_test.exe \
 	tests\unit\error_test.exe \
-	tests\unit\io_control_test.exe \
 	tests\unit\ipv4\address_test.exe \
 	tests\unit\ipv4\basic_host_resolver_test.exe \
 	tests\unit\ipv4\host_resolver_service_test.exe \
 	tests\unit\ipv4\host_resolver_test.exe \
 	tests\unit\ipv4\host_test.exe \
 	tests\unit\ipv4\multicast_test.exe \
-	tests\unit\ipv4\socket_option_test.exe \
 	tests\unit\ipv4\tcp_test.exe \
 	tests\unit\ipv4\udp_test.exe \
 	tests\unit\is_read_buffered_test.exe \
@@ -80,7 +78,6 @@ UNIT_TEST_EXES = \
 	tests\unit\socket_acceptor_service_test.exe \
 	tests\unit\socket_acceptor_test.exe \
 	tests\unit\socket_base_test.exe \
-	tests\unit\socket_option_test.exe \
 	tests\unit\stream_socket_service_test.exe \
 	tests\unit\stream_socket_test.exe \
 	tests\unit\thread_test.exe \

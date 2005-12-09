@@ -2,7 +2,7 @@
 // buffered_stream_storage.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -39,9 +39,9 @@ public:
 
   // Constructor.
   explicit buffered_stream_storage(std::size_t capacity)
-    : buffer_(capacity),
-      begin_offset_(0),
-      end_offset_(0)
+    : begin_offset_(0),
+      end_offset_(0),
+      buffer_(capacity)
   {
   }
 
@@ -109,14 +109,14 @@ public:
   }
 
 private:
-  // The data in the buffer.
-  std::vector<byte_type> buffer_;
-
   // The offset to the beginning of the unread data.
   size_type begin_offset_;
 
   // The offset to the end of the unread data.
   size_type end_offset_;
+  
+  // The data in the buffer.
+  std::vector<byte_type> buffer_;
 };
 
 } // namespace detail

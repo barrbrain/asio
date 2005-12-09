@@ -2,7 +2,7 @@
 // thread.hpp
 // ~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -17,10 +17,7 @@
 
 #include "asio/detail/push_options.hpp"
 
-#include "asio/detail/push_options.hpp"
-#include <boost/noncopyable.hpp>
-#include "asio/detail/pop_options.hpp"
-
+#include "asio/detail/noncopyable.hpp"
 #include "asio/detail/thread.hpp"
 
 namespace asio {
@@ -48,7 +45,7 @@ namespace asio {
  * t.join(); @endcode
  */
 class thread
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   /// Start a new thread that executes the supplied function.
@@ -57,7 +54,7 @@ public:
    * or function object.
    *
    * @param f The function or function object to be run in the thread. The
-   * equivalent function signature must be: @code void f(); @endcode
+   * function signature must be: @code void f(); @endcode
    */
   template <typename Function>
   explicit thread(Function f)

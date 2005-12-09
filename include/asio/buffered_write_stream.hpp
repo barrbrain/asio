@@ -2,7 +2,7 @@
 // buffered_write_stream.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -21,7 +21,6 @@
 #include <cstddef>
 #include <cstring>
 #include <boost/config.hpp>
-#include <boost/noncopyable.hpp>
 #include <boost/type_traits.hpp>
 #include "asio/detail/pop_options.hpp"
 
@@ -32,6 +31,7 @@
 #include "asio/write.hpp"
 #include "asio/detail/bind_handler.hpp"
 #include "asio/detail/buffered_stream_storage.hpp"
+#include "asio/detail/noncopyable.hpp"
 
 namespace asio {
 
@@ -50,7 +50,7 @@ namespace asio {
  */
 template <typename Stream>
 class buffered_write_stream
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   /// The type of the next layer.

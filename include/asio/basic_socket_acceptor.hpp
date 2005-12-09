@@ -2,7 +2,7 @@
 // basic_socket_acceptor.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -17,16 +17,11 @@
 
 #include "asio/detail/push_options.hpp"
 
-#include "asio/detail/push_options.hpp"
-#include <boost/noncopyable.hpp>
-#include "asio/detail/pop_options.hpp"
-
-#include "asio/basic_datagram_socket.hpp"
-#include "asio/basic_stream_socket.hpp"
 #include "asio/error.hpp"
 #include "asio/error_handler.hpp"
 #include "asio/service_factory.hpp"
 #include "asio/socket_base.hpp"
+#include "asio/detail/noncopyable.hpp"
 
 namespace asio {
 
@@ -43,11 +38,22 @@ namespace asio {
  *
  * @par Concepts:
  * Async_Object, Error_Source.
+ *
+ * @par Example:
+ * Opening a socket acceptor with the SO_REUSEADDR option enabled:
+ * @code
+ * asio::socket_acceptor acceptor(demuxer);
+ * asio::ipv4::tcp::endpoint endpoint(port);
+ * acceptor.open(endpoint.protocol());
+ * acceptor.set_option(asio::socket_acceptor::reuse_address(true));
+ * acceptor.bind(endpoint);
+ * acceptor.listen();
+ * @endcode
  */
 template <typename Service>
 class basic_socket_acceptor
   : public socket_base,
-    private boost::noncopyable
+    private noncopyable
 {
 public:
   /// The type of the service that will be used to provide accept operations.
@@ -108,8 +114,10 @@ public:
       impl_(service_.null())
   {
     service_.open(impl_, endpoint.protocol(), throw_error());
+    close_on_block_exit auto_close(service_, impl_);
     service_.bind(impl_, endpoint, throw_error());
     service_.listen(impl_, listen_backlog, throw_error());
+    auto_close.cancel();
   }
 
   /// Destructor.
@@ -137,6 +145,12 @@ public:
    * protocol.
    *
    * @param protocol An object specifying which protocol is to be used.
+   *
+   * @par Example:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * acceptor.open(asio::ipv4::tcp());
+   * @endcode
    */
   template <typename Protocol>
   void open(const Protocol& protocol)
@@ -152,11 +166,22 @@ public:
    * @param protocol An object specifying which protocol is to be used.
    *
    * @param error_handler The handler to be called when an error occurs. Copies
-   * will be made of the handler as required. The equivalent function signature
-   * of the handler must be:
+   * will be made of the handler as required. The function signature of the
+   * handler must be:
    * @code void error_handler(
    *   const asio::error& error // Result of operation
    * ); @endcode
+   *
+   * @par Example:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * asio::error error;
+   * acceptor.open(asio::ipv4::tcp(), asio::assign_error(error));
+   * if (error)
+   * {
+   *   // An error occurred.
+   * }
+   * @endcode
    */
   template <typename Protocol, typename Error_Handler>
   void open(const Protocol& protocol, Error_Handler error_handler)
@@ -173,6 +198,13 @@ public:
    * acceptor will be bound.
    *
    * @throws asio::error Thrown on failure.
+   *
+   * @par Example:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * acceptor.open(asio::ipv4::tcp());
+   * acceptor.bind(asio::ipv4::tcp::endpoint(12345));
+   * @endcode
    */
   template <typename Endpoint>
   void bind(const Endpoint& endpoint)
@@ -189,11 +221,24 @@ public:
    * acceptor will be bound.
    *
    * @param error_handler The handler to be called when an error occurs. Copies
-   * will be made of the handler as required. The equivalent function signature
-   * of the handler must be:
+   * will be made of the handler as required. The function signature of the
+   * handler must be:
    * @code void error_handler(
    *   const asio::error& error // Result of operation
    * ); @endcode
+   *
+   * @par Example:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * acceptor.open(asio::ipv4::tcp());
+   * asio::error error;
+   * acceptor.bind(asio::ipv4::tcp::endpoint(12345),
+   *     asio::assign_error(error));
+   * if (error)
+   * {
+   *   // An error occurred.
+   * }
+   * @endcode
    */
   template <typename Endpoint, typename Error_Handler>
   void bind(const Endpoint& endpoint, Error_Handler error_handler)
@@ -225,11 +270,23 @@ public:
    * value of 0 means use the default queue length.
    *
    * @param error_handler The handler to be called when an error occurs. Copies
-   * will be made of the handler as required. The equivalent function signature
-   * of the handler must be:
+   * will be made of the handler as required. The function signature of the
+   * handler must be:
    * @code void error_handler(
    *   const asio::error& error // Result of operation
    * ); @endcode
+   *
+   * @par Example:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * ...
+   * asio::error error;
+   * acceptor.listen(0, asio::assign_error(error));
+   * if (error)
+   * {
+   *   // An error occurred.
+   * }
+   * @endcode
    */
   template <typename Error_Handler>
   void listen(int backlog, Error_Handler error_handler)
@@ -261,11 +318,23 @@ public:
    * used to again perform socket accept operations.
    *
    * @param error_handler The handler to be called when an error occurs. Copies
-   * will be made of the handler as required. The equivalent function signature
-   * of the handler must be:
+   * will be made of the handler as required. The function signature of the
+   * handler must be:
    * @code void error_handler(
    *   const asio::error& error // Result of operation
    * ); @endcode
+   *
+   * @par Example:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * ...
+   * asio::error error;
+   * acceptor.close(asio::assign_error(error));
+   * if (error)
+   * {
+   *   // An error occurred.
+   * }
+   * @endcode
    */
   template <typename Error_Handler>
   void close(Error_Handler error_handler)
@@ -291,6 +360,18 @@ public:
    * @param option The new option value to be set on the acceptor.
    *
    * @throws asio::error Thrown on failure.
+   *
+   * @sa Socket_Option @n
+   * asio::socket_base::reuse_address
+   *
+   * @par Example:
+   * Setting the SOL_SOCKET/SO_REUSEADDR option:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * ...
+   * asio::socket_acceptor::reuse_address option(true);
+   * acceptor.set_option(option);
+   * @endcode
    */
   template <typename Option>
   void set_option(const Option& option)
@@ -305,11 +386,28 @@ public:
    * @param option The new option value to be set on the acceptor.
    *
    * @param error_handler The handler to be called when an error occurs. Copies
-   * will be made of the handler as required. The equivalent function signature
-   * of the handler must be:
+   * will be made of the handler as required. The function signature of the
+   * handler must be:
    * @code void error_handler(
    *   const asio::error& error // Result of operation
    * ); @endcode
+   *
+   * @sa Socket_Option @n
+   * asio::socket_base::reuse_address
+   *
+   * @par Example:
+   * Setting the SOL_SOCKET/SO_REUSEADDR option:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * ...
+   * asio::socket_acceptor::reuse_address option(true);
+   * asio::error error;
+   * acceptor.set_option(option, asio::assign_error(error));
+   * if (error)
+   * {
+   *   // An error occurred.
+   * }
+   * @endcode
    */
   template <typename Option, typename Error_Handler>
   void set_option(const Option& option, Error_Handler error_handler)
@@ -325,6 +423,19 @@ public:
    * @param option The option value to be obtained from the acceptor.
    *
    * @throws asio::error Thrown on failure.
+   *
+   * @sa Socket_Option @n
+   * asio::socket_base::reuse_address
+   *
+   * @par Example:
+   * Getting the value of the SOL_SOCKET/SO_REUSEADDR option:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * ...
+   * asio::socket_acceptor::reuse_address option;
+   * acceptor.get_option(option);
+   * bool is_set = option.get();
+   * @endcode
    */
   template <typename Option>
   void get_option(Option& option)
@@ -340,11 +451,29 @@ public:
    * @param option The option value to be obtained from the acceptor.
    *
    * @param error_handler The handler to be called when an error occurs. Copies
-   * will be made of the handler as required. The equivalent function signature
-   * of the handler must be:
+   * will be made of the handler as required. The function signature of the
+   * handler must be:
    * @code void error_handler(
    *   const asio::error& error // Result of operation
    * ); @endcode
+   *
+   * @sa Socket_Option @n
+   * asio::socket_base::reuse_address
+   *
+   * @par Example:
+   * Getting the value of the SOL_SOCKET/SO_REUSEADDR option:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * ...
+   * asio::socket_acceptor::reuse_address option;
+   * asio::error error;
+   * acceptor.get_option(option, asio::assign_error(error));
+   * if (error)
+   * {
+   *   // An error occurred.
+   * }
+   * bool is_set = option.get();
+   * @endcode
    */
   template <typename Option, typename Error_Handler>
   void get_option(Option& option, Error_Handler error_handler)
@@ -361,6 +490,14 @@ public:
    * acceptor.
    *
    * @throws asio::error Thrown on failure.
+   *
+   * @par Example:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * ...
+   * asio::ipv4::tcp::endpoint endpoint;
+   * acceptor.get_local_endpoint(endpoint);
+   * @endcode
    */
   template <typename Endpoint>
   void get_local_endpoint(Endpoint& endpoint)
@@ -377,11 +514,24 @@ public:
    * acceptor.
    *
    * @param error_handler The handler to be called when an error occurs. Copies
-   * will be made of the handler as required. The equivalent function signature
-   * of the handler must be:
+   * will be made of the handler as required. The function signature of the
+   * handler must be:
    * @code void error_handler(
    *   const asio::error& error // Result of operation
    * ); @endcode
+   *
+   * @par Example:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * ...
+   * asio::ipv4::tcp::endpoint endpoint;
+   * asio::error error;
+   * acceptor.get_local_endpoint(endpoint, asio::assign_error(error));
+   * if (error)
+   * {
+   *   // An error occurred.
+   * }
+   * @endcode
    */
   template <typename Endpoint, typename Error_Handler>
   void get_local_endpoint(Endpoint& endpoint, Error_Handler error_handler)
@@ -398,6 +548,14 @@ public:
    * @param peer The socket into which the new connection will be accepted.
    *
    * @throws asio::error Thrown on failure.
+   *
+   * @par Example:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * ...
+   * asio::stream_socket socket;
+   * acceptor.accept(socket);
+   * @endcode
    */
   template <typename Socket>
   void accept(Socket& peer)
@@ -414,11 +572,24 @@ public:
    * @param peer The socket into which the new connection will be accepted.
    *
    * @param error_handler The handler to be called when an error occurs. Copies
-   * will be made of the handler as required. The equivalent function signature
-   * of the handler must be:
+   * will be made of the handler as required. The function signature of the
+   * handler must be:
    * @code void error_handler(
    *   const asio::error& error // Result of operation
    * ); @endcode
+   *
+   * @par Example:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * ...
+   * asio::stream_socket socket;
+   * asio::error error;
+   * acceptor.accept(socket, asio::assign_error(error));
+   * if (error)
+   * {
+   *   // An error occurred.
+   * }
+   * @endcode
    */
   template <typename Socket, typename Error_Handler>
   void accept(Socket& peer, Error_Handler error_handler)
@@ -436,11 +607,33 @@ public:
    * guarantee that it is valid until the handler is called.
    *
    * @param handler The handler to be called when the accept operation
-   * completes. Copies will be made of the handler as required. The equivalent
-   * function signature of the handler must be:
+   * completes. Copies will be made of the handler as required. The function
+   * signature of the handler must be:
    * @code void handler(
    *   const asio::error& error // Result of operation
    * ); @endcode
+   * Regardless of whether the asynchronous operation completes immediately or
+   * not, the handler will not be invoked from within this function. Invocation
+   * of the handler will be performed in a manner equivalent to using
+   * asio::demuxer::post().
+   *
+   * @par Example:
+   * @code
+   * void accept_handler(const asio::error& error)
+   * {
+   *   if (!error)
+   *   {
+   *     // Accept succeeded.
+   *   }
+   * }
+   *
+   * ...
+   *
+   * asio::socket_acceptor acceptor(demuxer);
+   * ...
+   * asio::stream_socket socket;
+   * acceptor.async_accept(socket, accept_handler);
+   * @endcode
    */
   template <typename Socket, typename Handler>
   void async_accept(Socket& peer, Handler handler)
@@ -461,6 +654,15 @@ public:
    * the remote peer.
    *
    * @throws asio::error Thrown on failure.
+   *
+   * @par Example:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * ...
+   * asio::stream_socket socket;
+   * asio::ipv4::tcp::endpoint endpoint;
+   * acceptor.accept_endpoint(socket, endpoint);
+   * @endcode
    */
   template <typename Socket, typename Endpoint>
   void accept_endpoint(Socket& peer, Endpoint& peer_endpoint)
@@ -482,11 +684,26 @@ public:
    * the remote peer.
    *
    * @param error_handler The handler to be called when an error occurs. Copies
-   * will be made of the handler as required. The equivalent function signature
-   * of the handler must be:
+   * will be made of the handler as required. The function signature of the
+   * handler must be:
    * @code void error_handler(
    *   const asio::error& error // Result of operation
    * ); @endcode
+   *
+   * @par Example:
+   * @code
+   * asio::socket_acceptor acceptor(demuxer);
+   * ...
+   * asio::stream_socket socket;
+   * asio::ipv4::tcp::endpoint endpoint;
+   * asio::error error;
+   * acceptor.accept_endpoint(socket, endpoint,
+   *     asio::assign_error(error));
+   * if (error)
+   * {
+   *   // An error occurred.
+   * }
+   * @endcode
    */
   template <typename Socket, typename Endpoint, typename Error_Handler>
   void accept_endpoint(Socket& peer, Endpoint& peer_endpoint,
@@ -512,11 +729,15 @@ public:
    * handler is called.
    *
    * @param handler The handler to be called when the accept operation
-   * completes. Copies will be made of the handler as required. The equivalent
-   * function signature of the handler must be:
+   * completes. Copies will be made of the handler as required. The function
+   * signature of the handler must be:
    * @code void handler(
    *   const asio::error& error // Result of operation
    * ); @endcode
+   * Regardless of whether the asynchronous operation completes immediately or
+   * not, the handler will not be invoked from within this function. Invocation
+   * of the handler will be performed in a manner equivalent to using
+   * asio::demuxer::post().
    */
   template <typename Socket, typename Endpoint, typename Handler>
   void async_accept_endpoint(Socket& peer, Endpoint& peer_endpoint,
@@ -539,6 +760,33 @@ private:
   {
     return peer.lowest_layer();
   }
+
+  // Helper class to automatically close the implementation on block exit.
+  class close_on_block_exit
+  {
+  public:
+    close_on_block_exit(service_type& service, impl_type& impl)
+      : service_(&service), impl_(impl)
+    {
+    }
+
+    ~close_on_block_exit()
+    {
+      if (service_)
+      {
+        service_->close(impl_, ignore_error());
+      }
+    }
+
+    void cancel()
+    {
+      service_ = 0;
+    }
+
+  private:
+    service_type* service_;
+    impl_type& impl_;
+  };
 };
 
 } // namespace asio

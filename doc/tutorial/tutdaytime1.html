@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -35,7 +35,7 @@
 <p>
 We start by including the necessary header files.<p>
 <div class="fragment"><pre class="fragment"><span class="preprocessor">#include &lt;iostream&gt;</span>
-<span class="preprocessor">#include "asio.hpp"</span>
+<span class="preprocessor">#include &lt;asio.hpp&gt;</span>
 </pre></div><p>
 The purpose of this application is to access a daytime service, so we need the user to specify the server.<p>
 <div class="fragment"><pre class="fragment">
@@ -49,35 +49,35 @@ The purpose of this application is to access a daytime service, so we need the u
       <span class="keywordflow">return</span> 1;
     }
 </pre></div><p>
-All programs that use asio need to have at least one <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#67d5317ccbb1bb5e0076e27a2b73c9b7">asio::demuxer</a> object.<p>
+All programs that use asio need to have at least one <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#67d5317ccbb1bb5e0076e27a2b73c9b7">asio::demuxer</a> object.<p>
 <div class="fragment"><pre class="fragment">
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#67d5317ccbb1bb5e0076e27a2b73c9b7">demuxer</a>;
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html">asio::demuxer</a> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#67d5317ccbb1bb5e0076e27a2b73c9b7">demuxer</a>;
 </pre></div><p>
-We need to turn the server name that was specified as a parameter to the application, into an IP address. To do this we use an <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00222.html#3f9f04ad3aa44d20278537ad34c3db0f">asio::ipv4::host_resolver</a> object.<p>
+We need to turn the server name that was specified as a parameter to the application, into an IP address. To do this we use an <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00231.html#3f9f04ad3aa44d20278537ad34c3db0f">asio::ipv4::host_resolver</a> object.<p>
 <div class="fragment"><pre class="fragment">
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00092.html">asio::ipv4::host_resolver</a> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00222.html#3f9f04ad3aa44d20278537ad34c3db0f">host_resolver</a>(demuxer);
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html">asio::ipv4::host_resolver</a> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00231.html#3f9f04ad3aa44d20278537ad34c3db0f">host_resolver</a>(demuxer);
 </pre></div><p>
-Now we need an object of type <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00113.html">asio::ipv4::host</a> for the server. The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00092.html#ee9f5e5bf96255663e3a5782716b9366">asio::ipv4::host_resolver::get_host_by_name()</a> function takes a hostname and populates the <code>host</code> object with the corresponding IP address.<p>
-<div class="fragment"><pre class="fragment">    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00113.html">asio::ipv4::host</a> host;
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00222.html#3f9f04ad3aa44d20278537ad34c3db0f">host_resolver</a>.get_host_by_name(host, argv[1]);
+Now we need an object of type <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00117.html">asio::ipv4::host</a> for the server. The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html#ee9f5e5bf96255663e3a5782716b9366">asio::ipv4::host_resolver::get_host_by_name()</a> function takes a hostname and populates the <code>host</code> object with the corresponding IP address.<p>
+<div class="fragment"><pre class="fragment">    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00117.html">asio::ipv4::host</a> host;
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00231.html#3f9f04ad3aa44d20278537ad34c3db0f">host_resolver</a>.get_host_by_name(host, argv[1]);
 </pre></div><p>
 The socket is to connect to the daytime service, TCP port 13, on the server. Create an object for this remote endpoint.<p>
-<div class="fragment"><pre class="fragment">    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html">asio::ipv4::tcp::endpoint</a> remote_endpoint(13, host.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00113.html#89a8d838cb3c75d4b7b09576915713a1">address</a>(0));
+<div class="fragment"><pre class="fragment">    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00146.html">asio::ipv4::tcp::endpoint</a> remote_endpoint(13, host.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00117.html#89a8d838cb3c75d4b7b09576915713a1">address</a>(0));
 </pre></div><p>
 Now create and connect the socket.<p>
 <div class="fragment"><pre class="fragment">
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html">asio::stream_socket</a> socket(demuxer);
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00098.html">asio::stream_socket</a> socket(demuxer);
     socket.connect(remote_endpoint);
 </pre></div><p>
-The connection is open. All we need to do now is read the response from the daytime service. When the server closes the connection, the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html#c5426439e74aa97a33b3d33d0d41e974">asio::stream_socket::read_some()</a> function will exit with the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html#2e51b1ab42e8a4a67f3445174be5191b">asio::error::eof</a> error, which is how we know to exit the loop.<p>
+The connection is open. All we need to do now is read the response from the daytime service. When the server closes the connection, the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00098.html#c5426439e74aa97a33b3d33d0d41e974">asio::stream_socket::read_some()</a> function will exit with the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#2e51b1ab42e8a4a67f3445174be5191b">asio::error::eof</a> error, which is how we know to exit the loop.<p>
 <div class="fragment"><pre class="fragment">
     <span class="keywordflow">for</span> (;;)
     {
       <span class="keywordtype">char</span> buf[128];
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">error</a>;
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">error</a>;
       size_t len = socket.read_some(
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00230.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(buf), <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00232.html#6b246ec0bcb3c737dcd04e83348135cd">asio::assign_error</a>(error));
-      <span class="keywordflow">if</span> (error == <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html#2e51b1ab42e8a4a67f3445174be5191b">asio::error::eof</a>)
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00237.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(buf), <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00239.html#6b246ec0bcb3c737dcd04e83348135cd">asio::assign_error</a>(error));
+      <span class="keywordflow">if</span> (error == <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#2e51b1ab42e8a4a67f3445174be5191b">asio::error::eof</a>)
         <span class="keywordflow">break</span>; <span class="comment">// Connection closed cleanly by peer.</span>
       <span class="keywordflow">else</span> <span class="keywordflow">if</span> (error)
         <span class="keywordflow">throw</span> error; <span class="comment">// Some other error.</span>
@@ -86,7 +86,7 @@ The connection is open. All we need to do now is read the response from the dayt
 </pre></div><p>
 Finally, handle any exceptions that may have been thrown.<p>
 <div class="fragment"><pre class="fragment">  }
-  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; e)
+  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>&amp; e)
   {
     std::cerr &lt;&lt; e &lt;&lt; std::endl;
   }
@@ -97,7 +97,7 @@ See the <a class="el" href="tutdaytime1src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

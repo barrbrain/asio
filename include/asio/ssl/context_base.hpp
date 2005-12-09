@@ -2,7 +2,7 @@
 // context_base.hpp
 // ~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -19,6 +19,7 @@
 
 #include "asio/detail/push_options.hpp"
 #include <boost/config.hpp>
+#include <boost/detail/workaround.hpp>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/ssl/detail/openssl_types.hpp"
@@ -137,6 +138,12 @@ protected:
   ~context_base()
   {
   }
+
+#if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
+private:
+  // Workaround to enable the empty base optimisation with Borland C++.
+  char dummy_;
+#endif
 };
 
 } // namespace ssl

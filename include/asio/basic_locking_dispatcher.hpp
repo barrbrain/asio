@@ -2,7 +2,7 @@
 // basic_locking_dispatcher.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -17,12 +17,9 @@
 
 #include "asio/detail/push_options.hpp"
 
-#include "asio/detail/push_options.hpp"
-#include <boost/noncopyable.hpp>
-#include "asio/detail/pop_options.hpp"
-
 #include "asio/error.hpp"
 #include "asio/service_factory.hpp"
+#include "asio/detail/noncopyable.hpp"
 #include "asio/detail/wrapped_handler.hpp"
 
 namespace asio {
@@ -44,7 +41,7 @@ namespace asio {
  */
 template <typename Service>
 class basic_locking_dispatcher
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   /// The type of the service that will be used to provide locking dispatcher
@@ -104,8 +101,8 @@ public:
    * this function if the guarantee can be met.
    *
    * @param handler The handler to be called. The dispatcher will make
-   * a copy of the handler object as required. The equivalent function
-   * signature of the handler must be: @code void handler(); @endcode
+   * a copy of the handler object as required. The function signature of the
+   * handler must be: @code void handler(); @endcode
    */
   template <typename Handler>
   void dispatch(Handler handler)
@@ -126,8 +123,8 @@ public:
    * dispatcher will be invoked at a time.
    *
    * @param handler The handler to be called. The dispatcher will make
-   * a copy of the handler object as required. The equivalent function
-   * signature of the handler must be: @code void handler(); @endcode
+   * a copy of the handler object as required. The function signature of the
+   * handler must be: @code void handler(); @endcode
    */
   template <typename Handler>
   void post(Handler handler)
@@ -143,8 +140,8 @@ public:
    * dispatch function.
    *
    * @param handler The handler to be wrapped. The dispatcher will make a copy
-   * of the handler object as required. The equivalent function signature of
-   * the handler must be: @code void handler(A1 a1, ... An an); @endcode
+   * of the handler object as required. The function signature of the handler
+   * must be: @code void handler(A1 a1, ... An an); @endcode
    *
    * @return A function object that, when invoked, passes the wrapped handler to
    * the dispatcher's dispatch function. Given a function object with the

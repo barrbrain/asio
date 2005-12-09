@@ -2,7 +2,7 @@
 // basic_deadline_timer.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -18,11 +18,13 @@
 #include "asio/detail/push_options.hpp"
 
 #include "asio/detail/push_options.hpp"
-#include <boost/noncopyable.hpp>
+#include <cstddef>
+#include <boost/config.hpp>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/error.hpp"
 #include "asio/service_factory.hpp"
+#include "asio/detail/noncopyable.hpp"
 
 namespace asio {
 
@@ -41,10 +43,44 @@ namespace asio {
  * Async_Object, Error_Source.
  *
  * @sa @ref deadline_timer_reset
+ *
+ * @par Examples:
+ * Performing a blocking wait:
+ * @code
+ * // Construct a timer without setting an expiry time.
+ * asio::deadline_timer timer(demuxer);
+ *
+ * // Set an expiry time relative to now.
+ * timer.expires_from_now(boost::posix_time::seconds(5));
+ *
+ * // Wait for the timer to expire.
+ * timer.wait();
+ * @endcode
+ *
+ * @par 
+ * Performing an asynchronous wait:
+ * @code
+ * void handler(const asio::error& error)
+ * {
+ *   if (!error)
+ *   {
+ *     // Timer expired.
+ *   }
+ * }
+ *
+ * ...
+ *
+ * // Construct a timer with an absolute expiry time.
+ * asio::deadline_timer timer(demuxer,
+ *     boost::posix_time::time_from_string("2005-12-07 23:59:59.000"));
+ *
+ * // Start an asynchronous wait.
+ * timer.async_wait(handler);
+ * @endcode
  */
 template <typename Service>
 class basic_deadline_timer
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   /// The type of the service that will be used to provide timer operations.
@@ -96,7 +132,9 @@ public:
       impl_(service_.null())
   {
     service_.create(impl_);
+    destroy_on_block_exit auto_destroy(service_, impl_);
     service_.expires_at(impl_, expiry_time);
+    auto_destroy.cancel();
   }
 
   /// Constructor to set a particular expiry time relative to now.
@@ -114,7 +152,9 @@ public:
       impl_(service_.null())
   {
     service_.create(impl_);
+    destroy_on_block_exit auto_destroy(service_, impl_);
     service_.expires_from_now(impl_, expiry_time);
+    auto_destroy.cancel();
   }
 
   /// Destructor.
@@ -209,7 +249,7 @@ public:
    *
    * @return The number of asynchronous operations that were cancelled.
    */
-  int cancel()
+  std::size_t cancel()
   {
     return service_.cancel(impl_);
   }
@@ -240,11 +280,15 @@ public:
    * code asio::error::operation_aborted.
    *
    * @param handler The handler to be called when the timer expires. Copies
-   * will be made of the handler as required. The equivalent function signature
-   * of the handler must be:
+   * will be made of the handler as required. The function signature of the
+   * handler must be:
    * @code void handler(
    *   const asio::error& error // Result of operation
    * ); @endcode
+   * Regardless of whether the asynchronous operation completes immediately or
+   * not, the handler will not be invoked from within this function. Invocation
+   * of the handler will be performed in a manner equivalent to using
+   * asio::demuxer::post().
    */
   template <typename Handler>
   void async_wait(Handler handler)
@@ -258,6 +302,33 @@ private:
 
   /// The underlying native implementation.
   impl_type impl_;
+
+  // Helper class to automatically destroy the implementation on block exit.
+  class destroy_on_block_exit
+  {
+  public:
+    destroy_on_block_exit(service_type& service, impl_type& impl)
+      : service_(&service), impl_(impl)
+    {
+    }
+
+    ~destroy_on_block_exit()
+    {
+      if (service_)
+      {
+        service_->destroy(impl_);
+      }
+    }
+
+    void cancel()
+    {
+      service_ = 0;
+    }
+
+  private:
+    service_type* service_;
+    impl_type& impl_;
+  };
 };
 
 /**

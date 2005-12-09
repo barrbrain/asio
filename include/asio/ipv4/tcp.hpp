@@ -2,7 +2,7 @@
 // tcp.hpp
 // ~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -17,10 +17,18 @@
 
 #include "asio/detail/push_options.hpp"
 
+#include "asio/detail/push_options.hpp"
+#include <boost/throw_exception.hpp>
+#include <boost/detail/workaround.hpp>
+#if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
+# include <iostream>
+#endif // BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
+#include "asio/detail/pop_options.hpp"
+
 #include "asio/error.hpp"
-#include "asio/socket_option.hpp"
 #include "asio/ipv4/address.hpp"
 #include "asio/detail/socket_ops.hpp"
+#include "asio/detail/socket_option.hpp"
 #include "asio/detail/socket_types.hpp"
 
 namespace asio {
@@ -61,8 +69,37 @@ public:
   }
 
   /// Socket option for disabling the Nagle algorithm.
-  typedef asio::socket_option::boolean<IPPROTO_TCP, TCP_NODELAY>
-    no_delay;
+  /**
+   * Implements the IPPROTO_TCP/TCP_NODELAY socket option.
+   *
+   * @par Examples:
+   * Setting the option:
+   * @code
+   * asio::stream_socket socket(demuxer); 
+   * ...
+   * asio::ipv4::tcp::no_delay option(true);
+   * socket.set_option(option);
+   * @endcode
+   *
+   * @par
+   * Getting the current option value:
+   * @code
+   * asio::stream_socket socket(demuxer); 
+   * ...
+   * asio::ipv4::tcp::no_delay option;
+   * socket.get_option(option);
+   * bool is_set = option.get();
+   * @endcode
+   *
+   * @par Concepts:
+   * Socket_Option, Boolean_Socket_Option.
+   */
+#if defined(GENERATING_DOCUMENTATION)
+  typedef implementation_defined no_delay;
+#else
+  typedef asio::detail::socket_option::boolean<
+    IPPROTO_TCP, TCP_NODELAY> no_delay;
+#endif
 };
 
 /// Describes an endpoint for a TCP socket.
@@ -171,7 +208,10 @@ public:
   void size(size_type size)
   {
     if (size != sizeof(addr_))
-      throw asio::error(asio::error::invalid_argument);
+    {
+      asio::error e(asio::error::invalid_argument);
+      boost::throw_exception(e);
+    }
   }
 
   /// Get the port associated with the endpoint. The port number is always in
@@ -243,12 +283,20 @@ private:
  *
  * @relates tcp::endpoint
  */
+#if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
+std::ostream& operator<<(std::ostream& os, const tcp::endpoint& endpoint)
+{
+  os << endpoint.address().to_string() << ':' << endpoint.port();
+  return os;
+}
+#else // BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
 template <typename Ostream>
 Ostream& operator<<(Ostream& os, const tcp::endpoint& endpoint)
 {
   os << endpoint.address().to_string() << ':' << endpoint.port();
   return os;
 }
+#endif // BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
 
 } // namespace ipv4
 } // namespace asio

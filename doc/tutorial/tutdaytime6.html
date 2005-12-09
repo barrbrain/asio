@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -37,29 +37,29 @@ The main() function</a></h2>
 {
   <span class="keywordflow">try</span>
   {
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> demuxer;
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html">asio::demuxer</a> demuxer;
 
     <span class="keywordtype">char</span> recv_buf[1];
     size_t recv_length = <span class="keyword">sizeof</span>(recv_buf);
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00144.html">asio::ipv4::udp::endpoint</a> remote_endpoint;
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00150.html">asio::ipv4::udp::endpoint</a> remote_endpoint;
 </pre></div><p>
-Create an <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#215e8e0f020fae339fbe58ccd74e0cba">asio::datagram_socket</a> object to receive requests on UDP port 13.<p>
+Create an <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#215e8e0f020fae339fbe58ccd74e0cba">asio::datagram_socket</a> object to receive requests on UDP port 13.<p>
 <div class="fragment"><pre class="fragment">
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00088.html">asio::datagram_socket</a> socket(demuxer,
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00091.html">asio::datagram_socket</a> socket(demuxer,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00150.html">asio::ipv4::udp::endpoint</a>(13));
 </pre></div><p>
-The function <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00088.html#f2f3831201a148c263f86af81b72287d">asio::datagram_socket::async_receive_from()</a> will cause the application to listen in the background for a new request. When such a request is received, the demuxer will invoke the <code>handle_receive_from()</code> function with two arguments: <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>, and bytes_transferred.<p>
-<div class="fragment"><pre class="fragment">        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00144.html">asio::ipv4::udp::endpoint</a>(13));
-    socket.async_receive_from(
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00230.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(recv_buf, recv_length), 0, remote_endpoint,
+The function <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00091.html#f2f3831201a148c263f86af81b72287d">asio::datagram_socket::async_receive_from()</a> will cause the application to listen in the background for a new request. When such a request is received, the demuxer will invoke the <code>handle_receive_from()</code> function with two arguments: <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>, and bytes_transferred.<p>
+<div class="fragment"><pre class="fragment">    socket.async_receive_from(
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00237.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(recv_buf, recv_length), 0, remote_endpoint,
         boost::bind(handle_receive_from, &amp;socket, recv_buf, recv_length,
-          &amp;remote_endpoint, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#9f5c782222c58e35386e0cf28aa78d5a">asio::placeholders::bytes_transferred</a>));
+          &amp;remote_endpoint, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#9f5c782222c58e35386e0cf28aa78d5a">asio::placeholders::bytes_transferred</a>));
 </pre></div><p>
 Now that we have created some work for it to do, we can run the demuxer.<p>
 <div class="fragment"><pre class="fragment">
-    demuxer.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">run</a>();
+    demuxer.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html#7fd10941fde8cdff606799b100207712">run</a>();
   }
-  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; e)
+  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>&amp; e)
   {
     std::cerr &lt;&lt; e &lt;&lt; std::endl;
   }
@@ -69,13 +69,13 @@ Now that we have created some work for it to do, we can run the demuxer.<p>
 </pre></div><h2><a class="anchor" name="tutdaytime6funchandle_receive_from">
 The handle_receive_from() function</a></h2>
 The function <code>handle_receive_from()</code> will service the client request.<p>
- <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_receive_from(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00088.html">asio::datagram_socket</a>* socket, <span class="keywordtype">char</span>* recv_buf,
-    size_t recv_length, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00144.html">asio::ipv4::udp::endpoint</a>* remote_endpoint,
-    <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; error, size_t <span class="comment">/*bytes_transferred*/</span>)
+ <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_receive_from(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00091.html">asio::datagram_socket</a>* socket, <span class="keywordtype">char</span>* recv_buf,
+    size_t recv_length, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00150.html">asio::ipv4::udp::endpoint</a>* remote_endpoint,
+    <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>&amp; error, size_t <span class="comment">/*bytes_transferred*/</span>)
 {
 </pre></div><p>
 The <code>error</code> parameter contains the result of the asynchronous operation. Since we only provided a 1-byte buffer to contain the client's request, the demuxer would return an error if the client sent anything larger. We can ignore such an error if it comes up.<p>
-<div class="fragment"><pre class="fragment">  <span class="keywordflow">if</span> (!error || error == <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html#de5f4bc2f8a4690176e22e83196b9fd3">asio::error::message_size</a>)
+<div class="fragment"><pre class="fragment">  <span class="keywordflow">if</span> (!error || error == <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html#de5f4bc2f8a4690176e22e83196b9fd3">asio::error::message_size</a>)
   {
 </pre></div><p>
 Determine what we are going to send.<p>
@@ -84,28 +84,28 @@ Determine what we are going to send.<p>
     <span class="keywordtype">char</span>* send_buf = strdup(ctime(&amp;now));
     size_t send_length = strlen(send_buf);
 </pre></div><p>
-We now call <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00088.html#89ce1cac628d3c1a4d3a14be0b74b8a1">asio::datagram_socket::async_send_to()</a> to serve the data to the client.<p>
+We now call <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00091.html#89ce1cac628d3c1a4d3a14be0b74b8a1">asio::datagram_socket::async_send_to()</a> to serve the data to the client.<p>
 <div class="fragment"><pre class="fragment">
-    socket-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00088.html#89ce1cac628d3c1a4d3a14be0b74b8a1">async_send_to</a>(
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00230.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(send_buf, send_length), 0, *remote_endpoint,
-        boost::bind(handle_send_to, send_buf, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#9f5c782222c58e35386e0cf28aa78d5a">asio::placeholders::bytes_transferred</a>));
+    socket-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00091.html#89ce1cac628d3c1a4d3a14be0b74b8a1">async_send_to</a>(
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00237.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(send_buf, send_length), 0, *remote_endpoint,
+        boost::bind(handle_send_to, send_buf, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#9f5c782222c58e35386e0cf28aa78d5a">asio::placeholders::bytes_transferred</a>));
 </pre></div><p>
-When initiating the asynchronous operation, and if using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>, you must specify only the arguments that match the handler's parameter list. In this program, both of the argument placeholders (<a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a> and <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#9f5c782222c58e35386e0cf28aa78d5a">asio::placeholders::bytes_transferred</a>) could potentially have been removed.<p>
+When initiating the asynchronous operation, and if using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>, you must specify only the arguments that match the handler's parameter list. In this program, both of the argument placeholders (<a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a> and <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#9f5c782222c58e35386e0cf28aa78d5a">asio::placeholders::bytes_transferred</a>) could potentially have been removed.<p>
 Any further actions for this client request are now the responsibility of <code>handle_send_to()</code>.<p>
 Start listening for the next client request.<p>
 <div class="fragment"><pre class="fragment">
-    socket-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00088.html#f2f3831201a148c263f86af81b72287d">async_receive_from</a>(
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00230.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(recv_buf, recv_length), 0, *remote_endpoint,
+    socket-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00091.html#f2f3831201a148c263f86af81b72287d">async_receive_from</a>(
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00237.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(recv_buf, recv_length), 0, *remote_endpoint,
         boost::bind(handle_receive_from, socket, recv_buf, recv_length,
-          remote_endpoint, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#9f5c782222c58e35386e0cf28aa78d5a">asio::placeholders::bytes_transferred</a>));
+          remote_endpoint, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#9f5c782222c58e35386e0cf28aa78d5a">asio::placeholders::bytes_transferred</a>));
   }
 }
 </pre></div><h2><a class="anchor" name="tutdaytime6funchandle_send_to">
 The handle_send_to() function</a></h2>
 The function <code>handle_send_to()</code> is invoked after the service request has been completed.<p>
- <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_send_to(<span class="keywordtype">char</span>* send_buf, <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; <span class="comment">/*error*/</span>,
+ <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_send_to(<span class="keywordtype">char</span>* send_buf, <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>&amp; <span class="comment">/*error*/</span>,
     size_t <span class="comment">/*bytes_transferred*/</span>)
 {
   <span class="keyword">using namespace </span>std; <span class="comment">// For free.</span>
@@ -119,7 +119,7 @@ See the <a class="el" href="tutdaytime6src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

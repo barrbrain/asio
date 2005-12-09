@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -81,7 +81,7 @@
 <ul>
 <li>A typedef for the typical usage:</li>
 </ul>
-<div class="fragment"><pre class="fragment"><span class="keyword">typedef</span> basic_stream_socket&lt;stream_socket_service&lt;&gt; &gt; <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">stream_socket</a>;
+<div class="fragment"><pre class="fragment"><span class="keyword">typedef</span> basic_stream_socket&lt;stream_socket_service&lt;&gt; &gt; <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">stream_socket</a>;
 </pre></div><p>
 This design attempts meet the following goals:<p>
 <ul>
@@ -95,13 +95,13 @@ This design attempts meet the following goals:<p>
 </ul>
 <h2><a class="anchor" name="designservicesanddemuxer">
 Services and the Demuxer</a></h2>
-The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#67d5317ccbb1bb5e0076e27a2b73c9b7">asio::demuxer</a> object acts as an extensible collection of services, not dissimilar to the way a std::locale object is composed of facets. The demuxer contains one service object for each service type, and the service objects are accessed by their types (see <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#5a74792a439d056710cbeec44c124f7c">asio::basic_demuxer::get_service</a>).<p>
+The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#67d5317ccbb1bb5e0076e27a2b73c9b7">asio::demuxer</a> object acts as an extensible collection of services, not dissimilar to the way a std::locale object is composed of facets. The demuxer contains one service object for each service type, and the service objects are accessed by their types (see <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html#5a74792a439d056710cbeec44c124f7c">asio::basic_demuxer::get_service</a>).<p>
 However, unlike std::locale, services are loaded by the demuxer only when first used. This means that you do not pay for the resources associated with a service unless you instantiate the corresponding class. For example, the deadline_timer_service implementation for Win32 uses a background thread, but this thread will not be created if there are no deadline_timer objects in a program.<p>
 This design also allows the demuxer to be extended by user-defined services. As an example, a user may want to simulate asynchronous database access using a pool of background threads. A database_connection_service class can be defined to create and manage the thread pool, and each database_connection object uses this service.     <DIV CLASS="qindex">
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

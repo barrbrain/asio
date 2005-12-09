@@ -2,7 +2,7 @@
 // Const_Buffers.hpp
 // ~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -10,6 +10,13 @@
 
 /// Const_Buffers concept.
 /**
+ * Defines the interface that must be implemented by any object passed as the
+ * @c buffers parameter to functions such as:
+ * @li @ref write
+ * @li @ref async_write,
+ * @li asio::stream_socket::write_some
+ * @li asio::stream_socket::async_write_some
+ *
  * @par Implemented By:
  * asio::const_buffer_container_1 @n
  * asio::mutable_buffer_container_1 @n
@@ -23,6 +30,7 @@
  * boost::array<asio::mutable_buffer, N>
  */
 class Const_Buffers
+  : public CopyConstructible
 {
 public:
   /// The type for each element in the list of buffers. The type must be

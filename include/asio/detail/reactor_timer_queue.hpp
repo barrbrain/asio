@@ -2,7 +2,7 @@
 // reactor_timer_queue.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -18,23 +18,24 @@
 #include "asio/detail/push_options.hpp"
 
 #include "asio/detail/push_options.hpp"
+#include <cstddef>
 #include <functional>
 #include <limits>
 #include <memory>
 #include <vector>
 #include <boost/config.hpp>
-#include <boost/noncopyable.hpp>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/error.hpp"
 #include "asio/detail/hash_map.hpp"
+#include "asio/detail/noncopyable.hpp"
 
 namespace asio {
 namespace detail {
 
 template <typename Time, typename Comparator = std::less<Time> >
 class reactor_timer_queue
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   // Constructor.
@@ -50,26 +51,36 @@ public:
   template <typename Handler>
   bool enqueue_timer(const Time& time, Handler handler, void* token)
   {
+    // Ensure that there is space for the timer in the heap. We reserve here so
+    // that the push_back below will not throw due to a reallocation failure.
+    heap_.reserve(heap_.size() + 1);
+
     // Create a new timer object.
-    timer_base* new_timer = new timer<Handler>(time, handler, token);
+    std::auto_ptr<timer<Handler> > new_timer(
+        new timer<Handler>(time, handler, token));
 
     // Insert the new timer into the hash.
     typedef typename hash_map<void*, timer_base*>::iterator iterator;
     typedef typename hash_map<void*, timer_base*>::value_type value_type;
     std::pair<iterator, bool> result =
-      timers_.insert(value_type(token, new_timer));
+      timers_.insert(value_type(token, new_timer.get()));
     if (!result.second)
     {
-      result.first->second->prev_ = new_timer;
+      result.first->second->prev_ = new_timer.get();
       new_timer->next_ = result.first->second;
-      result.first->second = new_timer;
+      result.first->second = new_timer.get();
     }
 
     // Put the timer at the correct position in the heap.
     new_timer->heap_index_ = heap_.size();
-    heap_.push_back(new_timer);
+    heap_.push_back(new_timer.get());
     up_heap(heap_.size() - 1);
-    return (heap_[0] == new_timer);
+    bool is_first = (heap_[0] == new_timer.get());
+
+    // Ownership of the timer is transferred to the timer queue.
+    new_timer.release();
+
+    return is_first;
   }
 
   // Whether there are no timers in the queue.
@@ -98,9 +109,9 @@ public:
 
   // Cancel the timer with the given token. The handler will be invoked
   // immediately with the result operation_aborted.
-  int cancel_timer(void* timer_token)
+  std::size_t cancel_timer(void* timer_token)
   {
-    int num_cancelled = 0;
+    std::size_t num_cancelled = 0;
     typedef typename hash_map<void*, timer_base*>::iterator iterator;
     iterator it = timers_.find(timer_token);
     if (it != timers_.end())

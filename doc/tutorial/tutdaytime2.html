@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -36,24 +36,24 @@
 <div class="fragment"><pre class="fragment"><span class="preprocessor">#include &lt;ctime&gt;</span>
 <span class="preprocessor">#include &lt;iostream&gt;</span>
 <span class="preprocessor">#include &lt;string&gt;</span>
-<span class="preprocessor">#include "asio.hpp"</span>
+<span class="preprocessor">#include &lt;asio.hpp&gt;</span>
 
 <span class="keywordtype">int</span> main()
 {
   <span class="keywordflow">try</span>
   {
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> demuxer;
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html">asio::demuxer</a> demuxer;
 </pre></div><p>
-An <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#c99e62531a20918bd6a7808a1b1950b5">asio::socket_acceptor</a> object needs to be created to listen for new connections. It is initialised to listen on TCP port 13.<p>
+An <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#c99e62531a20918bd6a7808a1b1950b5">asio::socket_acceptor</a> object needs to be created to listen for new connections. It is initialised to listen on TCP port 13.<p>
 <div class="fragment"><pre class="fragment">
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00094.html">asio::socket_acceptor</a> acceptor(demuxer,
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00097.html">asio::socket_acceptor</a> acceptor(demuxer,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00146.html">asio::ipv4::tcp::endpoint</a>(13));
 </pre></div><p>
 This is an iterative server, which means that it will handle one connection at a time. Create a socket that will represent the connection to the client, and then wait for a connection.<p>
-<div class="fragment"><pre class="fragment">        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html">asio::ipv4::tcp::endpoint</a>(13));
-
+<div class="fragment"><pre class="fragment">
     <span class="keywordflow">for</span> (;;)
     {
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html">asio::stream_socket</a> socket(demuxer);
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00098.html">asio::stream_socket</a> socket(demuxer);
       acceptor.accept(socket);
 </pre></div><p>
 A client is accessing our service. Determine the current time and transfer this information to the client.<p>
@@ -62,14 +62,14 @@ A client is accessing our service. Determine the current time and transfer this 
       time_t now = time(0);
       std::string msg = ctime(&amp;now);
 
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00235.html#55e56cbc38c8f440ad297418ebfd563e">asio::write</a>(socket,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00230.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(msg.c_str(), msg.length()),
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00231.html#486175e71fff31ee9590d049090a76a6">asio::transfer_all</a>(), <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00232.html#9bcebec2b0b4b2a14f4bc7e35df2b8b4">asio::ignore_error</a>());
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00242.html#55e56cbc38c8f440ad297418ebfd563e">asio::write</a>(socket,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00237.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(msg.c_str(), msg.length()),
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00238.html#486175e71fff31ee9590d049090a76a6">asio::transfer_all</a>(), <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00239.html#9bcebec2b0b4b2a14f4bc7e35df2b8b4">asio::ignore_error</a>());
     }
   }
 </pre></div><p>
 Finally, handle any exceptions.<p>
-<div class="fragment"><pre class="fragment">  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; e)
+<div class="fragment"><pre class="fragment">  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>&amp; e)
   {
     std::cerr &lt;&lt; e &lt;&lt; std::endl;
   }
@@ -84,7 +84,7 @@ See the <a class="el" href="tutdaytime2src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

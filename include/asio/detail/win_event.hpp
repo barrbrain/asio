@@ -2,7 +2,7 @@
 // win_event.hpp
 // ~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -23,17 +23,19 @@
 
 #if defined(BOOST_WINDOWS)
 
-#include "asio/detail/push_options.hpp"
-#include <new>
-#include "asio/detail/pop_options.hpp"
-
+#include "asio/system_exception.hpp"
+#include "asio/detail/noncopyable.hpp"
 #include "asio/detail/socket_types.hpp"
+
+#include "asio/detail/push_options.hpp"
+#include <boost/throw_exception.hpp>
+#include "asio/detail/pop_options.hpp"
 
 namespace asio {
 namespace detail {
 
 class win_event
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   // Constructor.
@@ -41,7 +43,11 @@ public:
     : event_(::CreateEvent(0, true, false, 0))
   {
     if (!event_)
-      throw std::bad_alloc();
+    {
+      DWORD last_error = ::GetLastError();
+      system_exception e("event", last_error);
+      boost::throw_exception(e);
+    }
   }
 
   // Destructor.

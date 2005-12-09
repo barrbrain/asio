@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -37,27 +37,27 @@ The main() function</a></h2>
 {
   <span class="keywordflow">try</span>
   {
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html">asio::demuxer</a> demuxer;
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html">asio::demuxer</a> demuxer;
 
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00094.html">asio::socket_acceptor</a> acceptor(demuxer,
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00097.html">asio::socket_acceptor</a> acceptor(demuxer,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00146.html">asio::ipv4::tcp::endpoint</a>(13));
 </pre></div><p>
 We need to set up the initial socket to hold an accepted client connection.<p>
-<div class="fragment"><pre class="fragment">        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html">asio::ipv4::tcp::endpoint</a>(13));
-
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html">asio::stream_socket</a>* socket
+<div class="fragment"><pre class="fragment">
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00098.html">asio::stream_socket</a>* socket
+      = <span class="keyword">new</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">asio::stream_socket</a>(demuxer);
 </pre></div><p>
-The function <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00094.html#9a5542910afa53ecbb94b31115de053a">asio::socket_acceptor::async_accept()</a> will cause the application to listen in the background for a new connection. When such a connection is received, the demuxer will invoke the <code>handle_accept()</code> function with an <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a> argument.<p>
-<div class="fragment"><pre class="fragment">      = <span class="keyword">new</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00219.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">asio::stream_socket</a>(demuxer);
-
+The function <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00097.html#9a5542910afa53ecbb94b31115de053a">asio::socket_acceptor::async_accept()</a> will cause the application to listen in the background for a new connection. When such a connection is received, the demuxer will invoke the <code>handle_accept()</code> function with an <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a> argument.<p>
+<div class="fragment"><pre class="fragment">
     acceptor.async_accept(*socket,
         boost::bind(handle_accept, &amp;acceptor, socket,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
 </pre></div><p>
 Now that we have created some work for it to do, we can run the demuxer.<p>
 <div class="fragment"><pre class="fragment">
-    demuxer.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00090.html#7fd10941fde8cdff606799b100207712">run</a>();
+    demuxer.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00093.html#7fd10941fde8cdff606799b100207712">run</a>();
   }
-  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; e)
+  <span class="keywordflow">catch</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>&amp; e)
   {
     std::cerr &lt;&lt; e &lt;&lt; std::endl;
   }
@@ -67,8 +67,8 @@ Now that we have created some work for it to do, we can run the demuxer.<p>
 </pre></div><h2><a class="anchor" name="tutdaytime3funchandle_accept">
 The handle_accept() function</a></h2>
 The function <code>handle_accept()</code> will service the client request.<p>
- <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_accept(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00094.html">asio::socket_acceptor</a>* acceptor,
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html">asio::stream_socket</a>* socket, <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; error)
+ <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_accept(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00097.html">asio::socket_acceptor</a>* acceptor,
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00098.html">asio::stream_socket</a>* socket, <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>&amp; error)
 {
 </pre></div><p>
 The <code>error</code> parameter contains the result of the asynchronous operation.<p>
@@ -81,16 +81,34 @@ Determine what we are going to send.<p>
     <span class="keywordtype">char</span>* write_buf = strdup(ctime(&amp;now));
     size_t write_length = strlen(write_buf);
 </pre></div><p>
-We now call <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00236.html">asio::async_write</a> to serve the data to the client. Note that we are using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00236.html">asio::async_write</a>, rather than <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html#9b9d0ef2c9545cb8ce28f669b9718111">asio::stream_socket::write_some</a>, to ensure that the entire block of data is sent.<p>
-<div class="fragment"><pre class="fragment"></pre></div><p>
-When initiating the asynchronous operation, and if using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>, you must specify only the arguments that match the handler's parameter list. In this program, all three of the argument placeholders (<a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00226.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>, asio::placeholders::last_bytes_transferred and asio::placeholders::total_bytes_transferred) could potentially have been removed.<p>
+We now call <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00243.html">asio::async_write</a> to serve the data to the client. Note that we are using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00243.html">asio::async_write</a>, rather than <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00098.html#9b9d0ef2c9545cb8ce28f669b9718111">asio::stream_socket::write_some</a>, to ensure that the entire block of data is sent.<p>
+<div class="fragment"><pre class="fragment">
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00243.html#d7163fe4138ff3d02ff4a394fafae365">asio::async_write</a>(*socket,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00237.html#4116dae636ddf3b9b8a3d09372098eb0">asio::buffer</a>(write_buf, write_length),
+        boost::bind(handle_write, socket, write_buf,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#9f5c782222c58e35386e0cf28aa78d5a">asio::placeholders::bytes_transferred</a>));
+</pre></div><p>
+When initiating the asynchronous operation, and if using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>, you must specify only the arguments that match the handler's parameter list. In this program, both of the argument placeholders (<a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>, and <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#9f5c782222c58e35386e0cf28aa78d5a">asio::placeholders::bytes_transferred</a>) could potentially have been removed.<p>
 Any further actions for this client connection are now the responsibility of <code>handle_write()</code>.<p>
 Create a new socket for the next client connection.<p>
-<div class="fragment"><pre class="fragment"></pre></div><h2><a class="anchor" name="tutdaytime3funchandle_write">
+<div class="fragment"><pre class="fragment">
+    socket = <span class="keyword">new</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00229.html#35902bc440f0b9cf5f2fbb1c10b1cfeb">asio::stream_socket</a>(acceptor-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00097.html#6afeb5e9a5b1a4fbbc83e784e9d07a99">demuxer</a>());
+
+    acceptor-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00097.html#9a5542910afa53ecbb94b31115de053a">async_accept</a>(*socket,
+        boost::bind(handle_accept, acceptor, socket,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00233.html#cb5e100e5a9a3e7f6d1fd97512215282">asio::placeholders::error</a>));
+  }
+  <span class="keywordflow">else</span>
+  {
+    <span class="keyword">delete</span> socket;
+  }
+}
+</pre></div><h2><a class="anchor" name="tutdaytime3funchandle_write">
 The handle_write() function</a></h2>
 The function <code>handle_write()</code> is invoked after the service request has been completed.<p>
- <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_write(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00095.html">asio::stream_socket</a>* socket, <span class="keywordtype">char</span>* write_buf,
-    <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00111.html">asio::error</a>&amp; <span class="comment">/*error*/</span>, size_t <span class="comment">/*bytes_transferred*/</span>)
+ <div class="fragment"><pre class="fragment"><span class="keywordtype">void</span> handle_write(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00098.html">asio::stream_socket</a>* socket, <span class="keywordtype">char</span>* write_buf,
+    <span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00115.html">asio::error</a>&amp; <span class="comment">/*error*/</span>, size_t <span class="comment">/*bytes_transferred*/</span>)
 {
   <span class="keyword">using namespace </span>std; <span class="comment">// For free.</span>
   free(write_buf);
@@ -104,7 +122,7 @@ See the <a class="el" href="tutdaytime3src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.5</B>
+            <B>asio 0.3.6</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

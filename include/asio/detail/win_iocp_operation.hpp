@@ -2,7 +2,7 @@
 // win_iocp_operation.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -34,6 +34,10 @@ class win_iocp_demuxer_service;
 
 // Base class for all IOCP operations. A function pointer is used instead of
 // virtual functions to avoid the associated overhead.
+//
+// This class inherits from OVERLAPPED so that we can downcast to get back to
+// the win_iocp_operation pointer from the LPOVERLAPPED out parameter of
+// GetQueuedCompletionStatus.
 struct win_iocp_operation
   : public OVERLAPPED
 {

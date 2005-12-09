@@ -186,17 +186,18 @@ nobase_include_HEADERS = \
 	asio/detail/event.hpp \
 	asio/detail/fd_set_adapter.hpp \
 	asio/detail/hash_map.hpp \
+	asio/detail/io_control.hpp \
 	asio/detail/kqueue_reactor.hpp \
 	asio/detail/locking_dispatcher_impl.hpp \
 	asio/detail/locking_dispatcher_service.hpp \
 	asio/detail/mutex.hpp \
+	asio/detail/noncopyable.hpp \
 	asio/detail/pipe_select_interrupter.hpp \
 	asio/detail/pop_options.hpp \
 	asio/detail/posix_event.hpp \
 	asio/detail/posix_mutex.hpp \
 	asio/detail/posix_signal_blocker.hpp \
 	asio/detail/posix_thread.hpp \
-	asio/detail/posix_time.hpp \
 	asio/detail/posix_tss_ptr.hpp \
 	asio/detail/push_options.hpp \
 	asio/detail/reactive_deadline_timer_service.hpp \
@@ -211,34 +212,35 @@ nobase_include_HEADERS = \
 	asio/detail/signal_init.hpp \
 	asio/detail/socket_holder.hpp \
 	asio/detail/socket_ops.hpp \
+	asio/detail/socket_option.hpp \
 	asio/detail/socket_select_interrupter.hpp \
 	asio/detail/socket_types.hpp \
 	asio/detail/task_demuxer_service.hpp \
 	asio/detail/thread.hpp \
-	asio/detail/time.hpp \
 	asio/detail/tss_ptr.hpp \
 	asio/detail/win_event.hpp \
 	asio/detail/win_iocp_demuxer_service.hpp \
 	asio/detail/win_iocp_operation.hpp \
 	asio/detail/win_iocp_socket_service.hpp \
+	asio/detail/win_local_free_on_block_exit.hpp \
 	asio/detail/win_mutex.hpp \
 	asio/detail/win_signal_blocker.hpp \
 	asio/detail/winsock_init.hpp \
 	asio/detail/win_thread.hpp \
-	asio/detail/win_time.hpp \
 	asio/detail/win_tss_ptr.hpp \
 	asio/detail/wrapped_handler.hpp \
 	asio/error_handler.hpp \
 	asio/error.hpp \
-	asio/io_control.hpp \
+	asio/impl/read.ipp \
+	asio/impl/write.ipp \
 	asio/ipv4/address.hpp \
 	asio/ipv4/basic_host_resolver.hpp \
 	asio/ipv4/detail/host_resolver_service.hpp \
+	asio/ipv4/detail/socket_option.hpp \
 	asio/ipv4/host.hpp \
 	asio/ipv4/host_resolver.hpp \
 	asio/ipv4/host_resolver_service.hpp \
 	asio/ipv4/multicast.hpp \
-	asio/ipv4/socket_option.hpp \
 	asio/ipv4/tcp.hpp \
 	asio/ipv4/udp.hpp \
 	asio/is_read_buffered.hpp \
@@ -247,12 +249,10 @@ nobase_include_HEADERS = \
 	asio/locking_dispatcher_service.hpp \
 	asio/placeholders.hpp \
 	asio/read.hpp \
-	asio/read.ipp \
 	asio/service_factory.hpp \
 	asio/socket_acceptor.hpp \
 	asio/socket_acceptor_service.hpp \
 	asio/socket_base.hpp \
-	asio/socket_option.hpp \
   asio/ssl.hpp \
   asio/ssl/basic_context.hpp \
   asio/ssl/context.hpp \
@@ -268,10 +268,10 @@ nobase_include_HEADERS = \
   asio/ssl/stream_service.hpp \
 	asio/stream_socket.hpp \
 	asio/stream_socket_service.hpp \
+	asio/system_exception.hpp \
 	asio/thread.hpp \
 	asio/time_traits.hpp \
-	asio/write.hpp \
-	asio/write.ipp
+	asio/write.hpp
 
 MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in
@@ -378,7 +378,7 @@ distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
 
 distdir: $(DISTFILES)
-	$(mkdir_p) $(distdir)/asio $(distdir)/asio/detail $(distdir)/asio/ipv4 $(distdir)/asio/ipv4/detail $(distdir)/asio/ssl $(distdir)/asio/ssl/detail
+	$(mkdir_p) $(distdir)/asio $(distdir)/asio/detail $(distdir)/asio/impl $(distdir)/asio/ipv4 $(distdir)/asio/ipv4/detail $(distdir)/asio/ssl $(distdir)/asio/ssl/detail
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \

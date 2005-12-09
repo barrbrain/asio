@@ -2,7 +2,7 @@
 // tss_ptr.hpp
 // ~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -21,8 +21,17 @@
 #include <boost/config.hpp>
 #include "asio/detail/pop_options.hpp"
 
-#include "asio/detail/posix_tss_ptr.hpp"
-#include "asio/detail/win_tss_ptr.hpp"
+#if !defined(BOOST_HAS_THREADS)
+# error Thread support is required!
+#endif
+
+#if defined(BOOST_WINDOWS)
+# include "asio/detail/win_tss_ptr.hpp"
+#elif defined(BOOST_HAS_PTHREADS)
+# include "asio/detail/posix_tss_ptr.hpp"
+#else
+# error Only Windows and POSIX are supported!
+#endif
 
 namespace asio {
 namespace detail {
@@ -31,7 +40,7 @@ template <typename T>
 class tss_ptr
 #if defined(BOOST_WINDOWS)
   : public win_tss_ptr<T>
-#else
+#elif defined(BOOST_HAS_PTHREADS)
   : public posix_tss_ptr<T>
 #endif
 {
@@ -40,7 +49,7 @@ public:
   {
 #if defined(BOOST_WINDOWS)
     win_tss_ptr<T>::operator=(value);
-#else
+#elif defined(BOOST_HAS_PTHREADS)
     posix_tss_ptr<T>::operator=(value);
 #endif
   }

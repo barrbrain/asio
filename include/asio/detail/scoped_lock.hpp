@@ -2,7 +2,7 @@
 // scoped_lock.hpp
 // ~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -17,9 +17,7 @@
 
 #include "asio/detail/push_options.hpp"
 
-#include "asio/detail/push_options.hpp"
-#include <boost/noncopyable.hpp>
-#include "asio/detail/pop_options.hpp"
+#include "asio/detail/noncopyable.hpp"
 
 namespace asio {
 namespace detail {
@@ -27,7 +25,7 @@ namespace detail {
 // Helper class to lock and unlock a mutex automatically.
 template <typename Mutex>
 class scoped_lock
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   // Constructor acquires the lock.

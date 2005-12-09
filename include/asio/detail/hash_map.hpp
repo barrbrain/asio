@@ -2,7 +2,7 @@
 // hash_map.hpp
 // ~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -21,21 +21,17 @@
 #include <cassert>
 #include <list>
 #include <utility>
-#include <boost/noncopyable.hpp>
+#include <boost/functional/hash.hpp>
 #include "asio/detail/pop_options.hpp"
+
+#include "asio/detail/noncopyable.hpp"
 
 namespace asio {
 namespace detail {
 
-template <typename K>
-size_t hash(const K& k)
-{
-  return (size_t)k;
-}
-
 template <typename K, typename V>
 class hash_map
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   // The type of a value in the map.
@@ -82,7 +78,7 @@ public:
   // Find an entry in the map.
   iterator find(const K& k)
   {
-    size_t bucket = hash(k) % num_buckets;
+    size_t bucket = boost::hash_value(k) % num_buckets;
     iterator it = buckets_[bucket].first;
     if (it == values_.end())
       return values_.end();
@@ -100,7 +96,7 @@ public:
   // Find an entry in the map.
   const_iterator find(const K& k) const
   {
-    size_t bucket = hash(k) % num_buckets;
+    size_t bucket = boost::hash_value(k) % num_buckets;
     const_iterator it = buckets_[bucket].first;
     if (it == values_.end())
       return it;
@@ -118,7 +114,7 @@ public:
   // Insert a new entry into the map.
   std::pair<iterator, bool> insert(const value_type& v)
   {
-    size_t bucket = hash(v.first) % num_buckets;
+    size_t bucket = boost::hash_value(v.first) % num_buckets;
     iterator it = buckets_[bucket].first;
     if (it == values_.end())
     {
@@ -143,7 +139,7 @@ public:
   {
     assert(it != values_.end());
 
-    size_t bucket = hash(it->first) % num_buckets;
+    size_t bucket = boost::hash_value(it->first) % num_buckets;
     bool is_first = (it == buckets_[bucket].first);
     bool is_last = (it == buckets_[bucket].last);
     if (is_first && is_last)

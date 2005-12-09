@@ -2,7 +2,7 @@
 // basic_demuxer.hpp
 // ~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -17,13 +17,9 @@
 
 #include "asio/detail/push_options.hpp"
 
-#include "asio/detail/push_options.hpp"
-#include <boost/config.hpp>
-#include <boost/noncopyable.hpp>
-#include "asio/detail/pop_options.hpp"
-
 #include "asio/service_factory.hpp"
 #include "asio/detail/bind_handler.hpp"
+#include "asio/detail/noncopyable.hpp"
 #include "asio/detail/service_registry.hpp"
 #include "asio/detail/signal_init.hpp"
 #include "asio/detail/winsock_init.hpp"
@@ -53,14 +49,19 @@ namespace asio {
  *
  * @par Concepts:
  * Dispatcher.
+ *
+ * @sa \ref demuxer_handler_exception
  */
 template <typename Demuxer_Service>
 class basic_demuxer
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   /// The type of the service that will be used to provide demuxer operations.
   typedef Demuxer_Service service_type;
+
+  /// The allocator type for the demuxer.
+  typedef typename service_type::allocator_type allocator_type;
 
   /// Default constructor.
   basic_demuxer()
@@ -74,6 +75,18 @@ public:
     : service_registry_(*this),
       service_(get_service(factory))
   {
+  }
+
+  /// Return a copy of the allocator associated with the demuxer.
+  /**
+   * The get_allocator() returns a copy of the allocator object used by the
+   * demuxer.
+   *
+   * @return A copy of the demuxer's allocator.
+   */
+  allocator_type get_allocator() const
+  {
+    return service_.get_allocator();
   }
 
   /// Run the demuxer's event processing loop.
@@ -132,8 +145,8 @@ public:
    * may be executed inside this function if the guarantee can be met.
    *
    * @param handler The handler to be called. The demuxer will make
-   * a copy of the handler object as required. The equivalent function
-   * signature of the handler must be: @code void handler(); @endcode
+   * a copy of the handler object as required. The function signature of the
+   * handler must be: @code void handler(); @endcode
    */
   template <typename Handler>
   void dispatch(Handler handler)
@@ -151,8 +164,8 @@ public:
    * which the run() member function is currently being invoked.
    *
    * @param handler The handler to be called. The demuxer will make
-   * a copy of the handler object as required. The equivalent function
-   * signature of the handler must be: @code void handler(); @endcode
+   * a copy of the handler object as required. The function signature of the
+   * handler must be: @code void handler(); @endcode
    */
   template <typename Handler>
   void post(Handler handler)
@@ -168,8 +181,8 @@ public:
    * dispatch function.
    *
    * @param handler The handler to be wrapped. The demuxer will make a copy of
-   * the handler object as required. The equivalent function signature of the
-   * handler must be: @code void handler(A1 a1, ... An an); @endcode
+   * the handler object as required. The function signature of the handler must
+   * be: @code void handler(A1 a1, ... An an); @endcode
    *
    * @return A function object that, when invoked, passes the wrapped handler to
    * the demuxer's dispatch function. Given a function object with the
@@ -284,6 +297,40 @@ private:
   /// The underlying demuxer service implementation.
   Demuxer_Service& service_;
 };
+
+/**
+ * @page demuxer_handler_exception Effect of exceptions thrown from handlers
+ *
+ * If an exception is thrown from a handler, the exception is allowed to
+ * propagate through the throwing thread's invocation of
+ * asio::demuxer::run(). No other threads that are calling
+ * asio::demuxer::run() are affected. It is then the responsibility of
+ * the application to catch the exception.
+ *
+ * After the exception has been caught, the asio::demuxer::run() call
+ * may be restarted @em without the need for an intervening call to
+ * asio::demuxer::reset(). This allows the thread to rejoin the
+ * demuxer's thread pool without impacting any other threads in the
+ * pool.
+ *
+ * @par Example:
+ * @code
+ * asio::demuxer demuxer;
+ * ...
+ * for (;;)
+ * {
+ *   try
+ *   {
+ *     demuxer.run();
+ *     break; // run() exited normally
+ *   }
+ *   catch (my_exception& e)
+ *   {
+ *     // Deal with exception as appropriate.
+ *   }
+ * }
+ * @endcode
+ */
 
 } // namespace asio
 

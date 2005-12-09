@@ -2,7 +2,7 @@
 // Socket_Option.hpp
 // ~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -10,6 +10,15 @@
 
 /// Socket_Option concept.
 /**
+ * Defines the interface that must be implemented by an object passed as the
+ * @c option parameter to:
+ * @li asio::stream_socket::get_option
+ * @li asio::stream_socket::set_option
+ * @li asio::datagram_socket::get_option
+ * @li asio::datagram_socket::set_option
+ * @li asio::socket_acceptor::get_option
+ * @li asio::socket_acceptor::set_option
+ *
  * @par Implemented By:
  * asio::socket_base::broadcast @n
  * asio::socket_base::do_not_route @n
@@ -17,10 +26,8 @@
  * asio::socket_base::linger @n
  * asio::socket_base::send_buffer_size @n
  * asio::socket_base::send_low_watermark @n
- * asio::socket_base::send_timeout @n
  * asio::socket_base::receive_buffer_size @n
  * asio::socket_base::receive_low_watermark @n
- * asio::socket_base::receive_timeout @n
  * asio::socket_base::reuse_address @n
  * asio::ipv4::tcp::no_delay @n
  * asio::ipv4::multicast::add_membership @n

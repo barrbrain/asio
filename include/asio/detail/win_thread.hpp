@@ -2,7 +2,7 @@
 // win_thread.hpp
 // ~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -23,32 +23,40 @@
 
 #if defined(BOOST_WINDOWS)
 
+#include "asio/system_exception.hpp"
+#include "asio/detail/noncopyable.hpp"
 #include "asio/detail/socket_types.hpp"
 
 #include "asio/detail/push_options.hpp"
-#include <new>
+#include <boost/throw_exception.hpp>
+#include <memory>
 #include <process.h>
 #include "asio/detail/pop_options.hpp"
 
 namespace asio {
 namespace detail {
 
-extern "C" unsigned int __stdcall asio_detail_win_thread_function(void* arg);
+unsigned int __stdcall win_thread_function(void* arg);
 
 class win_thread
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   // Constructor.
   template <typename Function>
   win_thread(Function f)
   {
-    func_base* arg = new func<Function>(f);
+    std::auto_ptr<func_base> arg(new func<Function>(f));
     unsigned int thread_id = 0;
     thread_ = reinterpret_cast<HANDLE>(::_beginthreadex(0, 0,
-          asio_detail_win_thread_function, arg, 0, &thread_id));
+          win_thread_function, arg.get(), 0, &thread_id));
     if (!thread_)
-      throw std::bad_alloc();
+    {
+      DWORD last_error = ::GetLastError();
+      system_exception e("thread", last_error);
+      boost::throw_exception(e);
+    }
+    arg.release();
   }
 
   // Destructor.
@@ -64,7 +72,7 @@ public:
   }
 
 private:
-  friend unsigned int __stdcall asio_detail_win_thread_function(void* arg);
+  friend unsigned int __stdcall win_thread_function(void* arg);
 
   class func_base
   {
@@ -95,12 +103,11 @@ private:
   ::HANDLE thread_;
 };
 
-inline unsigned int __stdcall asio_detail_win_thread_function(void* arg)
+inline unsigned int __stdcall win_thread_function(void* arg)
 {
-  win_thread::func_base* func =
-    static_cast<win_thread::func_base*>(arg);
+  std::auto_ptr<win_thread::func_base> func(
+      static_cast<win_thread::func_base*>(arg));
   func->run();
-  delete func;
   return 0;
 }
 

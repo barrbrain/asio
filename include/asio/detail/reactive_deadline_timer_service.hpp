@@ -2,7 +2,7 @@
 // reactive_deadline_timer_service.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -18,16 +18,17 @@
 #include "asio/detail/push_options.hpp"
 
 #include "asio/detail/push_options.hpp"
+#include <cstddef>
+#include <boost/config.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
-#include <boost/noncopyable.hpp>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/error.hpp"
 #include "asio/service_factory.hpp"
 #include "asio/detail/bind_handler.hpp"
+#include "asio/detail/noncopyable.hpp"
 #include "asio/detail/socket_ops.hpp"
 #include "asio/detail/socket_types.hpp"
-#include "asio/detail/time.hpp"
 
 namespace asio {
 namespace detail {
@@ -38,9 +39,9 @@ class reactive_deadline_timer_service
 public:
   // Implementation structure for a timer.
   struct timer_impl
-    : private boost::noncopyable
+    : private noncopyable
   {
-    asio::detail::time expiry;
+    boost::posix_time::ptime expiry;
   };
 
   // The native type of the timer. This type is dependent on the underlying
@@ -95,23 +96,13 @@ public:
   // Get the expiry time for the timer as an absolute time.
   time_type expires_at(const impl_type& impl) const
   {
-    boost::posix_time::ptime ctime_epoch(
-        boost::posix_time::ptime::date_type(1970, 1, 1));
-    boost::posix_time::time_duration ctime
-      = boost::posix_time::seconds(impl->expiry.sec())
-      + boost::posix_time::microseconds(impl->expiry.usec());
-    return Time_Traits::from_utc(ctime_epoch + ctime);
+    return Time_Traits::from_utc(impl->expiry);
   }
 
   // Set the expiry time for the timer as an absolute time.
   void expires_at(impl_type& impl, const time_type& expiry_time)
   {
-    boost::posix_time::ptime utc_time = Time_Traits::to_utc(expiry_time);
-    boost::posix_time::ptime ctime_epoch(
-        boost::posix_time::ptime::date_type(1970, 1, 1));
-    boost::posix_time::time_duration ctime = utc_time - ctime_epoch;
-    impl->expiry.sec(ctime.total_seconds());
-    impl->expiry.usec(ctime.total_microseconds() % 1000000);
+    impl->expiry = Time_Traits::to_utc(expiry_time);
   }
 
   // Get the expiry time for the timer relative to now.
@@ -127,7 +118,7 @@ public:
   }
 
   // Cancel any asynchronous wait operations associated with the timer.
-  int cancel(impl_type& impl)
+  std::size_t cancel(impl_type& impl)
   {
     return reactor_.cancel_timer(impl);
   }
@@ -135,16 +126,16 @@ public:
   // Perform a blocking wait on the timer.
   void wait(impl_type& impl)
   {
-    asio::detail::time now = asio::detail::time::now();
+    boost::posix_time::ptime now
+      = boost::posix_time::microsec_clock::universal_time();
     while (now < impl->expiry)
     {
-      asio::detail::time timeout = impl->expiry;
-      timeout -= now;
+      boost::posix_time::time_duration timeout = impl->expiry - now;
       ::timeval tv;
-      tv.tv_sec = timeout.sec();
-      tv.tv_usec = timeout.usec();
+      tv.tv_sec = timeout.total_seconds();
+      tv.tv_usec = timeout.total_microseconds() % 1000000;
       socket_ops::select(0, 0, 0, 0, &tv);
-      now = asio::detail::time::now();
+      now = boost::posix_time::microsec_clock::universal_time();
     }
   }
 
@@ -177,7 +168,7 @@ public:
   template <typename Handler>
   void async_wait(impl_type& impl, Handler handler)
   {
-    reactor_.schedule_timer(impl->expiry.sec(), impl->expiry.usec(),
+    reactor_.schedule_timer(impl->expiry,
         wait_handler<Handler>(impl, demuxer_, handler), impl);
   }
 

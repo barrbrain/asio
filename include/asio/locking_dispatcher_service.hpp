@@ -2,7 +2,7 @@
 // locking_dispatcher_service.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -19,19 +19,19 @@
 
 #include "asio/detail/push_options.hpp"
 #include <memory>
-#include <boost/noncopyable.hpp>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/basic_demuxer.hpp"
 #include "asio/demuxer_service.hpp"
 #include "asio/detail/locking_dispatcher_service.hpp"
+#include "asio/detail/noncopyable.hpp"
 
 namespace asio {
 
 /// Default service implementation for a locking dispatcher.
 template <typename Allocator = std::allocator<void> >
 class locking_dispatcher_service
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   /// The demuxer type for this service.

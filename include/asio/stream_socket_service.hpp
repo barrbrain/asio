@@ -2,7 +2,7 @@
 // stream_socket_service.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris@kohlhoff.com)
+// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -21,13 +21,13 @@
 #include <cstddef>
 #include <memory>
 #include <boost/config.hpp>
-#include <boost/noncopyable.hpp>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/basic_demuxer.hpp"
 #include "asio/demuxer_service.hpp"
 #include "asio/detail/epoll_reactor.hpp"
 #include "asio/detail/kqueue_reactor.hpp"
+#include "asio/detail/noncopyable.hpp"
 #include "asio/detail/select_reactor.hpp"
 #include "asio/detail/win_iocp_socket_service.hpp"
 #include "asio/detail/reactive_socket_service.hpp"
@@ -37,7 +37,7 @@ namespace asio {
 /// Default service implementation for a stream socket.
 template <typename Allocator = std::allocator<void> >
 class stream_socket_service
-  : private boost::noncopyable
+  : private noncopyable
 {
 public:
   /// The demuxer type.
@@ -84,7 +84,7 @@ public:
     return service_impl_.null();
   }
 
-  // Open a new stream socket implementation.
+  /// Open a new stream socket implementation.
   template <typename Protocol, typename Error_Handler>
   void open(impl_type& impl, const Protocol& protocol,
       Error_Handler error_handler)
