@@ -2,7 +2,7 @@
 // buffer.hpp
 // ~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -21,6 +21,7 @@
 #include <cstddef>
 #include <boost/config.hpp>
 #include <boost/array.hpp>
+#include <boost/type_traits/is_const.hpp>
 #include <string>
 #include <vector>
 #include "asio/detail/pop_options.hpp"
@@ -39,8 +40,8 @@ std::size_t buffer_size_helper(const const_buffer&);
 
 /// Holds a buffer that can be modified.
 /**
- * The const_buffer class provides a safe representation of a buffer that can be
- * modified. It does not own the underlying data, and so is cheap to copy or
+ * The mutable_buffer class provides a safe representation of a buffer that can
+ * be modified. It does not own the underlying data, and so is cheap to copy or
  * assign.
  */
 class mutable_buffer
@@ -138,9 +139,6 @@ public:
   /// The type for each element in the list of buffers.
   typedef mutable_buffer value_type;
 
-  /// A random-access iterator type that may be used to read or modify elements.
-  typedef mutable_buffer* iterator;
-
   /// A random-access iterator type that may be used to read elements.
   typedef const mutable_buffer* const_iterator;
 
@@ -151,21 +149,9 @@ public:
   }
 
   /// Get a random-access iterator to the first element.
-  iterator begin()
-  {
-    return this;
-  }
-
-  /// Get a random-access iterator to the first element.
   const_iterator begin() const
   {
     return this;
-  }
-
-  /// Get a random-access iterator for one past the last element.
-  iterator end()
-  {
-    return begin() + 1;
   }
 
   /// Get a random-access iterator for one past the last element.
@@ -283,9 +269,6 @@ public:
   /// The type for each element in the list of buffers.
   typedef const_buffer value_type;
 
-  /// A random-access iterator type that may be used to read or modify elements.
-  typedef const_buffer* iterator;
-
   /// A random-access iterator type that may be used to read elements.
   typedef const const_buffer* const_iterator;
 
@@ -296,21 +279,9 @@ public:
   }
 
   /// Get a random-access iterator to the first element.
-  iterator begin()
-  {
-    return this;
-  }
-
-  /// Get a random-access iterator to the first element.
   const_iterator begin() const
   {
     return this;
-  }
-
-  /// Get a random-access iterator for one past the last element.
-  iterator end()
-  {
-    return begin() + 1;
   }
 
   /// Get a random-access iterator for one past the last element.
@@ -452,6 +423,75 @@ inline const_buffer_container_1 buffer(const Pod_Type (&data)[N],
         ? N * sizeof(Pod_Type) : max_size_in_bytes));
 }
 
+#if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
+
+// Borland C++ thinks the overloads:
+//
+//   unspecified buffer(boost::array<Pod_Type, N>& array ...);
+//
+// and
+//
+//   unspecified buffer(boost::array<const Pod_Type, N>& array ...);
+//
+// are ambiguous. This will be worked around by using a buffer_types traits
+// class that contains typedefs for the appropriate buffer and container
+// classes, based on whether Pod_Type is const or non-const.
+
+namespace detail {
+
+template <bool IsConst>
+struct buffer_types_base;
+
+template <>
+struct buffer_types_base<false>
+{
+  typedef mutable_buffer buffer_type;
+  typedef mutable_buffer_container_1 container_type;
+};
+
+template <>
+struct buffer_types_base<true>
+{
+  typedef const_buffer buffer_type;
+  typedef const_buffer_container_1 container_type;
+};
+
+template <typename Pod_Type>
+struct buffer_types
+  : public buffer_types_base<boost::is_const<Pod_Type>::value>
+{
+};
+
+} // namespace detail
+
+template <typename Pod_Type, std::size_t N>
+inline typename detail::buffer_types<Pod_Type>::container_type
+buffer(boost::array<Pod_Type, N>& data)
+{
+  typedef typename asio::detail::buffer_types<Pod_Type>::buffer_type
+    buffer_type;
+  typedef typename asio::detail::buffer_types<Pod_Type>::container_type
+    container_type;
+  return container_type(
+      buffer_type(data.c_array(), data.size() * sizeof(Pod_Type)));
+}
+
+template <typename Pod_Type, std::size_t N>
+inline typename detail::buffer_types<Pod_Type>::container_type
+buffer(boost::array<Pod_Type, N>& data, std::size_t max_size_in_bytes)
+{
+  typedef typename asio::detail::buffer_types<Pod_Type>::buffer_type
+    buffer_type;
+  typedef typename asio::detail::buffer_types<Pod_Type>::container_type
+    container_type;
+  return container_type(
+      buffer_type(data.c_array(),
+        data.size() * sizeof(Pod_Type) < max_size_in_bytes
+        ? data.size() * sizeof(Pod_Type) : max_size_in_bytes));
+}
+
+#else // BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
+
 /// Create a new modifiable buffer that represents the given POD array.
 template <typename Pod_Type, std::size_t N>
 inline mutable_buffer_container_1 buffer(boost::array<Pod_Type, N>& data)
@@ -467,25 +507,6 @@ inline mutable_buffer_container_1 buffer(boost::array<Pod_Type, N>& data,
 {
   return mutable_buffer_container_1(
       mutable_buffer(data.c_array(),
-        data.size() * sizeof(Pod_Type) < max_size_in_bytes
-        ? data.size() * sizeof(Pod_Type) : max_size_in_bytes));
-}
-
-/// Create a new non-modifiable buffer that represents the given POD array.
-template <typename Pod_Type, std::size_t N>
-inline const_buffer_container_1 buffer(const boost::array<Pod_Type, N>& data)
-{
-  return const_buffer_container_1(
-      const_buffer(data.data(), data.size() * sizeof(Pod_Type)));
-}
-
-/// Create a new non-modifiable buffer that represents the given POD array.
-template <typename Pod_Type, std::size_t N>
-inline const_buffer_container_1 buffer(const boost::array<Pod_Type, N>& data,
-    std::size_t max_size_in_bytes)
-{
-  return const_buffer_container_1(
-      const_buffer(data.data(),
         data.size() * sizeof(Pod_Type) < max_size_in_bytes
         ? data.size() * sizeof(Pod_Type) : max_size_in_bytes));
 }
@@ -509,13 +530,34 @@ inline const_buffer_container_1 buffer(boost::array<const Pod_Type, N>& data,
         ? data.size() * sizeof(Pod_Type) : max_size_in_bytes));
 }
 
+#endif // BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
+
+/// Create a new non-modifiable buffer that represents the given POD array.
+template <typename Pod_Type, std::size_t N>
+inline const_buffer_container_1 buffer(const boost::array<Pod_Type, N>& data)
+{
+  return const_buffer_container_1(
+      const_buffer(data.data(), data.size() * sizeof(Pod_Type)));
+}
+
+/// Create a new non-modifiable buffer that represents the given POD array.
+template <typename Pod_Type, std::size_t N>
+inline const_buffer_container_1 buffer(const boost::array<Pod_Type, N>& data,
+    std::size_t max_size_in_bytes)
+{
+  return const_buffer_container_1(
+      const_buffer(data.data(),
+        data.size() * sizeof(Pod_Type) < max_size_in_bytes
+        ? data.size() * sizeof(Pod_Type) : max_size_in_bytes));
+}
+
 /// Create a new modifiable buffer that represents the given POD vector.
 /**
  * @note The buffer is invalidated by any vector operation that would also
  * invalidate iterators.
  */
-template <typename Pod_Type>
-inline mutable_buffer_container_1 buffer(std::vector<Pod_Type>& data)
+template <typename Pod_Type, typename Allocator>
+inline mutable_buffer_container_1 buffer(std::vector<Pod_Type, Allocator>& data)
 {
   return mutable_buffer_container_1(
       mutable_buffer(&data[0], data.size() * sizeof(Pod_Type)));
@@ -526,8 +568,8 @@ inline mutable_buffer_container_1 buffer(std::vector<Pod_Type>& data)
  * @note The buffer is invalidated by any vector operation that would also
  * invalidate iterators.
  */
-template <typename Pod_Type>
-inline mutable_buffer_container_1 buffer(std::vector<Pod_Type>& data,
+template <typename Pod_Type, typename Allocator>
+inline mutable_buffer_container_1 buffer(std::vector<Pod_Type, Allocator>& data,
     std::size_t max_size_in_bytes)
 {
   return mutable_buffer_container_1(
@@ -541,8 +583,9 @@ inline mutable_buffer_container_1 buffer(std::vector<Pod_Type>& data,
  * @note The buffer is invalidated by any vector operation that would also
  * invalidate iterators.
  */
-template <typename Pod_Type>
-inline const_buffer_container_1 buffer(const std::vector<Pod_Type>& data)
+template <typename Pod_Type, typename Allocator>
+inline const_buffer_container_1 buffer(
+    const std::vector<Pod_Type, Allocator>& data)
 {
   return const_buffer_container_1(
       const_buffer(&data[0], data.size() * sizeof(Pod_Type)));
@@ -553,36 +596,9 @@ inline const_buffer_container_1 buffer(const std::vector<Pod_Type>& data)
  * @note The buffer is invalidated by any vector operation that would also
  * invalidate iterators.
  */
-template <typename Pod_Type>
-inline const_buffer_container_1 buffer(const std::vector<Pod_Type>& data,
-    std::size_t max_size_in_bytes)
-{
-  return const_buffer_container_1(
-      const_buffer(&data[0],
-        data.size() * sizeof(Pod_Type) < max_size_in_bytes
-        ? data.size() * sizeof(Pod_Type) : max_size_in_bytes));
-}
-
-/// Create a new non-modifiable buffer that represents the given POD vector.
-/**
- * @note The buffer is invalidated by any vector operation that would also
- * invalidate iterators.
- */
-template <typename Pod_Type>
-inline const_buffer_container_1 buffer(std::vector<const Pod_Type>& data)
-{
-  return const_buffer_container_1(
-      const_buffer(&data[0], data.size() * sizeof(Pod_Type)));
-}
-
-/// Create a new non-modifiable buffer that represents the given POD vector.
-/**
- * @note The buffer is invalidated by any vector operation that would also
- * invalidate iterators.
- */
-template <typename Pod_Type>
-inline const_buffer_container_1 buffer(std::vector<const Pod_Type>& data,
-    std::size_t max_size_in_bytes)
+template <typename Pod_Type, typename Allocator>
+inline const_buffer_container_1 buffer(
+    const std::vector<Pod_Type, Allocator>& data, std::size_t max_size_in_bytes)
 {
   return const_buffer_container_1(
       const_buffer(&data[0],

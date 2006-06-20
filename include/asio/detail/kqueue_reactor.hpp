@@ -2,7 +2,7 @@
 // kqueue_reactor.hpp
 // ~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 // Copyright (c) 2005 Stefan Arentz (stefan at soze dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
@@ -18,13 +18,13 @@
 
 #include "asio/detail/push_options.hpp"
 
-#if defined(__MACH__) && defined(__APPLE__)
+#include "asio/detail/kqueue_reactor_fwd.hpp"
 
-// Define this to indicate that epoll is supported on the target platform.
-#define ASIO_HAS_KQUEUE_REACTOR 1
+#if defined(ASIO_HAS_KQUEUE)
 
 #include "asio/detail/push_options.hpp"
 #include <cstddef>
+#include <vector>
 #include <sys/types.h>
 #include <sys/event.h>
 #include <sys/time.h>
@@ -33,12 +33,11 @@
 #include <boost/throw_exception.hpp>
 #include "asio/detail/pop_options.hpp"
 
+#include "asio/io_service.hpp"
 #include "asio/system_exception.hpp"
 #include "asio/detail/bind_handler.hpp"
-#include "asio/detail/hash_map.hpp"
 #include "asio/detail/mutex.hpp"
-#include "asio/detail/noncopyable.hpp"
-#include "asio/detail/task_demuxer_service.hpp"
+#include "asio/detail/task_io_service.hpp"
 #include "asio/detail/thread.hpp"
 #include "asio/detail/reactor_op_queue.hpp"
 #include "asio/detail/reactor_timer_queue.hpp"
@@ -51,13 +50,13 @@ namespace detail {
 
 template <bool Own_Thread>
 class kqueue_reactor
-  : private noncopyable
+  : public asio::io_service::service
 {
 public:
   // Constructor.
-  template <typename Demuxer>
-  kqueue_reactor(Demuxer&)
-    : mutex_(),
+  kqueue_reactor(asio::io_service& io_service)
+    : asio::io_service::service(io_service),
+      mutex_(),
       kqueue_fd_(do_kqueue_create()),
       wait_in_progress_(false),
       interrupter_(),
@@ -66,7 +65,8 @@ public:
       except_op_queue_(),
       pending_cancellations_(),
       stop_thread_(false),
-      thread_(0)
+      thread_(0),
+      shutdown_(false)
   {
     // Start the reactor's internal thread only if needed.
     if (Own_Thread)
@@ -86,17 +86,37 @@ public:
   // Destructor.
   ~kqueue_reactor()
   {
+    shutdown_service();
+    close(kqueue_fd_);
+  }
+
+  // Destroy all user-defined handler objects owned by the service.
+  void shutdown_service()
+  {
+    asio::detail::mutex::scoped_lock lock(mutex_);
+    shutdown_ = true;
+    stop_thread_ = true;
+    lock.unlock();
+
     if (thread_)
     {
-      asio::detail::mutex::scoped_lock lock(mutex_);
-      stop_thread_ = true;
-      lock.unlock();
       interrupter_.interrupt();
       thread_->join();
       delete thread_;
+      thread_ = 0;
     }
 
-    close(kqueue_fd_);
+    read_op_queue_.destroy_operations();
+    write_op_queue_.destroy_operations();
+    except_op_queue_.destroy_operations();
+    timer_queue_.destroy_timers();
+  }
+
+  // Register a socket with the reactor. Returns 0 on success, system error
+  // code on failure.
+  int register_descriptor(socket_type)
+  {
+    return 0;
   }
 
   // Start a new read operation. The handler object will be invoked when the
@@ -105,6 +125,13 @@ public:
   void start_read_op(socket_type descriptor, Handler handler)
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
+
+    if (shutdown_)
+      return;
+
+    if (!read_op_queue_.has_operation(descriptor))
+      if (handler(0))
+        return;
 
     if (read_op_queue_.enqueue_operation(descriptor, handler))
     {
@@ -125,6 +152,13 @@ public:
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
 
+    if (shutdown_)
+      return;
+
+    if (!write_op_queue_.has_operation(descriptor))
+      if (handler(0))
+        return;
+
     if (write_op_queue_.enqueue_operation(descriptor, handler))
     {
       struct kevent event;
@@ -143,6 +177,9 @@ public:
   void start_except_op(socket_type descriptor, Handler handler)
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
+
+    if (shutdown_)
+      return;
 
     if (except_op_queue_.enqueue_operation(descriptor, handler))
     {
@@ -166,6 +203,9 @@ public:
   void start_write_and_except_ops(socket_type descriptor, Handler handler)
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
+
+    if (shutdown_)
+      return;
 
     if (write_op_queue_.enqueue_operation(descriptor, handler))
     {
@@ -206,12 +246,11 @@ public:
   // Enqueue cancellation of all operations associated with the given
   // descriptor. The handlers associated with the descriptor will be invoked
   // with the operation_aborted error. This function does not acquire the
-  // select_reactor's mutex, and so should only be used from within a reactor
+  // kqueue_reactor's mutex, and so should only be used from within a reactor
   // handler.
   void enqueue_cancel_ops_unlocked(socket_type descriptor)
   {
-    pending_cancellations_.insert(
-        pending_cancellations_map::value_type(descriptor, true));
+    pending_cancellations_.push_back(descriptor);
   }
 
   // Cancel any operations that are running against the descriptor and remove
@@ -239,8 +278,9 @@ public:
       Handler handler, void* token)
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
-    if (timer_queue_.enqueue_timer(time, handler, token))
-      interrupter_.interrupt();
+    if (!shutdown_)
+      if (timer_queue_.enqueue_timer(time, handler, token))
+        interrupter_.interrupt();
   }
 
   // Cancel the timer associated with the given token. Returns the number of
@@ -252,18 +292,10 @@ public:
   }
 
 private:
-  friend class task_demuxer_service<kqueue_reactor<Own_Thread> >;
+  friend class task_io_service<kqueue_reactor<Own_Thread> >;
 
-  // Reset the select loop before a new run.
-  void reset()
-  {
-    asio::detail::mutex::scoped_lock lock(mutex_);
-    stop_thread_ = false;
-    interrupter_.reset();
-  }
-
-  // Run the epoll loop.
-  void run()
+  // Run the kqueue loop.
+  void run(bool block)
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
 
@@ -273,115 +305,142 @@ private:
     write_op_queue_.dispatch_cancellations();
     except_op_queue_.dispatch_cancellations();
 
-    bool stop = false;
-    while (!stop && !stop_thread_)
+    // Check if the thread is supposed to stop.
+    if (stop_thread_)
     {
-      timespec timeout_buf;
-      timespec* timeout = get_timeout(timeout_buf);
-      wait_in_progress_ = true;
+      // Clean up operations. We must not hold the lock since the operations may
+      // make calls back into this reactor.
       lock.unlock();
-
-      // Block on the kqueue descriptor.
-      struct kevent events[128];
-      int num_events = kevent(kqueue_fd_, 0, 0, events, 128, timeout);
-
-      lock.lock();
-      wait_in_progress_ = false;
-
-      // Block signals while dispatching operations.
-      asio::detail::signal_blocker sb;
-
-      // Dispatch the waiting events.
-      for (int i = 0; i < num_events; ++i)
-      {
-        int descriptor = events[i].ident;
-        if (descriptor == interrupter_.read_descriptor())
-        {
-          stop = interrupter_.reset();
-        }
-        else if (events[i].filter == EVFILT_READ)
-        {
-          // Dispatch operations associated with the descriptor.
-          bool more_reads = false;
-          bool more_except = false;
-          if (events[i].flags & EV_ERROR)
-          {
-            int error = events[i].data;
-            except_op_queue_.dispatch_all_operations(descriptor, error);
-            read_op_queue_.dispatch_all_operations(descriptor, error);
-          }
-          else if (events[i].flags & EV_OOBAND)
-          {
-            more_except = except_op_queue_.dispatch_operation(descriptor, 0);
-            if (events[i].data > 0)
-              more_reads = read_op_queue_.dispatch_operation(descriptor, 0);
-            else
-              more_reads = read_op_queue_.has_operation(descriptor);
-          }
-          else
-          {
-            more_reads = read_op_queue_.dispatch_operation(descriptor, 0);
-            more_except = except_op_queue_.has_operation(descriptor);
-          }
-
-          // Update the descriptor in the kqueue.
-          struct kevent event;
-          if (more_reads)
-            EV_SET(&event, descriptor, EVFILT_READ, EV_ADD, 0, 0, 0);
-          else if (more_except)
-            EV_SET(&event, descriptor, EVFILT_READ, EV_ADD, EV_OOBAND, 0, 0);
-          else
-            EV_SET(&event, descriptor, EVFILT_READ, EV_DELETE, 0, 0, 0);
-          if (::kevent(kqueue_fd_, &event, 1, 0, 0, 0) == -1)
-          {
-            int error = errno;
-            except_op_queue_.dispatch_all_operations(descriptor, error);
-            read_op_queue_.dispatch_all_operations(descriptor, error);
-          }
-        }
-        else if (events[i].filter == EVFILT_WRITE)
-        {
-          // Dispatch operations associated with the descriptor.
-          bool more_writes = false;
-          if (events[i].flags & EV_ERROR)
-          {
-            int error = events[i].data;
-            write_op_queue_.dispatch_all_operations(descriptor, error);
-          }
-          else
-          {
-            more_writes = write_op_queue_.dispatch_operation(descriptor, 0);
-          }
-
-          // Update the descriptor in the kqueue.
-          struct kevent event;
-          if (more_writes)
-            EV_SET(&event, descriptor, EVFILT_WRITE, EV_ADD, 0, 0, 0);
-          else
-            EV_SET(&event, descriptor, EVFILT_WRITE, EV_DELETE, 0, 0, 0);
-          if (::kevent(kqueue_fd_, &event, 1, 0, 0, 0) == -1)
-          {
-            int error = errno;
-            write_op_queue_.dispatch_all_operations(descriptor, error);
-          }
-        }
-      }
-
-      read_op_queue_.dispatch_cancellations();
-      write_op_queue_.dispatch_cancellations();
-      except_op_queue_.dispatch_cancellations();
-      timer_queue_.dispatch_timers(
-          boost::posix_time::microsec_clock::universal_time());
-
-      // Issue any pending cancellations.
-      pending_cancellations_map::iterator i = pending_cancellations_.begin();
-      while (i != pending_cancellations_.end())
-      {
-        cancel_ops_unlocked(i->first);
-        ++i;
-      }
-      pending_cancellations_.clear();
+      read_op_queue_.cleanup_operations();
+      write_op_queue_.cleanup_operations();
+      except_op_queue_.cleanup_operations();
+      return;
     }
+
+    // We can return immediately if there's no work to do and the reactor is
+    // not supposed to block.
+    if (!block && read_op_queue_.empty() && write_op_queue_.empty()
+        && except_op_queue_.empty() && timer_queue_.empty())
+    {
+      // Clean up operations. We must not hold the lock since the operations may
+      // make calls back into this reactor.
+      lock.unlock();
+      read_op_queue_.cleanup_operations();
+      write_op_queue_.cleanup_operations();
+      except_op_queue_.cleanup_operations();
+      return;
+    }
+
+    // Determine how long to block while waiting for events.
+    timespec timeout_buf = { 0, 0 };
+    timespec* timeout = block ? get_timeout(timeout_buf) : &timeout_buf;
+
+    wait_in_progress_ = true;
+    lock.unlock();
+
+    // Block on the kqueue descriptor.
+    struct kevent events[128];
+    int num_events = kevent(kqueue_fd_, 0, 0, events, 128, timeout);
+
+    lock.lock();
+    wait_in_progress_ = false;
+
+    // Block signals while dispatching operations.
+    asio::detail::signal_blocker sb;
+
+    // Dispatch the waiting events.
+    for (int i = 0; i < num_events; ++i)
+    {
+      int descriptor = events[i].ident;
+      if (descriptor == interrupter_.read_descriptor())
+      {
+        interrupter_.reset();
+      }
+      else if (events[i].filter == EVFILT_READ)
+      {
+        // Dispatch operations associated with the descriptor.
+        bool more_reads = false;
+        bool more_except = false;
+        if (events[i].flags & EV_ERROR)
+        {
+          int error = events[i].data;
+          except_op_queue_.dispatch_all_operations(descriptor, error);
+          read_op_queue_.dispatch_all_operations(descriptor, error);
+        }
+        else if (events[i].flags & EV_OOBAND)
+        {
+          more_except = except_op_queue_.dispatch_operation(descriptor, 0);
+          if (events[i].data > 0)
+            more_reads = read_op_queue_.dispatch_operation(descriptor, 0);
+          else
+            more_reads = read_op_queue_.has_operation(descriptor);
+        }
+        else
+        {
+          more_reads = read_op_queue_.dispatch_operation(descriptor, 0);
+          more_except = except_op_queue_.has_operation(descriptor);
+        }
+
+        // Update the descriptor in the kqueue.
+        struct kevent event;
+        if (more_reads)
+          EV_SET(&event, descriptor, EVFILT_READ, EV_ADD, 0, 0, 0);
+        else if (more_except)
+          EV_SET(&event, descriptor, EVFILT_READ, EV_ADD, EV_OOBAND, 0, 0);
+        else
+          EV_SET(&event, descriptor, EVFILT_READ, EV_DELETE, 0, 0, 0);
+        if (::kevent(kqueue_fd_, &event, 1, 0, 0, 0) == -1)
+        {
+          int error = errno;
+          except_op_queue_.dispatch_all_operations(descriptor, error);
+          read_op_queue_.dispatch_all_operations(descriptor, error);
+        }
+      }
+      else if (events[i].filter == EVFILT_WRITE)
+      {
+        // Dispatch operations associated with the descriptor.
+        bool more_writes = false;
+        if (events[i].flags & EV_ERROR)
+        {
+          int error = events[i].data;
+          write_op_queue_.dispatch_all_operations(descriptor, error);
+        }
+        else
+        {
+          more_writes = write_op_queue_.dispatch_operation(descriptor, 0);
+        }
+
+        // Update the descriptor in the kqueue.
+        struct kevent event;
+        if (more_writes)
+          EV_SET(&event, descriptor, EVFILT_WRITE, EV_ADD, 0, 0, 0);
+        else
+          EV_SET(&event, descriptor, EVFILT_WRITE, EV_DELETE, 0, 0, 0);
+        if (::kevent(kqueue_fd_, &event, 1, 0, 0, 0) == -1)
+        {
+          int error = errno;
+          write_op_queue_.dispatch_all_operations(descriptor, error);
+        }
+      }
+    }
+
+    read_op_queue_.dispatch_cancellations();
+    write_op_queue_.dispatch_cancellations();
+    except_op_queue_.dispatch_cancellations();
+    timer_queue_.dispatch_timers(
+        boost::posix_time::microsec_clock::universal_time());
+
+    // Issue any pending cancellations.
+    for (size_t i = 0; i < pending_cancellations_.size(); ++i)
+      cancel_ops_unlocked(pending_cancellations_[i]);
+    pending_cancellations_.clear();
+
+    // Clean up operations. We must not hold the lock since the operations may
+    // make calls back into this reactor.
+    lock.unlock();
+    read_op_queue_.cleanup_operations();
+    write_op_queue_.cleanup_operations();
+    except_op_queue_.cleanup_operations();
   }
 
   // Run the select loop in the thread.
@@ -391,7 +450,7 @@ private:
     while (!stop_thread_)
     {
       lock.unlock();
-      run();
+      run(true);
       lock.lock();
     }
   }
@@ -482,23 +541,23 @@ private:
   // The queue of timers.
   reactor_timer_queue<boost::posix_time::ptime> timer_queue_;
 
-  // The type for a map of descriptors to be cancelled.
-  typedef hash_map<socket_type, bool> pending_cancellations_map;
-
-  // The map of descriptors that are pending cancellation.
-  pending_cancellations_map pending_cancellations_;
+  // The descriptors that are pending cancellation.
+  std::vector<socket_type> pending_cancellations_;
 
   // Does the reactor loop thread need to stop.
   bool stop_thread_;
 
   // The thread that is running the reactor loop.
   asio::detail::thread* thread_;
+
+  // Whether the service has been shut down.
+  bool shutdown_;
 };
 
 } // namespace detail
 } // namespace asio
 
-#endif // defined(__MACH__) && defined(__APPLE__)
+#endif // defined(ASIO_HAS_KQUEUE)
 
 #include "asio/detail/pop_options.hpp"
 

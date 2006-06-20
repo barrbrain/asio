@@ -1,40 +1,49 @@
 nobase_include_HEADERS = \
-	asio.hpp \
 	asio/basic_datagram_socket.hpp \
 	asio/basic_deadline_timer.hpp \
-	asio/basic_demuxer.hpp \
-	asio/basic_locking_dispatcher.hpp \
+	asio/basic_io_object.hpp \
+	asio/basic_resolver.hpp \
+	asio/basic_socket.hpp \
 	asio/basic_socket_acceptor.hpp \
+	asio/basic_socket_iostream.hpp \
+	asio/basic_socketbuf.hpp \
+	asio/basic_strand.hpp \
 	asio/basic_stream_socket.hpp \
+	asio/basic_streambuf.hpp \
 	asio/buffer.hpp \
-	asio/buffered_read_stream_fwd.hpp \
 	asio/buffered_read_stream.hpp \
-	asio/buffered_stream_fwd.hpp \
+	asio/buffered_read_stream_fwd.hpp \
 	asio/buffered_stream.hpp \
-	asio/buffered_write_stream_fwd.hpp \
+	asio/buffered_stream_fwd.hpp \
 	asio/buffered_write_stream.hpp \
+	asio/buffered_write_stream_fwd.hpp \
 	asio/completion_condition.hpp \
-	asio/datagram_socket.hpp \
 	asio/datagram_socket_service.hpp \
 	asio/deadline_timer.hpp \
 	asio/deadline_timer_service.hpp \
-	asio/demuxer.hpp \
-	asio/demuxer_service.hpp \
 	asio/detail/bind_handler.hpp \
 	asio/detail/buffer_resize_guard.hpp \
 	asio/detail/buffered_stream_storage.hpp \
+	asio/detail/call_stack.hpp \
 	asio/detail/consuming_buffers.hpp \
-	asio/detail/demuxer_run_call_stack.hpp \
+	asio/detail/const_buffers_iterator.hpp \
 	asio/detail/epoll_reactor.hpp \
+	asio/detail/epoll_reactor_fwd.hpp \
 	asio/detail/event.hpp \
 	asio/detail/fd_set_adapter.hpp \
+	asio/detail/handler_alloc_helpers.hpp \
 	asio/detail/hash_map.hpp \
 	asio/detail/io_control.hpp \
 	asio/detail/kqueue_reactor.hpp \
-	asio/detail/locking_dispatcher_impl.hpp \
-	asio/detail/locking_dispatcher_service.hpp \
+	asio/detail/kqueue_reactor_fwd.hpp \
 	asio/detail/mutex.hpp \
 	asio/detail/noncopyable.hpp \
+	asio/detail/null_event.hpp \
+	asio/detail/null_mutex.hpp \
+	asio/detail/null_signal_blocker.hpp \
+	asio/detail/null_thread.hpp \
+	asio/detail/null_tss_ptr.hpp \
+	asio/detail/old_win_sdk_compat.hpp \
 	asio/detail/pipe_select_interrupter.hpp \
 	asio/detail/pop_options.hpp \
 	asio/detail/posix_event.hpp \
@@ -47,9 +56,11 @@ nobase_include_HEADERS = \
 	asio/detail/reactive_socket_service.hpp \
 	asio/detail/reactor_op_queue.hpp \
 	asio/detail/reactor_timer_queue.hpp \
+	asio/detail/resolver_service.hpp \
 	asio/detail/scoped_lock.hpp \
 	asio/detail/select_interrupter.hpp \
 	asio/detail/select_reactor.hpp \
+	asio/detail/select_reactor_fwd.hpp \
 	asio/detail/service_registry.hpp \
 	asio/detail/signal_blocker.hpp \
 	asio/detail/signal_init.hpp \
@@ -58,63 +69,75 @@ nobase_include_HEADERS = \
 	asio/detail/socket_option.hpp \
 	asio/detail/socket_select_interrupter.hpp \
 	asio/detail/socket_types.hpp \
-	asio/detail/task_demuxer_service.hpp \
+	asio/detail/strand_service.hpp \
+	asio/detail/task_io_service.hpp \
+	asio/detail/task_io_service_fwd.hpp \
 	asio/detail/thread.hpp \
 	asio/detail/tss_ptr.hpp \
 	asio/detail/win_event.hpp \
-	asio/detail/win_iocp_demuxer_service.hpp \
+	asio/detail/win_iocp_io_service.hpp \
+	asio/detail/win_iocp_io_service_fwd.hpp \
 	asio/detail/win_iocp_operation.hpp \
 	asio/detail/win_iocp_socket_service.hpp \
 	asio/detail/win_local_free_on_block_exit.hpp \
 	asio/detail/win_mutex.hpp \
 	asio/detail/win_signal_blocker.hpp \
-	asio/detail/winsock_init.hpp \
 	asio/detail/win_thread.hpp \
 	asio/detail/win_tss_ptr.hpp \
+	asio/detail/winsock_init.hpp \
 	asio/detail/wrapped_handler.hpp \
-	asio/error_handler.hpp \
 	asio/error.hpp \
+	asio/error_handler.hpp \
+	asio/handler_alloc_hook.hpp \
+	asio/impl/io_service.ipp \
 	asio/impl/read.ipp \
+	asio/impl/read_until.ipp \
 	asio/impl/write.ipp \
-	asio/ipv4/address.hpp \
-	asio/ipv4/basic_host_resolver.hpp \
-	asio/ipv4/detail/host_resolver_service.hpp \
-	asio/ipv4/detail/socket_option.hpp \
-	asio/ipv4/host.hpp \
-	asio/ipv4/host_resolver.hpp \
-	asio/ipv4/host_resolver_service.hpp \
-	asio/ipv4/multicast.hpp \
-	asio/ipv4/tcp.hpp \
-	asio/ipv4/udp.hpp \
+	asio/io_service.hpp \
+	asio/ip/address.hpp \
+	asio/ip/address_v4.hpp \
+	asio/ip/address_v6.hpp \
+	asio/ip/basic_endpoint.hpp \
+	asio/ip/basic_resolver_entry.hpp \
+	asio/ip/basic_resolver_iterator.hpp \
+	asio/ip/basic_resolver_query.hpp \
+	asio/ip/host_name.hpp \
+	asio/ip/multicast.hpp \
+	asio/ip/resolver_query_base.hpp \
+	asio/ip/tcp.hpp \
+	asio/ip/udp.hpp \
+	asio/ip/detail/socket_option.hpp \
 	asio/is_read_buffered.hpp \
 	asio/is_write_buffered.hpp \
-	asio/locking_dispatcher.hpp \
-	asio/locking_dispatcher_service.hpp \
 	asio/placeholders.hpp \
 	asio/read.hpp \
-	asio/service_factory.hpp \
-	asio/socket_acceptor.hpp \
+	asio/read_until.hpp \
+	asio/resolver_service.hpp \
 	asio/socket_acceptor_service.hpp \
 	asio/socket_base.hpp \
-  asio/ssl.hpp \
-  asio/ssl/basic_context.hpp \
-  asio/ssl/context.hpp \
-  asio/ssl/context_base.hpp \
-  asio/ssl/context_service.hpp \
-  asio/ssl/detail/openssl_context_service.hpp \
-  asio/ssl/detail/openssl_init.hpp \
-  asio/ssl/detail/openssl_operation.hpp \
-  asio/ssl/detail/openssl_stream_service.hpp \
-  asio/ssl/detail/openssl_types.hpp \
-  asio/ssl/stream.hpp \
-  asio/ssl/stream_base.hpp \
-  asio/ssl/stream_service.hpp \
-	asio/stream_socket.hpp \
+	asio/ssl/basic_context.hpp \
+	asio/ssl/context.hpp \
+	asio/ssl/context_base.hpp \
+	asio/ssl/context_service.hpp \
+	asio/ssl/detail/openssl_context_service.hpp \
+	asio/ssl/detail/openssl_init.hpp \
+	asio/ssl/detail/openssl_operation.hpp \
+	asio/ssl/detail/openssl_stream_service.hpp \
+	asio/ssl/detail/openssl_types.hpp \
+	asio/ssl/stream.hpp \
+	asio/ssl/stream_base.hpp \
+	asio/ssl/stream_service.hpp \
+	asio/ssl.hpp \
+	asio/strand.hpp \
+	asio/strand_service.hpp \
 	asio/stream_socket_service.hpp \
+	asio/streambuf.hpp \
 	asio/system_exception.hpp \
 	asio/thread.hpp \
 	asio/time_traits.hpp \
-	asio/write.hpp
+	asio/write.hpp \
+	asio.hpp
 
 MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in
+

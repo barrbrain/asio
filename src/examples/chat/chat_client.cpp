@@ -5,34 +5,38 @@
 #include "asio.hpp"
 #include "chat_message.hpp"
 
+using asio::ip::tcp;
+
 typedef std::deque<chat_message> chat_message_queue;
 
 class chat_client
 {
 public:
-  chat_client(asio::demuxer& d,
-      const asio::ipv4::tcp::endpoint& endpoint)
-    : demuxer_(d),
-      socket_(d)
+  chat_client(asio::io_service& io_service,
+      tcp::resolver::iterator endpoint_iterator)
+    : io_service_(io_service),
+      socket_(io_service)
   {
+    tcp::endpoint endpoint = *endpoint_iterator;
     socket_.async_connect(endpoint,
         boost::bind(&chat_client::handle_connect, this,
-          asio::placeholders::error));
+          asio::placeholders::error, ++endpoint_iterator));
   }
 
   void write(const chat_message& msg)
   {
-    demuxer_.post(boost::bind(&chat_client::do_write, this, msg));
+    io_service_.post(boost::bind(&chat_client::do_write, this, msg));
   }
 
   void close()
   {
-    demuxer_.post(boost::bind(&chat_client::do_close, this));
+    io_service_.post(boost::bind(&chat_client::do_close, this));
   }
 
 private:
 
-  void handle_connect(const asio::error& error)
+  void handle_connect(const asio::error& error,
+      tcp::resolver::iterator endpoint_iterator)
   {
     if (!error)
     {
@@ -40,6 +44,14 @@ private:
           asio::buffer(read_msg_.data(), chat_message::header_length),
           boost::bind(&chat_client::handle_read_header, this,
             asio::placeholders::error));
+    }
+    else if (endpoint_iterator != tcp::resolver::iterator())
+    {
+      socket_.close();
+      tcp::endpoint endpoint = *endpoint_iterator;
+      socket_.async_connect(endpoint,
+          boost::bind(&chat_client::handle_connect, this,
+            asio::placeholders::error, ++endpoint_iterator));
     }
   }
 
@@ -115,8 +127,8 @@ private:
   }
 
 private:
-  asio::demuxer& demuxer_;
-  asio::stream_socket socket_;
+  asio::io_service& io_service_;
+  tcp::socket socket_;
   chat_message read_msg_;
   chat_message_queue write_msgs_;
 };
@@ -131,21 +143,20 @@ int main(int argc, char* argv[])
       return 1;
     }
 
-    asio::demuxer d;
+    asio::io_service io_service;
 
-    using namespace std; // For atoi, strlen and memcpy.
-    asio::ipv4::host_resolver hr(d);
-    asio::ipv4::host h;
-    hr.get_host_by_name(h, argv[1]);
-    asio::ipv4::tcp::endpoint ep(atoi(argv[2]), h.address(0));
+    tcp::resolver resolver(io_service);
+    tcp::resolver::query query(argv[1], argv[2]);
+    tcp::resolver::iterator iterator = resolver.resolve(query);
 
-    chat_client c(d, ep);
+    chat_client c(io_service, iterator);
 
-    asio::thread t(boost::bind(&asio::demuxer::run, &d));
+    asio::thread t(boost::bind(&asio::io_service::run, &io_service));
 
     char line[chat_message::max_body_length + 1];
     while (std::cin.getline(line, chat_message::max_body_length + 1))
     {
+      using namespace std; // For strlen and memcpy.
       chat_message msg;
       msg.body_length(strlen(line));
       memcpy(msg.body(), line, msg.body_length());

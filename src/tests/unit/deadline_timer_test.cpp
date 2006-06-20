@@ -2,11 +2,16 @@
 // deadline_timer_test.cpp
 // ~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
+
+// Disable autolinking for unit tests.
+#if !defined(BOOST_ALL_NO_LIB)
+#define BOOST_ALL_NO_LIB 1
+#endif // !defined(BOOST_ALL_NO_LIB)
 
 // Test that header file is self-contained.
 #include "asio/deadline_timer.hpp"
@@ -46,7 +51,7 @@ void increment_if_not_cancelled(int* count, const asio::error& e)
 
 void cancel_timer(asio::deadline_timer* t)
 {
-  int num_cancelled = t->cancel();
+  std::size_t num_cancelled = t->cancel();
   BOOST_CHECK(num_cancelled == 1);
 }
 
@@ -57,12 +62,12 @@ ptime now()
 
 void deadline_timer_test()
 {
-  asio::demuxer d;
+  asio::io_service ios;
   int count = 0;
 
   ptime start = now();
 
-  asio::deadline_timer t1(d, seconds(1));
+  asio::deadline_timer t1(ios, seconds(1));
   t1.wait();
 
   // The timer must block until after its expiry time.
@@ -72,7 +77,7 @@ void deadline_timer_test()
 
   start = now();
 
-  asio::deadline_timer t2(d, seconds(1) + microseconds(500000));
+  asio::deadline_timer t2(ios, seconds(1) + microseconds(500000));
   t2.wait();
 
   // The timer must block until after its expiry time.
@@ -100,13 +105,13 @@ void deadline_timer_test()
 
   start = now();
 
-  asio::deadline_timer t3(d, seconds(5));
+  asio::deadline_timer t3(ios, seconds(5));
   t3.async_wait(boost::bind(increment, &count));
 
   // No completions can be delivered until run() is called.
   BOOST_CHECK(count == 0);
 
-  d.run();
+  ios.run();
 
   // The run() call will not return until all operations have finished, and
   // this should not be until after the timer's expiry time.
@@ -118,14 +123,14 @@ void deadline_timer_test()
   count = 3;
   start = now();
 
-  asio::deadline_timer t4(d, seconds(1));
+  asio::deadline_timer t4(ios, seconds(1));
   t4.async_wait(boost::bind(decrement_to_zero, &t4, &count));
 
   // No completions can be delivered until run() is called.
   BOOST_CHECK(count == 3);
 
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
 
   // The run() call will not return until all operations have finished, and
   // this should not be until after the timer's final expiry time.
@@ -137,17 +142,17 @@ void deadline_timer_test()
   count = 0;
   start = now();
 
-  asio::deadline_timer t5(d, seconds(10));
+  asio::deadline_timer t5(ios, seconds(10));
   t5.async_wait(boost::bind(increment_if_not_cancelled, &count,
         asio::placeholders::error));
-  asio::deadline_timer t6(d, seconds(1));
+  asio::deadline_timer t6(ios, seconds(1));
   t6.async_wait(boost::bind(cancel_timer, &t5));
 
   // No completions can be delivered until run() is called.
   BOOST_CHECK(count == 0);
 
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
 
   // The timer should have been cancelled, so count should not have changed.
   // The total run time should not have been much more than 1 second (and
@@ -162,8 +167,8 @@ void deadline_timer_test()
   t5.async_wait(boost::bind(increment_if_not_cancelled, &count,
         asio::placeholders::error));
 
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
 
   // The timer should not have been cancelled, so count should have changed.
   // The total time since the timer was created should be more than 10 seconds.

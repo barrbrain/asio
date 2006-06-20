@@ -2,7 +2,7 @@
 // Dispatcher.hpp
 // ~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -11,7 +11,7 @@
 /// Dispatcher concept.
 /**
  * @par Implemented By:
- * asio::basic_demuxer @n
+ * asio::basic_io_service @n
  * asio::basic_locking_dispatcher
  */
 class Dispatcher

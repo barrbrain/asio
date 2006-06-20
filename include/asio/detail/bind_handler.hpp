@@ -2,7 +2,7 @@
 // bind.hpp
 // ~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -17,15 +17,10 @@
 
 #include "asio/detail/push_options.hpp"
 
+#include "asio/detail/handler_alloc_helpers.hpp"
+
 namespace asio {
 namespace detail {
-
-// Some compilers (notably MSVC6) run into mysterious compiler errors when
-// trying to use the boost::bind template in this library. The class and
-// function templates below provide only the functionality of bind to create
-// function objects with the signature void() as used in handlers passed to a
-// demuxer's dispatch or post functions. This should make it simpler for the
-// compiler to work correctly.
 
 template <typename Handler, typename Arg1>
 class binder1
@@ -45,6 +40,20 @@ public:
   void operator()() const
   {
     handler_(arg1_);
+  }
+
+  friend void* asio_handler_allocate(std::size_t size,
+      binder1<Handler, Arg1>* this_handler)
+  {
+    return asio_handler_alloc_helpers::allocate(
+        size, &this_handler->handler_);
+  }
+
+  friend void asio_handler_deallocate(void* pointer, std::size_t size,
+      binder1<Handler, Arg1>* this_handler)
+  {
+    asio_handler_alloc_helpers::deallocate(
+        pointer, size, &this_handler->handler_);
   }
 
 private:
@@ -77,6 +86,20 @@ public:
   void operator()() const
   {
     handler_(arg1_, arg2_);
+  }
+
+  friend void* asio_handler_allocate(std::size_t size,
+      binder2<Handler, Arg1, Arg2>* this_handler)
+  {
+    return asio_handler_alloc_helpers::allocate(
+        size, &this_handler->handler_);
+  }
+
+  friend void asio_handler_deallocate(void* pointer, std::size_t size,
+      binder2<Handler, Arg1, Arg2>* this_handler)
+  {
+    asio_handler_alloc_helpers::deallocate(
+        pointer, size, &this_handler->handler_);
   }
 
 private:
@@ -112,6 +135,20 @@ public:
   void operator()() const
   {
     handler_(arg1_, arg2_, arg3_);
+  }
+
+  friend void* asio_handler_allocate(std::size_t size,
+      binder3<Handler, Arg1, Arg2, Arg3>* this_handler)
+  {
+    return asio_handler_alloc_helpers::allocate(
+        size, &this_handler->handler_);
+  }
+
+  friend void asio_handler_deallocate(void* pointer, std::size_t size,
+      binder3<Handler, Arg1, Arg2, Arg3>* this_handler)
+  {
+    asio_handler_alloc_helpers::deallocate(
+        pointer, size, &this_handler->handler_);
   }
 
 private:
@@ -150,6 +187,20 @@ public:
   void operator()() const
   {
     handler_(arg1_, arg2_, arg3_, arg4_);
+  }
+
+  friend void* asio_handler_allocate(std::size_t size,
+      binder4<Handler, Arg1, Arg2, Arg3, Arg4>* this_handler)
+  {
+    return asio_handler_alloc_helpers::allocate(
+        size, &this_handler->handler_);
+  }
+
+  friend void asio_handler_deallocate(void* pointer, std::size_t size,
+      binder4<Handler, Arg1, Arg2, Arg3, Arg4>* this_handler)
+  {
+    asio_handler_alloc_helpers::deallocate(
+        pointer, size, &this_handler->handler_);
   }
 
 private:
@@ -193,6 +244,20 @@ public:
   void operator()() const
   {
     handler_(arg1_, arg2_, arg3_, arg4_, arg5_);
+  }
+
+  friend void* asio_handler_allocate(std::size_t size,
+      binder5<Handler, Arg1, Arg2, Arg3, Arg4, Arg5>* this_handler)
+  {
+    return asio_handler_alloc_helpers::allocate(
+        size, &this_handler->handler_);
+  }
+
+  friend void asio_handler_deallocate(void* pointer, std::size_t size,
+      binder5<Handler, Arg1, Arg2, Arg3, Arg4, Arg5>* this_handler)
+  {
+    asio_handler_alloc_helpers::deallocate(
+        pointer, size, &this_handler->handler_);
   }
 
 private:

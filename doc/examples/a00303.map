@@ -1,6 +1,0 @@
-base referer
-rect $a00200.html 86,8 222,88
-rect $a00211.html 58,138 250,250
-rect $a00204.html 274,138 493,250
-rect asio.doxytags$a00093.html 517,154 789,234
-rect asio.doxytags$a00097.html 813,154 1069,234

@@ -3,15 +3,17 @@
 #include <boost/bind.hpp>
 #include "asio.hpp"
 
+using asio::ip::udp;
+
 class server
 {
 public:
-  server(asio::demuxer& d, short port)
-    : demuxer_(d),
-      socket_(d, asio::ipv4::udp::endpoint(port))
+  server(asio::io_service& io_service, short port)
+    : io_service_(io_service),
+      socket_(io_service, udp::endpoint(udp::v4(), port))
   {
-    socket_.async_receive_from(asio::buffer(data_, max_length), 0,
-        sender_endpoint_,
+    socket_.async_receive_from(
+        asio::buffer(data_, max_length), sender_endpoint_,
         boost::bind(&server::handle_receive_from, this,
           asio::placeholders::error,
           asio::placeholders::bytes_transferred));
@@ -21,16 +23,16 @@ public:
   {
     if (!error && bytes_recvd > 0)
     {
-      socket_.async_send_to(asio::buffer(data_, bytes_recvd), 0,
-          sender_endpoint_,
+      socket_.async_send_to(
+          asio::buffer(data_, bytes_recvd), sender_endpoint_,
           boost::bind(&server::handle_send_to, this,
             asio::placeholders::error,
             asio::placeholders::bytes_transferred));
     }
     else
     {
-      socket_.async_receive_from(asio::buffer(data_, max_length), 0,
-          sender_endpoint_,
+      socket_.async_receive_from(
+          asio::buffer(data_, max_length), sender_endpoint_,
           boost::bind(&server::handle_receive_from, this,
             asio::placeholders::error,
             asio::placeholders::bytes_transferred));
@@ -39,17 +41,17 @@ public:
 
   void handle_send_to(const asio::error& error, size_t bytes_sent)
   {
-    socket_.async_receive_from(asio::buffer(data_, max_length), 0,
-        sender_endpoint_,
+    socket_.async_receive_from(
+        asio::buffer(data_, max_length), sender_endpoint_,
         boost::bind(&server::handle_receive_from, this,
           asio::placeholders::error,
           asio::placeholders::bytes_transferred));
   }
 
 private:
-  asio::demuxer& demuxer_;
-  asio::datagram_socket socket_;
-  asio::ipv4::udp::endpoint sender_endpoint_;
+  asio::io_service& io_service_;
+  udp::socket socket_;
+  udp::endpoint sender_endpoint_;
   enum { max_length = 1024 };
   char data_[max_length];
 };
@@ -64,12 +66,12 @@ int main(int argc, char* argv[])
       return 1;
     }
 
-    asio::demuxer d;
+    asio::io_service io_service;
 
     using namespace std; // For atoi.
-    server s(d, atoi(argv[1]));
+    server s(io_service, atoi(argv[1]));
 
-    d.run();
+    io_service.run();
   }
   catch (asio::error& e)
   {

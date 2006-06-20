@@ -16,11 +16,12 @@ class server
   : private boost::noncopyable
 {
 public:
-  /// Construct the server to listen on the specified TCP port and serve up
-  /// files from the given directory.
-  explicit server(short port, const std::string& doc_root);
+  /// Construct the server to listen on the specified TCP address and port, and
+  /// serve up files from the given directory.
+  explicit server(const std::string& address, const std::string& port,
+      const std::string& doc_root);
 
-  /// Run the server's demuxer loop.
+  /// Run the server's io_service loop.
   void run();
 
   /// Stop the server.
@@ -33,11 +34,11 @@ private:
   /// Handle a request to stop the server.
   void handle_stop();
 
-  /// The demuxer used to perform asynchronous operations.
-  asio::demuxer demuxer_;
+  /// The io_service used to perform asynchronous operations.
+  asio::io_service io_service_;
 
   /// Acceptor used to listen for incoming connections.
-  asio::socket_acceptor acceptor_;
+  asio::ip::tcp::acceptor acceptor_;
 
   /// The connection manager which owns all live connections.
   connection_manager connection_manager_;

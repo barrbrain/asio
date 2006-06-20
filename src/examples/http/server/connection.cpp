@@ -7,15 +7,15 @@
 namespace http {
 namespace server {
 
-connection::connection(asio::demuxer& d, connection_manager& manager,
-    request_handler& handler)
-  : socket_(d),
+connection::connection(asio::io_service& io_service,
+    connection_manager& manager, request_handler& handler)
+  : socket_(io_service),
     connection_manager_(manager),
     request_handler_(handler)
 {
 }
 
-asio::stream_socket& connection::socket()
+asio::ip::tcp::socket& connection::socket()
 {
   return socket_;
 }

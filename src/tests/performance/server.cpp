@@ -2,7 +2,7 @@
 // server.hpp
 // ~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -19,10 +19,10 @@ using namespace asio;
 class session
 {
 public:
-  session(demuxer& d, size_t block_size)
-    : demuxer_(d),
-      dispatcher_(d),
-      socket_(d),
+  session(io_service& ios, size_t block_size)
+    : io_service_(ios),
+      strand_(ios),
+      socket_(ios),
       block_size_(block_size),
       read_data_(new char[block_size]),
       read_data_length_(0),
@@ -38,7 +38,7 @@ public:
     delete[] write_data_;
   }
 
-  stream_socket& socket()
+  ip::tcp::socket& socket()
   {
     return socket_;
   }
@@ -47,7 +47,7 @@ public:
   {
     ++op_count_;
     socket_.async_read_some(buffer(read_data_, block_size_),
-        dispatcher_.wrap(
+        strand_.wrap(
           boost::bind(&session::handle_read, this, placeholders::error,
             placeholders::bytes_transferred)));
   }
@@ -65,21 +65,20 @@ public:
         op_count_ += 2;
         std::swap(read_data_, write_data_);
         async_write(socket_, buffer(write_data_, read_data_length_),
-            dispatcher_.wrap(
-              boost::bind(&session::handle_write, this, placeholders::error,
-                placeholders::bytes_transferred)));
+            strand_.wrap(
+              boost::bind(&session::handle_write, this, placeholders::error)));
         socket_.async_read_some(buffer(read_data_, block_size_),
-            dispatcher_.wrap(
+            strand_.wrap(
               boost::bind(&session::handle_read, this, placeholders::error,
                 placeholders::bytes_transferred)));
       }
     }
 
     if (op_count_ == 0)
-      demuxer_.post(boost::bind(&session::destroy, this));
+      io_service_.post(boost::bind(&session::destroy, this));
   }
 
-  void handle_write(const error& err, size_t last_length)
+  void handle_write(const error& err)
   {
     --op_count_;
 
@@ -91,18 +90,17 @@ public:
         op_count_ += 2;
         std::swap(read_data_, write_data_);
         async_write(socket_, buffer(write_data_, read_data_length_),
-            dispatcher_.wrap(
-              boost::bind(&session::handle_write, this, placeholders::error,
-                placeholders::bytes_transferred)));
+            strand_.wrap(
+              boost::bind(&session::handle_write, this, placeholders::error)));
         socket_.async_read_some(buffer(read_data_, block_size_),
-            dispatcher_.wrap(
+            strand_.wrap(
               boost::bind(&session::handle_read, this, placeholders::error,
                 placeholders::bytes_transferred)));
       }
     }
 
     if (op_count_ == 0)
-      demuxer_.post(boost::bind(&session::destroy, this));
+      io_service_.post(boost::bind(&session::destroy, this));
   }
 
   static void destroy(session* s)
@@ -111,9 +109,9 @@ public:
   }
 
 private:
-  demuxer& demuxer_;
-  locking_dispatcher dispatcher_;
-  stream_socket socket_;
+  io_service& io_service_;
+  strand strand_;
+  ip::tcp::socket socket_;
   size_t block_size_;
   char* read_data_;
   size_t read_data_length_;
@@ -125,17 +123,18 @@ private:
 class server
 {
 public:
-  server(demuxer& d, const ipv4::tcp::endpoint& endpoint, size_t block_size)
-    : demuxer_(d),
-      acceptor_(d),
+  server(io_service& ios, const ip::tcp::endpoint& endpoint,
+      size_t block_size)
+    : io_service_(ios),
+      acceptor_(ios),
       block_size_(block_size)
   {
-    acceptor_.open(ipv4::tcp());
-    acceptor_.set_option(stream_socket::reuse_address(1));
+    acceptor_.open(endpoint.protocol());
+    acceptor_.set_option(ip::tcp::acceptor::reuse_address(1));
     acceptor_.bind(endpoint);
     acceptor_.listen();
 
-    session* new_session = new session(demuxer_, block_size_);
+    session* new_session = new session(io_service_, block_size_);
     acceptor_.async_accept(new_session->socket(),
         boost::bind(&server::handle_accept, this, new_session,
           placeholders::error));
@@ -146,13 +145,7 @@ public:
     if (!err)
     {
       new_session->start();
-      new_session = new session(demuxer_, block_size_);
-      acceptor_.async_accept(new_session->socket(),
-          boost::bind(&server::handle_accept, this, new_session,
-            placeholders::error));
-    }
-    else if (err == error::connection_aborted)
-    {
+      new_session = new session(io_service_, block_size_);
       acceptor_.async_accept(new_session->socket(),
           boost::bind(&server::handle_accept, this, new_session,
             placeholders::error));
@@ -164,8 +157,8 @@ public:
   }
 
 private:
-  demuxer& demuxer_;
-  socket_acceptor acceptor_;
+  io_service& io_service_;
+  ip::tcp::acceptor acceptor_;
   size_t block_size_;
 };
 
@@ -173,30 +166,31 @@ int main(int argc, char* argv[])
 {
   try
   {
-    if (argc != 4)
+    if (argc != 5)
     {
-      std::cerr << "Usage: server <port> <threads> <blocksize>\n";
+      std::cerr << "Usage: server <address> <port> <threads> <blocksize>\n";
       return 1;
     }
 
     using namespace std; // For atoi.
-    short port = atoi(argv[1]);
-    int thread_count = atoi(argv[2]);
-    size_t block_size = atoi(argv[3]);
+    ip::address address = ip::address::from_string(argv[1]);
+    short port = atoi(argv[2]);
+    int thread_count = atoi(argv[3]);
+    size_t block_size = atoi(argv[4]);
 
-    demuxer d;
+    io_service ios;
 
-    server s(d, ipv4::tcp::endpoint(port), block_size);
+    server s(ios, ip::tcp::endpoint(address, port), block_size);
 
     // Threads not currently supported in this test.
     std::list<thread*> threads;
     while (--thread_count > 0)
     {
-      thread* new_thread = new thread(boost::bind(&demuxer::run, &d));
+      thread* new_thread = new thread(boost::bind(&io_service::run, &ios));
       threads.push_back(new_thread);
     }
 
-    d.run();
+    ios.run();
 
     while (!threads.empty())
     {

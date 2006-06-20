@@ -1,6 +1,6 @@
 AC_INIT(include/asio.hpp)
 AM_MAINTAINER_MODE
-AM_INIT_AUTOMAKE(asio, [0.3.6])
+AM_INIT_AUTOMAKE(asio, [0.3.7])
 
 AC_CANONICAL_HOST
 AM_PROG_CC_C_O
@@ -51,6 +51,7 @@ fi
 
 AM_CONDITIONAL(HAVE_OPENSSL,test x$OPENSSL_FOUND != xno)
 
+WINDOWS=no
 case $host in
   *-*-linux*)
     CXXFLAGS="$CXXFLAGS -pthread"
@@ -68,7 +69,13 @@ case $host in
   *-*-mingw32*)
     CXXFLAGS="$CXXFLAGS -mthreads"
     LDFLAGS="$LDFLAGS -mthreads"
-    LIBS="$LIBS -lws2_32"
+    LIBS="$LIBS -lws2_32 -lmswsock"
+    WINDOWS=yes
+    ;;
+  *-pc-cygwin*)
+    CXXFLAGS="$CXXFLAGS -D__USE_W32_SOCKETS -D_WIN32_WINNT=0x0500"
+    LIBS="$LIBS -lws2_32 -lmswsock"
+    WINDOWS=yes
     ;;
   *-apple-darwin*)
     CXXFLAGS="$CXXFLAGS"
@@ -84,6 +91,7 @@ AC_CHECK_PROG(DOXYGEN_FOUND,doxygen,yes)
 AM_CONDITIONAL(HAVE_DOXYGEN,test x$DOXYGEN_FOUND = xyes)
 AC_CHECK_PROG(HAVE_DOT,dot,YES,NO)
 AC_SUBST(HAVE_DOT)
+AM_CONDITIONAL(WINDOWS_TARGET,test x$WINDOWS != xno)
 
 AC_OUTPUT([
   Makefile

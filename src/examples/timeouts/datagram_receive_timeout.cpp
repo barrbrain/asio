@@ -8,13 +8,13 @@ using namespace asio;
 class datagram_handler
 {
 public:
-  datagram_handler(demuxer& d)
-    : demuxer_(d),
-      timer_(d),
-      socket_(d, ipv4::udp::endpoint(32124))
+  datagram_handler(io_service& ios)
+    : io_service_(ios),
+      timer_(ios),
+      socket_(ios, ip::udp::endpoint(ip::udp::v4(), 32124))
   {
     socket_.async_receive_from(
-        asio::buffer(data_, max_length), 0, sender_endpoint_,
+        asio::buffer(data_, max_length), sender_endpoint_,
         boost::bind(&datagram_handler::handle_receive_from, this,
           asio::placeholders::error,
           asio::placeholders::bytes_transferred));
@@ -41,10 +41,10 @@ public:
   }
 
 private:
-  demuxer& demuxer_;
+  io_service& io_service_;
   deadline_timer timer_;
-  datagram_socket socket_;
-  ipv4::udp::endpoint sender_endpoint_;
+  ip::udp::socket socket_;
+  ip::udp::endpoint sender_endpoint_;
   enum { max_length = 512 };
   char data_[max_length];
 };
@@ -53,9 +53,9 @@ int main()
 {
   try
   {
-    demuxer d;
-    datagram_handler dh(d);
-    d.run();
+    io_service ios;
+    datagram_handler dh(ios);
+    ios.run();
   }
   catch (asio::error& e)
   {

@@ -3,15 +3,17 @@
 #include <boost/bind.hpp>
 #include "asio.hpp"
 
+using asio::ip::tcp;
+
 class session
 {
 public:
-  session(asio::demuxer& d)
-    : socket_(d)
+  session(asio::io_service& io_service)
+    : socket_(io_service)
   {
   }
 
-  asio::stream_socket& socket()
+  tcp::socket& socket()
   {
     return socket_;
   }
@@ -55,7 +57,7 @@ public:
   }
 
 private:
-  asio::stream_socket socket_;
+  tcp::socket socket_;
   enum { max_length = 1024 };
   char data_[max_length];
 };
@@ -63,11 +65,11 @@ private:
 class server
 {
 public:
-  server(asio::demuxer& d, short port)
-    : demuxer_(d),
-      acceptor_(d, asio::ipv4::tcp::endpoint(port))
+  server(asio::io_service& io_service, short port)
+    : io_service_(io_service),
+      acceptor_(io_service, tcp::endpoint(tcp::v4(), port))
   {
-    session* new_session = new session(demuxer_);
+    session* new_session = new session(io_service_);
     acceptor_.async_accept(new_session->socket(),
         boost::bind(&server::handle_accept, this, new_session,
           asio::placeholders::error));
@@ -78,13 +80,7 @@ public:
     if (!error)
     {
       new_session->start();
-      new_session = new session(demuxer_);
-      acceptor_.async_accept(new_session->socket(),
-          boost::bind(&server::handle_accept, this, new_session,
-            asio::placeholders::error));
-    }
-    else if (error == asio::error::connection_aborted)
-    {
+      new_session = new session(io_service_);
       acceptor_.async_accept(new_session->socket(),
           boost::bind(&server::handle_accept, this, new_session,
             asio::placeholders::error));
@@ -96,8 +92,8 @@ public:
   }
 
 private:
-  asio::demuxer& demuxer_;
-  asio::socket_acceptor acceptor_;
+  asio::io_service& io_service_;
+  tcp::acceptor acceptor_;
 };
 
 int main(int argc, char* argv[])
@@ -110,12 +106,12 @@ int main(int argc, char* argv[])
       return 1;
     }
 
-    asio::demuxer d;
+    asio::io_service io_service;
 
     using namespace std; // For atoi.
-    server s(d, atoi(argv[1]));
+    server s(io_service, atoi(argv[1]));
 
-    d.run();
+    io_service.run();
   }
   catch (asio::error& e)
   {

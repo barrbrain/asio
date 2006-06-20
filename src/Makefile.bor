@@ -3,7 +3,7 @@ BOOSTDIR = ../../boost_1_33_1
 !endif
 
 CXXFLAGS = -q -O2 -v -vi -y -a8 -b -Ve- -Vx- -tWM -tWR -tWC -w-inl -w-par -I../include -I$(BOOSTDIR)
-DEFINES = -D_WIN32_WINNT=0x0500 -DBOOST_DATE_TIME_NO_LIB
+DEFINES = -D_WIN32_WINNT=0x0500 -DBOOST_ALL_NO_LIB
 LDFLAGS = -q -O2 -v -vi -y -a8 -b -Ve- -Vx- -tWM -tWR -tWC -lw-dup
 
 PERFORMANCE_TEST_EXES = \
@@ -13,9 +13,9 @@ PERFORMANCE_TEST_EXES = \
 UNIT_TEST_EXES = \
 	tests\unit\basic_datagram_socket_test.exe \
 	tests\unit\basic_deadline_timer_test.exe \
-	tests\unit\basic_demuxer_test.exe \
-	tests\unit\basic_locking_dispatcher_test.exe \
+	tests\unit\basic_resolver_test.exe \
 	tests\unit\basic_socket_acceptor_test.exe \
+	tests\unit\basic_strand_test.exe \
 	tests\unit\basic_stream_socket_test.exe \
 	tests\unit\buffered_read_stream_test.exe \
 	tests\unit\buffered_stream_test.exe \
@@ -23,38 +23,40 @@ UNIT_TEST_EXES = \
 	tests\unit\buffer_test.exe \
 	tests\unit\completion_condition_test.exe \
 	tests\unit\datagram_socket_service_test.exe \
-	tests\unit\datagram_socket_test.exe \
 	tests\unit\deadline_timer_service_test.exe \
 	tests\unit\deadline_timer_test.exe \
-	tests\unit\demuxer_service_test.exe \
-	tests\unit\demuxer_test.exe \
+	tests\unit\io_service_test.exe \
 	tests\unit\error_handler_test.exe \
 	tests\unit\error_test.exe \
-	tests\unit\ipv4\address_test.exe \
-	tests\unit\ipv4\basic_host_resolver_test.exe \
-	tests\unit\ipv4\host_resolver_service_test.exe \
-	tests\unit\ipv4\host_resolver_test.exe \
-	tests\unit\ipv4\host_test.exe \
-	tests\unit\ipv4\multicast_test.exe \
-	tests\unit\ipv4\tcp_test.exe \
-	tests\unit\ipv4\udp_test.exe \
+	tests\unit\ip\address_test.exe \
+	tests\unit\ip\address_v4_test.exe \
+	tests\unit\ip\address_v6_test.exe \
+	tests\unit\ip\basic_endpoint_test.exe \
+	tests\unit\ip\basic_resolver_entry_test.exe \
+	tests\unit\ip\basic_resolver_iterator_test.exe \
+	tests\unit\ip\basic_resolver_query_test.exe \
+	tests\unit\ip\host_name_test.exe \
+	tests\unit\ip\multicast_test.exe \
+	tests\unit\ip\resolver_query_base_test.exe \
+	tests\unit\ip\tcp_test.exe \
+	tests\unit\ip\udp_test.exe \
 	tests\unit\is_read_buffered_test.exe \
 	tests\unit\is_write_buffered_test.exe \
-	tests\unit\locking_dispatcher_service_test.exe \
-	tests\unit\locking_dispatcher_test.exe \
 	tests\unit\placeholders_test.exe \
 	tests\unit\read_test.exe \
-	tests\unit\service_factory_test.exe \
+	tests\unit\resolver_service_test.exe \
 	tests\unit\socket_acceptor_service_test.exe \
-	tests\unit\socket_acceptor_test.exe \
 	tests\unit\socket_base_test.exe \
+	tests\unit\strand_service_test.exe \
+	tests\unit\strand_test.exe \
 	tests\unit\stream_socket_service_test.exe \
-	tests\unit\stream_socket_test.exe \
 	tests\unit\thread_test.exe \
 	tests\unit\time_traits_test.exe \
 	tests\unit\write_test.exe
 
 EXAMPLE_EXES = \
+	examples\allocation\server.exe \
+	examples\buffers\reference_counted.exe \
 	examples\chat\chat_client.exe \
 	examples\chat\chat_server.exe \
 	examples\echo\async_tcp_echo_server.exe \
@@ -64,6 +66,8 @@ EXAMPLE_EXES = \
 	examples\echo\blocking_udp_echo_client.exe \
 	examples\echo\blocking_udp_echo_server.exe \
 	examples\http\server\http_server.exe \
+	examples\iostreams\daytime_client.exe \
+	examples\iostreams\daytime_server.exe \
 	examples\multicast\receiver.exe \
 	examples\multicast\sender.exe \
 	examples\timeouts\accept_timeout.exe \

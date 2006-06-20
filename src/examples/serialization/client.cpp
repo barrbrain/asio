@@ -1,37 +1,38 @@
 #include <asio.hpp>
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 #include <iostream>
 #include <vector>
 #include "connection.hpp" // Must come before boost/serialization headers.
 #include <boost/serialization/vector.hpp>
 #include "stock.hpp"
 
-namespace serialization {
+namespace s11n_example {
 
 /// Downloads stock quote information from a server.
 class client
 {
 public:
   /// Constructor starts the asynchronous connect operation.
-  client(asio::demuxer& demuxer,
-      const std::string& hostname, unsigned short port)
-    : connection_(demuxer)
+  client(asio::io_service& io_service,
+      const std::string& host, const std::string& service)
+    : connection_(io_service)
   {
     // Resolve the host name into an IP address.
-    asio::ipv4::host_resolver host_resolver(demuxer);
-    asio::ipv4::host host;
-    host_resolver.get_host_by_name(host, hostname);
+    asio::ip::tcp::resolver resolver(io_service);
+    asio::ip::tcp::resolver::query query(host, service);
+    asio::ip::tcp::resolver::iterator endpoint_iterator =
+      resolver.resolve(query);
+    asio::ip::tcp::endpoint endpoint = *endpoint_iterator;
 
     // Start an asynchronous connect operation.
-    asio::ipv4::tcp::endpoint endpoint(port, host.address(0));
     connection_.socket().async_connect(endpoint,
         boost::bind(&client::handle_connect, this,
-          asio::placeholders::error));
+          asio::placeholders::error, ++endpoint_iterator));
   }
 
   /// Handle completion of a connect operation.
-  void handle_connect(const asio::error& e)
+  void handle_connect(const asio::error& e,
+      asio::ip::tcp::resolver::iterator endpoint_iterator)
   {
     if (!e)
     {
@@ -42,10 +43,19 @@ public:
           boost::bind(&client::handle_read, this,
             asio::placeholders::error));
     }
+    else if (endpoint_iterator != asio::ip::tcp::resolver::iterator())
+    {
+      // Try the next endpoint.
+      connection_.socket().close();
+      asio::ip::tcp::endpoint endpoint = *endpoint_iterator;
+      connection_.socket().async_connect(endpoint,
+          boost::bind(&client::handle_connect, this,
+            asio::placeholders::error, ++endpoint_iterator));
+    }
     else
     {
       // An error occurred. Log it and return. Since we are not starting a new
-      // operation the demuxer will run out of work to do and the client will
+      // operation the io_service will run out of work to do and the client will
       // exit.
       std::cerr << e << std::endl;
     }
@@ -78,7 +88,7 @@ public:
       std::cerr << e << std::endl;
     }
 
-    // Since we are not starting a new operation the demuxer will run out of
+    // Since we are not starting a new operation the io_service will run out of
     // work to do and the client will exit.
   }
 
@@ -90,7 +100,7 @@ private:
   std::vector<stock> stocks_;
 };
 
-} // namespace serialization
+} // namespace s11n_example
 
 int main(int argc, char* argv[])
 {
@@ -102,12 +112,10 @@ int main(int argc, char* argv[])
       std::cerr << "Usage: client <host> <port>" << std::endl;
       return 1;
     }
-    std::string host = argv[1];
-    unsigned short port = boost::lexical_cast<unsigned short>(argv[2]);
 
-    asio::demuxer demuxer;
-    serialization::client client(demuxer, host, port);
-    demuxer.run();
+    asio::io_service io_service;
+    s11n_example::client client(io_service, argv[1], argv[2]);
+    io_service.run();
   }
   catch (std::exception& e)
   {

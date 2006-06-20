@@ -22,12 +22,12 @@ class connection
     private boost::noncopyable
 {
 public:
-  /// Construct a connection with the given demuxer.
-  explicit connection(asio::demuxer& d, connection_manager& manager,
-      request_handler& handler);
+  /// Construct a connection with the given io_service.
+  explicit connection(asio::io_service& io_service,
+      connection_manager& manager, request_handler& handler);
 
   /// Get the socket associated with the connection.
-  asio::stream_socket& socket();
+  asio::ip::tcp::socket& socket();
 
   /// Start the first asynchronous operation for the connection.
   void start();
@@ -43,7 +43,7 @@ private:
   void handle_write(const asio::error& e);
 
   /// Socket for the connection.
-  asio::stream_socket socket_;
+  asio::ip::tcp::socket socket_;
 
   /// The manager for this connection.
   connection_manager& connection_manager_;

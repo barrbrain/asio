@@ -19,13 +19,11 @@
 #include "asio/detail/push_options.hpp"
 
 #include "asio/detail/push_options.hpp"
-#include <memory>
 #include <string>
 #include <boost/noncopyable.hpp>
 #include "asio/detail/pop_options.hpp"
 
-#include "asio/basic_demuxer.hpp"
-#include "asio/demuxer_service.hpp"
+#include "asio/io_service.hpp"
 #include "asio/ssl/context_base.hpp"
 #include "asio/ssl/detail/openssl_context_service.hpp"
 
@@ -33,36 +31,31 @@ namespace asio {
 namespace ssl {
 
 /// Default service implementation for a context.
-template <typename Allocator = std::allocator<void> >
 class context_service
-  : private boost::noncopyable
+  : public asio::io_service::service
 {
-public:
-  /// The demuxer type for this service.
-  typedef basic_demuxer<demuxer_service<Allocator> > demuxer_type;
-
 private:
   // The type of the platform-specific implementation.
-  typedef detail::openssl_context_service<demuxer_type> service_impl_type;
+  typedef detail::openssl_context_service service_impl_type;
 
 public:
   /// The type of the context.
 #if defined(GENERATING_DOCUMENTATION)
   typedef implementation_defined impl_type;
 #else
-  typedef typename service_impl_type::impl_type impl_type;
+  typedef service_impl_type::impl_type impl_type;
 #endif
 
   /// Constructor.
-  explicit context_service(demuxer_type& demuxer)
-    : service_impl_(demuxer.get_service(service_factory<service_impl_type>()))
+  explicit context_service(asio::io_service& io_service)
+    : asio::io_service::service(io_service),
+      service_impl_(asio::use_service<service_impl_type>(io_service))
   {
   }
 
-  /// Get the demuxer associated with the service.
-  demuxer_type& demuxer()
+  /// Destroy all user-defined handler objects owned by the service.
+  void shutdown_service()
   {
-    return service_impl_.demuxer();
   }
 
   /// Return a null context implementation.

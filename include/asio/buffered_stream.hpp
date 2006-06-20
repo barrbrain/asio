@@ -2,7 +2,7 @@
 // buffered_stream.hpp
 // ~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -26,6 +26,7 @@
 #include "asio/buffered_write_stream.hpp"
 #include "asio/buffered_stream_fwd.hpp"
 #include "asio/error.hpp"
+#include "asio/io_service.hpp"
 #include "asio/detail/noncopyable.hpp"
 
 namespace asio {
@@ -53,9 +54,6 @@ public:
 
   /// The type of the lowest layer.
   typedef typename next_layer_type::lowest_layer_type lowest_layer_type;
-
-  /// The demuxer type for this asynchronous type.
-  typedef typename next_layer_type::demuxer_type demuxer_type;
 
   /// The type used for reporting errors.
   typedef typename next_layer_type::error_type error_type;
@@ -89,10 +87,10 @@ public:
     return stream_impl_.lowest_layer();
   }
 
-  /// Get the demuxer associated with the asynchronous object.
-  demuxer_type& demuxer()
+  /// Get the io_service associated with the object.
+  asio::io_service& io_service()
   {
-    return stream_impl_.demuxer();
+    return stream_impl_.io_service();
   }
 
   /// Close the stream.

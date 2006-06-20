@@ -20,19 +20,17 @@ public:
   /// The native implementation type of the timer.
   typedef typename service_type::impl_type impl_type;
 
-  /// The demuxer type for this asynchronous type.
-  typedef typename service_type::demuxer_type demuxer_type;
-
   /// Constructor.
   /**
    * This constructor creates a logger.
    *
-   * @param d The demuxer object used to locate the logger service.
+   * @param io_service The io_service object used to locate the logger service.
    *
    * @param identifier An identifier for this logger.
    */
-  explicit basic_logger(demuxer_type& d, const std::string& identifier)
-    : service_(d.get_service(asio::service_factory<Service>())),
+  explicit basic_logger(asio::io_service& io_service,
+      const std::string& identifier)
+    : service_(asio::use_service<Service>(io_service)),
       impl_(service_.null())
   {
     service_.create(impl_, identifier);
@@ -44,10 +42,10 @@ public:
     service_.destroy(impl_);
   }
 
-  /// Get the demuxer associated with the asynchronous object.
-  demuxer_type& demuxer()
+  /// Get the io_service associated with the object.
+  asio::io_service& io_service()
   {
-    return service_.demuxer();
+    return service_.io_service();
   }
 
   /// Set the output file for all logger instances.

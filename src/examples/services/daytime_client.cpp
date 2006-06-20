@@ -4,8 +4,8 @@
 #include "logger.hpp"
 #include "stream_socket_service.hpp"
 
-typedef asio::basic_stream_socket<
-  services::stream_socket_service<> > debug_stream_socket;
+typedef asio::basic_stream_socket<asio::ip::tcp,
+    services::stream_socket_service<asio::ip::tcp> > debug_stream_socket;
 
 char read_buffer[1024];
 
@@ -22,13 +22,22 @@ void read_handler(const asio::error& e,
   }
 }
 
-void connect_handler(const asio::error& e, debug_stream_socket* s)
+void connect_handler(const asio::error& e, debug_stream_socket* s,
+    asio::ip::tcp::resolver::iterator endpoint_iterator)
 {
   if (!e)
   {
     s->async_read_some(asio::buffer(read_buffer),
         boost::bind(read_handler, asio::placeholders::error,
           asio::placeholders::bytes_transferred, s));
+  }
+  else if (endpoint_iterator != asio::ip::tcp::resolver::iterator())
+  {
+    s->close();
+    asio::ip::tcp::endpoint endpoint = *endpoint_iterator;
+    s->async_connect(endpoint,
+        boost::bind(connect_handler,
+          asio::placeholders::error, s, ++endpoint_iterator));
   }
   else
   {
@@ -46,26 +55,26 @@ int main(int argc, char* argv[])
       return 1;
     }
 
-    asio::demuxer demuxer;
+    asio::io_service io_service;
 
     // Set the name of the file that all logger instances will use.
-    services::logger logger(demuxer, "");
+    services::logger logger(io_service, "");
     logger.use_file("log.txt");
 
     // Resolve the address corresponding to the given host.
-    asio::ipv4::host_resolver host_resolver(demuxer);
-    asio::ipv4::host host;
-    host_resolver.get_host_by_name(host, argv[1]);
-    asio::ipv4::tcp::endpoint remote_endpoint(13, host.address(0));
+    asio::ip::tcp::resolver resolver(io_service);
+    asio::ip::tcp::resolver::query query(argv[1], "daytime");
+    asio::ip::tcp::resolver::iterator iterator = resolver.resolve(query);
+    asio::ip::tcp::endpoint endpoint = *iterator;
 
     // Start an asynchronous connect.
-    debug_stream_socket socket(demuxer);
-    socket.async_connect(remote_endpoint,
+    debug_stream_socket socket(io_service);
+    socket.async_connect(endpoint,
         boost::bind(connect_handler,
-          asio::placeholders::error, &socket));
+          asio::placeholders::error, &socket, ++iterator));
 
-    // Run the demuxer until all operations have finished.
-    demuxer.run();
+    // Run the io_service until all operations have finished.
+    io_service.run();
   }
   catch (std::exception& e)
   {

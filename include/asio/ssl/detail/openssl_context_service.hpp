@@ -23,6 +23,7 @@
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/error.hpp"
+#include "asio/io_service.hpp"
 #include "asio/ssl/context_base.hpp"
 #include "asio/ssl/detail/openssl_init.hpp"
 #include "asio/ssl/detail/openssl_types.hpp"
@@ -31,26 +32,22 @@ namespace asio {
 namespace ssl {
 namespace detail {
 
-template <typename Demuxer>
 class openssl_context_service
+  : public asio::io_service::service
 {
 public:
   // The native type of the context.
   typedef ::SSL_CTX* impl_type;
 
   // Constructor.
-  openssl_context_service(Demuxer& d)
-    : demuxer_(d)
+  openssl_context_service(asio::io_service& io_service)
+    : asio::io_service::service(io_service)
   {
   }
 
-  // The demuxer type for this service.
-  typedef Demuxer demuxer_type;
-
-  // Get the demuxer associated with the service.
-  demuxer_type& demuxer()
+  // Destroy all user-defined handler objects owned by the service.
+  void shutdown_service()
   {
-    return demuxer_;
   }
 
   // Return a null context implementation.
@@ -123,6 +120,9 @@ public:
       Error_Handler error_handler)
   {
     ::SSL_CTX_set_options(impl, o);
+
+    asio::error e;
+    error_handler(e);
   }
 
   // Set peer verification mode.
@@ -131,6 +131,9 @@ public:
       Error_Handler error_handler)
   {
     ::SSL_CTX_set_verify(impl, v, 0);
+
+    asio::error e;
+    error_handler(e);
   }
 
   // Load a certification authority file for performing verification.
@@ -142,7 +145,11 @@ public:
     {
       asio::error e(asio::error::invalid_argument);
       error_handler(e);
+      return;
     }
+
+    asio::error e;
+    error_handler(e);
   }
 
   // Add a directory containing certification authority files to be used for
@@ -155,7 +162,11 @@ public:
     {
       asio::error e(asio::error::invalid_argument);
       error_handler(e);
+      return;
     }
+
+    asio::error e;
+    error_handler(e);
   }
 
   // Use a certificate from a file.
@@ -184,7 +195,11 @@ public:
     {
       asio::error e(asio::error::invalid_argument);
       error_handler(e);
+      return;
     }
+
+    asio::error e;
+    error_handler(e);
   }
 
   // Use a certificate chain from a file.
@@ -196,7 +211,11 @@ public:
     {
       asio::error e(asio::error::invalid_argument);
       error_handler(e);
+      return;
     }
+
+    asio::error e;
+    error_handler(e);
   }
 
   // Use a private key from a file.
@@ -225,7 +244,11 @@ public:
     {
       asio::error e(asio::error::invalid_argument);
       error_handler(e);
+      return;
     }
+
+    asio::error e;
+    error_handler(e);
   }
 
   // Use an RSA private key from a file.
@@ -255,7 +278,11 @@ public:
     {
       asio::error e(asio::error::invalid_argument);
       error_handler(e);
+      return;
     }
+
+    asio::error e;
+    error_handler(e);
   }
 
   // Use the specified file to obtain the temporary Diffie-Hellman parameters.
@@ -287,13 +314,14 @@ public:
       ::DH_free(dh);
       asio::error e(asio::error::invalid_argument);
       error_handler(e);
+      return;
     }
+
+    asio::error e;
+    error_handler(e);
   }
 
 private:
-  // The demuxer that owns the service.
-  Demuxer& demuxer_;
-
   // Ensure openssl is initialised.
   openssl_init<> init_;
 };

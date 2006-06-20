@@ -4,11 +4,13 @@
 #include <boost/smart_ptr.hpp>
 #include "asio.hpp"
 
+using asio::ip::tcp;
+
 const int max_length = 1024;
 
-typedef boost::shared_ptr<asio::stream_socket> stream_socket_ptr;
+typedef boost::shared_ptr<tcp::socket> socket_ptr;
 
-void session(stream_socket_ptr sock)
+void session(socket_ptr sock)
 {
   try
   {
@@ -37,18 +39,14 @@ void session(stream_socket_ptr sock)
   }
 }
 
-void server(asio::demuxer& d, short port)
+void server(asio::io_service& io_service, short port)
 {
-  asio::socket_acceptor a(d, asio::ipv4::tcp::endpoint(port));
+  tcp::acceptor a(io_service, tcp::endpoint(tcp::v4(), port));
   for (;;)
   {
-    stream_socket_ptr sock(new asio::stream_socket(d));
-    asio::error error;
-    a.accept(*sock, asio::assign_error(error));
-    if (!error)
-      asio::thread t(boost::bind(session, sock));
-    else if (error != asio::error::connection_aborted)
-      throw error;
+    socket_ptr sock(new tcp::socket(io_service));
+    a.accept(*sock);
+    asio::thread t(boost::bind(session, sock));
   }
 }
 
@@ -62,10 +60,10 @@ int main(int argc, char* argv[])
       return 1;
     }
 
-    asio::demuxer d;
+    asio::io_service io_service;
 
     using namespace std; // For atoi.
-    server(d, atoi(argv[1]));
+    server(io_service, atoi(argv[1]));
   }
   catch (asio::error& e)
   {

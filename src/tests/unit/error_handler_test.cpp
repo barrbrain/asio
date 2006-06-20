@@ -2,11 +2,16 @@
 // error_handler_test.cpp
 // ~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
+
+// Disable autolinking for unit tests.
+#if !defined(BOOST_ALL_NO_LIB)
+#define BOOST_ALL_NO_LIB 1
+#endif // !defined(BOOST_ALL_NO_LIB)
 
 // Test that header file is self-contained.
 #include "asio/error_handler.hpp"
@@ -19,10 +24,10 @@ using namespace asio;
 
 void error_handler_test()
 {
-  demuxer d;
+  io_service ios;
 
-  stream_socket s(d);
-  ipv4::tcp::endpoint endpoint(321, ipv4::address::any());
+  ip::tcp::socket s(ios);
+  ip::tcp::endpoint endpoint(ip::tcp::v4(), 321);
 
   error expected_err;
   s.connect(endpoint, assign_error(expected_err));

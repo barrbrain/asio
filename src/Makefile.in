@@ -15,7 +15,7 @@
 @SET_MAKE@
 
 
-SOURCES = $(examples_chat_chat_client_SOURCES) $(examples_chat_chat_server_SOURCES) $(examples_echo_async_tcp_echo_server_SOURCES) $(examples_echo_async_udp_echo_server_SOURCES) $(examples_echo_blocking_tcp_echo_client_SOURCES) $(examples_echo_blocking_tcp_echo_server_SOURCES) $(examples_echo_blocking_udp_echo_client_SOURCES) $(examples_echo_blocking_udp_echo_server_SOURCES) $(examples_http_server_http_server_SOURCES) $(examples_iostreams_daytime_client_SOURCES) $(examples_multicast_receiver_SOURCES) $(examples_multicast_sender_SOURCES) $(examples_services_daytime_client_SOURCES) $(examples_ssl_client_SOURCES) $(examples_ssl_server_SOURCES) $(examples_timeouts_accept_timeout_SOURCES) $(examples_timeouts_connect_timeout_SOURCES) $(examples_timeouts_datagram_receive_timeout_SOURCES) $(examples_timeouts_stream_receive_timeout_SOURCES) $(examples_tutorial_daytime1_client_SOURCES) $(examples_tutorial_daytime2_server_SOURCES) $(examples_tutorial_daytime3_server_SOURCES) $(examples_tutorial_daytime4_client_SOURCES) $(examples_tutorial_daytime5_server_SOURCES) $(examples_tutorial_daytime6_server_SOURCES) $(examples_tutorial_daytime7_server_SOURCES) $(examples_tutorial_timer1_timer_SOURCES) $(examples_tutorial_timer2_timer_SOURCES) $(examples_tutorial_timer3_timer_SOURCES) $(examples_tutorial_timer4_timer_SOURCES) $(examples_tutorial_timer5_timer_SOURCES) $(tests_performance_client_SOURCES) $(tests_performance_server_SOURCES) $(tests_unit_basic_datagram_socket_test_SOURCES) $(tests_unit_basic_deadline_timer_test_SOURCES) $(tests_unit_basic_demuxer_test_SOURCES) $(tests_unit_basic_locking_dispatcher_test_SOURCES) $(tests_unit_basic_socket_acceptor_test_SOURCES) $(tests_unit_basic_stream_socket_test_SOURCES) $(tests_unit_buffer_test_SOURCES) $(tests_unit_buffered_read_stream_test_SOURCES) $(tests_unit_buffered_stream_test_SOURCES) $(tests_unit_buffered_write_stream_test_SOURCES) $(tests_unit_completion_condition_test_SOURCES) $(tests_unit_datagram_socket_service_test_SOURCES) $(tests_unit_datagram_socket_test_SOURCES) $(tests_unit_deadline_timer_service_test_SOURCES) $(tests_unit_deadline_timer_test_SOURCES) $(tests_unit_demuxer_service_test_SOURCES) $(tests_unit_demuxer_test_SOURCES) $(tests_unit_error_handler_test_SOURCES) $(tests_unit_error_test_SOURCES) $(tests_unit_ipv4_address_test_SOURCES) $(tests_unit_ipv4_basic_host_resolver_test_SOURCES) $(tests_unit_ipv4_host_resolver_service_test_SOURCES) $(tests_unit_ipv4_host_resolver_test_SOURCES) $(tests_unit_ipv4_host_test_SOURCES) $(tests_unit_ipv4_multicast_test_SOURCES) $(tests_unit_ipv4_tcp_test_SOURCES) $(tests_unit_ipv4_udp_test_SOURCES) $(tests_unit_is_read_buffered_test_SOURCES) $(tests_unit_is_write_buffered_test_SOURCES) $(tests_unit_locking_dispatcher_service_test_SOURCES) $(tests_unit_locking_dispatcher_test_SOURCES) $(tests_unit_placeholders_test_SOURCES) $(tests_unit_read_test_SOURCES) $(tests_unit_service_factory_test_SOURCES) $(tests_unit_socket_acceptor_service_test_SOURCES) $(tests_unit_socket_acceptor_test_SOURCES) $(tests_unit_socket_base_test_SOURCES) $(tests_unit_ssl_basic_context_test_SOURCES) $(tests_unit_ssl_context_base_test_SOURCES) $(tests_unit_ssl_context_service_test_SOURCES) $(tests_unit_ssl_context_test_SOURCES) $(tests_unit_ssl_stream_base_test_SOURCES) $(tests_unit_ssl_stream_service_test_SOURCES) $(tests_unit_ssl_stream_test_SOURCES) $(tests_unit_stream_socket_service_test_SOURCES) $(tests_unit_stream_socket_test_SOURCES) $(tests_unit_thread_test_SOURCES) $(tests_unit_time_traits_test_SOURCES) $(tests_unit_write_test_SOURCES)
+SOURCES = $(examples_allocation_server_SOURCES) $(examples_buffers_reference_counted_SOURCES) $(examples_chat_chat_client_SOURCES) $(examples_chat_chat_server_SOURCES) $(examples_echo_async_tcp_echo_server_SOURCES) $(examples_echo_async_udp_echo_server_SOURCES) $(examples_echo_blocking_tcp_echo_client_SOURCES) $(examples_echo_blocking_tcp_echo_server_SOURCES) $(examples_echo_blocking_udp_echo_client_SOURCES) $(examples_echo_blocking_udp_echo_server_SOURCES) $(examples_http_server_http_server_SOURCES) $(examples_iostreams_daytime_client_SOURCES) $(examples_iostreams_daytime_server_SOURCES) $(examples_multicast_receiver_SOURCES) $(examples_multicast_sender_SOURCES) $(examples_services_daytime_client_SOURCES) $(examples_ssl_client_SOURCES) $(examples_ssl_server_SOURCES) $(examples_timeouts_accept_timeout_SOURCES) $(examples_timeouts_connect_timeout_SOURCES) $(examples_timeouts_datagram_receive_timeout_SOURCES) $(examples_timeouts_stream_receive_timeout_SOURCES) $(examples_tutorial_daytime1_client_SOURCES) $(examples_tutorial_daytime2_server_SOURCES) $(examples_tutorial_daytime3_server_SOURCES) $(examples_tutorial_daytime4_client_SOURCES) $(examples_tutorial_daytime5_server_SOURCES) $(examples_tutorial_daytime6_server_SOURCES) $(examples_tutorial_daytime7_server_SOURCES) $(examples_tutorial_timer1_timer_SOURCES) $(examples_tutorial_timer2_timer_SOURCES) $(examples_tutorial_timer3_timer_SOURCES) $(examples_tutorial_timer4_timer_SOURCES) $(examples_tutorial_timer5_timer_SOURCES) $(tests_performance_client_SOURCES) $(tests_performance_server_SOURCES) $(tests_unit_basic_datagram_socket_test_SOURCES) $(tests_unit_basic_deadline_timer_test_SOURCES) $(tests_unit_basic_resolver_test_SOURCES) $(tests_unit_basic_socket_acceptor_test_SOURCES) $(tests_unit_basic_strand_test_SOURCES) $(tests_unit_basic_stream_socket_test_SOURCES) $(tests_unit_buffer_test_SOURCES) $(tests_unit_buffered_read_stream_test_SOURCES) $(tests_unit_buffered_stream_test_SOURCES) $(tests_unit_buffered_write_stream_test_SOURCES) $(tests_unit_completion_condition_test_SOURCES) $(tests_unit_datagram_socket_service_test_SOURCES) $(tests_unit_deadline_timer_service_test_SOURCES) $(tests_unit_deadline_timer_test_SOURCES) $(tests_unit_error_handler_test_SOURCES) $(tests_unit_error_test_SOURCES) $(tests_unit_io_service_test_SOURCES) $(tests_unit_ip_address_test_SOURCES) $(tests_unit_ip_address_v4_test_SOURCES) $(tests_unit_ip_address_v6_test_SOURCES) $(tests_unit_ip_basic_endpoint_test_SOURCES) $(tests_unit_ip_basic_resolver_entry_test_SOURCES) $(tests_unit_ip_basic_resolver_iterator_test_SOURCES) $(tests_unit_ip_basic_resolver_query_test_SOURCES) $(tests_unit_ip_host_name_test_SOURCES) $(tests_unit_ip_multicast_test_SOURCES) $(tests_unit_ip_resolver_query_base_test_SOURCES) $(tests_unit_ip_tcp_test_SOURCES) $(tests_unit_ip_udp_test_SOURCES) $(tests_unit_is_read_buffered_test_SOURCES) $(tests_unit_is_write_buffered_test_SOURCES) $(tests_unit_placeholders_test_SOURCES) $(tests_unit_read_test_SOURCES) $(tests_unit_resolver_service_test_SOURCES) $(tests_unit_socket_acceptor_service_test_SOURCES) $(tests_unit_socket_base_test_SOURCES) $(tests_unit_ssl_basic_context_test_SOURCES) $(tests_unit_ssl_context_base_test_SOURCES) $(tests_unit_ssl_context_service_test_SOURCES) $(tests_unit_ssl_context_test_SOURCES) $(tests_unit_ssl_stream_base_test_SOURCES) $(tests_unit_ssl_stream_service_test_SOURCES) $(tests_unit_ssl_stream_test_SOURCES) $(tests_unit_strand_service_test_SOURCES) $(tests_unit_strand_test_SOURCES) $(tests_unit_stream_socket_service_test_SOURCES) $(tests_unit_thread_test_SOURCES) $(tests_unit_time_traits_test_SOURCES) $(tests_unit_write_test_SOURCES)
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -43,9 +43,9 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	tests/performance/server$(EXEEXT) \
 	tests/unit/basic_datagram_socket_test$(EXEEXT) \
 	tests/unit/basic_deadline_timer_test$(EXEEXT) \
-	tests/unit/basic_demuxer_test$(EXEEXT) \
-	tests/unit/basic_locking_dispatcher_test$(EXEEXT) \
+	tests/unit/basic_resolver_test$(EXEEXT) \
 	tests/unit/basic_socket_acceptor_test$(EXEEXT) \
+	tests/unit/basic_strand_test$(EXEEXT) \
 	tests/unit/basic_stream_socket_test$(EXEEXT) \
 	tests/unit/buffered_read_stream_test$(EXEEXT) \
 	tests/unit/buffered_stream_test$(EXEEXT) \
@@ -53,36 +53,38 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	tests/unit/buffer_test$(EXEEXT) \
 	tests/unit/completion_condition_test$(EXEEXT) \
 	tests/unit/datagram_socket_service_test$(EXEEXT) \
-	tests/unit/datagram_socket_test$(EXEEXT) \
 	tests/unit/deadline_timer_service_test$(EXEEXT) \
 	tests/unit/deadline_timer_test$(EXEEXT) \
-	tests/unit/demuxer_service_test$(EXEEXT) \
-	tests/unit/demuxer_test$(EXEEXT) \
 	tests/unit/error_handler_test$(EXEEXT) \
 	tests/unit/error_test$(EXEEXT) \
-	tests/unit/ipv4/address_test$(EXEEXT) \
-	tests/unit/ipv4/basic_host_resolver_test$(EXEEXT) \
-	tests/unit/ipv4/host_resolver_service_test$(EXEEXT) \
-	tests/unit/ipv4/host_resolver_test$(EXEEXT) \
-	tests/unit/ipv4/host_test$(EXEEXT) \
-	tests/unit/ipv4/multicast_test$(EXEEXT) \
-	tests/unit/ipv4/tcp_test$(EXEEXT) \
-	tests/unit/ipv4/udp_test$(EXEEXT) \
+	tests/unit/io_service_test$(EXEEXT) \
+	tests/unit/ip/address_test$(EXEEXT) \
+	tests/unit/ip/address_v4_test$(EXEEXT) \
+	tests/unit/ip/address_v6_test$(EXEEXT) \
+	tests/unit/ip/basic_endpoint_test$(EXEEXT) \
+	tests/unit/ip/basic_resolver_entry_test$(EXEEXT) \
+	tests/unit/ip/basic_resolver_iterator_test$(EXEEXT) \
+	tests/unit/ip/basic_resolver_query_test$(EXEEXT) \
+	tests/unit/ip/host_name_test$(EXEEXT) \
+	tests/unit/ip/multicast_test$(EXEEXT) \
+	tests/unit/ip/resolver_query_base_test$(EXEEXT) \
+	tests/unit/ip/tcp_test$(EXEEXT) \
+	tests/unit/ip/udp_test$(EXEEXT) \
 	tests/unit/is_read_buffered_test$(EXEEXT) \
 	tests/unit/is_write_buffered_test$(EXEEXT) \
-	tests/unit/locking_dispatcher_service_test$(EXEEXT) \
-	tests/unit/locking_dispatcher_test$(EXEEXT) \
 	tests/unit/placeholders_test$(EXEEXT) \
 	tests/unit/read_test$(EXEEXT) \
-	tests/unit/service_factory_test$(EXEEXT) \
+	tests/unit/resolver_service_test$(EXEEXT) \
 	tests/unit/socket_acceptor_service_test$(EXEEXT) \
-	tests/unit/socket_acceptor_test$(EXEEXT) \
 	tests/unit/socket_base_test$(EXEEXT) \
+	tests/unit/strand_service_test$(EXEEXT) \
+	tests/unit/strand_test$(EXEEXT) \
 	tests/unit/stream_socket_service_test$(EXEEXT) \
-	tests/unit/stream_socket_test$(EXEEXT) \
 	tests/unit/thread_test$(EXEEXT) \
 	tests/unit/time_traits_test$(EXEEXT) \
 	tests/unit/write_test$(EXEEXT) \
+	examples/allocation/server$(EXEEXT) \
+	examples/buffers/reference_counted$(EXEEXT) \
 	examples/chat/chat_client$(EXEEXT) \
 	examples/chat/chat_server$(EXEEXT) \
 	examples/echo/async_tcp_echo_server$(EXEEXT) \
@@ -93,6 +95,7 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	examples/echo/blocking_udp_echo_server$(EXEEXT) \
 	examples/http/server/http_server$(EXEEXT) \
 	examples/iostreams/daytime_client$(EXEEXT) \
+	examples/iostreams/daytime_server$(EXEEXT) \
 	examples/multicast/receiver$(EXEEXT) \
 	examples/multicast/sender$(EXEEXT) \
 	examples/services/daytime_client$(EXEEXT) \
@@ -132,6 +135,12 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream_service_test \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream_test
 
+@WINDOWS_TARGET_TRUE@am__append_3 = \
+@WINDOWS_TARGET_TRUE@	examples/http/server/win_main.cpp
+
+@WINDOWS_TARGET_FALSE@am__append_4 = \
+@WINDOWS_TARGET_FALSE@	examples/http/server/posix_main.cpp
+
 subdir = src
 DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
@@ -153,6 +162,16 @@ CONFIG_CLEAN_FILES =
 @HAVE_OPENSSL_TRUE@	examples/ssl/server$(EXEEXT)
 PROGRAMS = $(noinst_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
+am_examples_allocation_server_OBJECTS =  \
+	examples/allocation/server.$(OBJEXT)
+examples_allocation_server_OBJECTS =  \
+	$(am_examples_allocation_server_OBJECTS)
+examples_allocation_server_LDADD = $(LDADD)
+am_examples_buffers_reference_counted_OBJECTS =  \
+	examples/buffers/reference_counted.$(OBJEXT)
+examples_buffers_reference_counted_OBJECTS =  \
+	$(am_examples_buffers_reference_counted_OBJECTS)
+examples_buffers_reference_counted_LDADD = $(LDADD)
 am_examples_chat_chat_client_OBJECTS =  \
 	examples/chat/chat_client.$(OBJEXT)
 examples_chat_chat_client_OBJECTS =  \
@@ -193,15 +212,28 @@ am_examples_echo_blocking_udp_echo_server_OBJECTS =  \
 examples_echo_blocking_udp_echo_server_OBJECTS =  \
 	$(am_examples_echo_blocking_udp_echo_server_OBJECTS)
 examples_echo_blocking_udp_echo_server_LDADD = $(LDADD)
+am__examples_http_server_http_server_SOURCES_DIST =  \
+	examples/http/server/connection.cpp \
+	examples/http/server/connection_manager.cpp \
+	examples/http/server/mime_types.cpp \
+	examples/http/server/reply.cpp \
+	examples/http/server/request_handler.cpp \
+	examples/http/server/request_parser.cpp \
+	examples/http/server/server.cpp \
+	examples/http/server/win_main.cpp \
+	examples/http/server/posix_main.cpp
+@WINDOWS_TARGET_TRUE@am__objects_1 =  \
+@WINDOWS_TARGET_TRUE@	examples/http/server/win_main.$(OBJEXT)
+@WINDOWS_TARGET_FALSE@am__objects_2 = examples/http/server/posix_main.$(OBJEXT)
 am_examples_http_server_http_server_OBJECTS =  \
 	examples/http/server/connection.$(OBJEXT) \
 	examples/http/server/connection_manager.$(OBJEXT) \
 	examples/http/server/mime_types.$(OBJEXT) \
-	examples/http/server/posix_main.$(OBJEXT) \
 	examples/http/server/reply.$(OBJEXT) \
 	examples/http/server/request_handler.$(OBJEXT) \
 	examples/http/server/request_parser.$(OBJEXT) \
-	examples/http/server/server.$(OBJEXT)
+	examples/http/server/server.$(OBJEXT) $(am__objects_1) \
+	$(am__objects_2)
 examples_http_server_http_server_OBJECTS =  \
 	$(am_examples_http_server_http_server_OBJECTS)
 examples_http_server_http_server_LDADD = $(LDADD)
@@ -210,6 +242,11 @@ am_examples_iostreams_daytime_client_OBJECTS =  \
 examples_iostreams_daytime_client_OBJECTS =  \
 	$(am_examples_iostreams_daytime_client_OBJECTS)
 examples_iostreams_daytime_client_LDADD = $(LDADD)
+am_examples_iostreams_daytime_server_OBJECTS =  \
+	examples/iostreams/daytime_server.$(OBJEXT)
+examples_iostreams_daytime_server_OBJECTS =  \
+	$(am_examples_iostreams_daytime_server_OBJECTS)
+examples_iostreams_daytime_server_LDADD = $(LDADD)
 am_examples_multicast_receiver_OBJECTS =  \
 	examples/multicast/receiver.$(OBJEXT)
 examples_multicast_receiver_OBJECTS =  \
@@ -335,21 +372,21 @@ am_tests_unit_basic_deadline_timer_test_OBJECTS =  \
 tests_unit_basic_deadline_timer_test_OBJECTS =  \
 	$(am_tests_unit_basic_deadline_timer_test_OBJECTS)
 tests_unit_basic_deadline_timer_test_LDADD = $(LDADD)
-am_tests_unit_basic_demuxer_test_OBJECTS =  \
-	tests/unit/basic_demuxer_test.$(OBJEXT)
-tests_unit_basic_demuxer_test_OBJECTS =  \
-	$(am_tests_unit_basic_demuxer_test_OBJECTS)
-tests_unit_basic_demuxer_test_LDADD = $(LDADD)
-am_tests_unit_basic_locking_dispatcher_test_OBJECTS =  \
-	tests/unit/basic_locking_dispatcher_test.$(OBJEXT)
-tests_unit_basic_locking_dispatcher_test_OBJECTS =  \
-	$(am_tests_unit_basic_locking_dispatcher_test_OBJECTS)
-tests_unit_basic_locking_dispatcher_test_LDADD = $(LDADD)
+am_tests_unit_basic_resolver_test_OBJECTS =  \
+	tests/unit/basic_resolver_test.$(OBJEXT)
+tests_unit_basic_resolver_test_OBJECTS =  \
+	$(am_tests_unit_basic_resolver_test_OBJECTS)
+tests_unit_basic_resolver_test_LDADD = $(LDADD)
 am_tests_unit_basic_socket_acceptor_test_OBJECTS =  \
 	tests/unit/basic_socket_acceptor_test.$(OBJEXT)
 tests_unit_basic_socket_acceptor_test_OBJECTS =  \
 	$(am_tests_unit_basic_socket_acceptor_test_OBJECTS)
 tests_unit_basic_socket_acceptor_test_LDADD = $(LDADD)
+am_tests_unit_basic_strand_test_OBJECTS =  \
+	tests/unit/basic_strand_test.$(OBJEXT)
+tests_unit_basic_strand_test_OBJECTS =  \
+	$(am_tests_unit_basic_strand_test_OBJECTS)
+tests_unit_basic_strand_test_LDADD = $(LDADD)
 am_tests_unit_basic_stream_socket_test_OBJECTS =  \
 	tests/unit/basic_stream_socket_test.$(OBJEXT)
 tests_unit_basic_stream_socket_test_OBJECTS =  \
@@ -383,11 +420,6 @@ am_tests_unit_datagram_socket_service_test_OBJECTS =  \
 tests_unit_datagram_socket_service_test_OBJECTS =  \
 	$(am_tests_unit_datagram_socket_service_test_OBJECTS)
 tests_unit_datagram_socket_service_test_LDADD = $(LDADD)
-am_tests_unit_datagram_socket_test_OBJECTS =  \
-	tests/unit/datagram_socket_test.$(OBJEXT)
-tests_unit_datagram_socket_test_OBJECTS =  \
-	$(am_tests_unit_datagram_socket_test_OBJECTS)
-tests_unit_datagram_socket_test_LDADD = $(LDADD)
 am_tests_unit_deadline_timer_service_test_OBJECTS =  \
 	tests/unit/deadline_timer_service_test.$(OBJEXT)
 tests_unit_deadline_timer_service_test_OBJECTS =  \
@@ -398,16 +430,6 @@ am_tests_unit_deadline_timer_test_OBJECTS =  \
 tests_unit_deadline_timer_test_OBJECTS =  \
 	$(am_tests_unit_deadline_timer_test_OBJECTS)
 tests_unit_deadline_timer_test_LDADD = $(LDADD)
-am_tests_unit_demuxer_service_test_OBJECTS =  \
-	tests/unit/demuxer_service_test.$(OBJEXT)
-tests_unit_demuxer_service_test_OBJECTS =  \
-	$(am_tests_unit_demuxer_service_test_OBJECTS)
-tests_unit_demuxer_service_test_LDADD = $(LDADD)
-am_tests_unit_demuxer_test_OBJECTS =  \
-	tests/unit/demuxer_test.$(OBJEXT)
-tests_unit_demuxer_test_OBJECTS =  \
-	$(am_tests_unit_demuxer_test_OBJECTS)
-tests_unit_demuxer_test_LDADD = $(LDADD)
 am_tests_unit_error_handler_test_OBJECTS =  \
 	tests/unit/error_handler_test.$(OBJEXT)
 tests_unit_error_handler_test_OBJECTS =  \
@@ -416,46 +438,67 @@ tests_unit_error_handler_test_LDADD = $(LDADD)
 am_tests_unit_error_test_OBJECTS = tests/unit/error_test.$(OBJEXT)
 tests_unit_error_test_OBJECTS = $(am_tests_unit_error_test_OBJECTS)
 tests_unit_error_test_LDADD = $(LDADD)
-am_tests_unit_ipv4_address_test_OBJECTS =  \
-	tests/unit/ipv4/address_test.$(OBJEXT)
-tests_unit_ipv4_address_test_OBJECTS =  \
-	$(am_tests_unit_ipv4_address_test_OBJECTS)
-tests_unit_ipv4_address_test_LDADD = $(LDADD)
-am_tests_unit_ipv4_basic_host_resolver_test_OBJECTS =  \
-	tests/unit/ipv4/basic_host_resolver_test.$(OBJEXT)
-tests_unit_ipv4_basic_host_resolver_test_OBJECTS =  \
-	$(am_tests_unit_ipv4_basic_host_resolver_test_OBJECTS)
-tests_unit_ipv4_basic_host_resolver_test_LDADD = $(LDADD)
-am_tests_unit_ipv4_host_resolver_service_test_OBJECTS =  \
-	tests/unit/ipv4/host_resolver_service_test.$(OBJEXT)
-tests_unit_ipv4_host_resolver_service_test_OBJECTS =  \
-	$(am_tests_unit_ipv4_host_resolver_service_test_OBJECTS)
-tests_unit_ipv4_host_resolver_service_test_LDADD = $(LDADD)
-am_tests_unit_ipv4_host_resolver_test_OBJECTS =  \
-	tests/unit/ipv4/host_resolver_test.$(OBJEXT)
-tests_unit_ipv4_host_resolver_test_OBJECTS =  \
-	$(am_tests_unit_ipv4_host_resolver_test_OBJECTS)
-tests_unit_ipv4_host_resolver_test_LDADD = $(LDADD)
-am_tests_unit_ipv4_host_test_OBJECTS =  \
-	tests/unit/ipv4/host_test.$(OBJEXT)
-tests_unit_ipv4_host_test_OBJECTS =  \
-	$(am_tests_unit_ipv4_host_test_OBJECTS)
-tests_unit_ipv4_host_test_LDADD = $(LDADD)
-am_tests_unit_ipv4_multicast_test_OBJECTS =  \
-	tests/unit/ipv4/multicast_test.$(OBJEXT)
-tests_unit_ipv4_multicast_test_OBJECTS =  \
-	$(am_tests_unit_ipv4_multicast_test_OBJECTS)
-tests_unit_ipv4_multicast_test_LDADD = $(LDADD)
-am_tests_unit_ipv4_tcp_test_OBJECTS =  \
-	tests/unit/ipv4/tcp_test.$(OBJEXT)
-tests_unit_ipv4_tcp_test_OBJECTS =  \
-	$(am_tests_unit_ipv4_tcp_test_OBJECTS)
-tests_unit_ipv4_tcp_test_LDADD = $(LDADD)
-am_tests_unit_ipv4_udp_test_OBJECTS =  \
-	tests/unit/ipv4/udp_test.$(OBJEXT)
-tests_unit_ipv4_udp_test_OBJECTS =  \
-	$(am_tests_unit_ipv4_udp_test_OBJECTS)
-tests_unit_ipv4_udp_test_LDADD = $(LDADD)
+am_tests_unit_io_service_test_OBJECTS =  \
+	tests/unit/io_service_test.$(OBJEXT)
+tests_unit_io_service_test_OBJECTS =  \
+	$(am_tests_unit_io_service_test_OBJECTS)
+tests_unit_io_service_test_LDADD = $(LDADD)
+am_tests_unit_ip_address_test_OBJECTS =  \
+	tests/unit/ip/address_test.$(OBJEXT)
+tests_unit_ip_address_test_OBJECTS =  \
+	$(am_tests_unit_ip_address_test_OBJECTS)
+tests_unit_ip_address_test_LDADD = $(LDADD)
+am_tests_unit_ip_address_v4_test_OBJECTS =  \
+	tests/unit/ip/address_v4_test.$(OBJEXT)
+tests_unit_ip_address_v4_test_OBJECTS =  \
+	$(am_tests_unit_ip_address_v4_test_OBJECTS)
+tests_unit_ip_address_v4_test_LDADD = $(LDADD)
+am_tests_unit_ip_address_v6_test_OBJECTS =  \
+	tests/unit/ip/address_v6_test.$(OBJEXT)
+tests_unit_ip_address_v6_test_OBJECTS =  \
+	$(am_tests_unit_ip_address_v6_test_OBJECTS)
+tests_unit_ip_address_v6_test_LDADD = $(LDADD)
+am_tests_unit_ip_basic_endpoint_test_OBJECTS =  \
+	tests/unit/ip/basic_endpoint_test.$(OBJEXT)
+tests_unit_ip_basic_endpoint_test_OBJECTS =  \
+	$(am_tests_unit_ip_basic_endpoint_test_OBJECTS)
+tests_unit_ip_basic_endpoint_test_LDADD = $(LDADD)
+am_tests_unit_ip_basic_resolver_entry_test_OBJECTS =  \
+	tests/unit/ip/basic_resolver_entry_test.$(OBJEXT)
+tests_unit_ip_basic_resolver_entry_test_OBJECTS =  \
+	$(am_tests_unit_ip_basic_resolver_entry_test_OBJECTS)
+tests_unit_ip_basic_resolver_entry_test_LDADD = $(LDADD)
+am_tests_unit_ip_basic_resolver_iterator_test_OBJECTS =  \
+	tests/unit/ip/basic_resolver_iterator_test.$(OBJEXT)
+tests_unit_ip_basic_resolver_iterator_test_OBJECTS =  \
+	$(am_tests_unit_ip_basic_resolver_iterator_test_OBJECTS)
+tests_unit_ip_basic_resolver_iterator_test_LDADD = $(LDADD)
+am_tests_unit_ip_basic_resolver_query_test_OBJECTS =  \
+	tests/unit/ip/basic_resolver_query_test.$(OBJEXT)
+tests_unit_ip_basic_resolver_query_test_OBJECTS =  \
+	$(am_tests_unit_ip_basic_resolver_query_test_OBJECTS)
+tests_unit_ip_basic_resolver_query_test_LDADD = $(LDADD)
+am_tests_unit_ip_host_name_test_OBJECTS =  \
+	tests/unit/ip/host_name_test.$(OBJEXT)
+tests_unit_ip_host_name_test_OBJECTS =  \
+	$(am_tests_unit_ip_host_name_test_OBJECTS)
+tests_unit_ip_host_name_test_LDADD = $(LDADD)
+am_tests_unit_ip_multicast_test_OBJECTS =  \
+	tests/unit/ip/multicast_test.$(OBJEXT)
+tests_unit_ip_multicast_test_OBJECTS =  \
+	$(am_tests_unit_ip_multicast_test_OBJECTS)
+tests_unit_ip_multicast_test_LDADD = $(LDADD)
+am_tests_unit_ip_resolver_query_base_test_OBJECTS =  \
+	tests/unit/ip/resolver_query_base_test.$(OBJEXT)
+tests_unit_ip_resolver_query_base_test_OBJECTS =  \
+	$(am_tests_unit_ip_resolver_query_base_test_OBJECTS)
+tests_unit_ip_resolver_query_base_test_LDADD = $(LDADD)
+am_tests_unit_ip_tcp_test_OBJECTS = tests/unit/ip/tcp_test.$(OBJEXT)
+tests_unit_ip_tcp_test_OBJECTS = $(am_tests_unit_ip_tcp_test_OBJECTS)
+tests_unit_ip_tcp_test_LDADD = $(LDADD)
+am_tests_unit_ip_udp_test_OBJECTS = tests/unit/ip/udp_test.$(OBJEXT)
+tests_unit_ip_udp_test_OBJECTS = $(am_tests_unit_ip_udp_test_OBJECTS)
+tests_unit_ip_udp_test_LDADD = $(LDADD)
 am_tests_unit_is_read_buffered_test_OBJECTS =  \
 	tests/unit/is_read_buffered_test.$(OBJEXT)
 tests_unit_is_read_buffered_test_OBJECTS =  \
@@ -466,16 +509,6 @@ am_tests_unit_is_write_buffered_test_OBJECTS =  \
 tests_unit_is_write_buffered_test_OBJECTS =  \
 	$(am_tests_unit_is_write_buffered_test_OBJECTS)
 tests_unit_is_write_buffered_test_LDADD = $(LDADD)
-am_tests_unit_locking_dispatcher_service_test_OBJECTS =  \
-	tests/unit/locking_dispatcher_service_test.$(OBJEXT)
-tests_unit_locking_dispatcher_service_test_OBJECTS =  \
-	$(am_tests_unit_locking_dispatcher_service_test_OBJECTS)
-tests_unit_locking_dispatcher_service_test_LDADD = $(LDADD)
-am_tests_unit_locking_dispatcher_test_OBJECTS =  \
-	tests/unit/locking_dispatcher_test.$(OBJEXT)
-tests_unit_locking_dispatcher_test_OBJECTS =  \
-	$(am_tests_unit_locking_dispatcher_test_OBJECTS)
-tests_unit_locking_dispatcher_test_LDADD = $(LDADD)
 am_tests_unit_placeholders_test_OBJECTS =  \
 	tests/unit/placeholders_test.$(OBJEXT)
 tests_unit_placeholders_test_OBJECTS =  \
@@ -484,21 +517,16 @@ tests_unit_placeholders_test_LDADD = $(LDADD)
 am_tests_unit_read_test_OBJECTS = tests/unit/read_test.$(OBJEXT)
 tests_unit_read_test_OBJECTS = $(am_tests_unit_read_test_OBJECTS)
 tests_unit_read_test_LDADD = $(LDADD)
-am_tests_unit_service_factory_test_OBJECTS =  \
-	tests/unit/service_factory_test.$(OBJEXT)
-tests_unit_service_factory_test_OBJECTS =  \
-	$(am_tests_unit_service_factory_test_OBJECTS)
-tests_unit_service_factory_test_LDADD = $(LDADD)
+am_tests_unit_resolver_service_test_OBJECTS =  \
+	tests/unit/resolver_service_test.$(OBJEXT)
+tests_unit_resolver_service_test_OBJECTS =  \
+	$(am_tests_unit_resolver_service_test_OBJECTS)
+tests_unit_resolver_service_test_LDADD = $(LDADD)
 am_tests_unit_socket_acceptor_service_test_OBJECTS =  \
 	tests/unit/socket_acceptor_service_test.$(OBJEXT)
 tests_unit_socket_acceptor_service_test_OBJECTS =  \
 	$(am_tests_unit_socket_acceptor_service_test_OBJECTS)
 tests_unit_socket_acceptor_service_test_LDADD = $(LDADD)
-am_tests_unit_socket_acceptor_test_OBJECTS =  \
-	tests/unit/socket_acceptor_test.$(OBJEXT)
-tests_unit_socket_acceptor_test_OBJECTS =  \
-	$(am_tests_unit_socket_acceptor_test_OBJECTS)
-tests_unit_socket_acceptor_test_LDADD = $(LDADD)
 am_tests_unit_socket_base_test_OBJECTS =  \
 	tests/unit/socket_base_test.$(OBJEXT)
 tests_unit_socket_base_test_OBJECTS =  \
@@ -550,16 +578,19 @@ am__tests_unit_ssl_stream_test_SOURCES_DIST =  \
 tests_unit_ssl_stream_test_OBJECTS =  \
 	$(am_tests_unit_ssl_stream_test_OBJECTS)
 tests_unit_ssl_stream_test_LDADD = $(LDADD)
+am_tests_unit_strand_service_test_OBJECTS =  \
+	tests/unit/strand_service_test.$(OBJEXT)
+tests_unit_strand_service_test_OBJECTS =  \
+	$(am_tests_unit_strand_service_test_OBJECTS)
+tests_unit_strand_service_test_LDADD = $(LDADD)
+am_tests_unit_strand_test_OBJECTS = tests/unit/strand_test.$(OBJEXT)
+tests_unit_strand_test_OBJECTS = $(am_tests_unit_strand_test_OBJECTS)
+tests_unit_strand_test_LDADD = $(LDADD)
 am_tests_unit_stream_socket_service_test_OBJECTS =  \
 	tests/unit/stream_socket_service_test.$(OBJEXT)
 tests_unit_stream_socket_service_test_OBJECTS =  \
 	$(am_tests_unit_stream_socket_service_test_OBJECTS)
 tests_unit_stream_socket_service_test_LDADD = $(LDADD)
-am_tests_unit_stream_socket_test_OBJECTS =  \
-	tests/unit/stream_socket_test.$(OBJEXT)
-tests_unit_stream_socket_test_OBJECTS =  \
-	$(am_tests_unit_stream_socket_test_OBJECTS)
-tests_unit_stream_socket_test_LDADD = $(LDADD)
 am_tests_unit_thread_test_OBJECTS = tests/unit/thread_test.$(OBJEXT)
 tests_unit_thread_test_OBJECTS = $(am_tests_unit_thread_test_OBJECTS)
 tests_unit_thread_test_LDADD = $(LDADD)
@@ -579,7 +610,9 @@ CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
-SOURCES = $(examples_chat_chat_client_SOURCES) \
+SOURCES = $(examples_allocation_server_SOURCES) \
+	$(examples_buffers_reference_counted_SOURCES) \
+	$(examples_chat_chat_client_SOURCES) \
 	$(examples_chat_chat_server_SOURCES) \
 	$(examples_echo_async_tcp_echo_server_SOURCES) \
 	$(examples_echo_async_udp_echo_server_SOURCES) \
@@ -589,6 +622,7 @@ SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(examples_echo_blocking_udp_echo_server_SOURCES) \
 	$(examples_http_server_http_server_SOURCES) \
 	$(examples_iostreams_daytime_client_SOURCES) \
+	$(examples_iostreams_daytime_server_SOURCES) \
 	$(examples_multicast_receiver_SOURCES) \
 	$(examples_multicast_sender_SOURCES) \
 	$(examples_services_daytime_client_SOURCES) \
@@ -613,9 +647,9 @@ SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(tests_performance_server_SOURCES) \
 	$(tests_unit_basic_datagram_socket_test_SOURCES) \
 	$(tests_unit_basic_deadline_timer_test_SOURCES) \
-	$(tests_unit_basic_demuxer_test_SOURCES) \
-	$(tests_unit_basic_locking_dispatcher_test_SOURCES) \
+	$(tests_unit_basic_resolver_test_SOURCES) \
 	$(tests_unit_basic_socket_acceptor_test_SOURCES) \
+	$(tests_unit_basic_strand_test_SOURCES) \
 	$(tests_unit_basic_stream_socket_test_SOURCES) \
 	$(tests_unit_buffer_test_SOURCES) \
 	$(tests_unit_buffered_read_stream_test_SOURCES) \
@@ -623,30 +657,29 @@ SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(tests_unit_buffered_write_stream_test_SOURCES) \
 	$(tests_unit_completion_condition_test_SOURCES) \
 	$(tests_unit_datagram_socket_service_test_SOURCES) \
-	$(tests_unit_datagram_socket_test_SOURCES) \
 	$(tests_unit_deadline_timer_service_test_SOURCES) \
 	$(tests_unit_deadline_timer_test_SOURCES) \
-	$(tests_unit_demuxer_service_test_SOURCES) \
-	$(tests_unit_demuxer_test_SOURCES) \
 	$(tests_unit_error_handler_test_SOURCES) \
 	$(tests_unit_error_test_SOURCES) \
-	$(tests_unit_ipv4_address_test_SOURCES) \
-	$(tests_unit_ipv4_basic_host_resolver_test_SOURCES) \
-	$(tests_unit_ipv4_host_resolver_service_test_SOURCES) \
-	$(tests_unit_ipv4_host_resolver_test_SOURCES) \
-	$(tests_unit_ipv4_host_test_SOURCES) \
-	$(tests_unit_ipv4_multicast_test_SOURCES) \
-	$(tests_unit_ipv4_tcp_test_SOURCES) \
-	$(tests_unit_ipv4_udp_test_SOURCES) \
+	$(tests_unit_io_service_test_SOURCES) \
+	$(tests_unit_ip_address_test_SOURCES) \
+	$(tests_unit_ip_address_v4_test_SOURCES) \
+	$(tests_unit_ip_address_v6_test_SOURCES) \
+	$(tests_unit_ip_basic_endpoint_test_SOURCES) \
+	$(tests_unit_ip_basic_resolver_entry_test_SOURCES) \
+	$(tests_unit_ip_basic_resolver_iterator_test_SOURCES) \
+	$(tests_unit_ip_basic_resolver_query_test_SOURCES) \
+	$(tests_unit_ip_host_name_test_SOURCES) \
+	$(tests_unit_ip_multicast_test_SOURCES) \
+	$(tests_unit_ip_resolver_query_base_test_SOURCES) \
+	$(tests_unit_ip_tcp_test_SOURCES) \
+	$(tests_unit_ip_udp_test_SOURCES) \
 	$(tests_unit_is_read_buffered_test_SOURCES) \
 	$(tests_unit_is_write_buffered_test_SOURCES) \
-	$(tests_unit_locking_dispatcher_service_test_SOURCES) \
-	$(tests_unit_locking_dispatcher_test_SOURCES) \
 	$(tests_unit_placeholders_test_SOURCES) \
 	$(tests_unit_read_test_SOURCES) \
-	$(tests_unit_service_factory_test_SOURCES) \
+	$(tests_unit_resolver_service_test_SOURCES) \
 	$(tests_unit_socket_acceptor_service_test_SOURCES) \
-	$(tests_unit_socket_acceptor_test_SOURCES) \
 	$(tests_unit_socket_base_test_SOURCES) \
 	$(tests_unit_ssl_basic_context_test_SOURCES) \
 	$(tests_unit_ssl_context_base_test_SOURCES) \
@@ -655,12 +688,15 @@ SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(tests_unit_ssl_stream_base_test_SOURCES) \
 	$(tests_unit_ssl_stream_service_test_SOURCES) \
 	$(tests_unit_ssl_stream_test_SOURCES) \
+	$(tests_unit_strand_service_test_SOURCES) \
+	$(tests_unit_strand_test_SOURCES) \
 	$(tests_unit_stream_socket_service_test_SOURCES) \
-	$(tests_unit_stream_socket_test_SOURCES) \
 	$(tests_unit_thread_test_SOURCES) \
 	$(tests_unit_time_traits_test_SOURCES) \
 	$(tests_unit_write_test_SOURCES)
-DIST_SOURCES = $(examples_chat_chat_client_SOURCES) \
+DIST_SOURCES = $(examples_allocation_server_SOURCES) \
+	$(examples_buffers_reference_counted_SOURCES) \
+	$(examples_chat_chat_client_SOURCES) \
 	$(examples_chat_chat_server_SOURCES) \
 	$(examples_echo_async_tcp_echo_server_SOURCES) \
 	$(examples_echo_async_udp_echo_server_SOURCES) \
@@ -668,8 +704,9 @@ DIST_SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(examples_echo_blocking_tcp_echo_server_SOURCES) \
 	$(examples_echo_blocking_udp_echo_client_SOURCES) \
 	$(examples_echo_blocking_udp_echo_server_SOURCES) \
-	$(examples_http_server_http_server_SOURCES) \
+	$(am__examples_http_server_http_server_SOURCES_DIST) \
 	$(examples_iostreams_daytime_client_SOURCES) \
+	$(examples_iostreams_daytime_server_SOURCES) \
 	$(examples_multicast_receiver_SOURCES) \
 	$(examples_multicast_sender_SOURCES) \
 	$(examples_services_daytime_client_SOURCES) \
@@ -695,9 +732,9 @@ DIST_SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(tests_performance_server_SOURCES) \
 	$(tests_unit_basic_datagram_socket_test_SOURCES) \
 	$(tests_unit_basic_deadline_timer_test_SOURCES) \
-	$(tests_unit_basic_demuxer_test_SOURCES) \
-	$(tests_unit_basic_locking_dispatcher_test_SOURCES) \
+	$(tests_unit_basic_resolver_test_SOURCES) \
 	$(tests_unit_basic_socket_acceptor_test_SOURCES) \
+	$(tests_unit_basic_strand_test_SOURCES) \
 	$(tests_unit_basic_stream_socket_test_SOURCES) \
 	$(tests_unit_buffer_test_SOURCES) \
 	$(tests_unit_buffered_read_stream_test_SOURCES) \
@@ -705,30 +742,29 @@ DIST_SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(tests_unit_buffered_write_stream_test_SOURCES) \
 	$(tests_unit_completion_condition_test_SOURCES) \
 	$(tests_unit_datagram_socket_service_test_SOURCES) \
-	$(tests_unit_datagram_socket_test_SOURCES) \
 	$(tests_unit_deadline_timer_service_test_SOURCES) \
 	$(tests_unit_deadline_timer_test_SOURCES) \
-	$(tests_unit_demuxer_service_test_SOURCES) \
-	$(tests_unit_demuxer_test_SOURCES) \
 	$(tests_unit_error_handler_test_SOURCES) \
 	$(tests_unit_error_test_SOURCES) \
-	$(tests_unit_ipv4_address_test_SOURCES) \
-	$(tests_unit_ipv4_basic_host_resolver_test_SOURCES) \
-	$(tests_unit_ipv4_host_resolver_service_test_SOURCES) \
-	$(tests_unit_ipv4_host_resolver_test_SOURCES) \
-	$(tests_unit_ipv4_host_test_SOURCES) \
-	$(tests_unit_ipv4_multicast_test_SOURCES) \
-	$(tests_unit_ipv4_tcp_test_SOURCES) \
-	$(tests_unit_ipv4_udp_test_SOURCES) \
+	$(tests_unit_io_service_test_SOURCES) \
+	$(tests_unit_ip_address_test_SOURCES) \
+	$(tests_unit_ip_address_v4_test_SOURCES) \
+	$(tests_unit_ip_address_v6_test_SOURCES) \
+	$(tests_unit_ip_basic_endpoint_test_SOURCES) \
+	$(tests_unit_ip_basic_resolver_entry_test_SOURCES) \
+	$(tests_unit_ip_basic_resolver_iterator_test_SOURCES) \
+	$(tests_unit_ip_basic_resolver_query_test_SOURCES) \
+	$(tests_unit_ip_host_name_test_SOURCES) \
+	$(tests_unit_ip_multicast_test_SOURCES) \
+	$(tests_unit_ip_resolver_query_base_test_SOURCES) \
+	$(tests_unit_ip_tcp_test_SOURCES) \
+	$(tests_unit_ip_udp_test_SOURCES) \
 	$(tests_unit_is_read_buffered_test_SOURCES) \
 	$(tests_unit_is_write_buffered_test_SOURCES) \
-	$(tests_unit_locking_dispatcher_service_test_SOURCES) \
-	$(tests_unit_locking_dispatcher_test_SOURCES) \
 	$(tests_unit_placeholders_test_SOURCES) \
 	$(tests_unit_read_test_SOURCES) \
-	$(tests_unit_service_factory_test_SOURCES) \
+	$(tests_unit_resolver_service_test_SOURCES) \
 	$(tests_unit_socket_acceptor_service_test_SOURCES) \
-	$(tests_unit_socket_acceptor_test_SOURCES) \
 	$(tests_unit_socket_base_test_SOURCES) \
 	$(am__tests_unit_ssl_basic_context_test_SOURCES_DIST) \
 	$(am__tests_unit_ssl_context_base_test_SOURCES_DIST) \
@@ -737,8 +773,9 @@ DIST_SOURCES = $(examples_chat_chat_client_SOURCES) \
 	$(am__tests_unit_ssl_stream_base_test_SOURCES_DIST) \
 	$(am__tests_unit_ssl_stream_service_test_SOURCES_DIST) \
 	$(am__tests_unit_ssl_stream_test_SOURCES_DIST) \
+	$(tests_unit_strand_service_test_SOURCES) \
+	$(tests_unit_strand_test_SOURCES) \
 	$(tests_unit_stream_socket_service_test_SOURCES) \
-	$(tests_unit_stream_socket_test_SOURCES) \
 	$(tests_unit_thread_test_SOURCES) \
 	$(tests_unit_time_traits_test_SOURCES) \
 	$(tests_unit_write_test_SOURCES)
@@ -808,6 +845,8 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 VERSION = @VERSION@
+WINDOWS_TARGET_FALSE = @WINDOWS_TARGET_FALSE@
+WINDOWS_TARGET_TRUE = @WINDOWS_TARGET_TRUE@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_RANLIB = @ac_ct_RANLIB@
@@ -853,40 +892,37 @@ AUTOMAKE_OPTIONS = subdir-objects
 SUBDIRS = doc
 TESTS = tests/unit/basic_datagram_socket_test \
 	tests/unit/basic_deadline_timer_test \
-	tests/unit/basic_demuxer_test \
-	tests/unit/basic_locking_dispatcher_test \
+	tests/unit/basic_resolver_test \
 	tests/unit/basic_socket_acceptor_test \
+	tests/unit/basic_strand_test \
 	tests/unit/basic_stream_socket_test \
 	tests/unit/buffered_read_stream_test \
 	tests/unit/buffered_stream_test \
 	tests/unit/buffered_write_stream_test tests/unit/buffer_test \
 	tests/unit/completion_condition_test \
 	tests/unit/datagram_socket_service_test \
-	tests/unit/datagram_socket_test \
 	tests/unit/deadline_timer_service_test \
-	tests/unit/deadline_timer_test tests/unit/demuxer_service_test \
-	tests/unit/demuxer_test tests/unit/error_handler_test \
-	tests/unit/error_test tests/unit/ipv4/address_test \
-	tests/unit/ipv4/basic_host_resolver_test \
-	tests/unit/ipv4/host_resolver_service_test \
-	tests/unit/ipv4/host_resolver_test tests/unit/ipv4/host_test \
-	tests/unit/ipv4/multicast_test tests/unit/ipv4/tcp_test \
-	tests/unit/ipv4/udp_test tests/unit/is_read_buffered_test \
-	tests/unit/is_write_buffered_test \
-	tests/unit/locking_dispatcher_service_test \
-	tests/unit/locking_dispatcher_test \
-	tests/unit/placeholders_test tests/unit/read_test \
-	tests/unit/service_factory_test \
+	tests/unit/deadline_timer_test tests/unit/error_handler_test \
+	tests/unit/error_test tests/unit/io_service_test \
+	tests/unit/ip/address_test tests/unit/ip/address_v4_test \
+	tests/unit/ip/address_v6_test \
+	tests/unit/ip/basic_endpoint_test \
+	tests/unit/ip/basic_resolver_entry_test \
+	tests/unit/ip/basic_resolver_iterator_test \
+	tests/unit/ip/basic_resolver_query_test \
+	tests/unit/ip/host_name_test tests/unit/ip/multicast_test \
+	tests/unit/ip/resolver_query_base_test tests/unit/ip/tcp_test \
+	tests/unit/ip/udp_test tests/unit/is_read_buffered_test \
+	tests/unit/is_write_buffered_test tests/unit/placeholders_test \
+	tests/unit/read_test tests/unit/resolver_service_test \
 	tests/unit/socket_acceptor_service_test \
-	tests/unit/socket_acceptor_test tests/unit/socket_base_test \
-	tests/unit/stream_socket_service_test \
-	tests/unit/stream_socket_test tests/unit/thread_test \
-	tests/unit/time_traits_test tests/unit/write_test \
-	$(am__append_2)
+	tests/unit/socket_base_test tests/unit/strand_service_test \
+	tests/unit/strand_test tests/unit/stream_socket_service_test \
+	tests/unit/thread_test tests/unit/time_traits_test \
+	tests/unit/write_test $(am__append_2)
 noinst_HEADERS = \
 	tests/unit/unit_test.hpp \
 	examples/chat/chat_message.hpp \
-	examples/iostreams/socket_stream.hpp \
 	examples/services/basic_logger.hpp \
 	examples/services/logger.hpp \
 	examples/services/logger_service.hpp \
@@ -895,48 +931,50 @@ noinst_HEADERS = \
 AM_CXXFLAGS = -I$(srcdir)/../include
 tests_performance_client_SOURCES = tests/performance/client.cpp
 tests_performance_server_SOURCES = tests/performance/server.cpp
-tests_unit_demuxer_test_SOURCES = tests/unit/demuxer_test.cpp
-tests_unit_ipv4_address_test_SOURCES = tests/unit/ipv4/address_test.cpp
-tests_unit_ipv4_basic_host_resolver_test_SOURCES = tests/unit/ipv4/basic_host_resolver_test.cpp
-tests_unit_ipv4_host_resolver_service_test_SOURCES = tests/unit/ipv4/host_resolver_service_test.cpp
-tests_unit_ipv4_host_resolver_test_SOURCES = tests/unit/ipv4/host_resolver_test.cpp
-tests_unit_ipv4_host_test_SOURCES = tests/unit/ipv4/host_test.cpp
-tests_unit_ipv4_multicast_test_SOURCES = tests/unit/ipv4/multicast_test.cpp
-tests_unit_ipv4_tcp_test_SOURCES = tests/unit/ipv4/tcp_test.cpp
-tests_unit_ipv4_udp_test_SOURCES = tests/unit/ipv4/udp_test.cpp
-tests_unit_locking_dispatcher_test_SOURCES = tests/unit/locking_dispatcher_test.cpp
-tests_unit_is_read_buffered_test_SOURCES = tests/unit/is_read_buffered_test.cpp
-tests_unit_socket_acceptor_test_SOURCES = tests/unit/socket_acceptor_test.cpp
-tests_unit_datagram_socket_test_SOURCES = tests/unit/datagram_socket_test.cpp
-tests_unit_read_test_SOURCES = tests/unit/read_test.cpp
-tests_unit_write_test_SOURCES = tests/unit/write_test.cpp
-tests_unit_is_write_buffered_test_SOURCES = tests/unit/is_write_buffered_test.cpp
 tests_unit_basic_datagram_socket_test_SOURCES = tests/unit/basic_datagram_socket_test.cpp
-tests_unit_deadline_timer_test_SOURCES = tests/unit/deadline_timer_test.cpp
-tests_unit_buffer_test_SOURCES = tests/unit/buffer_test.cpp
-tests_unit_completion_condition_test_SOURCES = tests/unit/completion_condition_test.cpp
-tests_unit_error_handler_test_SOURCES = tests/unit/error_handler_test.cpp
 tests_unit_basic_deadline_timer_test_SOURCES = tests/unit/basic_deadline_timer_test.cpp
-tests_unit_basic_demuxer_test_SOURCES = tests/unit/basic_demuxer_test.cpp
-tests_unit_basic_locking_dispatcher_test_SOURCES = tests/unit/basic_locking_dispatcher_test.cpp
+tests_unit_basic_resolver_test_SOURCES = tests/unit/basic_resolver_test.cpp
 tests_unit_basic_socket_acceptor_test_SOURCES = tests/unit/basic_socket_acceptor_test.cpp
+tests_unit_basic_strand_test_SOURCES = tests/unit/basic_strand_test.cpp
 tests_unit_basic_stream_socket_test_SOURCES = tests/unit/basic_stream_socket_test.cpp
+tests_unit_buffer_test_SOURCES = tests/unit/buffer_test.cpp
 tests_unit_buffered_read_stream_test_SOURCES = tests/unit/buffered_read_stream_test.cpp
 tests_unit_buffered_stream_test_SOURCES = tests/unit/buffered_stream_test.cpp
 tests_unit_buffered_write_stream_test_SOURCES = tests/unit/buffered_write_stream_test.cpp
+tests_unit_completion_condition_test_SOURCES = tests/unit/completion_condition_test.cpp
 tests_unit_datagram_socket_service_test_SOURCES = tests/unit/datagram_socket_service_test.cpp
 tests_unit_deadline_timer_service_test_SOURCES = tests/unit/deadline_timer_service_test.cpp
-tests_unit_demuxer_service_test_SOURCES = tests/unit/demuxer_service_test.cpp
+tests_unit_deadline_timer_test_SOURCES = tests/unit/deadline_timer_test.cpp
+tests_unit_error_handler_test_SOURCES = tests/unit/error_handler_test.cpp
 tests_unit_error_test_SOURCES = tests/unit/error_test.cpp
-tests_unit_locking_dispatcher_service_test_SOURCES = tests/unit/locking_dispatcher_service_test.cpp
+tests_unit_io_service_test_SOURCES = tests/unit/io_service_test.cpp
+tests_unit_ip_address_test_SOURCES = tests/unit/ip/address_test.cpp
+tests_unit_ip_address_v4_test_SOURCES = tests/unit/ip/address_v4_test.cpp
+tests_unit_ip_address_v6_test_SOURCES = tests/unit/ip/address_v6_test.cpp
+tests_unit_ip_basic_endpoint_test_SOURCES = tests/unit/ip/basic_endpoint_test.cpp
+tests_unit_ip_basic_resolver_entry_test_SOURCES = tests/unit/ip/basic_resolver_entry_test.cpp
+tests_unit_ip_basic_resolver_iterator_test_SOURCES = tests/unit/ip/basic_resolver_iterator_test.cpp
+tests_unit_ip_basic_resolver_query_test_SOURCES = tests/unit/ip/basic_resolver_query_test.cpp
+tests_unit_ip_host_name_test_SOURCES = tests/unit/ip/host_name_test.cpp
+tests_unit_ip_multicast_test_SOURCES = tests/unit/ip/multicast_test.cpp
+tests_unit_ip_resolver_query_base_test_SOURCES = tests/unit/ip/resolver_query_base_test.cpp
+tests_unit_ip_tcp_test_SOURCES = tests/unit/ip/tcp_test.cpp
+tests_unit_ip_udp_test_SOURCES = tests/unit/ip/udp_test.cpp
+tests_unit_is_read_buffered_test_SOURCES = tests/unit/is_read_buffered_test.cpp
+tests_unit_is_write_buffered_test_SOURCES = tests/unit/is_write_buffered_test.cpp
 tests_unit_placeholders_test_SOURCES = tests/unit/placeholders_test.cpp
-tests_unit_service_factory_test_SOURCES = tests/unit/service_factory_test.cpp
+tests_unit_read_test_SOURCES = tests/unit/read_test.cpp
+tests_unit_resolver_service_test_SOURCES = tests/unit/resolver_service_test.cpp
 tests_unit_socket_acceptor_service_test_SOURCES = tests/unit/socket_acceptor_service_test.cpp
 tests_unit_socket_base_test_SOURCES = tests/unit/socket_base_test.cpp
+tests_unit_strand_service_test_SOURCES = tests/unit/strand_service_test.cpp
+tests_unit_strand_test_SOURCES = tests/unit/strand_test.cpp
 tests_unit_stream_socket_service_test_SOURCES = tests/unit/stream_socket_service_test.cpp
-tests_unit_stream_socket_test_SOURCES = tests/unit/stream_socket_test.cpp
 tests_unit_thread_test_SOURCES = tests/unit/thread_test.cpp
 tests_unit_time_traits_test_SOURCES = tests/unit/time_traits_test.cpp
+tests_unit_write_test_SOURCES = tests/unit/write_test.cpp
+examples_allocation_server_SOURCES = examples/allocation/server.cpp
+examples_buffers_reference_counted_SOURCES = examples/buffers/reference_counted.cpp
 examples_chat_chat_client_SOURCES = examples/chat/chat_client.cpp
 examples_chat_chat_server_SOURCES = examples/chat/chat_server.cpp
 examples_echo_async_tcp_echo_server_SOURCES = examples/echo/async_tcp_echo_server.cpp
@@ -945,17 +983,17 @@ examples_echo_blocking_tcp_echo_client_SOURCES = examples/echo/blocking_tcp_echo
 examples_echo_blocking_tcp_echo_server_SOURCES = examples/echo/blocking_tcp_echo_server.cpp
 examples_echo_blocking_udp_echo_client_SOURCES = examples/echo/blocking_udp_echo_client.cpp
 examples_echo_blocking_udp_echo_server_SOURCES = examples/echo/blocking_udp_echo_server.cpp
-examples_http_server_http_server_SOURCES = \
+examples_http_server_http_server_SOURCES =  \
 	examples/http/server/connection.cpp \
 	examples/http/server/connection_manager.cpp \
 	examples/http/server/mime_types.cpp \
-	examples/http/server/posix_main.cpp \
 	examples/http/server/reply.cpp \
 	examples/http/server/request_handler.cpp \
 	examples/http/server/request_parser.cpp \
-	examples/http/server/server.cpp
-
+	examples/http/server/server.cpp $(am__append_3) \
+	$(am__append_4)
 examples_iostreams_daytime_client_SOURCES = examples/iostreams/daytime_client.cpp
+examples_iostreams_daytime_server_SOURCES = examples/iostreams/daytime_server.cpp
 examples_multicast_receiver_SOURCES = examples/multicast/receiver.cpp
 examples_multicast_sender_SOURCES = examples/multicast/sender.cpp
 examples_services_daytime_client_SOURCES = examples/services/daytime_client.cpp
@@ -1046,6 +1084,30 @@ $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 
 clean-noinstPROGRAMS:
 	-test -z "$(noinst_PROGRAMS)" || rm -f $(noinst_PROGRAMS)
+examples/allocation/$(am__dirstamp):
+	@$(mkdir_p) examples/allocation
+	@: > examples/allocation/$(am__dirstamp)
+examples/allocation/$(DEPDIR)/$(am__dirstamp):
+	@$(mkdir_p) examples/allocation/$(DEPDIR)
+	@: > examples/allocation/$(DEPDIR)/$(am__dirstamp)
+examples/allocation/server.$(OBJEXT):  \
+	examples/allocation/$(am__dirstamp) \
+	examples/allocation/$(DEPDIR)/$(am__dirstamp)
+examples/allocation/server$(EXEEXT): $(examples_allocation_server_OBJECTS) $(examples_allocation_server_DEPENDENCIES) examples/allocation/$(am__dirstamp)
+	@rm -f examples/allocation/server$(EXEEXT)
+	$(CXXLINK) $(examples_allocation_server_LDFLAGS) $(examples_allocation_server_OBJECTS) $(examples_allocation_server_LDADD) $(LIBS)
+examples/buffers/$(am__dirstamp):
+	@$(mkdir_p) examples/buffers
+	@: > examples/buffers/$(am__dirstamp)
+examples/buffers/$(DEPDIR)/$(am__dirstamp):
+	@$(mkdir_p) examples/buffers/$(DEPDIR)
+	@: > examples/buffers/$(DEPDIR)/$(am__dirstamp)
+examples/buffers/reference_counted.$(OBJEXT):  \
+	examples/buffers/$(am__dirstamp) \
+	examples/buffers/$(DEPDIR)/$(am__dirstamp)
+examples/buffers/reference_counted$(EXEEXT): $(examples_buffers_reference_counted_OBJECTS) $(examples_buffers_reference_counted_DEPENDENCIES) examples/buffers/$(am__dirstamp)
+	@rm -f examples/buffers/reference_counted$(EXEEXT)
+	$(CXXLINK) $(examples_buffers_reference_counted_LDFLAGS) $(examples_buffers_reference_counted_OBJECTS) $(examples_buffers_reference_counted_LDADD) $(LIBS)
 examples/chat/$(am__dirstamp):
 	@$(mkdir_p) examples/chat
 	@: > examples/chat/$(am__dirstamp)
@@ -1119,9 +1181,6 @@ examples/http/server/connection_manager.$(OBJEXT):  \
 examples/http/server/mime_types.$(OBJEXT):  \
 	examples/http/server/$(am__dirstamp) \
 	examples/http/server/$(DEPDIR)/$(am__dirstamp)
-examples/http/server/posix_main.$(OBJEXT):  \
-	examples/http/server/$(am__dirstamp) \
-	examples/http/server/$(DEPDIR)/$(am__dirstamp)
 examples/http/server/reply.$(OBJEXT):  \
 	examples/http/server/$(am__dirstamp) \
 	examples/http/server/$(DEPDIR)/$(am__dirstamp)
@@ -1132,6 +1191,12 @@ examples/http/server/request_parser.$(OBJEXT):  \
 	examples/http/server/$(am__dirstamp) \
 	examples/http/server/$(DEPDIR)/$(am__dirstamp)
 examples/http/server/server.$(OBJEXT):  \
+	examples/http/server/$(am__dirstamp) \
+	examples/http/server/$(DEPDIR)/$(am__dirstamp)
+examples/http/server/win_main.$(OBJEXT):  \
+	examples/http/server/$(am__dirstamp) \
+	examples/http/server/$(DEPDIR)/$(am__dirstamp)
+examples/http/server/posix_main.$(OBJEXT):  \
 	examples/http/server/$(am__dirstamp) \
 	examples/http/server/$(DEPDIR)/$(am__dirstamp)
 examples/http/server/http_server$(EXEEXT): $(examples_http_server_http_server_OBJECTS) $(examples_http_server_http_server_DEPENDENCIES) examples/http/server/$(am__dirstamp)
@@ -1149,6 +1214,12 @@ examples/iostreams/daytime_client.$(OBJEXT):  \
 examples/iostreams/daytime_client$(EXEEXT): $(examples_iostreams_daytime_client_OBJECTS) $(examples_iostreams_daytime_client_DEPENDENCIES) examples/iostreams/$(am__dirstamp)
 	@rm -f examples/iostreams/daytime_client$(EXEEXT)
 	$(CXXLINK) $(examples_iostreams_daytime_client_LDFLAGS) $(examples_iostreams_daytime_client_OBJECTS) $(examples_iostreams_daytime_client_LDADD) $(LIBS)
+examples/iostreams/daytime_server.$(OBJEXT):  \
+	examples/iostreams/$(am__dirstamp) \
+	examples/iostreams/$(DEPDIR)/$(am__dirstamp)
+examples/iostreams/daytime_server$(EXEEXT): $(examples_iostreams_daytime_server_OBJECTS) $(examples_iostreams_daytime_server_DEPENDENCIES) examples/iostreams/$(am__dirstamp)
+	@rm -f examples/iostreams/daytime_server$(EXEEXT)
+	$(CXXLINK) $(examples_iostreams_daytime_server_LDFLAGS) $(examples_iostreams_daytime_server_OBJECTS) $(examples_iostreams_daytime_server_LDADD) $(LIBS)
 examples/multicast/$(am__dirstamp):
 	@$(mkdir_p) examples/multicast
 	@: > examples/multicast/$(am__dirstamp)
@@ -1403,23 +1474,22 @@ tests/unit/basic_deadline_timer_test.$(OBJEXT):  \
 tests/unit/basic_deadline_timer_test$(EXEEXT): $(tests_unit_basic_deadline_timer_test_OBJECTS) $(tests_unit_basic_deadline_timer_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/basic_deadline_timer_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_basic_deadline_timer_test_LDFLAGS) $(tests_unit_basic_deadline_timer_test_OBJECTS) $(tests_unit_basic_deadline_timer_test_LDADD) $(LIBS)
-tests/unit/basic_demuxer_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
+tests/unit/basic_resolver_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/basic_demuxer_test$(EXEEXT): $(tests_unit_basic_demuxer_test_OBJECTS) $(tests_unit_basic_demuxer_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/basic_demuxer_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_basic_demuxer_test_LDFLAGS) $(tests_unit_basic_demuxer_test_OBJECTS) $(tests_unit_basic_demuxer_test_LDADD) $(LIBS)
-tests/unit/basic_locking_dispatcher_test.$(OBJEXT):  \
-	tests/unit/$(am__dirstamp) \
-	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/basic_locking_dispatcher_test$(EXEEXT): $(tests_unit_basic_locking_dispatcher_test_OBJECTS) $(tests_unit_basic_locking_dispatcher_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/basic_locking_dispatcher_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_basic_locking_dispatcher_test_LDFLAGS) $(tests_unit_basic_locking_dispatcher_test_OBJECTS) $(tests_unit_basic_locking_dispatcher_test_LDADD) $(LIBS)
+tests/unit/basic_resolver_test$(EXEEXT): $(tests_unit_basic_resolver_test_OBJECTS) $(tests_unit_basic_resolver_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
+	@rm -f tests/unit/basic_resolver_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_basic_resolver_test_LDFLAGS) $(tests_unit_basic_resolver_test_OBJECTS) $(tests_unit_basic_resolver_test_LDADD) $(LIBS)
 tests/unit/basic_socket_acceptor_test.$(OBJEXT):  \
 	tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/basic_socket_acceptor_test$(EXEEXT): $(tests_unit_basic_socket_acceptor_test_OBJECTS) $(tests_unit_basic_socket_acceptor_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/basic_socket_acceptor_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_basic_socket_acceptor_test_LDFLAGS) $(tests_unit_basic_socket_acceptor_test_OBJECTS) $(tests_unit_basic_socket_acceptor_test_LDADD) $(LIBS)
+tests/unit/basic_strand_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
+	tests/unit/$(DEPDIR)/$(am__dirstamp)
+tests/unit/basic_strand_test$(EXEEXT): $(tests_unit_basic_strand_test_OBJECTS) $(tests_unit_basic_strand_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
+	@rm -f tests/unit/basic_strand_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_basic_strand_test_LDFLAGS) $(tests_unit_basic_strand_test_OBJECTS) $(tests_unit_basic_strand_test_LDADD) $(LIBS)
 tests/unit/basic_stream_socket_test.$(OBJEXT):  \
 	tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
@@ -1460,11 +1530,6 @@ tests/unit/datagram_socket_service_test.$(OBJEXT):  \
 tests/unit/datagram_socket_service_test$(EXEEXT): $(tests_unit_datagram_socket_service_test_OBJECTS) $(tests_unit_datagram_socket_service_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/datagram_socket_service_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_datagram_socket_service_test_LDFLAGS) $(tests_unit_datagram_socket_service_test_OBJECTS) $(tests_unit_datagram_socket_service_test_LDADD) $(LIBS)
-tests/unit/datagram_socket_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
-	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/datagram_socket_test$(EXEEXT): $(tests_unit_datagram_socket_test_OBJECTS) $(tests_unit_datagram_socket_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/datagram_socket_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_datagram_socket_test_LDFLAGS) $(tests_unit_datagram_socket_test_OBJECTS) $(tests_unit_datagram_socket_test_LDADD) $(LIBS)
 tests/unit/deadline_timer_service_test.$(OBJEXT):  \
 	tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
@@ -1476,16 +1541,6 @@ tests/unit/deadline_timer_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 tests/unit/deadline_timer_test$(EXEEXT): $(tests_unit_deadline_timer_test_OBJECTS) $(tests_unit_deadline_timer_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/deadline_timer_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_deadline_timer_test_LDFLAGS) $(tests_unit_deadline_timer_test_OBJECTS) $(tests_unit_deadline_timer_test_LDADD) $(LIBS)
-tests/unit/demuxer_service_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
-	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/demuxer_service_test$(EXEEXT): $(tests_unit_demuxer_service_test_OBJECTS) $(tests_unit_demuxer_service_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/demuxer_service_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_demuxer_service_test_LDFLAGS) $(tests_unit_demuxer_service_test_OBJECTS) $(tests_unit_demuxer_service_test_LDADD) $(LIBS)
-tests/unit/demuxer_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
-	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/demuxer_test$(EXEEXT): $(tests_unit_demuxer_test_OBJECTS) $(tests_unit_demuxer_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/demuxer_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_demuxer_test_LDFLAGS) $(tests_unit_demuxer_test_OBJECTS) $(tests_unit_demuxer_test_LDADD) $(LIBS)
 tests/unit/error_handler_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/error_handler_test$(EXEEXT): $(tests_unit_error_handler_test_OBJECTS) $(tests_unit_error_handler_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
@@ -1496,57 +1551,84 @@ tests/unit/error_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 tests/unit/error_test$(EXEEXT): $(tests_unit_error_test_OBJECTS) $(tests_unit_error_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/error_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_error_test_LDFLAGS) $(tests_unit_error_test_OBJECTS) $(tests_unit_error_test_LDADD) $(LIBS)
-tests/unit/ipv4/$(am__dirstamp):
-	@$(mkdir_p) tests/unit/ipv4
-	@: > tests/unit/ipv4/$(am__dirstamp)
-tests/unit/ipv4/$(DEPDIR)/$(am__dirstamp):
-	@$(mkdir_p) tests/unit/ipv4/$(DEPDIR)
-	@: > tests/unit/ipv4/$(DEPDIR)/$(am__dirstamp)
-tests/unit/ipv4/address_test.$(OBJEXT):  \
-	tests/unit/ipv4/$(am__dirstamp) \
-	tests/unit/ipv4/$(DEPDIR)/$(am__dirstamp)
-tests/unit/ipv4/address_test$(EXEEXT): $(tests_unit_ipv4_address_test_OBJECTS) $(tests_unit_ipv4_address_test_DEPENDENCIES) tests/unit/ipv4/$(am__dirstamp)
-	@rm -f tests/unit/ipv4/address_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_ipv4_address_test_LDFLAGS) $(tests_unit_ipv4_address_test_OBJECTS) $(tests_unit_ipv4_address_test_LDADD) $(LIBS)
-tests/unit/ipv4/basic_host_resolver_test.$(OBJEXT):  \
-	tests/unit/ipv4/$(am__dirstamp) \
-	tests/unit/ipv4/$(DEPDIR)/$(am__dirstamp)
-tests/unit/ipv4/basic_host_resolver_test$(EXEEXT): $(tests_unit_ipv4_basic_host_resolver_test_OBJECTS) $(tests_unit_ipv4_basic_host_resolver_test_DEPENDENCIES) tests/unit/ipv4/$(am__dirstamp)
-	@rm -f tests/unit/ipv4/basic_host_resolver_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_ipv4_basic_host_resolver_test_LDFLAGS) $(tests_unit_ipv4_basic_host_resolver_test_OBJECTS) $(tests_unit_ipv4_basic_host_resolver_test_LDADD) $(LIBS)
-tests/unit/ipv4/host_resolver_service_test.$(OBJEXT):  \
-	tests/unit/ipv4/$(am__dirstamp) \
-	tests/unit/ipv4/$(DEPDIR)/$(am__dirstamp)
-tests/unit/ipv4/host_resolver_service_test$(EXEEXT): $(tests_unit_ipv4_host_resolver_service_test_OBJECTS) $(tests_unit_ipv4_host_resolver_service_test_DEPENDENCIES) tests/unit/ipv4/$(am__dirstamp)
-	@rm -f tests/unit/ipv4/host_resolver_service_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_ipv4_host_resolver_service_test_LDFLAGS) $(tests_unit_ipv4_host_resolver_service_test_OBJECTS) $(tests_unit_ipv4_host_resolver_service_test_LDADD) $(LIBS)
-tests/unit/ipv4/host_resolver_test.$(OBJEXT):  \
-	tests/unit/ipv4/$(am__dirstamp) \
-	tests/unit/ipv4/$(DEPDIR)/$(am__dirstamp)
-tests/unit/ipv4/host_resolver_test$(EXEEXT): $(tests_unit_ipv4_host_resolver_test_OBJECTS) $(tests_unit_ipv4_host_resolver_test_DEPENDENCIES) tests/unit/ipv4/$(am__dirstamp)
-	@rm -f tests/unit/ipv4/host_resolver_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_ipv4_host_resolver_test_LDFLAGS) $(tests_unit_ipv4_host_resolver_test_OBJECTS) $(tests_unit_ipv4_host_resolver_test_LDADD) $(LIBS)
-tests/unit/ipv4/host_test.$(OBJEXT): tests/unit/ipv4/$(am__dirstamp) \
-	tests/unit/ipv4/$(DEPDIR)/$(am__dirstamp)
-tests/unit/ipv4/host_test$(EXEEXT): $(tests_unit_ipv4_host_test_OBJECTS) $(tests_unit_ipv4_host_test_DEPENDENCIES) tests/unit/ipv4/$(am__dirstamp)
-	@rm -f tests/unit/ipv4/host_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_ipv4_host_test_LDFLAGS) $(tests_unit_ipv4_host_test_OBJECTS) $(tests_unit_ipv4_host_test_LDADD) $(LIBS)
-tests/unit/ipv4/multicast_test.$(OBJEXT):  \
-	tests/unit/ipv4/$(am__dirstamp) \
-	tests/unit/ipv4/$(DEPDIR)/$(am__dirstamp)
-tests/unit/ipv4/multicast_test$(EXEEXT): $(tests_unit_ipv4_multicast_test_OBJECTS) $(tests_unit_ipv4_multicast_test_DEPENDENCIES) tests/unit/ipv4/$(am__dirstamp)
-	@rm -f tests/unit/ipv4/multicast_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_ipv4_multicast_test_LDFLAGS) $(tests_unit_ipv4_multicast_test_OBJECTS) $(tests_unit_ipv4_multicast_test_LDADD) $(LIBS)
-tests/unit/ipv4/tcp_test.$(OBJEXT): tests/unit/ipv4/$(am__dirstamp) \
-	tests/unit/ipv4/$(DEPDIR)/$(am__dirstamp)
-tests/unit/ipv4/tcp_test$(EXEEXT): $(tests_unit_ipv4_tcp_test_OBJECTS) $(tests_unit_ipv4_tcp_test_DEPENDENCIES) tests/unit/ipv4/$(am__dirstamp)
-	@rm -f tests/unit/ipv4/tcp_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_ipv4_tcp_test_LDFLAGS) $(tests_unit_ipv4_tcp_test_OBJECTS) $(tests_unit_ipv4_tcp_test_LDADD) $(LIBS)
-tests/unit/ipv4/udp_test.$(OBJEXT): tests/unit/ipv4/$(am__dirstamp) \
-	tests/unit/ipv4/$(DEPDIR)/$(am__dirstamp)
-tests/unit/ipv4/udp_test$(EXEEXT): $(tests_unit_ipv4_udp_test_OBJECTS) $(tests_unit_ipv4_udp_test_DEPENDENCIES) tests/unit/ipv4/$(am__dirstamp)
-	@rm -f tests/unit/ipv4/udp_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_ipv4_udp_test_LDFLAGS) $(tests_unit_ipv4_udp_test_OBJECTS) $(tests_unit_ipv4_udp_test_LDADD) $(LIBS)
+tests/unit/io_service_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
+	tests/unit/$(DEPDIR)/$(am__dirstamp)
+tests/unit/io_service_test$(EXEEXT): $(tests_unit_io_service_test_OBJECTS) $(tests_unit_io_service_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
+	@rm -f tests/unit/io_service_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_io_service_test_LDFLAGS) $(tests_unit_io_service_test_OBJECTS) $(tests_unit_io_service_test_LDADD) $(LIBS)
+tests/unit/ip/$(am__dirstamp):
+	@$(mkdir_p) tests/unit/ip
+	@: > tests/unit/ip/$(am__dirstamp)
+tests/unit/ip/$(DEPDIR)/$(am__dirstamp):
+	@$(mkdir_p) tests/unit/ip/$(DEPDIR)
+	@: > tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+tests/unit/ip/address_test.$(OBJEXT): tests/unit/ip/$(am__dirstamp) \
+	tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+tests/unit/ip/address_test$(EXEEXT): $(tests_unit_ip_address_test_OBJECTS) $(tests_unit_ip_address_test_DEPENDENCIES) tests/unit/ip/$(am__dirstamp)
+	@rm -f tests/unit/ip/address_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_ip_address_test_LDFLAGS) $(tests_unit_ip_address_test_OBJECTS) $(tests_unit_ip_address_test_LDADD) $(LIBS)
+tests/unit/ip/address_v4_test.$(OBJEXT):  \
+	tests/unit/ip/$(am__dirstamp) \
+	tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+tests/unit/ip/address_v4_test$(EXEEXT): $(tests_unit_ip_address_v4_test_OBJECTS) $(tests_unit_ip_address_v4_test_DEPENDENCIES) tests/unit/ip/$(am__dirstamp)
+	@rm -f tests/unit/ip/address_v4_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_ip_address_v4_test_LDFLAGS) $(tests_unit_ip_address_v4_test_OBJECTS) $(tests_unit_ip_address_v4_test_LDADD) $(LIBS)
+tests/unit/ip/address_v6_test.$(OBJEXT):  \
+	tests/unit/ip/$(am__dirstamp) \
+	tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+tests/unit/ip/address_v6_test$(EXEEXT): $(tests_unit_ip_address_v6_test_OBJECTS) $(tests_unit_ip_address_v6_test_DEPENDENCIES) tests/unit/ip/$(am__dirstamp)
+	@rm -f tests/unit/ip/address_v6_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_ip_address_v6_test_LDFLAGS) $(tests_unit_ip_address_v6_test_OBJECTS) $(tests_unit_ip_address_v6_test_LDADD) $(LIBS)
+tests/unit/ip/basic_endpoint_test.$(OBJEXT):  \
+	tests/unit/ip/$(am__dirstamp) \
+	tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+tests/unit/ip/basic_endpoint_test$(EXEEXT): $(tests_unit_ip_basic_endpoint_test_OBJECTS) $(tests_unit_ip_basic_endpoint_test_DEPENDENCIES) tests/unit/ip/$(am__dirstamp)
+	@rm -f tests/unit/ip/basic_endpoint_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_ip_basic_endpoint_test_LDFLAGS) $(tests_unit_ip_basic_endpoint_test_OBJECTS) $(tests_unit_ip_basic_endpoint_test_LDADD) $(LIBS)
+tests/unit/ip/basic_resolver_entry_test.$(OBJEXT):  \
+	tests/unit/ip/$(am__dirstamp) \
+	tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+tests/unit/ip/basic_resolver_entry_test$(EXEEXT): $(tests_unit_ip_basic_resolver_entry_test_OBJECTS) $(tests_unit_ip_basic_resolver_entry_test_DEPENDENCIES) tests/unit/ip/$(am__dirstamp)
+	@rm -f tests/unit/ip/basic_resolver_entry_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_ip_basic_resolver_entry_test_LDFLAGS) $(tests_unit_ip_basic_resolver_entry_test_OBJECTS) $(tests_unit_ip_basic_resolver_entry_test_LDADD) $(LIBS)
+tests/unit/ip/basic_resolver_iterator_test.$(OBJEXT):  \
+	tests/unit/ip/$(am__dirstamp) \
+	tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+tests/unit/ip/basic_resolver_iterator_test$(EXEEXT): $(tests_unit_ip_basic_resolver_iterator_test_OBJECTS) $(tests_unit_ip_basic_resolver_iterator_test_DEPENDENCIES) tests/unit/ip/$(am__dirstamp)
+	@rm -f tests/unit/ip/basic_resolver_iterator_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_ip_basic_resolver_iterator_test_LDFLAGS) $(tests_unit_ip_basic_resolver_iterator_test_OBJECTS) $(tests_unit_ip_basic_resolver_iterator_test_LDADD) $(LIBS)
+tests/unit/ip/basic_resolver_query_test.$(OBJEXT):  \
+	tests/unit/ip/$(am__dirstamp) \
+	tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+tests/unit/ip/basic_resolver_query_test$(EXEEXT): $(tests_unit_ip_basic_resolver_query_test_OBJECTS) $(tests_unit_ip_basic_resolver_query_test_DEPENDENCIES) tests/unit/ip/$(am__dirstamp)
+	@rm -f tests/unit/ip/basic_resolver_query_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_ip_basic_resolver_query_test_LDFLAGS) $(tests_unit_ip_basic_resolver_query_test_OBJECTS) $(tests_unit_ip_basic_resolver_query_test_LDADD) $(LIBS)
+tests/unit/ip/host_name_test.$(OBJEXT): tests/unit/ip/$(am__dirstamp) \
+	tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+tests/unit/ip/host_name_test$(EXEEXT): $(tests_unit_ip_host_name_test_OBJECTS) $(tests_unit_ip_host_name_test_DEPENDENCIES) tests/unit/ip/$(am__dirstamp)
+	@rm -f tests/unit/ip/host_name_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_ip_host_name_test_LDFLAGS) $(tests_unit_ip_host_name_test_OBJECTS) $(tests_unit_ip_host_name_test_LDADD) $(LIBS)
+tests/unit/ip/multicast_test.$(OBJEXT): tests/unit/ip/$(am__dirstamp) \
+	tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+tests/unit/ip/multicast_test$(EXEEXT): $(tests_unit_ip_multicast_test_OBJECTS) $(tests_unit_ip_multicast_test_DEPENDENCIES) tests/unit/ip/$(am__dirstamp)
+	@rm -f tests/unit/ip/multicast_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_ip_multicast_test_LDFLAGS) $(tests_unit_ip_multicast_test_OBJECTS) $(tests_unit_ip_multicast_test_LDADD) $(LIBS)
+tests/unit/ip/resolver_query_base_test.$(OBJEXT):  \
+	tests/unit/ip/$(am__dirstamp) \
+	tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+tests/unit/ip/resolver_query_base_test$(EXEEXT): $(tests_unit_ip_resolver_query_base_test_OBJECTS) $(tests_unit_ip_resolver_query_base_test_DEPENDENCIES) tests/unit/ip/$(am__dirstamp)
+	@rm -f tests/unit/ip/resolver_query_base_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_ip_resolver_query_base_test_LDFLAGS) $(tests_unit_ip_resolver_query_base_test_OBJECTS) $(tests_unit_ip_resolver_query_base_test_LDADD) $(LIBS)
+tests/unit/ip/tcp_test.$(OBJEXT): tests/unit/ip/$(am__dirstamp) \
+	tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+tests/unit/ip/tcp_test$(EXEEXT): $(tests_unit_ip_tcp_test_OBJECTS) $(tests_unit_ip_tcp_test_DEPENDENCIES) tests/unit/ip/$(am__dirstamp)
+	@rm -f tests/unit/ip/tcp_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_ip_tcp_test_LDFLAGS) $(tests_unit_ip_tcp_test_OBJECTS) $(tests_unit_ip_tcp_test_LDADD) $(LIBS)
+tests/unit/ip/udp_test.$(OBJEXT): tests/unit/ip/$(am__dirstamp) \
+	tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+tests/unit/ip/udp_test$(EXEEXT): $(tests_unit_ip_udp_test_OBJECTS) $(tests_unit_ip_udp_test_DEPENDENCIES) tests/unit/ip/$(am__dirstamp)
+	@rm -f tests/unit/ip/udp_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_ip_udp_test_LDFLAGS) $(tests_unit_ip_udp_test_OBJECTS) $(tests_unit_ip_udp_test_LDADD) $(LIBS)
 tests/unit/is_read_buffered_test.$(OBJEXT):  \
 	tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
@@ -1559,18 +1641,6 @@ tests/unit/is_write_buffered_test.$(OBJEXT):  \
 tests/unit/is_write_buffered_test$(EXEEXT): $(tests_unit_is_write_buffered_test_OBJECTS) $(tests_unit_is_write_buffered_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/is_write_buffered_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_is_write_buffered_test_LDFLAGS) $(tests_unit_is_write_buffered_test_OBJECTS) $(tests_unit_is_write_buffered_test_LDADD) $(LIBS)
-tests/unit/locking_dispatcher_service_test.$(OBJEXT):  \
-	tests/unit/$(am__dirstamp) \
-	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/locking_dispatcher_service_test$(EXEEXT): $(tests_unit_locking_dispatcher_service_test_OBJECTS) $(tests_unit_locking_dispatcher_service_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/locking_dispatcher_service_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_locking_dispatcher_service_test_LDFLAGS) $(tests_unit_locking_dispatcher_service_test_OBJECTS) $(tests_unit_locking_dispatcher_service_test_LDADD) $(LIBS)
-tests/unit/locking_dispatcher_test.$(OBJEXT):  \
-	tests/unit/$(am__dirstamp) \
-	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/locking_dispatcher_test$(EXEEXT): $(tests_unit_locking_dispatcher_test_OBJECTS) $(tests_unit_locking_dispatcher_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/locking_dispatcher_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_locking_dispatcher_test_LDFLAGS) $(tests_unit_locking_dispatcher_test_OBJECTS) $(tests_unit_locking_dispatcher_test_LDADD) $(LIBS)
 tests/unit/placeholders_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/placeholders_test$(EXEEXT): $(tests_unit_placeholders_test_OBJECTS) $(tests_unit_placeholders_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
@@ -1581,22 +1651,18 @@ tests/unit/read_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 tests/unit/read_test$(EXEEXT): $(tests_unit_read_test_OBJECTS) $(tests_unit_read_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/read_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_read_test_LDFLAGS) $(tests_unit_read_test_OBJECTS) $(tests_unit_read_test_LDADD) $(LIBS)
-tests/unit/service_factory_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
+tests/unit/resolver_service_test.$(OBJEXT):  \
+	tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/service_factory_test$(EXEEXT): $(tests_unit_service_factory_test_OBJECTS) $(tests_unit_service_factory_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/service_factory_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_service_factory_test_LDFLAGS) $(tests_unit_service_factory_test_OBJECTS) $(tests_unit_service_factory_test_LDADD) $(LIBS)
+tests/unit/resolver_service_test$(EXEEXT): $(tests_unit_resolver_service_test_OBJECTS) $(tests_unit_resolver_service_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
+	@rm -f tests/unit/resolver_service_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_resolver_service_test_LDFLAGS) $(tests_unit_resolver_service_test_OBJECTS) $(tests_unit_resolver_service_test_LDADD) $(LIBS)
 tests/unit/socket_acceptor_service_test.$(OBJEXT):  \
 	tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/socket_acceptor_service_test$(EXEEXT): $(tests_unit_socket_acceptor_service_test_OBJECTS) $(tests_unit_socket_acceptor_service_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/socket_acceptor_service_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_socket_acceptor_service_test_LDFLAGS) $(tests_unit_socket_acceptor_service_test_OBJECTS) $(tests_unit_socket_acceptor_service_test_LDADD) $(LIBS)
-tests/unit/socket_acceptor_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
-	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/socket_acceptor_test$(EXEEXT): $(tests_unit_socket_acceptor_test_OBJECTS) $(tests_unit_socket_acceptor_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/socket_acceptor_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_socket_acceptor_test_LDFLAGS) $(tests_unit_socket_acceptor_test_OBJECTS) $(tests_unit_socket_acceptor_test_LDADD) $(LIBS)
 tests/unit/socket_base_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/socket_base_test$(EXEEXT): $(tests_unit_socket_base_test_OBJECTS) $(tests_unit_socket_base_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
@@ -1648,17 +1714,22 @@ tests/unit/ssl/stream_test.$(OBJEXT): tests/unit/ssl/$(am__dirstamp) \
 tests/unit/ssl/stream_test$(EXEEXT): $(tests_unit_ssl_stream_test_OBJECTS) $(tests_unit_ssl_stream_test_DEPENDENCIES) tests/unit/ssl/$(am__dirstamp)
 	@rm -f tests/unit/ssl/stream_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_ssl_stream_test_LDFLAGS) $(tests_unit_ssl_stream_test_OBJECTS) $(tests_unit_ssl_stream_test_LDADD) $(LIBS)
+tests/unit/strand_service_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
+	tests/unit/$(DEPDIR)/$(am__dirstamp)
+tests/unit/strand_service_test$(EXEEXT): $(tests_unit_strand_service_test_OBJECTS) $(tests_unit_strand_service_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
+	@rm -f tests/unit/strand_service_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_strand_service_test_LDFLAGS) $(tests_unit_strand_service_test_OBJECTS) $(tests_unit_strand_service_test_LDADD) $(LIBS)
+tests/unit/strand_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
+	tests/unit/$(DEPDIR)/$(am__dirstamp)
+tests/unit/strand_test$(EXEEXT): $(tests_unit_strand_test_OBJECTS) $(tests_unit_strand_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
+	@rm -f tests/unit/strand_test$(EXEEXT)
+	$(CXXLINK) $(tests_unit_strand_test_LDFLAGS) $(tests_unit_strand_test_OBJECTS) $(tests_unit_strand_test_LDADD) $(LIBS)
 tests/unit/stream_socket_service_test.$(OBJEXT):  \
 	tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/stream_socket_service_test$(EXEEXT): $(tests_unit_stream_socket_service_test_OBJECTS) $(tests_unit_stream_socket_service_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/stream_socket_service_test$(EXEEXT)
 	$(CXXLINK) $(tests_unit_stream_socket_service_test_LDFLAGS) $(tests_unit_stream_socket_service_test_OBJECTS) $(tests_unit_stream_socket_service_test_LDADD) $(LIBS)
-tests/unit/stream_socket_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
-	tests/unit/$(DEPDIR)/$(am__dirstamp)
-tests/unit/stream_socket_test$(EXEEXT): $(tests_unit_stream_socket_test_OBJECTS) $(tests_unit_stream_socket_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
-	@rm -f tests/unit/stream_socket_test$(EXEEXT)
-	$(CXXLINK) $(tests_unit_stream_socket_test_LDFLAGS) $(tests_unit_stream_socket_test_OBJECTS) $(tests_unit_stream_socket_test_LDADD) $(LIBS)
 tests/unit/thread_test.$(OBJEXT): tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/thread_test$(EXEEXT): $(tests_unit_thread_test_OBJECTS) $(tests_unit_thread_test_DEPENDENCIES) tests/unit/$(am__dirstamp)
@@ -1677,6 +1748,8 @@ tests/unit/write_test$(EXEEXT): $(tests_unit_write_test_OBJECTS) $(tests_unit_wr
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f examples/allocation/server.$(OBJEXT)
+	-rm -f examples/buffers/reference_counted.$(OBJEXT)
 	-rm -f examples/chat/chat_client.$(OBJEXT)
 	-rm -f examples/chat/chat_server.$(OBJEXT)
 	-rm -f examples/echo/async_tcp_echo_server.$(OBJEXT)
@@ -1693,7 +1766,9 @@ mostlyclean-compile:
 	-rm -f examples/http/server/request_handler.$(OBJEXT)
 	-rm -f examples/http/server/request_parser.$(OBJEXT)
 	-rm -f examples/http/server/server.$(OBJEXT)
+	-rm -f examples/http/server/win_main.$(OBJEXT)
 	-rm -f examples/iostreams/daytime_client.$(OBJEXT)
+	-rm -f examples/iostreams/daytime_server.$(OBJEXT)
 	-rm -f examples/multicast/receiver.$(OBJEXT)
 	-rm -f examples/multicast/sender.$(OBJEXT)
 	-rm -f examples/services/daytime_client.$(OBJEXT)
@@ -1719,9 +1794,9 @@ mostlyclean-compile:
 	-rm -f tests/performance/server.$(OBJEXT)
 	-rm -f tests/unit/basic_datagram_socket_test.$(OBJEXT)
 	-rm -f tests/unit/basic_deadline_timer_test.$(OBJEXT)
-	-rm -f tests/unit/basic_demuxer_test.$(OBJEXT)
-	-rm -f tests/unit/basic_locking_dispatcher_test.$(OBJEXT)
+	-rm -f tests/unit/basic_resolver_test.$(OBJEXT)
 	-rm -f tests/unit/basic_socket_acceptor_test.$(OBJEXT)
+	-rm -f tests/unit/basic_strand_test.$(OBJEXT)
 	-rm -f tests/unit/basic_stream_socket_test.$(OBJEXT)
 	-rm -f tests/unit/buffer_test.$(OBJEXT)
 	-rm -f tests/unit/buffered_read_stream_test.$(OBJEXT)
@@ -1729,30 +1804,29 @@ mostlyclean-compile:
 	-rm -f tests/unit/buffered_write_stream_test.$(OBJEXT)
 	-rm -f tests/unit/completion_condition_test.$(OBJEXT)
 	-rm -f tests/unit/datagram_socket_service_test.$(OBJEXT)
-	-rm -f tests/unit/datagram_socket_test.$(OBJEXT)
 	-rm -f tests/unit/deadline_timer_service_test.$(OBJEXT)
 	-rm -f tests/unit/deadline_timer_test.$(OBJEXT)
-	-rm -f tests/unit/demuxer_service_test.$(OBJEXT)
-	-rm -f tests/unit/demuxer_test.$(OBJEXT)
 	-rm -f tests/unit/error_handler_test.$(OBJEXT)
 	-rm -f tests/unit/error_test.$(OBJEXT)
-	-rm -f tests/unit/ipv4/address_test.$(OBJEXT)
-	-rm -f tests/unit/ipv4/basic_host_resolver_test.$(OBJEXT)
-	-rm -f tests/unit/ipv4/host_resolver_service_test.$(OBJEXT)
-	-rm -f tests/unit/ipv4/host_resolver_test.$(OBJEXT)
-	-rm -f tests/unit/ipv4/host_test.$(OBJEXT)
-	-rm -f tests/unit/ipv4/multicast_test.$(OBJEXT)
-	-rm -f tests/unit/ipv4/tcp_test.$(OBJEXT)
-	-rm -f tests/unit/ipv4/udp_test.$(OBJEXT)
+	-rm -f tests/unit/io_service_test.$(OBJEXT)
+	-rm -f tests/unit/ip/address_test.$(OBJEXT)
+	-rm -f tests/unit/ip/address_v4_test.$(OBJEXT)
+	-rm -f tests/unit/ip/address_v6_test.$(OBJEXT)
+	-rm -f tests/unit/ip/basic_endpoint_test.$(OBJEXT)
+	-rm -f tests/unit/ip/basic_resolver_entry_test.$(OBJEXT)
+	-rm -f tests/unit/ip/basic_resolver_iterator_test.$(OBJEXT)
+	-rm -f tests/unit/ip/basic_resolver_query_test.$(OBJEXT)
+	-rm -f tests/unit/ip/host_name_test.$(OBJEXT)
+	-rm -f tests/unit/ip/multicast_test.$(OBJEXT)
+	-rm -f tests/unit/ip/resolver_query_base_test.$(OBJEXT)
+	-rm -f tests/unit/ip/tcp_test.$(OBJEXT)
+	-rm -f tests/unit/ip/udp_test.$(OBJEXT)
 	-rm -f tests/unit/is_read_buffered_test.$(OBJEXT)
 	-rm -f tests/unit/is_write_buffered_test.$(OBJEXT)
-	-rm -f tests/unit/locking_dispatcher_service_test.$(OBJEXT)
-	-rm -f tests/unit/locking_dispatcher_test.$(OBJEXT)
 	-rm -f tests/unit/placeholders_test.$(OBJEXT)
 	-rm -f tests/unit/read_test.$(OBJEXT)
-	-rm -f tests/unit/service_factory_test.$(OBJEXT)
+	-rm -f tests/unit/resolver_service_test.$(OBJEXT)
 	-rm -f tests/unit/socket_acceptor_service_test.$(OBJEXT)
-	-rm -f tests/unit/socket_acceptor_test.$(OBJEXT)
 	-rm -f tests/unit/socket_base_test.$(OBJEXT)
 	-rm -f tests/unit/ssl/basic_context_test.$(OBJEXT)
 	-rm -f tests/unit/ssl/context_base_test.$(OBJEXT)
@@ -1761,8 +1835,9 @@ mostlyclean-compile:
 	-rm -f tests/unit/ssl/stream_base_test.$(OBJEXT)
 	-rm -f tests/unit/ssl/stream_service_test.$(OBJEXT)
 	-rm -f tests/unit/ssl/stream_test.$(OBJEXT)
+	-rm -f tests/unit/strand_service_test.$(OBJEXT)
+	-rm -f tests/unit/strand_test.$(OBJEXT)
 	-rm -f tests/unit/stream_socket_service_test.$(OBJEXT)
-	-rm -f tests/unit/stream_socket_test.$(OBJEXT)
 	-rm -f tests/unit/thread_test.$(OBJEXT)
 	-rm -f tests/unit/time_traits_test.$(OBJEXT)
 	-rm -f tests/unit/write_test.$(OBJEXT)
@@ -1770,6 +1845,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@examples/allocation/$(DEPDIR)/server.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/buffers/$(DEPDIR)/reference_counted.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/chat/$(DEPDIR)/chat_client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/chat/$(DEPDIR)/chat_server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/echo/$(DEPDIR)/async_tcp_echo_server.Po@am__quote@
@@ -1786,7 +1863,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@examples/http/server/$(DEPDIR)/request_handler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/http/server/$(DEPDIR)/request_parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/http/server/$(DEPDIR)/server.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server/$(DEPDIR)/win_main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/iostreams/$(DEPDIR)/daytime_client.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/iostreams/$(DEPDIR)/daytime_server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/multicast/$(DEPDIR)/receiver.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/multicast/$(DEPDIR)/sender.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/services/$(DEPDIR)/daytime_client.Po@am__quote@
@@ -1812,9 +1891,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@tests/performance/$(DEPDIR)/server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/basic_datagram_socket_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/basic_deadline_timer_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/basic_demuxer_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/basic_locking_dispatcher_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/basic_resolver_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/basic_socket_acceptor_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/basic_strand_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/basic_stream_socket_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/buffer_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/buffered_read_stream_test.Po@am__quote@
@@ -1822,36 +1901,36 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/buffered_write_stream_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/completion_condition_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/datagram_socket_service_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/datagram_socket_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/deadline_timer_service_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/deadline_timer_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/demuxer_service_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/demuxer_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/error_handler_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/error_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/io_service_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/is_read_buffered_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/is_write_buffered_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/locking_dispatcher_service_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/locking_dispatcher_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/placeholders_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/read_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/service_factory_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/resolver_service_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/socket_acceptor_service_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/socket_acceptor_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/socket_base_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/strand_service_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/strand_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/stream_socket_service_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/stream_socket_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/thread_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/time_traits_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/write_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ipv4/$(DEPDIR)/address_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ipv4/$(DEPDIR)/basic_host_resolver_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ipv4/$(DEPDIR)/host_resolver_service_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ipv4/$(DEPDIR)/host_resolver_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ipv4/$(DEPDIR)/host_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ipv4/$(DEPDIR)/multicast_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ipv4/$(DEPDIR)/tcp_test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ipv4/$(DEPDIR)/udp_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/address_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/address_v4_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/address_v6_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/basic_endpoint_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/basic_resolver_entry_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/basic_resolver_iterator_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/basic_resolver_query_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/host_name_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/multicast_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/resolver_query_base_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/tcp_test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/udp_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ssl/$(DEPDIR)/basic_context_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ssl/$(DEPDIR)/context_base_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ssl/$(DEPDIR)/context_service_test.Po@am__quote@
@@ -2071,7 +2150,7 @@ check-TESTS: $(TESTS)
 	else :; fi
 
 distdir: $(DISTFILES)
-	$(mkdir_p) $(distdir)/examples/chat $(distdir)/examples/http/server $(distdir)/examples/iostreams $(distdir)/examples/serialization $(distdir)/examples/services $(distdir)/examples/ssl $(distdir)/tests/unit
+	$(mkdir_p) $(distdir)/examples/chat $(distdir)/examples/http/server $(distdir)/examples/serialization $(distdir)/examples/services $(distdir)/examples/ssl $(distdir)/tests/unit
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
@@ -2139,6 +2218,10 @@ clean-generic:
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
+	-rm -f examples/allocation/$(DEPDIR)/$(am__dirstamp)
+	-rm -f examples/allocation/$(am__dirstamp)
+	-rm -f examples/buffers/$(DEPDIR)/$(am__dirstamp)
+	-rm -f examples/buffers/$(am__dirstamp)
 	-rm -f examples/chat/$(DEPDIR)/$(am__dirstamp)
 	-rm -f examples/chat/$(am__dirstamp)
 	-rm -f examples/echo/$(DEPDIR)/$(am__dirstamp)
@@ -2183,8 +2266,8 @@ distclean-generic:
 	-rm -f tests/performance/$(am__dirstamp)
 	-rm -f tests/unit/$(DEPDIR)/$(am__dirstamp)
 	-rm -f tests/unit/$(am__dirstamp)
-	-rm -f tests/unit/ipv4/$(DEPDIR)/$(am__dirstamp)
-	-rm -f tests/unit/ipv4/$(am__dirstamp)
+	-rm -f tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
+	-rm -f tests/unit/ip/$(am__dirstamp)
 	-rm -f tests/unit/ssl/$(DEPDIR)/$(am__dirstamp)
 	-rm -f tests/unit/ssl/$(am__dirstamp)
 
@@ -2197,7 +2280,7 @@ clean: clean-recursive
 clean-am: clean-generic clean-noinstPROGRAMS mostlyclean-am
 
 distclean: distclean-recursive
-	-rm -rf examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/server/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/multicast/$(DEPDIR) examples/services/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ipv4/$(DEPDIR) tests/unit/ssl/$(DEPDIR)
+	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/server/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/multicast/$(DEPDIR) examples/services/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/ssl/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -2223,7 +2306,7 @@ install-man:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-recursive
-	-rm -rf examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/server/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/multicast/$(DEPDIR) examples/services/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ipv4/$(DEPDIR) tests/unit/ssl/$(DEPDIR)
+	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/server/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/multicast/$(DEPDIR) examples/services/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/ssl/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

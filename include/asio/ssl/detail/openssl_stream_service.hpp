@@ -26,8 +26,7 @@
 #include <boost/bind.hpp>
 #include "asio/detail/pop_options.hpp"
 
-#include "asio/basic_demuxer.hpp"
-#include "asio/demuxer_service.hpp"
+#include "asio/io_service.hpp"
 #include "asio/ssl/basic_context.hpp"
 #include "asio/ssl/stream_base.hpp"
 #include "asio/ssl/detail/openssl_operation.hpp"
@@ -37,14 +36,9 @@ namespace asio {
 namespace ssl {
 namespace detail {
 
-template <typename Allocator>
 class openssl_stream_service
-  : private boost::noncopyable
+  : public asio::io_service::service
 {
-public:
-  // The demuxer type.
-  typedef basic_demuxer<demuxer_service<Allocator> > demuxer_type;
-
 private:
   //Base handler for asyncrhonous operations
   template <typename Stream>
@@ -53,10 +47,10 @@ private:
   public:
     typedef boost::function<void (const asio::error&, size_t)> func_t;
 
-    base_handler(demuxer_type& d)
+    base_handler(asio::io_service& io_service)
       : op_(NULL)
-      , demuxer_(d)
-      , work_(d)
+      , io_service_(io_service)
+      , work_(io_service)
     {}
     
     void do_func(const asio::error& error, size_t size)
@@ -75,8 +69,8 @@ private:
   private:
     func_t func_;
     openssl_operation<Stream>* op_;
-    demuxer_type& demuxer_;
-    typename demuxer_type::work work_;
+    asio::io_service& io_service_;
+    asio::io_service::work work_;
   };  // class base_handler
 
   // Handler for asynchronous IO (write/read) operations
@@ -85,8 +79,8 @@ private:
     : public base_handler<Stream>
   {
   public:
-    io_handler(Handler handler, demuxer_type& d)
-      : base_handler<Stream>(d)
+    io_handler(Handler handler, asio::io_service& io_service)
+      : base_handler<Stream>(io_service)
       , handler_(handler)
     {
       set_func(boost::bind(
@@ -109,8 +103,8 @@ private:
     : public base_handler<Stream>
   {
   public:
-    handshake_handler(Handler handler, demuxer_type& d)
-      : base_handler<Stream>(d)
+    handshake_handler(Handler handler, asio::io_service& io_service)
+      : base_handler<Stream>(io_service)
       , handler_(handler)
     {
       set_func(boost::bind(
@@ -134,8 +128,8 @@ private:
     : public base_handler<Stream>
   {
   public:
-    shutdown_handler(Handler handler, demuxer_type& d)
-      : base_handler<Stream>(d),
+    shutdown_handler(Handler handler, asio::io_service& io_service)
+      : base_handler<Stream>(io_service),
         handler_(handler)
     { 
       set_func(boost::bind(
@@ -160,16 +154,15 @@ public:
     ::BIO* ext_bio;
   } * impl_type;
 
-  // Construct a new stream socket service for the specified demuxer.
-  explicit openssl_stream_service(demuxer_type& demuxer)
-    : demuxer_(demuxer)
+  // Construct a new stream socket service for the specified io_service.
+  explicit openssl_stream_service(asio::io_service& io_service)
+    : asio::io_service::service(io_service)
   {
   }
 
-  // Get the demuxer associated with the service.
-  demuxer_type& demuxer()
+  // Destroy all user-defined handler objects owned by the service.
+  void shutdown_service()
   {
-    return demuxer_;
   }
 
   // Return a null stream implementation.
@@ -210,14 +203,25 @@ public:
   void handshake(impl_type& impl, Stream& next_layer,
       stream_base::handshake_type type, Error_Handler error_handler)
   {
-    openssl_operation<Stream> op(
-      type == stream_base::client ?
-        &::SSL_connect:
-        &::SSL_accept,
-      next_layer,
-      impl->ssl,
-      impl->ext_bio);
-    op.start();
+    try
+    {
+      openssl_operation<Stream> op(
+        type == stream_base::client ?
+          &ssl_wrap<mutex_type>::SSL_connect:
+          &ssl_wrap<mutex_type>::SSL_accept,
+        next_layer,
+        impl->ssl,
+        impl->ext_bio);
+      op.start();
+    }
+    catch (asio::error& e)
+    {
+      error_handler(e);
+      return;
+    }
+
+    asio::error e;
+    error_handler(e);
   }
 
   // Start an asynchronous SSL handshake.
@@ -228,13 +232,13 @@ public:
     typedef handshake_handler<Stream, Handler> connect_handler;
 
     connect_handler* local_handler = 
-      new connect_handler(handler, demuxer_);
+      new connect_handler(handler, owner());
 
     openssl_operation<Stream>* op = new openssl_operation<Stream>
     (
       type == stream_base::client ?
-        &::SSL_connect:
-        &::SSL_accept,
+        &ssl_wrap<mutex_type>::SSL_connect:
+        &ssl_wrap<mutex_type>::SSL_accept,
       next_layer,
       impl->ssl,
       impl->ext_bio,
@@ -248,7 +252,7 @@ public:
     );
     local_handler->set_operation(op);
 
-    demuxer_.post(boost::bind(&openssl_operation<Stream>::start, op));
+    owner().post(boost::bind(&openssl_operation<Stream>::start, op));
   }
 
   // Shut down SSL on the stream.
@@ -256,12 +260,23 @@ public:
   void shutdown(impl_type& impl, Stream& next_layer,
       Error_Handler error_handler)
   {
-    openssl_operation<Stream> op(
-      &::SSL_shutdown,
-      next_layer,
-      impl->ssl,
-      impl->ext_bio);
-    op.start();
+    try
+    {
+      openssl_operation<Stream> op(
+        &ssl_wrap<mutex_type>::SSL_shutdown,
+        next_layer,
+        impl->ssl,
+        impl->ext_bio);
+      op.start();
+    }
+    catch (asio::error& e)
+    {
+      error_handler(e);
+      return;
+    }
+
+    asio::error e;
+    error_handler(e);
   }
 
   // Asynchronously shut down SSL on the stream.
@@ -271,11 +286,11 @@ public:
     typedef shutdown_handler<Stream, Handler> disconnect_handler;
 
     disconnect_handler* local_handler = 
-      new disconnect_handler(handler, demuxer_);
+      new disconnect_handler(handler, owner());
 
     openssl_operation<Stream>* op = new openssl_operation<Stream>
     (
-      &::SSL_shutdown,
+      &ssl_wrap<mutex_type>::SSL_shutdown,
       next_layer,
       impl->ssl,
       impl->ext_bio,
@@ -289,7 +304,7 @@ public:
     );
     local_handler->set_operation(op);
 
-    demuxer_.post(boost::bind(&openssl_operation<Stream>::start, op));        
+    owner().post(boost::bind(&openssl_operation<Stream>::start, op));        
   }
 
   // Write some data to the stream.
@@ -297,17 +312,30 @@ public:
   std::size_t write_some(impl_type& impl, Stream& next_layer,
       const Const_Buffers& buffers, Error_Handler error_handler)
   {
-    boost::function<int (SSL*)> send_func =
-      boost::bind(&::SSL_write, boost::arg<1>(),  
-          asio::buffer_cast<const void*>(*buffers.begin()),
-          static_cast<int>(asio::buffer_size(*buffers.begin())));
-    openssl_operation<Stream> op(
-      send_func,
-      next_layer,
-      impl->ssl,
-      impl->ext_bio
-    );
-    return static_cast<size_t>(op.start());
+    size_t bytes_transferred = 0;
+    try
+    {
+      boost::function<int (SSL*)> send_func =
+        boost::bind(&::SSL_write, boost::arg<1>(),  
+            asio::buffer_cast<const void*>(*buffers.begin()),
+            static_cast<int>(asio::buffer_size(*buffers.begin())));
+      openssl_operation<Stream> op(
+        send_func,
+        next_layer,
+        impl->ssl,
+        impl->ext_bio
+      );
+      bytes_transferred = static_cast<size_t>(op.start());
+    }
+    catch (asio::error& e)
+    {
+      error_handler(e);
+      return 0;
+    }
+
+    asio::error e;
+    error_handler(e);
+    return bytes_transferred;
   }
 
   // Start an asynchronous write.
@@ -317,7 +345,7 @@ public:
   {
     typedef io_handler<Stream, Handler> send_handler;
 
-    send_handler* local_handler = new send_handler(handler, demuxer_);
+    send_handler* local_handler = new send_handler(handler, owner());
 
     boost::function<int (SSL*)> send_func =
       boost::bind(&::SSL_write, boost::arg<1>(),
@@ -340,7 +368,7 @@ public:
     );
     local_handler->set_operation(op);
 
-    demuxer_.post(boost::bind(&openssl_operation<Stream>::start, op));        
+    owner().post(boost::bind(&openssl_operation<Stream>::start, op));        
   }
 
   // Read some data from the stream.
@@ -348,17 +376,30 @@ public:
   std::size_t read_some(impl_type& impl, Stream& next_layer,
       const Mutable_Buffers& buffers, Error_Handler error_handler)
   {
-    boost::function<int (SSL*)> recv_func =
-      boost::bind(&::SSL_read, boost::arg<1>(),
-          asio::buffer_cast<void*>(*buffers.begin()),
-          asio::buffer_size(*buffers.begin()));
-    openssl_operation<Stream> op(recv_func,
-      next_layer,
-      impl->ssl,
-      impl->ext_bio
-    );
+    size_t bytes_transferred = 0;
+    try
+    {
+      boost::function<int (SSL*)> recv_func =
+        boost::bind(&::SSL_read, boost::arg<1>(),
+            asio::buffer_cast<void*>(*buffers.begin()),
+            asio::buffer_size(*buffers.begin()));
+      openssl_operation<Stream> op(recv_func,
+        next_layer,
+        impl->ssl,
+        impl->ext_bio
+      );
 
-    return static_cast<size_t>(op.start());
+      bytes_transferred = static_cast<size_t>(op.start());
+    }
+    catch (asio::error& e)
+    {
+      error_handler(e);
+      return 0;
+    }
+
+    asio::error e;
+    error_handler(e);
+    return bytes_transferred;
   }
 
   // Start an asynchronous read.
@@ -368,7 +409,7 @@ public:
   {
     typedef io_handler<Stream, Handler> recv_handler;
 
-    recv_handler* local_handler = new recv_handler(handler, demuxer_);
+    recv_handler* local_handler = new recv_handler(handler, owner());
 
     boost::function<int (SSL*)> recv_func =
       boost::bind(&::SSL_read, boost::arg<1>(),
@@ -391,7 +432,7 @@ public:
     );
     local_handler->set_operation(op);
 
-    demuxer_.post(boost::bind(&openssl_operation<Stream>::start, op));        
+    owner().post(boost::bind(&openssl_operation<Stream>::start, op));        
   }
 
   // Peek at the incoming data on the stream.
@@ -399,6 +440,8 @@ public:
   std::size_t peek(impl_type& impl, Stream& next_layer,
       const Mutable_Buffers& buffers, Error_Handler error_handler)
   {
+    asio::error e;
+    error_handler(e);
     return 0;
   }
 
@@ -407,13 +450,41 @@ public:
   std::size_t in_avail(impl_type& impl, Stream& next_layer,
       Error_Handler error_handler)
   {
+    asio::error e;
+    error_handler(e);
     return 0;
   }
 
-private:
-  // The demuxer used to dispatch handlers.
-  demuxer_type& demuxer_;
+private:  
+  typedef asio::detail::mutex mutex_type;
+  
+  template<typename Mutex>
+  struct ssl_wrap
+  {
+    static Mutex ssl_mutex_;
+
+    static int SSL_accept(SSL *ssl)
+    {
+      typename Mutex::scoped_lock lock(ssl_mutex_);
+      return ::SSL_accept(ssl);
+    }
+  
+    static int SSL_connect(SSL *ssl)
+    {
+      typename Mutex::scoped_lock lock(ssl_mutex_);
+      return ::SSL_connect(ssl);
+    }
+  
+    static int SSL_shutdown(SSL *ssl)
+    {
+      typename Mutex::scoped_lock lock(ssl_mutex_);
+      return ::SSL_shutdown(ssl);  
+    }    
+  };  
 };
+
+template<typename Mutex>
+Mutex openssl_stream_service::ssl_wrap<Mutex>::ssl_mutex_;
 
 } // namespace detail
 } // namespace ssl

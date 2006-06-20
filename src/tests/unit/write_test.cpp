@@ -2,11 +2,16 @@
 // write_test.cpp
 // ~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
+
+// Disable autolinking for unit tests.
+#if !defined(BOOST_ALL_NO_LIB)
+#define BOOST_ALL_NO_LIB 1
+#endif // !defined(BOOST_ALL_NO_LIB)
 
 // Test that header file is self-contained.
 #include "asio/write.hpp"
@@ -23,11 +28,11 @@ class test_stream
   : private boost::noncopyable
 {
 public:
-  typedef asio::demuxer demuxer_type;
+  typedef asio::io_service io_service_type;
   typedef asio::error error_type;
 
-  test_stream(asio::demuxer& d)
-    : demuxer_(d),
+  test_stream(asio::io_service& io_service)
+    : io_service_(io_service),
       length_(max_length),
       position_(0),
       next_write_length_(max_length)
@@ -35,9 +40,9 @@ public:
     memset(data_, 0, max_length);
   }
 
-  demuxer_type& demuxer()
+  io_service_type& io_service()
   {
-    return demuxer_;
+    return io_service_;
   }
 
   void reset(size_t length = max_length)
@@ -114,12 +119,12 @@ public:
   {
     size_t bytes_transferred = write_some(buffers);
     asio::error error;
-    demuxer_.post(
+    io_service_.post(
         asio::detail::bind_handler(handler, error, bytes_transferred));
   }
 
 private:
-  demuxer_type& demuxer_;
+  io_service_type& io_service_;
   enum { max_length = 8192 };
   char data_[max_length];
   size_t length_;
@@ -132,8 +137,8 @@ static const char write_data[]
 
 void test_2_arg_write()
 {
-  asio::demuxer d;
-  test_stream s(d);
+  asio::io_service ios;
+  test_stream s(ios);
   asio::const_buffer_container_1 buffers
     = asio::buffer(write_data, sizeof(write_data));
 
@@ -157,8 +162,8 @@ void test_2_arg_write()
 
 void test_3_arg_write()
 {
-  asio::demuxer d;
-  test_stream s(d);
+  asio::io_service ios;
+  test_stream s(ios);
   asio::const_buffer_container_1 buffers
     = asio::buffer(write_data, sizeof(write_data));
 
@@ -245,8 +250,8 @@ void test_3_arg_write()
 
 void test_4_arg_write()
 {
-  asio::demuxer d;
-  test_stream s(d);
+  asio::io_service ios;
+  test_stream s(ios);
   asio::const_buffer_container_1 buffers
     = asio::buffer(write_data, sizeof(write_data));
 
@@ -365,8 +370,8 @@ void async_write_handler(const asio::error& e, size_t bytes_transferred,
 
 void test_3_arg_async_write()
 {
-  asio::demuxer d;
-  test_stream s(d);
+  asio::io_service ios;
+  test_stream s(ios);
   asio::const_buffer_container_1 buffers
     = asio::buffer(write_data, sizeof(write_data));
 
@@ -377,8 +382,8 @@ void test_3_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         sizeof(write_data), &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, sizeof(write_data)));
 
@@ -390,8 +395,8 @@ void test_3_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         sizeof(write_data), &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, sizeof(write_data)));
 
@@ -403,16 +408,16 @@ void test_3_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         sizeof(write_data), &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, sizeof(write_data)));
 }
 
 void test_4_arg_async_write()
 {
-  asio::demuxer d;
-  test_stream s(d);
+  asio::io_service ios;
+  test_stream s(ios);
   asio::const_buffer_container_1 buffers
     = asio::buffer(write_data, sizeof(write_data));
 
@@ -423,8 +428,8 @@ void test_4_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         sizeof(write_data), &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, sizeof(write_data)));
 
@@ -436,8 +441,8 @@ void test_4_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         sizeof(write_data), &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, sizeof(write_data)));
 
@@ -449,8 +454,8 @@ void test_4_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         sizeof(write_data), &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, sizeof(write_data)));
 
@@ -461,8 +466,8 @@ void test_4_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         sizeof(write_data), &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, sizeof(write_data)));
 
@@ -474,8 +479,8 @@ void test_4_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         1, &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, 1));
 
@@ -487,8 +492,8 @@ void test_4_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         10, &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, 10));
 
@@ -499,8 +504,8 @@ void test_4_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         sizeof(write_data), &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, sizeof(write_data)));
 
@@ -512,8 +517,8 @@ void test_4_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         10, &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, 10));
 
@@ -525,8 +530,8 @@ void test_4_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         10, &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, 10));
 
@@ -537,8 +542,8 @@ void test_4_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         sizeof(write_data), &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, sizeof(write_data)));
 
@@ -550,8 +555,8 @@ void test_4_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         42, &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, 42));
 
@@ -563,8 +568,8 @@ void test_4_arg_async_write()
         asio::placeholders::error,
         asio::placeholders::bytes_transferred,
         50, &called));
-  d.reset();
-  d.run();
+  ios.reset();
+  ios.run();
   BOOST_CHECK(called);
   BOOST_CHECK(s.check(buffers, 50));
 }

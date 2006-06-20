@@ -6,14 +6,14 @@
 class printer
 {
 public:
-  printer(asio::demuxer& d)
-    : dispatcher_(d),
-      timer1_(d, boost::posix_time::seconds(1)),
-      timer2_(d, boost::posix_time::seconds(1)),
+  printer(asio::io_service& io)
+    : strand_(io),
+      timer1_(io, boost::posix_time::seconds(1)),
+      timer2_(io, boost::posix_time::seconds(1)),
       count_(0)
   {
-    timer1_.async_wait(dispatcher_.wrap(boost::bind(&printer::print1, this)));
-    timer2_.async_wait(dispatcher_.wrap(boost::bind(&printer::print2, this)));
+    timer1_.async_wait(strand_.wrap(boost::bind(&printer::print1, this)));
+    timer2_.async_wait(strand_.wrap(boost::bind(&printer::print2, this)));
   }
 
   ~printer()
@@ -29,7 +29,7 @@ public:
       ++count_;
 
       timer1_.expires_at(timer1_.expires_at() + boost::posix_time::seconds(1));
-      timer1_.async_wait(dispatcher_.wrap(boost::bind(&printer::print1, this)));
+      timer1_.async_wait(strand_.wrap(boost::bind(&printer::print1, this)));
     }
   }
 
@@ -41,12 +41,12 @@ public:
       ++count_;
 
       timer2_.expires_at(timer2_.expires_at() + boost::posix_time::seconds(1));
-      timer2_.async_wait(dispatcher_.wrap(boost::bind(&printer::print2, this)));
+      timer2_.async_wait(strand_.wrap(boost::bind(&printer::print2, this)));
     }
   }
 
 private:
-  asio::locking_dispatcher dispatcher_;
+  asio::strand strand_;
   asio::deadline_timer timer1_;
   asio::deadline_timer timer2_;
   int count_;
@@ -54,10 +54,10 @@ private:
 
 int main()
 {
-  asio::demuxer d;
-  printer p(d);
-  asio::thread t(boost::bind(&asio::demuxer::run, &d));
-  d.run();
+  asio::io_service io;
+  printer p(io);
+  asio::thread t(boost::bind(&asio::io_service::run, &io));
+  io.run();
   t.join();
 
   return 0;

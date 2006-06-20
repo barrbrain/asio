@@ -309,7 +309,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar build build_cpu build_vendor build_os host host_cpu host_vendor host_os CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE RANLIB ac_ct_RANLIB CXXCPP EGREP HAVE_OPENSSL_TRUE HAVE_OPENSSL_FALSE DOXYGEN_FOUND HAVE_DOXYGEN_TRUE HAVE_DOXYGEN_FALSE HAVE_DOT LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar build build_cpu build_vendor build_os host host_cpu host_vendor host_os CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE RANLIB ac_ct_RANLIB CXXCPP EGREP HAVE_OPENSSL_TRUE HAVE_OPENSSL_FALSE DOXYGEN_FOUND HAVE_DOXYGEN_TRUE HAVE_DOXYGEN_FALSE HAVE_DOT WINDOWS_TARGET_TRUE WINDOWS_TARGET_FALSE LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -1648,7 +1648,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=asio
- VERSION=0.3.6
+ VERSION=0.3.7
 
 
 cat >>confdefs.h <<_ACEOF
@@ -4423,6 +4423,7 @@ else
 fi
 
 
+WINDOWS=no
 case $host in
   *-*-linux*)
     CXXFLAGS="$CXXFLAGS -pthread"
@@ -4440,7 +4441,13 @@ case $host in
   *-*-mingw32*)
     CXXFLAGS="$CXXFLAGS -mthreads"
     LDFLAGS="$LDFLAGS -mthreads"
-    LIBS="$LIBS -lws2_32"
+    LIBS="$LIBS -lws2_32 -lmswsock"
+    WINDOWS=yes
+    ;;
+  *-pc-cygwin*)
+    CXXFLAGS="$CXXFLAGS -D__USE_W32_SOCKETS -D_WIN32_WINNT=0x0500"
+    LIBS="$LIBS -lws2_32 -lmswsock"
+    WINDOWS=yes
     ;;
   *-apple-darwin*)
     CXXFLAGS="$CXXFLAGS"
@@ -4533,6 +4540,16 @@ else
 echo "${ECHO_T}no" >&6
 fi
 
+
+
+
+if test x$WINDOWS != xno; then
+  WINDOWS_TARGET_TRUE=
+  WINDOWS_TARGET_FALSE='#'
+else
+  WINDOWS_TARGET_TRUE='#'
+  WINDOWS_TARGET_FALSE=
+fi
 
 
                                                                                                     ac_config_files="$ac_config_files Makefile include/Makefile src/Makefile src/doc/Makefile src/doc/design.dox src/doc/examples.dox src/doc/index.html src/doc/building.html src/doc/reference.dox src/doc/tutorial.dox"
@@ -4697,6 +4714,13 @@ if test -z "${HAVE_DOXYGEN_TRUE}" && test -z "${HAVE_DOXYGEN_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"HAVE_DOXYGEN\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
 echo "$as_me: error: conditional \"HAVE_DOXYGEN\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${WINDOWS_TARGET_TRUE}" && test -z "${WINDOWS_TARGET_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"WINDOWS_TARGET\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"WINDOWS_TARGET\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
@@ -5299,6 +5323,8 @@ s,@DOXYGEN_FOUND@,$DOXYGEN_FOUND,;t t
 s,@HAVE_DOXYGEN_TRUE@,$HAVE_DOXYGEN_TRUE,;t t
 s,@HAVE_DOXYGEN_FALSE@,$HAVE_DOXYGEN_FALSE,;t t
 s,@HAVE_DOT@,$HAVE_DOT,;t t
+s,@WINDOWS_TARGET_TRUE@,$WINDOWS_TARGET_TRUE,;t t
+s,@WINDOWS_TARGET_FALSE@,$WINDOWS_TARGET_FALSE,;t t
 s,@LIBOBJS@,$LIBOBJS,;t t
 s,@LTLIBOBJS@,$LTLIBOBJS,;t t
 CEOF

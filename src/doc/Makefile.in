@@ -107,6 +107,8 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 VERSION = @VERSION@
+WINDOWS_TARGET_FALSE = @WINDOWS_TARGET_FALSE@
+WINDOWS_TARGET_TRUE = @WINDOWS_TARGET_TRUE@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_RANLIB = @ac_ct_RANLIB@
@@ -194,8 +196,8 @@ target_alias = @target_alias@
 @HAVE_DOXYGEN_TRUE@	concepts/Endpoint.hpp \
 @HAVE_DOXYGEN_TRUE@	concepts/Error_Source.hpp \
 @HAVE_DOXYGEN_TRUE@	concepts/IO_Control_Command.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/IPv4_Address_Socket_Option.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/IPv4_MReq_Socket_Option.hpp \
+@HAVE_DOXYGEN_TRUE@	concepts/IP_MReq_Socket_Option.hpp \
+@HAVE_DOXYGEN_TRUE@	concepts/IP_Network_Interface_Socket_Option.hpp \
 @HAVE_DOXYGEN_TRUE@	concepts/Integer_Socket_Option.hpp \
 @HAVE_DOXYGEN_TRUE@	concepts/Linger_Socket_Option.hpp \
 @HAVE_DOXYGEN_TRUE@	concepts/Mutable_Buffers.hpp \

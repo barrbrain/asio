@@ -12,7 +12,7 @@
 #include <sstream>
 #include <vector>
 
-namespace serialization {
+namespace s11n_example {
 
 /// The connection class provides serialization primitives on top of a socket.
 /**
@@ -25,14 +25,14 @@ class connection
 {
 public:
   /// Constructor.
-  connection(asio::demuxer& demuxer)
-    : socket_(demuxer)
+  connection(asio::io_service& io_service)
+    : socket_(io_service)
   {
   }
 
   /// Get the underlying socket. Used for making a connection or for accepting
   /// an incoming connection.
-  asio::stream_socket& socket()
+  asio::ip::tcp::socket& socket()
   {
     return socket_;
   }
@@ -55,7 +55,7 @@ public:
     {
       // Something went wrong, inform the caller.
       asio::error error(asio::error::invalid_argument);
-      socket_.demuxer().post(boost::bind(handler, error));
+      socket_.io_service().post(boost::bind(handler, error));
       return;
     }
     outbound_header_ = header_stream.str();
@@ -73,8 +73,10 @@ public:
   void async_read(T& t, Handler handler)
   {
     // Issue a read operation to read exactly the number of bytes in a header.
+    void (connection::*f)(const asio::error&, T&, boost::tuple<Handler>)
+      = &connection::handle_read_header<T, Handler>;
     asio::async_read(socket_, asio::buffer(inbound_header_),
-        boost::bind(&connection::handle_read_header<T, Handler>,
+        boost::bind(f,
           this, asio::placeholders::error, boost::ref(t),
           boost::make_tuple(handler)));
   }
@@ -105,8 +107,10 @@ public:
 
       // Start an asynchronous call to receive the data.
       inbound_data_.resize(inbound_data_size);
+      void (connection::*f)(const asio::error&, T&, boost::tuple<Handler>)
+        = &connection::handle_read_data<T, Handler>;
       asio::async_read(socket_, asio::buffer(inbound_data_),
-        boost::bind(&connection::handle_read_data<T, Handler>, this,
+        boost::bind(f, this,
           asio::placeholders::error, boost::ref(t), handler));
     }
   }
@@ -145,7 +149,7 @@ public:
 
 private:
   /// The underlying socket.
-  asio::stream_socket socket_;
+  asio::ip::tcp::socket socket_;
 
   /// The size of a fixed length header.
   enum { header_length = 8 };
@@ -165,6 +169,6 @@ private:
 
 typedef boost::shared_ptr<connection> connection_ptr;
 
-} // namespace serialization
+} // namespace s11n_example
 
 #endif // SERIALIZATION_CONNECTION_HPP

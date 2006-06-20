@@ -2,7 +2,7 @@
 // wrapped_handler.hpp
 // ~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -18,6 +18,7 @@
 #include "asio/detail/push_options.hpp"
 
 #include "asio/detail/bind_handler.hpp"
+#include "asio/detail/handler_alloc_helpers.hpp"
 
 namespace asio {
 namespace detail {
@@ -108,6 +109,20 @@ public:
   {
     dispatcher_.dispatch(
         detail::bind_handler(handler_, arg1, arg2, arg3, arg4, arg5));
+  }
+
+  friend void* asio_handler_allocate(std::size_t size,
+      wrapped_handler<Dispatcher, Handler>* this_handler)
+  {
+    return asio_handler_alloc_helpers::allocate(
+        size, &this_handler->handler_);
+  }
+
+  friend void asio_handler_deallocate(void* pointer, std::size_t size,
+      wrapped_handler<Dispatcher, Handler>* this_handler)
+  {
+    asio_handler_alloc_helpers::deallocate(
+        pointer, size, &this_handler->handler_);
   }
 
 private:

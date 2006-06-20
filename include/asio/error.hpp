@@ -2,7 +2,7 @@
 // error.hpp
 // ~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -35,13 +35,24 @@
 
 namespace asio {
 
-#if defined(BOOST_WINDOWS)
+#if defined(GENERATING_DOCUMENTATION)
+/// INTERNAL ONLY.
+# define ASIO_SOCKET_ERROR(e) implementation_defined
+/// INTERNAL ONLY.
+# define ASIO_NETDB_ERROR(e) implementation_defined
+/// INTERNAL ONLY.
+# define ASIO_GETADDRINFO_ERROR(e) implementation_defined
+/// INTERNAL ONLY.
+# define ASIO_OS_ERROR(e_win, e_posix) implementation_defined
+#elif defined(BOOST_WINDOWS) || defined(__CYGWIN__)
 # define ASIO_SOCKET_ERROR(e) WSA ## e
 # define ASIO_NETDB_ERROR(e) WSA ## e
+# define ASIO_GETADDRINFO_ERROR(e) e
 # define ASIO_OS_ERROR(e_win, e_posix) e_win
 #else
 # define ASIO_SOCKET_ERROR(e) e
 # define ASIO_NETDB_ERROR(e) 16384 + e
+# define ASIO_GETADDRINFO_ERROR(e) 32768 + e
 # define ASIO_OS_ERROR(e_win, e_posix) e_posix
 #endif
 
@@ -122,8 +133,8 @@ public:
     /// No buffer space available.
     no_buffer_space = ASIO_SOCKET_ERROR(ENOBUFS),
 
-    /// The host is valid but does not have address data.
-    no_host_data = ASIO_NETDB_ERROR(NO_DATA),
+    /// The query is valid but does not have associated address data.
+    no_data = ASIO_NETDB_ERROR(NO_DATA),
 
     /// Cannot allocate memory.
     no_memory = ASIO_OS_ERROR(ERROR_OUTOFMEMORY, ENOMEM),
@@ -148,6 +159,16 @@ public:
 
     /// Operation cancelled.
     operation_aborted = ASIO_OS_ERROR(ERROR_OPERATION_ABORTED, ECANCELED),
+
+    /// The service is not supported for the given socket type.
+    service_not_found = ASIO_OS_ERROR(
+        WSATYPE_NOT_FOUND,
+        ASIO_GETADDRINFO_ERROR(EAI_SERVICE)),
+
+    /// The socket type is not supported.
+    socket_type_not_supported = ASIO_OS_ERROR(
+        WSAESOCKTNOSUPPORT,
+        ASIO_GETADDRINFO_ERROR(EAI_SOCKTYPE)),
 
     /// Cannot send after transport endpoint shutdown.
     shut_down = ASIO_SOCKET_ERROR(ESHUTDOWN),
@@ -180,7 +201,8 @@ public:
 
   /// Copy constructor.
   error(const error& e)
-    : code_(e.code_)
+    : std::exception(e),
+      code_(e.code_)
   {
   }
 
@@ -200,7 +222,7 @@ public:
   /// Get a string representation of the exception.
   virtual const char* what() const throw ()
   {
-#if defined(BOOST_WINDOWS)
+#if defined(BOOST_WINDOWS) || defined(__CYGWIN__)
     try
     {
       if (!what_)
@@ -237,14 +259,18 @@ public:
       return "Host not found (non-authoritative), try again later.";
     case error::no_recovery:
       return "A non-recoverable error occurred during database lookup.";
-    case error::no_host_data:
-      return "The name is valid, but it does not have associated data.";
+    case error::no_data:
+      return "The query is valid, but it does not have associated data.";
 #if !defined(__sun)
     case error::operation_aborted:
       return "Operation aborted.";
 #endif // !defined(__sun)
+    case error::service_not_found:
+      return "Service not found.";
+    case error::socket_type_not_supported:
+      return "Socket type not supported.";
     default:
-#if defined(__sun)
+#if defined(__sun) || defined(__QNX__)
       return strerror(code_);
 #elif defined(__MACH__) && defined(__APPLE__)
       try
@@ -280,7 +306,10 @@ public:
     return code_;
   }
 
-  struct unspecified_bool_type_t;
+  struct unspecified_bool_type_t
+  {
+  };
+
   typedef unspecified_bool_type_t* unspecified_bool_type;
 
   /// Operator returns non-null if there is a non-success error code.
@@ -349,6 +378,7 @@ Ostream& operator<<(Ostream& os, const error& e)
 
 #undef ASIO_SOCKET_ERROR
 #undef ASIO_NETDB_ERROR
+#undef ASIO_GETADDRINFO_ERROR
 #undef ASIO_OS_ERROR
 
 #include "asio/detail/pop_options.hpp"

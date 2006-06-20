@@ -2,7 +2,7 @@
 // error.hpp
 // ~~~~~~~~~
 //
-// Copyright (c) 2003-2005 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -49,7 +49,8 @@ public:
 
   /// Copy constructor.
   system_exception(const system_exception& e)
-    : context_(e.context_),
+    : std::exception(e),
+      context_(e.context_),
       code_(e.code_)
   {
   }
@@ -71,7 +72,7 @@ public:
   /// Get a string representation of the exception.
   virtual const char* what() const throw ()
   {
-#if defined(BOOST_WINDOWS)
+#if defined(BOOST_WINDOWS) || defined(__CYGWIN__)
     try
     {
       if (!what_)
@@ -104,7 +105,7 @@ public:
     {
       return "asio system_exception";
     }
-#elif defined(__sun)
+#elif defined(__sun) || defined(__QNX__)
     return strerror(code_);
 #elif defined(__MACH__) && defined(__APPLE__)
     try
