@@ -2,7 +2,7 @@
 // time_traits.hpp
 // ~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -57,16 +57,17 @@ struct time_traits<boost::posix_time::ptime>
     return t1 - t2;
   }
 
-  /// Convert to UTC in the posix time type.
-  static boost::posix_time::ptime to_utc(const time_type& t)
+  /// Test whether one time is less than another.
+  static bool less_than(const time_type& t1, const time_type& t2)
   {
-    return t;
+    return t1 < t2;
   }
 
-  /// Convert from UTC in the posix time type.
-  static time_type from_utc(const boost::posix_time::ptime& t)
+  /// Convert to POSIX duration type.
+  static boost::posix_time::time_duration to_posix_duration(
+      const duration_type& d)
   {
-    return t;
+    return d;
   }
 };
 

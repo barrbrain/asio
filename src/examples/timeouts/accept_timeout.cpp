@@ -1,3 +1,13 @@
+//
+// accept_timeout.cpp
+// ~~~~~~~~~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include "asio.hpp"
 #include <boost/bind.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
@@ -22,7 +32,7 @@ public:
     timer_.async_wait(boost::bind(&accept_handler::close, this));
   }
 
-  void handle_accept(const error& err)
+  void handle_accept(const asio::error_code& err)
   {
     if (err)
     {
@@ -53,10 +63,6 @@ int main()
     io_service ios;
     accept_handler ah(ios);
     ios.run();
-  }
-  catch (asio::error& e)
-  {
-    std::cerr << "Exception: " << e << "\n";
   }
   catch (std::exception& e)
   {

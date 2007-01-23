@@ -1,3 +1,13 @@
+//
+// server.cpp
+// ~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include <cstdlib>
 #include <iostream>
 #include <boost/aligned_storage.hpp>
@@ -130,7 +140,8 @@ public:
             asio::placeholders::bytes_transferred)));
   }
 
-  void handle_read(const asio::error& error, size_t bytes_transferred)
+  void handle_read(const asio::error_code& error,
+      size_t bytes_transferred)
   {
     if (!error)
     {
@@ -143,7 +154,7 @@ public:
     }
   }
 
-  void handle_write(const asio::error& error)
+  void handle_write(const asio::error_code& error)
   {
     if (!error)
     {
@@ -182,7 +193,8 @@ public:
           asio::placeholders::error));
   }
 
-  void handle_accept(session_ptr new_session, const asio::error& error)
+  void handle_accept(session_ptr new_session,
+      const asio::error_code& error)
   {
     if (!error)
     {
@@ -215,10 +227,6 @@ int main(int argc, char* argv[])
     server s(io_service, atoi(argv[1]));
 
     io_service.run();
-  }
-  catch (asio::error& e)
-  {
-    std::cerr << e << "\n";
   }
   catch (std::exception& e)
   {

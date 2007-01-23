@@ -1,3 +1,13 @@
+//
+// datagram_receive_timeout.cpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include "asio.hpp"
 #include <boost/bind.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
@@ -23,7 +33,7 @@ public:
     timer_.async_wait(boost::bind(&datagram_handler::close, this));
   }
 
-  void handle_receive_from(const error& err, size_t length)
+  void handle_receive_from(const asio::error_code& err, size_t length)
   {
     if (err)
     {
@@ -56,10 +66,6 @@ int main()
     io_service ios;
     datagram_handler dh(ios);
     ios.run();
-  }
-  catch (asio::error& e)
-  {
-    std::cerr << "Exception: " << e << "\n";
   }
   catch (std::exception& e)
   {

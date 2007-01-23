@@ -15,6 +15,12 @@ multicast.
 */
 
 /**
+\namespace asio::ip::unicast
+\brief The asio::ip::unicast namespace defines the socket options used for
+unicast.
+*/
+
+/**
 \namespace asio::placeholders
 \brief The asio::placeholders namespace defines argument placeholders for use
 with \ref boost_bind.
@@ -53,19 +59,27 @@ Standard exception class.
 \li ::asio
 \li asio::ip
 \li asio::ip::multicast
+\li asio::ip::unicast
 \li asio::placeholders
 \li asio::ssl
 
 <H2>Classes</H2>
 
 \li asio::const_buffer
+\li asio::const_buffers_1
 \li asio::deadline_timer
 \li asio::error
+\li asio::error_code
 \li asio::io_service
+\li asio::io_service::id
+\li asio::io_service::service
+\li asio::io_service::strand
+\li asio::io_service::work
 \li asio::ip::address
 \li asio::ip::address_v4
 \li asio::ip::address_v6
 \li asio::ip::resolver_query_base
+\li asio::ip::resolver_service
 \li asio::ip::tcp
 \li asio::ip::tcp::acceptor
 \li asio::ip::tcp::endpoint
@@ -77,35 +91,15 @@ Standard exception class.
 \li asio::ip::udp::resolver
 \li asio::ip::udp::socket
 \li asio::mutable_buffer
+\li asio::mutable_buffers_1
 \li asio::socket_base
 \li asio::ssl::context
 \li asio::ssl::context_base
 \li asio::ssl::stream_base
 \li asio::strand
 \li asio::streambuf
-\li asio::system_exception
+\li asio::system_error
 \li asio::thread
-
-<H2>Class Templates</H2>
-
-\li asio::basic_datagram_socket
-\li asio::basic_deadline_timer
-\li asio::basic_resolver
-\li asio::basic_socket_acceptor
-\li asio::basic_socket_iostream
-\li asio::basic_socketbuf
-\li asio::basic_strand
-\li asio::basic_stream_socket
-\li asio::basic_streambuf
-\li asio::buffered_read_stream
-\li asio::buffered_write_stream
-\li asio::buffered_stream
-\li asio::ip::basic_endpoint
-\li asio::ip::basic_resolver_entry
-\li asio::ip::basic_resolver_iterator
-\li asio::ip::basic_resolver_query
-\li asio::ssl::basic_context
-\li asio::ssl::stream
 
 </TD>
 <TD VALIGN="TOP">
@@ -123,6 +117,26 @@ Standard exception class.
 \li \ref asio::has_service
 \li \ref asio::use_service
 
+<H2>Class Templates</H2>
+
+\li asio::basic_datagram_socket
+\li asio::basic_deadline_timer
+\li asio::basic_socket_acceptor
+\li asio::basic_socket_iostream
+\li asio::basic_socket_streambuf
+\li asio::basic_stream_socket
+\li asio::basic_streambuf
+\li asio::buffered_read_stream
+\li asio::buffered_write_stream
+\li asio::buffered_stream
+\li asio::ip::basic_endpoint
+\li asio::ip::basic_resolver
+\li asio::ip::basic_resolver_entry
+\li asio::ip::basic_resolver_iterator
+\li asio::ip::basic_resolver_query
+\li asio::ssl::basic_context
+\li asio::ssl::stream
+
 <H2>Type Traits</H2>
 
 \li asio::is_read_buffered
@@ -132,36 +146,11 @@ Standard exception class.
 
 \li asio::datagram_socket_service
 \li asio::deadline_timer_service
-\li asio::resolver_service
+\li asio::ip::resolver_service
 \li asio::socket_acceptor_service
-\li asio::strand_service
-\li asio::stream_socket_service
 \li asio::ssl::context_service
 \li asio::ssl::stream_service
-
-<H2>Concepts</H2>
-
-\li Async_Object
-\li Async_Read_Stream
-\li Async_Write_Stream
-\li Boolean_Socket_Option
-\li Boolean_IO_Control_Command
-\li Const_Buffers
-\li Dispatcher
-\li Endpoint
-\li Error_Source
-\li Integer_Socket_Option
-\li IO_Control_Command
-\li IP_MReq_Socket_Option
-\li IP_Network_Interface_Socket_Option
-\li Linger_Socket_Option
-\li Mutable_Buffers
-\li Protocol
-\li Size_IO_Control_Command
-\li Socket_Option
-\li Stream
-\li Sync_Read_Stream
-\li Sync_Write_Stream
+\li asio::stream_socket_service
 
 </TD>
 </TR>

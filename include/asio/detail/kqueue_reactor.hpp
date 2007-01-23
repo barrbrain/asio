@@ -2,7 +2,7 @@
 // kqueue_reactor.hpp
 // ~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 // Copyright (c) 2005 Stefan Arentz (stefan at soze dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
@@ -33,29 +33,37 @@
 #include <boost/throw_exception.hpp>
 #include "asio/detail/pop_options.hpp"
 
+#include "asio/error.hpp"
 #include "asio/io_service.hpp"
-#include "asio/system_exception.hpp"
+#include "asio/system_error.hpp"
 #include "asio/detail/bind_handler.hpp"
 #include "asio/detail/mutex.hpp"
 #include "asio/detail/task_io_service.hpp"
 #include "asio/detail/thread.hpp"
 #include "asio/detail/reactor_op_queue.hpp"
-#include "asio/detail/reactor_timer_queue.hpp"
 #include "asio/detail/select_interrupter.hpp"
+#include "asio/detail/service_base.hpp"
 #include "asio/detail/signal_blocker.hpp"
 #include "asio/detail/socket_types.hpp"
+#include "asio/detail/timer_queue.hpp"
+
+// Older versions of Mac OS X may not define EV_OOBAND.
+#if !defined(EV_OOBAND)
+# define EV_OOBAND EV_FLAG1
+#endif // !defined(EV_OOBAND)
 
 namespace asio {
 namespace detail {
 
 template <bool Own_Thread>
 class kqueue_reactor
-  : public asio::io_service::service
+  : public asio::detail::service_base<kqueue_reactor<Own_Thread> >
 {
 public:
   // Constructor.
   kqueue_reactor(asio::io_service& io_service)
-    : asio::io_service::service(io_service),
+    : asio::detail::service_base<
+        kqueue_reactor<Own_Thread> >(io_service),
       mutex_(),
       kqueue_fd_(do_kqueue_create()),
       wait_in_progress_(false),
@@ -109,7 +117,10 @@ public:
     read_op_queue_.destroy_operations();
     write_op_queue_.destroy_operations();
     except_op_queue_.destroy_operations();
-    timer_queue_.destroy_timers();
+
+    for (std::size_t i = 0; i < timer_queues_.size(); ++i)
+      timer_queues_[i]->destroy_timers();
+    timer_queues_.clear();
   }
 
   // Register a socket with the reactor. Returns 0 on success, system error
@@ -130,7 +141,7 @@ public:
       return;
 
     if (!read_op_queue_.has_operation(descriptor))
-      if (handler(0))
+      if (handler(asio::error_code()))
         return;
 
     if (read_op_queue_.enqueue_operation(descriptor, handler))
@@ -139,8 +150,8 @@ public:
       EV_SET(&event, descriptor, EVFILT_READ, EV_ADD, 0, 0, 0);
       if (::kevent(kqueue_fd_, &event, 1, 0, 0, 0) == -1)
       {
-        int error = errno;
-        read_op_queue_.dispatch_all_operations(descriptor, error);
+        asio::error_code ec(errno, asio::native_ecat);
+        read_op_queue_.dispatch_all_operations(descriptor, ec);
       }
     }
   }
@@ -156,7 +167,7 @@ public:
       return;
 
     if (!write_op_queue_.has_operation(descriptor))
-      if (handler(0))
+      if (handler(asio::error_code()))
         return;
 
     if (write_op_queue_.enqueue_operation(descriptor, handler))
@@ -165,8 +176,8 @@ public:
       EV_SET(&event, descriptor, EVFILT_WRITE, EV_ADD, 0, 0, 0);
       if (::kevent(kqueue_fd_, &event, 1, 0, 0, 0) == -1)
       {
-        int error = errno;
-        write_op_queue_.dispatch_all_operations(descriptor, error);
+        asio::error_code ec(errno, asio::native_ecat);
+        write_op_queue_.dispatch_all_operations(descriptor, ec);
       }
     }
   }
@@ -190,8 +201,8 @@ public:
         EV_SET(&event, descriptor, EVFILT_READ, EV_ADD, EV_OOBAND, 0, 0);
       if (::kevent(kqueue_fd_, &event, 1, 0, 0, 0) == -1)
       {
-        int error = errno;
-        except_op_queue_.dispatch_all_operations(descriptor, error);
+        asio::error_code ec(errno, asio::native_ecat);
+        except_op_queue_.dispatch_all_operations(descriptor, ec);
       }
     }
   }
@@ -213,8 +224,8 @@ public:
       EV_SET(&event, descriptor, EVFILT_WRITE, EV_ADD, 0, 0, 0);
       if (::kevent(kqueue_fd_, &event, 1, 0, 0, 0) == -1)
       {
-        int error = errno;
-        write_op_queue_.dispatch_all_operations(descriptor, error);
+        asio::error_code ec(errno, asio::native_ecat);
+        write_op_queue_.dispatch_all_operations(descriptor, ec);
       }
     }
 
@@ -227,9 +238,9 @@ public:
         EV_SET(&event, descriptor, EVFILT_READ, EV_ADD, EV_OOBAND, 0, 0);
       if (::kevent(kqueue_fd_, &event, 1, 0, 0, 0) == -1)
       {
-        int error = errno;
-        except_op_queue_.dispatch_all_operations(descriptor, error);
-        write_op_queue_.dispatch_all_operations(descriptor, error);
+        asio::error_code ec(errno, asio::native_ecat);
+        except_op_queue_.dispatch_all_operations(descriptor, ec);
+        write_op_queue_.dispatch_all_operations(descriptor, ec);
       }
     }
   }
@@ -269,26 +280,48 @@ public:
     cancel_ops_unlocked(descriptor);
   }
 
-  // Schedule a timer to expire at the specified absolute time. The
-  // do_operation function of the handler object will be invoked when the timer
-  // expires. Returns a token that may be used for cancelling the timer, but it
-  // is not valid after the timer expires.
-  template <typename Handler>
-  void schedule_timer(const boost::posix_time::ptime& time,
-      Handler handler, void* token)
+  // Add a new timer queue to the reactor.
+  template <typename Time_Traits>
+  void add_timer_queue(timer_queue<Time_Traits>& timer_queue)
+  {
+    asio::detail::mutex::scoped_lock lock(mutex_);
+    timer_queues_.push_back(&timer_queue);
+  }
+
+  // Remove a timer queue from the reactor.
+  template <typename Time_Traits>
+  void remove_timer_queue(timer_queue<Time_Traits>& timer_queue)
+  {
+    asio::detail::mutex::scoped_lock lock(mutex_);
+    for (std::size_t i = 0; i < timer_queues_.size(); ++i)
+    {
+      if (timer_queues_[i] == &timer_queue)
+      {
+        timer_queues_.erase(timer_queues_.begin() + i);
+        return;
+      }
+    }
+  }
+
+  // Schedule a timer in the given timer queue to expire at the specified
+  // absolute time. The handler object will be invoked when the timer expires.
+  template <typename Time_Traits, typename Handler>
+  void schedule_timer(timer_queue<Time_Traits>& timer_queue,
+      const typename Time_Traits::time_type& time, Handler handler, void* token)
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
     if (!shutdown_)
-      if (timer_queue_.enqueue_timer(time, handler, token))
+      if (timer_queue.enqueue_timer(time, handler, token))
         interrupter_.interrupt();
   }
 
   // Cancel the timer associated with the given token. Returns the number of
   // handlers that have been posted or dispatched.
-  std::size_t cancel_timer(void* token)
+  template <typename Time_Traits>
+  std::size_t cancel_timer(timer_queue<Time_Traits>& timer_queue, void* token)
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
-    return timer_queue_.cancel_timer(token);
+    return timer_queue.cancel_timer(token);
   }
 
 private:
@@ -320,7 +353,7 @@ private:
     // We can return immediately if there's no work to do and the reactor is
     // not supposed to block.
     if (!block && read_op_queue_.empty() && write_op_queue_.empty()
-        && except_op_queue_.empty() && timer_queue_.empty())
+        && except_op_queue_.empty() && all_timer_queues_are_empty())
     {
       // Clean up operations. We must not hold the lock since the operations may
       // make calls back into this reactor.
@@ -363,21 +396,24 @@ private:
         bool more_except = false;
         if (events[i].flags & EV_ERROR)
         {
-          int error = events[i].data;
+          asio::error_code error(
+              events[i].data, asio::native_ecat);
           except_op_queue_.dispatch_all_operations(descriptor, error);
           read_op_queue_.dispatch_all_operations(descriptor, error);
         }
         else if (events[i].flags & EV_OOBAND)
         {
-          more_except = except_op_queue_.dispatch_operation(descriptor, 0);
+          asio::error_code error;
+          more_except = except_op_queue_.dispatch_operation(descriptor, error);
           if (events[i].data > 0)
-            more_reads = read_op_queue_.dispatch_operation(descriptor, 0);
+            more_reads = read_op_queue_.dispatch_operation(descriptor, error);
           else
             more_reads = read_op_queue_.has_operation(descriptor);
         }
         else
         {
-          more_reads = read_op_queue_.dispatch_operation(descriptor, 0);
+          asio::error_code error;
+          more_reads = read_op_queue_.dispatch_operation(descriptor, error);
           more_except = except_op_queue_.has_operation(descriptor);
         }
 
@@ -391,7 +427,7 @@ private:
           EV_SET(&event, descriptor, EVFILT_READ, EV_DELETE, 0, 0, 0);
         if (::kevent(kqueue_fd_, &event, 1, 0, 0, 0) == -1)
         {
-          int error = errno;
+          asio::error_code error(errno, asio::native_ecat);
           except_op_queue_.dispatch_all_operations(descriptor, error);
           read_op_queue_.dispatch_all_operations(descriptor, error);
         }
@@ -402,12 +438,14 @@ private:
         bool more_writes = false;
         if (events[i].flags & EV_ERROR)
         {
-          int error = events[i].data;
+          asio::error_code error(
+              events[i].data, asio::native_ecat);
           write_op_queue_.dispatch_all_operations(descriptor, error);
         }
         else
         {
-          more_writes = write_op_queue_.dispatch_operation(descriptor, 0);
+          asio::error_code error;
+          more_writes = write_op_queue_.dispatch_operation(descriptor, error);
         }
 
         // Update the descriptor in the kqueue.
@@ -418,7 +456,7 @@ private:
           EV_SET(&event, descriptor, EVFILT_WRITE, EV_DELETE, 0, 0, 0);
         if (::kevent(kqueue_fd_, &event, 1, 0, 0, 0) == -1)
         {
-          int error = errno;
+          asio::error_code error(errno, asio::native_ecat);
           write_op_queue_.dispatch_all_operations(descriptor, error);
         }
       }
@@ -427,11 +465,11 @@ private:
     read_op_queue_.dispatch_cancellations();
     write_op_queue_.dispatch_cancellations();
     except_op_queue_.dispatch_cancellations();
-    timer_queue_.dispatch_timers(
-        boost::posix_time::microsec_clock::universal_time());
+    for (std::size_t i = 0; i < timer_queues_.size(); ++i)
+      timer_queues_[i]->dispatch_timers();
 
     // Issue any pending cancellations.
-    for (size_t i = 0; i < pending_cancellations_.size(); ++i)
+    for (std::size_t i = 0; i < pending_cancellations_.size(); ++i)
       cancel_ops_unlocked(pending_cancellations_[i]);
     pending_cancellations_.clear();
 
@@ -474,27 +512,45 @@ private:
     int fd = kqueue();
     if (fd == -1)
     {
-      system_exception e("kqueue", errno);
-      boost::throw_exception(e);
+      boost::throw_exception(asio::system_error(
+            asio::error_code(errno, asio::native_ecat),
+            "kqueue"));
     }
     return fd;
+  }
+
+  // Check if all timer queues are empty.
+  bool all_timer_queues_are_empty() const
+  {
+    for (std::size_t i = 0; i < timer_queues_.size(); ++i)
+      if (!timer_queues_[i]->empty())
+        return false;
+    return true;
   }
 
   // Get the timeout value for the kevent call.
   timespec* get_timeout(timespec& ts)
   {
-    if (timer_queue_.empty())
+    if (all_timer_queues_are_empty())
       return 0;
 
-    boost::posix_time::ptime now
-      = boost::posix_time::microsec_clock::universal_time();
-    boost::posix_time::ptime earliest_timer;
-    timer_queue_.get_earliest_time(earliest_timer);
-    if (now < earliest_timer)
+    // By default we will wait no longer than 5 minutes. This will ensure that
+    // any changes to the system clock are detected after no longer than this.
+    boost::posix_time::time_duration minimum_wait_duration
+      = boost::posix_time::minutes(5);
+
+    for (std::size_t i = 0; i < timer_queues_.size(); ++i)
     {
-      boost::posix_time::time_duration timeout = earliest_timer - now;
-      ts.tv_sec = timeout.total_seconds();
-      ts.tv_nsec = timeout.total_nanoseconds() % 1000000000;
+      boost::posix_time::time_duration wait_duration
+        = timer_queues_[i]->wait_duration();
+      if (wait_duration < minimum_wait_duration)
+        minimum_wait_duration = wait_duration;
+    }
+
+    if (minimum_wait_duration > boost::posix_time::time_duration())
+    {
+      ts.tv_sec = minimum_wait_duration.total_seconds();
+      ts.tv_nsec = minimum_wait_duration.total_nanoseconds() % 1000000000;
     }
     else
     {
@@ -538,8 +594,8 @@ private:
   // The queue of except operations.
   reactor_op_queue<socket_type> except_op_queue_;
 
-  // The queue of timers.
-  reactor_timer_queue<boost::posix_time::ptime> timer_queue_;
+  // The timer queues.
+  std::vector<timer_queue_base*> timer_queues_;
 
   // The descriptors that are pending cancellation.
   std::vector<socket_type> pending_cancellations_;

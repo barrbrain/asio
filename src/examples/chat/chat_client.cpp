@@ -1,3 +1,13 @@
+//
+// chat_client.cpp
+// ~~~~~~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include <cstdlib>
 #include <deque>
 #include <iostream>
@@ -35,7 +45,7 @@ public:
 
 private:
 
-  void handle_connect(const asio::error& error,
+  void handle_connect(const asio::error_code& error,
       tcp::resolver::iterator endpoint_iterator)
   {
     if (!error)
@@ -55,7 +65,7 @@ private:
     }
   }
 
-  void handle_read_header(const asio::error& error)
+  void handle_read_header(const asio::error_code& error)
   {
     if (!error && read_msg_.decode_header())
     {
@@ -70,7 +80,7 @@ private:
     }
   }
 
-  void handle_read_body(const asio::error& error)
+  void handle_read_body(const asio::error_code& error)
   {
     if (!error)
     {
@@ -101,7 +111,7 @@ private:
     }
   }
 
-  void handle_write(const asio::error& error)
+  void handle_write(const asio::error_code& error)
   {
     if (!error)
     {
@@ -166,10 +176,6 @@ int main(int argc, char* argv[])
 
     c.close();
     t.join();
-  }
-  catch (asio::error& e)
-  {
-    std::cerr << e << "\n";
   }
   catch (std::exception& e)
   {

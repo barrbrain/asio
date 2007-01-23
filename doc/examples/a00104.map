@@ -1,0 +1,6 @@
+base referer
+rect $a00003.html 100,8 284,88
+rect $a00015.html 58,138 325,250
+rect $a00007.html 349,138 653,250
+rect asio.doxytags$a00032.html 677,154 826,234
+rect asio.doxytags$a00014.html 850,154 1418,234

@@ -2,7 +2,7 @@
 // basic_endpoint.hpp
 // ~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -22,7 +22,7 @@
 #include <boost/detail/workaround.hpp>
 #include <cstring>
 #if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
-# include <iostream>
+# include <ostream>
 #endif // BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
 #include "asio/detail/pop_options.hpp"
 
@@ -39,19 +39,19 @@ namespace ip {
  * The asio::ip::basic_endpoint class template describes an endpoint that
  * may be associated with a particular socket.
  *
- * @par Thread Safety:
+ * @par Thread Safety
  * @e Distinct @e objects: Safe.@n
  * @e Shared @e objects: Unsafe.
  *
  * @par Concepts:
  * Endpoint.
  */
-template <typename Protocol>
+template <typename InternetProtocol>
 class basic_endpoint
 {
 public:
   /// The protocol type associated with the endpoint.
-  typedef Protocol protocol_type;
+  typedef InternetProtocol protocol_type;
 
   /// The type of the endpoint structure. This type is dependent on the
   /// underlying implementation of the socket layer.
@@ -71,6 +71,7 @@ public:
 
   /// Default constructor.
   basic_endpoint()
+    : data_()
   {
     asio::detail::sockaddr_in4_type& data
       = reinterpret_cast<asio::detail::sockaddr_in4_type&>(data_);
@@ -84,7 +85,7 @@ public:
   /// in6addr_any). This constructor would typically be used for accepting new
   /// connections.
   /**
-   * @par Examples:
+   * @par Examples
    * To initialise an IPv4 TCP endpoint for port 1234, use:
    * @code
    * asio::ip::tcp::endpoint ep(asio::ip::tcp::v4(), 1234);
@@ -95,7 +96,8 @@ public:
    * asio::ip::udp::endpoint ep(asio::ip::udp::v6(), 9876);
    * @endcode
    */
-  basic_endpoint(const Protocol& protocol, unsigned short port_num)
+  basic_endpoint(const InternetProtocol& protocol, unsigned short port_num)
+    : data_()
   {
     using namespace std; // For memcpy.
     if (protocol.family() == PF_INET)
@@ -125,6 +127,7 @@ public:
   /// constructor may be used for accepting connections on a specific interface
   /// or for making a connection to a remote endpoint.
   basic_endpoint(const asio::ip::address& addr, unsigned short port_num)
+    : data_()
   {
     using namespace std; // For memcpy.
     if (addr.is_v4())
@@ -170,8 +173,8 @@ public:
   protocol_type protocol() const
   {
     if (data_.ss_family == AF_INET)
-      return Protocol::v4();
-    return Protocol::v6();
+      return InternetProtocol::v4();
+    return InternetProtocol::v6();
   }
 
   /// Get the underlying endpoint in the native type.
@@ -200,7 +203,7 @@ public:
   {
     if (size > size_type(sizeof(data_)))
     {
-      asio::error e(asio::error::invalid_argument);
+      asio::system_error e(asio::error::invalid_argument);
       boost::throw_exception(e);
     }
   }
@@ -272,27 +275,27 @@ public:
   /// Set the IP address associated with the endpoint.
   void address(const asio::ip::address& addr)
   {
-    basic_endpoint<Protocol> tmp_endpoint(addr, port());
+    basic_endpoint<InternetProtocol> tmp_endpoint(addr, port());
     data_ = tmp_endpoint.data_;
   }
 
   /// Compare two endpoints for equality.
-  friend bool operator==(const basic_endpoint<Protocol>& e1,
-      const basic_endpoint<Protocol>& e2)
+  friend bool operator==(const basic_endpoint<InternetProtocol>& e1,
+      const basic_endpoint<InternetProtocol>& e2)
   {
     return e1.address() == e2.address() && e1.port() == e2.port();
   }
 
   /// Compare two endpoints for inequality.
-  friend bool operator!=(const basic_endpoint<Protocol>& e1,
-      const basic_endpoint<Protocol>& e2)
+  friend bool operator!=(const basic_endpoint<InternetProtocol>& e1,
+      const basic_endpoint<InternetProtocol>& e2)
   {
     return e1.address() != e2.address() || e1.port() != e2.port();
   }
 
   /// Compare endpoints for ordering.
-  friend bool operator<(const basic_endpoint<Protocol>& e1,
-      const basic_endpoint<Protocol>& e2)
+  friend bool operator<(const basic_endpoint<InternetProtocol>& e1,
+      const basic_endpoint<InternetProtocol>& e2)
   {
     if (e1.address() < e2.address())
       return true;
@@ -319,9 +322,9 @@ private:
  * @relates asio::ip::basic_endpoint
  */
 #if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
-template <typename Protocol>
+template <typename InternetProtocol>
 std::ostream& operator<<(std::ostream& os,
-    const basic_endpoint<Protocol>& endpoint)
+    const basic_endpoint<InternetProtocol>& endpoint)
 {
   const address& addr = endpoint.address();
   if (addr.is_v4())
@@ -332,10 +335,10 @@ std::ostream& operator<<(std::ostream& os,
   return os;
 }
 #else // BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
-template <typename Elem, typename Traits, typename Protocol>
+template <typename Elem, typename Traits, typename InternetProtocol>
 std::basic_ostream<Elem, Traits>& operator<<(
     std::basic_ostream<Elem, Traits>& os,
-    const basic_endpoint<Protocol>& endpoint)
+    const basic_endpoint<InternetProtocol>& endpoint)
 {
   const address& addr = endpoint.address();
   if (addr.is_v4())

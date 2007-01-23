@@ -1,0 +1,5 @@
+base referer
+rect $a00008.html 8,176 434,202
+rect external.doxytags$noncopyable.html 194,8 320,34
+rect $a00008.html 228,85 590,112
+rect $a00045.html 458,176 629,202

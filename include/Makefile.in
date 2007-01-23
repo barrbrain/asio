@@ -161,12 +161,10 @@ nobase_include_HEADERS = \
 	asio/basic_datagram_socket.hpp \
 	asio/basic_deadline_timer.hpp \
 	asio/basic_io_object.hpp \
-	asio/basic_resolver.hpp \
 	asio/basic_socket.hpp \
 	asio/basic_socket_acceptor.hpp \
 	asio/basic_socket_iostream.hpp \
-	asio/basic_socketbuf.hpp \
-	asio/basic_strand.hpp \
+	asio/basic_socket_streambuf.hpp \
 	asio/basic_stream_socket.hpp \
 	asio/basic_streambuf.hpp \
 	asio/buffer.hpp \
@@ -186,15 +184,18 @@ nobase_include_HEADERS = \
 	asio/detail/call_stack.hpp \
 	asio/detail/consuming_buffers.hpp \
 	asio/detail/const_buffers_iterator.hpp \
+	asio/detail/deadline_timer_service.hpp \
 	asio/detail/epoll_reactor.hpp \
 	asio/detail/epoll_reactor_fwd.hpp \
 	asio/detail/event.hpp \
 	asio/detail/fd_set_adapter.hpp \
 	asio/detail/handler_alloc_helpers.hpp \
+	asio/detail/handler_invoke_helpers.hpp \
 	asio/detail/hash_map.hpp \
 	asio/detail/io_control.hpp \
 	asio/detail/kqueue_reactor.hpp \
 	asio/detail/kqueue_reactor_fwd.hpp \
+	asio/detail/local_free_on_block_exit.hpp \
 	asio/detail/mutex.hpp \
 	asio/detail/noncopyable.hpp \
 	asio/detail/null_event.hpp \
@@ -206,21 +207,23 @@ nobase_include_HEADERS = \
 	asio/detail/pipe_select_interrupter.hpp \
 	asio/detail/pop_options.hpp \
 	asio/detail/posix_event.hpp \
+	asio/detail/posix_fd_set_adapter.hpp \
 	asio/detail/posix_mutex.hpp \
 	asio/detail/posix_signal_blocker.hpp \
 	asio/detail/posix_thread.hpp \
 	asio/detail/posix_tss_ptr.hpp \
 	asio/detail/push_options.hpp \
-	asio/detail/reactive_deadline_timer_service.hpp \
 	asio/detail/reactive_socket_service.hpp \
 	asio/detail/reactor_op_queue.hpp \
-	asio/detail/reactor_timer_queue.hpp \
 	asio/detail/resolver_service.hpp \
 	asio/detail/scoped_lock.hpp \
 	asio/detail/select_interrupter.hpp \
 	asio/detail/select_reactor.hpp \
 	asio/detail/select_reactor_fwd.hpp \
+	asio/detail/service_base.hpp \
+	asio/detail/service_id.hpp \
 	asio/detail/service_registry.hpp \
+	asio/detail/service_registry_fwd.hpp \
 	asio/detail/signal_blocker.hpp \
 	asio/detail/signal_init.hpp \
 	asio/detail/socket_holder.hpp \
@@ -232,13 +235,16 @@ nobase_include_HEADERS = \
 	asio/detail/task_io_service.hpp \
 	asio/detail/task_io_service_fwd.hpp \
 	asio/detail/thread.hpp \
+	asio/detail/throw_error.hpp \
+	asio/detail/timer_queue.hpp \
+	asio/detail/timer_queue_base.hpp \
 	asio/detail/tss_ptr.hpp \
 	asio/detail/win_event.hpp \
+	asio/detail/win_fd_set_adapter.hpp \
 	asio/detail/win_iocp_io_service.hpp \
 	asio/detail/win_iocp_io_service_fwd.hpp \
 	asio/detail/win_iocp_operation.hpp \
 	asio/detail/win_iocp_socket_service.hpp \
-	asio/detail/win_local_free_on_block_exit.hpp \
 	asio/detail/win_mutex.hpp \
 	asio/detail/win_signal_blocker.hpp \
 	asio/detail/win_thread.hpp \
@@ -246,8 +252,10 @@ nobase_include_HEADERS = \
 	asio/detail/winsock_init.hpp \
 	asio/detail/wrapped_handler.hpp \
 	asio/error.hpp \
-	asio/error_handler.hpp \
+	asio/error_code.hpp \
 	asio/handler_alloc_hook.hpp \
+	asio/handler_invoke_hook.hpp \
+	asio/impl/error_code.ipp \
 	asio/impl/io_service.ipp \
 	asio/impl/read.ipp \
 	asio/impl/read_until.ipp \
@@ -257,21 +265,24 @@ nobase_include_HEADERS = \
 	asio/ip/address_v4.hpp \
 	asio/ip/address_v6.hpp \
 	asio/ip/basic_endpoint.hpp \
+	asio/ip/basic_resolver.hpp \
 	asio/ip/basic_resolver_entry.hpp \
 	asio/ip/basic_resolver_iterator.hpp \
 	asio/ip/basic_resolver_query.hpp \
 	asio/ip/host_name.hpp \
 	asio/ip/multicast.hpp \
 	asio/ip/resolver_query_base.hpp \
+	asio/ip/resolver_service.hpp \
 	asio/ip/tcp.hpp \
 	asio/ip/udp.hpp \
+	asio/ip/unicast.hpp \
+	asio/ip/v6_only.hpp \
 	asio/ip/detail/socket_option.hpp \
 	asio/is_read_buffered.hpp \
 	asio/is_write_buffered.hpp \
 	asio/placeholders.hpp \
 	asio/read.hpp \
 	asio/read_until.hpp \
-	asio/resolver_service.hpp \
 	asio/socket_acceptor_service.hpp \
 	asio/socket_base.hpp \
 	asio/ssl/basic_context.hpp \
@@ -288,10 +299,9 @@ nobase_include_HEADERS = \
 	asio/ssl/stream_service.hpp \
 	asio/ssl.hpp \
 	asio/strand.hpp \
-	asio/strand_service.hpp \
 	asio/stream_socket_service.hpp \
 	asio/streambuf.hpp \
-	asio/system_exception.hpp \
+	asio/system_error.hpp \
 	asio/thread.hpp \
 	asio/time_traits.hpp \
 	asio/write.hpp \

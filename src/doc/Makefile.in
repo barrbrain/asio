@@ -185,28 +185,6 @@ target_alias = @target_alias@
 @HAVE_DOXYGEN_TRUE@	release_checklist.htm \
 @HAVE_DOXYGEN_TRUE@	tutorial_header.htm \
 @HAVE_DOXYGEN_TRUE@	tutorial_footer.htm \
-@HAVE_DOXYGEN_TRUE@	concepts/Async_Object.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Async_Read_Stream.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Async_Write_Stream.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Boolean_Socket_Option.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Boolean_IO_Control_Command.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Const_Buffers.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/CopyConstructible.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Dispatcher.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Endpoint.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Error_Source.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/IO_Control_Command.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/IP_MReq_Socket_Option.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/IP_Network_Interface_Socket_Option.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Integer_Socket_Option.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Linger_Socket_Option.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Mutable_Buffers.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Protocol.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Size_IO_Control_Command.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Socket_Option.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Stream.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Sync_Read_Stream.hpp \
-@HAVE_DOXYGEN_TRUE@	concepts/Sync_Write_Stream.hpp \
 @HAVE_DOXYGEN_TRUE@	design/buffers_dox.txt \
 @HAVE_DOXYGEN_TRUE@	design/closeascancel_dox.txt \
 @HAVE_DOXYGEN_TRUE@	design/glossary_dox.txt \
@@ -300,7 +278,7 @@ CTAGS:
 
 
 distdir: $(DISTFILES)
-	$(mkdir_p) $(distdir)/../.. $(distdir)/../../doc $(distdir)/../../doc/design $(distdir)/../../doc/examples $(distdir)/../../doc/reference $(distdir)/../../doc/tutorial $(distdir)/../examples/tutorial $(distdir)/concepts $(distdir)/design
+	$(mkdir_p) $(distdir)/../.. $(distdir)/../../doc $(distdir)/../../doc/design $(distdir)/../../doc/examples $(distdir)/../../doc/reference $(distdir)/../../doc/tutorial $(distdir)/../examples/tutorial $(distdir)/design
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \

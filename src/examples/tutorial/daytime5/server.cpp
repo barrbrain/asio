@@ -1,3 +1,13 @@
+//
+// server.cpp
+// ~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include <ctime>
 #include <iostream>
 #include <string>
@@ -25,17 +35,18 @@ int main()
     {
       boost::array<char, 1> recv_buf;
       udp::endpoint remote_endpoint;
-      asio::error error;
+      asio::error_code error;
       socket.receive_from(asio::buffer(recv_buf),
-          remote_endpoint, 0, asio::assign_error(error));
+          remote_endpoint, 0, error);
 
       if (error && error != asio::error::message_size)
-        throw error;
+        throw asio::system_error(error);
 
       std::string message = make_daytime_string();
 
+      asio::error_code ignored_error;
       socket.send_to(asio::buffer(message),
-          remote_endpoint, 0, asio::ignore_error());
+          remote_endpoint, 0, ignored_error);
     }
   }
   catch (std::exception& e)

@@ -1,3 +1,13 @@
+//
+// connection.cpp
+// ~~~~~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include "connection.hpp"
 #include <vector>
 #include <boost/bind.hpp>
@@ -33,7 +43,7 @@ void connection::stop()
   socket_.close();
 }
 
-void connection::handle_read(const asio::error& e,
+void connection::handle_read(const asio::error_code& e,
     std::size_t bytes_transferred)
 {
   if (!e)
@@ -70,7 +80,7 @@ void connection::handle_read(const asio::error& e,
   }
 }
 
-void connection::handle_write(const asio::error& e)
+void connection::handle_write(const asio::error_code& e)
 {
   if (e != asio::error::operation_aborted)
   {

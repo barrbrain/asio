@@ -11,48 +11,48 @@ PERFORMANCE_TEST_EXES = \
 	tests\performance\server.exe
 
 UNIT_TEST_EXES = \
-	tests\unit\basic_datagram_socket_test.exe \
-	tests\unit\basic_deadline_timer_test.exe \
-	tests\unit\basic_resolver_test.exe \
-	tests\unit\basic_socket_acceptor_test.exe \
-	tests\unit\basic_strand_test.exe \
-	tests\unit\basic_stream_socket_test.exe \
-	tests\unit\buffered_read_stream_test.exe \
-	tests\unit\buffered_stream_test.exe \
-	tests\unit\buffered_write_stream_test.exe \
-	tests\unit\buffer_test.exe \
-	tests\unit\completion_condition_test.exe \
-	tests\unit\datagram_socket_service_test.exe \
-	tests\unit\deadline_timer_service_test.exe \
-	tests\unit\deadline_timer_test.exe \
-	tests\unit\io_service_test.exe \
-	tests\unit\error_handler_test.exe \
-	tests\unit\error_test.exe \
-	tests\unit\ip\address_test.exe \
-	tests\unit\ip\address_v4_test.exe \
-	tests\unit\ip\address_v6_test.exe \
-	tests\unit\ip\basic_endpoint_test.exe \
-	tests\unit\ip\basic_resolver_entry_test.exe \
-	tests\unit\ip\basic_resolver_iterator_test.exe \
-	tests\unit\ip\basic_resolver_query_test.exe \
-	tests\unit\ip\host_name_test.exe \
-	tests\unit\ip\multicast_test.exe \
-	tests\unit\ip\resolver_query_base_test.exe \
-	tests\unit\ip\tcp_test.exe \
-	tests\unit\ip\udp_test.exe \
-	tests\unit\is_read_buffered_test.exe \
-	tests\unit\is_write_buffered_test.exe \
-	tests\unit\placeholders_test.exe \
-	tests\unit\read_test.exe \
-	tests\unit\resolver_service_test.exe \
-	tests\unit\socket_acceptor_service_test.exe \
-	tests\unit\socket_base_test.exe \
-	tests\unit\strand_service_test.exe \
-	tests\unit\strand_test.exe \
-	tests\unit\stream_socket_service_test.exe \
-	tests\unit\thread_test.exe \
-	tests\unit\time_traits_test.exe \
-	tests\unit\write_test.exe
+	tests\unit\basic_datagram_socket.exe \
+	tests\unit\basic_deadline_timer.exe \
+	tests\unit\basic_socket_acceptor.exe \
+	tests\unit\basic_stream_socket.exe \
+	tests\unit\buffered_read_stream.exe \
+	tests\unit\buffered_stream.exe \
+	tests\unit\buffered_write_stream.exe \
+	tests\unit\buffer.exe \
+	tests\unit\completion_condition.exe \
+	tests\unit\datagram_socket_service.exe \
+	tests\unit\deadline_timer_service.exe \
+	tests\unit\deadline_timer.exe \
+	tests\unit\io_service.exe \
+	tests\unit\error.exe \
+	tests\unit\ip\address.exe \
+	tests\unit\ip\address_v4.exe \
+	tests\unit\ip\address_v6.exe \
+	tests\unit\ip\basic_endpoint.exe \
+	tests\unit\ip\basic_resolver.exe \
+	tests\unit\ip\basic_resolver_entry.exe \
+	tests\unit\ip\basic_resolver_iterator.exe \
+	tests\unit\ip\basic_resolver_query.exe \
+	tests\unit\ip\host_name.exe \
+	tests\unit\ip\multicast.exe \
+	tests\unit\ip\resolver_query_base.exe \
+	tests\unit\ip\resolver_service.exe \
+	tests\unit\ip\tcp.exe \
+	tests\unit\ip\udp.exe \
+	tests\unit\ip\unicast.exe \
+	tests\unit\ip\v6_only.exe \
+	tests\unit\is_read_buffered.exe \
+	tests\unit\is_write_buffered.exe \
+	tests\unit\placeholders.exe \
+	tests\unit\read.exe \
+	tests\unit\read_until.exe \
+	tests\unit\socket_acceptor_service.exe \
+	tests\unit\socket_base.exe \
+	tests\unit\strand.exe \
+	tests\unit\stream_socket_service.exe \
+	tests\unit\thread.exe \
+	tests\unit\time_traits.exe \
+	tests\unit\write.exe
 
 EXAMPLE_EXES = \
 	examples\allocation\server.exe \
@@ -65,15 +65,21 @@ EXAMPLE_EXES = \
 	examples\echo\blocking_tcp_echo_server.exe \
 	examples\echo\blocking_udp_echo_client.exe \
 	examples\echo\blocking_udp_echo_server.exe \
+	examples\http\client\async_client.exe \
+	examples\http\client\sync_client.exe \
 	examples\http\server\http_server.exe \
 	examples\iostreams\daytime_client.exe \
 	examples\iostreams\daytime_server.exe \
 	examples\multicast\receiver.exe \
 	examples\multicast\sender.exe \
+	examples\services\daytime_client.exe \
+	examples\socks4\sync_client.exe \
 	examples\timeouts\accept_timeout.exe \
 	examples\timeouts\connect_timeout.exe \
 	examples\timeouts\datagram_receive_timeout.exe \
 	examples\timeouts\stream_receive_timeout.exe \
+	examples\timers\tick_count_timer.exe \
+	examples\timers\time_t_timer.exe \
 	examples\tutorial\timer1\timer.exe \
 	examples\tutorial\timer2\timer.exe \
 	examples\tutorial\timer3\timer.exe \
@@ -87,9 +93,13 @@ EXAMPLE_EXES = \
 	examples\tutorial\daytime6\server.exe \
 	examples\tutorial\daytime7\server.exe
 
-all: \
-	$(PERFORMANCE_TEST_EXES) \
+# Only build unit tests by default with Borland C++ since the performance tests
+# and examples may use language that are not supported.
+tests: $(UNIT_TEST_EXES)
+
+all:
 	$(UNIT_TEST_EXES) \
+	$(PERFORMANCE_TEST_EXES) \
 	$(EXAMPLE_EXES)
 
 check: $(UNIT_TEST_EXES)
@@ -112,6 +122,11 @@ examples\http\server\http_server.exe: \
 		examples\http\server\request_parser.obj \
 		examples\http\server\server.obj \
 		examples\http\server\win_main.obj
+	bcc32 -e$@ $(LDFLAGS) $**
+
+examples\services\daytime_client.exe: \
+		examples\services\daytime_client.obj \
+		examples\services\logger_service.obj
 	bcc32 -e$@ $(LDFLAGS) $**
 
 .obj.exe:

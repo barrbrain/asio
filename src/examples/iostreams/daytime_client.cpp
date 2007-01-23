@@ -1,3 +1,13 @@
+//
+// daytime_client.cpp
+// ~~~~~~~~~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include <iostream>
 #include <string>
 #include <asio.hpp>
@@ -19,9 +29,9 @@ int main(int argc, char* argv[])
     std::getline(s, line);
     std::cout << line << std::endl;
   }
-  catch (asio::error& e)
+  catch (std::exception& e)
   {
-    std::cout << e << std::endl;
+    std::cout << "Exception: " << e.what() << std::endl;
   }
 
   return 0;

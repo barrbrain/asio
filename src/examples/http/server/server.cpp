@@ -1,3 +1,13 @@
+//
+// server.cpp
+// ~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include "server.hpp"
 #include <boost/bind.hpp>
 
@@ -42,7 +52,7 @@ void server::stop()
   io_service_.post(boost::bind(&server::handle_stop, this));
 }
 
-void server::handle_accept(const asio::error& e)
+void server::handle_accept(const asio::error_code& e)
 {
   if (!e)
   {

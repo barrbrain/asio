@@ -1,3 +1,13 @@
+//
+// blocking_tcp_echo_server.cpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include <cstdlib>
 #include <iostream>
 #include <boost/bind.hpp>
@@ -18,20 +28,15 @@ void session(socket_ptr sock)
     {
       char data[max_length];
 
-      asio::error error;
-      size_t length = sock->read_some(
-          asio::buffer(data), asio::assign_error(error));
+      asio::error_code error;
+      size_t length = sock->read_some(asio::buffer(data), error);
       if (error == asio::error::eof)
         break; // Connection closed cleanly by peer.
       else if (error)
-        throw error; // Some other error.
+        throw asio::system_error(error); // Some other error.
 
       asio::write(*sock, asio::buffer(data, length));
     }
-  }
-  catch (asio::error& e)
-  {
-    std::cerr << "Error in thread: " << e << "\n";
   }
   catch (std::exception& e)
   {
@@ -64,10 +69,6 @@ int main(int argc, char* argv[])
 
     using namespace std; // For atoi.
     server(io_service, atoi(argv[1]));
-  }
-  catch (asio::error& e)
-  {
-    std::cerr << e << "\n";
   }
   catch (std::exception& e)
   {

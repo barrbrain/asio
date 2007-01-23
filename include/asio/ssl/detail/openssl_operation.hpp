@@ -25,6 +25,7 @@
 #include "asio/buffer.hpp"
 #include "asio/placeholders.hpp"
 #include "asio/write.hpp"
+#include "asio/detail/socket_ops.hpp"
 #include "asio/ssl/detail/openssl_types.hpp"
 
 namespace asio {
@@ -32,7 +33,8 @@ namespace ssl {
 namespace detail {
 
 typedef boost::function<int (::SSL*)> ssl_primitive_func; 
-typedef boost::function<void (const error&, int)> user_handler_func;
+typedef boost::function<void (const asio::error_code&, int)>
+  user_handler_func;
 
 // Network send_/recv buffer implementation
 //
@@ -82,12 +84,14 @@ public:
   // Constructor for asynchronous operations
   openssl_operation(ssl_primitive_func primitive,
                     Stream& socket,
+                    net_buffer& recv_buf,
                     SSL* session,
                     BIO* ssl_bio,
                     user_handler_func  handler
                     )
     : primitive_(primitive)
     , user_handler_(handler)
+    , recv_buf_(recv_buf)
     , socket_(socket)
     , ssl_bio_(ssl_bio)
     , session_(session)
@@ -105,9 +109,11 @@ public:
   // Constructor for synchronous operations
   openssl_operation(ssl_primitive_func primitive,
                     Stream& socket,
+                    net_buffer& recv_buf,
                     SSL* session,
                     BIO* ssl_bio)
     : primitive_(primitive)
+    , recv_buf_(recv_buf)
     , socket_(socket)
     , ssl_bio_(ssl_bio)
     , session_(session)
@@ -128,6 +134,7 @@ public:
   int start()
   {
     int rc = primitive_( session_ );
+    int sys_error_code = ERR_get_error();
     bool is_operation_done = (rc > 0);  
                 // For connect/accept/shutdown, the operation
                 // is done, when return code is 1
@@ -149,21 +156,62 @@ public:
 
     if (is_shut_down_sent && is_shut_down_received && is_operation_done)
       // SSL connection is shut down cleanly
-      return handler_(asio::error(), 1);
+      return handler_(asio::error_code(), 1);
 
     if (is_shut_down_received && !is_write_needed)
-      return handler_(asio::error(asio::error::eof), 0);
+      return handler_(asio::error::eof, 0);
 
     if (is_shut_down_received)
       // Shutdown has been requested, while we were reading or writing...
       // abort our action...
-      return handler_(asio::error(asio::error::shut_down), 0);
+      return handler_(asio::error::shut_down, 0);
 
     if (!is_operation_done && !is_read_needed && !is_write_needed 
       && !is_shut_down_sent)
+    {
       // The operation has failed... It is not completed and does 
       // not want network communication nor does want to send shutdown out...
-      return handler_(asio::error(error_code), rc); 
+      if (error_code == SSL_ERROR_SYSCALL)
+      {
+        return handler_(asio::error_code(
+              sys_error_code, asio::native_ecat), rc); 
+      }
+      else
+      {
+        return handler_(asio::error_code(
+              error_code, asio::ssl_ecat), rc); 
+      }
+    }
+
+    if (!is_operation_done && !is_write_needed)
+    {
+      // We may have left over data that we can pass to SSL immediately
+      if (recv_buf_.get_data_len() > 0)
+      {
+        // Pass the buffered data to SSL
+        int written = ::BIO_write
+        ( 
+          ssl_bio_, 
+          recv_buf_.get_data_start(), 
+          recv_buf_.get_data_len() 
+        );
+
+        if (written > 0)
+        {
+          recv_buf_.data_removed(written);
+        }
+        else if (written < 0)
+        {
+          if (!BIO_should_retry(ssl_bio_))
+          {
+            // Some serios error with BIO....
+            return handler_(asio::error::no_recovery, 0);
+          }
+        }
+
+        return start();
+      }
+    }
 
     // Continue with operation, flush any SSL data out to network...
     return write_(is_operation_done, rc); 
@@ -171,7 +219,7 @@ public:
 
 // Private implementation
 private:
-  typedef boost::function<int (const asio::error&, int)>
+  typedef boost::function<int (const asio::error_code&, int)>
     int_handler_func;
   typedef boost::function<int (bool, int)> write_func;
 
@@ -181,22 +229,27 @@ private:
   int_handler_func handler_;
     
   net_buffer send_buf_; // buffers for network IO
-  net_buffer recv_buf_; 
+
+  // The recv buffer is owned by the stream, not the operation, since there can
+  // be left over bytes after passing the data up to the application, and these
+  // bytes need to be kept around for the next read operation issued by the
+  // application.
+  net_buffer& recv_buf_;
 
   Stream& socket_;
   BIO*    ssl_bio_;
   SSL*    session_;
 
   //
-  int sync_user_handler(const asio::error& error, int rc)
+  int sync_user_handler(const asio::error_code& error, int rc)
   {
     if (!error)
       return rc;
 
-    throw error;
+    throw asio::system_error(error);
   }
     
-  int async_user_handler(const asio::error& error, int rc)
+  int async_user_handler(const asio::error_code& error, int rc)
   {
     user_handler_(error, rc);
     return 0;
@@ -214,9 +267,11 @@ private:
         send_buf_.get_unused_len();
         
       if (len == 0)
+      {
         // In case our send buffer is full, we have just to wait until 
         // previous send to complete...
         return 0;
+      }
 
       // Read outgoing data from bio
       len = ::BIO_read( ssl_bio_, send_buf_.get_unused_start(), len); 
@@ -225,7 +280,7 @@ private:
       {
         unsigned char *data_start = send_buf_.get_unused_start();
         send_buf_.data_added(len);
-   
+  
         asio::async_write
         ( 
           socket_, 
@@ -247,7 +302,7 @@ private:
       {
         // Seems like fatal error
         // reading from SSL BIO has failed...
-        handler_(asio::error(asio::error::no_recovery), 0);
+        handler_(asio::error::no_recovery, 0);
         return 0;
       }
     }
@@ -255,7 +310,7 @@ private:
     if (is_operation_done)
     {
       // Finish the operation, with success
-      handler_(asio::error(), rc);
+      handler_(asio::error_code(), rc);
       return 0;
     }
     
@@ -267,7 +322,7 @@ private:
   }
 
   void async_write_handler(bool is_operation_done, int rc, 
-    const asio::error& error, size_t bytes_sent)
+    const asio::error_code& error, size_t bytes_sent)
   {
     if (!error)
     {
@@ -275,7 +330,7 @@ private:
       send_buf_.data_removed(bytes_sent);
 
       if (is_operation_done)
-        handler_(asio::error(), rc);
+        handler_(asio::error_code(), rc);
       else
         // Since the operation was not completed, try it again...
         start();
@@ -301,7 +356,8 @@ private:
     );
   }
 
-  void async_read_handler(const asio::error& error, size_t bytes_recvd)
+  void async_read_handler(const asio::error_code& error,
+      size_t bytes_recvd)
   {
     if (!error)
     {
@@ -324,7 +380,7 @@ private:
         if (!BIO_should_retry(ssl_bio_))
         {
           // Some serios error with BIO....
-          handler_(asio::error(asio::error::no_recovery), 0);
+          handler_(asio::error::no_recovery, 0);
           return;
         }
       }
@@ -368,7 +424,7 @@ private:
       {
         // Seems like fatal error
         // reading from SSL BIO has failed...
-        throw asio::error(asio::error::no_recovery);
+        throw asio::system_error(asio::error::no_recovery);
       }
     }
     
@@ -408,7 +464,7 @@ private:
       if (!BIO_should_retry(ssl_bio_))
       {
         // Some serios error with BIO....
-        throw asio::error(asio::error::no_recovery);
+        throw asio::system_error(asio::error::no_recovery);
       }
     }
 

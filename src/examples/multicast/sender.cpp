@@ -1,3 +1,13 @@
+//
+// sender.cpp
+// ~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -28,7 +38,7 @@ public:
           asio::placeholders::error));
   }
 
-  void handle_send_to(const asio::error& error)
+  void handle_send_to(const asio::error_code& error)
   {
     if (!error && message_count_ < max_message_count)
     {
@@ -39,7 +49,7 @@ public:
     }
   }
 
-  void handle_timeout(const asio::error& error)
+  void handle_timeout(const asio::error_code& error)
   {
     if (!error)
     {
@@ -79,10 +89,6 @@ int main(int argc, char* argv[])
     asio::io_service io_service;
     sender s(io_service, asio::ip::address::from_string(argv[1]));
     io_service.run();
-  }
-  catch (asio::error& e)
-  {
-    std::cerr << e << "\n";
   }
   catch (std::exception& e)
   {

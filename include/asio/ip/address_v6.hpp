@@ -2,7 +2,7 @@
 // address_v6.hpp
 // ~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -21,14 +21,16 @@
 #include <cstring>
 #include <string>
 #include <stdexcept>
+#include <typeinfo>
 #include <boost/array.hpp>
 #include <boost/throw_exception.hpp>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/error.hpp"
-#include "asio/error_handler.hpp"
 #include "asio/detail/socket_ops.hpp"
 #include "asio/detail/socket_types.hpp"
+#include "asio/detail/throw_error.hpp"
+#include "asio/ip/address_v4.hpp"
 
 namespace asio {
 namespace ip {
@@ -38,7 +40,7 @@ namespace ip {
  * The asio::ip::address_v6 class provides the ability to use and
  * manipulate IP version 6 addresses.
  *
- * @par Thread Safety:
+ * @par Thread Safety
  * @e Distinct @e objects: Safe.@n
  * @e Shared @e objects: Unsafe.
  */
@@ -79,13 +81,19 @@ public:
     return *this;
   }
 
-  /// Get the scope ID of the address.
+  /// The scope ID of the address.
+  /**
+   * Returns the scope ID associated with the IPv6 address.
+   */
   unsigned long scope_id() const
   {
     return scope_id_;
   }
 
-  /// Set the scope ID of the address.
+  /// The scope ID of the address.
+  /**
+   * Modifies the scope ID associated with the IPv6 address.
+   */
   void scope_id(unsigned long id)
   {
     scope_id_ = id;
@@ -103,77 +111,100 @@ public:
   /// Get the address as a string.
   std::string to_string() const
   {
-    return to_string(asio::throw_error());
+    asio::error_code ec;
+    std::string addr = to_string(ec);
+    asio::detail::throw_error(ec);
+    return addr;
   }
 
   /// Get the address as a string.
-  template <typename Error_Handler>
-  std::string to_string(Error_Handler error_handler) const
+  std::string to_string(asio::error_code& ec) const
   {
     char addr_str[asio::detail::max_addr_v6_str_len];
     const char* addr =
       asio::detail::socket_ops::inet_ntop(AF_INET6, &addr_, addr_str,
-          asio::detail::max_addr_v6_str_len, scope_id_);
+          asio::detail::max_addr_v6_str_len, scope_id_, ec);
     if (addr == 0)
-    {
-      asio::error e(asio::detail::socket_ops::get_error());
-      error_handler(e);
       return std::string();
-    }
-    asio::error e;
-    error_handler(e);
     return addr;
   }
 
   /// Create an address from an IP address string.
   static address_v6 from_string(const char* str)
   {
-    return from_string(str, asio::throw_error());
+    asio::error_code ec;
+    address_v6 addr = from_string(str, ec);
+    asio::detail::throw_error(ec);
+    return addr;
   }
 
   /// Create an address from an IP address string.
-  template <typename Error_Handler>
-  static address_v6 from_string(const char* str, Error_Handler error_handler)
+  static address_v6 from_string(const char* str, asio::error_code& ec)
   {
     address_v6 tmp;
     if (asio::detail::socket_ops::inet_pton(
-          AF_INET6, str, &tmp.addr_, &tmp.scope_id_) <= 0)
-    {
-      asio::error e(asio::detail::socket_ops::get_error());
-      error_handler(e);
+          AF_INET6, str, &tmp.addr_, &tmp.scope_id_, ec) <= 0)
       return address_v6();
-    }
-    asio::error e;
-    error_handler(e);
     return tmp;
   }
 
   /// Create an address from an IP address string.
   static address_v6 from_string(const std::string& str)
   {
-    return from_string(str.c_str(), asio::throw_error());
+    return from_string(str.c_str());
   }
 
   /// Create an address from an IP address string.
-  template <typename Error_Handler>
   static address_v6 from_string(const std::string& str,
-      Error_Handler error_handler)
+      asio::error_code& ec)
   {
-    return from_string(str.c_str(), error_handler);
+    return from_string(str.c_str(), ec);
+  }
+
+  /// Converts an IPv4-mapped or IPv4-compatible address to an IPv4 address.
+  address_v4 to_v4() const
+  {
+    if (!is_v4_mapped() && !is_v4_compatible())
+      throw std::bad_cast();
+    address_v4::bytes_type v4_bytes = { addr_.s6_addr[12],
+      addr_.s6_addr[13], addr_.s6_addr[14], addr_.s6_addr[15] };
+    return address_v4(v4_bytes);
   }
 
   /// Determine whether the address is a loopback address.
   bool is_loopback() const
   {
+#if defined(__BORLANDC__)
+    return ((addr_.s6_addr[0] == 0) && (addr_.s6_addr[1] == 0)
+        && (addr_.s6_addr[2] == 0) && (addr_.s6_addr[3] == 0)
+        && (addr_.s6_addr[4] == 0) && (addr_.s6_addr[5] == 0)
+        && (addr_.s6_addr[6] == 0) && (addr_.s6_addr[7] == 0)
+        && (addr_.s6_addr[8] == 0) && (addr_.s6_addr[9] == 0)
+        && (addr_.s6_addr[10] == 0) && (addr_.s6_addr[11] == 0)
+        && (addr_.s6_addr[12] == 0) && (addr_.s6_addr[13] == 0)
+        && (addr_.s6_addr[14] == 0) && (addr_.s6_addr[15] == 1));
+#else
     using namespace asio::detail;
     return IN6_IS_ADDR_LOOPBACK(&addr_) != 0;
+#endif
   }
 
   /// Determine whether the address is unspecified.
   bool is_unspecified() const
   {
+#if defined(__BORLANDC__)
+    return ((addr_.s6_addr[0] == 0) && (addr_.s6_addr[1] == 0)
+        && (addr_.s6_addr[2] == 0) && (addr_.s6_addr[3] == 0)
+        && (addr_.s6_addr[4] == 0) && (addr_.s6_addr[5] == 0)
+        && (addr_.s6_addr[6] == 0) && (addr_.s6_addr[7] == 0)
+        && (addr_.s6_addr[8] == 0) && (addr_.s6_addr[9] == 0)
+        && (addr_.s6_addr[10] == 0) && (addr_.s6_addr[11] == 0)
+        && (addr_.s6_addr[12] == 0) && (addr_.s6_addr[13] == 0)
+        && (addr_.s6_addr[14] == 0) && (addr_.s6_addr[15] == 0));
+#else
     using namespace asio::detail;
     return IN6_IS_ADDR_UNSPECIFIED(&addr_) != 0;
+#endif
   }
 
   /// Determine whether the address is link local.
@@ -191,14 +222,14 @@ public:
   }
 
   /// Determine whether the address is a mapped IPv4 address.
-  bool is_ipv4_mapped() const
+  bool is_v4_mapped() const
   {
     using namespace asio::detail;
     return IN6_IS_ADDR_V4MAPPED(&addr_) != 0;
   }
 
   /// Determine whether the address is an IPv4-compatible address.
-  bool is_ipv4_compatible() const
+  bool is_v4_compatible() const
   {
     using namespace asio::detail;
     return IN6_IS_ADDR_V4COMPAT(&addr_) != 0;
@@ -277,6 +308,24 @@ public:
     return a1.scope_id_ < a2.scope_id_;
   }
 
+  /// Compare addresses for ordering.
+  friend bool operator>(const address_v6& a1, const address_v6& a2)
+  {
+    return a2 < a1;
+  }
+
+  /// Compare addresses for ordering.
+  friend bool operator<=(const address_v6& a1, const address_v6& a2)
+  {
+    return !(a2 < a1);
+  }
+
+  /// Compare addresses for ordering.
+  friend bool operator>=(const address_v6& a1, const address_v6& a2)
+  {
+    return !(a1 < a2);
+  }
+
   /// Obtain an address object that represents any address.
   static address_v6 any()
   {
@@ -290,6 +339,24 @@ public:
     asio::detail::in6_addr_type tmp_addr = IN6ADDR_LOOPBACK_INIT;
     tmp.addr_ = tmp_addr;
     return tmp;
+  }
+
+  /// Create an IPv4-mapped IPv6 address.
+  static address_v6 v4_mapped(const address_v4& addr)
+  {
+    address_v4::bytes_type v4_bytes = addr.to_bytes();
+    bytes_type v6_bytes = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xFF, 0xFF,
+      v4_bytes[0], v4_bytes[1], v4_bytes[2], v4_bytes[3] };
+    return address_v6(v6_bytes);
+  }
+
+  /// Create an IPv4-compatible IPv6 address.
+  static address_v6 v4_compatible(const address_v4& addr)
+  {
+    address_v4::bytes_type v4_bytes = addr.to_bytes();
+    bytes_type v6_bytes = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      v4_bytes[0], v4_bytes[1], v4_bytes[2], v4_bytes[3] };
+    return address_v6(v6_bytes);
   }
 
 private:
@@ -316,7 +383,13 @@ template <typename Elem, typename Traits>
 std::basic_ostream<Elem, Traits>& operator<<(
     std::basic_ostream<Elem, Traits>& os, const address_v6& addr)
 {
-  os << addr.to_string();
+  asio::error_code ec;
+  std::string s = addr.to_string(ec);
+  if (ec)
+    os.setstate(std::ios_base::failbit);
+  else
+    for (std::string::iterator i = s.begin(); i != s.end(); ++i)
+      os << os.widen(*i);
   return os;
 }
 

@@ -1,3 +1,13 @@
+//
+// chat_server.cpp
+// ~~~~~~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include <algorithm>
 #include <cstdlib>
 #include <deque>
@@ -102,7 +112,7 @@ public:
     }
   }
 
-  void handle_read_header(const asio::error& error)
+  void handle_read_header(const asio::error_code& error)
   {
     if (!error && read_msg_.decode_header())
     {
@@ -117,7 +127,7 @@ public:
     }
   }
 
-  void handle_read_body(const asio::error& error)
+  void handle_read_body(const asio::error_code& error)
   {
     if (!error)
     {
@@ -133,7 +143,7 @@ public:
     }
   }
 
-  void handle_write(const asio::error& error)
+  void handle_write(const asio::error_code& error)
   {
     if (!error)
     {
@@ -178,7 +188,8 @@ public:
           asio::placeholders::error));
   }
 
-  void handle_accept(chat_session_ptr session, const asio::error& error)
+  void handle_accept(chat_session_ptr session,
+      const asio::error_code& error)
   {
     if (!error)
     {
@@ -223,10 +234,6 @@ int main(int argc, char* argv[])
     }
 
     io_service.run();
-  }
-  catch (asio::error& e)
-  {
-    std::cerr << e << "\n";
   }
   catch (std::exception& e)
   {

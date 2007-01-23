@@ -2,7 +2,7 @@
 // client.hpp
 // ~~~~~~~~~~
 //
-// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -89,7 +89,7 @@ public:
   }
 
 private:
-  void handle_connect(const error& err,
+  void handle_connect(const asio::error_code& err,
       ip::tcp::resolver::iterator endpoint_iterator)
   {
     if (!err)
@@ -114,7 +114,7 @@ private:
     }
   }
 
-  void handle_read(const error& err, size_t length)
+  void handle_read(const asio::error_code& err, size_t length)
   {
     if (!err)
     {
@@ -137,7 +137,7 @@ private:
     }
   }
 
-  void handle_write(const error& err, size_t length)
+  void handle_write(const asio::error_code& err, size_t length)
   {
     if (!err && length > 0)
     {

@@ -1,3 +1,13 @@
+//
+// connection.hpp
+// ~~~~~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #ifndef HTTP_CONNECTION_HPP
 #define HTTP_CONNECTION_HPP
 
@@ -37,10 +47,11 @@ public:
 
 private:
   /// Handle completion of a read operation.
-  void handle_read(const asio::error& e, std::size_t bytes_transferred);
+  void handle_read(const asio::error_code& e,
+      std::size_t bytes_transferred);
 
   /// Handle completion of a write operation.
-  void handle_write(const asio::error& e);
+  void handle_write(const asio::error_code& e);
 
   /// Socket for the connection.
   asio::ip::tcp::socket socket_;

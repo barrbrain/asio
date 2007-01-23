@@ -2,7 +2,7 @@
 // task_io_service.hpp
 // ~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2006 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -17,11 +17,14 @@
 
 #include "asio/detail/push_options.hpp"
 
+#include "asio/error_code.hpp"
 #include "asio/io_service.hpp"
 #include "asio/detail/call_stack.hpp"
 #include "asio/detail/event.hpp"
 #include "asio/detail/handler_alloc_helpers.hpp"
+#include "asio/detail/handler_invoke_helpers.hpp"
 #include "asio/detail/mutex.hpp"
+#include "asio/detail/service_base.hpp"
 #include "asio/detail/task_io_service_fwd.hpp"
 
 namespace asio {
@@ -29,20 +32,24 @@ namespace detail {
 
 template <typename Task>
 class task_io_service
-  : public asio::io_service::service
+  : public asio::detail::service_base<task_io_service<Task> >
 {
 public:
   // Constructor.
   task_io_service(asio::io_service& io_service)
-    : asio::io_service::service(io_service),
+    : asio::detail::service_base<task_io_service<Task> >(io_service),
       mutex_(),
       task_(use_service<Task>(io_service)),
       outstanding_work_(0),
       handler_queue_(&task_handler_),
       handler_queue_end_(&task_handler_),
-      interrupted_(false),
+      stopped_(false),
       shutdown_(false),
       first_idle_thread_(0)
+  {
+  }
+
+  void init(size_t /*concurrency_hint*/)
   {
   }
 
@@ -67,8 +74,8 @@ public:
     handler_queue_end_ = &task_handler_;
   }
 
-  // Run the event processing loop.
-  void run()
+  // Run the event loop until interrupted or no more work.
+  size_t run(asio::error_code& ec)
   {
     typename call_stack<task_io_service>::context ctx(this);
 
@@ -78,86 +85,63 @@ public:
 
     asio::detail::mutex::scoped_lock lock(mutex_);
 
-    while (!interrupted_ && outstanding_work_ > 0)
-    {
-      if (handler_queue_)
-      {
-        // Prepare to execute first handler from queue.
-        handler_base* h = handler_queue_;
-        handler_queue_ = h->next_;
-        if (handler_queue_ == 0)
-          handler_queue_end_ = 0;
-        bool more_handlers = (handler_queue_ != 0);
-        lock.unlock();
+    size_t n = 0;
+    while (do_one(lock, &this_idle_thread, ec))
+      if (n != (std::numeric_limits<size_t>::max)())
+        ++n;
+    return n;
+  }
 
-        if (h == &task_handler_)
-        {
-          task_cleanup c(lock, handler_queue_,
-              handler_queue_end_, task_handler_);
+  // Run until interrupted or one operation is performed.
+  size_t run_one(asio::error_code& ec)
+  {
+    typename call_stack<task_io_service>::context ctx(this);
 
-          // Run the task. May throw an exception. Only block if the handler
-          // queue is empty, otherwise we want to return as soon as possible to
-          // execute the handlers.
-          task_.run(!more_handlers);
-        }
-        else
-        {
-          handler_cleanup c(lock, outstanding_work_);
+    idle_thread_info this_idle_thread;
+    this_idle_thread.prev = &this_idle_thread;
+    this_idle_thread.next = &this_idle_thread;
 
-          // Invoke the handler. May throw an exception.
-          h->call(); // call() deletes the handler object
-        }
-      }
-      else 
-      {
-        // Nothing to run right now, so just wait for work to do.
-        if (first_idle_thread_)
-        {
-          this_idle_thread.next = first_idle_thread_;
-          this_idle_thread.prev = first_idle_thread_->prev;
-          first_idle_thread_->prev->next = &this_idle_thread;
-          first_idle_thread_->prev = &this_idle_thread;
-        }
-        first_idle_thread_ = &this_idle_thread;
-        this_idle_thread.wakeup_event.clear();
-        lock.unlock();
-        this_idle_thread.wakeup_event.wait();
-        lock.lock();
-        if (this_idle_thread.next == &this_idle_thread)
-        {
-          first_idle_thread_ = 0;
-        }
-        else
-        {
-          if (first_idle_thread_ == &this_idle_thread)
-            first_idle_thread_ = this_idle_thread.next;
-          this_idle_thread.next->prev = this_idle_thread.prev;
-          this_idle_thread.prev->next = this_idle_thread.next;
-          this_idle_thread.next = &this_idle_thread;
-          this_idle_thread.prev = &this_idle_thread;
-        }
-      }
-    }
+    asio::detail::mutex::scoped_lock lock(mutex_);
 
-    if (!interrupted_)
-    {
-      // No more work to do!
-      interrupt_all_threads();
-    }
+    return do_one(lock, &this_idle_thread, ec);
+  }
+
+  // Poll for operations without blocking.
+  size_t poll(asio::error_code& ec)
+  {
+    typename call_stack<task_io_service>::context ctx(this);
+
+    asio::detail::mutex::scoped_lock lock(mutex_);
+
+    size_t n = 0;
+    while (do_one(lock, 0, ec))
+      if (n != (std::numeric_limits<size_t>::max)())
+        ++n;
+    return n;
+  }
+
+  // Poll for one operation without blocking.
+  size_t poll_one(asio::error_code& ec)
+  {
+    typename call_stack<task_io_service>::context ctx(this);
+
+    asio::detail::mutex::scoped_lock lock(mutex_);
+
+    return do_one(lock, 0, ec);
   }
 
   // Interrupt the event processing loop.
-  void interrupt()
+  void stop()
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
-    interrupt_all_threads();
+    stop_all_threads();
   }
 
   // Reset in preparation for a subsequent run invocation.
   void reset()
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
-    interrupted_ = false;
+    stopped_ = false;
   }
 
   // Notify that some work has started.
@@ -172,7 +156,7 @@ public:
   {
     asio::detail::mutex::scoped_lock lock(mutex_);
     if (--outstanding_work_ == 0)
-      interrupt_all_threads();
+      stop_all_threads();
   }
 
   // Request invocation of the given handler.
@@ -180,7 +164,7 @@ public:
   void dispatch(Handler handler)
   {
     if (call_stack<task_io_service>::contains(this))
-      handler();
+      asio_handler_invoke_helpers::invoke(handler, &handler);
     else
       post(handler);
   }
@@ -223,10 +207,104 @@ public:
   }
 
 private:
-  // Interrupt the task and all idle threads.
-  void interrupt_all_threads()
+  struct idle_thread_info;
+
+  size_t do_one(asio::detail::mutex::scoped_lock& lock,
+      idle_thread_info* this_idle_thread, asio::error_code& ec)
   {
-    interrupted_ = true;
+    if (outstanding_work_ == 0 && !stopped_)
+    {
+      stop_all_threads();
+      ec = asio::error_code();
+      return 0;
+    }
+
+    bool polling = !this_idle_thread;
+    bool task_has_run = false;
+    while (!stopped_)
+    {
+      if (handler_queue_)
+      {
+        // Prepare to execute first handler from queue.
+        handler_base* h = handler_queue_;
+        handler_queue_ = h->next_;
+        if (handler_queue_ == 0)
+          handler_queue_end_ = 0;
+        bool more_handlers = (handler_queue_ != 0);
+        lock.unlock();
+
+        if (h == &task_handler_)
+        {
+          // If the task has already run and we're polling then we're done.
+          if (task_has_run && polling)
+          {
+            ec = asio::error_code();
+            return 0;
+          }
+          task_has_run = true;
+          
+          task_cleanup c(lock, *this);
+
+          // Run the task. May throw an exception. Only block if the handler
+          // queue is empty and we have an idle_thread_info object, otherwise
+          // we want to return as soon as possible.
+          task_.run(!more_handlers && !polling);
+        }
+        else
+        {
+          handler_cleanup c(lock, *this);
+
+          // Invoke the handler. May throw an exception.
+          h->call(); // call() deletes the handler object
+
+          ec = asio::error_code();
+          return 1;
+        }
+      }
+      else if (this_idle_thread)
+      {
+        // Nothing to run right now, so just wait for work to do.
+        if (first_idle_thread_)
+        {
+          this_idle_thread->next = first_idle_thread_;
+          this_idle_thread->prev = first_idle_thread_->prev;
+          first_idle_thread_->prev->next = this_idle_thread;
+          first_idle_thread_->prev = this_idle_thread;
+        }
+        first_idle_thread_ = this_idle_thread;
+        this_idle_thread->wakeup_event.clear();
+        lock.unlock();
+        this_idle_thread->wakeup_event.wait();
+        lock.lock();
+        if (this_idle_thread->next == this_idle_thread)
+        {
+          first_idle_thread_ = 0;
+        }
+        else
+        {
+          if (first_idle_thread_ == this_idle_thread)
+            first_idle_thread_ = this_idle_thread->next;
+          this_idle_thread->next->prev = this_idle_thread->prev;
+          this_idle_thread->prev->next = this_idle_thread->next;
+          this_idle_thread->next = this_idle_thread;
+          this_idle_thread->prev = this_idle_thread;
+        }
+      }
+      else
+      {
+        ec = asio::error_code();
+        return 0;
+      }
+    }
+
+    ec = asio::error_code();
+    return 0;
+  }
+
+  // Stop the task and all idle threads.
+  void stop_all_threads()
+  {
+    stopped_ = true;
     interrupt_all_idle_threads();
     if (task_handler_.next_ == 0 && handler_queue_end_ != &task_handler_)
       task_.interrupt();
@@ -330,7 +408,7 @@ private:
       ptr.reset();
 
       // Make the upcall.
-      handler();
+      asio_handler_invoke_helpers::invoke(handler, &handler);
     }
 
     static void do_destroy(handler_base* base)
@@ -347,16 +425,15 @@ private:
   };
 
   // Helper class to perform task-related operations on block exit.
+  class task_cleanup;
+  friend class task_cleanup;
   class task_cleanup
   {
   public:
     task_cleanup(asio::detail::mutex::scoped_lock& lock,
-        handler_base*& handler_queue, handler_base*& handler_queue_end,
-        handler_base& task_handler)
+        task_io_service& task_io_svc)
       : lock_(lock),
-        handler_queue_(handler_queue),
-        handler_queue_end_(handler_queue_end),
-        task_handler_(task_handler)
+        task_io_service_(task_io_svc)
     {
     }
 
@@ -364,45 +441,50 @@ private:
     {
       // Reinsert the task at the end of the handler queue.
       lock_.lock();
-      task_handler_.next_ = 0;
-      if (handler_queue_end_)
+      task_io_service_.task_handler_.next_ = 0;
+      if (task_io_service_.handler_queue_end_)
       {
-        handler_queue_end_->next_ = &task_handler_;
-        handler_queue_end_ = &task_handler_;
+        task_io_service_.handler_queue_end_->next_
+          = &task_io_service_.task_handler_;
+        task_io_service_.handler_queue_end_
+          = &task_io_service_.task_handler_;
       }
       else
       {
-        handler_queue_ = handler_queue_end_ = &task_handler_;
+        task_io_service_.handler_queue_
+          = task_io_service_.handler_queue_end_
+          = &task_io_service_.task_handler_;
       }
     }
 
   private:
     asio::detail::mutex::scoped_lock& lock_;
-    handler_base*& handler_queue_;
-    handler_base*& handler_queue_end_;
-    handler_base& task_handler_;
+    task_io_service& task_io_service_;
   };
 
   // Helper class to perform handler-related operations on block exit.
+  class handler_cleanup;
+  friend class handler_cleanup;
   class handler_cleanup
   {
   public:
     handler_cleanup(asio::detail::mutex::scoped_lock& lock,
-        int& outstanding_work)
+        task_io_service& task_io_svc)
       : lock_(lock),
-        outstanding_work_(outstanding_work)
+        task_io_service_(task_io_svc)
     {
     }
 
     ~handler_cleanup()
     {
       lock_.lock();
-      --outstanding_work_;
+      if (--task_io_service_.outstanding_work_ == 0)
+        task_io_service_.stop_all_threads();
     }
 
   private:
     asio::detail::mutex::scoped_lock& lock_;
-    int& outstanding_work_;
+    task_io_service& task_io_service_;
   };
 
   // Mutex to protect access to internal data.
@@ -431,8 +513,8 @@ private:
   // The end of a linked list of handlers that are ready to be delivered.
   handler_base* handler_queue_end_;
 
-  // Flag to indicate that the dispatcher has been interrupted.
-  bool interrupted_;
+  // Flag to indicate that the dispatcher has been stopped.
+  bool stopped_;
 
   // Flag to indicate that the dispatcher has been shut down.
   bool shutdown_;

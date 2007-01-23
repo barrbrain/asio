@@ -1,3 +1,13 @@
+//
+// client.cpp
+// ~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include <asio.hpp>
 #include <boost/bind.hpp>
 #include <iostream>
@@ -31,7 +41,7 @@ public:
   }
 
   /// Handle completion of a connect operation.
-  void handle_connect(const asio::error& e,
+  void handle_connect(const asio::error_code& e,
       asio::ip::tcp::resolver::iterator endpoint_iterator)
   {
     if (!e)
@@ -62,7 +72,7 @@ public:
   }
 
   /// Handle completion of a read operation.
-  void handle_read(const asio::error& e)
+  void handle_read(const asio::error_code& e)
   {
     if (!e)
     {

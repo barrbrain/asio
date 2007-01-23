@@ -1,3 +1,13 @@
+//
+// daytime_client.cpp
+// ~~~~~~~~~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include <asio.hpp>
 #include <boost/bind.hpp>
 #include <iostream>
@@ -9,7 +19,7 @@ typedef asio::basic_stream_socket<asio::ip::tcp,
 
 char read_buffer[1024];
 
-void read_handler(const asio::error& e,
+void read_handler(const asio::error_code& e,
     std::size_t bytes_transferred, debug_stream_socket* s)
 {
   if (!e)
@@ -22,7 +32,7 @@ void read_handler(const asio::error& e,
   }
 }
 
-void connect_handler(const asio::error& e, debug_stream_socket* s,
+void connect_handler(const asio::error_code& e, debug_stream_socket* s,
     asio::ip::tcp::resolver::iterator endpoint_iterator)
 {
   if (!e)

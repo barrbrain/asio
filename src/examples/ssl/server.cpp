@@ -1,3 +1,13 @@
+//
+// server.cpp
+// ~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include <cstdlib>
 #include <iostream>
 #include <boost/bind.hpp>
@@ -26,7 +36,7 @@ public:
           asio::placeholders::error));
   }
 
-  void handle_handshake(const asio::error& error)
+  void handle_handshake(const asio::error_code& error)
   {
     if (!error)
     {
@@ -41,7 +51,8 @@ public:
     }
   }
 
-  void handle_read(const asio::error& error, size_t bytes_transferred)
+  void handle_read(const asio::error_code& error,
+      size_t bytes_transferred)
   {
     if (!error)
     {
@@ -56,7 +67,7 @@ public:
     }
   }
 
-  void handle_write(const asio::error& error)
+  void handle_write(const asio::error_code& error)
   {
     if (!error)
     {
@@ -90,6 +101,7 @@ public:
         asio::ssl::context::default_workarounds
         | asio::ssl::context::no_sslv2
         | asio::ssl::context::single_dh_use);
+    context_.set_password_callback(boost::bind(&server::get_password, this));
     context_.use_certificate_chain_file("server.pem");
     context_.use_private_key_file("server.pem", asio::ssl::context::pem);
     context_.use_tmp_dh_file("dh512.pem");
@@ -100,7 +112,13 @@ public:
           asio::placeholders::error));
   }
 
-  void handle_accept(session* new_session, const asio::error& error)
+  std::string get_password() const
+  {
+    return "test";
+  }
+
+  void handle_accept(session* new_session,
+      const asio::error_code& error)
   {
     if (!error)
     {
@@ -138,10 +156,6 @@ int main(int argc, char* argv[])
     server s(io_service, atoi(argv[1]));
 
     io_service.run();
-  }
-  catch (asio::error& e)
-  {
-    std::cerr << e << "\n";
   }
   catch (std::exception& e)
   {

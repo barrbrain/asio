@@ -1,3 +1,13 @@
+//
+// server.cpp
+// ~~~~~~~~~~
+//
+// Copyright (c) 2003-2007 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include <ctime>
 #include <iostream>
 #include <string>
@@ -76,7 +86,7 @@ private:
   }
 
   void handle_accept(tcp_connection::pointer new_connection,
-      const asio::error& error)
+      const asio::error_code& error)
   {
     if (!error)
     {
@@ -106,7 +116,7 @@ private:
           asio::placeholders::error));
   }
 
-  void handle_receive(const asio::error& error)
+  void handle_receive(const asio::error_code& error)
   {
     if (!error || error == asio::error::message_size)
     {

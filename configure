@@ -1648,7 +1648,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=asio
- VERSION=0.3.7
+ VERSION=0.3.8rc1
 
 
 cat >>confdefs.h <<_ACEOF
@@ -4452,6 +4452,10 @@ case $host in
   *-apple-darwin*)
     CXXFLAGS="$CXXFLAGS"
     LDFLAGS="$LDFLAGS"
+    ;;
+  *-*-freebsd*)
+    CXXFLAGS="$CXXFLAGS -pthread"
+    LDFLAGS="$LDFLAGS -pthread"
     ;;
 esac
 
