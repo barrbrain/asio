@@ -1648,7 +1648,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=asio
- VERSION=0.3.8rc1
+ VERSION=0.3.8rc2
 
 
 cat >>confdefs.h <<_ACEOF

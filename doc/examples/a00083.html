@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc1</B>
+            <B>asio 0.3.8rc2</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -99,7 +99,7 @@
 <a name="l00067"></a>00067       <span class="comment">// An error occurred. Log it and return. Since we are not starting a new</span>
 <a name="l00068"></a>00068       <span class="comment">// operation the io_service will run out of work to do and the client will</span>
 <a name="l00069"></a>00069       <span class="comment">// exit.</span>
-<a name="l00070"></a>00070       std::cerr &lt;&lt; e &lt;&lt; std::endl;
+<a name="l00070"></a>00070       std::cerr &lt;&lt; e.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html#7029a8f8f51f7e03da42bd50c2b3c85b">message</a>() &lt;&lt; std::endl;
 <a name="l00071"></a>00071     }
 <a name="l00072"></a>00072   }
 <a name="l00073"></a>00073 
@@ -126,7 +126,7 @@
 <a name="l00095"></a>00095     <span class="keywordflow">else</span>
 <a name="l00096"></a>00096     {
 <a name="l00097"></a>00097       <span class="comment">// An error occurred.</span>
-<a name="l00098"></a>00098       std::cerr &lt;&lt; e &lt;&lt; std::endl;
+<a name="l00098"></a>00098       std::cerr &lt;&lt; e.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html#7029a8f8f51f7e03da42bd50c2b3c85b">message</a>() &lt;&lt; std::endl;
 <a name="l00099"></a>00099     }
 <a name="l00100"></a>00100 
 <a name="l00101"></a>00101     <span class="comment">// Since we are not starting a new operation the io_service will run out of</span>
@@ -167,7 +167,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc1</B>
+            <B>asio 0.3.8rc2</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

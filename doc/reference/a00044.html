@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc1</B>
+            <B>asio 0.3.8rc2</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -85,6 +85,9 @@ Default service implementation for a socket acceptor.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="a00030.html">asio::error_code</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00044.html#50ae54d312c870c90a3539e08a993bda">assign</a> (<a class="el" href="a00044.html#7c6e1481b778dcea81f849670b14c54a">implementation_type</a> &amp;impl, const <a class="el" href="a00044.html#2622e1b415ef0257f92e1d586cc25641">protocol_type</a> &amp;protocol, const <a class="el" href="a00044.html#a2f0a54fa4ef9c3b824cc7e2815b91a0">native_type</a> &amp;native_acceptor, <a class="el" href="a00030.html">asio::error_code</a> &amp;ec)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Assign an existing native acceptor to a socket acceptor.  <a href="#50ae54d312c870c90a3539e08a993bda"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00044.html#95fc7e13258e56dc058dbde04998d0a4">is_open</a> (const <a class="el" href="a00044.html#7c6e1481b778dcea81f849670b14c54a">implementation_type</a> &amp;impl) const </td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Determine whether the acceptor is open.  <a href="#95fc7e13258e56dc058dbde04998d0a4"></a><br></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="a00030.html">asio::error_code</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00044.html#9bf1511bc47356299ae87361b0bdc40f">cancel</a> (<a class="el" href="a00044.html#7c6e1481b778dcea81f849670b14c54a">implementation_type</a> &amp;impl, <a class="el" href="a00030.html">asio::error_code</a> &amp;ec)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Cancel all asynchronous operations associated with the acceptor.  <a href="#9bf1511bc47356299ae87361b0bdc40f"></a><br></td></tr>
@@ -387,6 +390,30 @@ template&lt;typename Protocol&gt; </div>
 
 <p>
 Assign an existing native acceptor to a socket acceptor. 
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="95fc7e13258e56dc058dbde04998d0a4"></a><!-- doxytag: member="asio::socket_acceptor_service::is_open" ref="95fc7e13258e56dc058dbde04998d0a4" args="(const implementation_type &amp;impl) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Protocol&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="a00044.html">asio::socket_acceptor_service</a>&lt; Protocol &gt;::is_open           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a00044.html#7c6e1481b778dcea81f849670b14c54a">implementation_type</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>impl</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Determine whether the acceptor is open. 
 <p>
 
 </div>
@@ -854,7 +881,7 @@ The unique service identifier.
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc1</B>
+            <B>asio 0.3.8rc2</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

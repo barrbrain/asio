@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc1</B>
+            <B>asio 0.3.8rc2</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -108,13 +108,11 @@ Here is a list of all documented class members with links to the class documenta
 , <a class="el" href="a00049.html#20afbead9aaa1892910f2cac8344e08f">asio::stream_socket_service&lt; Protocol &gt;</a>
 , <a class="el" href="a00026.html#e1a47c711cd101d2967f38b1d05c47f8">asio::datagram_socket_service&lt; Protocol &gt;</a>
 <li>in_avail()
-: <a class="el" href="a00019.html#3742dc57c776d8653662cbd0410d0b2d">asio::buffered_read_stream&lt; Stream &gt;</a>
-, <a class="el" href="a00020.html#7e720406a8679da92e77e6f563705fad">asio::buffered_stream&lt; Stream &gt;</a>
-, <a class="el" href="a00046.html#10af61711275d370d88c82ac9e902e51">asio::ssl::stream&lt; Stream, Service &gt;</a>
-, <a class="el" href="a00048.html#734d4cfa5b086bc7d3f2239ca91afc96">asio::ssl::stream_service</a>
-, <a class="el" href="a00021.html#1e0fd46ecd1c6c661514415b25a848ac">asio::buffered_write_stream&lt; Stream &gt;</a>
-, <a class="el" href="a00046.html#cded8c96c0166ae3c6543f0fac296bbf">asio::ssl::stream&lt; Stream, Service &gt;</a>
+: <a class="el" href="a00048.html#734d4cfa5b086bc7d3f2239ca91afc96">asio::ssl::stream_service</a>
 , <a class="el" href="a00019.html#73537967bde75b2134e31f83b4e03e7d">asio::buffered_read_stream&lt; Stream &gt;</a>
+, <a class="el" href="a00020.html#7e720406a8679da92e77e6f563705fad">asio::buffered_stream&lt; Stream &gt;</a>
+, <a class="el" href="a00046.html#cded8c96c0166ae3c6543f0fac296bbf">asio::ssl::stream&lt; Stream, Service &gt;</a>
+, <a class="el" href="a00021.html#1e0fd46ecd1c6c661514415b25a848ac">asio::buffered_write_stream&lt; Stream &gt;</a>
 <li>in_progress
 : <a class="el" href="a00029.html#de59ccbd0ca25564aa583f097e3ea473">asio::detail::error_base&lt; T &gt;</a>
 <li>interrupted
@@ -127,18 +125,14 @@ Here is a list of all documented class members with links to the class documenta
 , <a class="el" href="a00049.html#4f9bc3f19db694eff9eb468f0ad51946">asio::stream_socket_service&lt; Protocol &gt;</a>
 , <a class="el" href="a00013.html#4fb5d33d2ebee7fc119c3060ab258cde">asio::basic_socket&lt; Protocol, SocketService &gt;</a>
 <li>io_service()
-: <a class="el" href="a00032.html#0f6e8bb7dde972c571b986b32f45a3fe">asio::io_service</a>
-, <a class="el" href="a00034.html#db83b982e4f940ce62995dc249e56229">asio::io_service::service</a>
-, <a class="el" href="a00020.html#7a0e3e2fde22cc14fb37ab2bd6aff4a7">asio::buffered_stream&lt; Stream &gt;</a>
-, <a class="el" href="a00034.html#db83b982e4f940ce62995dc249e56229">asio::io_service::service</a>
-, <a class="el" href="a00035.html#0cc0563e108097591b070185406c99c3">asio::io_service::strand</a>
-, <a class="el" href="a00034.html#db83b982e4f940ce62995dc249e56229">asio::io_service::service</a>
-, <a class="el" href="a00032.html#c843d46058d711a8ce0cc5f98acc116e">asio::io_service</a>
+: <a class="el" href="a00020.html#7a0e3e2fde22cc14fb37ab2bd6aff4a7">asio::buffered_stream&lt; Stream &gt;</a>
+, <a class="el" href="a00032.html#0f6e8bb7dde972c571b986b32f45a3fe">asio::io_service</a>
 , <a class="el" href="a00034.html#db83b982e4f940ce62995dc249e56229">asio::io_service::service</a>
 , <a class="el" href="a00021.html#7ef988d92e39e70c2335cd5e0deaba9c">asio::buffered_write_stream&lt; Stream &gt;</a>
-, <a class="el" href="a00034.html#db83b982e4f940ce62995dc249e56229">asio::io_service::service</a>
 , <a class="el" href="a00036.html#c31d386a002a7e0ea9eda856f6169b0e">asio::io_service::work</a>
+, <a class="el" href="a00034.html#db83b982e4f940ce62995dc249e56229">asio::io_service::service</a>
 , <a class="el" href="a00046.html#8232f577d588b368fb780bbcfb32d4ec">asio::ssl::stream&lt; Stream, Service &gt;</a>
+, <a class="el" href="a00035.html#0cc0563e108097591b070185406c99c3">asio::io_service::strand</a>
 , <a class="el" href="a00008.html#e5208e056c92fa6130114d023a5bd8b0">asio::basic_io_object&lt; IoObjectService &gt;</a>
 , <a class="el" href="a00034.html#db83b982e4f940ce62995dc249e56229">asio::io_service::service</a>
 , <a class="el" href="a00019.html#af5dd4f4ed7fb9a7787fe48347d1fbbe">asio::buffered_read_stream&lt; Stream &gt;</a>
@@ -168,9 +162,11 @@ Here is a list of all documented class members with links to the class documenta
 <li>is_multicast_site_local()
 : <a class="el" href="a00003.html#c4e6b60380ffde9e238a0a4f1b67986f">asio::ip::address_v6</a>
 <li>is_open()
-: <a class="el" href="a00026.html#3fee9e1dd06d35c771f198a209d96de1">asio::datagram_socket_service&lt; Protocol &gt;</a>
+: <a class="el" href="a00049.html#f78dc1f9ba53bf978dd5946ce8bc8089">asio::stream_socket_service&lt; Protocol &gt;</a>
+, <a class="el" href="a00026.html#3fee9e1dd06d35c771f198a209d96de1">asio::datagram_socket_service&lt; Protocol &gt;</a>
+, <a class="el" href="a00044.html#95fc7e13258e56dc058dbde04998d0a4">asio::socket_acceptor_service&lt; Protocol &gt;</a>
+, <a class="el" href="a00014.html#b5a99e6f2a5c41f61fc6fffda878be81">asio::basic_socket_acceptor&lt; Protocol, SocketAcceptorService &gt;</a>
 , <a class="el" href="a00013.html#d18a1f2f159d0d99aa088df9e58d1cfc">asio::basic_socket&lt; Protocol, SocketService &gt;</a>
-, <a class="el" href="a00049.html#f78dc1f9ba53bf978dd5946ce8bc8089">asio::stream_socket_service&lt; Protocol &gt;</a>
 <li>is_site_local()
 : <a class="el" href="a00003.html#6c5d92b1234de20d1fd9450e96626802">asio::ip::address_v6</a>
 <li>is_unspecified()
@@ -192,7 +188,7 @@ Here is a list of all documented class members with links to the class documenta
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc1</B>
+            <B>asio 0.3.8rc2</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

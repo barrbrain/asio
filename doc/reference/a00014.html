@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc1</B>
+            <B>asio 0.3.8rc2</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -160,6 +160,9 @@ The <a class="el" href="a00014.html">basic_socket_acceptor</a> class template is
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="a00030.html">asio::error_code</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#807969a9b35037fa90a30571bb566687">assign</a> (const <a class="el" href="a00014.html#38f40022b2596eb88875792bd6c0fb21">protocol_type</a> &amp;protocol, const <a class="el" href="a00014.html#9235a28f30142290e4dbc8b6bbdb016a">native_type</a> &amp;native_acceptor, <a class="el" href="a00030.html">asio::error_code</a> &amp;ec)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Assigns an existing native acceptor to the acceptor.  <a href="#807969a9b35037fa90a30571bb566687"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#b5a99e6f2a5c41f61fc6fffda878be81">is_open</a> () const</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Determine whether the acceptor is open.  <a href="#b5a99e6f2a5c41f61fc6fffda878be81"></a><br></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#513b6fc8e25f355d3970f305eefac406">bind</a> (const <a class="el" href="a00014.html#393d69e2f8a370aaa13a9018af4c0048">endpoint_type</a> &amp;endpoint)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Bind the acceptor to the given local endpoint.  <a href="#513b6fc8e25f355d3970f305eefac406"></a><br></td></tr>
@@ -1109,6 +1112,29 @@ template&lt;typename Protocol, typename SocketAcceptorService = socket_acceptor_
 
 <p>
 Assigns an existing native acceptor to the acceptor. 
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="b5a99e6f2a5c41f61fc6fffda878be81"></a><!-- doxytag: member="asio::basic_socket_acceptor::is_open" ref="b5a99e6f2a5c41f61fc6fffda878be81" args="() const" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Protocol, typename SocketAcceptorService = socket_acceptor_service&lt;Protocol&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="a00014.html">asio::basic_socket_acceptor</a>&lt; Protocol, SocketAcceptorService &gt;::is_open           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Determine whether the acceptor is open. 
 <p>
 
 </div>
@@ -2124,7 +2150,7 @@ The maximum length of the queue of pending incoming connections.
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc1</B>
+            <B>asio 0.3.8rc2</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
