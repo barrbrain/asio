@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -75,7 +75,7 @@ The function <code>start_accept()</code> creates a socket and initiates an async
 
     acceptor_.async_accept(new_connection-&gt;socket(),
         boost::bind(&amp;tcp_server::handle_accept, <span class="keyword">this</span>, new_connection,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
   }
 </pre></div><p>
 The function <code>handle_accept()</code> is called when the asynchronous accept operation initiated by <code>start_accept()</code> finishes. It services the client request, and then calls <code>start_accept()</code> to initiate the next accept operation.<p>
@@ -108,7 +108,7 @@ We will use <code>shared_ptr</code> and <code>enable_shared_from_this</code> bec
     <span class="keywordflow">return</span> socket_;
   }
 </pre></div><p>
-In the function <code>start()</code>, we call <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html">asio::async_write</a> to serve the data to the client. Note that we are using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html">asio::async_write</a>, rather than <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00017.html#f223b4c1761ac2123038e8a81ad8fc54">asio::ip::tcp::socket::async_write_some()</a>, to ensure that the entire block of data is sent.<p>
+In the function <code>start()</code>, we call <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00141.html">asio::async_write</a> to serve the data to the client. Note that we are using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00141.html">asio::async_write</a>, rather than <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00017.html#f223b4c1761ac2123038e8a81ad8fc54">asio::ip::tcp::socket::async_write_some()</a>, to ensure that the entire block of data is sent.<p>
 <div class="fragment"><pre class="fragment">
   <span class="keywordtype">void</span> start()
   {
@@ -116,12 +116,12 @@ In the function <code>start()</code>, we call <a class="elRef" doxygen="asio.dox
 The data to be sent is stored in the class member <code>message_</code> as we need to keep the data valid until the asynchronous operation is complete.<p>
 <div class="fragment"><pre class="fragment">    message_ = make_daytime_string();
 </pre></div><p>
-When initiating the asynchronous operation, and if using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>, you must specify only the arguments that match the handler's parameter list. In this program, both of the argument placeholders (<a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a> and <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>) could potentially have been removed, since they are not being used in <code>handle_write()</code>.<p>
+When initiating the asynchronous operation, and if using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>, you must specify only the arguments that match the handler's parameter list. In this program, both of the argument placeholders (<a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a> and <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>) could potentially have been removed, since they are not being used in <code>handle_write()</code>.<p>
 <div class="fragment"><pre class="fragment">
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(message_),
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00141.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(message_),
         boost::bind(&amp;tcp_connection::handle_write, shared_from_this(),
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
 </pre></div><p>
 Any further actions for this client connection are now the responsibility of <code>handle_write()</code>.<p>
 <div class="fragment"><pre class="fragment">  }
@@ -147,8 +147,8 @@ You may have noticed that the <code>error</code>, and <code>bytes_transferred</c
   {
   }
 </pre></div><p>
-The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html">asio::async_write</a> call used to initiate the call can then be changed to just:<p>
-<div class="fragment"><pre class="fragment">  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(message_),
+The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00141.html">asio::async_write</a> call used to initiate the call can then be changed to just:<p>
+<div class="fragment"><pre class="fragment">  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00141.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(message_),
       boost::bind(&amp;tcp_connection::handle_write, shared_from_this()));
 </pre></div><p>
 See the <a class="el" href="tutdaytime3src.html">full source listing</a> <br>
@@ -158,7 +158,7 @@ See the <a class="el" href="tutdaytime3src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

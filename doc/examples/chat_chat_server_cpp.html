@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -126,11 +126,11 @@
   <span class="keywordtype">void</span> start()
   {
     room_.join(shared_from_this());
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00136.html#gb1d5925953621f0ba652f8b158eb4687">asio::async_read</a>(socket_,
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(read_msg_.data(), chat_message::header_length),
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00137.html#gb1d5925953621f0ba652f8b158eb4687">asio::async_read</a>(socket_,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(read_msg_.data(), chat_message::header_length),
         boost::bind(
           &amp;chat_session::handle_read_header, shared_from_this(),
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
   }
 
   <span class="keywordtype">void</span> deliver(<span class="keyword">const</span> chat_message&amp; msg)
@@ -139,11 +139,11 @@
     write_msgs_.push_back(msg);
     <span class="keywordflow">if</span> (!write_in_progress)
     {
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(write_msgs_.front().data(),
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00141.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(write_msgs_.front().data(),
             write_msgs_.front().length()),
           boost::bind(&amp;chat_session::handle_write, shared_from_this(),
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
     }
   }
 
@@ -151,10 +151,10 @@
   {
     <span class="keywordflow">if</span> (!error &amp;&amp; read_msg_.decode_header())
     {
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00136.html#gb1d5925953621f0ba652f8b158eb4687">asio::async_read</a>(socket_,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(read_msg_.body(), read_msg_.body_length()),
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00137.html#gb1d5925953621f0ba652f8b158eb4687">asio::async_read</a>(socket_,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(read_msg_.body(), read_msg_.body_length()),
           boost::bind(&amp;chat_session::handle_read_body, shared_from_this(),
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
     }
     <span class="keywordflow">else</span>
     {
@@ -167,10 +167,10 @@
     <span class="keywordflow">if</span> (!error)
     {
       room_.deliver(read_msg_);
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00136.html#gb1d5925953621f0ba652f8b158eb4687">asio::async_read</a>(socket_,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(read_msg_.data(), chat_message::header_length),
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00137.html#gb1d5925953621f0ba652f8b158eb4687">asio::async_read</a>(socket_,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(read_msg_.data(), chat_message::header_length),
           boost::bind(&amp;chat_session::handle_read_header, shared_from_this(),
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
     }
     <span class="keywordflow">else</span>
     {
@@ -185,11 +185,11 @@
       write_msgs_.pop_front();
       <span class="keywordflow">if</span> (!write_msgs_.empty())
       {
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(write_msgs_.front().data(),
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00141.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_,
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(write_msgs_.front().data(),
               write_msgs_.front().length()),
             boost::bind(&amp;chat_session::handle_write, shared_from_this(),
-              <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+              <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
       }
     }
     <span class="keywordflow">else</span>
@@ -220,7 +220,7 @@
     chat_session_ptr new_session(<span class="keyword">new</span> chat_session(io_service_, room_));
     acceptor_.async_accept(new_session-&gt;socket(),
         boost::bind(&amp;chat_server::handle_accept, <span class="keyword">this</span>, new_session,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
   }
 
   <span class="keywordtype">void</span> handle_accept(chat_session_ptr session,
@@ -232,7 +232,7 @@
       chat_session_ptr new_session(<span class="keyword">new</span> chat_session(io_service_, room_));
       acceptor_.async_accept(new_session-&gt;socket(),
           boost::bind(&amp;chat_server::handle_accept, <span class="keyword">this</span>, new_session,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
     }
   }
 
@@ -281,7 +281,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

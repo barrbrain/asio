@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -51,7 +51,7 @@ The constructor of this class will take a reference to the io_service object and
   {
 </pre></div><p>
 The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a> function works just as well with class member functions as with free functions. Since all non-static class member functions have an implicit <code>this</code> parameter, we need to bind <code>this</code> to the function. As in tutorial Timer.3, <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a> converts our callback handler (now a member function) into a function object that can be invoked as though it has the signature <code>void(const <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html">asio::error_code</a>&amp;)</code>.<p>
-You will note that the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a> placeholder is not specified here, as the <code>print</code> member function does not accept an error object as a parameter.<p>
+You will note that the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a> placeholder is not specified here, as the <code>print</code> member function does not accept an error object as a parameter.<p>
 <div class="fragment"><pre class="fragment">    timer_.async_wait(boost::bind(&amp;printer::print, <span class="keyword">this</span>));
   }
 </pre></div><p>
@@ -100,7 +100,7 @@ See the <a class="el" href="tuttimer4src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -64,13 +64,13 @@
       <span class="keywordtype">char</span> data[max_length];
 
       <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html">asio::error_code</a> error;
-      size_t length = sock-&gt;read_some(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(data), error);
+      size_t length = sock-&gt;read_some(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(data), error);
       <span class="keywordflow">if</span> (error == <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00029.html#be23228e9941caa68ae36adaf2f1052c">asio::error::eof</a>)
         <span class="keywordflow">break</span>; <span class="comment">// Connection closed cleanly by peer.</span>
       <span class="keywordflow">else</span> <span class="keywordflow">if</span> (error)
         <span class="keywordflow">throw</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00050.html">asio::system_error</a>(error); <span class="comment">// Some other error.</span>
 
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00139.html#gac57e38176c76b4323e69341f18ff8b3">asio::write</a>(*sock, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(data, length));
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html#gac57e38176c76b4323e69341f18ff8b3">asio::write</a>(*sock, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(data, length));
     }
   }
   <span class="keywordflow">catch</span> (std::exception&amp; e)
@@ -116,7 +116,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

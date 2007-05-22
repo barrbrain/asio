@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -62,9 +62,9 @@ Next we move the expiry time for the timer along by one second from the previous
 </pre></div><p>
 Then we start a new asynchronous wait on the timer. As you can see, the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a> function is used to associate the extra parameters with your callback handler. The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00006.html#b6322d1557db31cf0a96635034c30d5e">asio::deadline_timer::async_wait()</a> function expects a handler function (or function object) with the signature <code>void(const asio::error_code&amp;)</code>. Binding the additional parameters converts your <code>print</code> function into a function object that matches the signature correctly.<p>
 See the <a href="http://www.boost.org/libs/bind/bind.html">Boost.Bind documentation</a> for more information on how to use <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>.<p>
-In this example, the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a> argument to <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a> is a named placeholder for the error object passed to the handler. When initiating the asynchronous operation, and if using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>, you must specify only the arguments that match the handler's parameter list. In tutorial Timer.4 you will see that this placeholder may be elided if the parameter is not needed by the callback handler.<p>
+In this example, the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a> argument to <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a> is a named placeholder for the error object passed to the handler. When initiating the asynchronous operation, and if using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>, you must specify only the arguments that match the handler's parameter list. In tutorial Timer.4 you will see that this placeholder may be elided if the parameter is not needed by the callback handler.<p>
 <div class="fragment"><pre class="fragment">    t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00006.html#b6322d1557db31cf0a96635034c30d5e">async_wait</a>(boost::bind(print,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, t, count));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, t, count));
   }
 }
 
@@ -79,7 +79,7 @@ A new <code>count</code> variable is added so that we can stop the program when 
 </pre></div><p>
 As in Step 4, when making the call to <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00006.html#b6322d1557db31cf0a96635034c30d5e">asio::deadline_timer::async_wait()</a> from <code>main</code> we bind the additional parameters needed for the <code>print</code> function.<p>
 <div class="fragment"><pre class="fragment">  t.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00006.html#b6322d1557db31cf0a96635034c30d5e">async_wait</a>(boost::bind(print,
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, &amp;t, &amp;count));
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, &amp;t, &amp;count));
 
   io.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00032.html#c84bed0d1dd061bc71010ba1228439da">run</a>();
 </pre></div><p>
@@ -97,7 +97,7 @@ See the <a class="el" href="tuttimer3src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

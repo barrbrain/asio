@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -75,12 +75,12 @@
     <span class="keywordtype">char</span> request[max_length];
     std::cin.getline(request, max_length);
     size_t request_length = strlen(request);
-    s.send_to(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(request, request_length), *iterator);
+    s.send_to(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(request, request_length), *iterator);
 
     <span class="keywordtype">char</span> reply[max_length];
     udp::endpoint sender_endpoint;
     size_t reply_length = s.receive_from(
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(reply, max_length), sender_endpoint);
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(reply, max_length), sender_endpoint);
     std::cout &lt;&lt; <span class="stringliteral">"Reply is: "</span>;
     std::cout.write(reply, reply_length);
     std::cout &lt;&lt; <span class="stringliteral">"\n"</span>;
@@ -96,7 +96,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

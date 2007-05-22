@@ -1,6 +1,6 @@
 AC_INIT(include/asio.hpp)
 AM_MAINTAINER_MODE
-AM_INIT_AUTOMAKE(asio, [0.3.8rc2])
+AM_INIT_AUTOMAKE(asio, [0.3.8rc3])
 
 AC_CANONICAL_HOST
 AM_PROG_CC_C_O
@@ -16,13 +16,18 @@ AC_ARG_WITH(boost,
   CPPFLAGS="$CPPFLAGS -I${withval}"
 ],
 [
-  BOOSTDIR="`pwd`/../boost_1_33_1"
+  BOOSTDIR="`pwd`/../boost_1_34_0"
   if test -d "${BOOSTDIR}"; then
     CPPFLAGS="$CPPFLAGS -I${BOOSTDIR}"
   else
-    BOOSTDIR="`pwd`/../boost_1_33_0"
+    BOOSTDIR="`pwd`/../boost_1_33_1"
     if test -d "${BOOSTDIR}"; then
       CPPFLAGS="$CPPFLAGS -I${BOOSTDIR}"
+    else
+      BOOSTDIR="`pwd`/../boost_1_33_0"
+      if test -d "${BOOSTDIR}"; then
+        CPPFLAGS="$CPPFLAGS -I${BOOSTDIR}"
+      fi
     fi
   fi
 ])

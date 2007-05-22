@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -48,11 +48,11 @@ However, the asio library does not use the above definitions, but instead define
 <li>There is protection against buffer overruns. Given a buffer instance, a user can only create another buffer representing the same range of memory or a sub-range of it. To provide further safety, the library also includes mechanisms for automatically determining the size of a buffer from an array, boost::array or std::vector of POD elements. </li>
 <li>Type safety violations must be explicitly requested using the asio::buffer_cast function. In general an application should never need to do this, but it is required by the asio implementation to pass the raw memory to the underlying operating system functions.</li>
 </ul>
-Finally, multiple buffers can be passed to scatter-gather operations (such as <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00135.html">asio::read</a> or <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00139.html">asio::write</a>) by putting the buffer objects into a container. The Mutable_Buffers and Const_Buffers concepts have been defined so that containers such as std::vector, std::list, std::vector or boost::array can be used. See the documentation for <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html">asio::buffer</a> for examples.     <DIV CLASS="qindex">
+Finally, multiple buffers can be passed to scatter-gather operations (such as <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00136.html">asio::read</a> or <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html">asio::write</a>) by putting the buffer objects into a container. The Mutable_Buffers and Const_Buffers concepts have been defined so that containers such as std::vector, std::list, std::vector or boost::array can be used. See the documentation for <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html">asio::buffer</a> for examples.     <DIV CLASS="qindex">
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

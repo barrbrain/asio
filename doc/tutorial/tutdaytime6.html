@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -69,10 +69,10 @@ The constructor initialises a socket to listen on UDP port 13.<p>
 </pre></div><p>
 The function <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00005.html#873d734eea489acbe03a3302934fb89d">asio::ip::udp::socket::async_receive_from()</a> will cause the application to listen in the background for a new request. When such a request is received, the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00032.html">asio::io_service</a> object will invoke the <code>handle_receive()</code> function with two arguments: a value of type <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html">asio::error_code</a> indicating whether the operation succeeded or failed, and a <code>size_t</code> value <code>bytes_transferred</code> specifying the number of bytes received.<p>
 <div class="fragment"><pre class="fragment">    socket_.async_receive_from(
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(recv_buffer_), remote_endpoint_,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(recv_buffer_), remote_endpoint_,
         boost::bind(&amp;udp_server::handle_receive, <span class="keyword">this</span>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
   }
 </pre></div><p>
 The function <code>handle_receive()</code> will service the client request.<p>
@@ -91,12 +91,12 @@ Determine what we are going to send.<p>
 </pre></div><p>
 We now call <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00005.html#684892ec806755c38810e2733950d609">asio::ip::udp::socket::async_send_to()</a> to serve the data to the client.<p>
 <div class="fragment"><pre class="fragment">
-      socket_.async_send_to(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(*message), remote_endpoint_,
+      socket_.async_send_to(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(*message), remote_endpoint_,
           boost::bind(&amp;udp_server::handle_send, <span class="keyword">this</span>, message,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
 </pre></div><p>
-When initiating the asynchronous operation, and if using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>, you must specify only the arguments that match the handler's parameter list. In this program, both of the argument placeholders (<a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a> and <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>) could potentially have been removed.<p>
+When initiating the asynchronous operation, and if using <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/boost_bind.html">boost::bind</a>, you must specify only the arguments that match the handler's parameter list. In this program, both of the argument placeholders (<a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a> and <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>) could potentially have been removed.<p>
 Start listening for the next client request.<p>
 <div class="fragment"><pre class="fragment">
       start_receive();
@@ -125,7 +125,7 @@ See the <a class="el" href="tutdaytime6src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

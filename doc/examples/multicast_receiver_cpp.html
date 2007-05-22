@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -67,13 +67,13 @@
 
     <span class="comment">// Join the multicast group.</span>
     socket_.set_option(
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00128.html#b9ef02d2f76ab2a904ad0008aa9b9afc">asio::ip::multicast::join_group</a>(multicast_address));
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00129.html#b9ef02d2f76ab2a904ad0008aa9b9afc">asio::ip::multicast::join_group</a>(multicast_address));
 
     socket_.async_receive_from(
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(data_, max_length), sender_endpoint_,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(data_, max_length), sender_endpoint_,
         boost::bind(&amp;receiver::handle_receive_from, <span class="keyword">this</span>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
   }
 
   <span class="keywordtype">void</span> handle_receive_from(<span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html">asio::error_code</a>&amp; error,
@@ -85,10 +85,10 @@
       std::cout &lt;&lt; std::endl;
 
       socket_.async_receive_from(
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(data_, max_length), sender_endpoint_,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(data_, max_length), sender_endpoint_,
           boost::bind(&amp;receiver::handle_receive_from, <span class="keyword">this</span>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
     }
   }
 
@@ -130,7 +130,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

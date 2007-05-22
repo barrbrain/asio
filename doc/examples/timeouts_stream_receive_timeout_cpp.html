@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -49,6 +49,7 @@
 <span class="preprocessor">#include &lt;iostream&gt;</span>
 
 <span class="keyword">using namespace </span>asio;
+<span class="keyword">using</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00051.html">asio::ip::tcp</a>;
 
 <span class="keyword">class </span>stream_handler
 {
@@ -56,12 +57,12 @@
   stream_handler(io_service&amp; ios)
     : io_service_(ios),
       timer_(ios),
-      acceptor_(ios, ip::tcp::endpoint(ip::tcp::v4(), 32123)),
+      acceptor_(ios, tcp::endpoint(tcp::v4(), 32123)),
       socket_(ios)
   {
     acceptor_.async_accept(socket_,
         boost::bind(&amp;stream_handler::handle_accept, <span class="keyword">this</span>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
   }
 
   <span class="keywordtype">void</span> handle_accept(<span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html">asio::error_code</a>&amp; err)
@@ -74,9 +75,9 @@
     {
       std::cout &lt;&lt; <span class="stringliteral">"Successful accept\n"</span>;
 
-      socket_.async_read_some(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(buf_, <span class="keyword">sizeof</span>(buf_)),
+      socket_.async_read_some(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(buf_, <span class="keyword">sizeof</span>(buf_)),
           boost::bind(&amp;stream_handler::handle_recv, <span class="keyword">this</span>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
       timer_.expires_from_now(boost::posix_time::seconds(5));
       timer_.async_wait(boost::bind(&amp;stream_handler::close, <span class="keyword">this</span>));
     }
@@ -101,13 +102,13 @@
 
 <span class="keyword">private</span>:
   io_service&amp; io_service_;
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00125.html#9c1e57628983c6b9c45e9204228109b7">deadline_timer</a> timer_;
-  ip::tcp::acceptor acceptor_;
-  ip::tcp::socket socket_;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00126.html#9c1e57628983c6b9c45e9204228109b7">deadline_timer</a> timer_;
+  tcp::acceptor acceptor_;
+  tcp::socket socket_;
   <span class="keywordtype">char</span> buf_[1024];
 };
 
-<span class="keywordtype">void</span> <a class="code" href="a00048.html#eaf8f02fcb709ee04b4d44e04ffe982e">connect_handler</a>()
+<span class="keywordtype">void</span> <a class="code" href="a00049.html#eaf8f02fcb709ee04b4d44e04ffe982e">connect_handler</a>()
 {
   std::cout &lt;&lt; <span class="stringliteral">"Successful connect\n"</span>;
 }
@@ -120,8 +121,9 @@
 
     stream_handler sh(ios);
 
-    ip::tcp::socket s(ios);
-    s.async_connect(ip::tcp::endpoint(ip::address_v4::loopback(), 32123),
+    tcp::socket s(ios);
+    s.async_connect(
+        tcp::endpoint(asio::ip::address_v4::loopback(), 32123),
         boost::bind(connect_handler));
 
     ios.run();
@@ -137,7 +139,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

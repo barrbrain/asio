@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -49,7 +49,7 @@ Wait for a client to initiate contact with us. The remote_endpoint object will b
       boost::array&lt;char, 1&gt; recv_buf;
       udp::endpoint remote_endpoint;
       <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html">asio::error_code</a> error;
-      socket.receive_from(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(recv_buf),
+      socket.receive_from(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(recv_buf),
           remote_endpoint, 0, error);
 
       <span class="keywordflow">if</span> (error &amp;&amp; error != <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00029.html#21fb192c09dbe854642cd2688e691d3d">asio::error::message_size</a>)
@@ -62,7 +62,7 @@ Determine what we are going to send back to the client.<p>
 Send the response to the remote_endpoint.<p>
 <div class="fragment"><pre class="fragment">
       <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html">asio::error_code</a> ignored_error;
-      socket.send_to(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(message),
+      socket.send_to(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(message),
           remote_endpoint, 0, ignored_error);
     }
   }
@@ -83,7 +83,7 @@ See the <a class="el" href="tutdaytime5src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

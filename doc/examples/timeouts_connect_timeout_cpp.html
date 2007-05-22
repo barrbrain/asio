@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -49,19 +49,20 @@
 <span class="preprocessor">#include &lt;iostream&gt;</span>
 
 <span class="keyword">using namespace </span>asio;
+<span class="keyword">using</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00051.html">asio::ip::tcp</a>;
 
 <span class="keyword">class </span>connect_handler
 {
 <span class="keyword">public</span>:
-  <a class="code" href="a00048.html#eaf8f02fcb709ee04b4d44e04ffe982e">connect_handler</a>(io_service&amp; ios)
+  <a class="code" href="a00049.html#eaf8f02fcb709ee04b4d44e04ffe982e">connect_handler</a>(io_service&amp; ios)
     : io_service_(ios),
       timer_(ios),
       socket_(ios)
   {
     socket_.async_connect(
-        ip::tcp::endpoint(ip::address_v4::loopback(), 32123),
+        tcp::endpoint(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00002.html#4a716c7fff91f58159f5add64cc67396">asio::ip::address_v4::loopback</a>(), 32123),
         boost::bind(&amp;connect_handler::handle_connect, <span class="keyword">this</span>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
 
     timer_.expires_from_now(boost::posix_time::seconds(5));
     timer_.async_wait(boost::bind(&amp;connect_handler::close, <span class="keyword">this</span>));
@@ -86,8 +87,8 @@
 
 <span class="keyword">private</span>:
   io_service&amp; io_service_;
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00125.html#9c1e57628983c6b9c45e9204228109b7">deadline_timer</a> timer_;
-  ip::tcp::socket socket_;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00126.html#9c1e57628983c6b9c45e9204228109b7">deadline_timer</a> timer_;
+  tcp::socket socket_;
 };
 
 <span class="keywordtype">int</span> <a class="code" href="a00033.html#0ddf1224851353fc92bfbff6f499fa97">main</a>()
@@ -95,7 +96,7 @@
   <span class="keywordflow">try</span>
   {
     io_service ios;
-    ip::tcp::acceptor a(ios, ip::tcp::endpoint(ip::tcp::v4(), 32123), 1);
+    tcp::acceptor a(ios, tcp::endpoint(tcp::v4(), 32123), 1);
 
     <span class="comment">// Make lots of connections so that at least some of them will block.</span>
     connect_handler ch1(ios);
@@ -121,7 +122,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

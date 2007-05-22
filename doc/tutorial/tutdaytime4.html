@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -66,14 +66,14 @@ Since UDP is datagram-oriented, we will not be using a stream socket. Create an 
     socket.open(udp::v4());
 
     boost::array&lt;char, 1&gt; send_buf  = { 0 };
-    socket.send_to(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(send_buf), receiver_endpoint);
+    socket.send_to(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(send_buf), receiver_endpoint);
 </pre></div><p>
 Now we need to be ready to accept whatever the server sends back to us. The endpoint on our side that receives the server's response will be initialised by <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00005.html#994ea38ff4c08abeacd663a4d1d9b72d">asio::ip::udp::socket::receive_from()</a>.<p>
 <div class="fragment"><pre class="fragment">
     boost::array&lt;char, 128&gt; recv_buf;
     udp::endpoint sender_endpoint;
     size_t len = socket.receive_from(
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(recv_buf), sender_endpoint);
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(recv_buf), sender_endpoint);
 
     std::cout.write(recv_buf.data(), len);
   }
@@ -93,7 +93,7 @@ Finally, handle any exceptions that may have been thrown.<p>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

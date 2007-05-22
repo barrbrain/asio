@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -74,8 +74,8 @@
     tcp::resolver::query query(server, <span class="stringliteral">"http"</span>);
     resolver_.async_resolve(query,
         boost::bind(&amp;client::handle_resolve, <span class="keyword">this</span>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#4aaf36b46c92386e9216df53718f9d67">asio::placeholders::iterator</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#4aaf36b46c92386e9216df53718f9d67">asio::placeholders::iterator</a>));
   }
 
 <span class="keyword">private</span>:
@@ -89,7 +89,7 @@
       tcp::endpoint endpoint = *endpoint_iterator;
       socket_.async_connect(endpoint,
           boost::bind(&amp;client::handle_connect, <span class="keyword">this</span>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, ++endpoint_iterator));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, ++endpoint_iterator));
     }
     <span class="keywordflow">else</span>
     {
@@ -103,9 +103,9 @@
     <span class="keywordflow">if</span> (!err)
     {
       <span class="comment">// The connection was successful. Send the request.</span>
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_, request_,
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00141.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_, request_,
           boost::bind(&amp;client::handle_write_request, <span class="keyword">this</span>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
     }
     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (endpoint_iterator != tcp::resolver::iterator())
     {
@@ -114,7 +114,7 @@
       tcp::endpoint endpoint = *endpoint_iterator;
       socket_.async_connect(endpoint,
           boost::bind(&amp;client::handle_connect, <span class="keyword">this</span>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, ++endpoint_iterator));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, ++endpoint_iterator));
     }
     <span class="keywordflow">else</span>
     {
@@ -127,9 +127,9 @@
     <span class="keywordflow">if</span> (!err)
     {
       <span class="comment">// Read the response status line.</span>
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00138.html#g8488672677809c834f4e6377b0852eee">asio::async_read_until</a>(socket_, response_, <span class="stringliteral">"\r\n"</span>,
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00139.html#g8488672677809c834f4e6377b0852eee">asio::async_read_until</a>(socket_, response_, <span class="stringliteral">"\r\n"</span>,
           boost::bind(&amp;client::handle_read_status_line, <span class="keyword">this</span>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
     }
     <span class="keywordflow">else</span>
     {
@@ -162,9 +162,9 @@
       }
 
       <span class="comment">// Read the response headers, which are terminated by a blank line.</span>
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00138.html#g8488672677809c834f4e6377b0852eee">asio::async_read_until</a>(socket_, response_, <span class="stringliteral">"\r\n\r\n"</span>,
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00139.html#g8488672677809c834f4e6377b0852eee">asio::async_read_until</a>(socket_, response_, <span class="stringliteral">"\r\n\r\n"</span>,
           boost::bind(&amp;client::handle_read_headers, <span class="keyword">this</span>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
     }
     <span class="keywordflow">else</span>
     {
@@ -188,10 +188,10 @@
         std::cout &lt;&lt; &amp;response_;
 
       <span class="comment">// Start reading remaining data until EOF.</span>
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00136.html#gb1d5925953621f0ba652f8b158eb4687">asio::async_read</a>(socket_, response_,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#gdba1ed43445276e2b563a59663ca26cd">asio::transfer_at_least</a>(1),
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00137.html#gb1d5925953621f0ba652f8b158eb4687">asio::async_read</a>(socket_, response_,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00135.html#gdba1ed43445276e2b563a59663ca26cd">asio::transfer_at_least</a>(1),
           boost::bind(&amp;client::handle_read_content, <span class="keyword">this</span>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
     }
     <span class="keywordflow">else</span>
     {
@@ -207,10 +207,10 @@
       std::cout &lt;&lt; &amp;response_;
 
       <span class="comment">// Continue reading remaining data until EOF.</span>
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00136.html#gb1d5925953621f0ba652f8b158eb4687">asio::async_read</a>(socket_, response_,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#gdba1ed43445276e2b563a59663ca26cd">asio::transfer_at_least</a>(1),
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00137.html#gb1d5925953621f0ba652f8b158eb4687">asio::async_read</a>(socket_, response_,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00135.html#gdba1ed43445276e2b563a59663ca26cd">asio::transfer_at_least</a>(1),
           boost::bind(&amp;client::handle_read_content, <span class="keyword">this</span>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
     }
     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (err != <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00029.html#be23228e9941caa68ae36adaf2f1052c">asio::error::eof</a>)
     {
@@ -251,7 +251,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

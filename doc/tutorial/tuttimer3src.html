@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -56,7 +56,7 @@
 
     t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00006.html#886dfd4636c6d4269b11dca57d7df920">expires_at</a>(t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00006.html#886dfd4636c6d4269b11dca57d7df920">expires_at</a>() + boost::posix_time::seconds(1));
     t-&gt;<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00006.html#b6322d1557db31cf0a96635034c30d5e">async_wait</a>(boost::bind(print,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, t, count));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, t, count));
   }
 }
 
@@ -67,7 +67,7 @@
   <span class="keywordtype">int</span> count = 0;
   <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00006.html">asio::deadline_timer</a> t(io, boost::posix_time::seconds(1));
   t.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00006.html#b6322d1557db31cf0a96635034c30d5e">async_wait</a>(boost::bind(print,
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, &amp;t, &amp;count));
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, &amp;t, &amp;count));
 
   io.<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00032.html#c84bed0d1dd061bc71010ba1228439da">run</a>();
 
@@ -79,7 +79,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

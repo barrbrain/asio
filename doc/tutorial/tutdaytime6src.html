@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -71,10 +71,10 @@ std::string make_daytime_string()
   <span class="keywordtype">void</span> start_receive()
   {
     socket_.async_receive_from(
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(recv_buffer_), remote_endpoint_,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(recv_buffer_), remote_endpoint_,
         boost::bind(&amp;udp_server::handle_receive, <span class="keyword">this</span>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
   }
 
   <span class="keywordtype">void</span> handle_receive(<span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html">asio::error_code</a>&amp; error,
@@ -85,10 +85,10 @@ std::string make_daytime_string()
       boost::shared_ptr&lt;std::string&gt; message(
           <span class="keyword">new</span> std::string(make_daytime_string()));
 
-      socket_.async_send_to(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(*message), remote_endpoint_,
+      socket_.async_send_to(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(*message), remote_endpoint_,
           boost::bind(&amp;udp_server::handle_send, <span class="keyword">this</span>, message,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
 
       start_receive();
     }
@@ -124,7 +124,7 @@ std::string make_daytime_string()
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

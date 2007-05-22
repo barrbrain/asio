@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -93,11 +93,11 @@
     request_stream &lt;&lt; <span class="stringliteral">"Connection: close\r\n\r\n"</span>;
 
     <span class="comment">// Send the request.</span>
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00139.html#gac57e38176c76b4323e69341f18ff8b3">asio::write</a>(socket, request);
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html#gac57e38176c76b4323e69341f18ff8b3">asio::write</a>(socket, request);
 
     <span class="comment">// Read the response status line.</span>
     <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00018.html">asio::streambuf</a> response;
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00137.html#g031fe6f23722b75486bf0b7f3fb83eef">asio::read_until</a>(socket, response, <span class="stringliteral">"\r\n"</span>);
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00138.html#g031fe6f23722b75486bf0b7f3fb83eef">asio::read_until</a>(socket, response, <span class="stringliteral">"\r\n"</span>);
 
     <span class="comment">// Check that response is OK.</span>
     std::istream response_stream(&amp;response);
@@ -119,7 +119,7 @@
     }
 
     <span class="comment">// Read the response headers, which are terminated by a blank line.</span>
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00137.html#g031fe6f23722b75486bf0b7f3fb83eef">asio::read_until</a>(socket, response, <span class="stringliteral">"\r\n\r\n"</span>);
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00138.html#g031fe6f23722b75486bf0b7f3fb83eef">asio::read_until</a>(socket, response, <span class="stringliteral">"\r\n\r\n"</span>);
 
     <span class="comment">// Process the response headers.</span>
     std::string header;
@@ -132,8 +132,8 @@
       std::cout &lt;&lt; &amp;response;
 
     <span class="comment">// Read until EOF, writing data to output as we go.</span>
-    <span class="keywordflow">while</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00135.html#g4cd1ae88fa40eeb1998bc6b457b6e209">asio::read</a>(socket, response,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#gdba1ed43445276e2b563a59663ca26cd">asio::transfer_at_least</a>(1), error))
+    <span class="keywordflow">while</span> (<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00136.html#g4cd1ae88fa40eeb1998bc6b457b6e209">asio::read</a>(socket, response,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00135.html#gdba1ed43445276e2b563a59663ca26cd">asio::transfer_at_least</a>(1), error))
       std::cout &lt;&lt; &amp;response;
     <span class="keywordflow">if</span> (error != <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00029.html#be23228e9941caa68ae36adaf2f1052c">asio::error::eof</a>)
       <span class="keywordflow">throw</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00050.html">asio::system_error</a>(error);
@@ -149,7 +149,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

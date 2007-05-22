@@ -15,7 +15,7 @@
 @SET_MAKE@
 
 
-SOURCES = $(examples_allocation_server_SOURCES) $(examples_buffers_reference_counted_SOURCES) $(examples_chat_chat_client_SOURCES) $(examples_chat_chat_server_SOURCES) $(examples_echo_async_tcp_echo_server_SOURCES) $(examples_echo_async_udp_echo_server_SOURCES) $(examples_echo_blocking_tcp_echo_client_SOURCES) $(examples_echo_blocking_tcp_echo_server_SOURCES) $(examples_echo_blocking_udp_echo_client_SOURCES) $(examples_echo_blocking_udp_echo_server_SOURCES) $(examples_http_client_async_client_SOURCES) $(examples_http_client_sync_client_SOURCES) $(examples_http_server_http_server_SOURCES) $(examples_iostreams_daytime_client_SOURCES) $(examples_iostreams_daytime_server_SOURCES) $(examples_multicast_receiver_SOURCES) $(examples_multicast_sender_SOURCES) $(examples_services_daytime_client_SOURCES) $(examples_socks4_sync_client_SOURCES) $(examples_ssl_client_SOURCES) $(examples_ssl_server_SOURCES) $(examples_timeouts_accept_timeout_SOURCES) $(examples_timeouts_connect_timeout_SOURCES) $(examples_timeouts_datagram_receive_timeout_SOURCES) $(examples_timeouts_stream_receive_timeout_SOURCES) $(examples_timers_time_t_timer_SOURCES) $(examples_tutorial_daytime1_client_SOURCES) $(examples_tutorial_daytime2_server_SOURCES) $(examples_tutorial_daytime3_server_SOURCES) $(examples_tutorial_daytime4_client_SOURCES) $(examples_tutorial_daytime5_server_SOURCES) $(examples_tutorial_daytime6_server_SOURCES) $(examples_tutorial_daytime7_server_SOURCES) $(examples_tutorial_timer1_timer_SOURCES) $(examples_tutorial_timer2_timer_SOURCES) $(examples_tutorial_timer3_timer_SOURCES) $(examples_tutorial_timer4_timer_SOURCES) $(examples_tutorial_timer5_timer_SOURCES) $(tests_performance_client_SOURCES) $(tests_performance_server_SOURCES) $(tests_unit_basic_datagram_socket_SOURCES) $(tests_unit_basic_deadline_timer_SOURCES) $(tests_unit_basic_socket_acceptor_SOURCES) $(tests_unit_basic_stream_socket_SOURCES) $(tests_unit_buffer_SOURCES) $(tests_unit_buffered_read_stream_SOURCES) $(tests_unit_buffered_stream_SOURCES) $(tests_unit_buffered_write_stream_SOURCES) $(tests_unit_completion_condition_SOURCES) $(tests_unit_datagram_socket_service_SOURCES) $(tests_unit_deadline_timer_SOURCES) $(tests_unit_deadline_timer_service_SOURCES) $(tests_unit_error_SOURCES) $(tests_unit_io_service_SOURCES) $(tests_unit_ip_address_SOURCES) $(tests_unit_ip_address_v4_SOURCES) $(tests_unit_ip_address_v6_SOURCES) $(tests_unit_ip_basic_endpoint_SOURCES) $(tests_unit_ip_basic_resolver_SOURCES) $(tests_unit_ip_basic_resolver_entry_SOURCES) $(tests_unit_ip_basic_resolver_iterator_SOURCES) $(tests_unit_ip_basic_resolver_query_SOURCES) $(tests_unit_ip_host_name_SOURCES) $(tests_unit_ip_multicast_SOURCES) $(tests_unit_ip_resolver_query_base_SOURCES) $(tests_unit_ip_resolver_service_SOURCES) $(tests_unit_ip_tcp_SOURCES) $(tests_unit_ip_udp_SOURCES) $(tests_unit_ip_unicast_SOURCES) $(tests_unit_ip_v6_only_SOURCES) $(tests_unit_is_read_buffered_SOURCES) $(tests_unit_is_write_buffered_SOURCES) $(tests_unit_placeholders_SOURCES) $(tests_unit_read_SOURCES) $(tests_unit_read_until_SOURCES) $(tests_unit_socket_acceptor_service_SOURCES) $(tests_unit_socket_base_SOURCES) $(tests_unit_ssl_basic_context_SOURCES) $(tests_unit_ssl_context_SOURCES) $(tests_unit_ssl_context_base_SOURCES) $(tests_unit_ssl_context_service_SOURCES) $(tests_unit_ssl_stream_SOURCES) $(tests_unit_ssl_stream_base_SOURCES) $(tests_unit_ssl_stream_service_SOURCES) $(tests_unit_strand_SOURCES) $(tests_unit_stream_socket_service_SOURCES) $(tests_unit_thread_SOURCES) $(tests_unit_time_traits_SOURCES) $(tests_unit_write_SOURCES)
+SOURCES = $(examples_allocation_server_SOURCES) $(examples_buffers_reference_counted_SOURCES) $(examples_chat_chat_client_SOURCES) $(examples_chat_chat_server_SOURCES) $(examples_echo_async_tcp_echo_server_SOURCES) $(examples_echo_async_udp_echo_server_SOURCES) $(examples_echo_blocking_tcp_echo_client_SOURCES) $(examples_echo_blocking_tcp_echo_server_SOURCES) $(examples_echo_blocking_udp_echo_client_SOURCES) $(examples_echo_blocking_udp_echo_server_SOURCES) $(examples_http_client_async_client_SOURCES) $(examples_http_client_sync_client_SOURCES) $(examples_http_server_http_server_SOURCES) $(examples_http_server2_http_server_SOURCES) $(examples_http_server3_http_server_SOURCES) $(examples_invocation_prioritised_handlers_SOURCES) $(examples_iostreams_daytime_client_SOURCES) $(examples_iostreams_daytime_server_SOURCES) $(examples_multicast_receiver_SOURCES) $(examples_multicast_sender_SOURCES) $(examples_services_daytime_client_SOURCES) $(examples_socks4_sync_client_SOURCES) $(examples_ssl_client_SOURCES) $(examples_ssl_server_SOURCES) $(examples_timeouts_accept_timeout_SOURCES) $(examples_timeouts_connect_timeout_SOURCES) $(examples_timeouts_datagram_receive_timeout_SOURCES) $(examples_timeouts_stream_receive_timeout_SOURCES) $(examples_timers_time_t_timer_SOURCES) $(examples_tutorial_daytime1_client_SOURCES) $(examples_tutorial_daytime2_server_SOURCES) $(examples_tutorial_daytime3_server_SOURCES) $(examples_tutorial_daytime4_client_SOURCES) $(examples_tutorial_daytime5_server_SOURCES) $(examples_tutorial_daytime6_server_SOURCES) $(examples_tutorial_daytime7_server_SOURCES) $(examples_tutorial_timer1_timer_SOURCES) $(examples_tutorial_timer2_timer_SOURCES) $(examples_tutorial_timer3_timer_SOURCES) $(examples_tutorial_timer4_timer_SOURCES) $(examples_tutorial_timer5_timer_SOURCES) $(tests_performance_client_SOURCES) $(tests_performance_server_SOURCES) $(tests_unit_basic_datagram_socket_SOURCES) $(tests_unit_basic_deadline_timer_SOURCES) $(tests_unit_basic_socket_acceptor_SOURCES) $(tests_unit_basic_stream_socket_SOURCES) $(tests_unit_buffer_SOURCES) $(tests_unit_buffered_read_stream_SOURCES) $(tests_unit_buffered_stream_SOURCES) $(tests_unit_buffered_write_stream_SOURCES) $(tests_unit_completion_condition_SOURCES) $(tests_unit_datagram_socket_service_SOURCES) $(tests_unit_deadline_timer_SOURCES) $(tests_unit_deadline_timer_service_SOURCES) $(tests_unit_error_SOURCES) $(tests_unit_io_service_SOURCES) $(tests_unit_ip_address_SOURCES) $(tests_unit_ip_address_v4_SOURCES) $(tests_unit_ip_address_v6_SOURCES) $(tests_unit_ip_basic_endpoint_SOURCES) $(tests_unit_ip_basic_resolver_SOURCES) $(tests_unit_ip_basic_resolver_entry_SOURCES) $(tests_unit_ip_basic_resolver_iterator_SOURCES) $(tests_unit_ip_basic_resolver_query_SOURCES) $(tests_unit_ip_host_name_SOURCES) $(tests_unit_ip_multicast_SOURCES) $(tests_unit_ip_resolver_query_base_SOURCES) $(tests_unit_ip_resolver_service_SOURCES) $(tests_unit_ip_tcp_SOURCES) $(tests_unit_ip_udp_SOURCES) $(tests_unit_ip_unicast_SOURCES) $(tests_unit_ip_v6_only_SOURCES) $(tests_unit_is_read_buffered_SOURCES) $(tests_unit_is_write_buffered_SOURCES) $(tests_unit_placeholders_SOURCES) $(tests_unit_read_SOURCES) $(tests_unit_read_until_SOURCES) $(tests_unit_socket_acceptor_service_SOURCES) $(tests_unit_socket_base_SOURCES) $(tests_unit_ssl_basic_context_SOURCES) $(tests_unit_ssl_context_SOURCES) $(tests_unit_ssl_context_base_SOURCES) $(tests_unit_ssl_context_service_SOURCES) $(tests_unit_ssl_stream_SOURCES) $(tests_unit_ssl_stream_base_SOURCES) $(tests_unit_ssl_stream_service_SOURCES) $(tests_unit_strand_SOURCES) $(tests_unit_stream_socket_service_SOURCES) $(tests_unit_thread_SOURCES) $(tests_unit_time_traits_SOURCES) $(tests_unit_write_SOURCES)
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -88,6 +88,9 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	examples/http/client/async_client$(EXEEXT) \
 	examples/http/client/sync_client$(EXEEXT) \
 	examples/http/server/http_server$(EXEEXT) \
+	examples/http/server2/http_server$(EXEEXT) \
+	examples/http/server3/http_server$(EXEEXT) \
+	examples/invocation/prioritised_handlers$(EXEEXT) \
 	examples/iostreams/daytime_client$(EXEEXT) \
 	examples/iostreams/daytime_server$(EXEEXT) \
 	examples/multicast/receiver$(EXEEXT) \
@@ -136,6 +139,18 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 
 @WINDOWS_TARGET_FALSE@am__append_4 = \
 @WINDOWS_TARGET_FALSE@	examples/http/server/posix_main.cpp
+
+@WINDOWS_TARGET_TRUE@am__append_5 = \
+@WINDOWS_TARGET_TRUE@	examples/http/server2/win_main.cpp
+
+@WINDOWS_TARGET_FALSE@am__append_6 = \
+@WINDOWS_TARGET_FALSE@	examples/http/server2/posix_main.cpp
+
+@WINDOWS_TARGET_TRUE@am__append_7 = \
+@WINDOWS_TARGET_TRUE@	examples/http/server3/win_main.cpp
+
+@WINDOWS_TARGET_FALSE@am__append_8 = \
+@WINDOWS_TARGET_FALSE@	examples/http/server3/posix_main.cpp
 
 subdir = src
 DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.am \
@@ -243,6 +258,59 @@ am_examples_http_server_http_server_OBJECTS =  \
 examples_http_server_http_server_OBJECTS =  \
 	$(am_examples_http_server_http_server_OBJECTS)
 examples_http_server_http_server_LDADD = $(LDADD)
+am__examples_http_server2_http_server_SOURCES_DIST =  \
+	examples/http/server2/connection.cpp \
+	examples/http/server2/io_service_pool.cpp \
+	examples/http/server2/mime_types.cpp \
+	examples/http/server2/reply.cpp \
+	examples/http/server2/request_handler.cpp \
+	examples/http/server2/request_parser.cpp \
+	examples/http/server2/server.cpp \
+	examples/http/server2/win_main.cpp \
+	examples/http/server2/posix_main.cpp
+@WINDOWS_TARGET_TRUE@am__objects_3 =  \
+@WINDOWS_TARGET_TRUE@	examples/http/server2/win_main.$(OBJEXT)
+@WINDOWS_TARGET_FALSE@am__objects_4 = examples/http/server2/posix_main.$(OBJEXT)
+am_examples_http_server2_http_server_OBJECTS =  \
+	examples/http/server2/connection.$(OBJEXT) \
+	examples/http/server2/io_service_pool.$(OBJEXT) \
+	examples/http/server2/mime_types.$(OBJEXT) \
+	examples/http/server2/reply.$(OBJEXT) \
+	examples/http/server2/request_handler.$(OBJEXT) \
+	examples/http/server2/request_parser.$(OBJEXT) \
+	examples/http/server2/server.$(OBJEXT) $(am__objects_3) \
+	$(am__objects_4)
+examples_http_server2_http_server_OBJECTS =  \
+	$(am_examples_http_server2_http_server_OBJECTS)
+examples_http_server2_http_server_LDADD = $(LDADD)
+am__examples_http_server3_http_server_SOURCES_DIST =  \
+	examples/http/server3/connection.cpp \
+	examples/http/server3/mime_types.cpp \
+	examples/http/server3/reply.cpp \
+	examples/http/server3/request_handler.cpp \
+	examples/http/server3/request_parser.cpp \
+	examples/http/server3/server.cpp \
+	examples/http/server3/win_main.cpp \
+	examples/http/server3/posix_main.cpp
+@WINDOWS_TARGET_TRUE@am__objects_5 =  \
+@WINDOWS_TARGET_TRUE@	examples/http/server3/win_main.$(OBJEXT)
+@WINDOWS_TARGET_FALSE@am__objects_6 = examples/http/server3/posix_main.$(OBJEXT)
+am_examples_http_server3_http_server_OBJECTS =  \
+	examples/http/server3/connection.$(OBJEXT) \
+	examples/http/server3/mime_types.$(OBJEXT) \
+	examples/http/server3/reply.$(OBJEXT) \
+	examples/http/server3/request_handler.$(OBJEXT) \
+	examples/http/server3/request_parser.$(OBJEXT) \
+	examples/http/server3/server.$(OBJEXT) $(am__objects_5) \
+	$(am__objects_6)
+examples_http_server3_http_server_OBJECTS =  \
+	$(am_examples_http_server3_http_server_OBJECTS)
+examples_http_server3_http_server_LDADD = $(LDADD)
+am_examples_invocation_prioritised_handlers_OBJECTS =  \
+	examples/invocation/prioritised_handlers.$(OBJEXT)
+examples_invocation_prioritised_handlers_OBJECTS =  \
+	$(am_examples_invocation_prioritised_handlers_OBJECTS)
+examples_invocation_prioritised_handlers_LDADD = $(LDADD)
 am_examples_iostreams_daytime_client_OBJECTS =  \
 	examples/iostreams/daytime_client.$(OBJEXT)
 examples_iostreams_daytime_client_OBJECTS =  \
@@ -625,6 +693,9 @@ SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_http_client_async_client_SOURCES) \
 	$(examples_http_client_sync_client_SOURCES) \
 	$(examples_http_server_http_server_SOURCES) \
+	$(examples_http_server2_http_server_SOURCES) \
+	$(examples_http_server3_http_server_SOURCES) \
+	$(examples_invocation_prioritised_handlers_SOURCES) \
 	$(examples_iostreams_daytime_client_SOURCES) \
 	$(examples_iostreams_daytime_server_SOURCES) \
 	$(examples_multicast_receiver_SOURCES) \
@@ -709,6 +780,9 @@ DIST_SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_http_client_async_client_SOURCES) \
 	$(examples_http_client_sync_client_SOURCES) \
 	$(am__examples_http_server_http_server_SOURCES_DIST) \
+	$(am__examples_http_server2_http_server_SOURCES_DIST) \
+	$(am__examples_http_server3_http_server_SOURCES_DIST) \
+	$(examples_invocation_prioritised_handlers_SOURCES) \
 	$(examples_iostreams_daytime_client_SOURCES) \
 	$(examples_iostreams_daytime_server_SOURCES) \
 	$(examples_multicast_receiver_SOURCES) \
@@ -989,6 +1063,24 @@ examples_http_server_http_server_SOURCES =  \
 	examples/http/server/request_parser.cpp \
 	examples/http/server/server.cpp $(am__append_3) \
 	$(am__append_4)
+examples_http_server2_http_server_SOURCES =  \
+	examples/http/server2/connection.cpp \
+	examples/http/server2/io_service_pool.cpp \
+	examples/http/server2/mime_types.cpp \
+	examples/http/server2/reply.cpp \
+	examples/http/server2/request_handler.cpp \
+	examples/http/server2/request_parser.cpp \
+	examples/http/server2/server.cpp $(am__append_5) \
+	$(am__append_6)
+examples_http_server3_http_server_SOURCES =  \
+	examples/http/server3/connection.cpp \
+	examples/http/server3/mime_types.cpp \
+	examples/http/server3/reply.cpp \
+	examples/http/server3/request_handler.cpp \
+	examples/http/server3/request_parser.cpp \
+	examples/http/server3/server.cpp $(am__append_7) \
+	$(am__append_8)
+examples_invocation_prioritised_handlers_SOURCES = examples/invocation/prioritised_handlers.cpp
 examples_iostreams_daytime_client_SOURCES = examples/iostreams/daytime_client.cpp
 examples_iostreams_daytime_server_SOURCES = examples/iostreams/daytime_server.cpp
 examples_multicast_receiver_SOURCES = examples/multicast/receiver.cpp
@@ -1038,6 +1130,25 @@ EXTRA_DIST = \
 	examples/http/server/request_parser.hpp \
 	examples/http/server/server.hpp \
 	examples/http/server/win_main.cpp \
+	examples/http/server2/connection.hpp \
+	examples/http/server2/io_service_pool.hpp \
+	examples/http/server2/header.hpp \
+	examples/http/server2/mime_types.hpp \
+	examples/http/server2/reply.hpp \
+	examples/http/server2/request.hpp \
+	examples/http/server2/request_handler.hpp \
+	examples/http/server2/request_parser.hpp \
+	examples/http/server2/server.hpp \
+	examples/http/server2/win_main.cpp \
+	examples/http/server3/connection.hpp \
+	examples/http/server3/header.hpp \
+	examples/http/server3/mime_types.hpp \
+	examples/http/server3/reply.hpp \
+	examples/http/server3/request.hpp \
+	examples/http/server3/request_handler.hpp \
+	examples/http/server3/request_parser.hpp \
+	examples/http/server3/server.hpp \
+	examples/http/server3/win_main.cpp \
 	examples/serialization/client.cpp \
 	examples/serialization/server.cpp \
 	examples/serialization/connection.hpp \
@@ -1228,6 +1339,87 @@ examples/http/server/posix_main.$(OBJEXT):  \
 examples/http/server/http_server$(EXEEXT): $(examples_http_server_http_server_OBJECTS) $(examples_http_server_http_server_DEPENDENCIES) examples/http/server/$(am__dirstamp)
 	@rm -f examples/http/server/http_server$(EXEEXT)
 	$(CXXLINK) $(examples_http_server_http_server_LDFLAGS) $(examples_http_server_http_server_OBJECTS) $(examples_http_server_http_server_LDADD) $(LIBS)
+examples/http/server2/$(am__dirstamp):
+	@$(mkdir_p) examples/http/server2
+	@: > examples/http/server2/$(am__dirstamp)
+examples/http/server2/$(DEPDIR)/$(am__dirstamp):
+	@$(mkdir_p) examples/http/server2/$(DEPDIR)
+	@: > examples/http/server2/$(DEPDIR)/$(am__dirstamp)
+examples/http/server2/connection.$(OBJEXT):  \
+	examples/http/server2/$(am__dirstamp) \
+	examples/http/server2/$(DEPDIR)/$(am__dirstamp)
+examples/http/server2/io_service_pool.$(OBJEXT):  \
+	examples/http/server2/$(am__dirstamp) \
+	examples/http/server2/$(DEPDIR)/$(am__dirstamp)
+examples/http/server2/mime_types.$(OBJEXT):  \
+	examples/http/server2/$(am__dirstamp) \
+	examples/http/server2/$(DEPDIR)/$(am__dirstamp)
+examples/http/server2/reply.$(OBJEXT):  \
+	examples/http/server2/$(am__dirstamp) \
+	examples/http/server2/$(DEPDIR)/$(am__dirstamp)
+examples/http/server2/request_handler.$(OBJEXT):  \
+	examples/http/server2/$(am__dirstamp) \
+	examples/http/server2/$(DEPDIR)/$(am__dirstamp)
+examples/http/server2/request_parser.$(OBJEXT):  \
+	examples/http/server2/$(am__dirstamp) \
+	examples/http/server2/$(DEPDIR)/$(am__dirstamp)
+examples/http/server2/server.$(OBJEXT):  \
+	examples/http/server2/$(am__dirstamp) \
+	examples/http/server2/$(DEPDIR)/$(am__dirstamp)
+examples/http/server2/win_main.$(OBJEXT):  \
+	examples/http/server2/$(am__dirstamp) \
+	examples/http/server2/$(DEPDIR)/$(am__dirstamp)
+examples/http/server2/posix_main.$(OBJEXT):  \
+	examples/http/server2/$(am__dirstamp) \
+	examples/http/server2/$(DEPDIR)/$(am__dirstamp)
+examples/http/server2/http_server$(EXEEXT): $(examples_http_server2_http_server_OBJECTS) $(examples_http_server2_http_server_DEPENDENCIES) examples/http/server2/$(am__dirstamp)
+	@rm -f examples/http/server2/http_server$(EXEEXT)
+	$(CXXLINK) $(examples_http_server2_http_server_LDFLAGS) $(examples_http_server2_http_server_OBJECTS) $(examples_http_server2_http_server_LDADD) $(LIBS)
+examples/http/server3/$(am__dirstamp):
+	@$(mkdir_p) examples/http/server3
+	@: > examples/http/server3/$(am__dirstamp)
+examples/http/server3/$(DEPDIR)/$(am__dirstamp):
+	@$(mkdir_p) examples/http/server3/$(DEPDIR)
+	@: > examples/http/server3/$(DEPDIR)/$(am__dirstamp)
+examples/http/server3/connection.$(OBJEXT):  \
+	examples/http/server3/$(am__dirstamp) \
+	examples/http/server3/$(DEPDIR)/$(am__dirstamp)
+examples/http/server3/mime_types.$(OBJEXT):  \
+	examples/http/server3/$(am__dirstamp) \
+	examples/http/server3/$(DEPDIR)/$(am__dirstamp)
+examples/http/server3/reply.$(OBJEXT):  \
+	examples/http/server3/$(am__dirstamp) \
+	examples/http/server3/$(DEPDIR)/$(am__dirstamp)
+examples/http/server3/request_handler.$(OBJEXT):  \
+	examples/http/server3/$(am__dirstamp) \
+	examples/http/server3/$(DEPDIR)/$(am__dirstamp)
+examples/http/server3/request_parser.$(OBJEXT):  \
+	examples/http/server3/$(am__dirstamp) \
+	examples/http/server3/$(DEPDIR)/$(am__dirstamp)
+examples/http/server3/server.$(OBJEXT):  \
+	examples/http/server3/$(am__dirstamp) \
+	examples/http/server3/$(DEPDIR)/$(am__dirstamp)
+examples/http/server3/win_main.$(OBJEXT):  \
+	examples/http/server3/$(am__dirstamp) \
+	examples/http/server3/$(DEPDIR)/$(am__dirstamp)
+examples/http/server3/posix_main.$(OBJEXT):  \
+	examples/http/server3/$(am__dirstamp) \
+	examples/http/server3/$(DEPDIR)/$(am__dirstamp)
+examples/http/server3/http_server$(EXEEXT): $(examples_http_server3_http_server_OBJECTS) $(examples_http_server3_http_server_DEPENDENCIES) examples/http/server3/$(am__dirstamp)
+	@rm -f examples/http/server3/http_server$(EXEEXT)
+	$(CXXLINK) $(examples_http_server3_http_server_LDFLAGS) $(examples_http_server3_http_server_OBJECTS) $(examples_http_server3_http_server_LDADD) $(LIBS)
+examples/invocation/$(am__dirstamp):
+	@$(mkdir_p) examples/invocation
+	@: > examples/invocation/$(am__dirstamp)
+examples/invocation/$(DEPDIR)/$(am__dirstamp):
+	@$(mkdir_p) examples/invocation/$(DEPDIR)
+	@: > examples/invocation/$(DEPDIR)/$(am__dirstamp)
+examples/invocation/prioritised_handlers.$(OBJEXT):  \
+	examples/invocation/$(am__dirstamp) \
+	examples/invocation/$(DEPDIR)/$(am__dirstamp)
+examples/invocation/prioritised_handlers$(EXEEXT): $(examples_invocation_prioritised_handlers_OBJECTS) $(examples_invocation_prioritised_handlers_DEPENDENCIES) examples/invocation/$(am__dirstamp)
+	@rm -f examples/invocation/prioritised_handlers$(EXEEXT)
+	$(CXXLINK) $(examples_invocation_prioritised_handlers_LDFLAGS) $(examples_invocation_prioritised_handlers_OBJECTS) $(examples_invocation_prioritised_handlers_LDADD) $(LIBS)
 examples/iostreams/$(am__dirstamp):
 	@$(mkdir_p) examples/iostreams
 	@: > examples/iostreams/$(am__dirstamp)
@@ -1811,6 +2003,24 @@ mostlyclean-compile:
 	-rm -f examples/http/server/request_parser.$(OBJEXT)
 	-rm -f examples/http/server/server.$(OBJEXT)
 	-rm -f examples/http/server/win_main.$(OBJEXT)
+	-rm -f examples/http/server2/connection.$(OBJEXT)
+	-rm -f examples/http/server2/io_service_pool.$(OBJEXT)
+	-rm -f examples/http/server2/mime_types.$(OBJEXT)
+	-rm -f examples/http/server2/posix_main.$(OBJEXT)
+	-rm -f examples/http/server2/reply.$(OBJEXT)
+	-rm -f examples/http/server2/request_handler.$(OBJEXT)
+	-rm -f examples/http/server2/request_parser.$(OBJEXT)
+	-rm -f examples/http/server2/server.$(OBJEXT)
+	-rm -f examples/http/server2/win_main.$(OBJEXT)
+	-rm -f examples/http/server3/connection.$(OBJEXT)
+	-rm -f examples/http/server3/mime_types.$(OBJEXT)
+	-rm -f examples/http/server3/posix_main.$(OBJEXT)
+	-rm -f examples/http/server3/reply.$(OBJEXT)
+	-rm -f examples/http/server3/request_handler.$(OBJEXT)
+	-rm -f examples/http/server3/request_parser.$(OBJEXT)
+	-rm -f examples/http/server3/server.$(OBJEXT)
+	-rm -f examples/http/server3/win_main.$(OBJEXT)
+	-rm -f examples/invocation/prioritised_handlers.$(OBJEXT)
 	-rm -f examples/iostreams/daytime_client.$(OBJEXT)
 	-rm -f examples/iostreams/daytime_server.$(OBJEXT)
 	-rm -f examples/multicast/receiver.$(OBJEXT)
@@ -1913,6 +2123,24 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@examples/http/server/$(DEPDIR)/request_parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/http/server/$(DEPDIR)/server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/http/server/$(DEPDIR)/win_main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server2/$(DEPDIR)/connection.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server2/$(DEPDIR)/io_service_pool.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server2/$(DEPDIR)/mime_types.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server2/$(DEPDIR)/posix_main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server2/$(DEPDIR)/reply.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server2/$(DEPDIR)/request_handler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server2/$(DEPDIR)/request_parser.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server2/$(DEPDIR)/server.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server2/$(DEPDIR)/win_main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server3/$(DEPDIR)/connection.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server3/$(DEPDIR)/mime_types.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server3/$(DEPDIR)/posix_main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server3/$(DEPDIR)/reply.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server3/$(DEPDIR)/request_handler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server3/$(DEPDIR)/request_parser.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server3/$(DEPDIR)/server.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/http/server3/$(DEPDIR)/win_main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/invocation/$(DEPDIR)/prioritised_handlers.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/iostreams/$(DEPDIR)/daytime_client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/iostreams/$(DEPDIR)/daytime_server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/multicast/$(DEPDIR)/receiver.Po@am__quote@
@@ -2202,7 +2430,7 @@ check-TESTS: $(TESTS)
 	else :; fi
 
 distdir: $(DISTFILES)
-	$(mkdir_p) $(distdir)/examples/chat $(distdir)/examples/http/server $(distdir)/examples/serialization $(distdir)/examples/services $(distdir)/examples/socks4 $(distdir)/examples/ssl $(distdir)/examples/timers $(distdir)/tests/unit
+	$(mkdir_p) $(distdir)/examples/chat $(distdir)/examples/http/server $(distdir)/examples/http/server2 $(distdir)/examples/http/server3 $(distdir)/examples/serialization $(distdir)/examples/services $(distdir)/examples/socks4 $(distdir)/examples/ssl $(distdir)/examples/timers $(distdir)/tests/unit
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
@@ -2282,6 +2510,12 @@ distclean-generic:
 	-rm -f examples/http/client/$(am__dirstamp)
 	-rm -f examples/http/server/$(DEPDIR)/$(am__dirstamp)
 	-rm -f examples/http/server/$(am__dirstamp)
+	-rm -f examples/http/server2/$(DEPDIR)/$(am__dirstamp)
+	-rm -f examples/http/server2/$(am__dirstamp)
+	-rm -f examples/http/server3/$(DEPDIR)/$(am__dirstamp)
+	-rm -f examples/http/server3/$(am__dirstamp)
+	-rm -f examples/invocation/$(DEPDIR)/$(am__dirstamp)
+	-rm -f examples/invocation/$(am__dirstamp)
 	-rm -f examples/iostreams/$(DEPDIR)/$(am__dirstamp)
 	-rm -f examples/iostreams/$(am__dirstamp)
 	-rm -f examples/multicast/$(DEPDIR)/$(am__dirstamp)
@@ -2338,7 +2572,7 @@ clean: clean-recursive
 clean-am: clean-generic clean-noinstPROGRAMS mostlyclean-am
 
 distclean: distclean-recursive
-	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/multicast/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/ssl/$(DEPDIR)
+	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/multicast/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/ssl/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -2364,7 +2598,7 @@ install-man:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-recursive
-	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/multicast/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/ssl/$(DEPDIR)
+	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/multicast/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/ssl/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

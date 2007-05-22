@@ -28,10 +28,11 @@
 
 namespace ip_v6_only_compile {
 
-using namespace asio;
-
 void test()
 {
+  using namespace asio;
+  namespace ip = asio::ip;
+
   try
   {
     io_service ios;
@@ -64,10 +65,11 @@ void test()
 
 namespace ip_v6_only_runtime {
 
-using namespace asio;
-
 void test()
 {
+  using namespace asio;
+  namespace ip = asio::ip;
+
   io_service ios;
   asio::error_code ec;
 

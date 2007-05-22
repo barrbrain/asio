@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -61,7 +61,7 @@
     <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00007.html">asio::ip::tcp::endpoint</a> endpoint = *endpoint_iterator;
     socket_.lowest_layer().async_connect(endpoint,
         boost::bind(&amp;client::handle_connect, <span class="keyword">this</span>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, ++endpoint_iterator));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, ++endpoint_iterator));
   }
 
   <span class="keywordtype">void</span> handle_connect(<span class="keyword">const</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html">asio::error_code</a>&amp; error,
@@ -71,7 +71,7 @@
     {
       socket_.async_handshake(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00047.html#2f18813d3860bc8aee99249834d7c32068134fb041cb11ffe46e248ed1e1d73f">asio::ssl::stream_base::client</a>,
           boost::bind(&amp;client::handle_handshake, <span class="keyword">this</span>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
     }
     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (endpoint_iterator != <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00009.html#67f0ef88dbfc0bc436f482e9e45f661d">asio::ip::tcp::resolver::iterator</a>())
     {
@@ -79,7 +79,7 @@
       <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00007.html">asio::ip::tcp::endpoint</a> endpoint = *endpoint_iterator;
       socket_.lowest_layer().async_connect(endpoint,
           boost::bind(&amp;client::handle_connect, <span class="keyword">this</span>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, ++endpoint_iterator));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>, ++endpoint_iterator));
     }
     <span class="keywordflow">else</span>
     {
@@ -95,11 +95,11 @@
       std::cin.getline(request_, max_length);
       size_t request_length = strlen(request_);
 
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(request_, request_length),
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00141.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(request_, request_length),
           boost::bind(&amp;client::handle_write, <span class="keyword">this</span>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
     }
     <span class="keywordflow">else</span>
     {
@@ -112,11 +112,11 @@
   {
     <span class="keywordflow">if</span> (!error)
     {
-      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00136.html#gb1d5925953621f0ba652f8b158eb4687">asio::async_read</a>(socket_,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(reply_, bytes_transferred),
+      <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00137.html#gb1d5925953621f0ba652f8b158eb4687">asio::async_read</a>(socket_,
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(reply_, bytes_transferred),
           boost::bind(&amp;client::handle_read, <span class="keyword">this</span>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>,
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#88d33c7a9dada222d44c76e7e5cf99b7">asio::placeholders::bytes_transferred</a>));
     }
     <span class="keywordflow">else</span>
     {
@@ -180,7 +180,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

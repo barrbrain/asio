@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -58,7 +58,7 @@
   <span class="comment">// Construct from a std::string.</span>
   <span class="keyword">explicit</span> shared_const_buffer(<span class="keyword">const</span> std::string&amp; data)
     : data_(new std::vector&lt;char&gt;(data.begin(), data.end())),
-      buffer_(asio::<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#gg1ed66e401559cbfd19595392f653b47c">buffer</a>(*data_))
+      buffer_(asio::<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#gg1ed66e401559cbfd19595392f653b47c">buffer</a>(*data_))
   {
   }
 
@@ -91,8 +91,8 @@
   {
     <span class="keyword">using namespace </span>std; <span class="comment">// For time_t, time and ctime.</span>
     time_t now = time(0);
-    shared_const_buffer <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#gg1ed66e401559cbfd19595392f653b47c">buffer</a>(ctime(&amp;now));
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#gg1ed66e401559cbfd19595392f653b47c">buffer</a>,
+    shared_const_buffer <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#gg1ed66e401559cbfd19595392f653b47c">buffer</a>(ctime(&amp;now));
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00141.html#g1747d3ec27f952154952e23be9249fbc">asio::async_write</a>(socket_, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#gg1ed66e401559cbfd19595392f653b47c">buffer</a>,
         boost::bind(&amp;session::handle_write, shared_from_this()));
   }
 
@@ -117,7 +117,7 @@
     session_ptr new_session(<span class="keyword">new</span> session(io_service_));
     acceptor_.async_accept(new_session-&gt;socket(),
         boost::bind(&amp;server::handle_accept, <span class="keyword">this</span>, new_session,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
   }
 
   <span class="keywordtype">void</span> handle_accept(session_ptr new_session,
@@ -129,7 +129,7 @@
       new_session.reset(<span class="keyword">new</span> session(io_service_));
       acceptor_.async_accept(new_session-&gt;socket(),
           boost::bind(&amp;server::handle_accept, <span class="keyword">this</span>, new_session,
-            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+            <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
     }
   }
 
@@ -166,7 +166,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

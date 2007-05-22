@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -76,11 +76,11 @@
     <span class="keywordtype">char</span> request[max_length];
     std::cin.getline(request, max_length);
     size_t request_length = strlen(request);
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00139.html#gac57e38176c76b4323e69341f18ff8b3">asio::write</a>(s, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(request, request_length));
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00140.html#gac57e38176c76b4323e69341f18ff8b3">asio::write</a>(s, <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(request, request_length));
 
     <span class="keywordtype">char</span> reply[max_length];
-    size_t reply_length = <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00135.html#g4cd1ae88fa40eeb1998bc6b457b6e209">asio::read</a>(s,
-        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(reply, request_length));
+    size_t reply_length = <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00136.html#g4cd1ae88fa40eeb1998bc6b457b6e209">asio::read</a>(s,
+        <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(reply, request_length));
     std::cout &lt;&lt; <span class="stringliteral">"Reply is: "</span>;
     std::cout.write(reply, reply_length);
     std::cout &lt;&lt; <span class="stringliteral">"\n"</span>;
@@ -96,7 +96,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

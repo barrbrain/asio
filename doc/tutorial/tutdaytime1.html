@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -70,7 +70,7 @@ The list of endpoints is returned using an iterator of type <a class="elRef" dox
 Now we create and connect the socket. The list of endpoints obtained above may contain both IPv4 and IPv6 endpoints, so we need to try each of them until we find one that works. This keeps the client program independent of a specific IP version.<p>
 <div class="fragment"><pre class="fragment">
     tcp::socket socket(io_service);
-    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html">asio::error_code</a> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">error</a> = <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00029.html#88e9703944ab256c753c48fe1b25bbdd">asio::error::host_not_found</a>;
+    <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html">asio::error_code</a> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">error</a> = <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00029.html#88e9703944ab256c753c48fe1b25bbdd">asio::error::host_not_found</a>;
     <span class="keywordflow">while</span> (error &amp;&amp; endpoint_iterator != end)
     {
       socket.close();
@@ -80,14 +80,14 @@ Now we create and connect the socket. The list of endpoints obtained above may c
       <span class="keywordflow">throw</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00050.html">asio::system_error</a>(error);
 </pre></div><p>
 The connection is open. All we need to do now is read the response from the daytime service.<p>
-We use a <code>boost::array</code> to hold the received data. The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer()</a> function automatically determines the size of the array to help prevent buffer overruns. Instead of a <code>boost::array</code>, we could have used a <code>char []</code> or <code>std::vector</code>.<p>
+We use a <code>boost::array</code> to hold the received data. The <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer()</a> function automatically determines the size of the array to help prevent buffer overruns. Instead of a <code>boost::array</code>, we could have used a <code>char []</code> or <code>std::vector</code>.<p>
 <div class="fragment"><pre class="fragment">
     <span class="keywordflow">for</span> (;;)
     {
       boost::array&lt;char, 128&gt; buf;
       <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00030.html">asio::error_code</a> error;
 
-      size_t len = socket.read_some(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00133.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(buf), error);
+      size_t len = socket.read_some(<a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00134.html#g1ed66e401559cbfd19595392f653b47c">asio::buffer</a>(buf), error);
 </pre></div><p>
 When the server closes the connection, the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00017.html#b4cb97ae46abddf826540c01cd748c88">asio::ip::tcp::socket::read_some()</a> function will exit with the <a class="elRef" doxygen="asio.doxytags:../reference/" href="../reference/a00029.html#be23228e9941caa68ae36adaf2f1052c">asio::error::eof</a> error, which is how we know to exit the loop.<p>
 <div class="fragment"><pre class="fragment">
@@ -112,7 +112,7 @@ See the <a class="el" href="tutdaytime1src.html">full source listing</a> <br>
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |

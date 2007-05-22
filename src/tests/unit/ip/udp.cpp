@@ -30,8 +30,6 @@
 
 namespace ip_udp_socket_compile {
 
-using namespace asio;
-
 void connect_handler(const asio::error_code&)
 {
 }
@@ -46,6 +44,9 @@ void receive_handler(const asio::error_code&, std::size_t)
 
 void test()
 {
+  using namespace asio;
+  namespace ip = asio::ip;
+
   try
   {
     io_service ios;
@@ -228,8 +229,6 @@ void test()
 
 namespace ip_udp_socket_runtime {
 
-using namespace asio;
-
 void handle_send(size_t expected_bytes_sent,
     const asio::error_code& err, size_t bytes_sent)
 {
@@ -247,6 +246,8 @@ void handle_recv(size_t expected_bytes_recvd,
 void test()
 {
   using namespace std; // For memcmp and memset.
+  using namespace asio;
+  namespace ip = asio::ip;
 
   io_service ios;
 

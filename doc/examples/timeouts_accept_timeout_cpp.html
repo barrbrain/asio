@@ -9,7 +9,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
@@ -49,6 +49,7 @@
 <span class="preprocessor">#include &lt;iostream&gt;</span>
 
 <span class="keyword">using namespace </span>asio;
+<span class="keyword">using</span> <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00051.html">asio::ip::tcp</a>;
 
 <span class="keyword">class </span>accept_handler
 {
@@ -56,12 +57,12 @@
   accept_handler(io_service&amp; ios)
     : io_service_(ios),
       timer_(ios),
-      acceptor_(ios, ip::tcp::endpoint(ip::tcp::v4(), 32123)),
+      acceptor_(ios, tcp::endpoint(tcp::v4(), 32123)),
       socket_(ios)
   {
     acceptor_.async_accept(socket_,
         boost::bind(&amp;accept_handler::handle_accept, <span class="keyword">this</span>,
-          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00130.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
+          <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00131.html#441d03324a306a3f2e2c4c72485fdf4e">asio::placeholders::error</a>));
 
     timer_.expires_from_now(boost::posix_time::seconds(5));
     timer_.async_wait(boost::bind(&amp;accept_handler::close, <span class="keyword">this</span>));
@@ -86,9 +87,9 @@
 
 <span class="keyword">private</span>:
   io_service&amp; io_service_;
-  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00125.html#9c1e57628983c6b9c45e9204228109b7">deadline_timer</a> timer_;
-  ip::tcp::acceptor acceptor_;
-  ip::tcp::socket socket_;
+  <a class="codeRef" doxygen="asio.doxytags:../reference/" href="../reference/a00126.html#9c1e57628983c6b9c45e9204228109b7">deadline_timer</a> timer_;
+  tcp::acceptor acceptor_;
+  tcp::socket socket_;
 };
 
 <span class="keywordtype">int</span> <a class="code" href="a00033.html#0ddf1224851353fc92bfbff6f499fa97">main</a>()
@@ -110,7 +111,7 @@
       <TABLE BORDER="0" WIDTH="100%">
         <TR>
           <TD ALIGN="LEFT">
-            <B>asio 0.3.8rc2</B>
+            <B>asio 0.3.8rc3</B>
           </TD>
           <TD ALIGN="RIGHT">
             <A CLASS="qindex" HREF="../index.html">Home</A> |
