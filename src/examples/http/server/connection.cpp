@@ -82,6 +82,13 @@ void connection::handle_read(const asio::error_code& e,
 
 void connection::handle_write(const asio::error_code& e)
 {
+  if (!e)
+  {
+    // Initiate graceful connection closure.
+    asio::error_code ignored_ec;
+    socket_.shutdown(asio::ip::tcp::socket::shutdown_both, ignored_ec);
+  }
+
   if (e != asio::error::operation_aborted)
   {
     connection_manager_.stop(shared_from_this());

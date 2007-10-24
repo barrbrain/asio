@@ -1,8 +1,0 @@
-base referer
-rect $a00008.html 866,10 1229,37
-rect $a00008.html 834,74 1261,101
-rect $a00008.html 873,138 1222,165
-rect $a00008.html 842,202 1253,229
-rect $a00008.html 832,266 1264,293
-rect $a00008.html 878,330 1217,357
-rect external.doxytags$noncopyable.html 9,170 134,197

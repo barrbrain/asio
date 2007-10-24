@@ -1,0 +1,247 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title> Using Asio</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<link rel="start" href="../index.html" title="Asio">
+<link rel="up" href="../index.html" title="Asio">
+<link rel="prev" href="../index.html" title="Asio">
+<link rel="next" href="tutorial.html" title=" Tutorial">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../asio.png"></td></tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="../index.html"><img src="../prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../home.png" alt="Home"></a><a accesskey="n" href="tutorial.html"><img src="../next.png" alt="Next"></a>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="asio.using"></a><a href="using.html" title=" Using Asio"> Using Asio</a></h2></div></div></div>
+<a name="asio.using.supported_platforms"></a><h3>
+<a name="id905216"></a>
+      <a href="using.html#asio.using.supported_platforms">Supported Platforms</a>
+    </h3>
+<p>
+      The following platforms and compilers have been tested:
+    </p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+        Win32 and Win64 using Visual C++ 7.1 and Visual C++ 8.0.
+      </li>
+<li>
+        Win32 using Borland C++Builder 6 patch 4.
+      </li>
+<li>
+        Win32 using MinGW.
+      </li>
+<li>
+        Win32 using Cygwin. (<code class="computeroutput"><span class="identifier">__USE_W32_SOCKETS</span></code>
+        must be defined.)
+      </li>
+<li>
+        Linux (2.4 or 2.6 kernels) using g++ 3.3 or later.
+      </li>
+<li>
+        Solaris using g++ 3.3 or later.
+      </li>
+<li>
+        Mac OS X 10.4 using g++ 3.3 or later.
+      </li>
+</ul></div>
+<p>
+      The following platforms may also work:
+    </p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+        AIX 5.3 using XL C/C++ v9.
+      </li>
+<li>
+        HP-UX 11i v3 using patched aC++ A.06.14.
+      </li>
+<li>
+        QNX Neutrino 6.3 using g++ 3.3 or later.
+      </li>
+<li>
+        Solaris using Sun Studio 11 or later.
+      </li>
+<li>
+        Tru64 v5.1 using Compaq C++ v7.1.
+      </li>
+</ul></div>
+<a name="asio.using.dependencies"></a><h3>
+<a name="id905313"></a>
+      <a href="using.html#asio.using.dependencies">Dependencies</a>
+    </h3>
+<p>
+      The following libraries must be available in order to link programs that use
+      Asio:
+    </p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+        Boost.Regex (optional) if you use any of the <a href="reference/read_until.html" title=" read_until"><code class="computeroutput"><span class="identifier">read_until</span><span class="special">()</span></code></a>
+        or <a href="reference/async_read_until.html" title=" async_read_until"><code class="computeroutput"><span class="identifier">async_read_until</span><span class="special">()</span></code></a> overloads that take a <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">regex</span></code> parameter.
+      </li>
+<li>
+<a href="http://www.openssl.org" target="_top">OpenSSL</a> (optional) if you use
+        Asio's SSL support.
+      </li>
+</ul></div>
+<p>
+      Furthermore, some of the examples also require Boost.Date_Time or Boost.Serialization
+      libraries.
+    </p>
+<div class="note"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../note.png"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>
+        With MSVC or Borland C++ you may want to add <code class="computeroutput"><span class="special">-</span><span class="identifier">DBOOST_DATE_TIME_NO_LIB</span></code> and <code class="computeroutput"><span class="special">-</span><span class="identifier">DBOOST_REGEX_NO_LIB</span></code>
+        to your project settings to disable autolinking of the Boost.Date_Time and
+        Boost.Regex libraries respectively. Alternatively, you may choose to build
+        these libraries and link to them.
+      </p></td></tr>
+</table></div>
+<a name="asio.using.building_the_tests_and_examples_on_linux_or_unix"></a><h3>
+<a name="id905464"></a>
+      <a href="using.html#asio.using.building_the_tests_and_examples_on_linux_or_unix">Building
+      the tests and examples on Linux or UNIX</a>
+    </h3>
+<p>
+      If the boost directory (e.g. the directory called <code class="computeroutput"><span class="identifier">boost_1_34_1</span></code>)
+      is in the same directory as the asio source kit, then you may configure asio
+      by simply going:
+    </p>
+<pre class="programlisting">
+<span class="special">./</span><span class="identifier">configure</span>
+</pre>
+<p>
+      in the root directory of the asio source kit. Note that configure will always
+      use the most recent boost version it knows about (i.e. 1.34.1) in preference
+      to earlier versions, if there is more than one version present.
+    </p>
+<p>
+      If the boost directory is in some other location, then you need to specify
+      this directory when running configure:
+    </p>
+<pre class="programlisting">
+<span class="special">./</span><span class="identifier">configure</span> <span class="special">--</span><span class="identifier">with</span><span class="special">-</span><span class="identifier">boost</span><span class="special">=</span><span class="emphasis"><em>path_to_boost</em></span>
+</pre>
+<p>
+      When specifying the boost directory in this way you should ensure that you
+      use an absolute path.
+    </p>
+<p>
+      To build, simply run <code class="computeroutput"><span class="identifier">make</span></code> in
+      the root directory of the asio source kit. To test that asio is working correctly,
+      run <code class="computeroutput"><span class="identifier">make</span> <span class="identifier">check</span></code>
+      after a successful build.
+    </p>
+<a name="asio.using.building_the_tests_and_examples_with_msvc"></a><h3>
+<a name="id905614"></a>
+      <a href="using.html#asio.using.building_the_tests_and_examples_with_msvc">Building
+      the tests and examples with MSVC</a>
+    </h3>
+<p>
+      To build using the MSVC 7.1 or MSVC 8.0 command line compiler, perform the
+      following steps in a Command Prompt window:
+    </p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+        If you are using a version of boost other than 1.34.1, or if the boost directory
+        (i.e. the directory called <code class="computeroutput"><span class="identifier">boost_1_34_1</span></code>)
+        is not in the same directory as the asio source kit, then specify the location
+        of boost by running a command similar to <code class="literal">set BOOSTDIR=<span class="emphasis"><em>path_to_boost</em></span></code>.
+        Ensure that you specify an absolute path.
+      </li>
+<li>
+        Change to the asio <code class="computeroutput"><span class="identifier">src</span></code> directory.
+      </li>
+<li>
+        Execute the command <code class="computeroutput"><span class="identifier">nmake</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">msc</span></code>.
+      </li>
+<li>
+        Execute the command <code class="computeroutput"><span class="identifier">nmake</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">msc</span> <span class="identifier">check</span></code>
+        to run a suite of tests to confirm that asio is working correctly.
+      </li>
+</ul></div>
+<a name="asio.using.building_the_test_and_examples_with_borland_c__"></a><h3>
+<a name="id905770"></a>
+      <a href="using.html#asio.using.building_the_test_and_examples_with_borland_c__">Building
+      the test and examples with Borland C++</a>
+    </h3>
+<p>
+      To build using the Borland C++ Builder command line compiler, perform the following
+      steps in a Command Prompt window:
+    </p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+        If you are using a version of boost other than 1.34.1, or if the boost directory
+        (i.e. the directory called <code class="computeroutput"><span class="identifier">boost_1_34_1</span></code>)
+        is not in the same directory as the asio source kit, then specify the location
+        of boost by running a command similar to <code class="literal">set BOOSTDIR=<span class="emphasis"><em>path_to_boost</em></span></code>.
+        Ensure that you specify an absolute path.
+      </li>
+<li>
+        Change to the asio <code class="computeroutput"><span class="identifier">src</span></code> directory.
+      </li>
+<li>
+        Execute the command <code class="computeroutput"><span class="identifier">make</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">bor</span></code>.
+      </li>
+<li>
+        Execute the command <code class="computeroutput"><span class="identifier">make</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">bor</span> <span class="identifier">check</span></code>
+        to run a suite of tests to confirm that asio is working correctly.
+      </li>
+</ul></div>
+<a name="asio.using.building_the_tests_and_examples_with_mingw"></a><h3>
+<a name="id905926"></a>
+      <a href="using.html#asio.using.building_the_tests_and_examples_with_mingw">Building
+      the tests and examples with MinGW</a>
+    </h3>
+<p>
+      To build using the MinGW g++ compiler from the command line, perform the following
+      steps in a Command Prompt window:
+    </p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+        If you are using a version of boost other than 1.34.1, or if the boost directory
+        (i.e. the directory called <code class="computeroutput"><span class="identifier">boost_1_34_1</span></code>)
+        is not in the same directory as the asio source kit, then specify the location
+        of boost by running a command similar to <code class="literal">set BOOSTDIR=<span class="emphasis"><em>path_to_boost</em></span></code>.
+        Ensure that you specify an absolute path using <span class="emphasis"><em>forward slashes</em></span>
+        (i.e. <code class="computeroutput"><span class="identifier">c</span><span class="special">:/</span><span class="identifier">projects</span><span class="special">/</span><span class="identifier">boost_1_34_1</span></code> rather than <code class="computeroutput"><span class="identifier">c</span><span class="special">:\</span><span class="identifier">projects</span><span class="special">\</span><span class="identifier">boost_1_34_1</span></code>).
+      </li>
+<li>
+        Change to the asio <code class="computeroutput"><span class="identifier">src</span></code> directory.
+      </li>
+<li>
+        Execute the command <code class="computeroutput"><span class="identifier">make</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">mgw</span></code>.
+      </li>
+<li>
+        Execute the command <code class="computeroutput"><span class="identifier">make</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">mgw</span> <span class="identifier">check</span></code>
+        to run a suite of tests to confirm that asio is working correctly.
+      </li>
+</ul></div>
+<div class="note"><table border="0" summary="Note">
+<tr>
+<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../note.png"></td>
+<th align="left">Note</th>
+</tr>
+<tr><td align="left" valign="top"><p>
+        The above instructions do not work when building inside MSYS. If you want
+        to build using MSYS, you should use <code class="literal">export</code> rather than
+        <code class="literal">set</code> to specify the location of boost.
+      </p></td></tr>
+</table></div>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="../index.html"><img src="../prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../home.png" alt="Home"></a><a accesskey="n" href="tutorial.html"><img src="../next.png" alt="Next"></a>
+</div>
+</body>
+</html>

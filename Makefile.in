@@ -37,8 +37,7 @@ build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(top_srcdir)/configure COPYING INSTALL \
-	THANKS compile config.guess config.sub depcomp install-sh \
-	missing
+	compile config.guess config.sub depcomp install-sh missing
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -89,15 +88,11 @@ CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
-DOXYGEN_FOUND = @DOXYGEN_FOUND@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 EXEEXT = @EXEEXT@
-HAVE_DOT = @HAVE_DOT@
-HAVE_DOXYGEN_FALSE = @HAVE_DOXYGEN_FALSE@
-HAVE_DOXYGEN_TRUE = @HAVE_DOXYGEN_TRUE@
 HAVE_OPENSSL_FALSE = @HAVE_OPENSSL_FALSE@
 HAVE_OPENSSL_TRUE = @HAVE_OPENSSL_TRUE@
 INSTALL_DATA = @INSTALL_DATA@
@@ -183,7 +178,8 @@ MAINTAINERCLEANFILES = \
 	asio-*.tar.gz
 
 EXTRA_DIST = \
-	LICENSE_1_0.txt
+	LICENSE_1_0.txt \
+	doc
 
 all: all-recursive
 
@@ -346,7 +342,6 @@ distclean-tags:
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkdir_p) $(distdir)/src/doc
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \

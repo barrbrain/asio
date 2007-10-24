@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title> Design Notes</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<link rel="start" href="../index.html" title="Asio">
+<link rel="up" href="../index.html" title="Asio">
+<link rel="prev" href="reference/write/overload6.html" title=" write (6 of 6 overloads)">
+<link rel="next" href="design/rationale.html" title=" Rationale">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../asio.png"></td></tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="reference/write/overload6.html"><img src="../prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../home.png" alt="Home"></a><a accesskey="n" href="design/rationale.html"><img src="../next.png" alt="Next"></a>
+</div>
+<div class="section" lang="en">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="asio.design"></a><a href="design.html" title=" Design Notes"> Design Notes</a></h2></div></div></div>
+<div class="variablelist">
+<p class="title"><b></b></p>
+<dl>
+<dt><span class="term"> <a href="design/rationale.html" title=" Rationale">Rationale</a>
+      </span></dt>
+<dd><p>
+          Design rationale for the Asio library.
+        </p></dd>
+<dt><span class="term"> <a href="design/async.html" title=" Asynchronous Operations">Asynchronous
+      operations</a> </span></dt>
+<dd><p>
+          Support for asynchronous operations in the Asio library is based on the
+          Proactor pattern. This design note outlines the advantages and disadvantages
+          of this approach.
+        </p></dd>
+<dt><span class="term"> <a href="design/allocation.html" title=" Custom Memory Allocation">Custom
+      memory allocation</a> </span></dt>
+<dd><p>
+          Describes the custom memory allocation support in Asio.
+        </p></dd>
+<dt><span class="term"> <a href="design/buffers.html" title=" Buffers">Buffers</a>
+      </span></dt>
+<dd><p>
+          Examines the buffer abstraction used by asio in order to support scatter-gather
+          operations.
+        </p></dd>
+<dt><span class="term"> <a href="design/eof.html" title=" Why EOF is an error">Why EOF
+      is an error</a> </span></dt>
+<dd><p>
+          Discusses why the end-of-file condition should be an error code.
+        </p></dd>
+<dt><span class="term"> <a href="design/line_based.html" title=" Line-Based Protocols">Line-based
+      protocols</a> </span></dt>
+<dd><p>
+          Outlines Asio's support for line-based protocols.
+        </p></dd>
+<dt><span class="term"> <a href="design/threads.html" title=" Threads">Threads</a>
+      </span></dt>
+<dd><p>
+          An implementation of Asio for a particular platform may make use of one
+          or more additional threads to emulate asynchronicity. This design note
+          discusses design rules applied to the use of threads in this way.
+        </p></dd>
+<dt><span class="term"> <a href="design/strands.html" title=" Strands">Strands</a>
+      </span></dt>
+<dd><p>
+          Describes the "strand" abstraction provided by Asio to ease concurrent
+          programming and provide scalability across multiple processors.
+        </p></dd>
+<dt><span class="term"> <a href="design/implementation.html" title=" Platform-Specific Implementation">Platform-specific
+      implementation</a> </span></dt>
+<dd><p>
+          This design note lists platform-specific implementation details, such as
+          the default demultiplexing mechanism, the number of threads created internally,
+          and when threads are created.
+        </p></dd>
+</dl>
+</div>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="reference/write/overload6.html"><img src="../prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../home.png" alt="Home"></a><a accesskey="n" href="design/rationale.html"><img src="../next.png" alt="Next"></a>
+</div>
+</body>
+</html>

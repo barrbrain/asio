@@ -309,7 +309,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar build build_cpu build_vendor build_os host host_cpu host_vendor host_os CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE RANLIB ac_ct_RANLIB CXXCPP EGREP HAVE_OPENSSL_TRUE HAVE_OPENSSL_FALSE DOXYGEN_FOUND HAVE_DOXYGEN_TRUE HAVE_DOXYGEN_FALSE HAVE_DOT WINDOWS_TARGET_TRUE WINDOWS_TARGET_FALSE LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar build build_cpu build_vendor build_os host host_cpu host_vendor host_os CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE RANLIB ac_ct_RANLIB CXXCPP EGREP HAVE_OPENSSL_TRUE HAVE_OPENSSL_FALSE WINDOWS_TARGET_TRUE WINDOWS_TARGET_FALSE LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -1648,7 +1648,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=asio
- VERSION=0.3.8rc3
+ VERSION=0.3.8
 
 
 cat >>confdefs.h <<_ACEOF
@@ -3606,17 +3606,22 @@ if test "${with_boost+set}" = set; then
 
 else
 
-  BOOSTDIR="`pwd`/../boost_1_34_0"
+  BOOSTDIR="`pwd`/../boost_1_34_1"
   if test -d "${BOOSTDIR}"; then
     CPPFLAGS="$CPPFLAGS -I${BOOSTDIR}"
   else
-    BOOSTDIR="`pwd`/../boost_1_33_1"
+    BOOSTDIR="`pwd`/../boost_1_34_0"
     if test -d "${BOOSTDIR}"; then
       CPPFLAGS="$CPPFLAGS -I${BOOSTDIR}"
     else
-      BOOSTDIR="`pwd`/../boost_1_33_0"
+      BOOSTDIR="`pwd`/../boost_1_33_1"
       if test -d "${BOOSTDIR}"; then
         CPPFLAGS="$CPPFLAGS -I${BOOSTDIR}"
+      else
+        BOOSTDIR="`pwd`/../boost_1_33_0"
+        if test -d "${BOOSTDIR}"; then
+          CPPFLAGS="$CPPFLAGS -I${BOOSTDIR}"
+        fi
       fi
     fi
   fi
@@ -4450,7 +4455,7 @@ case $host in
     WINDOWS=yes
     ;;
   *-pc-cygwin*)
-    CXXFLAGS="$CXXFLAGS -D__USE_W32_SOCKETS -D_WIN32_WINNT=0x0500"
+    CXXFLAGS="$CXXFLAGS -D__USE_W32_SOCKETS -D_WIN32_WINNT=0x0501"
     LIBS="$LIBS -lws2_32 -lmswsock"
     WINDOWS=yes
     ;;
@@ -4468,88 +4473,6 @@ if test "$GXX" = yes; then
   CXXFLAGS="$CXXFLAGS -ftemplate-depth-256"
 fi
 
-# Extract the first word of "doxygen", so it can be a program name with args.
-set dummy doxygen; ac_word=$2
-echo "$as_me:$LINENO: checking for $ac_word" >&5
-echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
-if test "${ac_cv_prog_DOXYGEN_FOUND+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  if test -n "$DOXYGEN_FOUND"; then
-  ac_cv_prog_DOXYGEN_FOUND="$DOXYGEN_FOUND" # Let the user override the test.
-else
-as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-  for ac_exec_ext in '' $ac_executable_extensions; do
-  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_prog_DOXYGEN_FOUND="yes"
-    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-done
-
-fi
-fi
-DOXYGEN_FOUND=$ac_cv_prog_DOXYGEN_FOUND
-if test -n "$DOXYGEN_FOUND"; then
-  echo "$as_me:$LINENO: result: $DOXYGEN_FOUND" >&5
-echo "${ECHO_T}$DOXYGEN_FOUND" >&6
-else
-  echo "$as_me:$LINENO: result: no" >&5
-echo "${ECHO_T}no" >&6
-fi
-
-
-
-if test x$DOXYGEN_FOUND = xyes; then
-  HAVE_DOXYGEN_TRUE=
-  HAVE_DOXYGEN_FALSE='#'
-else
-  HAVE_DOXYGEN_TRUE='#'
-  HAVE_DOXYGEN_FALSE=
-fi
-
-# Extract the first word of "dot", so it can be a program name with args.
-set dummy dot; ac_word=$2
-echo "$as_me:$LINENO: checking for $ac_word" >&5
-echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
-if test "${ac_cv_prog_HAVE_DOT+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  if test -n "$HAVE_DOT"; then
-  ac_cv_prog_HAVE_DOT="$HAVE_DOT" # Let the user override the test.
-else
-as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-  for ac_exec_ext in '' $ac_executable_extensions; do
-  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_prog_HAVE_DOT="YES"
-    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-done
-
-  test -z "$ac_cv_prog_HAVE_DOT" && ac_cv_prog_HAVE_DOT="NO"
-fi
-fi
-HAVE_DOT=$ac_cv_prog_HAVE_DOT
-if test -n "$HAVE_DOT"; then
-  echo "$as_me:$LINENO: result: $HAVE_DOT" >&5
-echo "${ECHO_T}$HAVE_DOT" >&6
-else
-  echo "$as_me:$LINENO: result: no" >&5
-echo "${ECHO_T}no" >&6
-fi
-
-
 
 
 if test x$WINDOWS != xno; then
@@ -4561,7 +4484,7 @@ else
 fi
 
 
-                                                                                                    ac_config_files="$ac_config_files Makefile include/Makefile src/Makefile src/doc/Makefile src/doc/design.dox src/doc/examples.dox src/doc/index.html src/doc/building.html src/doc/reference.dox src/doc/tutorial.dox"
+                              ac_config_files="$ac_config_files Makefile include/Makefile src/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -4716,13 +4639,6 @@ if test -z "${HAVE_OPENSSL_TRUE}" && test -z "${HAVE_OPENSSL_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"HAVE_OPENSSL\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
 echo "$as_me: error: conditional \"HAVE_OPENSSL\" was never defined.
-Usually this means the macro was only invoked conditionally." >&2;}
-   { (exit 1); exit 1; }; }
-fi
-if test -z "${HAVE_DOXYGEN_TRUE}" && test -z "${HAVE_DOXYGEN_FALSE}"; then
-  { { echo "$as_me:$LINENO: error: conditional \"HAVE_DOXYGEN\" was never defined.
-Usually this means the macro was only invoked conditionally." >&5
-echo "$as_me: error: conditional \"HAVE_DOXYGEN\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
@@ -5175,13 +5091,6 @@ do
   "Makefile" ) CONFIG_FILES="$CONFIG_FILES Makefile" ;;
   "include/Makefile" ) CONFIG_FILES="$CONFIG_FILES include/Makefile" ;;
   "src/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
-  "src/doc/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/doc/Makefile" ;;
-  "src/doc/design.dox" ) CONFIG_FILES="$CONFIG_FILES src/doc/design.dox" ;;
-  "src/doc/examples.dox" ) CONFIG_FILES="$CONFIG_FILES src/doc/examples.dox" ;;
-  "src/doc/index.html" ) CONFIG_FILES="$CONFIG_FILES src/doc/index.html" ;;
-  "src/doc/building.html" ) CONFIG_FILES="$CONFIG_FILES src/doc/building.html" ;;
-  "src/doc/reference.dox" ) CONFIG_FILES="$CONFIG_FILES src/doc/reference.dox" ;;
-  "src/doc/tutorial.dox" ) CONFIG_FILES="$CONFIG_FILES src/doc/tutorial.dox" ;;
   "depfiles" ) CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
@@ -5328,10 +5237,6 @@ s,@CXXCPP@,$CXXCPP,;t t
 s,@EGREP@,$EGREP,;t t
 s,@HAVE_OPENSSL_TRUE@,$HAVE_OPENSSL_TRUE,;t t
 s,@HAVE_OPENSSL_FALSE@,$HAVE_OPENSSL_FALSE,;t t
-s,@DOXYGEN_FOUND@,$DOXYGEN_FOUND,;t t
-s,@HAVE_DOXYGEN_TRUE@,$HAVE_DOXYGEN_TRUE,;t t
-s,@HAVE_DOXYGEN_FALSE@,$HAVE_DOXYGEN_FALSE,;t t
-s,@HAVE_DOT@,$HAVE_DOT,;t t
 s,@WINDOWS_TARGET_TRUE@,$WINDOWS_TARGET_TRUE,;t t
 s,@WINDOWS_TARGET_FALSE@,$WINDOWS_TARGET_FALSE,;t t
 s,@LIBOBJS@,$LIBOBJS,;t t
