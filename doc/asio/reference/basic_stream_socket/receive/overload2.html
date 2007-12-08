@@ -1,16 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>
-          basic_stream_socket::receive (2 of 3 overloads)</title>
+<title>basic_stream_socket::receive (2 of 3 overloads)</title>
 <link rel="stylesheet" href="../../../../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../../../../index.html" title="Asio">
-<link rel="up" href="../receive.html" title=" basic_stream_socket::receive">
-<link rel="prev" href="overload1.html" title="
-          basic_stream_socket::receive (1 of 3 overloads)">
-<link rel="next" href="overload3.html" title="
-          basic_stream_socket::receive (3 of 3 overloads)">
+<link rel="up" href="../receive.html" title="basic_stream_socket::receive">
+<link rel="prev" href="overload1.html" title="basic_stream_socket::receive (1 of 3 overloads)">
+<link rel="next" href="overload3.html" title="basic_stream_socket::receive (3 of 3 overloads)">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../../../asio.png"></td></tr></table>
@@ -20,16 +17,14 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="asio.reference.basic_stream_socket.receive.overload2"></a><a href="overload2.html" title="
-          basic_stream_socket::receive (2 of 3 overloads)">
+<a name="asio.reference.basic_stream_socket.receive.overload2"></a><a class="link" href="overload2.html" title="basic_stream_socket::receive (2 of 3 overloads)">
           basic_stream_socket::receive (2 of 3 overloads)</a></h5></div></div></div>
 <p>
             Receive some data on the socket.
           </p>
 <pre class="programlisting">
 <span class="keyword">template</span><span class="special">&lt;</span>
-    <span class="keyword">typename</span> <a href="../../MutableBufferSequence.html" title=" Mutable buffer
-      sequence requirements">MutableBufferSequence</a><span class="special">&gt;</span>
+    <span class="keyword">typename</span> <a class="link" href="../../MutableBufferSequence.html" title="Mutable buffer sequence requirements">MutableBufferSequence</a><span class="special">&gt;</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">receive</span><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">MutableBufferSequence</span> <span class="special">&amp;</span> <span class="identifier">buffers</span><span class="special">,</span>
     <span class="identifier">socket_base</span><span class="special">::</span><span class="identifier">message_flags</span> <span class="identifier">flags</span><span class="special">);</span>
@@ -40,8 +35,8 @@
             or until an error occurs.
           </p>
 <a name="asio.reference.basic_stream_socket.receive.overload2.parameters"></a><h6>
-<a name="id1310977"></a>
-            <a href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.parameters">Parameters</a>
+<a name="id3557955"></a>
+            <a class="link" href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
 <p class="title"><b></b></p>
@@ -57,16 +52,16 @@
 </dl>
 </div>
 <a name="asio.reference.basic_stream_socket.receive.overload2.return_value"></a><h6>
-<a name="id1311035"></a>
-            <a href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.return_value">Return
+<a name="id3558005"></a>
+            <a class="link" href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.return_value">Return
             Value</a>
           </h6>
 <p>
             The number of bytes received.
           </p>
 <a name="asio.reference.basic_stream_socket.receive.overload2.exceptions"></a><h6>
-<a name="id1311042"></a>
-            <a href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.exceptions">Exceptions</a>
+<a name="id3558028"></a>
+            <a class="link" href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.exceptions">Exceptions</a>
           </h6>
 <div class="variablelist">
 <p class="title"><b></b></p>
@@ -79,35 +74,39 @@
 </dl>
 </div>
 <a name="asio.reference.basic_stream_socket.receive.overload2.remarks"></a><h6>
-<a name="id1311106"></a>
-            <a href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.remarks">Remarks</a>
+<a name="id3558066"></a>
+            <a class="link" href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.remarks">Remarks</a>
           </h6>
 <p>
             The receive operation may not receive all of the requested number of
-            bytes. Consider using the <a href="../../read.html" title=" read">read</a>
+            bytes. Consider using the <a class="link" href="../../read.html" title="read">read</a>
             function if you need to ensure that the requested amount of data is read
             before the blocking operation completes.
           </p>
 <a name="asio.reference.basic_stream_socket.receive.overload2.example"></a><h6>
-<a name="id1311144"></a>
-            <a href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.example">Example</a>
+<a name="id3558097"></a>
+            <a class="link" href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.example">Example</a>
           </h6>
 <p>
-            To receive into a single data buffer use the <a href="../../buffer.html" title=" buffer">buffer</a>
+            To receive into a single data buffer use the <a class="link" href="../../buffer.html" title="buffer">buffer</a>
             function as follows:
           </p>
 <pre class="programlisting">
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">receive</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span> <span class="number">0</span><span class="special">);</span>
 </pre>
 <p>
-            See the <a href="../../buffer.html" title=" buffer">buffer</a> documentation
+            See the <a class="link" href="../../buffer.html" title="buffer">buffer</a> documentation
             for information on receiving into multiple buffers in one go, and how
             to use it with arrays, boost::array or std::vector.
           </p>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">

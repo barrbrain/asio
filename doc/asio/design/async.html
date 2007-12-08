@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title> Asynchronous Operations</title>
+<title>Asynchronous Operations</title>
 <link rel="stylesheet" href="../../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../../index.html" title="Asio">
-<link rel="up" href="../design.html" title=" Design Notes">
-<link rel="prev" href="rationale.html" title=" Rationale">
-<link rel="next" href="allocation.html" title=" Custom Memory Allocation">
+<link rel="up" href="../design.html" title="Design Notes">
+<link rel="prev" href="rationale.html" title="Rationale">
+<link rel="next" href="allocation.html" title="Custom Memory Allocation">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../asio.png"></td></tr></table>
@@ -17,18 +17,18 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="asio.design.async"></a><a href="async.html" title=" Asynchronous Operations"> Asynchronous Operations</a></h3></div></div></div>
+<a name="asio.design.async"></a><a class="link" href="async.html" title="Asynchronous Operations"> Asynchronous Operations</a></h3></div></div></div>
 <p>
         The proposed library offers side-by-side support for synchronous and asynchronous
         operations. The asynchronous support is based on the Proactor design pattern
-        <a href="async.html#asio.design.async.references">[POSA2]</a>, and the advantages
+        <a class="link" href="async.html#asio.design.async.references">[POSA2]</a>, and the advantages
         and disadvantages of this approach, when compared to a synchronous-only or
         Reactor approach, are outlined below.
       </p>
-<a name="asio.design.async.proactor_and_asio"></a><h4>
-<a name="id1771357"></a>
-        <a href="async.html#asio.design.async.proactor_and_asio">Proactor and Asio</a>
-      </h4>
+<a name="asio.design.async.proactor_and_asio"></a><h5>
+<a name="id3699204"></a>
+        <a class="link" href="async.html#asio.design.async.proactor_and_asio">Proactor and Asio</a>
+      </h5>
 <p>
         Let us examine how the Proactor design pattern is implemented in Asio, without
         reference to platform-specific details.
@@ -134,11 +134,11 @@
 <p>
         </p>
 </blockquote></div>
-<a name="asio.design.async.implementation_using_reactor"></a><h4>
-<a name="id1771614"></a>
-        <a href="async.html#asio.design.async.implementation_using_reactor">Implementation
+<a name="asio.design.async.implementation_using_reactor"></a><h5>
+<a name="id3699441"></a>
+        <a class="link" href="async.html#asio.design.async.implementation_using_reactor">Implementation
         Using Reactor</a>
-      </h4>
+      </h5>
 <p>
         On many platforms, Asio implements the Proactor design pattern in terms of
         a Reactor, such as <code class="computeroutput"><span class="identifier">select</span></code>,
@@ -187,11 +187,11 @@
 <p>
         </p>
 </blockquote></div>
-<a name="asio.design.async.implementation_using_windows_overlapped_i_o"></a><h4>
-<a name="id1771761"></a>
-        <a href="async.html#asio.design.async.implementation_using_windows_overlapped_i_o">Implementation
+<a name="asio.design.async.implementation_using_windows_overlapped_i_o"></a><h5>
+<a name="id3699576"></a>
+        <a class="link" href="async.html#asio.design.async.implementation_using_windows_overlapped_i_o">Implementation
         Using Windows Overlapped I/O</a>
-      </h4>
+      </h5>
 <p>
         On Windows NT, 2000 and XP, Asio takes advantage of overlapped I/O to provide
         an efficient implementation of the Proactor design pattern. This implementation
@@ -236,10 +236,10 @@
 <p>
         </p>
 </blockquote></div>
-<a name="asio.design.async.advantages"></a><h4>
-<a name="id1771856"></a>
-        <a href="async.html#asio.design.async.advantages">Advantages</a>
-      </h4>
+<a name="asio.design.async.advantages"></a><h5>
+<a name="id3699658"></a>
+        <a class="link" href="async.html#asio.design.async.advantages">Advantages</a>
+      </h5>
 <p>
         &#8212; Portability.
       </p>
@@ -356,10 +356,10 @@
 <p>
         </p>
 </blockquote></div>
-<a name="asio.design.async.disadvantages"></a><h4>
-<a name="id1772043"></a>
-        <a href="async.html#asio.design.async.disadvantages">Disadvantages</a>
-      </h4>
+<a name="asio.design.async.disadvantages"></a><h5>
+<a name="id3699827"></a>
+        <a class="link" href="async.html#asio.design.async.disadvantages">Disadvantages</a>
+      </h5>
 <p>
         &#8212; Program complexity.
       </p>
@@ -390,18 +390,22 @@
 <p>
         </p>
 </blockquote></div>
-<a name="asio.design.async.references"></a><h4>
-<a name="id1772103"></a>
-        <a href="async.html#asio.design.async.references">References</a>
-      </h4>
+<a name="asio.design.async.references"></a><h5>
+<a name="id3699877"></a>
+        <a class="link" href="async.html#asio.design.async.references">References</a>
+      </h5>
 <p>
         [POSA2] D. Schmidt et al, <span class="emphasis"><em>Pattern Oriented Software Architecture,
         Volume 2</em></span>. Wiley, 2000.
       </p>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">

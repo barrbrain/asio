@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title> io_service::use_service</title>
+<title>io_service::use_service</title>
 <link rel="stylesheet" href="../../../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../../../index.html" title="Asio">
-<link rel="up" href="../io_service.html" title=" io_service">
-<link rel="prev" href="stop.html" title=" io_service::stop">
-<link rel="next" href="wrap.html" title=" io_service::wrap">
+<link rel="up" href="../io_service.html" title="io_service">
+<link rel="prev" href="stop.html" title="io_service::stop">
+<link rel="next" href="wrap.html" title="io_service::wrap">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../../asio.png"></td></tr></table>
@@ -17,13 +17,13 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.reference.io_service.use_service"></a><a href="use_service.html" title=" io_service::use_service"> io_service::use_service</a></h4></div></div></div>
+<a name="asio.reference.io_service.use_service"></a><a class="link" href="use_service.html" title="io_service::use_service"> io_service::use_service</a></h4></div></div></div>
 <p>
           Obtain the service object corresponding to the given type.
         </p>
 <pre class="programlisting">
 <span class="keyword">template</span><span class="special">&lt;</span>
-    <span class="keyword">typename</span> <a href="../Service.html" title=" Service requirements">Service</a><span class="special">&gt;</span>
+    <span class="keyword">typename</span> <a class="link" href="../Service.html" title="Service requirements">Service</a><span class="special">&gt;</span>
 <span class="keyword">friend</span> <span class="identifier">Service</span> <span class="special">&amp;</span> <span class="identifier">use_service</span><span class="special">(</span>
     <span class="identifier">io_service</span> <span class="special">&amp;</span> <span class="identifier">ios</span><span class="special">);</span>
 </pre>
@@ -32,10 +32,10 @@
           given service type. If there is no existing implementation of the service,
           then the io_service will create a new instance of the service.
         </p>
-<a name="asio.reference.io_service.use_service.parameters"></a><h5>
-<a name="id1566660"></a>
-          <a href="use_service.html#asio.reference.io_service.use_service.parameters">Parameters</a>
-        </h5>
+<a name="asio.reference.io_service.use_service.parameters"></a><h6>
+<a name="id3602728"></a>
+          <a class="link" href="use_service.html#asio.reference.io_service.use_service.parameters">Parameters</a>
+        </h6>
 <div class="variablelist">
 <p class="title"><b></b></p>
 <dl>
@@ -45,19 +45,23 @@
             </p></dd>
 </dl>
 </div>
-<a name="asio.reference.io_service.use_service.return_value"></a><h5>
-<a name="id1566702"></a>
-          <a href="use_service.html#asio.reference.io_service.use_service.return_value">Return
+<a name="asio.reference.io_service.use_service.return_value"></a><h6>
+<a name="id3602765"></a>
+          <a class="link" href="use_service.html#asio.reference.io_service.use_service.return_value">Return
           Value</a>
-        </h5>
+        </h6>
 <p>
           The service interface implementing the specified service type. Ownership
           of the service interface is not transferred to the caller.
         </p>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">

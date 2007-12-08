@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title> read (6 of 6 overloads)</title>
+<title>read (6 of 6 overloads)</title>
 <link rel="stylesheet" href="../../../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../../../index.html" title="Asio">
-<link rel="up" href="../read.html" title=" read">
-<link rel="prev" href="overload5.html" title=" read (5 of 6 overloads)">
-<link rel="next" href="../read_until.html" title=" read_until">
+<link rel="up" href="../read.html" title="read">
+<link rel="prev" href="overload5.html" title="read (5 of 6 overloads)">
+<link rel="next" href="../read_until.html" title="read_until">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../../asio.png"></td></tr></table>
@@ -17,14 +17,13 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.reference.read.overload6"></a><a href="overload6.html" title=" read (6 of 6 overloads)"> read (6 of 6 overloads)</a></h4></div></div></div>
+<a name="asio.reference.read.overload6"></a><a class="link" href="overload6.html" title="read (6 of 6 overloads)"> read (6 of 6 overloads)</a></h4></div></div></div>
 <p>
           Attempt to read a certain amount of data from a stream before returning.
         </p>
 <pre class="programlisting">
 <span class="keyword">template</span><span class="special">&lt;</span>
-    <span class="keyword">typename</span> <a href="../SyncReadStream.html" title=" Buffer-oriented synchronous
-      read stream requirements">SyncReadStream</a><span class="special">,</span>
+    <span class="keyword">typename</span> <a class="link" href="../SyncReadStream.html" title="Buffer-oriented synchronous read stream requirements">SyncReadStream</a><span class="special">,</span>
     <span class="keyword">typename</span> <span class="identifier">Allocator</span><span class="special">,</span>
     <span class="keyword">typename</span> <span class="identifier">CompletionCondition</span><span class="special">&gt;</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">read</span><span class="special">(</span>
@@ -44,10 +43,10 @@
           This operation is implemented in terms of one or more calls to the stream's
           read_some function.
         </p>
-<a name="asio.reference.read.overload6.parameters"></a><h5>
-<a name="id1668648"></a>
-          <a href="overload6.html#asio.reference.read.overload6.parameters">Parameters</a>
-        </h5>
+<a name="asio.reference.read.overload6.parameters"></a><h6>
+<a name="id3650445"></a>
+          <a class="link" href="overload6.html#asio.reference.read.overload6.parameters">Parameters</a>
+        </h6>
 <div class="variablelist">
 <p class="title"><b></b></p>
 <dl>
@@ -88,18 +87,22 @@
             </p></dd>
 </dl>
 </div>
-<a name="asio.reference.read.overload6.return_value"></a><h5>
-<a name="id1668839"></a>
-          <a href="overload6.html#asio.reference.read.overload6.return_value">Return Value</a>
-        </h5>
+<a name="asio.reference.read.overload6.return_value"></a><h6>
+<a name="id3650630"></a>
+          <a class="link" href="overload6.html#asio.reference.read.overload6.return_value">Return Value</a>
+        </h6>
 <p>
           The number of bytes read. If an error occurs, returns the total number
           of bytes successfully transferred prior to the error.
         </p>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">

@@ -1,15 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>
-          ssl::stream::write_some (1 of 2 overloads)</title>
+<title>ssl::stream::write_some (1 of 2 overloads)</title>
 <link rel="stylesheet" href="../../../../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../../../../index.html" title="Asio">
-<link rel="up" href="../write_some.html" title=" ssl::stream::write_some">
-<link rel="prev" href="../write_some.html" title=" ssl::stream::write_some">
-<link rel="next" href="overload2.html" title="
-          ssl::stream::write_some (2 of 2 overloads)">
+<link rel="up" href="../write_some.html" title="ssl::stream::write_some">
+<link rel="prev" href="../write_some.html" title="ssl::stream::write_some">
+<link rel="next" href="overload2.html" title="ssl::stream::write_some (2 of 2 overloads)">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../../../asio.png"></td></tr></table>
@@ -19,16 +17,14 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="asio.reference.ssl__stream.write_some.overload1"></a><a href="overload1.html" title="
-          ssl::stream::write_some (1 of 2 overloads)">
+<a name="asio.reference.ssl__stream.write_some.overload1"></a><a class="link" href="overload1.html" title="ssl::stream::write_some (1 of 2 overloads)">
           ssl::stream::write_some (1 of 2 overloads)</a></h5></div></div></div>
 <p>
             Write some data to the stream.
           </p>
 <pre class="programlisting">
 <span class="keyword">template</span><span class="special">&lt;</span>
-    <span class="keyword">typename</span> <a href="../../ConstBufferSequence.html" title=" Constant buffer
-      sequence requirements">ConstBufferSequence</a><span class="special">&gt;</span>
+    <span class="keyword">typename</span> <a class="link" href="../../ConstBufferSequence.html" title="Constant buffer sequence requirements">ConstBufferSequence</a><span class="special">&gt;</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">write_some</span><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">ConstBufferSequence</span> <span class="special">&amp;</span> <span class="identifier">buffers</span><span class="special">);</span>
 </pre>
@@ -38,8 +34,8 @@
             or until an error occurs.
           </p>
 <a name="asio.reference.ssl__stream.write_some.overload1.parameters"></a><h6>
-<a name="id1736887"></a>
-            <a href="overload1.html#asio.reference.ssl__stream.write_some.overload1.parameters">Parameters</a>
+<a name="id3682726"></a>
+            <a class="link" href="overload1.html#asio.reference.ssl__stream.write_some.overload1.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
 <p class="title"><b></b></p>
@@ -51,16 +47,16 @@
 </dl>
 </div>
 <a name="asio.reference.ssl__stream.write_some.overload1.return_value"></a><h6>
-<a name="id1736929"></a>
-            <a href="overload1.html#asio.reference.ssl__stream.write_some.overload1.return_value">Return
+<a name="id3682765"></a>
+            <a class="link" href="overload1.html#asio.reference.ssl__stream.write_some.overload1.return_value">Return
             Value</a>
           </h6>
 <p>
             The number of bytes written.
           </p>
 <a name="asio.reference.ssl__stream.write_some.overload1.exceptions"></a><h6>
-<a name="id1736957"></a>
-            <a href="overload1.html#asio.reference.ssl__stream.write_some.overload1.exceptions">Exceptions</a>
+<a name="id3682789"></a>
+            <a class="link" href="overload1.html#asio.reference.ssl__stream.write_some.overload1.exceptions">Exceptions</a>
           </h6>
 <div class="variablelist">
 <p class="title"><b></b></p>
@@ -72,19 +68,23 @@
 </dl>
 </div>
 <a name="asio.reference.ssl__stream.write_some.overload1.remarks"></a><h6>
-<a name="id1737000"></a>
-            <a href="overload1.html#asio.reference.ssl__stream.write_some.overload1.remarks">Remarks</a>
+<a name="id3682827"></a>
+            <a class="link" href="overload1.html#asio.reference.ssl__stream.write_some.overload1.remarks">Remarks</a>
           </h6>
 <p>
             The write_some operation may not transmit all of the data to the peer.
-            Consider using the <a href="../../write.html" title=" write">write</a>
+            Consider using the <a class="link" href="../../write.html" title="write">write</a>
             function if you need to ensure that all data is written before the blocking
             operation completes.
           </p>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">

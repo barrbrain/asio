@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title> Timer service requirements</title>
+<title>Timer service requirements</title>
 <link rel="stylesheet" href="../../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../../index.html" title="Asio">
-<link rel="up" href="../reference.html" title=" Reference">
-<link rel="prev" href="TimeTraits.html" title=" Time traits requirements">
-<link rel="next" href="WaitHandler.html" title=" Wait handler requirements">
+<link rel="up" href="../reference.html" title="Reference">
+<link rel="prev" href="TimeTraits.html" title="Time traits requirements">
+<link rel="next" href="WaitHandler.html" title="Wait handler requirements">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../asio.png"></td></tr></table>
@@ -17,9 +17,9 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="asio.reference.TimerService"></a><a href="TimerService.html" title=" Timer service requirements"> Timer service requirements</a></h3></div></div></div>
+<a name="asio.reference.TimerService"></a><a class="link" href="TimerService.html" title="Timer service requirements"> Timer service requirements</a></h3></div></div></div>
 <p>
-        A timer service must meet the requirements for an <a href="IoObjectService.html" title=" I/O object service requirements">I/O
+        A timer service must meet the requirements for an <a class="link" href="IoObjectService.html" title="I/O object service requirements">I/O
         object service</a>, as well as the additional requirements listed below.
       </p>
 <p>
@@ -33,11 +33,11 @@
         <code class="computeroutput"><span class="identifier">Time</span></code>, <code class="computeroutput"><span class="identifier">d</span></code>
         denotes a value of type <code class="computeroutput"><span class="identifier">TimeTraits</span><span class="special">::</span><span class="identifier">duration_type</span></code>,
         <code class="computeroutput"><span class="identifier">e</span></code> denotes a value of type
-        <code class="computeroutput"><span class="identifier">error_code</span></code>, and <code class="computeroutput"><span class="identifier">h</span></code> denotes a value meeting <a href="WaitHandler.html" title=" Wait handler requirements"><code class="computeroutput"><span class="identifier">WaitHandler</span></code></a> requirements.
+        <code class="computeroutput"><span class="identifier">error_code</span></code>, and <code class="computeroutput"><span class="identifier">h</span></code> denotes a value meeting <a class="link" href="WaitHandler.html" title="Wait handler requirements"><code class="computeroutput"><span class="identifier">WaitHandler</span></code></a> requirements.
       </p>
 <div class="table">
-<a name="id1038235"></a><p class="title"><b>Table 23. TimerService requirements</b></p>
-<table class="table" summary="TimerService requirements">
+<a name="id3427922"></a><p class="title"><b>Table 23. TimerService requirements</b></p>
+<div class="table-contents"><table class="table" summary="TimerService requirements">
 <colgroup>
 <col>
 <col>
@@ -73,7 +73,7 @@
             </td>
 <td>
             <p>
-              From <a href="IoObjectService.html" title=" I/O object service requirements">IoObjectService</a>
+              From <a class="link" href="IoObjectService.html" title="I/O object service requirements">IoObjectService</a>
               requirements. Implicitly cancels asynchronous wait operations, as if
               by calling <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">cancel</span><span class="special">(</span><span class="identifier">b</span><span class="special">,</span> <span class="identifier">e</span><span class="special">)</span></code>.
             </p>
@@ -233,8 +233,7 @@
               Initiates an asynchronous wait operation that is performed via the
               <code class="computeroutput"><span class="identifier">io_service</span></code> object
               <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">io_service</span><span class="special">()</span></code>
-              and behaves according to <a href="asynchronous_operations.html" title=" Requirements
-      on asynchronous operations">asynchronous
+              and behaves according to <a class="link" href="asynchronous_operations.html" title="Requirements on asynchronous operations">asynchronous
               operation</a> requirements.<br> <br> The handler shall be posted
               for execution only if the condition <code class="computeroutput"><span class="special">!!</span><span class="identifier">ec</span> <span class="special">||</span> <span class="special">!</span><span class="identifier">TimeTraits</span><span class="special">::</span><span class="identifier">lt</span><span class="special">(</span><span class="identifier">TimeTraits</span><span class="special">::</span><span class="identifier">now</span><span class="special">(),</span> <span class="identifier">a</span><span class="special">.</span><span class="identifier">expires_at</span><span class="special">(</span><span class="identifier">b</span><span class="special">))</span></code> holds, where <code class="computeroutput"><span class="identifier">ec</span></code>
               is the error code to be passed to the handler.
@@ -242,12 +241,17 @@
             </td>
 </tr>
 </tbody>
-</table>
+</table></div>
 </div>
+<br class="table-break">
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">

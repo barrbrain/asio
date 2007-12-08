@@ -1,14 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title> Requirements
-      on asynchronous operations</title>
+<title>Requirements on asynchronous operations</title>
 <link rel="stylesheet" href="../../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../../index.html" title="Asio">
-<link rel="up" href="../reference.html" title=" Reference">
-<link rel="prev" href="../reference.html" title=" Reference">
-<link rel="next" href="AcceptHandler.html" title=" Accept handler requirements">
+<link rel="up" href="../reference.html" title="Reference">
+<link rel="prev" href="../reference.html" title="Reference">
+<link rel="next" href="AcceptHandler.html" title="Accept handler requirements">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../asio.png"></td></tr></table>
@@ -18,8 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="asio.reference.asynchronous_operations"></a><a href="asynchronous_operations.html" title=" Requirements
-      on asynchronous operations"> Requirements
+<a name="asio.reference.asynchronous_operations"></a><a class="link" href="asynchronous_operations.html" title="Requirements on asynchronous operations"> Requirements
       on asynchronous operations</a></h3></div></div></div>
 <p>
         In Asio, an asynchronous operation is initiated by a function that is named
@@ -27,7 +25,7 @@
         functions will be referred to as <span class="emphasis"><em>initiating functions</em></span>.
       </p>
 <p>
-        All initiating functions in Asio take a function object meeting <a href="Handler.html" title=" Handlers">handler</a>
+        All initiating functions in Asio take a function object meeting <a class="link" href="Handler.html" title="Handlers">handler</a>
         requirements as the final parameter. These handlers accept as their first
         parameter an lvalue of type <code class="computeroutput"><span class="keyword">const</span>
         <span class="identifier">error_code</span></code>.
@@ -114,14 +112,17 @@
         to the function has an <code class="computeroutput"><span class="identifier">io_service</span><span class="special">()</span></code> member function that returns the associated
         <code class="computeroutput"><span class="identifier">io_service</span></code> object.
       </p>
-<div class="sidebar"><p>
+<div class="sidebar">
+<p class="title"><b></b></p>
+<p>
         Asio may use one or more hidden threads to emulate asynchronous functionality.
         The above requirements are intended to prevent these hidden threads from
         making calls to program code. This means that a program can, for example,
         use thread-unsafe reference counting in handler objects, provided the program
         ensures that all calls to an <code class="computeroutput"><span class="identifier">io_service</span></code>
         and related objects occur from the one thread.
-      </p></div>
+      </p>
+</div>
 <p>
         The <code class="computeroutput"><span class="identifier">io_service</span></code> object associated
         with an asynchronous operation will have unfinished work, as if by maintaining
@@ -156,8 +157,7 @@
         contains values to be passed as arguments to the user-supplied handler. The
         bound completion handler forwards the <code class="computeroutput"><span class="identifier">asio_handler_allocate</span><span class="special">()</span></code>, <code class="computeroutput"><span class="identifier">asio_handler_deallocate</span><span class="special">()</span></code>, and <code class="computeroutput"><span class="identifier">asio_handler_invoke</span><span class="special">()</span></code> calls to the corresponding functions for
         the user-supplied handler. A bound completion handler meets the requirements
-        for a <a href="CompletionHandler.html" title=" Completion handler
-      requirements">completion handler</a>.
+        for a <a class="link" href="CompletionHandler.html" title="Completion handler requirements">completion handler</a>.
       </p>
 <p>
         For example, a bound completion handler for a <code class="computeroutput"><span class="identifier">ReadHandler</span></code>
@@ -226,9 +226,13 @@
         Multiple storage blocks may be allocated for a single asynchronous operation.
       </p>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">

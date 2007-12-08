@@ -757,6 +757,11 @@ asio/reference/deadline_timer_service/wait.html
 asio/reference/error__addrinfo_errors.html
 asio/reference/error__basic_errors.html
 asio/reference/error__error_category.html
+asio/reference/error__get_addrinfo_category.html
+asio/reference/error__get_misc_category.html
+asio/reference/error__get_netdb_category.html
+asio/reference/error__get_ssl_category.html
+asio/reference/error__get_system_category.html
 asio/reference/error__make_error_code.html
 asio/reference/error__make_error_code/overload1.html
 asio/reference/error__make_error_code/overload2.html
@@ -778,6 +783,7 @@ asio/reference/error_code/operator_unspecified_bool_type.html
 asio/reference/error_code/operator_not_.html
 asio/reference/error_code/operator_not__eq_.html
 asio/reference/error_code/operator_eq__eq_.html
+asio/reference/error_code/unspecified_bool_true.html
 asio/reference/error_code/unspecified_bool_type.html
 asio/reference/error_code/value.html
 asio/reference/error_code/value_type.html

@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title> thread</title>
+<title>thread</title>
 <link rel="stylesheet" href="../../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../../index.html" title="Asio">
-<link rel="up" href="../reference.html" title=" Reference">
-<link rel="prev" href="system_error/_system_error.html" title=" system_error::~system_error">
-<link rel="next" href="thread/join.html" title=" thread::join">
+<link rel="up" href="../reference.html" title="Reference">
+<link rel="prev" href="system_error/_system_error.html" title="system_error::~system_error">
+<link rel="next" href="thread/join.html" title="thread::join">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../asio.png"></td></tr></table>
@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="asio.reference.thread"></a><a href="thread.html" title=" thread"> thread</a></h3></div></div></div>
+<a name="asio.reference.thread"></a><a class="link" href="thread.html" title="thread"> thread</a></h3></div></div></div>
 <p>
         A simple abstraction for starting threads.
       </p>
@@ -25,10 +25,10 @@
 <span class="keyword">class</span> <span class="identifier">thread</span> <span class="special">:</span>
   <span class="identifier">noncopyable</span>
 </pre>
-<a name="asio.reference.thread.member_functions"></a><h4>
-<a name="id1747243"></a>
-        <a href="thread.html#asio.reference.thread.member_functions">Member Functions</a>
-      </h4>
+<a name="asio.reference.thread.member_functions"></a><h5>
+<a name="id3692763"></a>
+        <a class="link" href="thread.html#asio.reference.thread.member_functions">Member Functions</a>
+      </h5>
 <div class="informaltable"><table class="table">
 <colgroup>
 <col>
@@ -50,7 +50,7 @@
 <tr>
 <td>
               <p>
-                <a href="thread/join.html" title=" thread::join"><span class="bold"><strong>join</strong></span></a>
+                <a class="link" href="thread/join.html" title="thread::join"><span class="bold"><strong>join</strong></span></a>
               </p>
               </td>
 <td>
@@ -62,7 +62,7 @@
 <tr>
 <td>
               <p>
-                <a href="thread/thread.html" title=" thread::thread"><span class="bold"><strong>thread</strong></span></a>
+                <a class="link" href="thread/thread.html" title="thread::thread"><span class="bold"><strong>thread</strong></span></a>
               </p>
               </td>
 <td>
@@ -74,7 +74,7 @@
 <tr>
 <td>
               <p>
-                <a href="thread/_thread.html" title=" thread::~thread"><span class="bold"><strong>~thread</strong></span></a>
+                <a class="link" href="thread/_thread.html" title="thread::~thread"><span class="bold"><strong>~thread</strong></span></a>
               </p>
               </td>
 <td>
@@ -86,16 +86,16 @@
 </tbody>
 </table></div>
 <p>
-        The <a href="thread.html" title=" thread">thread</a> class implements
+        The <a class="link" href="thread.html" title="thread">thread</a> class implements
         the smallest possible subset of the functionality of boost::thread. It is
         intended to be used only for starting a thread and waiting for it to exit.
         If more extensive threading capabilities are required, you are strongly advised
         to use something else.
       </p>
-<a name="asio.reference.thread.thread_safety"></a><h4>
-<a name="id1747398"></a>
-        <a href="thread.html#asio.reference.thread.thread_safety">Thread Safety</a>
-      </h4>
+<a name="asio.reference.thread.thread_safety"></a><h5>
+<a name="id3692908"></a>
+        <a class="link" href="thread.html#asio.reference.thread.thread_safety">Thread Safety</a>
+      </h5>
 <p>
         <span class="bold"><strong>Distinct</strong></span> <span class="bold"><strong>objects:</strong></span>
         Safe.
@@ -104,12 +104,12 @@
         <span class="bold"><strong>Shared</strong></span> <span class="bold"><strong>objects:</strong></span>
         Unsafe.
       </p>
-<a name="asio.reference.thread.example"></a><h4>
-<a name="id1747449"></a>
-        <a href="thread.html#asio.reference.thread.example">Example</a>
-      </h4>
+<a name="asio.reference.thread.example"></a><h5>
+<a name="id3692956"></a>
+        <a class="link" href="thread.html#asio.reference.thread.example">Example</a>
+      </h5>
 <p>
-        A typical use of <a href="thread.html" title=" thread">thread</a> would
+        A typical use of <a class="link" href="thread.html" title="thread">thread</a> would
         be to launch a thread to run an io_service's event processing loop:
       </p>
 <pre class="programlisting">
@@ -120,9 +120,13 @@
 </span><span class="identifier">t</span><span class="special">.</span><span class="identifier">join</span><span class="special">();</span> 
 </pre>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">

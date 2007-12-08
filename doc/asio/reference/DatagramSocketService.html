@@ -1,15 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title> Datagram socket
-      service requirements</title>
+<title>Datagram socket service requirements</title>
 <link rel="stylesheet" href="../../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../../index.html" title="Asio">
-<link rel="up" href="../reference.html" title=" Reference">
-<link rel="prev" href="ConvertibleToMutableBuffer.html" title=" Convertible
-      to mutable buffer requirements">
-<link rel="next" href="Endpoint.html" title=" Endpoint requirements">
+<link rel="up" href="../reference.html" title="Reference">
+<link rel="prev" href="ConvertibleToMutableBuffer.html" title="Convertible to mutable buffer requirements">
+<link rel="next" href="Endpoint.html" title="Endpoint requirements">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../asio.png"></td></tr></table>
@@ -19,33 +17,30 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="asio.reference.DatagramSocketService"></a><a href="DatagramSocketService.html" title=" Datagram socket
-      service requirements"> Datagram socket
+<a name="asio.reference.DatagramSocketService"></a><a class="link" href="DatagramSocketService.html" title="Datagram socket service requirements"> Datagram socket
       service requirements</a></h3></div></div></div>
 <p>
-        A datagram socket service must meet the requirements for a <a href="SocketService.html" title=" Socket service requirements">socket
+        A datagram socket service must meet the requirements for a <a class="link" href="SocketService.html" title="Socket service requirements">socket
         service</a>, as well as the additional requirements listed below.
       </p>
 <p>
         In the table below, <code class="computeroutput"><span class="identifier">X</span></code> denotes
-        a datagram socket service class for protocol <a href="Protocol.html" title=" Protocol requirements"><code class="computeroutput"><span class="identifier">Protocol</span></code></a>, <code class="computeroutput"><span class="identifier">a</span></code>
+        a datagram socket service class for protocol <a class="link" href="Protocol.html" title="Protocol requirements"><code class="computeroutput"><span class="identifier">Protocol</span></code></a>, <code class="computeroutput"><span class="identifier">a</span></code>
         denotes a value of type <code class="computeroutput"><span class="identifier">X</span></code>,
         <code class="computeroutput"><span class="identifier">b</span></code> denotes a value of type
         <code class="computeroutput"><span class="identifier">X</span><span class="special">::</span><span class="identifier">implementation_type</span></code>, <code class="computeroutput"><span class="identifier">e</span></code>
         denotes a value of type <code class="computeroutput"><span class="identifier">Protocol</span><span class="special">::</span><span class="identifier">endpoint</span></code>,
         <code class="computeroutput"><span class="identifier">ec</span></code> denotes a value of type
         <code class="computeroutput"><span class="identifier">error_code</span></code>, <code class="computeroutput"><span class="identifier">f</span></code> denotes a value of type <code class="computeroutput"><span class="identifier">socket_base</span><span class="special">::</span><span class="identifier">message_flags</span></code>, <code class="computeroutput"><span class="identifier">mb</span></code>
-        denotes a value satisfying <a href="MutableBufferSequence.html" title=" Mutable buffer
-      sequence requirements">mutable
+        denotes a value satisfying <a class="link" href="MutableBufferSequence.html" title="Mutable buffer sequence requirements">mutable
         buffer sequence</a> requirements, <code class="computeroutput"><span class="identifier">rh</span></code>
-        denotes a value meeting <a href="ReadHandler.html" title=" Read handler requirements"><code class="computeroutput"><span class="identifier">ReadHandler</span></code></a> requirements, <code class="computeroutput"><span class="identifier">cb</span></code> denotes a value satisfying <a href="ConstBufferSequence.html" title=" Constant buffer
-      sequence requirements">constant
+        denotes a value meeting <a class="link" href="ReadHandler.html" title="Read handler requirements"><code class="computeroutput"><span class="identifier">ReadHandler</span></code></a> requirements, <code class="computeroutput"><span class="identifier">cb</span></code> denotes a value satisfying <a class="link" href="ConstBufferSequence.html" title="Constant buffer sequence requirements">constant
         buffer sequence</a> requirements, and <code class="computeroutput"><span class="identifier">wh</span></code>
-        denotes a value meeting <a href="WriteHandler.html" title=" Write handler requirements"><code class="computeroutput"><span class="identifier">WriteHandler</span></code></a> requirements.
+        denotes a value meeting <a class="link" href="WriteHandler.html" title="Write handler requirements"><code class="computeroutput"><span class="identifier">WriteHandler</span></code></a> requirements.
       </p>
 <div class="table">
-<a name="id999964"></a><p class="title"><b>Table 6. DatagramSocketService requirements</b></p>
-<table class="table" summary="DatagramSocketService requirements">
+<a name="id3407253"></a><p class="title"><b>Table 6. DatagramSocketService requirements</b></p>
+<div class="table-contents"><table class="table" summary="DatagramSocketService requirements">
 <colgroup>
 <col>
 <col>
@@ -110,8 +105,7 @@
               of data from a connected socket <code class="computeroutput"><span class="identifier">b</span></code>.
               The operation is performed via the <code class="computeroutput"><span class="identifier">io_service</span></code>
               object <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">io_service</span><span class="special">()</span></code>
-              and behaves according to <a href="asynchronous_operations.html" title=" Requirements
-      on asynchronous operations">asynchronous
+              and behaves according to <a class="link" href="asynchronous_operations.html" title="Requirements on asynchronous operations">asynchronous
               operation</a> requirements.<br> <br> The mutable buffer sequence
               <code class="computeroutput"><span class="identifier">mb</span></code> specifies memory
               where the data should be placed. The operation shall always fill a
@@ -171,8 +165,7 @@
               of data from an unconnected socket <code class="computeroutput"><span class="identifier">b</span></code>.
               The operation is performed via the <code class="computeroutput"><span class="identifier">io_service</span></code>
               object <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">io_service</span><span class="special">()</span></code>
-              and behaves according to <a href="asynchronous_operations.html" title=" Requirements
-      on asynchronous operations">asynchronous
+              and behaves according to <a class="link" href="asynchronous_operations.html" title="Requirements on asynchronous operations">asynchronous
               operation</a> requirements.<br> <br> The mutable buffer sequence
               <code class="computeroutput"><span class="identifier">mb</span></code> specifies memory
               where the data should be placed. The operation shall always fill a
@@ -233,8 +226,7 @@
               of data to a connected socket <code class="computeroutput"><span class="identifier">b</span></code>.
               The operation is performed via the <code class="computeroutput"><span class="identifier">io_service</span></code>
               object <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">io_service</span><span class="special">()</span></code>
-              and behaves according to <a href="asynchronous_operations.html" title=" Requirements
-      on asynchronous operations">asynchronous
+              and behaves according to <a class="link" href="asynchronous_operations.html" title="Requirements on asynchronous operations">asynchronous
               operation</a> requirements.<br> <br> The constant buffer sequence
               <code class="computeroutput"><span class="identifier">cb</span></code> specifies memory
               where the data to be written is located. The operation shall always
@@ -306,8 +298,7 @@
               of data to an unconnected socket <code class="computeroutput"><span class="identifier">b</span></code>.
               The operation is performed via the <code class="computeroutput"><span class="identifier">io_service</span></code>
               object <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">io_service</span><span class="special">()</span></code>
-              and behaves according to <a href="asynchronous_operations.html" title=" Requirements
-      on asynchronous operations">asynchronous
+              and behaves according to <a class="link" href="asynchronous_operations.html" title="Requirements on asynchronous operations">asynchronous
               operation</a> requirements.<br> <br> The constant buffer sequence
               <code class="computeroutput"><span class="identifier">cb</span></code> specifies memory
               where the data to be written is located. The operation shall always
@@ -327,12 +318,17 @@
             </td>
 </tr>
 </tbody>
-</table>
+</table></div>
 </div>
+<br class="table-break">
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">

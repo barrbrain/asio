@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title> Using Asio</title>
+<title>Using Asio</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../index.html" title="Asio">
 <link rel="up" href="../index.html" title="Asio">
 <link rel="prev" href="../index.html" title="Asio">
-<link rel="next" href="tutorial.html" title=" Tutorial">
+<link rel="next" href="tutorial.html" title="Tutorial">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../asio.png"></td></tr></table>
@@ -17,11 +17,11 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="asio.using"></a><a href="using.html" title=" Using Asio"> Using Asio</a></h2></div></div></div>
-<a name="asio.using.supported_platforms"></a><h3>
-<a name="id905216"></a>
-      <a href="using.html#asio.using.supported_platforms">Supported Platforms</a>
-    </h3>
+<a name="asio.using"></a><a class="link" href="using.html" title="Using Asio"> Using Asio</a></h2></div></div></div>
+<a name="asio.using.supported_platforms"></a><h4>
+<a name="id3324010"></a>
+      <a class="link" href="using.html#asio.using.supported_platforms">Supported Platforms</a>
+    </h4>
 <p>
       The following platforms and compilers have been tested:
     </p>
@@ -69,18 +69,18 @@
         Tru64 v5.1 using Compaq C++ v7.1.
       </li>
 </ul></div>
-<a name="asio.using.dependencies"></a><h3>
-<a name="id905313"></a>
-      <a href="using.html#asio.using.dependencies">Dependencies</a>
-    </h3>
+<a name="asio.using.dependencies"></a><h4>
+<a name="id3324099"></a>
+      <a class="link" href="using.html#asio.using.dependencies">Dependencies</a>
+    </h4>
 <p>
       The following libraries must be available in order to link programs that use
       Asio:
     </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-        Boost.Regex (optional) if you use any of the <a href="reference/read_until.html" title=" read_until"><code class="computeroutput"><span class="identifier">read_until</span><span class="special">()</span></code></a>
-        or <a href="reference/async_read_until.html" title=" async_read_until"><code class="computeroutput"><span class="identifier">async_read_until</span><span class="special">()</span></code></a> overloads that take a <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">regex</span></code> parameter.
+        Boost.Regex (optional) if you use any of the <a class="link" href="reference/read_until.html" title="read_until"><code class="computeroutput"><span class="identifier">read_until</span><span class="special">()</span></code></a>
+        or <a class="link" href="reference/async_read_until.html" title="async_read_until"><code class="computeroutput"><span class="identifier">async_read_until</span><span class="special">()</span></code></a> overloads that take a <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">regex</span></code> parameter.
       </li>
 <li>
 <a href="http://www.openssl.org" target="_top">OpenSSL</a> (optional) if you use
@@ -103,11 +103,11 @@
         these libraries and link to them.
       </p></td></tr>
 </table></div>
-<a name="asio.using.building_the_tests_and_examples_on_linux_or_unix"></a><h3>
-<a name="id905464"></a>
-      <a href="using.html#asio.using.building_the_tests_and_examples_on_linux_or_unix">Building
+<a name="asio.using.building_the_tests_and_examples_on_linux_or_unix"></a><h4>
+<a name="id3364514"></a>
+      <a class="link" href="using.html#asio.using.building_the_tests_and_examples_on_linux_or_unix">Building
       the tests and examples on Linux or UNIX</a>
-    </h3>
+    </h4>
 <p>
       If the boost directory (e.g. the directory called <code class="computeroutput"><span class="identifier">boost_1_34_1</span></code>)
       is in the same directory as the asio source kit, then you may configure asio
@@ -138,11 +138,11 @@
       run <code class="computeroutput"><span class="identifier">make</span> <span class="identifier">check</span></code>
       after a successful build.
     </p>
-<a name="asio.using.building_the_tests_and_examples_with_msvc"></a><h3>
-<a name="id905614"></a>
-      <a href="using.html#asio.using.building_the_tests_and_examples_with_msvc">Building
+<a name="asio.using.building_the_tests_and_examples_with_msvc"></a><h4>
+<a name="id3364653"></a>
+      <a class="link" href="using.html#asio.using.building_the_tests_and_examples_with_msvc">Building
       the tests and examples with MSVC</a>
-    </h3>
+    </h4>
 <p>
       To build using the MSVC 7.1 or MSVC 8.0 command line compiler, perform the
       following steps in a Command Prompt window:
@@ -166,11 +166,11 @@
         to run a suite of tests to confirm that asio is working correctly.
       </li>
 </ul></div>
-<a name="asio.using.building_the_test_and_examples_with_borland_c__"></a><h3>
-<a name="id905770"></a>
-      <a href="using.html#asio.using.building_the_test_and_examples_with_borland_c__">Building
+<a name="asio.using.building_the_test_and_examples_with_borland_c__"></a><h4>
+<a name="id3364803"></a>
+      <a class="link" href="using.html#asio.using.building_the_test_and_examples_with_borland_c__">Building
       the test and examples with Borland C++</a>
-    </h3>
+    </h4>
 <p>
       To build using the Borland C++ Builder command line compiler, perform the following
       steps in a Command Prompt window:
@@ -194,11 +194,11 @@
         to run a suite of tests to confirm that asio is working correctly.
       </li>
 </ul></div>
-<a name="asio.using.building_the_tests_and_examples_with_mingw"></a><h3>
-<a name="id905926"></a>
-      <a href="using.html#asio.using.building_the_tests_and_examples_with_mingw">Building
+<a name="asio.using.building_the_tests_and_examples_with_mingw"></a><h4>
+<a name="id3364952"></a>
+      <a class="link" href="using.html#asio.using.building_the_tests_and_examples_with_mingw">Building
       the tests and examples with MinGW</a>
-    </h3>
+    </h4>
 <p>
       To build using the MinGW g++ compiler from the command line, perform the following
       steps in a Command Prompt window:
@@ -234,10 +234,196 @@
         <code class="literal">set</code> to specify the location of boost.
       </p></td></tr>
 </table></div>
+<a name="asio.using.macros"></a><h4>
+<a name="id3365180"></a>
+      <a class="link" href="using.html#asio.using.macros">Macros</a>
+    </h4>
+<p>
+      The macros listed in the table below may be used to control the behaviour of
+      Asio.
+    </p>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+            <p>
+              Macro
+            </p>
+            </th>
+<th>
+            <p>
+              Description
+            </p>
+            </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+            <p>
+              <code class="computeroutput"><span class="identifier">ASIO_ENABLE_BUFFER_DEBUGGING</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              Enables Asio's buffer debugging support, which can help identify when
+              invalid buffers are used in read or write operations (e.g. if a std::string
+              object being written is destroyed before the write operation completes).
+            </p>
+            <p>
+              When using Microsoft Visual C++, this macro is defined automatically
+              if the compiler's iterator debugging support is enabled, unless <code class="computeroutput"><span class="identifier">ASIO_DISABLE_BUFFER_DEBUGGING</span></code> has
+              been defined.
+            </p>
+            <p>
+              When using g++, this macro is defined automatically if standard library
+              debugging is enabled (<code class="computeroutput"><span class="identifier">_GLIBCXX_DEBUG</span></code>
+              is defined), unless <code class="computeroutput"><span class="identifier">ASIO_DISABLE_BUFFER_DEBUGGING</span></code>
+              has been defined.
+            </p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p>
+              <code class="computeroutput"><span class="identifier">ASIO_DISABLE_BUFFER_DEBUGGING</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              Explictly disables Asio's buffer debugging support.
+            </p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p>
+              <code class="computeroutput"><span class="identifier">ASIO_DISABLE_DEV_POLL</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              Explicitly disables <code class="literal">/dev/poll</code> support on Solaris,
+              forcing the use of a <code class="computeroutput"><span class="identifier">select</span></code>-based
+              implementation.
+            </p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p>
+              <code class="computeroutput"><span class="identifier">ASIO_DISABLE_EPOLL</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              Explicitly disables <code class="computeroutput"><span class="identifier">epoll</span></code>
+              support on Linux, forcing the use of a <code class="computeroutput"><span class="identifier">select</span></code>-based
+              implementation.
+            </p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p>
+              <code class="computeroutput"><span class="identifier">ASIO_DISABLE_KQUEUE</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              Explicitly disables <code class="computeroutput"><span class="identifier">kqueue</span></code>
+              support on Mac OS X and BSD variants, forcing the use of a <code class="computeroutput"><span class="identifier">select</span></code>-based implementation.
+            </p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p>
+              <code class="computeroutput"><span class="identifier">ASIO_DISABLE_IOCP</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              Explicitly disables I/O completion ports support on Windows, forcing
+              the use of a <code class="computeroutput"><span class="identifier">select</span></code>-based
+              implementation.
+            </p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p>
+              <code class="computeroutput"><span class="identifier">ASIO_NO_WIN32_LEAN_AND_MEAN</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              By default, Asio will automatically define <code class="computeroutput"><span class="identifier">WIN32_LEAN_AND_MEAN</span></code>
+              when compiling for Windows, to minimise the number of Windows SDK header
+              files and features that are included. The presence of <code class="computeroutput"><span class="identifier">ASIO_NO_WIN32_LEAN_AND_MEAN</span></code> prevents
+              <code class="computeroutput"><span class="identifier">WIN32_LEAN_AND_MEAN</span></code>
+              from being defined.
+            </p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p>
+              <code class="computeroutput"><span class="identifier">ASIO_NO_DEFAULT_LINKED_LIBS</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              When compiling for Windows using Microsoft Visual C++ or Borland C++,
+              Asio will automatically link in the necessary Windows SDK libraries
+              for sockets support (i.e. <code class="literal">ws2_32.lib</code> and <code class="literal">mswsock.lib</code>,
+              or <code class="literal">ws2.lib</code> when building for Windows CE). The <code class="computeroutput"><span class="identifier">ASIO_NO_DEFAULT_LINKED_LIBS</span></code> macro
+              prevents these libraries from being linked.
+            </p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p>
+              <code class="computeroutput"><span class="identifier">ASIO_SOCKET_STREAMBUF_MAX_ARITY</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              Determines the maximum number of arguments that may be passed to the
+              <code class="computeroutput"><span class="identifier">basic_socket_streambuf</span></code>
+              class template's <code class="computeroutput"><span class="identifier">connect</span></code>
+              member function. Defaults to 5.
+            </p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p>
+              <code class="computeroutput"><span class="identifier">ASIO_SOCKET_IOSTREAM_MAX_ARITY</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              Determines the maximum number of arguments that may be passed to the
+              <code class="computeroutput"><span class="identifier">basic_socket_iostream</span></code>
+              class template's constructor and <code class="computeroutput"><span class="identifier">connect</span></code>
+              member function. Defaults to 5.
+            </p>
+            </td>
+</tr>
+</tbody>
+</table></div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">

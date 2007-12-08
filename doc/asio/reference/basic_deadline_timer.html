@@ -1,14 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title> basic_deadline_timer</title>
+<title>basic_deadline_timer</title>
 <link rel="stylesheet" href="../../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../../index.html" title="Asio">
-<link rel="up" href="../reference.html" title=" Reference">
-<link rel="prev" href="basic_datagram_socket/shutdown_type.html" title="
-        basic_datagram_socket::shutdown_type">
-<link rel="next" href="basic_deadline_timer/async_wait.html" title=" basic_deadline_timer::async_wait">
+<link rel="up" href="../reference.html" title="Reference">
+<link rel="prev" href="basic_datagram_socket/shutdown_type.html" title="basic_datagram_socket::shutdown_type">
+<link rel="next" href="basic_deadline_timer/async_wait.html" title="basic_deadline_timer::async_wait">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../asio.png"></td></tr></table>
@@ -18,22 +17,22 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="asio.reference.basic_deadline_timer"></a><a href="basic_deadline_timer.html" title=" basic_deadline_timer"> basic_deadline_timer</a></h3></div></div></div>
+<a name="asio.reference.basic_deadline_timer"></a><a class="link" href="basic_deadline_timer.html" title="basic_deadline_timer"> basic_deadline_timer</a></h3></div></div></div>
 <p>
         Provides waitable timer functionality.
       </p>
 <pre class="programlisting">
 <span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <span class="identifier">Time</span><span class="special">,</span>
-    <span class="keyword">typename</span> <a href="TimeTraits.html" title=" Time traits requirements">TimeTraits</a> <span class="special">=</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">time_traits</span><span class="special">&lt;</span><span class="identifier">Time</span><span class="special">&gt;,</span>
-    <span class="keyword">typename</span> <a href="TimerService.html" title=" Timer service requirements">TimerService</a> <span class="special">=</span> <span class="identifier">deadline_timer_service</span><span class="special">&lt;</span><span class="identifier">Time</span><span class="special">,</span> <span class="identifier">TimeTraits</span><span class="special">&gt;&gt;</span>
+    <span class="keyword">typename</span> <a class="link" href="TimeTraits.html" title="Time traits requirements">TimeTraits</a> <span class="special">=</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">time_traits</span><span class="special">&lt;</span><span class="identifier">Time</span><span class="special">&gt;,</span>
+    <span class="keyword">typename</span> <a class="link" href="TimerService.html" title="Timer service requirements">TimerService</a> <span class="special">=</span> <span class="identifier">deadline_timer_service</span><span class="special">&lt;</span><span class="identifier">Time</span><span class="special">,</span> <span class="identifier">TimeTraits</span><span class="special">&gt;&gt;</span>
 <span class="keyword">class</span> <span class="identifier">basic_deadline_timer</span> <span class="special">:</span>
   <span class="keyword">public</span> <span class="identifier">basic_io_object</span><span class="special">&lt;</span> <span class="identifier">TimerService</span> <span class="special">&gt;</span>
 </pre>
-<a name="asio.reference.basic_deadline_timer.types"></a><h4>
-<a name="id1116939"></a>
-        <a href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.types">Types</a>
-      </h4>
+<a name="asio.reference.basic_deadline_timer.types"></a><h5>
+<a name="id3470258"></a>
+        <a class="link" href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.types">Types</a>
+      </h5>
 <div class="informaltable"><table class="table">
 <colgroup>
 <col>
@@ -55,8 +54,7 @@
 <tr>
 <td>
               <p>
-                <a href="basic_deadline_timer/duration_type.html" title="
-        basic_deadline_timer::duration_type"><span class="bold"><strong>duration_type</strong></span></a>
+                <a class="link" href="basic_deadline_timer/duration_type.html" title="basic_deadline_timer::duration_type"><span class="bold"><strong>duration_type</strong></span></a>
               </p>
               </td>
 <td>
@@ -68,8 +66,7 @@
 <tr>
 <td>
               <p>
-                <a href="basic_deadline_timer/implementation_type.html" title="
-        basic_deadline_timer::implementation_type"><span class="bold"><strong>implementation_type</strong></span></a>
+                <a class="link" href="basic_deadline_timer/implementation_type.html" title="basic_deadline_timer::implementation_type"><span class="bold"><strong>implementation_type</strong></span></a>
               </p>
               </td>
 <td>
@@ -81,8 +78,7 @@
 <tr>
 <td>
               <p>
-                <a href="basic_deadline_timer/service_type.html" title="
-        basic_deadline_timer::service_type"><span class="bold"><strong>service_type</strong></span></a>
+                <a class="link" href="basic_deadline_timer/service_type.html" title="basic_deadline_timer::service_type"><span class="bold"><strong>service_type</strong></span></a>
               </p>
               </td>
 <td>
@@ -94,7 +90,7 @@
 <tr>
 <td>
               <p>
-                <a href="basic_deadline_timer/time_type.html" title=" basic_deadline_timer::time_type"><span class="bold"><strong>time_type</strong></span></a>
+                <a class="link" href="basic_deadline_timer/time_type.html" title="basic_deadline_timer::time_type"><span class="bold"><strong>time_type</strong></span></a>
               </p>
               </td>
 <td>
@@ -106,7 +102,7 @@
 <tr>
 <td>
               <p>
-                <a href="basic_deadline_timer/traits_type.html" title=" basic_deadline_timer::traits_type"><span class="bold"><strong>traits_type</strong></span></a>
+                <a class="link" href="basic_deadline_timer/traits_type.html" title="basic_deadline_timer::traits_type"><span class="bold"><strong>traits_type</strong></span></a>
               </p>
               </td>
 <td>
@@ -117,11 +113,11 @@
 </tr>
 </tbody>
 </table></div>
-<a name="asio.reference.basic_deadline_timer.member_functions"></a><h4>
-<a name="id1117142"></a>
-        <a href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.member_functions">Member
+<a name="asio.reference.basic_deadline_timer.member_functions"></a><h5>
+<a name="id3470447"></a>
+        <a class="link" href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.member_functions">Member
         Functions</a>
-      </h4>
+      </h5>
 <div class="informaltable"><table class="table">
 <colgroup>
 <col>
@@ -143,7 +139,7 @@
 <tr>
 <td>
               <p>
-                <a href="basic_deadline_timer/async_wait.html" title=" basic_deadline_timer::async_wait"><span class="bold"><strong>async_wait</strong></span></a>
+                <a class="link" href="basic_deadline_timer/async_wait.html" title="basic_deadline_timer::async_wait"><span class="bold"><strong>async_wait</strong></span></a>
               </p>
               </td>
 <td>
@@ -155,8 +151,7 @@
 <tr>
 <td>
               <p>
-                <a href="basic_deadline_timer/basic_deadline_timer.html" title="
-        basic_deadline_timer::basic_deadline_timer"><span class="bold"><strong>basic_deadline_timer</strong></span></a>
+                <a class="link" href="basic_deadline_timer/basic_deadline_timer.html" title="basic_deadline_timer::basic_deadline_timer"><span class="bold"><strong>basic_deadline_timer</strong></span></a>
               </p>
               </td>
 <td>
@@ -168,7 +163,7 @@
 <tr>
 <td>
               <p>
-                <a href="basic_deadline_timer/cancel.html" title=" basic_deadline_timer::cancel"><span class="bold"><strong>cancel</strong></span></a>
+                <a class="link" href="basic_deadline_timer/cancel.html" title="basic_deadline_timer::cancel"><span class="bold"><strong>cancel</strong></span></a>
               </p>
               </td>
 <td>
@@ -180,7 +175,7 @@
 <tr>
 <td>
               <p>
-                <a href="basic_deadline_timer/expires_at.html" title=" basic_deadline_timer::expires_at"><span class="bold"><strong>expires_at</strong></span></a>
+                <a class="link" href="basic_deadline_timer/expires_at.html" title="basic_deadline_timer::expires_at"><span class="bold"><strong>expires_at</strong></span></a>
               </p>
               </td>
 <td>
@@ -192,8 +187,7 @@
 <tr>
 <td>
               <p>
-                <a href="basic_deadline_timer/expires_from_now.html" title="
-        basic_deadline_timer::expires_from_now"><span class="bold"><strong>expires_from_now</strong></span></a>
+                <a class="link" href="basic_deadline_timer/expires_from_now.html" title="basic_deadline_timer::expires_from_now"><span class="bold"><strong>expires_from_now</strong></span></a>
               </p>
               </td>
 <td>
@@ -205,8 +199,7 @@
 <tr>
 <td>
               <p>
-                <a href="basic_deadline_timer/get_io_service.html" title="
-        basic_deadline_timer::get_io_service"><span class="bold"><strong>get_io_service</strong></span></a>
+                <a class="link" href="basic_deadline_timer/get_io_service.html" title="basic_deadline_timer::get_io_service"><span class="bold"><strong>get_io_service</strong></span></a>
               </p>
               </td>
 <td>
@@ -218,7 +211,7 @@
 <tr>
 <td>
               <p>
-                <a href="basic_deadline_timer/io_service.html" title=" basic_deadline_timer::io_service"><span class="bold"><strong>io_service</strong></span></a>
+                <a class="link" href="basic_deadline_timer/io_service.html" title="basic_deadline_timer::io_service"><span class="bold"><strong>io_service</strong></span></a>
               </p>
               </td>
 <td>
@@ -231,7 +224,7 @@
 <tr>
 <td>
               <p>
-                <a href="basic_deadline_timer/wait.html" title=" basic_deadline_timer::wait"><span class="bold"><strong>wait</strong></span></a>
+                <a class="link" href="basic_deadline_timer/wait.html" title="basic_deadline_timer::wait"><span class="bold"><strong>wait</strong></span></a>
               </p>
               </td>
 <td>
@@ -249,11 +242,11 @@
 <p>
         Most applications will use the asio::deadline_timer typedef.
       </p>
-<a name="asio.reference.basic_deadline_timer.thread_safety"></a><h4>
-<a name="id1117446"></a>
-        <a href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.thread_safety">Thread
+<a name="asio.reference.basic_deadline_timer.thread_safety"></a><h5>
+<a name="id3470728"></a>
+        <a class="link" href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.thread_safety">Thread
         Safety</a>
-      </h4>
+      </h5>
 <p>
         <span class="bold"><strong>Distinct</strong></span> <span class="bold"><strong>objects:</strong></span>
         Safe.
@@ -262,10 +255,10 @@
         <span class="bold"><strong>Shared</strong></span> <span class="bold"><strong>objects:</strong></span>
         Unsafe.
       </p>
-<a name="asio.reference.basic_deadline_timer.examples"></a><h4>
-<a name="id1117500"></a>
-        <a href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.examples">Examples</a>
-      </h4>
+<a name="asio.reference.basic_deadline_timer.examples"></a><h5>
+<a name="id3470778"></a>
+        <a class="link" href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.examples">Examples</a>
+      </h5>
 <p>
         Performing a blocking wait:
       </p>
@@ -300,11 +293,11 @@
 <span class="comment">// Start an asynchronous wait.
 </span><span class="identifier">timer</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">handler</span><span class="special">);</span>
 </pre>
-<a name="asio.reference.basic_deadline_timer.changing_an_active_deadline_timer_s_expiry_time"></a><h4>
-<a name="id1117876"></a>
-        <a href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.changing_an_active_deadline_timer_s_expiry_time">Changing
+<a name="asio.reference.basic_deadline_timer.changing_an_active_deadline_timer_s_expiry_time"></a><h5>
+<a name="id3471156"></a>
+        <a class="link" href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.changing_an_active_deadline_timer_s_expiry_time">Changing
         an active deadline_timer's expiry time</a>
-      </h4>
+      </h5>
 <p>
         Changing the expiry time of a timer while there are pending asynchronous
         waits causes those wait operations to be cancelled. To ensure that the action
@@ -347,9 +340,13 @@
         </li>
 </ul></div>
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">

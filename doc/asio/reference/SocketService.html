@@ -1,15 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title> Socket service requirements</title>
+<title>Socket service requirements</title>
 <link rel="stylesheet" href="../../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../../index.html" title="Asio">
-<link rel="up" href="../reference.html" title=" Reference">
-<link rel="prev" href="SocketAcceptorService.html" title=" Socket acceptor
-      service requirements">
-<link rel="next" href="StreamSocketService.html" title=" Stream socket service
-      requirements">
+<link rel="up" href="../reference.html" title="Reference">
+<link rel="prev" href="SocketAcceptorService.html" title="Socket acceptor service requirements">
+<link rel="next" href="StreamSocketService.html" title="Stream socket service requirements">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../asio.png"></td></tr></table>
@@ -19,14 +17,14 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="asio.reference.SocketService"></a><a href="SocketService.html" title=" Socket service requirements"> Socket service requirements</a></h3></div></div></div>
+<a name="asio.reference.SocketService"></a><a class="link" href="SocketService.html" title="Socket service requirements"> Socket service requirements</a></h3></div></div></div>
 <p>
-        A socket service must meet the requirements for an <a href="IoObjectService.html" title=" I/O object service requirements">I/O
+        A socket service must meet the requirements for an <a class="link" href="IoObjectService.html" title="I/O object service requirements">I/O
         object service</a>, as well as the additional requirements listed below.
       </p>
 <p>
         In the table below, <code class="computeroutput"><span class="identifier">X</span></code> denotes
-        a socket service class for protocol <a href="Protocol.html" title=" Protocol requirements"><code class="computeroutput"><span class="identifier">Protocol</span></code></a>, <code class="computeroutput"><span class="identifier">a</span></code>
+        a socket service class for protocol <a class="link" href="Protocol.html" title="Protocol requirements"><code class="computeroutput"><span class="identifier">Protocol</span></code></a>, <code class="computeroutput"><span class="identifier">a</span></code>
         denotes a value of type <code class="computeroutput"><span class="identifier">X</span></code>,
         <code class="computeroutput"><span class="identifier">b</span></code> denotes a value of type
         <code class="computeroutput"><span class="identifier">X</span><span class="special">::</span><span class="identifier">implementation_type</span></code>, <code class="computeroutput"><span class="identifier">p</span></code>
@@ -35,23 +33,20 @@
         <code class="computeroutput"><span class="identifier">X</span><span class="special">::</span><span class="identifier">native_type</span></code>, <code class="computeroutput"><span class="identifier">e</span></code>
         denotes a value of type <code class="computeroutput"><span class="identifier">Protocol</span><span class="special">::</span><span class="identifier">endpoint</span></code>,
         <code class="computeroutput"><span class="identifier">ec</span></code> denotes a value of type
-        <code class="computeroutput"><span class="identifier">error_code</span></code>, <code class="computeroutput"><span class="identifier">s</span></code> denotes a value meeting <a href="SettableSocketOption.html" title=" Settable socket
-      option requirements"><code class="computeroutput"><span class="identifier">SettableSocketOption</span></code></a> requirements,
+        <code class="computeroutput"><span class="identifier">error_code</span></code>, <code class="computeroutput"><span class="identifier">s</span></code> denotes a value meeting <a class="link" href="SettableSocketOption.html" title="Settable socket option requirements"><code class="computeroutput"><span class="identifier">SettableSocketOption</span></code></a> requirements,
         <code class="computeroutput"><span class="identifier">g</span></code> denotes a value meeting
-        <a href="GettableSocketOption.html" title=" Gettable socket
-      option requirements"><code class="computeroutput"><span class="identifier">GettableSocketOption</span></code></a>
+        <a class="link" href="GettableSocketOption.html" title="Gettable socket option requirements"><code class="computeroutput"><span class="identifier">GettableSocketOption</span></code></a>
         requirements, <code class="computeroutput"><span class="identifier">i</span></code> denotes a
-        value meeting <a href="IoControlCommand.html" title=" I/O control command
-      requirements"><code class="computeroutput"><span class="identifier">IoControlCommand</span></code></a> requirements,
+        value meeting <a class="link" href="IoControlCommand.html" title="I/O control command requirements"><code class="computeroutput"><span class="identifier">IoControlCommand</span></code></a> requirements,
         <code class="computeroutput"><span class="identifier">h</span></code> denotes a value of type
         <code class="computeroutput"><span class="identifier">socket_base</span><span class="special">::</span><span class="identifier">shutdown_type</span></code>, <code class="computeroutput"><span class="identifier">ch</span></code>
-        denotes a value meeting <a href="ConnectHandler.html" title=" Connect handler requirements"><code class="computeroutput"><span class="identifier">ConnectHandler</span></code></a> requirements, and
+        denotes a value meeting <a class="link" href="ConnectHandler.html" title="Connect handler requirements"><code class="computeroutput"><span class="identifier">ConnectHandler</span></code></a> requirements, and
         <code class="computeroutput"><span class="identifier">u</span></code> and <code class="computeroutput"><span class="identifier">v</span></code>
         denote identifiers.
       </p>
 <div class="table">
-<a name="id1031242"></a><p class="title"><b>Table 18. SocketService requirements</b></p>
-<table class="table" summary="SocketService requirements">
+<a name="id3420946"></a><p class="title"><b>Table 18. SocketService requirements</b></p>
+<div class="table-contents"><table class="table" summary="SocketService requirements">
 <colgroup>
 <col>
 <col>
@@ -106,7 +101,7 @@
             </td>
 <td>
             <p>
-              From <a href="IoObjectService.html" title=" I/O object service requirements">IoObjectService</a>
+              From <a class="link" href="IoObjectService.html" title="I/O object service requirements">IoObjectService</a>
               requirements.<br> post: <code class="computeroutput"><span class="special">!</span><span class="identifier">a</span><span class="special">.</span><span class="identifier">is_open</span><span class="special">(</span><span class="identifier">b</span><span class="special">)</span></code>.
             </p>
             </td>
@@ -123,7 +118,7 @@
             </td>
 <td>
             <p>
-              From <a href="IoObjectService.html" title=" I/O object service requirements">IoObjectService</a>
+              From <a class="link" href="IoObjectService.html" title="I/O object service requirements">IoObjectService</a>
               requirements. Implicitly cancels asynchronous operations, as if by
               calling <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">close</span><span class="special">(</span><span class="identifier">b</span><span class="special">,</span> <span class="identifier">ec</span><span class="special">)</span></code>.
             </p>
@@ -653,19 +648,23 @@
               Initiates an asynchronous connect operation that is performed via the
               <code class="computeroutput"><span class="identifier">io_service</span></code> object
               <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">io_service</span><span class="special">()</span></code>
-              and behaves according to <a href="asynchronous_operations.html" title=" Requirements
-      on asynchronous operations">asynchronous
+              and behaves according to <a class="link" href="asynchronous_operations.html" title="Requirements on asynchronous operations">asynchronous
               operation</a> requirements.
             </p>
             </td>
 </tr>
 </tbody>
-</table>
+</table></div>
 </div>
+<br class="table-break">
 </div>
-<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><small>Copyright © 2003 - 2007 Christopher M. Kohlhoff</small></td>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div></td>
 </tr></table>
 <hr>
 <div class="spirit-nav">
