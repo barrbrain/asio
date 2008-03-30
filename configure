@@ -1648,7 +1648,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=asio
- VERSION=0.3.9
+ VERSION=1.0.0
 
 
 cat >>confdefs.h <<_ACEOF
@@ -3606,21 +3606,26 @@ if test "${with_boost+set}" = set; then
 
 else
 
-  BOOSTDIR="`pwd`/../boost_1_34_1"
+  BOOSTDIR="`pwd`/../boost_1_35_0"
   if test -d "${BOOSTDIR}"; then
     CPPFLAGS="$CPPFLAGS -I${BOOSTDIR}"
   else
-    BOOSTDIR="`pwd`/../boost_1_34_0"
+    BOOSTDIR="`pwd`/../boost_1_34_1"
     if test -d "${BOOSTDIR}"; then
       CPPFLAGS="$CPPFLAGS -I${BOOSTDIR}"
     else
-      BOOSTDIR="`pwd`/../boost_1_33_1"
+      BOOSTDIR="`pwd`/../boost_1_34_0"
       if test -d "${BOOSTDIR}"; then
         CPPFLAGS="$CPPFLAGS -I${BOOSTDIR}"
       else
-        BOOSTDIR="`pwd`/../boost_1_33_0"
+        BOOSTDIR="`pwd`/../boost_1_33_1"
         if test -d "${BOOSTDIR}"; then
           CPPFLAGS="$CPPFLAGS -I${BOOSTDIR}"
+        else
+          BOOSTDIR="`pwd`/../boost_1_33_0"
+          if test -d "${BOOSTDIR}"; then
+            CPPFLAGS="$CPPFLAGS -I${BOOSTDIR}"
+          fi
         fi
       fi
     fi

@@ -29,7 +29,7 @@
   <span class="keyword">public</span> <span class="identifier">ssl</span><span class="special">::</span><span class="identifier">stream_base</span>
 </pre>
 <a name="asio.reference.ssl__stream.types"></a><h5>
-<a name="id3677023"></a>
+<a name="id2346777"></a>
         <a class="link" href="ssl__stream.html#asio.reference.ssl__stream.types">Types</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -113,7 +113,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.ssl__stream.member_functions"></a><h5>
-<a name="id3677212"></a>
+<a name="id2346966"></a>
         <a class="link" href="ssl__stream.html#asio.reference.ssl__stream.member_functions">Member Functions</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -346,7 +346,7 @@
         functionality using SSL.
       </p>
 <a name="asio.reference.ssl__stream.thread_safety"></a><h5>
-<a name="id3677731"></a>
+<a name="id2347485"></a>
         <a class="link" href="ssl__stream.html#asio.reference.ssl__stream.thread_safety">Thread Safety</a>
       </h5>
 <p>
@@ -358,21 +358,21 @@
         Unsafe.
       </p>
 <a name="asio.reference.ssl__stream.example"></a><h5>
-<a name="id3677780"></a>
+<a name="id2347534"></a>
         <a class="link" href="ssl__stream.html#asio.reference.ssl__stream.example">Example</a>
       </h5>
 <p>
-        To use the SSL stream template with a stream_socket, you would write:
+        To use the SSL stream template with an ip::tcp::socket, you would write:
       </p>
 <pre class="programlisting">
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span> <span class="identifier">io_service</span><span class="special">;</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ssl</span><span class="special">::</span><span class="identifier">context</span> <span class="identifier">context</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">,</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ssl</span><span class="special">::</span><span class="identifier">context</span><span class="special">::</span><span class="identifier">sslv23</span><span class="special">);</span>
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ssl</span><span class="special">::</span><span class="identifier">stream</span><span class="special">&lt;</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">stream_socket</span><span class="special">&gt;</span> <span class="identifier">sock</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">,</span> <span class="identifier">context</span><span class="special">);</span>
+<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ssl</span><span class="special">::</span><span class="identifier">stream</span><span class="special">&lt;</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span><span class="special">&gt;</span> <span class="identifier">sock</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">,</span> <span class="identifier">context</span><span class="special">);</span>
 </pre>
 </div>
 <table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2008 Christopher M. Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

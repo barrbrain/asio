@@ -19,7 +19,7 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="asio.using"></a><a class="link" href="using.html" title="Using Asio"> Using Asio</a></h2></div></div></div>
 <a name="asio.using.supported_platforms"></a><h4>
-<a name="id3324010"></a>
+<a name="id1993160"></a>
       <a class="link" href="using.html#asio.using.supported_platforms">Supported Platforms</a>
     </h4>
 <p>
@@ -70,7 +70,7 @@
       </li>
 </ul></div>
 <a name="asio.using.dependencies"></a><h4>
-<a name="id3324099"></a>
+<a name="id1993247"></a>
       <a class="link" href="using.html#asio.using.dependencies">Dependencies</a>
     </h4>
 <p>
@@ -104,7 +104,7 @@
       </p></td></tr>
 </table></div>
 <a name="asio.using.building_the_tests_and_examples_on_linux_or_unix"></a><h4>
-<a name="id3364514"></a>
+<a name="id2033640"></a>
       <a class="link" href="using.html#asio.using.building_the_tests_and_examples_on_linux_or_unix">Building
       the tests and examples on Linux or UNIX</a>
     </h4>
@@ -139,7 +139,7 @@
       after a successful build.
     </p>
 <a name="asio.using.building_the_tests_and_examples_with_msvc"></a><h4>
-<a name="id3364653"></a>
+<a name="id2033779"></a>
       <a class="link" href="using.html#asio.using.building_the_tests_and_examples_with_msvc">Building
       the tests and examples with MSVC</a>
     </h4>
@@ -167,7 +167,7 @@
       </li>
 </ul></div>
 <a name="asio.using.building_the_test_and_examples_with_borland_c__"></a><h4>
-<a name="id3364803"></a>
+<a name="id2033929"></a>
       <a class="link" href="using.html#asio.using.building_the_test_and_examples_with_borland_c__">Building
       the test and examples with Borland C++</a>
     </h4>
@@ -195,7 +195,7 @@
       </li>
 </ul></div>
 <a name="asio.using.building_the_tests_and_examples_with_mingw"></a><h4>
-<a name="id3364952"></a>
+<a name="id2034078"></a>
       <a class="link" href="using.html#asio.using.building_the_tests_and_examples_with_mingw">Building
       the tests and examples with MinGW</a>
     </h4>
@@ -235,7 +235,7 @@
       </p></td></tr>
 </table></div>
 <a name="asio.using.macros"></a><h4>
-<a name="id3365180"></a>
+<a name="id2034306"></a>
       <a class="link" href="using.html#asio.using.macros">Macros</a>
     </h4>
 <p>
@@ -414,12 +414,54 @@
             </p>
             </td>
 </tr>
+<tr>
+<td>
+            <p>
+              <code class="computeroutput"><span class="identifier">ASIO_ENABLE_CANCELIO</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              Enables use of the <code class="computeroutput"><span class="identifier">CancelIo</span></code>
+              function on older versions of Windows. If not enabled, calls to <code class="computeroutput"><span class="identifier">cancel</span><span class="special">()</span></code>
+              on a socket object will always fail with <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error</span><span class="special">::</span><span class="identifier">operation_not_supported</span></code>
+              when run on Windows XP, Windows Server 2003, and earlier versions of
+              Windows. When running on Windows Vista, Windows Server 2008, and later,
+              the <code class="computeroutput"><span class="identifier">CancelIoEx</span></code> function
+              is always used.
+            </p>
+            <p>
+              The <code class="computeroutput"><span class="identifier">CancelIo</span></code> function
+              has two issues that should be considered before enabling its use:
+            </p>
+            <p>
+              * It will only cancel asynchronous operations that were initiated in
+              the current thread.
+            </p>
+            <p>
+              * It can appear to complete without error, but the request to cancel
+              the unfinished operations may be silently ignored by the operating
+              system. Whether it works or not seems to depend on the drivers that
+              are installed.
+            </p>
+            <p>
+              For portable cancellation, consider using one of the following alternatives:
+            </p>
+            <p>
+              * Disable asio's I/O completion port backend by defining ASIO_DISABLE_IOCP.
+            </p>
+            <p>
+              * Use the socket object's close() function to simultaneously cancel
+              the outstanding operations and close the socket.
+            </p>
+            </td>
+</tr>
 </tbody>
 </table></div>
 </div>
 <table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2008 Christopher M. Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>

@@ -34,7 +34,7 @@
             will be passed the asio::error::operation_aborted error.
           </p>
 <a name="asio.reference.basic_stream_socket.cancel.overload1.exceptions"></a><h6>
-<a name="id3545685"></a>
+<a name="id2215306"></a>
             <a class="link" href="overload1.html#asio.reference.basic_stream_socket.cancel.overload1.exceptions">Exceptions</a>
           </h6>
 <div class="variablelist">
@@ -46,10 +46,50 @@
               </p></dd>
 </dl>
 </div>
+<a name="asio.reference.basic_stream_socket.cancel.overload1.remarks"></a><h6>
+<a name="id2215344"></a>
+            <a class="link" href="overload1.html#asio.reference.basic_stream_socket.cancel.overload1.remarks">Remarks</a>
+          </h6>
+<p>
+            Calls to cancel() will always fail with asio::error::operation_not_supported
+            when run on Windows XP, Windows Server 2003, and earlier versions of
+            Windows, unless ASIO_ENABLE_CANCELIO is defined. However, the CancelIo
+            function has two issues that should be considered before enabling its
+            use:
+          </p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+              It will only cancel asynchronous operations that were initiated in
+              the current thread.
+            </li>
+<li>
+              It can appear to complete without error, but the request to cancel
+              the unfinished operations may be silently ignored by the operating
+              system. Whether it works or not seems to depend on the drivers that
+              are installed.
+            </li>
+</ul></div>
+<p>
+            For portable cancellation, consider using one of the following alternatives:
+          </p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+              Disable asio's I/O completion port backend by defining ASIO_DISABLE_IOCP.
+            </li>
+<li>
+              Use the close() function to simultaneously cancel the outstanding operations
+              and close the socket.
+            </li>
+</ul></div>
+<p>
+            When running on Windows Vista, Windows Server 2008, and later, the CancelIoEx
+            function is always used. This function does not have the problems described
+            above.
+          </p>
 </div>
 <table width="100%"><tr>
 <td align="left"></td>
-<td align="right"><div class="copyright-footer">Copyright © 2003 - 2007 Christopher M. Kohlhoff<p>
+<td align="right"><div class="copyright-footer">Copyright © 2003 - 2008 Christopher M. Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
         file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
       </p>
