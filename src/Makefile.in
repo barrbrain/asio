@@ -67,8 +67,17 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	tests/unit/ip/unicast$(EXEEXT) tests/unit/ip/v6_only$(EXEEXT) \
 	tests/unit/is_read_buffered$(EXEEXT) \
 	tests/unit/is_write_buffered$(EXEEXT) \
-	tests/unit/placeholders$(EXEEXT) tests/unit/read$(EXEEXT) \
-	tests/unit/read_until$(EXEEXT) \
+	tests/unit/local/basic_endpoint$(EXEEXT) \
+	tests/unit/local/connect_pair$(EXEEXT) \
+	tests/unit/local/datagram_protocol$(EXEEXT) \
+	tests/unit/local/stream_protocol$(EXEEXT) \
+	tests/unit/placeholders$(EXEEXT) \
+	tests/unit/posix/basic_descriptor$(EXEEXT) \
+	tests/unit/posix/basic_stream_descriptor$(EXEEXT) \
+	tests/unit/posix/descriptor_base$(EXEEXT) \
+	tests/unit/posix/stream_descriptor$(EXEEXT) \
+	tests/unit/posix/stream_descriptor_service$(EXEEXT) \
+	tests/unit/read$(EXEEXT) tests/unit/read_until$(EXEEXT) \
 	tests/unit/socket_acceptor_service$(EXEEXT) \
 	tests/unit/socket_base$(EXEEXT) tests/unit/strand$(EXEEXT) \
 	tests/unit/stream_socket_service$(EXEEXT) \
@@ -93,6 +102,9 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	examples/iostreams/daytime_server$(EXEEXT) \
 	examples/multicast/receiver$(EXEEXT) \
 	examples/multicast/sender$(EXEEXT) \
+	examples/nonblocking/third_party_lib$(EXEEXT) \
+	examples/porthopper/client$(EXEEXT) \
+	examples/porthopper/server$(EXEEXT) \
 	examples/services/daytime_client$(EXEEXT) \
 	examples/socks4/sync_client$(EXEEXT) \
 	examples/timeouts/accept_timeout$(EXEEXT) \
@@ -329,6 +341,21 @@ am_examples_multicast_sender_OBJECTS =  \
 examples_multicast_sender_OBJECTS =  \
 	$(am_examples_multicast_sender_OBJECTS)
 examples_multicast_sender_LDADD = $(LDADD)
+am_examples_nonblocking_third_party_lib_OBJECTS =  \
+	examples/nonblocking/third_party_lib.$(OBJEXT)
+examples_nonblocking_third_party_lib_OBJECTS =  \
+	$(am_examples_nonblocking_third_party_lib_OBJECTS)
+examples_nonblocking_third_party_lib_LDADD = $(LDADD)
+am_examples_porthopper_client_OBJECTS =  \
+	examples/porthopper/client.$(OBJEXT)
+examples_porthopper_client_OBJECTS =  \
+	$(am_examples_porthopper_client_OBJECTS)
+examples_porthopper_client_LDADD = $(LDADD)
+am_examples_porthopper_server_OBJECTS =  \
+	examples/porthopper/server.$(OBJEXT)
+examples_porthopper_server_OBJECTS =  \
+	$(am_examples_porthopper_server_OBJECTS)
+examples_porthopper_server_LDADD = $(LDADD)
 am_examples_services_daytime_client_OBJECTS =  \
 	examples/services/daytime_client.$(OBJEXT) \
 	examples/services/logger_service.$(OBJEXT)
@@ -589,11 +616,56 @@ am_tests_unit_is_write_buffered_OBJECTS =  \
 tests_unit_is_write_buffered_OBJECTS =  \
 	$(am_tests_unit_is_write_buffered_OBJECTS)
 tests_unit_is_write_buffered_LDADD = $(LDADD)
+am_tests_unit_local_basic_endpoint_OBJECTS =  \
+	tests/unit/local/basic_endpoint.$(OBJEXT)
+tests_unit_local_basic_endpoint_OBJECTS =  \
+	$(am_tests_unit_local_basic_endpoint_OBJECTS)
+tests_unit_local_basic_endpoint_LDADD = $(LDADD)
+am_tests_unit_local_connect_pair_OBJECTS =  \
+	tests/unit/local/connect_pair.$(OBJEXT)
+tests_unit_local_connect_pair_OBJECTS =  \
+	$(am_tests_unit_local_connect_pair_OBJECTS)
+tests_unit_local_connect_pair_LDADD = $(LDADD)
+am_tests_unit_local_datagram_protocol_OBJECTS =  \
+	tests/unit/local/datagram_protocol.$(OBJEXT)
+tests_unit_local_datagram_protocol_OBJECTS =  \
+	$(am_tests_unit_local_datagram_protocol_OBJECTS)
+tests_unit_local_datagram_protocol_LDADD = $(LDADD)
+am_tests_unit_local_stream_protocol_OBJECTS =  \
+	tests/unit/local/stream_protocol.$(OBJEXT)
+tests_unit_local_stream_protocol_OBJECTS =  \
+	$(am_tests_unit_local_stream_protocol_OBJECTS)
+tests_unit_local_stream_protocol_LDADD = $(LDADD)
 am_tests_unit_placeholders_OBJECTS =  \
 	tests/unit/placeholders.$(OBJEXT)
 tests_unit_placeholders_OBJECTS =  \
 	$(am_tests_unit_placeholders_OBJECTS)
 tests_unit_placeholders_LDADD = $(LDADD)
+am_tests_unit_posix_basic_descriptor_OBJECTS =  \
+	tests/unit/posix/basic_descriptor.$(OBJEXT)
+tests_unit_posix_basic_descriptor_OBJECTS =  \
+	$(am_tests_unit_posix_basic_descriptor_OBJECTS)
+tests_unit_posix_basic_descriptor_LDADD = $(LDADD)
+am_tests_unit_posix_basic_stream_descriptor_OBJECTS =  \
+	tests/unit/posix/basic_stream_descriptor.$(OBJEXT)
+tests_unit_posix_basic_stream_descriptor_OBJECTS =  \
+	$(am_tests_unit_posix_basic_stream_descriptor_OBJECTS)
+tests_unit_posix_basic_stream_descriptor_LDADD = $(LDADD)
+am_tests_unit_posix_descriptor_base_OBJECTS =  \
+	tests/unit/posix/descriptor_base.$(OBJEXT)
+tests_unit_posix_descriptor_base_OBJECTS =  \
+	$(am_tests_unit_posix_descriptor_base_OBJECTS)
+tests_unit_posix_descriptor_base_LDADD = $(LDADD)
+am_tests_unit_posix_stream_descriptor_OBJECTS =  \
+	tests/unit/posix/stream_descriptor.$(OBJEXT)
+tests_unit_posix_stream_descriptor_OBJECTS =  \
+	$(am_tests_unit_posix_stream_descriptor_OBJECTS)
+tests_unit_posix_stream_descriptor_LDADD = $(LDADD)
+am_tests_unit_posix_stream_descriptor_service_OBJECTS =  \
+	tests/unit/posix/stream_descriptor_service.$(OBJEXT)
+tests_unit_posix_stream_descriptor_service_OBJECTS =  \
+	$(am_tests_unit_posix_stream_descriptor_service_OBJECTS)
+tests_unit_posix_stream_descriptor_service_LDADD = $(LDADD)
 am_tests_unit_read_OBJECTS = tests/unit/read.$(OBJEXT)
 tests_unit_read_OBJECTS = $(am_tests_unit_read_OBJECTS)
 tests_unit_read_LDADD = $(LDADD)
@@ -698,6 +770,9 @@ SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_iostreams_daytime_server_SOURCES) \
 	$(examples_multicast_receiver_SOURCES) \
 	$(examples_multicast_sender_SOURCES) \
+	$(examples_nonblocking_third_party_lib_SOURCES) \
+	$(examples_porthopper_client_SOURCES) \
+	$(examples_porthopper_server_SOURCES) \
 	$(examples_services_daytime_client_SOURCES) \
 	$(examples_socks4_sync_client_SOURCES) \
 	$(examples_ssl_client_SOURCES) $(examples_ssl_server_SOURCES) \
@@ -750,8 +825,17 @@ SOURCES = $(examples_allocation_server_SOURCES) \
 	$(tests_unit_ip_v6_only_SOURCES) \
 	$(tests_unit_is_read_buffered_SOURCES) \
 	$(tests_unit_is_write_buffered_SOURCES) \
-	$(tests_unit_placeholders_SOURCES) $(tests_unit_read_SOURCES) \
-	$(tests_unit_read_until_SOURCES) \
+	$(tests_unit_local_basic_endpoint_SOURCES) \
+	$(tests_unit_local_connect_pair_SOURCES) \
+	$(tests_unit_local_datagram_protocol_SOURCES) \
+	$(tests_unit_local_stream_protocol_SOURCES) \
+	$(tests_unit_placeholders_SOURCES) \
+	$(tests_unit_posix_basic_descriptor_SOURCES) \
+	$(tests_unit_posix_basic_stream_descriptor_SOURCES) \
+	$(tests_unit_posix_descriptor_base_SOURCES) \
+	$(tests_unit_posix_stream_descriptor_SOURCES) \
+	$(tests_unit_posix_stream_descriptor_service_SOURCES) \
+	$(tests_unit_read_SOURCES) $(tests_unit_read_until_SOURCES) \
 	$(tests_unit_socket_acceptor_service_SOURCES) \
 	$(tests_unit_socket_base_SOURCES) \
 	$(tests_unit_ssl_basic_context_SOURCES) \
@@ -785,6 +869,9 @@ DIST_SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_iostreams_daytime_server_SOURCES) \
 	$(examples_multicast_receiver_SOURCES) \
 	$(examples_multicast_sender_SOURCES) \
+	$(examples_nonblocking_third_party_lib_SOURCES) \
+	$(examples_porthopper_client_SOURCES) \
+	$(examples_porthopper_server_SOURCES) \
 	$(examples_services_daytime_client_SOURCES) \
 	$(examples_socks4_sync_client_SOURCES) \
 	$(am__examples_ssl_client_SOURCES_DIST) \
@@ -838,8 +925,17 @@ DIST_SOURCES = $(examples_allocation_server_SOURCES) \
 	$(tests_unit_ip_v6_only_SOURCES) \
 	$(tests_unit_is_read_buffered_SOURCES) \
 	$(tests_unit_is_write_buffered_SOURCES) \
-	$(tests_unit_placeholders_SOURCES) $(tests_unit_read_SOURCES) \
-	$(tests_unit_read_until_SOURCES) \
+	$(tests_unit_local_basic_endpoint_SOURCES) \
+	$(tests_unit_local_connect_pair_SOURCES) \
+	$(tests_unit_local_datagram_protocol_SOURCES) \
+	$(tests_unit_local_stream_protocol_SOURCES) \
+	$(tests_unit_placeholders_SOURCES) \
+	$(tests_unit_posix_basic_descriptor_SOURCES) \
+	$(tests_unit_posix_basic_stream_descriptor_SOURCES) \
+	$(tests_unit_posix_descriptor_base_SOURCES) \
+	$(tests_unit_posix_stream_descriptor_SOURCES) \
+	$(tests_unit_posix_stream_descriptor_service_SOURCES) \
+	$(tests_unit_read_SOURCES) $(tests_unit_read_until_SOURCES) \
 	$(tests_unit_socket_acceptor_service_SOURCES) \
 	$(tests_unit_socket_base_SOURCES) \
 	$(am__tests_unit_ssl_basic_context_SOURCES_DIST) \
@@ -970,11 +1066,18 @@ TESTS = tests/unit/basic_datagram_socket \
 	tests/unit/ip/resolver_service tests/unit/ip/tcp \
 	tests/unit/ip/udp tests/unit/ip/unicast tests/unit/ip/v6_only \
 	tests/unit/is_read_buffered tests/unit/is_write_buffered \
-	tests/unit/placeholders tests/unit/read tests/unit/read_until \
-	tests/unit/socket_acceptor_service tests/unit/socket_base \
-	tests/unit/strand tests/unit/stream_socket_service \
-	tests/unit/thread tests/unit/time_traits tests/unit/write \
-	$(am__append_2)
+	tests/unit/local/basic_endpoint tests/unit/local/connect_pair \
+	tests/unit/local/datagram_protocol \
+	tests/unit/local/stream_protocol tests/unit/placeholders \
+	tests/unit/posix/basic_descriptor \
+	tests/unit/posix/basic_stream_descriptor \
+	tests/unit/posix/descriptor_base \
+	tests/unit/posix/stream_descriptor \
+	tests/unit/posix/stream_descriptor_service tests/unit/read \
+	tests/unit/read_until tests/unit/socket_acceptor_service \
+	tests/unit/socket_base tests/unit/strand \
+	tests/unit/stream_socket_service tests/unit/thread \
+	tests/unit/time_traits tests/unit/write $(am__append_2)
 noinst_HEADERS = \
 	tests/unit/unit_test.hpp \
 	examples/chat/chat_message.hpp \
@@ -1018,7 +1121,16 @@ tests_unit_ip_unicast_SOURCES = tests/unit/ip/unicast.cpp
 tests_unit_ip_v6_only_SOURCES = tests/unit/ip/v6_only.cpp
 tests_unit_is_read_buffered_SOURCES = tests/unit/is_read_buffered.cpp
 tests_unit_is_write_buffered_SOURCES = tests/unit/is_write_buffered.cpp
+tests_unit_local_basic_endpoint_SOURCES = tests/unit/local/basic_endpoint.cpp
+tests_unit_local_connect_pair_SOURCES = tests/unit/local/connect_pair.cpp
+tests_unit_local_datagram_protocol_SOURCES = tests/unit/local/datagram_protocol.cpp
+tests_unit_local_stream_protocol_SOURCES = tests/unit/local/stream_protocol.cpp
 tests_unit_placeholders_SOURCES = tests/unit/placeholders.cpp
+tests_unit_posix_basic_descriptor_SOURCES = tests/unit/posix/basic_descriptor.cpp
+tests_unit_posix_basic_stream_descriptor_SOURCES = tests/unit/posix/basic_stream_descriptor.cpp
+tests_unit_posix_descriptor_base_SOURCES = tests/unit/posix/descriptor_base.cpp
+tests_unit_posix_stream_descriptor_SOURCES = tests/unit/posix/stream_descriptor.cpp
+tests_unit_posix_stream_descriptor_service_SOURCES = tests/unit/posix/stream_descriptor_service.cpp
 tests_unit_read_SOURCES = tests/unit/read.cpp
 tests_unit_read_until_SOURCES = tests/unit/read_until.cpp
 tests_unit_socket_acceptor_service_SOURCES = tests/unit/socket_acceptor_service.cpp
@@ -1071,6 +1183,9 @@ examples_iostreams_daytime_client_SOURCES = examples/iostreams/daytime_client.cp
 examples_iostreams_daytime_server_SOURCES = examples/iostreams/daytime_server.cpp
 examples_multicast_receiver_SOURCES = examples/multicast/receiver.cpp
 examples_multicast_sender_SOURCES = examples/multicast/sender.cpp
+examples_nonblocking_third_party_lib_SOURCES = examples/nonblocking/third_party_lib.cpp
+examples_porthopper_client_SOURCES = examples/porthopper/client.cpp
+examples_porthopper_server_SOURCES = examples/porthopper/server.cpp
 examples_services_daytime_client_SOURCES = \
 	examples/services/daytime_client.cpp \
 	examples/services/logger_service.cpp
@@ -1135,6 +1250,7 @@ EXTRA_DIST = \
 	examples/http/server3/request_parser.hpp \
 	examples/http/server3/server.hpp \
 	examples/http/server3/win_main.cpp \
+	examples/porthopper/protocol.hpp \
 	examples/serialization/client.cpp \
 	examples/serialization/server.cpp \
 	examples/serialization/connection.hpp \
@@ -1442,6 +1558,36 @@ examples/multicast/sender.$(OBJEXT):  \
 examples/multicast/sender$(EXEEXT): $(examples_multicast_sender_OBJECTS) $(examples_multicast_sender_DEPENDENCIES) examples/multicast/$(am__dirstamp)
 	@rm -f examples/multicast/sender$(EXEEXT)
 	$(CXXLINK) $(examples_multicast_sender_LDFLAGS) $(examples_multicast_sender_OBJECTS) $(examples_multicast_sender_LDADD) $(LIBS)
+examples/nonblocking/$(am__dirstamp):
+	@$(mkdir_p) examples/nonblocking
+	@: > examples/nonblocking/$(am__dirstamp)
+examples/nonblocking/$(DEPDIR)/$(am__dirstamp):
+	@$(mkdir_p) examples/nonblocking/$(DEPDIR)
+	@: > examples/nonblocking/$(DEPDIR)/$(am__dirstamp)
+examples/nonblocking/third_party_lib.$(OBJEXT):  \
+	examples/nonblocking/$(am__dirstamp) \
+	examples/nonblocking/$(DEPDIR)/$(am__dirstamp)
+examples/nonblocking/third_party_lib$(EXEEXT): $(examples_nonblocking_third_party_lib_OBJECTS) $(examples_nonblocking_third_party_lib_DEPENDENCIES) examples/nonblocking/$(am__dirstamp)
+	@rm -f examples/nonblocking/third_party_lib$(EXEEXT)
+	$(CXXLINK) $(examples_nonblocking_third_party_lib_LDFLAGS) $(examples_nonblocking_third_party_lib_OBJECTS) $(examples_nonblocking_third_party_lib_LDADD) $(LIBS)
+examples/porthopper/$(am__dirstamp):
+	@$(mkdir_p) examples/porthopper
+	@: > examples/porthopper/$(am__dirstamp)
+examples/porthopper/$(DEPDIR)/$(am__dirstamp):
+	@$(mkdir_p) examples/porthopper/$(DEPDIR)
+	@: > examples/porthopper/$(DEPDIR)/$(am__dirstamp)
+examples/porthopper/client.$(OBJEXT):  \
+	examples/porthopper/$(am__dirstamp) \
+	examples/porthopper/$(DEPDIR)/$(am__dirstamp)
+examples/porthopper/client$(EXEEXT): $(examples_porthopper_client_OBJECTS) $(examples_porthopper_client_DEPENDENCIES) examples/porthopper/$(am__dirstamp)
+	@rm -f examples/porthopper/client$(EXEEXT)
+	$(CXXLINK) $(examples_porthopper_client_LDFLAGS) $(examples_porthopper_client_OBJECTS) $(examples_porthopper_client_LDADD) $(LIBS)
+examples/porthopper/server.$(OBJEXT):  \
+	examples/porthopper/$(am__dirstamp) \
+	examples/porthopper/$(DEPDIR)/$(am__dirstamp)
+examples/porthopper/server$(EXEEXT): $(examples_porthopper_server_OBJECTS) $(examples_porthopper_server_DEPENDENCIES) examples/porthopper/$(am__dirstamp)
+	@rm -f examples/porthopper/server$(EXEEXT)
+	$(CXXLINK) $(examples_porthopper_server_LDFLAGS) $(examples_porthopper_server_OBJECTS) $(examples_porthopper_server_LDADD) $(LIBS)
 examples/services/$(am__dirstamp):
 	@$(mkdir_p) examples/services
 	@: > examples/services/$(am__dirstamp)
@@ -1869,11 +2015,77 @@ tests/unit/is_write_buffered.$(OBJEXT): tests/unit/$(am__dirstamp) \
 tests/unit/is_write_buffered$(EXEEXT): $(tests_unit_is_write_buffered_OBJECTS) $(tests_unit_is_write_buffered_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/is_write_buffered$(EXEEXT)
 	$(CXXLINK) $(tests_unit_is_write_buffered_LDFLAGS) $(tests_unit_is_write_buffered_OBJECTS) $(tests_unit_is_write_buffered_LDADD) $(LIBS)
+tests/unit/local/$(am__dirstamp):
+	@$(mkdir_p) tests/unit/local
+	@: > tests/unit/local/$(am__dirstamp)
+tests/unit/local/$(DEPDIR)/$(am__dirstamp):
+	@$(mkdir_p) tests/unit/local/$(DEPDIR)
+	@: > tests/unit/local/$(DEPDIR)/$(am__dirstamp)
+tests/unit/local/basic_endpoint.$(OBJEXT):  \
+	tests/unit/local/$(am__dirstamp) \
+	tests/unit/local/$(DEPDIR)/$(am__dirstamp)
+tests/unit/local/basic_endpoint$(EXEEXT): $(tests_unit_local_basic_endpoint_OBJECTS) $(tests_unit_local_basic_endpoint_DEPENDENCIES) tests/unit/local/$(am__dirstamp)
+	@rm -f tests/unit/local/basic_endpoint$(EXEEXT)
+	$(CXXLINK) $(tests_unit_local_basic_endpoint_LDFLAGS) $(tests_unit_local_basic_endpoint_OBJECTS) $(tests_unit_local_basic_endpoint_LDADD) $(LIBS)
+tests/unit/local/connect_pair.$(OBJEXT):  \
+	tests/unit/local/$(am__dirstamp) \
+	tests/unit/local/$(DEPDIR)/$(am__dirstamp)
+tests/unit/local/connect_pair$(EXEEXT): $(tests_unit_local_connect_pair_OBJECTS) $(tests_unit_local_connect_pair_DEPENDENCIES) tests/unit/local/$(am__dirstamp)
+	@rm -f tests/unit/local/connect_pair$(EXEEXT)
+	$(CXXLINK) $(tests_unit_local_connect_pair_LDFLAGS) $(tests_unit_local_connect_pair_OBJECTS) $(tests_unit_local_connect_pair_LDADD) $(LIBS)
+tests/unit/local/datagram_protocol.$(OBJEXT):  \
+	tests/unit/local/$(am__dirstamp) \
+	tests/unit/local/$(DEPDIR)/$(am__dirstamp)
+tests/unit/local/datagram_protocol$(EXEEXT): $(tests_unit_local_datagram_protocol_OBJECTS) $(tests_unit_local_datagram_protocol_DEPENDENCIES) tests/unit/local/$(am__dirstamp)
+	@rm -f tests/unit/local/datagram_protocol$(EXEEXT)
+	$(CXXLINK) $(tests_unit_local_datagram_protocol_LDFLAGS) $(tests_unit_local_datagram_protocol_OBJECTS) $(tests_unit_local_datagram_protocol_LDADD) $(LIBS)
+tests/unit/local/stream_protocol.$(OBJEXT):  \
+	tests/unit/local/$(am__dirstamp) \
+	tests/unit/local/$(DEPDIR)/$(am__dirstamp)
+tests/unit/local/stream_protocol$(EXEEXT): $(tests_unit_local_stream_protocol_OBJECTS) $(tests_unit_local_stream_protocol_DEPENDENCIES) tests/unit/local/$(am__dirstamp)
+	@rm -f tests/unit/local/stream_protocol$(EXEEXT)
+	$(CXXLINK) $(tests_unit_local_stream_protocol_LDFLAGS) $(tests_unit_local_stream_protocol_OBJECTS) $(tests_unit_local_stream_protocol_LDADD) $(LIBS)
 tests/unit/placeholders.$(OBJEXT): tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/placeholders$(EXEEXT): $(tests_unit_placeholders_OBJECTS) $(tests_unit_placeholders_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/placeholders$(EXEEXT)
 	$(CXXLINK) $(tests_unit_placeholders_LDFLAGS) $(tests_unit_placeholders_OBJECTS) $(tests_unit_placeholders_LDADD) $(LIBS)
+tests/unit/posix/$(am__dirstamp):
+	@$(mkdir_p) tests/unit/posix
+	@: > tests/unit/posix/$(am__dirstamp)
+tests/unit/posix/$(DEPDIR)/$(am__dirstamp):
+	@$(mkdir_p) tests/unit/posix/$(DEPDIR)
+	@: > tests/unit/posix/$(DEPDIR)/$(am__dirstamp)
+tests/unit/posix/basic_descriptor.$(OBJEXT):  \
+	tests/unit/posix/$(am__dirstamp) \
+	tests/unit/posix/$(DEPDIR)/$(am__dirstamp)
+tests/unit/posix/basic_descriptor$(EXEEXT): $(tests_unit_posix_basic_descriptor_OBJECTS) $(tests_unit_posix_basic_descriptor_DEPENDENCIES) tests/unit/posix/$(am__dirstamp)
+	@rm -f tests/unit/posix/basic_descriptor$(EXEEXT)
+	$(CXXLINK) $(tests_unit_posix_basic_descriptor_LDFLAGS) $(tests_unit_posix_basic_descriptor_OBJECTS) $(tests_unit_posix_basic_descriptor_LDADD) $(LIBS)
+tests/unit/posix/basic_stream_descriptor.$(OBJEXT):  \
+	tests/unit/posix/$(am__dirstamp) \
+	tests/unit/posix/$(DEPDIR)/$(am__dirstamp)
+tests/unit/posix/basic_stream_descriptor$(EXEEXT): $(tests_unit_posix_basic_stream_descriptor_OBJECTS) $(tests_unit_posix_basic_stream_descriptor_DEPENDENCIES) tests/unit/posix/$(am__dirstamp)
+	@rm -f tests/unit/posix/basic_stream_descriptor$(EXEEXT)
+	$(CXXLINK) $(tests_unit_posix_basic_stream_descriptor_LDFLAGS) $(tests_unit_posix_basic_stream_descriptor_OBJECTS) $(tests_unit_posix_basic_stream_descriptor_LDADD) $(LIBS)
+tests/unit/posix/descriptor_base.$(OBJEXT):  \
+	tests/unit/posix/$(am__dirstamp) \
+	tests/unit/posix/$(DEPDIR)/$(am__dirstamp)
+tests/unit/posix/descriptor_base$(EXEEXT): $(tests_unit_posix_descriptor_base_OBJECTS) $(tests_unit_posix_descriptor_base_DEPENDENCIES) tests/unit/posix/$(am__dirstamp)
+	@rm -f tests/unit/posix/descriptor_base$(EXEEXT)
+	$(CXXLINK) $(tests_unit_posix_descriptor_base_LDFLAGS) $(tests_unit_posix_descriptor_base_OBJECTS) $(tests_unit_posix_descriptor_base_LDADD) $(LIBS)
+tests/unit/posix/stream_descriptor.$(OBJEXT):  \
+	tests/unit/posix/$(am__dirstamp) \
+	tests/unit/posix/$(DEPDIR)/$(am__dirstamp)
+tests/unit/posix/stream_descriptor$(EXEEXT): $(tests_unit_posix_stream_descriptor_OBJECTS) $(tests_unit_posix_stream_descriptor_DEPENDENCIES) tests/unit/posix/$(am__dirstamp)
+	@rm -f tests/unit/posix/stream_descriptor$(EXEEXT)
+	$(CXXLINK) $(tests_unit_posix_stream_descriptor_LDFLAGS) $(tests_unit_posix_stream_descriptor_OBJECTS) $(tests_unit_posix_stream_descriptor_LDADD) $(LIBS)
+tests/unit/posix/stream_descriptor_service.$(OBJEXT):  \
+	tests/unit/posix/$(am__dirstamp) \
+	tests/unit/posix/$(DEPDIR)/$(am__dirstamp)
+tests/unit/posix/stream_descriptor_service$(EXEEXT): $(tests_unit_posix_stream_descriptor_service_OBJECTS) $(tests_unit_posix_stream_descriptor_service_DEPENDENCIES) tests/unit/posix/$(am__dirstamp)
+	@rm -f tests/unit/posix/stream_descriptor_service$(EXEEXT)
+	$(CXXLINK) $(tests_unit_posix_stream_descriptor_service_LDFLAGS) $(tests_unit_posix_stream_descriptor_service_OBJECTS) $(tests_unit_posix_stream_descriptor_service_LDADD) $(LIBS)
 tests/unit/read.$(OBJEXT): tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/read$(EXEEXT): $(tests_unit_read_OBJECTS) $(tests_unit_read_DEPENDENCIES) tests/unit/$(am__dirstamp)
@@ -2011,6 +2223,9 @@ mostlyclean-compile:
 	-rm -f examples/iostreams/daytime_server.$(OBJEXT)
 	-rm -f examples/multicast/receiver.$(OBJEXT)
 	-rm -f examples/multicast/sender.$(OBJEXT)
+	-rm -f examples/nonblocking/third_party_lib.$(OBJEXT)
+	-rm -f examples/porthopper/client.$(OBJEXT)
+	-rm -f examples/porthopper/server.$(OBJEXT)
 	-rm -f examples/services/daytime_client.$(OBJEXT)
 	-rm -f examples/services/logger_service.$(OBJEXT)
 	-rm -f examples/socks4/sync_client.$(OBJEXT)
@@ -2067,7 +2282,16 @@ mostlyclean-compile:
 	-rm -f tests/unit/ip/v6_only.$(OBJEXT)
 	-rm -f tests/unit/is_read_buffered.$(OBJEXT)
 	-rm -f tests/unit/is_write_buffered.$(OBJEXT)
+	-rm -f tests/unit/local/basic_endpoint.$(OBJEXT)
+	-rm -f tests/unit/local/connect_pair.$(OBJEXT)
+	-rm -f tests/unit/local/datagram_protocol.$(OBJEXT)
+	-rm -f tests/unit/local/stream_protocol.$(OBJEXT)
 	-rm -f tests/unit/placeholders.$(OBJEXT)
+	-rm -f tests/unit/posix/basic_descriptor.$(OBJEXT)
+	-rm -f tests/unit/posix/basic_stream_descriptor.$(OBJEXT)
+	-rm -f tests/unit/posix/descriptor_base.$(OBJEXT)
+	-rm -f tests/unit/posix/stream_descriptor.$(OBJEXT)
+	-rm -f tests/unit/posix/stream_descriptor_service.$(OBJEXT)
 	-rm -f tests/unit/read.$(OBJEXT)
 	-rm -f tests/unit/read_until.$(OBJEXT)
 	-rm -f tests/unit/socket_acceptor_service.$(OBJEXT)
@@ -2131,6 +2355,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@examples/iostreams/$(DEPDIR)/daytime_server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/multicast/$(DEPDIR)/receiver.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/multicast/$(DEPDIR)/sender.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/nonblocking/$(DEPDIR)/third_party_lib.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/porthopper/$(DEPDIR)/client.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/porthopper/$(DEPDIR)/server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/services/$(DEPDIR)/daytime_client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/services/$(DEPDIR)/logger_service.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/socks4/$(DEPDIR)/sync_client.Po@am__quote@
@@ -2197,6 +2424,15 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/udp.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/unicast.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/v6_only.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/local/$(DEPDIR)/basic_endpoint.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/local/$(DEPDIR)/connect_pair.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/local/$(DEPDIR)/datagram_protocol.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/local/$(DEPDIR)/stream_protocol.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/posix/$(DEPDIR)/basic_descriptor.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/posix/$(DEPDIR)/basic_stream_descriptor.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/posix/$(DEPDIR)/descriptor_base.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/posix/$(DEPDIR)/stream_descriptor.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/posix/$(DEPDIR)/stream_descriptor_service.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ssl/$(DEPDIR)/basic_context.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ssl/$(DEPDIR)/context.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ssl/$(DEPDIR)/context_base.Po@am__quote@
@@ -2344,7 +2580,7 @@ check-TESTS: $(TESTS)
 	else :; fi
 
 distdir: $(DISTFILES)
-	$(mkdir_p) $(distdir)/examples/chat $(distdir)/examples/http/server $(distdir)/examples/http/server2 $(distdir)/examples/http/server3 $(distdir)/examples/serialization $(distdir)/examples/services $(distdir)/examples/socks4 $(distdir)/examples/ssl $(distdir)/examples/timers $(distdir)/tests/unit
+	$(mkdir_p) $(distdir)/examples/chat $(distdir)/examples/http/server $(distdir)/examples/http/server2 $(distdir)/examples/http/server3 $(distdir)/examples/porthopper $(distdir)/examples/serialization $(distdir)/examples/services $(distdir)/examples/socks4 $(distdir)/examples/ssl $(distdir)/examples/timers $(distdir)/tests/unit
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
@@ -2418,6 +2654,10 @@ distclean-generic:
 	-rm -f examples/iostreams/$(am__dirstamp)
 	-rm -f examples/multicast/$(DEPDIR)/$(am__dirstamp)
 	-rm -f examples/multicast/$(am__dirstamp)
+	-rm -f examples/nonblocking/$(DEPDIR)/$(am__dirstamp)
+	-rm -f examples/nonblocking/$(am__dirstamp)
+	-rm -f examples/porthopper/$(DEPDIR)/$(am__dirstamp)
+	-rm -f examples/porthopper/$(am__dirstamp)
 	-rm -f examples/services/$(DEPDIR)/$(am__dirstamp)
 	-rm -f examples/services/$(am__dirstamp)
 	-rm -f examples/socks4/$(DEPDIR)/$(am__dirstamp)
@@ -2458,6 +2698,10 @@ distclean-generic:
 	-rm -f tests/unit/$(am__dirstamp)
 	-rm -f tests/unit/ip/$(DEPDIR)/$(am__dirstamp)
 	-rm -f tests/unit/ip/$(am__dirstamp)
+	-rm -f tests/unit/local/$(DEPDIR)/$(am__dirstamp)
+	-rm -f tests/unit/local/$(am__dirstamp)
+	-rm -f tests/unit/posix/$(DEPDIR)/$(am__dirstamp)
+	-rm -f tests/unit/posix/$(am__dirstamp)
 	-rm -f tests/unit/ssl/$(DEPDIR)/$(am__dirstamp)
 	-rm -f tests/unit/ssl/$(am__dirstamp)
 
@@ -2470,7 +2714,7 @@ clean: clean-am
 clean-am: clean-generic clean-noinstPROGRAMS mostlyclean-am
 
 distclean: distclean-am
-	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/multicast/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/ssl/$(DEPDIR)
+	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/multicast/$(DEPDIR) examples/nonblocking/$(DEPDIR) examples/porthopper/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/local/$(DEPDIR) tests/unit/posix/$(DEPDIR) tests/unit/ssl/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -2496,7 +2740,7 @@ install-man:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/multicast/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/ssl/$(DEPDIR)
+	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/multicast/$(DEPDIR) examples/nonblocking/$(DEPDIR) examples/porthopper/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/local/$(DEPDIR) tests/unit/posix/$(DEPDIR) tests/unit/ssl/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

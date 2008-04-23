@@ -29,7 +29,7 @@
   <span class="keyword">public</span> <span class="identifier">basic_socket</span><span class="special">&lt;</span> <span class="identifier">Protocol</span><span class="special">,</span> <span class="identifier">StreamSocketService</span> <span class="special">&gt;</span>
 </pre>
 <a name="asio.reference.basic_socket_streambuf.types"></a><h5>
-<a name="id2185550"></a>
+<a name="id3751219"></a>
         <a class="link" href="basic_socket_streambuf.html#asio.reference.basic_socket_streambuf.types">Types</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -308,7 +308,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.basic_socket_streambuf.member_functions"></a><h5>
-<a name="id2186185"></a>
+<a name="id3751855"></a>
         <a class="link" href="basic_socket_streambuf.html#asio.reference.basic_socket_streambuf.member_functions">Member
         Functions</a>
       </h5>
@@ -597,8 +597,77 @@
 </tr>
 </tbody>
 </table></div>
+<a name="asio.reference.basic_socket_streambuf.protected_member_functions"></a><h5>
+<a name="id3752514"></a>
+        <a class="link" href="basic_socket_streambuf.html#asio.reference.basic_socket_streambuf.protected_member_functions">Protected
+        Member Functions</a>
+      </h5>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+              <p>
+                Name
+              </p>
+              </th>
+<th>
+              <p>
+                Description
+              </p>
+              </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+              <p>
+                <a class="link" href="basic_socket_streambuf/overflow.html" title="basic_socket_streambuf::overflow"><span class="bold"><strong>overflow</strong></span></a>
+              </p>
+              </td>
+<td>
+              <p>
+              </p>
+              </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <a class="link" href="basic_socket_streambuf/setbuf.html" title="basic_socket_streambuf::setbuf"><span class="bold"><strong>setbuf</strong></span></a>
+              </p>
+              </td>
+<td>
+              <p>
+              </p>
+              </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <a class="link" href="basic_socket_streambuf/sync.html" title="basic_socket_streambuf::sync"><span class="bold"><strong>sync</strong></span></a>
+              </p>
+              </td>
+<td>
+              <p>
+              </p>
+              </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <a class="link" href="basic_socket_streambuf/underflow.html" title="basic_socket_streambuf::underflow"><span class="bold"><strong>underflow</strong></span></a>
+              </p>
+              </td>
+<td>
+              <p>
+              </p>
+              </td>
+</tr>
+</tbody>
+</table></div>
 <a name="asio.reference.basic_socket_streambuf.data_members"></a><h5>
-<a name="id2186844"></a>
+<a name="id3752675"></a>
         <a class="link" href="basic_socket_streambuf.html#asio.reference.basic_socket_streambuf.data_members">Data Members</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -664,6 +733,55 @@
 <td>
               <p>
                 Peek at incoming data without removing it from the input queue.
+              </p>
+              </td>
+</tr>
+</tbody>
+</table></div>
+<a name="asio.reference.basic_socket_streambuf.protected_data_members"></a><h5>
+<a name="id3752839"></a>
+        <a class="link" href="basic_socket_streambuf.html#asio.reference.basic_socket_streambuf.protected_data_members">Protected
+        Data Members</a>
+      </h5>
+<div class="informaltable"><table class="table">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+              <p>
+                Name
+              </p>
+              </th>
+<th>
+              <p>
+                Description
+              </p>
+              </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+              <p>
+                <a class="link" href="basic_socket_streambuf/implementation.html" title="basic_socket_streambuf::implementation"><span class="bold"><strong>implementation</strong></span></a>
+              </p>
+              </td>
+<td>
+              <p>
+                The underlying implementation of the I/O object.
+              </p>
+              </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <a class="link" href="basic_socket_streambuf/service.html" title="basic_socket_streambuf::service"><span class="bold"><strong>service</strong></span></a>
+              </p>
+              </td>
+<td>
+              <p>
+                The service associated with the I/O object.
               </p>
               </td>
 </tr>

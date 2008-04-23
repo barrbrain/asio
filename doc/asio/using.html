@@ -19,7 +19,7 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="asio.using"></a><a class="link" href="using.html" title="Using Asio"> Using Asio</a></h2></div></div></div>
 <a name="asio.using.supported_platforms"></a><h4>
-<a name="id1993160"></a>
+<a name="id3551620"></a>
       <a class="link" href="using.html#asio.using.supported_platforms">Supported Platforms</a>
     </h4>
 <p>
@@ -70,7 +70,7 @@
       </li>
 </ul></div>
 <a name="asio.using.dependencies"></a><h4>
-<a name="id1993247"></a>
+<a name="id3551707"></a>
       <a class="link" href="using.html#asio.using.dependencies">Dependencies</a>
     </h4>
 <p>
@@ -104,7 +104,7 @@
       </p></td></tr>
 </table></div>
 <a name="asio.using.building_the_tests_and_examples_on_linux_or_unix"></a><h4>
-<a name="id2033640"></a>
+<a name="id3592100"></a>
       <a class="link" href="using.html#asio.using.building_the_tests_and_examples_on_linux_or_unix">Building
       the tests and examples on Linux or UNIX</a>
     </h4>
@@ -139,7 +139,7 @@
       after a successful build.
     </p>
 <a name="asio.using.building_the_tests_and_examples_with_msvc"></a><h4>
-<a name="id2033779"></a>
+<a name="id3592239"></a>
       <a class="link" href="using.html#asio.using.building_the_tests_and_examples_with_msvc">Building
       the tests and examples with MSVC</a>
     </h4>
@@ -167,7 +167,7 @@
       </li>
 </ul></div>
 <a name="asio.using.building_the_test_and_examples_with_borland_c__"></a><h4>
-<a name="id2033929"></a>
+<a name="id3592388"></a>
       <a class="link" href="using.html#asio.using.building_the_test_and_examples_with_borland_c__">Building
       the test and examples with Borland C++</a>
     </h4>
@@ -195,7 +195,7 @@
       </li>
 </ul></div>
 <a name="asio.using.building_the_tests_and_examples_with_mingw"></a><h4>
-<a name="id2034078"></a>
+<a name="id3592538"></a>
       <a class="link" href="using.html#asio.using.building_the_tests_and_examples_with_mingw">Building
       the tests and examples with MinGW</a>
     </h4>
@@ -235,7 +235,7 @@
       </p></td></tr>
 </table></div>
 <a name="asio.using.macros"></a><h4>
-<a name="id2034306"></a>
+<a name="id3592766"></a>
       <a class="link" href="using.html#asio.using.macros">Macros</a>
     </h4>
 <p>
@@ -453,6 +453,20 @@
             <p>
               * Use the socket object's close() function to simultaneously cancel
               the outstanding operations and close the socket.
+            </p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p>
+              <code class="computeroutput"><span class="identifier">ASIO_NO_TYPEID</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              Disables uses of the <code class="computeroutput"><span class="keyword">typeid</span></code>
+              operator in asio. Defined automatically if <code class="computeroutput"><span class="identifier">BOOST_NO_TYPEID</span></code>
+              is defined.
             </p>
             </td>
 </tr>

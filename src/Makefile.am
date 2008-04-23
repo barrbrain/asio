@@ -35,7 +35,16 @@ noinst_PROGRAMS = \
 	tests/unit/ip/v6_only \
 	tests/unit/is_read_buffered \
 	tests/unit/is_write_buffered \
+	tests/unit/local/basic_endpoint \
+	tests/unit/local/connect_pair \
+	tests/unit/local/datagram_protocol \
+	tests/unit/local/stream_protocol \
 	tests/unit/placeholders \
+	tests/unit/posix/basic_descriptor \
+	tests/unit/posix/basic_stream_descriptor \
+	tests/unit/posix/descriptor_base \
+	tests/unit/posix/stream_descriptor \
+	tests/unit/posix/stream_descriptor_service \
 	tests/unit/read \
 	tests/unit/read_until \
 	tests/unit/socket_acceptor_service \
@@ -65,6 +74,9 @@ noinst_PROGRAMS = \
 	examples/iostreams/daytime_server \
 	examples/multicast/receiver \
 	examples/multicast/sender \
+	examples/nonblocking/third_party_lib \
+	examples/porthopper/client \
+	examples/porthopper/server \
 	examples/services/daytime_client \
 	examples/socks4/sync_client \
 	examples/timeouts/accept_timeout \
@@ -133,7 +145,16 @@ TESTS = \
 	tests/unit/ip/v6_only \
 	tests/unit/is_read_buffered \
 	tests/unit/is_write_buffered \
+	tests/unit/local/basic_endpoint \
+	tests/unit/local/connect_pair \
+	tests/unit/local/datagram_protocol \
+	tests/unit/local/stream_protocol \
 	tests/unit/placeholders \
+	tests/unit/posix/basic_descriptor \
+	tests/unit/posix/basic_stream_descriptor \
+	tests/unit/posix/descriptor_base \
+	tests/unit/posix/stream_descriptor \
+	tests/unit/posix/stream_descriptor_service \
 	tests/unit/read \
 	tests/unit/read_until \
 	tests/unit/socket_acceptor_service \
@@ -201,7 +222,16 @@ tests_unit_ip_unicast_SOURCES = tests/unit/ip/unicast.cpp
 tests_unit_ip_v6_only_SOURCES = tests/unit/ip/v6_only.cpp
 tests_unit_is_read_buffered_SOURCES = tests/unit/is_read_buffered.cpp
 tests_unit_is_write_buffered_SOURCES = tests/unit/is_write_buffered.cpp
+tests_unit_local_basic_endpoint_SOURCES = tests/unit/local/basic_endpoint.cpp
+tests_unit_local_connect_pair_SOURCES = tests/unit/local/connect_pair.cpp
+tests_unit_local_datagram_protocol_SOURCES = tests/unit/local/datagram_protocol.cpp
+tests_unit_local_stream_protocol_SOURCES = tests/unit/local/stream_protocol.cpp
 tests_unit_placeholders_SOURCES = tests/unit/placeholders.cpp
+tests_unit_posix_basic_descriptor_SOURCES = tests/unit/posix/basic_descriptor.cpp
+tests_unit_posix_basic_stream_descriptor_SOURCES = tests/unit/posix/basic_stream_descriptor.cpp
+tests_unit_posix_descriptor_base_SOURCES = tests/unit/posix/descriptor_base.cpp
+tests_unit_posix_stream_descriptor_SOURCES = tests/unit/posix/stream_descriptor.cpp
+tests_unit_posix_stream_descriptor_service_SOURCES = tests/unit/posix/stream_descriptor_service.cpp
 tests_unit_read_SOURCES = tests/unit/read.cpp
 tests_unit_read_until_SOURCES = tests/unit/read_until.cpp
 tests_unit_socket_acceptor_service_SOURCES = tests/unit/socket_acceptor_service.cpp
@@ -272,6 +302,9 @@ examples_iostreams_daytime_client_SOURCES = examples/iostreams/daytime_client.cp
 examples_iostreams_daytime_server_SOURCES = examples/iostreams/daytime_server.cpp
 examples_multicast_receiver_SOURCES = examples/multicast/receiver.cpp
 examples_multicast_sender_SOURCES = examples/multicast/sender.cpp
+examples_nonblocking_third_party_lib_SOURCES = examples/nonblocking/third_party_lib.cpp
+examples_porthopper_client_SOURCES = examples/porthopper/client.cpp
+examples_porthopper_server_SOURCES = examples/porthopper/server.cpp
 examples_services_daytime_client_SOURCES = \
 	examples/services/daytime_client.cpp \
 	examples/services/logger_service.cpp
@@ -341,6 +374,7 @@ EXTRA_DIST = \
 	examples/http/server3/request_parser.hpp \
 	examples/http/server3/server.hpp \
 	examples/http/server3/win_main.cpp \
+	examples/porthopper/protocol.hpp \
 	examples/serialization/client.cpp \
 	examples/serialization/server.cpp \
 	examples/serialization/connection.hpp \
