@@ -22,8 +22,7 @@
 <p>
             Start an asynchronous send.
           </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../../ConstBufferSequence.html" title="Constant buffer sequence requirements">ConstBufferSequence</a><span class="special">,</span>
     <span class="keyword">typename</span> <a class="link" href="../../WriteHandler.html" title="Write handler requirements">WriteHandler</a><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">async_send</span><span class="special">(</span>
@@ -36,7 +35,7 @@
             The function call always returns immediately.
           </p>
 <a name="asio.reference.basic_stream_socket.async_send.overload2.parameters"></a><h6>
-<a name="id3778227"></a>
+<a name="id2762476"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.async_send.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -60,12 +59,10 @@
                 will be made of the handler as required. The function signature of
                 the handler must be: 
 </p>
-<pre class="programlisting">
-<span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span><span class="special">,</span> <span class="comment">// Result of operation.
 </span>  <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_transferred</span>           <span class="comment">// Number of bytes sent.
 </span><span class="special">);</span> 
-
 </pre>
 <p>
                 Regardless of whether the asynchronous operation completes immediately
@@ -77,7 +74,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_stream_socket.async_send.overload2.remarks"></a><h6>
-<a name="id3778391"></a>
+<a name="id2762638"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.async_send.overload2.remarks">Remarks</a>
           </h6>
 <p>
@@ -87,15 +84,14 @@
             operation completes.
           </p>
 <a name="asio.reference.basic_stream_socket.async_send.overload2.example"></a><h6>
-<a name="id3778425"></a>
+<a name="id2762672"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.async_send.overload2.example">Example</a>
           </h6>
 <p>
             To send a single data buffer use the <a class="link" href="../../buffer.html" title="buffer">buffer</a>
             function as follows:
           </p>
-<pre class="programlisting">
-<span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_send</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span> <span class="number">0</span><span class="special">,</span> <span class="identifier">handler</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_send</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span> <span class="number">0</span><span class="special">,</span> <span class="identifier">handler</span><span class="special">);</span>
 </pre>
 <p>
             See the <a class="link" href="../../buffer.html" title="buffer">buffer</a> documentation

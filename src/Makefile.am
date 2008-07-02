@@ -5,12 +5,14 @@ noinst_PROGRAMS = \
 	tests/performance/server \
 	tests/unit/basic_datagram_socket \
 	tests/unit/basic_deadline_timer \
+	tests/unit/basic_serial_port \
 	tests/unit/basic_socket_acceptor \
 	tests/unit/basic_stream_socket \
 	tests/unit/buffered_read_stream \
 	tests/unit/buffered_stream \
 	tests/unit/buffered_write_stream \
 	tests/unit/buffer \
+	tests/unit/buffers_iterator \
 	tests/unit/completion_condition \
 	tests/unit/datagram_socket_service \
 	tests/unit/deadline_timer_service \
@@ -47,12 +49,22 @@ noinst_PROGRAMS = \
 	tests/unit/posix/stream_descriptor_service \
 	tests/unit/read \
 	tests/unit/read_until \
+	tests/unit/serial_port \
+	tests/unit/serial_port_base \
+	tests/unit/serial_port_service \
 	tests/unit/socket_acceptor_service \
 	tests/unit/socket_base \
 	tests/unit/strand \
 	tests/unit/stream_socket_service \
 	tests/unit/thread \
 	tests/unit/time_traits \
+	tests/unit/windows/basic_handle \
+	tests/unit/windows/basic_random_access_handle \
+	tests/unit/windows/basic_stream_handle \
+	tests/unit/windows/random_access_handle \
+	tests/unit/windows/random_access_handle_service \
+	tests/unit/windows/stream_handle \
+	tests/unit/windows/stream_handle_service \
 	tests/unit/write \
 	examples/allocation/server \
 	examples/buffers/reference_counted \
@@ -115,12 +127,14 @@ endif
 TESTS = \
 	tests/unit/basic_datagram_socket \
 	tests/unit/basic_deadline_timer \
+	tests/unit/basic_serial_port \
 	tests/unit/basic_socket_acceptor \
 	tests/unit/basic_stream_socket \
 	tests/unit/buffered_read_stream \
 	tests/unit/buffered_stream \
 	tests/unit/buffered_write_stream \
 	tests/unit/buffer \
+	tests/unit/buffers_iterator \
 	tests/unit/completion_condition \
 	tests/unit/datagram_socket_service \
 	tests/unit/deadline_timer_service \
@@ -157,12 +171,22 @@ TESTS = \
 	tests/unit/posix/stream_descriptor_service \
 	tests/unit/read \
 	tests/unit/read_until \
+	tests/unit/serial_port \
+	tests/unit/serial_port_base \
+	tests/unit/serial_port_service \
 	tests/unit/socket_acceptor_service \
 	tests/unit/socket_base \
 	tests/unit/strand \
 	tests/unit/stream_socket_service \
 	tests/unit/thread \
 	tests/unit/time_traits \
+	tests/unit/windows/basic_handle \
+	tests/unit/windows/basic_random_access_handle \
+	tests/unit/windows/basic_stream_handle \
+	tests/unit/windows/random_access_handle \
+	tests/unit/windows/random_access_handle_service \
+	tests/unit/windows/stream_handle \
+	tests/unit/windows/stream_handle_service \
 	tests/unit/write
 
 if HAVE_OPENSSL
@@ -192,9 +216,11 @@ tests_performance_client_SOURCES = tests/performance/client.cpp
 tests_performance_server_SOURCES = tests/performance/server.cpp
 tests_unit_basic_datagram_socket_SOURCES = tests/unit/basic_datagram_socket.cpp
 tests_unit_basic_deadline_timer_SOURCES = tests/unit/basic_deadline_timer.cpp
+tests_unit_basic_serial_port_SOURCES = tests/unit/basic_serial_port.cpp
 tests_unit_basic_socket_acceptor_SOURCES = tests/unit/basic_socket_acceptor.cpp
 tests_unit_basic_stream_socket_SOURCES = tests/unit/basic_stream_socket.cpp
 tests_unit_buffer_SOURCES = tests/unit/buffer.cpp
+tests_unit_buffers_iterator_SOURCES = tests/unit/buffers_iterator.cpp
 tests_unit_buffered_read_stream_SOURCES = tests/unit/buffered_read_stream.cpp
 tests_unit_buffered_stream_SOURCES = tests/unit/buffered_stream.cpp
 tests_unit_buffered_write_stream_SOURCES = tests/unit/buffered_write_stream.cpp
@@ -234,12 +260,22 @@ tests_unit_posix_stream_descriptor_SOURCES = tests/unit/posix/stream_descriptor.
 tests_unit_posix_stream_descriptor_service_SOURCES = tests/unit/posix/stream_descriptor_service.cpp
 tests_unit_read_SOURCES = tests/unit/read.cpp
 tests_unit_read_until_SOURCES = tests/unit/read_until.cpp
+tests_unit_serial_port_SOURCES = tests/unit/serial_port.cpp
+tests_unit_serial_port_base_SOURCES = tests/unit/serial_port_base.cpp
+tests_unit_serial_port_service_SOURCES = tests/unit/serial_port_service.cpp
 tests_unit_socket_acceptor_service_SOURCES = tests/unit/socket_acceptor_service.cpp
 tests_unit_socket_base_SOURCES = tests/unit/socket_base.cpp
 tests_unit_strand_SOURCES = tests/unit/strand.cpp
 tests_unit_stream_socket_service_SOURCES = tests/unit/stream_socket_service.cpp
 tests_unit_thread_SOURCES = tests/unit/thread.cpp
 tests_unit_time_traits_SOURCES = tests/unit/time_traits.cpp
+tests_unit_windows_basic_handle_SOURCES = tests/unit/windows/basic_handle.cpp
+tests_unit_windows_basic_random_access_handle_SOURCES = tests/unit/windows/basic_random_access_handle.cpp
+tests_unit_windows_basic_stream_handle_SOURCES = tests/unit/windows/basic_stream_handle.cpp
+tests_unit_windows_random_access_handle_SOURCES = tests/unit/windows/random_access_handle.cpp
+tests_unit_windows_random_access_handle_service_SOURCES = tests/unit/windows/random_access_handle_service.cpp
+tests_unit_windows_stream_handle_SOURCES = tests/unit/windows/stream_handle.cpp
+tests_unit_windows_stream_handle_service_SOURCES = tests/unit/windows/stream_handle_service.cpp
 tests_unit_write_SOURCES = tests/unit/write.cpp
 examples_allocation_server_SOURCES = examples/allocation/server.cpp
 examples_buffers_reference_counted_SOURCES = examples/buffers/reference_counted.cpp
@@ -388,7 +424,8 @@ EXTRA_DIST = \
 	examples/ssl/ca.pem \
 	examples/ssl/server.pem \
 	examples/ssl/dh512.pem \
-	examples/timers/tick_count_timer.cpp
+	examples/timers/tick_count_timer.cpp \
+	tests/performance/handler_allocator.hpp
 
 MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in

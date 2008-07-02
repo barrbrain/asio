@@ -22,13 +22,23 @@
 <p>
           Create a new modifiable buffer that represents the given POD array.
         </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <span class="identifier">PodType</span><span class="special">,</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">N</span><span class="special">&gt;</span>
 <span class="identifier">mutable_buffers_1</span> <span class="identifier">buffer</span><span class="special">(</span>
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">array</span><span class="special">&lt;</span> <span class="identifier">PodType</span><span class="special">,</span> <span class="identifier">N</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">data</span><span class="special">,</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">max_size_in_bytes</span><span class="special">);</span>
+</pre>
+<a name="asio.reference.buffer.overload12.return_value"></a><h6>
+<a name="id2794568"></a>
+          <a class="link" href="overload12.html#asio.reference.buffer.overload12.return_value">Return Value</a>
+        </h6>
+<p>
+          A mutable_buffers_1 value equivalent to:
+        </p>
+<pre class="programlisting"><span class="identifier">mutable_buffers_1</span><span class="special">(</span>
+    <span class="identifier">data</span><span class="special">.</span><span class="identifier">data</span><span class="special">(),</span>
+    <span class="identifier">min</span><span class="special">(</span><span class="identifier">data</span><span class="special">.</span><span class="identifier">size</span><span class="special">()</span> <span class="special">*</span> <span class="keyword">sizeof</span><span class="special">(</span><span class="identifier">PodType</span><span class="special">),</span> <span class="identifier">max_size_in_bytes</span><span class="special">));</span> 
 </pre>
 </div>
 <table width="100%"><tr>

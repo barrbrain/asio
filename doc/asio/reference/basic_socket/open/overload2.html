@@ -22,8 +22,7 @@
 <p>
             Open the socket using the specified protocol.
           </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">open</span><span class="special">(</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">open</span><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">protocol_type</span> <span class="special">&amp;</span> <span class="identifier">protocol</span><span class="special">,</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">);</span>
 </pre>
@@ -31,7 +30,7 @@
             This function opens the socket so that it will use the specified protocol.
           </p>
 <a name="asio.reference.basic_socket.open.overload2.parameters"></a><h6>
-<a name="id3726097"></a>
+<a name="id2710614"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket.open.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -48,11 +47,10 @@
 </dl>
 </div>
 <a name="asio.reference.basic_socket.open.overload2.example"></a><h6>
-<a name="id3726148"></a>
+<a name="id2710664"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket.open.overload2.example">Example</a>
           </h6>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">open</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">v4</span><span class="special">(),</span> <span class="identifier">ec</span><span class="special">);</span>
 <span class="keyword">if</span> <span class="special">(</span><span class="identifier">ec</span><span class="special">)</span>

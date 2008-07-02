@@ -27,7 +27,7 @@
         denotes an identifier.
       </p>
 <div class="table">
-<a name="id3630088"></a><p class="title"><b>Table 3. ConstBufferSequence requirements</b></p>
+<a name="id2563938"></a><p class="title"><b>Table 3. ConstBufferSequence requirements</b></p>
 <div class="table-contents"><table class="table" summary="ConstBufferSequence requirements">
 <colgroup>
 <col>
@@ -103,8 +103,7 @@
               post: <code class="computeroutput"><span class="identifier">equal_const_buffer_seq</span><span class="special">(</span><span class="identifier">a</span><span class="special">,</span> <span class="identifier">X</span><span class="special">(</span><span class="identifier">a</span><span class="special">))</span></code> where the binary predicate <code class="computeroutput"><span class="identifier">equal_const_buffer_seq</span></code> is defined
               as 
 </p>
-<pre class="programlisting">
-<span class="keyword">bool</span> <span class="identifier">equal_const_buffer_seq</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">bool</span> <span class="identifier">equal_const_buffer_seq</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">X</span><span class="special">&amp;</span> <span class="identifier">x1</span><span class="special">,</span> <span class="keyword">const</span> <span class="identifier">X</span><span class="special">&amp;</span> <span class="identifier">x2</span><span class="special">)</span>
 <span class="special">{</span>
   <span class="keyword">return</span>
@@ -118,8 +117,7 @@
               and the binary predicate <code class="computeroutput"><span class="identifier">equal_buffer</span></code>
               is defined as 
 </p>
-<pre class="programlisting">
-<span class="keyword">bool</span> <span class="identifier">equal_buffer</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">bool</span> <span class="identifier">equal_buffer</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">X</span><span class="special">::</span><span class="identifier">value_type</span><span class="special">&amp;</span> <span class="identifier">v1</span><span class="special">,</span>
   <span class="keyword">const</span> <span class="identifier">X</span><span class="special">::</span><span class="identifier">value_type</span><span class="special">&amp;</span> <span class="identifier">v2</span><span class="special">)</span>
 <span class="special">{</span>
@@ -149,8 +147,7 @@
             <p>
               post: 
 </p>
-<pre class="programlisting">
-<span class="identifier">distance</span><span class="special">(</span><span class="identifier">a</span><span class="special">.</span><span class="identifier">begin</span><span class="special">(),</span> <span class="identifier">a</span><span class="special">.</span><span class="identifier">end</span><span class="special">())</span>
+<pre class="programlisting"><span class="identifier">distance</span><span class="special">(</span><span class="identifier">a</span><span class="special">.</span><span class="identifier">begin</span><span class="special">(),</span> <span class="identifier">a</span><span class="special">.</span><span class="identifier">end</span><span class="special">())</span>
   <span class="special">==</span> <span class="identifier">distance</span><span class="special">(</span><span class="identifier">u</span><span class="special">.</span><span class="identifier">begin</span><span class="special">(),</span> <span class="identifier">u</span><span class="special">.</span><span class="identifier">end</span><span class="special">())</span>
     <span class="special">&amp;&amp;</span> <span class="identifier">equal</span><span class="special">(</span><span class="identifier">a</span><span class="special">.</span><span class="identifier">begin</span><span class="special">(),</span> <span class="identifier">a</span><span class="special">.</span><span class="identifier">end</span><span class="special">(),</span>
              <span class="identifier">u</span><span class="special">.</span><span class="identifier">begin</span><span class="special">(),</span> <span class="identifier">equal_buffer</span><span class="special">)</span>
@@ -159,8 +156,7 @@
               where the binary predicate <code class="computeroutput"><span class="identifier">equal_buffer</span></code>
               is defined as 
 </p>
-<pre class="programlisting">
-<span class="keyword">bool</span> <span class="identifier">equal_buffer</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">bool</span> <span class="identifier">equal_buffer</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">X</span><span class="special">::</span><span class="identifier">value_type</span><span class="special">&amp;</span> <span class="identifier">v1</span><span class="special">,</span>
   <span class="keyword">const</span> <span class="identifier">X</span><span class="special">::</span><span class="identifier">value_type</span><span class="special">&amp;</span> <span class="identifier">v2</span><span class="special">)</span>
 <span class="special">{</span>

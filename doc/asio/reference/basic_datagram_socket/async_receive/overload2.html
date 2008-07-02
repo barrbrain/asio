@@ -22,8 +22,7 @@
 <p>
             Start an asynchronous receive on a connected socket.
           </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../../MutableBufferSequence.html" title="Mutable buffer sequence requirements">MutableBufferSequence</a><span class="special">,</span>
     <span class="keyword">typename</span> <a class="link" href="../../ReadHandler.html" title="Read handler requirements">ReadHandler</a><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">async_receive</span><span class="special">(</span>
@@ -36,7 +35,7 @@
             socket. The function call always returns immediately.
           </p>
 <a name="asio.reference.basic_datagram_socket.async_receive.overload2.parameters"></a><h6>
-<a name="id3676131"></a>
+<a name="id2618381"></a>
             <a class="link" href="overload2.html#asio.reference.basic_datagram_socket.async_receive.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -60,12 +59,10 @@
                 will be made of the handler as required. The function signature of
                 the handler must be: 
 </p>
-<pre class="programlisting">
-<span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span><span class="special">,</span> <span class="comment">// Result of operation.
 </span>  <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_transferred</span>           <span class="comment">// Number of bytes received.
 </span><span class="special">);</span> 
-
 </pre>
 <p>
                 Regardless of whether the asynchronous operation completes immediately
@@ -77,7 +74,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_datagram_socket.async_receive.overload2.remarks"></a><h6>
-<a name="id3676295"></a>
+<a name="id2618544"></a>
             <a class="link" href="overload2.html#asio.reference.basic_datagram_socket.async_receive.overload2.remarks">Remarks</a>
           </h6>
 <p>

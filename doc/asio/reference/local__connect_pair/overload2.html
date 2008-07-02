@@ -22,11 +22,10 @@
 <p>
           Create a pair of connected sockets.
         </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../Protocol.html" title="Protocol requirements">Protocol</a><span class="special">,</span>
-    <span class="keyword">typename</span> <a class="link" href="../../../">SocketService1</a><span class="special">,</span>
-    <span class="keyword">typename</span> <a class="link" href="../../../">SocketService2</a><span class="special">&gt;</span>
+    <span class="keyword">typename</span> <a class="link" href="../SocketService.html" title="Socket service requirements">SocketService1</a><span class="special">,</span>
+    <span class="keyword">typename</span> <a class="link" href="../SocketService.html" title="Socket service requirements">SocketService2</a><span class="special">&gt;</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">connect_pair</span><span class="special">(</span>
     <span class="identifier">basic_socket</span><span class="special">&lt;</span> <span class="identifier">Protocol</span><span class="special">,</span> <span class="identifier">SocketService1</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">socket1</span><span class="special">,</span>
     <span class="identifier">basic_socket</span><span class="special">&lt;</span> <span class="identifier">Protocol</span><span class="special">,</span> <span class="identifier">SocketService2</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">socket2</span><span class="special">,</span>

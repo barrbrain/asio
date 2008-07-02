@@ -19,10 +19,10 @@
 <div class="titlepage"><div><div><h4 class="title">
 <a name="asio.reference.io_service__strand.post"></a><a class="link" href="post.html" title="io_service::strand::post"> io_service::strand::post</a></h4></div></div></div>
 <p>
-          Request the strand to invoke the given handler and return immediately.
+          <a class="indexterm" name="id2833303"></a> Request the strand to invoke the given handler and
+          return immediately.
         </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../Handler.html" title="Handlers">Handler</a><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">post</span><span class="special">(</span>
     <span class="identifier">Handler</span> <span class="identifier">handler</span><span class="special">);</span>
@@ -39,7 +39,7 @@
           in which the io_service's run member function is currently being invoked.
         </p>
 <a name="asio.reference.io_service__strand.post.parameters"></a><h6>
-<a name="id3842821"></a>
+<a name="id2833397"></a>
           <a class="link" href="post.html#asio.reference.io_service__strand.post.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -52,9 +52,7 @@
               object as required. The function signature of the handler must be:
               
 </p>
-<pre class="programlisting">
-<span class="keyword">void</span> <span class="identifier">handler</span><span class="special">();</span> 
-
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">();</span> 
 </pre>
 <p>
             </p>

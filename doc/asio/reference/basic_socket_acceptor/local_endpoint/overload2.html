@@ -22,15 +22,14 @@
 <p>
             Get the local endpoint of the acceptor.
           </p>
-<pre class="programlisting">
-<span class="identifier">endpoint_type</span> <span class="identifier">local_endpoint</span><span class="special">(</span>
+<pre class="programlisting"><span class="identifier">endpoint_type</span> <span class="identifier">local_endpoint</span><span class="special">(</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
 </pre>
 <p>
             This function is used to obtain the locally bound endpoint of the acceptor.
           </p>
 <a name="asio.reference.basic_socket_acceptor.local_endpoint.overload2.parameters"></a><h6>
-<a name="id3745248"></a>
+<a name="id2729889"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket_acceptor.local_endpoint.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -43,7 +42,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_socket_acceptor.local_endpoint.overload2.return_value"></a><h6>
-<a name="id3745288"></a>
+<a name="id2729927"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket_acceptor.local_endpoint.overload2.return_value">Return
             Value</a>
           </h6>
@@ -53,11 +52,10 @@
             handler did not throw an exception.
           </p>
 <a name="asio.reference.basic_socket_acceptor.local_endpoint.overload2.example"></a><h6>
-<a name="id3745314"></a>
+<a name="id2729954"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket_acceptor.local_endpoint.overload2.example">Example</a>
           </h6>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">endpoint</span> <span class="identifier">endpoint</span> <span class="special">=</span> <span class="identifier">acceptor</span><span class="special">.</span><span class="identifier">local_endpoint</span><span class="special">(</span><span class="identifier">ec</span><span class="special">);</span>

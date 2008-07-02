@@ -25,15 +25,14 @@
 <p>
             Perform an IO control command on the socket.
           </p>
-<pre class="programlisting">
-<span class="keyword">void</span> <span class="identifier">io_control</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">io_control</span><span class="special">(</span>
     <span class="identifier">IoControlCommand</span> <span class="special">&amp;</span> <span class="identifier">command</span><span class="special">);</span>
 </pre>
 <p>
             This function is used to execute an IO control command on the socket.
           </p>
 <a name="asio.reference.basic_datagram_socket.io_control.overload1.parameters"></a><h6>
-<a name="id3687871"></a>
+<a name="id2630238"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.io_control.overload1.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -46,7 +45,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_datagram_socket.io_control.overload1.exceptions"></a><h6>
-<a name="id3687910"></a>
+<a name="id2630277"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.io_control.overload1.exceptions">Exceptions</a>
           </h6>
 <div class="variablelist">
@@ -59,14 +58,13 @@
 </dl>
 </div>
 <a name="asio.reference.basic_datagram_socket.io_control.overload1.example"></a><h6>
-<a name="id3687949"></a>
+<a name="id2630316"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.io_control.overload1.example">Example</a>
           </h6>
 <p>
             Getting the number of bytes ready to read:
           </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span><span class="special">::</span><span class="identifier">bytes_readable</span> <span class="identifier">command</span><span class="special">;</span>
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">io_control</span><span class="special">(</span><span class="identifier">command</span><span class="special">);</span>

@@ -7,13 +7,13 @@
 <link rel="start" href="../../../index.html" title="Asio">
 <link rel="up" href="../read.html" title="read">
 <link rel="prev" href="overload5.html" title="read (5 of 6 overloads)">
-<link rel="next" href="../read_until.html" title="read_until">
+<link rel="next" href="../read_at.html" title="read_at">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../../asio.png"></td></tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="overload5.html"><img src="../../../prev.png" alt="Prev"></a><a accesskey="u" href="../read.html"><img src="../../../up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../home.png" alt="Home"></a><a accesskey="n" href="../read_until.html"><img src="../../../next.png" alt="Next"></a>
+<a accesskey="p" href="overload5.html"><img src="../../../prev.png" alt="Prev"></a><a accesskey="u" href="../read.html"><img src="../../../up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../home.png" alt="Home"></a><a accesskey="n" href="../read_at.html"><img src="../../../next.png" alt="Next"></a>
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
@@ -21,8 +21,7 @@
 <p>
           Attempt to read a certain amount of data from a stream before returning.
         </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../SyncReadStream.html" title="Buffer-oriented synchronous read stream requirements">SyncReadStream</a><span class="special">,</span>
     <span class="keyword">typename</span> <span class="identifier">Allocator</span><span class="special">,</span>
     <span class="keyword">typename</span> <span class="identifier">CompletionCondition</span><span class="special">&gt;</span>
@@ -44,7 +43,7 @@
           read_some function.
         </p>
 <a name="asio.reference.read.overload6.parameters"></a><h6>
-<a name="id3921982"></a>
+<a name="id2926059"></a>
           <a class="link" href="overload6.html#asio.reference.read.overload6.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -65,15 +64,13 @@
               The function object to be called to determine whether the read operation
               is complete. The signature of the function object must be: 
 </p>
-<pre class="programlisting">
-<span class="keyword">bool</span> <span class="identifier">completion_condition</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">bool</span> <span class="identifier">completion_condition</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span><span class="special">,</span> <span class="comment">// Result of latest read_some
 </span>                                          <span class="comment">// operation.
 </span>
   <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_transferred</span>           <span class="comment">// Number of bytes transferred
 </span>                                          <span class="comment">// so far.
 </span><span class="special">);</span> 
-
 </pre>
 <p>
               A return value of true indicates that the read operation is complete.
@@ -88,7 +85,7 @@
 </dl>
 </div>
 <a name="asio.reference.read.overload6.return_value"></a><h6>
-<a name="id3922166"></a>
+<a name="id2926243"></a>
           <a class="link" href="overload6.html#asio.reference.read.overload6.return_value">Return Value</a>
         </h6>
 <p>
@@ -106,7 +103,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="overload5.html"><img src="../../../prev.png" alt="Prev"></a><a accesskey="u" href="../read.html"><img src="../../../up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../home.png" alt="Home"></a><a accesskey="n" href="../read_until.html"><img src="../../../next.png" alt="Next"></a>
+<a accesskey="p" href="overload5.html"><img src="../../../prev.png" alt="Prev"></a><a accesskey="u" href="../read.html"><img src="../../../up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../home.png" alt="Home"></a><a accesskey="n" href="../read_at.html"><img src="../../../next.png" alt="Next"></a>
 </div>
 </body>
 </html>

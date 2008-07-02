@@ -23,20 +23,19 @@
           <span class="emphasis"><em>Inherited from posix::descriptor_base.</em></span>
         </p>
 <p>
-          IO control command to set the blocking mode of the descriptor.
+          <a class="indexterm" name="id2904176"></a> IO control command to set the blocking
+          mode of the descriptor.
         </p>
-<pre class="programlisting">
-<span class="keyword">typedef</span> <span class="identifier">implementation_defined</span> <span class="identifier">non_blocking_io</span><span class="special">;</span>
+<pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">implementation_defined</span> <span class="identifier">non_blocking_io</span><span class="special">;</span>
 </pre>
 <p>
           Implements the FIONBIO IO control command.
         </p>
 <a name="asio.reference.posix__basic_descriptor.non_blocking_io.example"></a><h6>
-<a name="id3906277"></a>
+<a name="id2904224"></a>
           <a class="link" href="non_blocking_io.html#asio.reference.posix__basic_descriptor.non_blocking_io.example">Example</a>
         </h6>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">posix</span><span class="special">::</span><span class="identifier">stream_descriptor</span> <span class="identifier">descriptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">posix</span><span class="special">::</span><span class="identifier">stream_descriptor</span> <span class="identifier">descriptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">descriptor_base</span><span class="special">::</span><span class="identifier">non_blocking_io</span> <span class="identifier">command</span><span class="special">(</span><span class="keyword">true</span><span class="special">);</span>
 <span class="identifier">descriptor</span><span class="special">.</span><span class="identifier">io_control</span><span class="special">(</span><span class="identifier">command</span><span class="special">);</span>

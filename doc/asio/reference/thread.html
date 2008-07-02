@@ -21,12 +21,11 @@
 <p>
         A simple abstraction for starting threads.
       </p>
-<pre class="programlisting">
-<span class="keyword">class</span> <span class="identifier">thread</span> <span class="special">:</span>
+<pre class="programlisting"><span class="keyword">class</span> <span class="identifier">thread</span> <span class="special">:</span>
   <span class="identifier">noncopyable</span>
 </pre>
 <a name="asio.reference.thread.member_functions"></a><h5>
-<a name="id3964838"></a>
+<a name="id2985365"></a>
         <a class="link" href="thread.html#asio.reference.thread.member_functions">Member Functions</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -93,7 +92,7 @@
         to use something else.
       </p>
 <a name="asio.reference.thread.thread_safety"></a><h5>
-<a name="id3964984"></a>
+<a name="id2985510"></a>
         <a class="link" href="thread.html#asio.reference.thread.thread_safety">Thread Safety</a>
       </h5>
 <p>
@@ -105,15 +104,14 @@
         Unsafe.
       </p>
 <a name="asio.reference.thread.example"></a><h5>
-<a name="id3965033"></a>
+<a name="id2985559"></a>
         <a class="link" href="thread.html#asio.reference.thread.example">Example</a>
       </h5>
 <p>
         A typical use of <a class="link" href="thread.html" title="thread">thread</a> would
         be to launch a thread to run an io_service's event processing loop:
       </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span> <span class="identifier">io_service</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span> <span class="identifier">io_service</span><span class="special">;</span>
 <span class="comment">// ...
 </span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">thread</span> <span class="identifier">t</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">run</span><span class="special">,</span> <span class="special">&amp;</span><span class="identifier">io_service</span><span class="special">));</span>
 <span class="comment">// ...

@@ -25,8 +25,7 @@
 <p>
             Disable sends or receives on the socket.
           </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">shutdown</span><span class="special">(</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">shutdown</span><span class="special">(</span>
     <span class="identifier">shutdown_type</span> <span class="identifier">what</span><span class="special">,</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">);</span>
 </pre>
@@ -35,7 +34,7 @@
             or both.
           </p>
 <a name="asio.reference.basic_stream_socket.shutdown.overload2.parameters"></a><h6>
-<a name="id3800681"></a>
+<a name="id2785254"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.shutdown.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -52,14 +51,13 @@
 </dl>
 </div>
 <a name="asio.reference.basic_stream_socket.shutdown.overload2.example"></a><h6>
-<a name="id3800732"></a>
+<a name="id2785305"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.shutdown.overload2.example">Example</a>
           </h6>
 <p>
             Shutting down the send side of the socket:
           </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">shutdown</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span><span class="special">::</span><span class="identifier">shutdown_send</span><span class="special">,</span> <span class="identifier">ec</span><span class="special">);</span>

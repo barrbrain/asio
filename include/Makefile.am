@@ -2,6 +2,8 @@ nobase_include_HEADERS = \
 	asio/basic_datagram_socket.hpp \
 	asio/basic_deadline_timer.hpp \
 	asio/basic_io_object.hpp \
+	asio/basic_raw_socket.hpp \
+	asio/basic_serial_port.hpp \
 	asio/basic_socket.hpp \
 	asio/basic_socket_acceptor.hpp \
 	asio/basic_socket_iostream.hpp \
@@ -15,6 +17,7 @@ nobase_include_HEADERS = \
 	asio/buffered_stream_fwd.hpp \
 	asio/buffered_write_stream.hpp \
 	asio/buffered_write_stream_fwd.hpp \
+	asio/buffers_iterator.hpp \
 	asio/completion_condition.hpp \
 	asio/datagram_socket_service.hpp \
 	asio/deadline_timer.hpp \
@@ -34,9 +37,11 @@ nobase_include_HEADERS = \
 	asio/detail/event.hpp \
 	asio/detail/fd_set_adapter.hpp \
 	asio/detail/handler_alloc_helpers.hpp \
+	asio/detail/handler_base_from_member.hpp \
 	asio/detail/handler_invoke_helpers.hpp \
 	asio/detail/handler_queue.hpp \
 	asio/detail/hash_map.hpp \
+	asio/detail/indirect_handler_queue.hpp \
 	asio/detail/io_control.hpp \
 	asio/detail/kqueue_reactor.hpp \
 	asio/detail/kqueue_reactor_fwd.hpp \
@@ -60,6 +65,7 @@ nobase_include_HEADERS = \
 	asio/detail/push_options.hpp \
 	asio/detail/reactive_socket_service.hpp \
 	asio/detail/reactive_descriptor_service.hpp \
+	asio/detail/reactive_serial_port_service.hpp \
 	asio/detail/reactor_op_queue.hpp \
 	asio/detail/resolver_service.hpp \
 	asio/detail/scoped_lock.hpp \
@@ -79,6 +85,7 @@ nobase_include_HEADERS = \
 	asio/detail/socket_types.hpp \
 	asio/detail/strand_service.hpp \
 	asio/detail/task_io_service.hpp \
+	asio/detail/task_io_service_2lock.hpp \
 	asio/detail/task_io_service_fwd.hpp \
 	asio/detail/thread.hpp \
 	asio/detail/throw_error.hpp \
@@ -90,6 +97,7 @@ nobase_include_HEADERS = \
 	asio/detail/win_iocp_io_service.hpp \
 	asio/detail/win_iocp_io_service_fwd.hpp \
 	asio/detail/win_iocp_handle_service.hpp \
+	asio/detail/win_iocp_serial_port_service.hpp \
 	asio/detail/win_iocp_socket_service.hpp \
 	asio/detail/win_mutex.hpp \
 	asio/detail/win_signal_blocker.hpp \
@@ -105,8 +113,11 @@ nobase_include_HEADERS = \
 	asio/impl/error_code.ipp \
 	asio/impl/io_service.ipp \
 	asio/impl/read.ipp \
+	asio/impl/read_at.ipp \
 	asio/impl/read_until.ipp \
+	asio/impl/serial_port_base.ipp \
 	asio/impl/write.ipp \
+	asio/impl/write_at.ipp \
 	asio/io_service.hpp \
 	asio/ip/address.hpp \
 	asio/ip/address_v4.hpp \
@@ -117,6 +128,7 @@ nobase_include_HEADERS = \
 	asio/ip/basic_resolver_iterator.hpp \
 	asio/ip/basic_resolver_query.hpp \
 	asio/ip/host_name.hpp \
+	asio/ip/icmp.hpp \
 	asio/ip/multicast.hpp \
 	asio/ip/resolver_query_base.hpp \
 	asio/ip/resolver_service.hpp \
@@ -137,8 +149,13 @@ nobase_include_HEADERS = \
 	asio/posix/descriptor_base.hpp \
 	asio/posix/stream_descriptor.hpp \
 	asio/posix/stream_descriptor_service.hpp \
+	asio/raw_socket_service.hpp \
 	asio/read.hpp \
+	asio/read_at.hpp \
 	asio/read_until.hpp \
+	asio/serial_port.hpp \
+	asio/serial_port_base.hpp \
+	asio/serial_port_service.hpp \
 	asio/socket_acceptor_service.hpp \
 	asio/socket_base.hpp \
 	asio/ssl/basic_context.hpp \
@@ -162,10 +179,14 @@ nobase_include_HEADERS = \
 	asio/time_traits.hpp \
 	asio/version.hpp \
 	asio/windows/basic_handle.hpp \
+	asio/windows/basic_random_access_handle.hpp \
 	asio/windows/basic_stream_handle.hpp \
+	asio/windows/random_access_handle.hpp \
+	asio/windows/random_access_handle_service.hpp \
 	asio/windows/stream_handle.hpp \
 	asio/windows/stream_handle_service.hpp \
 	asio/write.hpp \
+	asio/write_at.hpp \
 	asio.hpp
 
 MAINTAINERCLEANFILES = \

@@ -22,8 +22,7 @@
 <p>
             Accept a new connection.
           </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../../SocketService.html" title="Socket service requirements">SocketService</a><span class="special">&gt;</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">accept</span><span class="special">(</span>
     <span class="identifier">basic_socket</span><span class="special">&lt;</span> <span class="identifier">protocol_type</span><span class="special">,</span> <span class="identifier">SocketService</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">peer</span><span class="special">,</span>
@@ -35,7 +34,7 @@
             been accepted successfully or an error occurs.
           </p>
 <a name="asio.reference.basic_socket_acceptor.accept.overload2.parameters"></a><h6>
-<a name="id3734063"></a>
+<a name="id2718620"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket_acceptor.accept.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -52,11 +51,10 @@
 </dl>
 </div>
 <a name="asio.reference.basic_socket_acceptor.accept.overload2.example"></a><h6>
-<a name="id3734115"></a>
+<a name="id2718671"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket_acceptor.accept.overload2.example">Example</a>
           </h6>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">soocket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>

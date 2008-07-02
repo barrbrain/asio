@@ -23,10 +23,10 @@
           <span class="emphasis"><em>Inherited from socket_base.</em></span>
         </p>
 <p>
-          Socket option to report aborted connections on accept.
+          <a class="indexterm" name="id2726044"></a> Socket option to report aborted
+          connections on accept.
         </p>
-<pre class="programlisting">
-<span class="keyword">typedef</span> <span class="identifier">implementation_defined</span> <span class="identifier">enable_connection_aborted</span><span class="special">;</span>
+<pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">implementation_defined</span> <span class="identifier">enable_connection_aborted</span><span class="special">;</span>
 </pre>
 <p>
           Implements a custom socket option that determines whether or not an accept
@@ -34,14 +34,13 @@
           default the option is false.
         </p>
 <a name="asio.reference.basic_socket_acceptor.enable_connection_aborted.examples"></a><h6>
-<a name="id3741515"></a>
+<a name="id2726094"></a>
           <a class="link" href="enable_connection_aborted.html#asio.reference.basic_socket_acceptor.enable_connection_aborted.examples">Examples</a>
         </h6>
 <p>
           Setting the option:
         </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">socket_base</span><span class="special">::</span><span class="identifier">enable_connection_aborted</span> <span class="identifier">option</span><span class="special">(</span><span class="keyword">true</span><span class="special">);</span>
 <span class="identifier">acceptor</span><span class="special">.</span><span class="identifier">set_option</span><span class="special">(</span><span class="identifier">option</span><span class="special">);</span>
@@ -49,8 +48,7 @@
 <p>
           Getting the current option value:
         </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">socket_base</span><span class="special">::</span><span class="identifier">enable_connection_aborted</span> <span class="identifier">option</span><span class="special">;</span>
 <span class="identifier">acceptor</span><span class="special">.</span><span class="identifier">get_option</span><span class="special">(</span><span class="identifier">option</span><span class="special">);</span>

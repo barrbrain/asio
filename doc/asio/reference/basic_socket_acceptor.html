@@ -21,8 +21,7 @@
 <p>
         Provides the ability to accept new connections.
       </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="Protocol.html" title="Protocol requirements">Protocol</a><span class="special">,</span>
     <span class="keyword">typename</span> <a class="link" href="SocketAcceptorService.html" title="Socket acceptor service requirements">SocketAcceptorService</a> <span class="special">=</span> <span class="identifier">socket_acceptor_service</span><span class="special">&lt;</span><span class="identifier">Protocol</span><span class="special">&gt;&gt;</span>
 <span class="keyword">class</span> <span class="identifier">basic_socket_acceptor</span> <span class="special">:</span>
@@ -30,7 +29,7 @@
   <span class="keyword">public</span> <span class="identifier">socket_base</span>
 </pre>
 <a name="asio.reference.basic_socket_acceptor.types"></a><h5>
-<a name="id3731258"></a>
+<a name="id2715831"></a>
         <a class="link" href="basic_socket_acceptor.html#asio.reference.basic_socket_acceptor.types">Types</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -297,7 +296,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.basic_socket_acceptor.member_functions"></a><h5>
-<a name="id3731864"></a>
+<a name="id2716432"></a>
         <a class="link" href="basic_socket_acceptor.html#asio.reference.basic_socket_acceptor.member_functions">Member
         Functions</a>
       </h5>
@@ -515,7 +514,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.basic_socket_acceptor.data_members"></a><h5>
-<a name="id3732358"></a>
+<a name="id2716919"></a>
         <a class="link" href="basic_socket_acceptor.html#asio.reference.basic_socket_acceptor.data_members">Data Members</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -587,7 +586,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.basic_socket_acceptor.protected_data_members"></a><h5>
-<a name="id3732522"></a>
+<a name="id2717081"></a>
         <a class="link" href="basic_socket_acceptor.html#asio.reference.basic_socket_acceptor.protected_data_members">Protected
         Data Members</a>
       </h5>
@@ -640,7 +639,7 @@
         connections.
       </p>
 <a name="asio.reference.basic_socket_acceptor.thread_safety"></a><h5>
-<a name="id3732635"></a>
+<a name="id2717193"></a>
         <a class="link" href="basic_socket_acceptor.html#asio.reference.basic_socket_acceptor.thread_safety">Thread
         Safety</a>
       </h5>
@@ -653,14 +652,13 @@
         Unsafe.
       </p>
 <a name="asio.reference.basic_socket_acceptor.example"></a><h5>
-<a name="id3732684"></a>
+<a name="id2717242"></a>
         <a class="link" href="basic_socket_acceptor.html#asio.reference.basic_socket_acceptor.example">Example</a>
       </h5>
 <p>
         Opening a socket acceptor with the SO_REUSEADDR option enabled:
       </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">endpoint</span> <span class="identifier">endpoint</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">v4</span><span class="special">(),</span> <span class="identifier">port</span><span class="special">);</span>
 <span class="identifier">acceptor</span><span class="special">.</span><span class="identifier">open</span><span class="special">(</span><span class="identifier">endpoint</span><span class="special">.</span><span class="identifier">protocol</span><span class="special">());</span>
 <span class="identifier">acceptor</span><span class="special">.</span><span class="identifier">set_option</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span><span class="special">::</span><span class="identifier">reuse_address</span><span class="special">(</span><span class="keyword">true</span><span class="special">));</span>

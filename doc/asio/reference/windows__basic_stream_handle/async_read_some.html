@@ -20,10 +20,9 @@
 <a name="asio.reference.windows__basic_stream_handle.async_read_some"></a><a class="link" href="async_read_some.html" title="windows::basic_stream_handle::async_read_some">
         windows::basic_stream_handle::async_read_some</a></h4></div></div></div>
 <p>
-          Start an asynchronous read.
+          <a class="indexterm" name="id2999681"></a> Start an asynchronous read.
         </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../MutableBufferSequence.html" title="Mutable buffer sequence requirements">MutableBufferSequence</a><span class="special">,</span>
     <span class="keyword">typename</span> <a class="link" href="../ReadHandler.html" title="Read handler requirements">ReadHandler</a><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">async_read_some</span><span class="special">(</span>
@@ -35,7 +34,7 @@
           The function call always returns immediately.
         </p>
 <a name="asio.reference.windows__basic_stream_handle.async_read_some.parameters"></a><h6>
-<a name="id3972227"></a>
+<a name="id2999813"></a>
           <a class="link" href="async_read_some.html#asio.reference.windows__basic_stream_handle.async_read_some.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -55,12 +54,10 @@
               will be made of the handler as required. The function signature of
               the handler must be: 
 </p>
-<pre class="programlisting">
-<span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span><span class="special">,</span> <span class="comment">// Result of operation.
 </span>  <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_transferred</span>           <span class="comment">// Number of bytes read.
 </span><span class="special">);</span> 
-
 </pre>
 <p>
               Regardless of whether the asynchronous operation completes immediately
@@ -72,7 +69,7 @@
 </dl>
 </div>
 <a name="asio.reference.windows__basic_stream_handle.async_read_some.remarks"></a><h6>
-<a name="id3972378"></a>
+<a name="id2999963"></a>
           <a class="link" href="async_read_some.html#asio.reference.windows__basic_stream_handle.async_read_some.remarks">Remarks</a>
         </h6>
 <p>
@@ -82,15 +79,14 @@
           the asynchronous operation completes.
         </p>
 <a name="asio.reference.windows__basic_stream_handle.async_read_some.example"></a><h6>
-<a name="id3972411"></a>
+<a name="id2999996"></a>
           <a class="link" href="async_read_some.html#asio.reference.windows__basic_stream_handle.async_read_some.example">Example</a>
         </h6>
 <p>
           To read into a single data buffer use the <a class="link" href="../buffer.html" title="buffer">buffer</a>
           function as follows:
         </p>
-<pre class="programlisting">
-<span class="identifier">handle</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span> <span class="identifier">handler</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">handle</span><span class="special">.</span><span class="identifier">async_read_some</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span> <span class="identifier">handler</span><span class="special">);</span>
 </pre>
 <p>
           See the <a class="link" href="../buffer.html" title="buffer">buffer</a> documentation

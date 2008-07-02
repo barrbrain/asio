@@ -19,11 +19,10 @@
 <div class="titlepage"><div><div><h4 class="title">
 <a name="asio.reference.io_service.wrap"></a><a class="link" href="wrap.html" title="io_service::wrap"> io_service::wrap</a></h4></div></div></div>
 <p>
-          Create a new handler that automatically dispatches the wrapped handler
-          on the io_service.
+          <a class="indexterm" name="id2831383"></a> Create a new handler that automatically dispatches the wrapped
+          handler on the io_service.
         </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../Handler.html" title="Handlers">Handler</a><span class="special">&gt;</span>
 <span class="identifier">unspecified</span> <span class="identifier">wrap</span><span class="special">(</span>
     <span class="identifier">Handler</span> <span class="identifier">handler</span><span class="special">);</span>
@@ -34,7 +33,7 @@
           dispatch function.
         </p>
 <a name="asio.reference.io_service.wrap.parameters"></a><h6>
-<a name="id3840968"></a>
+<a name="id2831471"></a>
           <a class="link" href="wrap.html#asio.reference.io_service.wrap.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -47,9 +46,7 @@
               object as required. The function signature of the handler must be:
               
 </p>
-<pre class="programlisting">
-<span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span><span class="identifier">A1</span> <span class="identifier">a1</span><span class="special">,</span> <span class="special">...</span> <span class="identifier">An</span> <span class="identifier">an</span><span class="special">);</span> 
-
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span><span class="identifier">A1</span> <span class="identifier">a1</span><span class="special">,</span> <span class="special">...</span> <span class="identifier">An</span> <span class="identifier">an</span><span class="special">);</span> 
 </pre>
 <p>
             </p>
@@ -57,33 +54,29 @@
 </dl>
 </div>
 <a name="asio.reference.io_service.wrap.return_value"></a><h6>
-<a name="id3841065"></a>
+<a name="id2831567"></a>
           <a class="link" href="wrap.html#asio.reference.io_service.wrap.return_value">Return Value</a>
         </h6>
 <p>
           A function object that, when invoked, passes the wrapped handler to the
           io_service's dispatch function. Given a function object with the signature:
         </p>
-<pre class="programlisting">
-<span class="identifier">R</span> <span class="identifier">f</span><span class="special">(</span><span class="identifier">A1</span> <span class="identifier">a1</span><span class="special">,</span> <span class="special">...</span> <span class="identifier">An</span> <span class="identifier">an</span><span class="special">);</span> 
+<pre class="programlisting"><span class="identifier">R</span> <span class="identifier">f</span><span class="special">(</span><span class="identifier">A1</span> <span class="identifier">a1</span><span class="special">,</span> <span class="special">...</span> <span class="identifier">An</span> <span class="identifier">an</span><span class="special">);</span> 
 </pre>
 <p>
           If this function object is passed to the wrap function like so:
         </p>
-<pre class="programlisting">
-<span class="identifier">io_service</span><span class="special">.</span><span class="identifier">wrap</span><span class="special">(</span><span class="identifier">f</span><span class="special">);</span> 
+<pre class="programlisting"><span class="identifier">io_service</span><span class="special">.</span><span class="identifier">wrap</span><span class="special">(</span><span class="identifier">f</span><span class="special">);</span> 
 </pre>
 <p>
           then the return value is a function object with the signature
         </p>
-<pre class="programlisting">
-<span class="keyword">void</span> <span class="identifier">g</span><span class="special">(</span><span class="identifier">A1</span> <span class="identifier">a1</span><span class="special">,</span> <span class="special">...</span> <span class="identifier">An</span> <span class="identifier">an</span><span class="special">);</span> 
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">g</span><span class="special">(</span><span class="identifier">A1</span> <span class="identifier">a1</span><span class="special">,</span> <span class="special">...</span> <span class="identifier">An</span> <span class="identifier">an</span><span class="special">);</span> 
 </pre>
 <p>
           that, when invoked, executes code equivalent to:
         </p>
-<pre class="programlisting">
-<span class="identifier">io_service</span><span class="special">.</span><span class="identifier">dispatch</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">a1</span><span class="special">,</span> <span class="special">...</span> <span class="identifier">an</span><span class="special">));</span> 
+<pre class="programlisting"><span class="identifier">io_service</span><span class="special">.</span><span class="identifier">dispatch</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(</span><span class="identifier">f</span><span class="special">,</span> <span class="identifier">a1</span><span class="special">,</span> <span class="special">...</span> <span class="identifier">an</span><span class="special">));</span> 
 </pre>
 </div>
 <table width="100%"><tr>

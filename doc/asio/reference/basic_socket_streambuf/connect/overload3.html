@@ -25,8 +25,7 @@
 <p>
             Connect the socket to the specified endpoint.
           </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">connect</span><span class="special">(</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">connect</span><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">endpoint_type</span> <span class="special">&amp;</span> <span class="identifier">peer_endpoint</span><span class="special">,</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">);</span>
 </pre>
@@ -38,10 +37,10 @@
 <p>
             The socket is automatically opened if it is not already open. If the
             connect fails, and the socket was automatically opened, the socket is
-            returned to the closed state.
+            not returned to the closed state.
           </p>
 <a name="asio.reference.basic_socket_streambuf.connect.overload3.parameters"></a><h6>
-<a name="id3759339"></a>
+<a name="id2743126"></a>
             <a class="link" href="overload3.html#asio.reference.basic_socket_streambuf.connect.overload3.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -58,11 +57,10 @@
 </dl>
 </div>
 <a name="asio.reference.basic_socket_streambuf.connect.overload3.example"></a><h6>
-<a name="id3759387"></a>
+<a name="id2743176"></a>
             <a class="link" href="overload3.html#asio.reference.basic_socket_streambuf.connect.overload3.example">Example</a>
           </h6>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">endpoint</span> <span class="identifier">endpoint</span><span class="special">(</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">address</span><span class="special">::</span><span class="identifier">from_string</span><span class="special">(</span><span class="string">"1.2.3.4"</span><span class="special">),</span> <span class="number">12345</span><span class="special">);</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>

@@ -19,10 +19,9 @@
 <div class="titlepage"><div><div><h4 class="title">
 <a name="asio.reference.ssl__stream.async_shutdown"></a><a class="link" href="async_shutdown.html" title="ssl::stream::async_shutdown"> ssl::stream::async_shutdown</a></h4></div></div></div>
 <p>
-          Asynchronously shut down SSL on the stream.
+          <a class="indexterm" name="id2970256"></a> Asynchronously shut down SSL on the stream.
         </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <span class="identifier">ShutdownHandler</span><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">async_shutdown</span><span class="special">(</span>
     <span class="identifier">ShutdownHandler</span> <span class="identifier">handler</span><span class="special">);</span>
@@ -32,7 +31,7 @@
           function call always returns immediately.
         </p>
 <a name="asio.reference.ssl__stream.async_shutdown.parameters"></a><h6>
-<a name="id3950434"></a>
+<a name="id2970342"></a>
           <a class="link" href="async_shutdown.html#asio.reference.ssl__stream.async_shutdown.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -45,11 +44,9 @@
               will be made of the handler as required. The equivalent function signature
               of the handler must be: 
 </p>
-<pre class="programlisting">
-<span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span> <span class="comment">// Result of operation.
 </span><span class="special">);</span> 
-
 </pre>
 <p>
             </p>

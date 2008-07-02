@@ -22,8 +22,7 @@
 <p>
             Receive a datagram with the endpoint of the sender.
           </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../../MutableBufferSequence.html" title="Mutable buffer sequence requirements">MutableBufferSequence</a><span class="special">&gt;</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">receive_from</span><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">MutableBufferSequence</span> <span class="special">&amp;</span> <span class="identifier">buffers</span><span class="special">,</span>
@@ -34,7 +33,7 @@
             until data has been received successfully or an error occurs.
           </p>
 <a name="asio.reference.basic_datagram_socket.receive_from.overload1.parameters"></a><h6>
-<a name="id3695926"></a>
+<a name="id2638435"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.receive_from.overload1.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -52,7 +51,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_datagram_socket.receive_from.overload1.return_value"></a><h6>
-<a name="id3695979"></a>
+<a name="id2638488"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.receive_from.overload1.return_value">Return
             Value</a>
           </h6>
@@ -60,7 +59,7 @@
             The number of bytes received.
           </p>
 <a name="asio.reference.basic_datagram_socket.receive_from.overload1.exceptions"></a><h6>
-<a name="id3696003"></a>
+<a name="id2638512"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.receive_from.overload1.exceptions">Exceptions</a>
           </h6>
 <div class="variablelist">
@@ -73,15 +72,14 @@
 </dl>
 </div>
 <a name="asio.reference.basic_datagram_socket.receive_from.overload1.example"></a><h6>
-<a name="id3696042"></a>
+<a name="id2638551"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.receive_from.overload1.example">Example</a>
           </h6>
 <p>
             To receive into a single data buffer use the <a class="link" href="../../buffer.html" title="buffer">buffer</a>
             function as follows:
           </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">udp</span><span class="special">::</span><span class="identifier">endpoint</span> <span class="identifier">sender_endpoint</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">udp</span><span class="special">::</span><span class="identifier">endpoint</span> <span class="identifier">sender_endpoint</span><span class="special">;</span>
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">receive_from</span><span class="special">(</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span> <span class="identifier">sender_endpoint</span><span class="special">);</span>
 </pre>

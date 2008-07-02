@@ -19,10 +19,9 @@
 <div class="titlepage"><div><div><h4 class="title">
 <a name="asio.reference.ssl__stream.async_handshake"></a><a class="link" href="async_handshake.html" title="ssl::stream::async_handshake"> ssl::stream::async_handshake</a></h4></div></div></div>
 <p>
-          Start an asynchronous SSL handshake.
+          <a class="indexterm" name="id2969706"></a> Start an asynchronous SSL handshake.
         </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <span class="identifier">HandshakeHandler</span><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">async_handshake</span><span class="special">(</span>
     <span class="identifier">handshake_type</span> <span class="identifier">type</span><span class="special">,</span>
@@ -33,7 +32,7 @@
           stream. This function call always returns immediately.
         </p>
 <a name="asio.reference.ssl__stream.async_handshake.parameters"></a><h6>
-<a name="id3949914"></a>
+<a name="id2969807"></a>
           <a class="link" href="async_handshake.html#asio.reference.ssl__stream.async_handshake.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -50,11 +49,9 @@
               will be made of the handler as required. The equivalent function signature
               of the handler must be: 
 </p>
-<pre class="programlisting">
-<span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span> <span class="comment">// Result of operation.
 </span><span class="special">);</span> 
-
 </pre>
 <p>
             </p>

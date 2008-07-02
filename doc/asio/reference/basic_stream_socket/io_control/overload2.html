@@ -25,8 +25,7 @@
 <p>
             Perform an IO control command on the socket.
           </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">io_control</span><span class="special">(</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">io_control</span><span class="special">(</span>
     <span class="identifier">IoControlCommand</span> <span class="special">&amp;</span> <span class="identifier">command</span><span class="special">,</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">);</span>
 </pre>
@@ -34,7 +33,7 @@
             This function is used to execute an IO control command on the socket.
           </p>
 <a name="asio.reference.basic_stream_socket.io_control.overload2.parameters"></a><h6>
-<a name="id3787489"></a>
+<a name="id2771855"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.io_control.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -51,14 +50,13 @@
 </dl>
 </div>
 <a name="asio.reference.basic_stream_socket.io_control.overload2.example"></a><h6>
-<a name="id3787540"></a>
+<a name="id2771906"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.io_control.overload2.example">Example</a>
           </h6>
 <p>
             Getting the number of bytes ready to read:
           </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span><span class="special">::</span><span class="identifier">bytes_readable</span> <span class="identifier">command</span><span class="special">;</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>

@@ -22,13 +22,23 @@
 <p>
           Create a new non-modifiable buffer that represents the given string.
         </p>
-<pre class="programlisting">
-<span class="identifier">const_buffers_1</span> <span class="identifier">buffer</span><span class="special">(</span>
+<pre class="programlisting"><span class="identifier">const_buffers_1</span> <span class="identifier">buffer</span><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <span class="special">&amp;</span> <span class="identifier">data</span><span class="special">,</span>
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">max_size_in_bytes</span><span class="special">);</span>
 </pre>
+<a name="asio.reference.buffer.overload22.return_value"></a><h6>
+<a name="id2797419"></a>
+          <a class="link" href="overload22.html#asio.reference.buffer.overload22.return_value">Return Value</a>
+        </h6>
+<p>
+          A const_buffers_1 value equivalent to:
+        </p>
+<pre class="programlisting"><span class="identifier">const_buffers_1</span><span class="special">(</span>
+    <span class="identifier">data</span><span class="special">.</span><span class="identifier">data</span><span class="special">(),</span>
+    <span class="identifier">min</span><span class="special">(</span><span class="identifier">data</span><span class="special">.</span><span class="identifier">size</span><span class="special">(),</span> <span class="identifier">max_size_in_bytes</span><span class="special">));</span> 
+</pre>
 <a name="asio.reference.buffer.overload22.remarks"></a><h6>
-<a name="id3809412"></a>
+<a name="id2797516"></a>
           <a class="link" href="overload22.html#asio.reference.buffer.overload22.remarks">Remarks</a>
         </h6>
 <p>

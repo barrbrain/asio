@@ -21,8 +21,7 @@
 <p>
           Write a certain amount of data to a stream before returning.
         </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../SyncWriteStream.html" title="Buffer-oriented synchronous write stream requirements">SyncWriteStream</a><span class="special">,</span>
     <span class="keyword">typename</span> <a class="link" href="../ConstBufferSequence.html" title="Constant buffer sequence requirements">ConstBufferSequence</a><span class="special">,</span>
     <span class="keyword">typename</span> <span class="identifier">CompletionCondition</span><span class="special">&gt;</span>
@@ -50,7 +49,7 @@
           write_some function.
         </p>
 <a name="asio.reference.write.overload3.parameters"></a><h6>
-<a name="id3982512"></a>
+<a name="id3013759"></a>
           <a class="link" href="overload3.html#asio.reference.write.overload3.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -73,15 +72,13 @@
               The function object to be called to determine whether the write operation
               is complete. The signature of the function object must be: 
 </p>
-<pre class="programlisting">
-<span class="keyword">bool</span> <span class="identifier">completion_condition</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">bool</span> <span class="identifier">completion_condition</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span><span class="special">,</span> <span class="comment">// Result of latest write_some
 </span>                                          <span class="comment">// operation.
 </span>
   <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_transferred</span>           <span class="comment">// Number of bytes transferred
 </span>                                          <span class="comment">// so far.
 </span><span class="special">);</span> 
-
 </pre>
 <p>
               A return value of true indicates that the write operation is complete.
@@ -96,7 +93,7 @@
 </dl>
 </div>
 <a name="asio.reference.write.overload3.return_value"></a><h6>
-<a name="id3982698"></a>
+<a name="id3013944"></a>
           <a class="link" href="overload3.html#asio.reference.write.overload3.return_value">Return Value</a>
         </h6>
 <p>

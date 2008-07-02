@@ -20,10 +20,10 @@
 <a name="asio.reference.socket_base.enable_connection_aborted"></a><a class="link" href="enable_connection_aborted.html" title="socket_base::enable_connection_aborted">
         socket_base::enable_connection_aborted</a></h4></div></div></div>
 <p>
-          Socket option to report aborted connections on accept.
+          <a class="indexterm" name="id2950955"></a> Socket option to report aborted connections
+          on accept.
         </p>
-<pre class="programlisting">
-<span class="keyword">typedef</span> <span class="identifier">implementation_defined</span> <span class="identifier">enable_connection_aborted</span><span class="special">;</span>
+<pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">implementation_defined</span> <span class="identifier">enable_connection_aborted</span><span class="special">;</span>
 </pre>
 <p>
           Implements a custom socket option that determines whether or not an accept
@@ -31,14 +31,13 @@
           default the option is false.
         </p>
 <a name="asio.reference.socket_base.enable_connection_aborted.examples"></a><h6>
-<a name="id3931726"></a>
+<a name="id2951006"></a>
           <a class="link" href="enable_connection_aborted.html#asio.reference.socket_base.enable_connection_aborted.examples">Examples</a>
         </h6>
 <p>
           Setting the option:
         </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">socket_base</span><span class="special">::</span><span class="identifier">enable_connection_aborted</span> <span class="identifier">option</span><span class="special">(</span><span class="keyword">true</span><span class="special">);</span>
 <span class="identifier">acceptor</span><span class="special">.</span><span class="identifier">set_option</span><span class="special">(</span><span class="identifier">option</span><span class="special">);</span>
@@ -46,8 +45,7 @@
 <p>
           Getting the current option value:
         </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">socket_base</span><span class="special">::</span><span class="identifier">enable_connection_aborted</span> <span class="identifier">option</span><span class="special">;</span>
 <span class="identifier">acceptor</span><span class="special">.</span><span class="identifier">get_option</span><span class="special">(</span><span class="identifier">option</span><span class="special">);</span>

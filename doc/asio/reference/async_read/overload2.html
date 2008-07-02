@@ -23,8 +23,7 @@
           Start an asynchronous operation to read a certain amount of data from a
           stream.
         </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../AsyncReadStream.html" title="Buffer-oriented asynchronous read stream requirements">AsyncReadStream</a><span class="special">,</span>
     <span class="keyword">typename</span> <a class="link" href="../MutableBufferSequence.html" title="Mutable buffer sequence requirements">MutableBufferSequence</a><span class="special">,</span>
     <span class="keyword">typename</span> <span class="identifier">CompletionCondition</span><span class="special">,</span>
@@ -51,7 +50,7 @@
           </li>
 </ul></div>
 <a name="asio.reference.async_read.overload2.parameters"></a><h6>
-<a name="id3665077"></a>
+<a name="id2598828"></a>
           <a class="link" href="overload2.html#asio.reference.async_read.overload2.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -76,15 +75,13 @@
               The function object to be called to determine whether the read operation
               is complete. The signature of the function object must be: 
 </p>
-<pre class="programlisting">
-<span class="keyword">bool</span> <span class="identifier">completion_condition</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">bool</span> <span class="identifier">completion_condition</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span><span class="special">,</span> <span class="comment">// Result of latest read_some
 </span>                                          <span class="comment">// operation.
 </span>
   <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_transferred</span>           <span class="comment">// Number of bytes transferred
 </span>                                          <span class="comment">// so far.
 </span><span class="special">);</span> 
-
 </pre>
 <p>
               A return value of true indicates that the read operation is complete.
@@ -99,8 +96,7 @@
               will be made of the handler as required. The function signature of
               the handler must be: 
 </p>
-<pre class="programlisting">
-<span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span><span class="special">,</span> <span class="comment">// Result of operation.
 </span>
   <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_transferred</span>           <span class="comment">// Number of bytes copied into the
@@ -109,7 +105,6 @@
 </span>                                          <span class="comment">// bytes successfully transferred
 </span>                                          <span class="comment">// prior to the error.
 </span><span class="special">);</span> 
-
 </pre>
 <p>
               Regardless of whether the asynchronous operation completes immediately
@@ -121,15 +116,14 @@
 </dl>
 </div>
 <a name="asio.reference.async_read.overload2.example"></a><h6>
-<a name="id3665386"></a>
+<a name="id2599134"></a>
           <a class="link" href="overload2.html#asio.reference.async_read.overload2.example">Example</a>
         </h6>
 <p>
           To read into a single data buffer use the <a class="link" href="../buffer.html" title="buffer">buffer</a>
           function as follows:
         </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">async_read</span><span class="special">(</span><span class="identifier">s</span><span class="special">,</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">async_read</span><span class="special">(</span><span class="identifier">s</span><span class="special">,</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">transfer_at_least</span><span class="special">(</span><span class="number">32</span><span class="special">),</span>
     <span class="identifier">handler</span><span class="special">);</span> 

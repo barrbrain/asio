@@ -22,8 +22,7 @@
 <p>
             Set an option on the acceptor.
           </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../../SettableSocketOption.html" title="Settable socket option requirements">SettableSocketOption</a><span class="special">&gt;</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">set_option</span><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">SettableSocketOption</span> <span class="special">&amp;</span> <span class="identifier">option</span><span class="special">,</span>
@@ -33,7 +32,7 @@
             This function is used to set an option on the acceptor.
           </p>
 <a name="asio.reference.basic_socket_acceptor.set_option.overload2.parameters"></a><h6>
-<a name="id3749810"></a>
+<a name="id2734560"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket_acceptor.set_option.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -50,14 +49,13 @@
 </dl>
 </div>
 <a name="asio.reference.basic_socket_acceptor.set_option.overload2.example"></a><h6>
-<a name="id3749861"></a>
+<a name="id2734611"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket_acceptor.set_option.overload2.example">Example</a>
           </h6>
 <p>
             Setting the SOL_SOCKET/SO_REUSEADDR option:
           </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span><span class="special">::</span><span class="identifier">reuse_address</span> <span class="identifier">option</span><span class="special">(</span><span class="keyword">true</span><span class="special">);</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>

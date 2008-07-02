@@ -6,37 +6,36 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../../index.html" title="Asio">
 <link rel="up" href="../reference.html" title="Reference">
-<link rel="prev" href="ip__host_name/overload2.html" title="ip::host_name (2 of 2 overloads)">
+<link rel="prev" href="ip__icmp/v6.html" title="ip::icmp::v6">
 <link rel="next" href="ip__multicast__hops.html" title="ip::multicast::hops">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../asio.png"></td></tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ip__host_name/overload2.html"><img src="../../prev.png" alt="Prev"></a><a accesskey="u" href="../reference.html"><img src="../../up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../home.png" alt="Home"></a><a accesskey="n" href="ip__multicast__hops.html"><img src="../../next.png" alt="Next"></a>
+<a accesskey="p" href="ip__icmp/v6.html"><img src="../../prev.png" alt="Prev"></a><a accesskey="u" href="../reference.html"><img src="../../up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../home.png" alt="Home"></a><a accesskey="n" href="ip__multicast__hops.html"><img src="../../next.png" alt="Next"></a>
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="asio.reference.ip__multicast__enable_loopback"></a><a class="link" href="ip__multicast__enable_loopback.html" title="ip::multicast::enable_loopback"> ip::multicast::enable_loopback</a></h3></div></div></div>
 <p>
-        Socket option determining whether outgoing multicast packets will be received
-        on the same socket if it is a member of the multicast group.
+        <a class="indexterm" name="id2864261"></a> Socket option determining whether outgoing
+        multicast packets will be received on the same socket if it is a member of
+        the multicast group.
       </p>
-<pre class="programlisting">
-<span class="keyword">typedef</span> <span class="identifier">implementation_defined</span> <span class="identifier">enable_loopback</span><span class="special">;</span>
+<pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">implementation_defined</span> <span class="identifier">enable_loopback</span><span class="special">;</span>
 </pre>
 <p>
         Implements the IPPROTO_IP/IP_MULTICAST_LOOP socket option.
       </p>
 <a name="asio.reference.ip__multicast__enable_loopback.examples"></a><h5>
-<a name="id3867652"></a>
+<a name="id2864308"></a>
         <a class="link" href="ip__multicast__enable_loopback.html#asio.reference.ip__multicast__enable_loopback.examples">Examples</a>
       </h5>
 <p>
         Setting the option:
       </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">udp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">udp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">multicast</span><span class="special">::</span><span class="identifier">enable_loopback</span> <span class="identifier">option</span><span class="special">(</span><span class="keyword">true</span><span class="special">);</span>
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">set_option</span><span class="special">(</span><span class="identifier">option</span><span class="special">);</span>
@@ -44,8 +43,7 @@
 <p>
         Getting the current option value:
       </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">udp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">udp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">multicast</span><span class="special">::</span><span class="identifier">enable_loopback</span> <span class="identifier">option</span><span class="special">;</span>
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">get_option</span><span class="special">(</span><span class="identifier">option</span><span class="special">);</span>
@@ -62,7 +60,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="ip__host_name/overload2.html"><img src="../../prev.png" alt="Prev"></a><a accesskey="u" href="../reference.html"><img src="../../up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../home.png" alt="Home"></a><a accesskey="n" href="ip__multicast__hops.html"><img src="../../next.png" alt="Next"></a>
+<a accesskey="p" href="ip__icmp/v6.html"><img src="../../prev.png" alt="Prev"></a><a accesskey="u" href="../reference.html"><img src="../../up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../home.png" alt="Home"></a><a accesskey="n" href="ip__multicast__hops.html"><img src="../../next.png" alt="Next"></a>
 </div>
 </body>
 </html>

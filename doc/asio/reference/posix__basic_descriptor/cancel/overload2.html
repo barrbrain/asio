@@ -22,17 +22,16 @@
 <p>
             Cancel all asynchronous operations associated with the descriptor.
           </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">cancel</span><span class="special">(</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">cancel</span><span class="special">(</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">);</span>
 </pre>
 <p>
             This function causes all outstanding asynchronous read or write operations
-            to finish immediately, and the descriptorrs for cancelled operations
-            will be passed the asio::error::operation_aborted error.
+            to finish immediately, and the handlers for cancelled operations will
+            be passed the asio::error::operation_aborted error.
           </p>
 <a name="asio.reference.posix__basic_descriptor.cancel.overload2.parameters"></a><h6>
-<a name="id3903474"></a>
+<a name="id2901330"></a>
             <a class="link" href="overload2.html#asio.reference.posix__basic_descriptor.cancel.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">

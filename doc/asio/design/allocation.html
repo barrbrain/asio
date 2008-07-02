@@ -37,21 +37,18 @@
         needs to allocate memory associated with that handler it will execute the
         code:
       </p>
-<pre class="programlisting">
-<span class="keyword">void</span><span class="special">*</span> <span class="identifier">pointer</span> <span class="special">=</span> <span class="identifier">asio_handler_allocate</span><span class="special">(</span><span class="identifier">size</span><span class="special">,</span> <span class="special">&amp;</span><span class="identifier">h</span><span class="special">);</span>
+<pre class="programlisting"><span class="keyword">void</span><span class="special">*</span> <span class="identifier">pointer</span> <span class="special">=</span> <span class="identifier">asio_handler_allocate</span><span class="special">(</span><span class="identifier">size</span><span class="special">,</span> <span class="special">&amp;</span><span class="identifier">h</span><span class="special">);</span>
 </pre>
 <p>
         Similarly, to deallocate the memory it will execute:
       </p>
-<pre class="programlisting">
-<span class="identifier">asio_handler_deallocate</span><span class="special">(</span><span class="identifier">pointer</span><span class="special">,</span> <span class="identifier">size</span><span class="special">,</span> <span class="special">&amp;</span><span class="identifier">h</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">asio_handler_deallocate</span><span class="special">(</span><span class="identifier">pointer</span><span class="special">,</span> <span class="identifier">size</span><span class="special">,</span> <span class="special">&amp;</span><span class="identifier">h</span><span class="special">);</span>
 </pre>
 <p>
         These functions are located using argument-dependent lookup. The implementation
         provides default implementations of the above functions in the <code class="computeroutput"><span class="identifier">asio</span></code> namespace:
       </p>
-<pre class="programlisting">
-<span class="keyword">void</span><span class="special">*</span> <span class="identifier">asio_handler_allocate</span><span class="special">(</span><span class="identifier">size_t</span><span class="special">,</span> <span class="special">...);</span>
+<pre class="programlisting"><span class="keyword">void</span><span class="special">*</span> <span class="identifier">asio_handler_allocate</span><span class="special">(</span><span class="identifier">size_t</span><span class="special">,</span> <span class="special">...);</span>
 <span class="keyword">void</span> <span class="identifier">asio_handler_deallocate</span><span class="special">(</span><span class="keyword">void</span><span class="special">*,</span> <span class="identifier">size_t</span><span class="special">,</span> <span class="special">...);</span>
 </pre>
 <p>

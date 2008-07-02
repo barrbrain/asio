@@ -22,8 +22,7 @@
 <p>
             Perform an IO control command on the descriptor.
           </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../../IoControlCommand.html" title="I/O control command requirements">IoControlCommand</a><span class="special">&gt;</span>
 <span class="keyword">void</span> <span class="identifier">io_control</span><span class="special">(</span>
     <span class="identifier">IoControlCommand</span> <span class="special">&amp;</span> <span class="identifier">command</span><span class="special">);</span>
@@ -32,7 +31,7 @@
             This function is used to execute an IO control command on the descriptor.
           </p>
 <a name="asio.reference.posix__basic_descriptor.io_control.overload1.parameters"></a><h6>
-<a name="id3904330"></a>
+<a name="id2902223"></a>
             <a class="link" href="overload1.html#asio.reference.posix__basic_descriptor.io_control.overload1.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -45,7 +44,7 @@
 </dl>
 </div>
 <a name="asio.reference.posix__basic_descriptor.io_control.overload1.exceptions"></a><h6>
-<a name="id3904368"></a>
+<a name="id2902261"></a>
             <a class="link" href="overload1.html#asio.reference.posix__basic_descriptor.io_control.overload1.exceptions">Exceptions</a>
           </h6>
 <div class="variablelist">
@@ -58,14 +57,13 @@
 </dl>
 </div>
 <a name="asio.reference.posix__basic_descriptor.io_control.overload1.example"></a><h6>
-<a name="id3904406"></a>
+<a name="id2902300"></a>
             <a class="link" href="overload1.html#asio.reference.posix__basic_descriptor.io_control.overload1.example">Example</a>
           </h6>
 <p>
             Getting the number of bytes ready to read:
           </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">posix</span><span class="special">::</span><span class="identifier">stream_descriptor</span> <span class="identifier">descriptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">posix</span><span class="special">::</span><span class="identifier">stream_descriptor</span> <span class="identifier">descriptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">posix</span><span class="special">::</span><span class="identifier">stream_descriptor</span><span class="special">::</span><span class="identifier">bytes_readable</span> <span class="identifier">command</span><span class="special">;</span>
 <span class="identifier">descriptor</span><span class="special">.</span><span class="identifier">io_control</span><span class="special">(</span><span class="identifier">command</span><span class="special">);</span>

@@ -22,8 +22,7 @@
 <p>
             Send some data on the socket.
           </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../../ConstBufferSequence.html" title="Constant buffer sequence requirements">ConstBufferSequence</a><span class="special">&gt;</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">send</span><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">ConstBufferSequence</span> <span class="special">&amp;</span> <span class="identifier">buffers</span><span class="special">,</span>
@@ -35,7 +34,7 @@
             or an until error occurs.
           </p>
 <a name="asio.reference.basic_stream_socket.send.overload2.parameters"></a><h6>
-<a name="id3797834"></a>
+<a name="id2782370"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.send.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -52,7 +51,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_stream_socket.send.overload2.return_value"></a><h6>
-<a name="id3797884"></a>
+<a name="id2782421"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.send.overload2.return_value">Return
             Value</a>
           </h6>
@@ -60,7 +59,7 @@
             The number of bytes sent.
           </p>
 <a name="asio.reference.basic_stream_socket.send.overload2.exceptions"></a><h6>
-<a name="id3797908"></a>
+<a name="id2782444"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.send.overload2.exceptions">Exceptions</a>
           </h6>
 <div class="variablelist">
@@ -73,7 +72,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_stream_socket.send.overload2.remarks"></a><h6>
-<a name="id3797946"></a>
+<a name="id2782482"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.send.overload2.remarks">Remarks</a>
           </h6>
 <p>
@@ -83,15 +82,14 @@
             completes.
           </p>
 <a name="asio.reference.basic_stream_socket.send.overload2.example"></a><h6>
-<a name="id3797978"></a>
+<a name="id2782515"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.send.overload2.example">Example</a>
           </h6>
 <p>
             To send a single data buffer use the <a class="link" href="../../buffer.html" title="buffer">buffer</a>
             function as follows:
           </p>
-<pre class="programlisting">
-<span class="identifier">socket</span><span class="special">.</span><span class="identifier">send</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span> <span class="number">0</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">socket</span><span class="special">.</span><span class="identifier">send</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span> <span class="number">0</span><span class="special">);</span>
 </pre>
 <p>
             See the <a class="link" href="../../buffer.html" title="buffer">buffer</a> documentation

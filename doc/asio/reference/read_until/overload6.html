@@ -1,29 +1,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>read_until (6 of 6 overloads)</title>
+<title>read_until (6 of 8 overloads)</title>
 <link rel="stylesheet" href="../../../boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
 <link rel="start" href="../../../index.html" title="Asio">
 <link rel="up" href="../read_until.html" title="read_until">
-<link rel="prev" href="overload5.html" title="read_until (5 of 6 overloads)">
-<link rel="next" href="../service_already_exists.html" title="service_already_exists">
+<link rel="prev" href="overload5.html" title="read_until (5 of 8 overloads)">
+<link rel="next" href="overload7.html" title="read_until (7 of 8 overloads)">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"><img alt="asio C++ library" width="250" height="60" src="../../../asio.png"></td></tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="overload5.html"><img src="../../../prev.png" alt="Prev"></a><a accesskey="u" href="../read_until.html"><img src="../../../up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../home.png" alt="Home"></a><a accesskey="n" href="../service_already_exists.html"><img src="../../../next.png" alt="Next"></a>
+<a accesskey="p" href="overload5.html"><img src="../../../prev.png" alt="Prev"></a><a accesskey="u" href="../read_until.html"><img src="../../../up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../home.png" alt="Home"></a><a accesskey="n" href="overload7.html"><img src="../../../next.png" alt="Next"></a>
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.reference.read_until.overload6"></a><a class="link" href="overload6.html" title="read_until (6 of 6 overloads)"> read_until (6
-        of 6 overloads)</a></h4></div></div></div>
+<a name="asio.reference.read_until.overload6"></a><a class="link" href="overload6.html" title="read_until (6 of 8 overloads)"> read_until (6
+        of 8 overloads)</a></h4></div></div></div>
 <p>
-          Read data into a streambuf until a regular expression is located.
+          Read data into a streambuf until some part of the data it contains matches
+          a regular expression.
         </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../SyncReadStream.html" title="Buffer-oriented synchronous read stream requirements">SyncReadStream</a><span class="special">,</span>
     <span class="keyword">typename</span> <span class="identifier">Allocator</span><span class="special">&gt;</span>
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">read_until</span><span class="special">(</span>
@@ -51,7 +51,7 @@
           matches the regular expression, the function returns immediately.
         </p>
 <a name="asio.reference.read_until.overload6.parameters"></a><h6>
-<a name="id3925875"></a>
+<a name="id2934694"></a>
           <a class="link" href="overload6.html#asio.reference.read_until.overload6.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -77,13 +77,23 @@
 </dl>
 </div>
 <a name="asio.reference.read_until.overload6.return_value"></a><h6>
-<a name="id3925952"></a>
+<a name="id2934770"></a>
           <a class="link" href="overload6.html#asio.reference.read_until.overload6.return_value">Return
           Value</a>
         </h6>
 <p>
           The number of bytes in the streambuf's get area up to and including the
           substring that matches the regular expression. Returns 0 if an error occurred.
+        </p>
+<a name="asio.reference.read_until.overload6.remarks"></a><h6>
+<a name="id2934795"></a>
+          <a class="link" href="overload6.html#asio.reference.read_until.overload6.remarks">Remarks</a>
+        </h6>
+<p>
+          After a successful read_until operation, the streambuf may contain additional
+          data beyond that which matched the regular expression. An application will
+          typically leave that data in the streambuf for a subsequent read_until
+          operation to examine.
         </p>
 </div>
 <table width="100%"><tr>
@@ -96,7 +106,7 @@
 </tr></table>
 <hr>
 <div class="spirit-nav">
-<a accesskey="p" href="overload5.html"><img src="../../../prev.png" alt="Prev"></a><a accesskey="u" href="../read_until.html"><img src="../../../up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../home.png" alt="Home"></a><a accesskey="n" href="../service_already_exists.html"><img src="../../../next.png" alt="Next"></a>
+<a accesskey="p" href="overload5.html"><img src="../../../prev.png" alt="Prev"></a><a accesskey="u" href="../read_until.html"><img src="../../../up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../home.png" alt="Home"></a><a accesskey="n" href="overload7.html"><img src="../../../next.png" alt="Next"></a>
 </div>
 </body>
 </html>

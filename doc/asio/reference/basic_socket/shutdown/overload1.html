@@ -22,8 +22,7 @@
 <p>
             Disable sends or receives on the socket.
           </p>
-<pre class="programlisting">
-<span class="keyword">void</span> <span class="identifier">shutdown</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">shutdown</span><span class="special">(</span>
     <span class="identifier">shutdown_type</span> <span class="identifier">what</span><span class="special">);</span>
 </pre>
 <p>
@@ -31,7 +30,7 @@
             or both.
           </p>
 <a name="asio.reference.basic_socket.shutdown.overload1.parameters"></a><h6>
-<a name="id3730357"></a>
+<a name="id2714923"></a>
             <a class="link" href="overload1.html#asio.reference.basic_socket.shutdown.overload1.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -44,7 +43,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_socket.shutdown.overload1.exceptions"></a><h6>
-<a name="id3730395"></a>
+<a name="id2714962"></a>
             <a class="link" href="overload1.html#asio.reference.basic_socket.shutdown.overload1.exceptions">Exceptions</a>
           </h6>
 <div class="variablelist">
@@ -57,14 +56,13 @@
 </dl>
 </div>
 <a name="asio.reference.basic_socket.shutdown.overload1.example"></a><h6>
-<a name="id3730434"></a>
+<a name="id2715001"></a>
             <a class="link" href="overload1.html#asio.reference.basic_socket.shutdown.overload1.example">Example</a>
           </h6>
 <p>
             Shutting down the send side of the socket:
           </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
 <span class="special">...</span>
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">shutdown</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span><span class="special">::</span><span class="identifier">shutdown_send</span><span class="special">);</span>
 </pre>

@@ -21,15 +21,14 @@
 <p>
         Provides stream-oriented functionality using SSL.
       </p>
-<pre class="programlisting">
-<span class="keyword">template</span><span class="special">&lt;</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <span class="identifier">Stream</span><span class="special">,</span>
     <span class="keyword">typename</span> <a class="link" href="Service.html" title="Service requirements">Service</a> <span class="special">=</span> <span class="identifier">stream_service</span><span class="special">&gt;</span>
 <span class="keyword">class</span> <span class="identifier">stream</span> <span class="special">:</span>
   <span class="keyword">public</span> <span class="identifier">ssl</span><span class="special">::</span><span class="identifier">stream_base</span>
 </pre>
 <a name="asio.reference.ssl__stream.types"></a><h5>
-<a name="id3948824"></a>
+<a name="id2968711"></a>
         <a class="link" href="ssl__stream.html#asio.reference.ssl__stream.types">Types</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -113,7 +112,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.ssl__stream.member_functions"></a><h5>
-<a name="id3949014"></a>
+<a name="id2968900"></a>
         <a class="link" href="ssl__stream.html#asio.reference.ssl__stream.member_functions">Member Functions</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -346,7 +345,7 @@
         functionality using SSL.
       </p>
 <a name="asio.reference.ssl__stream.thread_safety"></a><h5>
-<a name="id3949532"></a>
+<a name="id2969419"></a>
         <a class="link" href="ssl__stream.html#asio.reference.ssl__stream.thread_safety">Thread Safety</a>
       </h5>
 <p>
@@ -358,14 +357,13 @@
         Unsafe.
       </p>
 <a name="asio.reference.ssl__stream.example"></a><h5>
-<a name="id3949581"></a>
+<a name="id2969468"></a>
         <a class="link" href="ssl__stream.html#asio.reference.ssl__stream.example">Example</a>
       </h5>
 <p>
         To use the SSL stream template with an ip::tcp::socket, you would write:
       </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span> <span class="identifier">io_service</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span> <span class="identifier">io_service</span><span class="special">;</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ssl</span><span class="special">::</span><span class="identifier">context</span> <span class="identifier">context</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">,</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ssl</span><span class="special">::</span><span class="identifier">context</span><span class="special">::</span><span class="identifier">sslv23</span><span class="special">);</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ssl</span><span class="special">::</span><span class="identifier">stream</span><span class="special">&lt;</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span><span class="special">&gt;</span> <span class="identifier">sock</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">,</span> <span class="identifier">context</span><span class="special">);</span>
 </pre>

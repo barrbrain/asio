@@ -27,7 +27,7 @@
         denotes an object of type <code class="computeroutput"><span class="identifier">error_code</span></code>.
       </p>
 <div class="table">
-<a name="id3659111"></a><p class="title"><b>Table 24. Buffer-oriented synchronous read stream requirements</b></p>
+<a name="id2592848"></a><p class="title"><b>Table 24. Buffer-oriented synchronous read stream requirements</b></p>
 <div class="table-contents"><table class="table" summary="Buffer-oriented synchronous read stream requirements">
 <colgroup>
 <col>
@@ -67,8 +67,7 @@
             <p>
               Equivalent to: 
 </p>
-<pre class="programlisting">
-<span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>
+<pre class="programlisting"><span class="identifier">error_code</span> <span class="identifier">ec</span><span class="special">;</span>
 <span class="identifier">size_t</span> <span class="identifier">s</span> <span class="special">=</span> <span class="identifier">a</span><span class="special">.</span><span class="identifier">read_some</span><span class="special">(</span><span class="identifier">mb</span><span class="special">,</span> <span class="identifier">ec</span><span class="special">);</span>
 <span class="keyword">if</span> <span class="special">(</span><span class="identifier">ec</span><span class="special">)</span> <span class="keyword">throw</span> <span class="identifier">system_error</span><span class="special">(</span><span class="identifier">ec</span><span class="special">);</span>
 <span class="keyword">return</span> <span class="identifier">s</span><span class="special">;</span>

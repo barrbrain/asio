@@ -25,15 +25,14 @@
 <p>
             Get an option from the socket.
           </p>
-<pre class="programlisting">
-<span class="keyword">void</span> <span class="identifier">get_option</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">get_option</span><span class="special">(</span>
     <span class="identifier">GettableSocketOption</span> <span class="special">&amp;</span> <span class="identifier">option</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
 </pre>
 <p>
             This function is used to get the current value of an option on the socket.
           </p>
 <a name="asio.reference.basic_socket_streambuf.get_option.overload1.parameters"></a><h6>
-<a name="id3761085"></a>
+<a name="id2745044"></a>
             <a class="link" href="overload1.html#asio.reference.basic_socket_streambuf.get_option.overload1.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -46,7 +45,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_socket_streambuf.get_option.overload1.exceptions"></a><h6>
-<a name="id3761124"></a>
+<a name="id2745082"></a>
             <a class="link" href="overload1.html#asio.reference.basic_socket_streambuf.get_option.overload1.exceptions">Exceptions</a>
           </h6>
 <div class="variablelist">
@@ -59,14 +58,13 @@
 </dl>
 </div>
 <a name="asio.reference.basic_socket_streambuf.get_option.overload1.example"></a><h6>
-<a name="id3761162"></a>
+<a name="id2745120"></a>
             <a class="link" href="overload1.html#asio.reference.basic_socket_streambuf.get_option.overload1.example">Example</a>
           </h6>
 <p>
             Getting the value of the SOL_SOCKET/SO_KEEPALIVE option:
           </p>
-<pre class="programlisting">
-<span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
+<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
 <span class="special">...</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span><span class="special">::</span><span class="identifier">keep_alive</span> <span class="identifier">option</span><span class="special">;</span>
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">get_option</span><span class="special">(</span><span class="identifier">option</span><span class="special">);</span>
