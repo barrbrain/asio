@@ -18,12 +18,13 @@
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
 <a name="asio.reference.basic_socket_streambuf.bytes_readable"></a><a class="link" href="bytes_readable.html" title="basic_socket_streambuf::bytes_readable">
-        basic_socket_streambuf::bytes_readable</a></h4></div></div></div>
+        basic_socket_streambuf::bytes_readable</a>
+</h4></div></div></div>
 <p>
           <span class="emphasis"><em>Inherited from socket_base.</em></span>
         </p>
 <p>
-          <a class="indexterm" name="id2741035"></a> IO control command to get the amount
+          <a class="indexterm" name="id801291"></a> IO control command to get the amount
           of data that can be read without blocking.
         </p>
 <pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">implementation_defined</span> <span class="identifier">bytes_readable</span><span class="special">;</span>
@@ -32,7 +33,7 @@
           Implements the FIONREAD IO control command.
         </p>
 <a name="asio.reference.basic_socket_streambuf.bytes_readable.example"></a><h6>
-<a name="id2741084"></a>
+<a name="id801340"></a>
           <a class="link" href="bytes_readable.html#asio.reference.basic_socket_streambuf.bytes_readable.example">Example</a>
         </h6>
 <pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span> 
@@ -42,7 +43,7 @@
 <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_readable</span> <span class="special">=</span> <span class="identifier">command</span><span class="special">.</span><span class="identifier">get</span><span class="special">();</span>
 </pre>
 </div>
-<table width="100%"><tr>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>
 <td align="right"><div class="copyright-footer">Copyright © 2003 - 2008 Christopher M. Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying

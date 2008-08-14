@@ -109,6 +109,13 @@ noinst_PROGRAMS = \
 	examples/tutorial/daytime6/server \
 	examples/tutorial/daytime7/server
 
+if !WINDOWS_TARGET
+noinst_PROGRAMS += \
+	examples/local/connect_pair \
+	examples/local/stream_server \
+	examples/local/stream_client
+endif
+
 if HAVE_OPENSSL
 
 noinst_PROGRAMS += \
@@ -362,6 +369,12 @@ examples_tutorial_daytime4_client_SOURCES = examples/tutorial/daytime4/client.cp
 examples_tutorial_daytime5_server_SOURCES = examples/tutorial/daytime5/server.cpp
 examples_tutorial_daytime6_server_SOURCES = examples/tutorial/daytime6/server.cpp
 examples_tutorial_daytime7_server_SOURCES = examples/tutorial/daytime7/server.cpp
+
+if !WINDOWS_TARGET
+examples_local_connect_pair_SOURCES = examples/local/connect_pair.cpp
+examples_local_stream_server_SOURCES = examples/local/stream_server.cpp
+examples_local_stream_client_SOURCES = examples/local/stream_client.cpp
+endif
 
 if HAVE_OPENSSL
 

@@ -18,7 +18,8 @@
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="asio.tutorial.tutdaytime2"></a><a class="link" href="tutdaytime2.html" title="Daytime.2 - A synchronous TCP daytime server"> Daytime.2 - A synchronous
-      TCP daytime server</a></h3></div></div></div>
+      TCP daytime server</a>
+</h3></div></div></div>
 <p>
         This tutorial program shows how to use asio to implement a server application
         with TCP.
@@ -48,8 +49,9 @@
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span> <span class="identifier">io_service</span><span class="special">;</span>
 </pre>
 <p>
-        A asio::ip::tcp::acceptor object needs to be created to listen for new connections.
-        It is initialised to listen on TCP port 13, for IP version 4.
+        A <a class="link" href="../reference/ip__tcp/acceptor.html" title="ip::tcp::acceptor">ip::tcp::acceptor</a>
+        object needs to be created to listen for new connections. It is initialised
+        to listen on TCP port 13, for IP version 4.
       </p>
 <pre class="programlisting">    <span class="identifier">tcp</span><span class="special">::</span><span class="identifier">acceptor</span> <span class="identifier">acceptor</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">,</span> <span class="identifier">tcp</span><span class="special">::</span><span class="identifier">endpoint</span><span class="special">(</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">v4</span><span class="special">(),</span> <span class="number">13</span><span class="special">));</span>
 </pre>
@@ -101,7 +103,7 @@
         TCP daytime server</a>
       </p>
 </div>
-<table width="100%"><tr>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>
 <td align="right"><div class="copyright-footer">Copyright © 2003 - 2008 Christopher M. Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying

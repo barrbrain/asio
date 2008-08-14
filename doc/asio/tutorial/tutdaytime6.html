@@ -18,9 +18,10 @@
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="asio.tutorial.tutdaytime6"></a><a class="link" href="tutdaytime6.html" title="Daytime.6 - An asynchronous UDP daytime server"> Daytime.6 - An asynchronous
-      UDP daytime server</a></h3></div></div></div>
+      UDP daytime server</a>
+</h3></div></div></div>
 <a name="asio.tutorial.tutdaytime6.the_main___function"></a><h5>
-<a name="id2548596"></a>
+<a name="id598872"></a>
         <a class="link" href="tutdaytime6.html#asio.tutorial.tutdaytime6.the_main___function">The main()
         function</a>
       </h5>
@@ -30,8 +31,7 @@
   <span class="special">{</span>
 </pre>
 <p>
-        Create a server object to accept incoming client requests, and run the asio::io_service
-        object.
+        Create a server object to accept incoming client requests, and run the <a class="link" href="../reference/io_service.html" title="io_service">io_service</a> object.
       </p>
 <pre class="programlisting">    <span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span> <span class="identifier">io_service</span><span class="special">;</span>
     <span class="identifier">udp_server</span> <span class="identifier">server</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
@@ -46,7 +46,7 @@
 <span class="special">}</span>
 </pre>
 <a name="asio.tutorial.tutdaytime6.the_udp_server_class"></a><h5>
-<a name="id2548872"></a>
+<a name="id599157"></a>
         <a class="link" href="tutdaytime6.html#asio.tutorial.tutdaytime6.the_udp_server_class">The udp_server
         class</a>
       </h5>
@@ -68,12 +68,14 @@
   <span class="special">{</span>
 </pre>
 <p>
-        The function asio::ip::udp::socket::async_receive_from() will cause the application
-        to listen in the background for a new request. When such a request is received,
-        the asio::io_service object will invoke the <code class="computeroutput"><span class="identifier">handle_receive</span><span class="special">()</span></code> function with two arguments: a value of
-        type asio::error_code indicating whether the operation succeeded or failed,
-        and a <code class="computeroutput"><span class="identifier">size_t</span></code> value <code class="computeroutput"><span class="identifier">bytes_transferred</span></code> specifying the number
-        of bytes received.
+        The function <a class="link" href="../reference/basic_datagram_socket/async_receive_from.html" title="basic_datagram_socket::async_receive_from">ip::udp::socket::async_receive_from()</a>
+        will cause the application to listen in the background for a new request.
+        When such a request is received, the <a class="link" href="../reference/io_service.html" title="io_service">io_service</a>
+        object will invoke the <code class="computeroutput"><span class="identifier">handle_receive</span><span class="special">()</span></code> function with two arguments: a value of
+        type <a class="link" href="../reference/error_code.html" title="error_code">error_code</a> indicating
+        whether the operation succeeded or failed, and a <code class="computeroutput"><span class="identifier">size_t</span></code>
+        value <code class="computeroutput"><span class="identifier">bytes_transferred</span></code> specifying
+        the number of bytes received.
       </p>
 <pre class="programlisting">    <span class="identifier">socket_</span><span class="special">.</span><span class="identifier">async_receive_from</span><span class="special">(</span>
         <span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">recv_buffer_</span><span class="special">),</span> <span class="identifier">remote_endpoint_</span><span class="special">,</span>
@@ -93,8 +95,9 @@
         The <code class="computeroutput"><span class="identifier">error</span></code> parameter contains
         the result of the asynchronous operation. Since we only provide the 1-byte
         <code class="computeroutput"><span class="identifier">recv_buffer_</span></code> to contain the
-        client's request, the asio::io_service object would return an error if the
-        client sent anything larger. We can ignore such an error if it comes up.
+        client's request, the <a class="link" href="../reference/io_service.html" title="io_service">io_service</a>
+        object would return an error if the client sent anything larger. We can ignore
+        such an error if it comes up.
       </p>
 <pre class="programlisting">    <span class="keyword">if</span> <span class="special">(!</span><span class="identifier">error</span> <span class="special">||</span> <span class="identifier">error</span> <span class="special">==</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error</span><span class="special">::</span><span class="identifier">message_size</span><span class="special">)</span>
     <span class="special">{</span>
@@ -106,8 +109,8 @@
           <span class="keyword">new</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span><span class="special">(</span><span class="identifier">make_daytime_string</span><span class="special">()));</span>
 </pre>
 <p>
-        We now call asio::ip::udp::socket::async_send_to() to serve the data to the
-        client.
+        We now call <a class="link" href="../reference/basic_datagram_socket/async_send_to.html" title="basic_datagram_socket::async_send_to">ip::udp::socket::async_send_to()</a>
+        to serve the data to the client.
       </p>
 <pre class="programlisting">      <span class="identifier">socket_</span><span class="special">.</span><span class="identifier">async_send_to</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(*</span><span class="identifier">message</span><span class="special">),</span> <span class="identifier">remote_endpoint_</span><span class="special">,</span>
           <span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">udp_server</span><span class="special">::</span><span class="identifier">handle_send</span><span class="special">,</span> <span class="keyword">this</span><span class="special">,</span> <span class="identifier">message</span><span class="special">,</span>
@@ -162,7 +165,7 @@
         asynchronous server</a>
       </p>
 </div>
-<table width="100%"><tr>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>
 <td align="right"><div class="copyright-footer">Copyright © 2003 - 2008 Christopher M. Kohlhoff<p>
         Distributed under the Boost Software License, Version 1.0. (See accompanying
