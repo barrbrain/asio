@@ -75,8 +75,8 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	tests/unit/posix/descriptor_base$(EXEEXT) \
 	tests/unit/posix/stream_descriptor$(EXEEXT) \
 	tests/unit/posix/stream_descriptor_service$(EXEEXT) \
-	tests/unit/read$(EXEEXT) tests/unit/read_until$(EXEEXT) \
-	tests/unit/serial_port$(EXEEXT) \
+	tests/unit/read$(EXEEXT) tests/unit/read_at$(EXEEXT) \
+	tests/unit/read_until$(EXEEXT) tests/unit/serial_port$(EXEEXT) \
 	tests/unit/serial_port_base$(EXEEXT) \
 	tests/unit/serial_port_service$(EXEEXT) \
 	tests/unit/socket_acceptor_service$(EXEEXT) \
@@ -86,11 +86,13 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	tests/unit/windows/basic_handle$(EXEEXT) \
 	tests/unit/windows/basic_random_access_handle$(EXEEXT) \
 	tests/unit/windows/basic_stream_handle$(EXEEXT) \
+	tests/unit/windows/overlapped_ptr$(EXEEXT) \
 	tests/unit/windows/random_access_handle$(EXEEXT) \
 	tests/unit/windows/random_access_handle_service$(EXEEXT) \
 	tests/unit/windows/stream_handle$(EXEEXT) \
 	tests/unit/windows/stream_handle_service$(EXEEXT) \
-	tests/unit/write$(EXEEXT) examples/allocation/server$(EXEEXT) \
+	tests/unit/write$(EXEEXT) tests/unit/write_at$(EXEEXT) \
+	examples/allocation/server$(EXEEXT) \
 	examples/buffers/reference_counted$(EXEEXT) \
 	examples/chat/chat_client$(EXEEXT) \
 	examples/chat/chat_server$(EXEEXT) \
@@ -132,13 +134,16 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	examples/tutorial/daytime5/server$(EXEEXT) \
 	examples/tutorial/daytime6/server$(EXEEXT) \
 	examples/tutorial/daytime7/server$(EXEEXT) $(am__EXEEXT_1) \
-	$(am__EXEEXT_2)
+	$(am__EXEEXT_2) $(am__EXEEXT_3)
 @WINDOWS_TARGET_FALSE@am__append_1 = \
 @WINDOWS_TARGET_FALSE@	examples/local/connect_pair \
 @WINDOWS_TARGET_FALSE@	examples/local/stream_server \
 @WINDOWS_TARGET_FALSE@	examples/local/stream_client
 
-@HAVE_OPENSSL_TRUE@am__append_2 = \
+@WINDOWS_TARGET_TRUE@am__append_2 = \
+@WINDOWS_TARGET_TRUE@	examples/windows/transmit_file
+
+@HAVE_OPENSSL_TRUE@am__append_3 = \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/basic_context \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_base \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_service \
@@ -189,8 +194,8 @@ TESTS = tests/unit/basic_datagram_socket$(EXEEXT) \
 	tests/unit/posix/descriptor_base$(EXEEXT) \
 	tests/unit/posix/stream_descriptor$(EXEEXT) \
 	tests/unit/posix/stream_descriptor_service$(EXEEXT) \
-	tests/unit/read$(EXEEXT) tests/unit/read_until$(EXEEXT) \
-	tests/unit/serial_port$(EXEEXT) \
+	tests/unit/read$(EXEEXT) tests/unit/read_at$(EXEEXT) \
+	tests/unit/read_until$(EXEEXT) tests/unit/serial_port$(EXEEXT) \
 	tests/unit/serial_port_base$(EXEEXT) \
 	tests/unit/serial_port_service$(EXEEXT) \
 	tests/unit/socket_acceptor_service$(EXEEXT) \
@@ -200,12 +205,14 @@ TESTS = tests/unit/basic_datagram_socket$(EXEEXT) \
 	tests/unit/windows/basic_handle$(EXEEXT) \
 	tests/unit/windows/basic_random_access_handle$(EXEEXT) \
 	tests/unit/windows/basic_stream_handle$(EXEEXT) \
+	tests/unit/windows/overlapped_ptr$(EXEEXT) \
 	tests/unit/windows/random_access_handle$(EXEEXT) \
 	tests/unit/windows/random_access_handle_service$(EXEEXT) \
 	tests/unit/windows/stream_handle$(EXEEXT) \
 	tests/unit/windows/stream_handle_service$(EXEEXT) \
-	tests/unit/write$(EXEEXT) $(am__EXEEXT_3)
-@HAVE_OPENSSL_TRUE@am__append_3 = \
+	tests/unit/write$(EXEEXT) tests/unit/write_at$(EXEEXT) \
+	$(am__EXEEXT_4)
+@HAVE_OPENSSL_TRUE@am__append_4 = \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/basic_context \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_base \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_service \
@@ -214,22 +221,22 @@ TESTS = tests/unit/basic_datagram_socket$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream_service \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream
 
-@WINDOWS_TARGET_TRUE@am__append_4 = \
+@WINDOWS_TARGET_TRUE@am__append_5 = \
 @WINDOWS_TARGET_TRUE@	examples/http/server/win_main.cpp
 
-@WINDOWS_TARGET_FALSE@am__append_5 = \
+@WINDOWS_TARGET_FALSE@am__append_6 = \
 @WINDOWS_TARGET_FALSE@	examples/http/server/posix_main.cpp
 
-@WINDOWS_TARGET_TRUE@am__append_6 = \
+@WINDOWS_TARGET_TRUE@am__append_7 = \
 @WINDOWS_TARGET_TRUE@	examples/http/server2/win_main.cpp
 
-@WINDOWS_TARGET_FALSE@am__append_7 = \
+@WINDOWS_TARGET_FALSE@am__append_8 = \
 @WINDOWS_TARGET_FALSE@	examples/http/server2/posix_main.cpp
 
-@WINDOWS_TARGET_TRUE@am__append_8 = \
+@WINDOWS_TARGET_TRUE@am__append_9 = \
 @WINDOWS_TARGET_TRUE@	examples/http/server3/win_main.cpp
 
-@WINDOWS_TARGET_FALSE@am__append_9 = \
+@WINDOWS_TARGET_FALSE@am__append_10 = \
 @WINDOWS_TARGET_FALSE@	examples/http/server3/posix_main.cpp
 
 subdir = src
@@ -245,7 +252,9 @@ CONFIG_CLEAN_FILES =
 @WINDOWS_TARGET_FALSE@	examples/local/connect_pair$(EXEEXT) \
 @WINDOWS_TARGET_FALSE@	examples/local/stream_server$(EXEEXT) \
 @WINDOWS_TARGET_FALSE@	examples/local/stream_client$(EXEEXT)
-@HAVE_OPENSSL_TRUE@am__EXEEXT_2 =  \
+@WINDOWS_TARGET_TRUE@am__EXEEXT_2 =  \
+@WINDOWS_TARGET_TRUE@	examples/windows/transmit_file$(EXEEXT)
+@HAVE_OPENSSL_TRUE@am__EXEEXT_3 =  \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/basic_context$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_base$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_service$(EXEEXT) \
@@ -557,6 +566,13 @@ am_examples_tutorial_timer5_timer_OBJECTS =  \
 examples_tutorial_timer5_timer_OBJECTS =  \
 	$(am_examples_tutorial_timer5_timer_OBJECTS)
 examples_tutorial_timer5_timer_LDADD = $(LDADD)
+am__examples_windows_transmit_file_SOURCES_DIST =  \
+	examples/windows/transmit_file.cpp
+@WINDOWS_TARGET_TRUE@am_examples_windows_transmit_file_OBJECTS =  \
+@WINDOWS_TARGET_TRUE@	examples/windows/transmit_file.$(OBJEXT)
+examples_windows_transmit_file_OBJECTS =  \
+	$(am_examples_windows_transmit_file_OBJECTS)
+examples_windows_transmit_file_LDADD = $(LDADD)
 am_tests_performance_client_OBJECTS =  \
 	tests/performance/client.$(OBJEXT)
 tests_performance_client_OBJECTS =  \
@@ -774,6 +790,9 @@ tests_unit_posix_stream_descriptor_service_LDADD = $(LDADD)
 am_tests_unit_read_OBJECTS = tests/unit/read.$(OBJEXT)
 tests_unit_read_OBJECTS = $(am_tests_unit_read_OBJECTS)
 tests_unit_read_LDADD = $(LDADD)
+am_tests_unit_read_at_OBJECTS = tests/unit/read_at.$(OBJEXT)
+tests_unit_read_at_OBJECTS = $(am_tests_unit_read_at_OBJECTS)
+tests_unit_read_at_LDADD = $(LDADD)
 am_tests_unit_read_until_OBJECTS = tests/unit/read_until.$(OBJEXT)
 tests_unit_read_until_OBJECTS = $(am_tests_unit_read_until_OBJECTS)
 tests_unit_read_until_LDADD = $(LDADD)
@@ -872,6 +891,11 @@ am_tests_unit_windows_basic_stream_handle_OBJECTS =  \
 tests_unit_windows_basic_stream_handle_OBJECTS =  \
 	$(am_tests_unit_windows_basic_stream_handle_OBJECTS)
 tests_unit_windows_basic_stream_handle_LDADD = $(LDADD)
+am_tests_unit_windows_overlapped_ptr_OBJECTS =  \
+	tests/unit/windows/overlapped_ptr.$(OBJEXT)
+tests_unit_windows_overlapped_ptr_OBJECTS =  \
+	$(am_tests_unit_windows_overlapped_ptr_OBJECTS)
+tests_unit_windows_overlapped_ptr_LDADD = $(LDADD)
 am_tests_unit_windows_random_access_handle_OBJECTS =  \
 	tests/unit/windows/random_access_handle.$(OBJEXT)
 tests_unit_windows_random_access_handle_OBJECTS =  \
@@ -895,6 +919,9 @@ tests_unit_windows_stream_handle_service_LDADD = $(LDADD)
 am_tests_unit_write_OBJECTS = tests/unit/write.$(OBJEXT)
 tests_unit_write_OBJECTS = $(am_tests_unit_write_OBJECTS)
 tests_unit_write_LDADD = $(LDADD)
+am_tests_unit_write_at_OBJECTS = tests/unit/write_at.$(OBJEXT)
+tests_unit_write_at_OBJECTS = $(am_tests_unit_write_at_OBJECTS)
+tests_unit_write_at_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -949,6 +976,7 @@ SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_tutorial_timer3_timer_SOURCES) \
 	$(examples_tutorial_timer4_timer_SOURCES) \
 	$(examples_tutorial_timer5_timer_SOURCES) \
+	$(examples_windows_transmit_file_SOURCES) \
 	$(tests_performance_client_SOURCES) \
 	$(tests_performance_server_SOURCES) \
 	$(tests_unit_basic_datagram_socket_SOURCES) \
@@ -993,7 +1021,8 @@ SOURCES = $(examples_allocation_server_SOURCES) \
 	$(tests_unit_posix_descriptor_base_SOURCES) \
 	$(tests_unit_posix_stream_descriptor_SOURCES) \
 	$(tests_unit_posix_stream_descriptor_service_SOURCES) \
-	$(tests_unit_read_SOURCES) $(tests_unit_read_until_SOURCES) \
+	$(tests_unit_read_SOURCES) $(tests_unit_read_at_SOURCES) \
+	$(tests_unit_read_until_SOURCES) \
 	$(tests_unit_serial_port_SOURCES) \
 	$(tests_unit_serial_port_base_SOURCES) \
 	$(tests_unit_serial_port_service_SOURCES) \
@@ -1012,11 +1041,12 @@ SOURCES = $(examples_allocation_server_SOURCES) \
 	$(tests_unit_windows_basic_handle_SOURCES) \
 	$(tests_unit_windows_basic_random_access_handle_SOURCES) \
 	$(tests_unit_windows_basic_stream_handle_SOURCES) \
+	$(tests_unit_windows_overlapped_ptr_SOURCES) \
 	$(tests_unit_windows_random_access_handle_SOURCES) \
 	$(tests_unit_windows_random_access_handle_service_SOURCES) \
 	$(tests_unit_windows_stream_handle_SOURCES) \
 	$(tests_unit_windows_stream_handle_service_SOURCES) \
-	$(tests_unit_write_SOURCES)
+	$(tests_unit_write_SOURCES) $(tests_unit_write_at_SOURCES)
 DIST_SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_buffers_reference_counted_SOURCES) \
 	$(examples_chat_chat_client_SOURCES) \
@@ -1064,6 +1094,7 @@ DIST_SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_tutorial_timer3_timer_SOURCES) \
 	$(examples_tutorial_timer4_timer_SOURCES) \
 	$(examples_tutorial_timer5_timer_SOURCES) \
+	$(am__examples_windows_transmit_file_SOURCES_DIST) \
 	$(tests_performance_client_SOURCES) \
 	$(tests_performance_server_SOURCES) \
 	$(tests_unit_basic_datagram_socket_SOURCES) \
@@ -1108,7 +1139,8 @@ DIST_SOURCES = $(examples_allocation_server_SOURCES) \
 	$(tests_unit_posix_descriptor_base_SOURCES) \
 	$(tests_unit_posix_stream_descriptor_SOURCES) \
 	$(tests_unit_posix_stream_descriptor_service_SOURCES) \
-	$(tests_unit_read_SOURCES) $(tests_unit_read_until_SOURCES) \
+	$(tests_unit_read_SOURCES) $(tests_unit_read_at_SOURCES) \
+	$(tests_unit_read_until_SOURCES) \
 	$(tests_unit_serial_port_SOURCES) \
 	$(tests_unit_serial_port_base_SOURCES) \
 	$(tests_unit_serial_port_service_SOURCES) \
@@ -1127,15 +1159,16 @@ DIST_SOURCES = $(examples_allocation_server_SOURCES) \
 	$(tests_unit_windows_basic_handle_SOURCES) \
 	$(tests_unit_windows_basic_random_access_handle_SOURCES) \
 	$(tests_unit_windows_basic_stream_handle_SOURCES) \
+	$(tests_unit_windows_overlapped_ptr_SOURCES) \
 	$(tests_unit_windows_random_access_handle_SOURCES) \
 	$(tests_unit_windows_random_access_handle_service_SOURCES) \
 	$(tests_unit_windows_stream_handle_SOURCES) \
 	$(tests_unit_windows_stream_handle_service_SOURCES) \
-	$(tests_unit_write_SOURCES)
+	$(tests_unit_write_SOURCES) $(tests_unit_write_at_SOURCES)
 HEADERS = $(noinst_HEADERS)
 ETAGS = etags
 CTAGS = ctags
-@HAVE_OPENSSL_TRUE@am__EXEEXT_3 =  \
+@HAVE_OPENSSL_TRUE@am__EXEEXT_4 =  \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/basic_context$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_base$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_service$(EXEEXT) \
@@ -1299,6 +1332,7 @@ tests_unit_posix_descriptor_base_SOURCES = tests/unit/posix/descriptor_base.cpp
 tests_unit_posix_stream_descriptor_SOURCES = tests/unit/posix/stream_descriptor.cpp
 tests_unit_posix_stream_descriptor_service_SOURCES = tests/unit/posix/stream_descriptor_service.cpp
 tests_unit_read_SOURCES = tests/unit/read.cpp
+tests_unit_read_at_SOURCES = tests/unit/read_at.cpp
 tests_unit_read_until_SOURCES = tests/unit/read_until.cpp
 tests_unit_serial_port_SOURCES = tests/unit/serial_port.cpp
 tests_unit_serial_port_base_SOURCES = tests/unit/serial_port_base.cpp
@@ -1312,11 +1346,13 @@ tests_unit_time_traits_SOURCES = tests/unit/time_traits.cpp
 tests_unit_windows_basic_handle_SOURCES = tests/unit/windows/basic_handle.cpp
 tests_unit_windows_basic_random_access_handle_SOURCES = tests/unit/windows/basic_random_access_handle.cpp
 tests_unit_windows_basic_stream_handle_SOURCES = tests/unit/windows/basic_stream_handle.cpp
+tests_unit_windows_overlapped_ptr_SOURCES = tests/unit/windows/overlapped_ptr.cpp
 tests_unit_windows_random_access_handle_SOURCES = tests/unit/windows/random_access_handle.cpp
 tests_unit_windows_random_access_handle_service_SOURCES = tests/unit/windows/random_access_handle_service.cpp
 tests_unit_windows_stream_handle_SOURCES = tests/unit/windows/stream_handle.cpp
 tests_unit_windows_stream_handle_service_SOURCES = tests/unit/windows/stream_handle_service.cpp
 tests_unit_write_SOURCES = tests/unit/write.cpp
+tests_unit_write_at_SOURCES = tests/unit/write_at.cpp
 examples_allocation_server_SOURCES = examples/allocation/server.cpp
 examples_buffers_reference_counted_SOURCES = examples/buffers/reference_counted.cpp
 examples_chat_chat_client_SOURCES = examples/chat/chat_client.cpp
@@ -1336,8 +1372,8 @@ examples_http_server_http_server_SOURCES =  \
 	examples/http/server/reply.cpp \
 	examples/http/server/request_handler.cpp \
 	examples/http/server/request_parser.cpp \
-	examples/http/server/server.cpp $(am__append_4) \
-	$(am__append_5)
+	examples/http/server/server.cpp $(am__append_5) \
+	$(am__append_6)
 examples_http_server2_http_server_SOURCES =  \
 	examples/http/server2/connection.cpp \
 	examples/http/server2/io_service_pool.cpp \
@@ -1345,16 +1381,16 @@ examples_http_server2_http_server_SOURCES =  \
 	examples/http/server2/reply.cpp \
 	examples/http/server2/request_handler.cpp \
 	examples/http/server2/request_parser.cpp \
-	examples/http/server2/server.cpp $(am__append_6) \
-	$(am__append_7)
+	examples/http/server2/server.cpp $(am__append_7) \
+	$(am__append_8)
 examples_http_server3_http_server_SOURCES =  \
 	examples/http/server3/connection.cpp \
 	examples/http/server3/mime_types.cpp \
 	examples/http/server3/reply.cpp \
 	examples/http/server3/request_handler.cpp \
 	examples/http/server3/request_parser.cpp \
-	examples/http/server3/server.cpp $(am__append_8) \
-	$(am__append_9)
+	examples/http/server3/server.cpp $(am__append_9) \
+	$(am__append_10)
 examples_invocation_prioritised_handlers_SOURCES = examples/invocation/prioritised_handlers.cpp
 examples_iostreams_daytime_client_SOURCES = examples/iostreams/daytime_client.cpp
 examples_iostreams_daytime_server_SOURCES = examples/iostreams/daytime_server.cpp
@@ -1388,6 +1424,7 @@ examples_tutorial_daytime7_server_SOURCES = examples/tutorial/daytime7/server.cp
 @WINDOWS_TARGET_FALSE@examples_local_connect_pair_SOURCES = examples/local/connect_pair.cpp
 @WINDOWS_TARGET_FALSE@examples_local_stream_server_SOURCES = examples/local/stream_server.cpp
 @WINDOWS_TARGET_FALSE@examples_local_stream_client_SOURCES = examples/local/stream_client.cpp
+@WINDOWS_TARGET_TRUE@examples_windows_transmit_file_SOURCES = examples/windows/transmit_file.cpp
 @HAVE_OPENSSL_TRUE@tests_unit_ssl_basic_context_SOURCES = tests/unit/ssl/basic_context.cpp
 @HAVE_OPENSSL_TRUE@tests_unit_ssl_context_base_SOURCES = tests/unit/ssl/context_base.cpp
 @HAVE_OPENSSL_TRUE@tests_unit_ssl_context_service_SOURCES = tests/unit/ssl/context_service.cpp
@@ -2021,6 +2058,18 @@ examples/tutorial/timer5/timer.$(OBJEXT):  \
 examples/tutorial/timer5/timer$(EXEEXT): $(examples_tutorial_timer5_timer_OBJECTS) $(examples_tutorial_timer5_timer_DEPENDENCIES) examples/tutorial/timer5/$(am__dirstamp)
 	@rm -f examples/tutorial/timer5/timer$(EXEEXT)
 	$(CXXLINK) $(examples_tutorial_timer5_timer_OBJECTS) $(examples_tutorial_timer5_timer_LDADD) $(LIBS)
+examples/windows/$(am__dirstamp):
+	@$(MKDIR_P) examples/windows
+	@: > examples/windows/$(am__dirstamp)
+examples/windows/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) examples/windows/$(DEPDIR)
+	@: > examples/windows/$(DEPDIR)/$(am__dirstamp)
+examples/windows/transmit_file.$(OBJEXT):  \
+	examples/windows/$(am__dirstamp) \
+	examples/windows/$(DEPDIR)/$(am__dirstamp)
+examples/windows/transmit_file$(EXEEXT): $(examples_windows_transmit_file_OBJECTS) $(examples_windows_transmit_file_DEPENDENCIES) examples/windows/$(am__dirstamp)
+	@rm -f examples/windows/transmit_file$(EXEEXT)
+	$(CXXLINK) $(examples_windows_transmit_file_OBJECTS) $(examples_windows_transmit_file_LDADD) $(LIBS)
 tests/performance/$(am__dirstamp):
 	@$(MKDIR_P) tests/performance
 	@: > tests/performance/$(am__dirstamp)
@@ -2305,6 +2354,11 @@ tests/unit/read.$(OBJEXT): tests/unit/$(am__dirstamp) \
 tests/unit/read$(EXEEXT): $(tests_unit_read_OBJECTS) $(tests_unit_read_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/read$(EXEEXT)
 	$(CXXLINK) $(tests_unit_read_OBJECTS) $(tests_unit_read_LDADD) $(LIBS)
+tests/unit/read_at.$(OBJEXT): tests/unit/$(am__dirstamp) \
+	tests/unit/$(DEPDIR)/$(am__dirstamp)
+tests/unit/read_at$(EXEEXT): $(tests_unit_read_at_OBJECTS) $(tests_unit_read_at_DEPENDENCIES) tests/unit/$(am__dirstamp)
+	@rm -f tests/unit/read_at$(EXEEXT)
+	$(CXXLINK) $(tests_unit_read_at_OBJECTS) $(tests_unit_read_at_LDADD) $(LIBS)
 tests/unit/read_until.$(OBJEXT): tests/unit/$(am__dirstamp) \
 	tests/unit/$(DEPDIR)/$(am__dirstamp)
 tests/unit/read_until$(EXEEXT): $(tests_unit_read_until_OBJECTS) $(tests_unit_read_until_DEPENDENCIES) tests/unit/$(am__dirstamp)
@@ -2425,6 +2479,12 @@ tests/unit/windows/basic_stream_handle.$(OBJEXT):  \
 tests/unit/windows/basic_stream_handle$(EXEEXT): $(tests_unit_windows_basic_stream_handle_OBJECTS) $(tests_unit_windows_basic_stream_handle_DEPENDENCIES) tests/unit/windows/$(am__dirstamp)
 	@rm -f tests/unit/windows/basic_stream_handle$(EXEEXT)
 	$(CXXLINK) $(tests_unit_windows_basic_stream_handle_OBJECTS) $(tests_unit_windows_basic_stream_handle_LDADD) $(LIBS)
+tests/unit/windows/overlapped_ptr.$(OBJEXT):  \
+	tests/unit/windows/$(am__dirstamp) \
+	tests/unit/windows/$(DEPDIR)/$(am__dirstamp)
+tests/unit/windows/overlapped_ptr$(EXEEXT): $(tests_unit_windows_overlapped_ptr_OBJECTS) $(tests_unit_windows_overlapped_ptr_DEPENDENCIES) tests/unit/windows/$(am__dirstamp)
+	@rm -f tests/unit/windows/overlapped_ptr$(EXEEXT)
+	$(CXXLINK) $(tests_unit_windows_overlapped_ptr_OBJECTS) $(tests_unit_windows_overlapped_ptr_LDADD) $(LIBS)
 tests/unit/windows/random_access_handle.$(OBJEXT):  \
 	tests/unit/windows/$(am__dirstamp) \
 	tests/unit/windows/$(DEPDIR)/$(am__dirstamp)
@@ -2454,6 +2514,11 @@ tests/unit/write.$(OBJEXT): tests/unit/$(am__dirstamp) \
 tests/unit/write$(EXEEXT): $(tests_unit_write_OBJECTS) $(tests_unit_write_DEPENDENCIES) tests/unit/$(am__dirstamp)
 	@rm -f tests/unit/write$(EXEEXT)
 	$(CXXLINK) $(tests_unit_write_OBJECTS) $(tests_unit_write_LDADD) $(LIBS)
+tests/unit/write_at.$(OBJEXT): tests/unit/$(am__dirstamp) \
+	tests/unit/$(DEPDIR)/$(am__dirstamp)
+tests/unit/write_at$(EXEEXT): $(tests_unit_write_at_OBJECTS) $(tests_unit_write_at_DEPENDENCIES) tests/unit/$(am__dirstamp)
+	@rm -f tests/unit/write_at$(EXEEXT)
+	$(CXXLINK) $(tests_unit_write_at_OBJECTS) $(tests_unit_write_at_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -2528,6 +2593,7 @@ mostlyclean-compile:
 	-rm -f examples/tutorial/timer3/timer.$(OBJEXT)
 	-rm -f examples/tutorial/timer4/timer.$(OBJEXT)
 	-rm -f examples/tutorial/timer5/timer.$(OBJEXT)
+	-rm -f examples/windows/transmit_file.$(OBJEXT)
 	-rm -f tests/performance/client.$(OBJEXT)
 	-rm -f tests/performance/server.$(OBJEXT)
 	-rm -f tests/unit/basic_datagram_socket.$(OBJEXT)
@@ -2575,6 +2641,7 @@ mostlyclean-compile:
 	-rm -f tests/unit/posix/stream_descriptor.$(OBJEXT)
 	-rm -f tests/unit/posix/stream_descriptor_service.$(OBJEXT)
 	-rm -f tests/unit/read.$(OBJEXT)
+	-rm -f tests/unit/read_at.$(OBJEXT)
 	-rm -f tests/unit/read_until.$(OBJEXT)
 	-rm -f tests/unit/serial_port.$(OBJEXT)
 	-rm -f tests/unit/serial_port_base.$(OBJEXT)
@@ -2595,11 +2662,13 @@ mostlyclean-compile:
 	-rm -f tests/unit/windows/basic_handle.$(OBJEXT)
 	-rm -f tests/unit/windows/basic_random_access_handle.$(OBJEXT)
 	-rm -f tests/unit/windows/basic_stream_handle.$(OBJEXT)
+	-rm -f tests/unit/windows/overlapped_ptr.$(OBJEXT)
 	-rm -f tests/unit/windows/random_access_handle.$(OBJEXT)
 	-rm -f tests/unit/windows/random_access_handle_service.$(OBJEXT)
 	-rm -f tests/unit/windows/stream_handle.$(OBJEXT)
 	-rm -f tests/unit/windows/stream_handle_service.$(OBJEXT)
 	-rm -f tests/unit/write.$(OBJEXT)
+	-rm -f tests/unit/write_at.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
@@ -2675,6 +2744,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@examples/tutorial/timer3/$(DEPDIR)/timer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/tutorial/timer4/$(DEPDIR)/timer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/tutorial/timer5/$(DEPDIR)/timer.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/windows/$(DEPDIR)/transmit_file.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/performance/$(DEPDIR)/client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/performance/$(DEPDIR)/server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/basic_datagram_socket.Po@am__quote@
@@ -2697,6 +2767,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/is_write_buffered.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/placeholders.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/read.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/read_at.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/read_until.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/serial_port.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/serial_port_base.Po@am__quote@
@@ -2708,6 +2779,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/thread.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/time_traits.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/write.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/write_at.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/address.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/address_v4.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/ip/$(DEPDIR)/address_v6.Po@am__quote@
@@ -2743,6 +2815,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/windows/$(DEPDIR)/basic_handle.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/windows/$(DEPDIR)/basic_random_access_handle.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/windows/$(DEPDIR)/basic_stream_handle.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/unit/windows/$(DEPDIR)/overlapped_ptr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/windows/$(DEPDIR)/random_access_handle.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/windows/$(DEPDIR)/random_access_handle_service.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/windows/$(DEPDIR)/stream_handle.Po@am__quote@
@@ -2997,6 +3070,8 @@ distclean-generic:
 	-rm -f examples/tutorial/timer4/$(am__dirstamp)
 	-rm -f examples/tutorial/timer5/$(DEPDIR)/$(am__dirstamp)
 	-rm -f examples/tutorial/timer5/$(am__dirstamp)
+	-rm -f examples/windows/$(DEPDIR)/$(am__dirstamp)
+	-rm -f examples/windows/$(am__dirstamp)
 	-rm -f tests/performance/$(DEPDIR)/$(am__dirstamp)
 	-rm -f tests/performance/$(am__dirstamp)
 	-rm -f tests/unit/$(DEPDIR)/$(am__dirstamp)
@@ -3021,7 +3096,7 @@ clean: clean-am
 clean-am: clean-generic clean-noinstPROGRAMS mostlyclean-am
 
 distclean: distclean-am
-	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/local/$(DEPDIR) examples/multicast/$(DEPDIR) examples/nonblocking/$(DEPDIR) examples/porthopper/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/local/$(DEPDIR) tests/unit/posix/$(DEPDIR) tests/unit/ssl/$(DEPDIR) tests/unit/windows/$(DEPDIR)
+	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/local/$(DEPDIR) examples/multicast/$(DEPDIR) examples/nonblocking/$(DEPDIR) examples/porthopper/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) examples/windows/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/local/$(DEPDIR) tests/unit/posix/$(DEPDIR) tests/unit/ssl/$(DEPDIR) tests/unit/windows/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -3055,7 +3130,7 @@ install-ps: install-ps-am
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/local/$(DEPDIR) examples/multicast/$(DEPDIR) examples/nonblocking/$(DEPDIR) examples/porthopper/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/local/$(DEPDIR) tests/unit/posix/$(DEPDIR) tests/unit/ssl/$(DEPDIR) tests/unit/windows/$(DEPDIR)
+	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/local/$(DEPDIR) examples/multicast/$(DEPDIR) examples/nonblocking/$(DEPDIR) examples/porthopper/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) examples/windows/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/local/$(DEPDIR) tests/unit/posix/$(DEPDIR) tests/unit/ssl/$(DEPDIR) tests/unit/windows/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

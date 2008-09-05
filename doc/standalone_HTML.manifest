@@ -191,6 +191,8 @@ asio/reference/basic_datagram_socket/local_endpoint.html
 asio/reference/basic_datagram_socket/local_endpoint/overload1.html
 asio/reference/basic_datagram_socket/local_endpoint/overload2.html
 asio/reference/basic_datagram_socket/lowest_layer.html
+asio/reference/basic_datagram_socket/lowest_layer/overload1.html
+asio/reference/basic_datagram_socket/lowest_layer/overload2.html
 asio/reference/basic_datagram_socket/lowest_layer_type.html
 asio/reference/basic_datagram_socket/max_connections.html
 asio/reference/basic_datagram_socket/message_do_not_route.html
@@ -338,6 +340,8 @@ asio/reference/basic_raw_socket/local_endpoint.html
 asio/reference/basic_raw_socket/local_endpoint/overload1.html
 asio/reference/basic_raw_socket/local_endpoint/overload2.html
 asio/reference/basic_raw_socket/lowest_layer.html
+asio/reference/basic_raw_socket/lowest_layer/overload1.html
+asio/reference/basic_raw_socket/lowest_layer/overload2.html
 asio/reference/basic_raw_socket/lowest_layer_type.html
 asio/reference/basic_raw_socket/max_connections.html
 asio/reference/basic_raw_socket/message_do_not_route.html
@@ -410,6 +414,8 @@ asio/reference/basic_serial_port/implementation_type.html
 asio/reference/basic_serial_port/io_service.html
 asio/reference/basic_serial_port/is_open.html
 asio/reference/basic_serial_port/lowest_layer.html
+asio/reference/basic_serial_port/lowest_layer/overload1.html
+asio/reference/basic_serial_port/lowest_layer/overload2.html
 asio/reference/basic_serial_port/lowest_layer_type.html
 asio/reference/basic_serial_port/native.html
 asio/reference/basic_serial_port/native_type.html
@@ -481,6 +487,8 @@ asio/reference/basic_socket/local_endpoint.html
 asio/reference/basic_socket/local_endpoint/overload1.html
 asio/reference/basic_socket/local_endpoint/overload2.html
 asio/reference/basic_socket/lowest_layer.html
+asio/reference/basic_socket/lowest_layer/overload1.html
+asio/reference/basic_socket/lowest_layer/overload2.html
 asio/reference/basic_socket/lowest_layer_type.html
 asio/reference/basic_socket/max_connections.html
 asio/reference/basic_socket/message_do_not_route.html
@@ -638,6 +646,8 @@ asio/reference/basic_socket_streambuf/local_endpoint.html
 asio/reference/basic_socket_streambuf/local_endpoint/overload1.html
 asio/reference/basic_socket_streambuf/local_endpoint/overload2.html
 asio/reference/basic_socket_streambuf/lowest_layer.html
+asio/reference/basic_socket_streambuf/lowest_layer/overload1.html
+asio/reference/basic_socket_streambuf/lowest_layer/overload2.html
 asio/reference/basic_socket_streambuf/lowest_layer_type.html
 asio/reference/basic_socket_streambuf/max_connections.html
 asio/reference/basic_socket_streambuf/message_do_not_route.html
@@ -732,6 +742,8 @@ asio/reference/basic_stream_socket/local_endpoint.html
 asio/reference/basic_stream_socket/local_endpoint/overload1.html
 asio/reference/basic_stream_socket/local_endpoint/overload2.html
 asio/reference/basic_stream_socket/lowest_layer.html
+asio/reference/basic_stream_socket/lowest_layer/overload1.html
+asio/reference/basic_stream_socket/lowest_layer/overload2.html
 asio/reference/basic_stream_socket/lowest_layer_type.html
 asio/reference/basic_stream_socket/max_connections.html
 asio/reference/basic_stream_socket/message_do_not_route.html
@@ -832,6 +844,8 @@ asio/reference/buffered_read_stream/in_avail/overload1.html
 asio/reference/buffered_read_stream/in_avail/overload2.html
 asio/reference/buffered_read_stream/io_service.html
 asio/reference/buffered_read_stream/lowest_layer.html
+asio/reference/buffered_read_stream/lowest_layer/overload1.html
+asio/reference/buffered_read_stream/lowest_layer/overload2.html
 asio/reference/buffered_read_stream/lowest_layer_type.html
 asio/reference/buffered_read_stream/next_layer.html
 asio/reference/buffered_read_stream/next_layer_type.html
@@ -867,6 +881,8 @@ asio/reference/buffered_stream/in_avail/overload1.html
 asio/reference/buffered_stream/in_avail/overload2.html
 asio/reference/buffered_stream/io_service.html
 asio/reference/buffered_stream/lowest_layer.html
+asio/reference/buffered_stream/lowest_layer/overload1.html
+asio/reference/buffered_stream/lowest_layer/overload2.html
 asio/reference/buffered_stream/lowest_layer_type.html
 asio/reference/buffered_stream/next_layer.html
 asio/reference/buffered_stream/next_layer_type.html
@@ -899,6 +915,8 @@ asio/reference/buffered_write_stream/in_avail/overload1.html
 asio/reference/buffered_write_stream/in_avail/overload2.html
 asio/reference/buffered_write_stream/io_service.html
 asio/reference/buffered_write_stream/lowest_layer.html
+asio/reference/buffered_write_stream/lowest_layer/overload1.html
+asio/reference/buffered_write_stream/lowest_layer/overload2.html
 asio/reference/buffered_write_stream/lowest_layer_type.html
 asio/reference/buffered_write_stream/next_layer.html
 asio/reference/buffered_write_stream/next_layer_type.html
@@ -1447,6 +1465,8 @@ asio/reference/posix__basic_descriptor/io_control/overload2.html
 asio/reference/posix__basic_descriptor/io_service.html
 asio/reference/posix__basic_descriptor/is_open.html
 asio/reference/posix__basic_descriptor/lowest_layer.html
+asio/reference/posix__basic_descriptor/lowest_layer/overload1.html
+asio/reference/posix__basic_descriptor/lowest_layer/overload2.html
 asio/reference/posix__basic_descriptor/lowest_layer_type.html
 asio/reference/posix__basic_descriptor/native.html
 asio/reference/posix__basic_descriptor/native_type.html
@@ -1479,6 +1499,8 @@ asio/reference/posix__basic_stream_descriptor/io_control/overload2.html
 asio/reference/posix__basic_stream_descriptor/io_service.html
 asio/reference/posix__basic_stream_descriptor/is_open.html
 asio/reference/posix__basic_stream_descriptor/lowest_layer.html
+asio/reference/posix__basic_stream_descriptor/lowest_layer/overload1.html
+asio/reference/posix__basic_stream_descriptor/lowest_layer/overload2.html
 asio/reference/posix__basic_stream_descriptor/lowest_layer_type.html
 asio/reference/posix__basic_stream_descriptor/native.html
 asio/reference/posix__basic_stream_descriptor/native_type.html
@@ -1783,6 +1805,8 @@ asio/reference/ssl__stream/in_avail/overload1.html
 asio/reference/ssl__stream/in_avail/overload2.html
 asio/reference/ssl__stream/io_service.html
 asio/reference/ssl__stream/lowest_layer.html
+asio/reference/ssl__stream/lowest_layer/overload1.html
+asio/reference/ssl__stream/lowest_layer/overload2.html
 asio/reference/ssl__stream/lowest_layer_type.html
 asio/reference/ssl__stream/next_layer.html
 asio/reference/ssl__stream/next_layer_type.html
@@ -1902,6 +1926,8 @@ asio/reference/windows__basic_handle/implementation_type.html
 asio/reference/windows__basic_handle/io_service.html
 asio/reference/windows__basic_handle/is_open.html
 asio/reference/windows__basic_handle/lowest_layer.html
+asio/reference/windows__basic_handle/lowest_layer/overload1.html
+asio/reference/windows__basic_handle/lowest_layer/overload2.html
 asio/reference/windows__basic_handle/lowest_layer_type.html
 asio/reference/windows__basic_handle/native.html
 asio/reference/windows__basic_handle/native_type.html
@@ -1929,6 +1955,8 @@ asio/reference/windows__basic_random_access_handle/implementation_type.html
 asio/reference/windows__basic_random_access_handle/io_service.html
 asio/reference/windows__basic_random_access_handle/is_open.html
 asio/reference/windows__basic_random_access_handle/lowest_layer.html
+asio/reference/windows__basic_random_access_handle/lowest_layer/overload1.html
+asio/reference/windows__basic_random_access_handle/lowest_layer/overload2.html
 asio/reference/windows__basic_random_access_handle/lowest_layer_type.html
 asio/reference/windows__basic_random_access_handle/native.html
 asio/reference/windows__basic_random_access_handle/native_type.html
@@ -1961,6 +1989,8 @@ asio/reference/windows__basic_stream_handle/implementation_type.html
 asio/reference/windows__basic_stream_handle/io_service.html
 asio/reference/windows__basic_stream_handle/is_open.html
 asio/reference/windows__basic_stream_handle/lowest_layer.html
+asio/reference/windows__basic_stream_handle/lowest_layer/overload1.html
+asio/reference/windows__basic_stream_handle/lowest_layer/overload2.html
 asio/reference/windows__basic_stream_handle/lowest_layer_type.html
 asio/reference/windows__basic_stream_handle/native.html
 asio/reference/windows__basic_stream_handle/native_type.html
@@ -1972,6 +2002,19 @@ asio/reference/windows__basic_stream_handle/service_type.html
 asio/reference/windows__basic_stream_handle/write_some.html
 asio/reference/windows__basic_stream_handle/write_some/overload1.html
 asio/reference/windows__basic_stream_handle/write_some/overload2.html
+asio/reference/windows__overlapped_ptr.html
+asio/reference/windows__overlapped_ptr/complete.html
+asio/reference/windows__overlapped_ptr/get.html
+asio/reference/windows__overlapped_ptr/get/overload1.html
+asio/reference/windows__overlapped_ptr/get/overload2.html
+asio/reference/windows__overlapped_ptr/overlapped_ptr.html
+asio/reference/windows__overlapped_ptr/overlapped_ptr/overload1.html
+asio/reference/windows__overlapped_ptr/overlapped_ptr/overload2.html
+asio/reference/windows__overlapped_ptr/release.html
+asio/reference/windows__overlapped_ptr/reset.html
+asio/reference/windows__overlapped_ptr/reset/overload1.html
+asio/reference/windows__overlapped_ptr/reset/overload2.html
+asio/reference/windows__overlapped_ptr/_overlapped_ptr.html
 asio/reference/windows__random_access_handle.html
 asio/reference/windows__random_access_handle_service.html
 asio/reference/windows__random_access_handle_service/assign.html
