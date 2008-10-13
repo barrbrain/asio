@@ -137,6 +137,7 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	$(am__EXEEXT_2) $(am__EXEEXT_3)
 @WINDOWS_TARGET_FALSE@am__append_1 = \
 @WINDOWS_TARGET_FALSE@	examples/local/connect_pair \
+@WINDOWS_TARGET_FALSE@	examples/local/iostream_client \
 @WINDOWS_TARGET_FALSE@	examples/local/stream_server \
 @WINDOWS_TARGET_FALSE@	examples/local/stream_client
 
@@ -250,6 +251,7 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 @WINDOWS_TARGET_FALSE@am__EXEEXT_1 =  \
 @WINDOWS_TARGET_FALSE@	examples/local/connect_pair$(EXEEXT) \
+@WINDOWS_TARGET_FALSE@	examples/local/iostream_client$(EXEEXT) \
 @WINDOWS_TARGET_FALSE@	examples/local/stream_server$(EXEEXT) \
 @WINDOWS_TARGET_FALSE@	examples/local/stream_client$(EXEEXT)
 @WINDOWS_TARGET_TRUE@am__EXEEXT_2 =  \
@@ -421,6 +423,12 @@ am__examples_local_connect_pair_SOURCES_DIST =  \
 examples_local_connect_pair_OBJECTS =  \
 	$(am_examples_local_connect_pair_OBJECTS)
 examples_local_connect_pair_LDADD = $(LDADD)
+am__examples_local_iostream_client_SOURCES_DIST =  \
+	examples/local/iostream_client.cpp
+@WINDOWS_TARGET_FALSE@am_examples_local_iostream_client_OBJECTS = examples/local/iostream_client.$(OBJEXT)
+examples_local_iostream_client_OBJECTS =  \
+	$(am_examples_local_iostream_client_OBJECTS)
+examples_local_iostream_client_LDADD = $(LDADD)
 am__examples_local_stream_client_SOURCES_DIST =  \
 	examples/local/stream_client.cpp
 @WINDOWS_TARGET_FALSE@am_examples_local_stream_client_OBJECTS =  \
@@ -949,6 +957,7 @@ SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_iostreams_daytime_client_SOURCES) \
 	$(examples_iostreams_daytime_server_SOURCES) \
 	$(examples_local_connect_pair_SOURCES) \
+	$(examples_local_iostream_client_SOURCES) \
 	$(examples_local_stream_client_SOURCES) \
 	$(examples_local_stream_server_SOURCES) \
 	$(examples_multicast_receiver_SOURCES) \
@@ -1066,6 +1075,7 @@ DIST_SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_iostreams_daytime_client_SOURCES) \
 	$(examples_iostreams_daytime_server_SOURCES) \
 	$(am__examples_local_connect_pair_SOURCES_DIST) \
+	$(am__examples_local_iostream_client_SOURCES_DIST) \
 	$(am__examples_local_stream_client_SOURCES_DIST) \
 	$(am__examples_local_stream_server_SOURCES_DIST) \
 	$(examples_multicast_receiver_SOURCES) \
@@ -1422,6 +1432,7 @@ examples_tutorial_daytime5_server_SOURCES = examples/tutorial/daytime5/server.cp
 examples_tutorial_daytime6_server_SOURCES = examples/tutorial/daytime6/server.cpp
 examples_tutorial_daytime7_server_SOURCES = examples/tutorial/daytime7/server.cpp
 @WINDOWS_TARGET_FALSE@examples_local_connect_pair_SOURCES = examples/local/connect_pair.cpp
+@WINDOWS_TARGET_FALSE@examples_local_iostream_client_SOURCES = examples/local/iostream_client.cpp
 @WINDOWS_TARGET_FALSE@examples_local_stream_server_SOURCES = examples/local/stream_server.cpp
 @WINDOWS_TARGET_FALSE@examples_local_stream_client_SOURCES = examples/local/stream_client.cpp
 @WINDOWS_TARGET_TRUE@examples_windows_transmit_file_SOURCES = examples/windows/transmit_file.cpp
@@ -1769,6 +1780,12 @@ examples/local/connect_pair.$(OBJEXT): examples/local/$(am__dirstamp) \
 examples/local/connect_pair$(EXEEXT): $(examples_local_connect_pair_OBJECTS) $(examples_local_connect_pair_DEPENDENCIES) examples/local/$(am__dirstamp)
 	@rm -f examples/local/connect_pair$(EXEEXT)
 	$(CXXLINK) $(examples_local_connect_pair_OBJECTS) $(examples_local_connect_pair_LDADD) $(LIBS)
+examples/local/iostream_client.$(OBJEXT):  \
+	examples/local/$(am__dirstamp) \
+	examples/local/$(DEPDIR)/$(am__dirstamp)
+examples/local/iostream_client$(EXEEXT): $(examples_local_iostream_client_OBJECTS) $(examples_local_iostream_client_DEPENDENCIES) examples/local/$(am__dirstamp)
+	@rm -f examples/local/iostream_client$(EXEEXT)
+	$(CXXLINK) $(examples_local_iostream_client_OBJECTS) $(examples_local_iostream_client_LDADD) $(LIBS)
 examples/local/stream_client.$(OBJEXT):  \
 	examples/local/$(am__dirstamp) \
 	examples/local/$(DEPDIR)/$(am__dirstamp)
@@ -2564,6 +2581,7 @@ mostlyclean-compile:
 	-rm -f examples/iostreams/daytime_client.$(OBJEXT)
 	-rm -f examples/iostreams/daytime_server.$(OBJEXT)
 	-rm -f examples/local/connect_pair.$(OBJEXT)
+	-rm -f examples/local/iostream_client.$(OBJEXT)
 	-rm -f examples/local/stream_client.$(OBJEXT)
 	-rm -f examples/local/stream_server.$(OBJEXT)
 	-rm -f examples/multicast/receiver.$(OBJEXT)
@@ -2715,6 +2733,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@examples/iostreams/$(DEPDIR)/daytime_client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/iostreams/$(DEPDIR)/daytime_server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/local/$(DEPDIR)/connect_pair.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/local/$(DEPDIR)/iostream_client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/local/$(DEPDIR)/stream_client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/local/$(DEPDIR)/stream_server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/multicast/$(DEPDIR)/receiver.Po@am__quote@
