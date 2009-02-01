@@ -136,6 +136,7 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	examples/tutorial/daytime7/server$(EXEEXT) $(am__EXEEXT_1) \
 	$(am__EXEEXT_2) $(am__EXEEXT_3)
 @WINDOWS_TARGET_FALSE@am__append_1 = \
+@WINDOWS_TARGET_FALSE@	examples/chat/posix_chat_client \
 @WINDOWS_TARGET_FALSE@	examples/local/connect_pair \
 @WINDOWS_TARGET_FALSE@	examples/local/iostream_client \
 @WINDOWS_TARGET_FALSE@	examples/local/stream_server \
@@ -249,7 +250,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
-@WINDOWS_TARGET_FALSE@am__EXEEXT_1 =  \
+@WINDOWS_TARGET_FALSE@am__EXEEXT_1 = examples/chat/posix_chat_client$(EXEEXT) \
 @WINDOWS_TARGET_FALSE@	examples/local/connect_pair$(EXEEXT) \
 @WINDOWS_TARGET_FALSE@	examples/local/iostream_client$(EXEEXT) \
 @WINDOWS_TARGET_FALSE@	examples/local/stream_server$(EXEEXT) \
@@ -288,6 +289,12 @@ am_examples_chat_chat_server_OBJECTS =  \
 examples_chat_chat_server_OBJECTS =  \
 	$(am_examples_chat_chat_server_OBJECTS)
 examples_chat_chat_server_LDADD = $(LDADD)
+am__examples_chat_posix_chat_client_SOURCES_DIST =  \
+	examples/chat/posix_chat_client.cpp
+@WINDOWS_TARGET_FALSE@am_examples_chat_posix_chat_client_OBJECTS = examples/chat/posix_chat_client.$(OBJEXT)
+examples_chat_posix_chat_client_OBJECTS =  \
+	$(am_examples_chat_posix_chat_client_OBJECTS)
+examples_chat_posix_chat_client_LDADD = $(LDADD)
 am_examples_echo_async_tcp_echo_server_OBJECTS =  \
 	examples/echo/async_tcp_echo_server.$(OBJEXT)
 examples_echo_async_tcp_echo_server_OBJECTS =  \
@@ -942,6 +949,7 @@ SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_buffers_reference_counted_SOURCES) \
 	$(examples_chat_chat_client_SOURCES) \
 	$(examples_chat_chat_server_SOURCES) \
+	$(examples_chat_posix_chat_client_SOURCES) \
 	$(examples_echo_async_tcp_echo_server_SOURCES) \
 	$(examples_echo_async_udp_echo_server_SOURCES) \
 	$(examples_echo_blocking_tcp_echo_client_SOURCES) \
@@ -1060,6 +1068,7 @@ DIST_SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_buffers_reference_counted_SOURCES) \
 	$(examples_chat_chat_client_SOURCES) \
 	$(examples_chat_chat_server_SOURCES) \
+	$(am__examples_chat_posix_chat_client_SOURCES_DIST) \
 	$(examples_echo_async_tcp_echo_server_SOURCES) \
 	$(examples_echo_async_udp_echo_server_SOURCES) \
 	$(examples_echo_blocking_tcp_echo_client_SOURCES) \
@@ -1431,6 +1440,7 @@ examples_tutorial_daytime4_client_SOURCES = examples/tutorial/daytime4/client.cp
 examples_tutorial_daytime5_server_SOURCES = examples/tutorial/daytime5/server.cpp
 examples_tutorial_daytime6_server_SOURCES = examples/tutorial/daytime6/server.cpp
 examples_tutorial_daytime7_server_SOURCES = examples/tutorial/daytime7/server.cpp
+@WINDOWS_TARGET_FALSE@examples_chat_posix_chat_client_SOURCES = examples/chat/posix_chat_client.cpp
 @WINDOWS_TARGET_FALSE@examples_local_connect_pair_SOURCES = examples/local/connect_pair.cpp
 @WINDOWS_TARGET_FALSE@examples_local_iostream_client_SOURCES = examples/local/iostream_client.cpp
 @WINDOWS_TARGET_FALSE@examples_local_stream_server_SOURCES = examples/local/stream_server.cpp
@@ -1574,6 +1584,12 @@ examples/chat/chat_server.$(OBJEXT): examples/chat/$(am__dirstamp) \
 examples/chat/chat_server$(EXEEXT): $(examples_chat_chat_server_OBJECTS) $(examples_chat_chat_server_DEPENDENCIES) examples/chat/$(am__dirstamp)
 	@rm -f examples/chat/chat_server$(EXEEXT)
 	$(CXXLINK) $(examples_chat_chat_server_OBJECTS) $(examples_chat_chat_server_LDADD) $(LIBS)
+examples/chat/posix_chat_client.$(OBJEXT):  \
+	examples/chat/$(am__dirstamp) \
+	examples/chat/$(DEPDIR)/$(am__dirstamp)
+examples/chat/posix_chat_client$(EXEEXT): $(examples_chat_posix_chat_client_OBJECTS) $(examples_chat_posix_chat_client_DEPENDENCIES) examples/chat/$(am__dirstamp)
+	@rm -f examples/chat/posix_chat_client$(EXEEXT)
+	$(CXXLINK) $(examples_chat_posix_chat_client_OBJECTS) $(examples_chat_posix_chat_client_LDADD) $(LIBS)
 examples/echo/$(am__dirstamp):
 	@$(MKDIR_P) examples/echo
 	@: > examples/echo/$(am__dirstamp)
@@ -2543,6 +2559,7 @@ mostlyclean-compile:
 	-rm -f examples/buffers/reference_counted.$(OBJEXT)
 	-rm -f examples/chat/chat_client.$(OBJEXT)
 	-rm -f examples/chat/chat_server.$(OBJEXT)
+	-rm -f examples/chat/posix_chat_client.$(OBJEXT)
 	-rm -f examples/echo/async_tcp_echo_server.$(OBJEXT)
 	-rm -f examples/echo/async_udp_echo_server.$(OBJEXT)
 	-rm -f examples/echo/blocking_tcp_echo_client.$(OBJEXT)
@@ -2695,6 +2712,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@examples/buffers/$(DEPDIR)/reference_counted.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/chat/$(DEPDIR)/chat_client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/chat/$(DEPDIR)/chat_server.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/chat/$(DEPDIR)/posix_chat_client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/echo/$(DEPDIR)/async_tcp_echo_server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/echo/$(DEPDIR)/async_udp_echo_server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/echo/$(DEPDIR)/blocking_tcp_echo_client.Po@am__quote@
