@@ -29,7 +29,7 @@
   <span class="keyword">public</span> <span class="identifier">basic_socket</span><span class="special">&lt;</span> <span class="identifier">Protocol</span><span class="special">,</span> <span class="identifier">StreamSocketService</span> <span class="special">&gt;</span>
 </pre>
 <a name="asio.reference.basic_stream_socket.types"></a><h5>
-<a name="id717865"></a>
+<a name="id879277"></a>
         <a class="link" href="basic_stream_socket.html#asio.reference.basic_stream_socket.types">Types</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -308,7 +308,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.basic_stream_socket.member_functions"></a><h5>
-<a name="id718494"></a>
+<a name="id879906"></a>
         <a class="link" href="basic_stream_socket.html#asio.reference.basic_stream_socket.member_functions">Member
         Functions</a>
       </h5>
@@ -435,6 +435,16 @@
 <td>
               <p>
                 Construct a basic_stream_socket without opening it.
+              </p>
+              <p>
+                Construct and open a basic_stream_socket.
+              </p>
+              <p>
+                Construct a basic_stream_socket, opening it and binding it to the
+                given local endpoint.
+              </p>
+              <p>
+                Construct a basic_stream_socket on an existing native socket.
               </p>
               </td>
 </tr>
@@ -569,6 +579,9 @@
               <p>
                 Get a reference to the lowest layer.
               </p>
+              <p>
+                Get a const reference to the lowest layer.
+              </p>
               </td>
 </tr>
 <tr>
@@ -616,6 +629,9 @@
 <td>
               <p>
                 Receive some data on the socket.
+              </p>
+              <p>
+                Receive some data on a connected socket.
               </p>
               </td>
 </tr>
@@ -682,7 +698,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.basic_stream_socket.data_members"></a><h5>
-<a name="id719327"></a>
+<a name="id880759"></a>
         <a class="link" href="basic_stream_socket.html#asio.reference.basic_stream_socket.data_members">Data Members</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -754,7 +770,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.basic_stream_socket.protected_data_members"></a><h5>
-<a name="id719489"></a>
+<a name="id880921"></a>
         <a class="link" href="basic_stream_socket.html#asio.reference.basic_stream_socket.protected_data_members">Protected
         Data Members</a>
       </h5>
@@ -807,7 +823,7 @@
         stream-oriented socket functionality.
       </p>
 <a name="asio.reference.basic_stream_socket.thread_safety"></a><h5>
-<a name="id719601"></a>
+<a name="id881033"></a>
         <a class="link" href="basic_stream_socket.html#asio.reference.basic_stream_socket.thread_safety">Thread Safety</a>
       </h5>
 <p>

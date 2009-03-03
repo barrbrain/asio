@@ -20,7 +20,7 @@
 <a name="asio.reference.basic_socket_acceptor.accept"></a><a class="link" href="accept.html" title="basic_socket_acceptor::accept"> basic_socket_acceptor::accept</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id678014"></a> Accept a new connection.
+          <a class="indexterm" name="id839317"></a> Accept a new connection.
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../SocketService.html" title="Socket service requirements">SocketService</a><span class="special">&gt;</span>
@@ -32,8 +32,11 @@
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <a class="link" href="accept/overload2.html" title="basic_socket_acceptor::accept (2 of 4 overloads)">accept</a><span class="special">(</span>
     <span class="identifier">basic_socket</span><span class="special">&lt;</span> <span class="identifier">protocol_type</span><span class="special">,</span> <span class="identifier">SocketService</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">peer</span><span class="special">,</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">);</span>
-
-<span class="keyword">template</span><span class="special">&lt;</span>
+</pre>
+<p>
+          Accept a new connection and obtain the endpoint of the peer.
+        </p>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../SocketService.html" title="Socket service requirements">SocketService</a><span class="special">&gt;</span>
 <span class="keyword">void</span> <a class="link" href="accept/overload3.html" title="basic_socket_acceptor::accept (3 of 4 overloads)">accept</a><span class="special">(</span>
     <span class="identifier">basic_socket</span><span class="special">&lt;</span> <span class="identifier">protocol_type</span><span class="special">,</span> <span class="identifier">SocketService</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">peer</span><span class="special">,</span>

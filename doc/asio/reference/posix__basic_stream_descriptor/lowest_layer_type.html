@@ -24,13 +24,13 @@
           <span class="emphasis"><em>Inherited from posix::basic_descriptor.</em></span>
         </p>
 <p>
-          <a class="indexterm" name="id872934"></a> A basic_descriptor is always
+          <a class="indexterm" name="id1035586"></a> A basic_descriptor is always
           the lowest layer.
         </p>
 <pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">basic_descriptor</span><span class="special">&lt;</span> <span class="identifier">StreamDescriptorService</span> <span class="special">&gt;</span> <span class="identifier">lowest_layer_type</span><span class="special">;</span>
 </pre>
 <a name="asio.reference.posix__basic_stream_descriptor.lowest_layer_type.types"></a><h6>
-<a name="id872996"></a>
+<a name="id1035648"></a>
           <a class="link" href="lowest_layer_type.html#asio.reference.posix__basic_stream_descriptor.lowest_layer_type.types">Types</a>
         </h6>
 <div class="informaltable"><table class="table">
@@ -127,7 +127,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.posix__basic_stream_descriptor.lowest_layer_type.member_functions"></a><h6>
-<a name="id873209"></a>
+<a name="id1035861"></a>
           <a class="link" href="lowest_layer_type.html#asio.reference.posix__basic_stream_descriptor.lowest_layer_type.member_functions">Member
           Functions</a>
         </h6>
@@ -170,6 +170,9 @@
 <td>
                 <p>
                   Construct a basic_descriptor without opening it.
+                </p>
+                <p>
+                  Construct a basic_descriptor on an existing native descriptor.
                 </p>
                 </td>
 </tr>
@@ -256,6 +259,9 @@
                 <p>
                   Get a reference to the lowest layer.
                 </p>
+                <p>
+                  Get a const reference to the lowest layer.
+                </p>
                 </td>
 </tr>
 <tr>
@@ -273,7 +279,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.posix__basic_stream_descriptor.lowest_layer_type.protected_member_functions"></a><h6>
-<a name="id873526"></a>
+<a name="id1036186"></a>
           <a class="link" href="lowest_layer_type.html#asio.reference.posix__basic_stream_descriptor.lowest_layer_type.protected_member_functions">Protected
           Member Functions</a>
         </h6>
@@ -308,7 +314,7 @@
 </tr></tbody>
 </table></div>
 <a name="asio.reference.posix__basic_stream_descriptor.lowest_layer_type.protected_data_members"></a><h6>
-<a name="id873607"></a>
+<a name="id1036267"></a>
           <a class="link" href="lowest_layer_type.html#asio.reference.posix__basic_stream_descriptor.lowest_layer_type.protected_data_members">Protected
           Data Members</a>
         </h6>
@@ -361,7 +367,7 @@
           a POSIX descriptor.
         </p>
 <a name="asio.reference.posix__basic_stream_descriptor.lowest_layer_type.thread_safety"></a><h6>
-<a name="id873718"></a>
+<a name="id1036378"></a>
           <a class="link" href="lowest_layer_type.html#asio.reference.posix__basic_stream_descriptor.lowest_layer_type.thread_safety">Thread
           Safety</a>
         </h6>

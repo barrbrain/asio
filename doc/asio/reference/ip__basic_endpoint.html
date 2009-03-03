@@ -27,7 +27,7 @@
 <span class="keyword">class</span> <span class="identifier">basic_endpoint</span>
 </pre>
 <a name="asio.reference.ip__basic_endpoint.types"></a><h5>
-<a name="id810339"></a>
+<a name="id972350"></a>
         <a class="link" href="ip__basic_endpoint.html#asio.reference.ip__basic_endpoint.types">Types</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -76,7 +76,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.ip__basic_endpoint.member_functions"></a><h5>
-<a name="id810447"></a>
+<a name="id972458"></a>
         <a class="link" href="ip__basic_endpoint.html#asio.reference.ip__basic_endpoint.member_functions">Member
         Functions</a>
       </h5>
@@ -108,6 +108,9 @@
               <p>
                 Get the IP address associated with the endpoint.
               </p>
+              <p>
+                Set the IP address associated with the endpoint.
+              </p>
               </td>
 </tr>
 <tr>
@@ -119,6 +122,20 @@
 <td>
               <p>
                 Default constructor.
+              </p>
+              <p>
+                Construct an endpoint using a port number, specified in the host's
+                byte order. The IP address will be the any address (i.e. INADDR_ANY
+                or in6addr_any). This constructor would typically be used for accepting
+                new connections.
+              </p>
+              <p>
+                Construct an endpoint using a port number and an IP address. This
+                constructor may be used for accepting connections on a specific interface
+                or for making a connection to a remote endpoint.
+              </p>
+              <p>
+                Copy constructor.
               </p>
               </td>
 </tr>
@@ -169,6 +186,10 @@
                 Get the port associated with the endpoint. The port number is always
                 in the host's byte order.
               </p>
+              <p>
+                Set the port associated with the endpoint. The port number is always
+                in the host's byte order.
+              </p>
               </td>
 </tr>
 <tr>
@@ -210,7 +231,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.ip__basic_endpoint.friends"></a><h5>
-<a name="id810746"></a>
+<a name="id972782"></a>
         <a class="link" href="ip__basic_endpoint.html#asio.reference.ip__basic_endpoint.friends">Friends</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -270,7 +291,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.ip__basic_endpoint.related_functions"></a><h5>
-<a name="id810881"></a>
+<a name="id972916"></a>
         <a class="link" href="ip__basic_endpoint.html#asio.reference.ip__basic_endpoint.related_functions">Related
         Functions</a>
       </h5>
@@ -310,7 +331,7 @@
         socket.
       </p>
 <a name="asio.reference.ip__basic_endpoint.thread_safety"></a><h5>
-<a name="id810973"></a>
+<a name="id973008"></a>
         <a class="link" href="ip__basic_endpoint.html#asio.reference.ip__basic_endpoint.thread_safety">Thread Safety</a>
       </h5>
 <p>

@@ -20,12 +20,12 @@
 <a name="asio.reference.ip__tcp.resolver_iterator"></a><a class="link" href="resolver_iterator.html" title="ip::tcp::resolver_iterator"> ip::tcp::resolver_iterator</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id837142"></a> The type of a resolver iterator.
+          <a class="indexterm" name="id999471"></a> The type of a resolver iterator.
         </p>
 <pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">basic_resolver_iterator</span><span class="special">&lt;</span> <span class="identifier">tcp</span> <span class="special">&gt;</span> <span class="identifier">resolver_iterator</span><span class="special">;</span>
 </pre>
 <a name="asio.reference.ip__tcp.resolver_iterator.member_functions"></a><h6>
-<a name="id837203"></a>
+<a name="id999532"></a>
           <a class="link" href="resolver_iterator.html#asio.reference.ip__tcp.resolver_iterator.member_functions">Member
           Functions</a>
         </h6>
@@ -69,6 +69,9 @@
                 <p>
                   Create an iterator from an addrinfo list returned by getaddrinfo.
                 </p>
+                <p>
+                  Create an iterator from an endpoint, host name and service name.
+                </p>
                 </td>
 </tr>
 </tbody>
@@ -85,7 +88,7 @@
 <pre class="programlisting"><span class="keyword">const</span> <span class="identifier">basic_resolver_entry</span><span class="special">&lt;</span><span class="identifier">InternetProtocol</span><span class="special">&gt;</span> 
 </pre>
 <a name="asio.reference.ip__tcp.resolver_iterator.thread_safety"></a><h6>
-<a name="id837357"></a>
+<a name="id999690"></a>
           <a class="link" href="resolver_iterator.html#asio.reference.ip__tcp.resolver_iterator.thread_safety">Thread
           Safety</a>
         </h6>

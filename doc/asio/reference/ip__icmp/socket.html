@@ -20,12 +20,12 @@
 <a name="asio.reference.ip__icmp.socket"></a><a class="link" href="socket.html" title="ip::icmp::socket"> ip::icmp::socket</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id825236"></a> The ICMP socket type.
+          <a class="indexterm" name="id987469"></a> The ICMP socket type.
         </p>
 <pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">basic_raw_socket</span><span class="special">&lt;</span> <span class="identifier">icmp</span> <span class="special">&gt;</span> <span class="identifier">socket</span><span class="special">;</span>
 </pre>
 <a name="asio.reference.ip__icmp.socket.types"></a><h6>
-<a name="id825296"></a>
+<a name="id987528"></a>
           <a class="link" href="socket.html#asio.reference.ip__icmp.socket.types">Types</a>
         </h6>
 <div class="informaltable"><table class="table">
@@ -304,7 +304,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.ip__icmp.socket.member_functions"></a><h6>
-<a name="id825901"></a>
+<a name="id988134"></a>
           <a class="link" href="socket.html#asio.reference.ip__icmp.socket.member_functions">Member
           Functions</a>
         </h6>
@@ -431,6 +431,16 @@
 <td>
                 <p>
                   Construct a basic_raw_socket without opening it.
+                </p>
+                <p>
+                  Construct and open a basic_raw_socket.
+                </p>
+                <p>
+                  Construct a basic_raw_socket, opening it and binding it to the
+                  given local endpoint.
+                </p>
+                <p>
+                  Construct a basic_raw_socket on an existing native socket.
                 </p>
                 </td>
 </tr>
@@ -565,6 +575,9 @@
                 <p>
                   Get a reference to the lowest layer.
                 </p>
+                <p>
+                  Get a const reference to the lowest layer.
+                </p>
                 </td>
 </tr>
 <tr>
@@ -678,7 +691,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.ip__icmp.socket.data_members"></a><h6>
-<a name="id826712"></a>
+<a name="id988962"></a>
           <a class="link" href="socket.html#asio.reference.ip__icmp.socket.data_members">Data Members</a>
         </h6>
 <div class="informaltable"><table class="table">
@@ -750,7 +763,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.ip__icmp.socket.protected_data_members"></a><h6>
-<a name="id826870"></a>
+<a name="id989119"></a>
           <a class="link" href="socket.html#asio.reference.ip__icmp.socket.protected_data_members">Protected
           Data Members</a>
         </h6>
@@ -803,7 +816,7 @@
           raw-oriented socket functionality.
         </p>
 <a name="asio.reference.ip__icmp.socket.thread_safety"></a><h6>
-<a name="id826980"></a>
+<a name="id989229"></a>
           <a class="link" href="socket.html#asio.reference.ip__icmp.socket.thread_safety">Thread Safety</a>
         </h6>
 <p>
