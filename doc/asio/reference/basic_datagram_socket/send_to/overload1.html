@@ -35,7 +35,7 @@
             or an error occurs.
           </p>
 <a name="asio.reference.basic_datagram_socket.send_to.overload1.parameters"></a><h6>
-<a name="id688688"></a>
+<a name="id542752"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.send_to.overload1.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -52,7 +52,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_datagram_socket.send_to.overload1.return_value"></a><h6>
-<a name="id688740"></a>
+<a name="id542803"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.send_to.overload1.return_value">Return
             Value</a>
           </h6>
@@ -60,7 +60,7 @@
             The number of bytes sent.
           </p>
 <a name="asio.reference.basic_datagram_socket.send_to.overload1.exceptions"></a><h6>
-<a name="id688764"></a>
+<a name="id542828"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.send_to.overload1.exceptions">Exceptions</a>
           </h6>
 <div class="variablelist">
@@ -73,21 +73,20 @@
 </dl>
 </div>
 <a name="asio.reference.basic_datagram_socket.send_to.overload1.example"></a><h6>
-<a name="id688802"></a>
+<a name="id542866"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.send_to.overload1.example">Example</a>
           </h6>
 <p>
-            To send a single data buffer use the <a class="link" href="../../buffer.html" title="buffer">buffer</a>
-            function as follows:
+            To send a single data buffer use the <a class="link" href="../../buffer.html" title="buffer"><code class="computeroutput"><span class="identifier">buffer</span></code></a> function as follows:
           </p>
 <pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">udp</span><span class="special">::</span><span class="identifier">endpoint</span> <span class="identifier">destination</span><span class="special">(</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">address</span><span class="special">::</span><span class="identifier">from_string</span><span class="special">(</span><span class="string">"1.2.3.4"</span><span class="special">),</span> <span class="number">12345</span><span class="special">);</span>
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">send_to</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span> <span class="identifier">destination</span><span class="special">);</span>
 </pre>
 <p>
-            See the <a class="link" href="../../buffer.html" title="buffer">buffer</a> documentation
-            for information on sending multiple buffers in one go, and how to use
-            it with arrays, boost::array or std::vector.
+            See the <a class="link" href="../../buffer.html" title="buffer"><code class="computeroutput"><span class="identifier">buffer</span></code></a>
+            documentation for information on sending multiple buffers in one go,
+            and how to use it with arrays, boost::array or std::vector.
           </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

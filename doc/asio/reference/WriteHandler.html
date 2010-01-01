@@ -29,6 +29,50 @@
         and <code class="computeroutput"><span class="identifier">s</span></code> is an lvalue of type
         <code class="computeroutput"><span class="keyword">const</span> <span class="identifier">size_t</span></code>.
       </p>
+<a name="asio.reference.WriteHandler.examples"></a><h5>
+<a name="id490341"></a>
+        <a class="link" href="WriteHandler.html#asio.reference.WriteHandler.examples">Examples</a>
+      </h5>
+<p>
+        A free function as a write handler:
+      </p>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">write_handler</span><span class="special">(</span>
+    <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">,</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_transferred</span><span class="special">)</span>
+<span class="special">{</span>
+  <span class="special">...</span>
+<span class="special">}</span>
+</pre>
+<p>
+        A write handler function object:
+      </p>
+<pre class="programlisting"><span class="keyword">struct</span> <span class="identifier">write_handler</span>
+<span class="special">{</span>
+  <span class="special">...</span>
+  <span class="keyword">void</span> <span class="keyword">operator</span><span class="special">()(</span>
+      <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">,</span>
+      <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_transferred</span><span class="special">)</span>
+  <span class="special">{</span>
+    <span class="special">...</span>
+  <span class="special">}</span>
+  <span class="special">...</span>
+<span class="special">};</span>
+</pre>
+<p>
+        A non-static class member function adapted to a write handler using <code class="computeroutput"><span class="identifier">bind</span><span class="special">()</span></code>:
+      </p>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">my_class</span><span class="special">::</span><span class="identifier">write_handler</span><span class="special">(</span>
+    <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">,</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">bytes_transferred</span><span class="special">)</span>
+<span class="special">{</span>
+  <span class="special">...</span>
+<span class="special">}</span>
+<span class="special">...</span>
+<span class="identifier">socket</span><span class="special">.</span><span class="identifier">async_write</span><span class="special">(...,</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">my_class</span><span class="special">::</span><span class="identifier">write_handler</span><span class="special">,</span>
+      <span class="keyword">this</span><span class="special">,</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">error</span><span class="special">,</span>
+      <span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">bytes_transferred</span><span class="special">));</span>
+</pre>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

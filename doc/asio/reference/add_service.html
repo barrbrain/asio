@@ -20,7 +20,7 @@
 <a name="asio.reference.add_service"></a><a class="link" href="add_service.html" title="add_service"> add_service</a>
 </h3></div></div></div>
 <p>
-        <a class="indexterm" name="id641056"></a>
+        <a class="indexterm" name="id490862"></a>
       </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="Service.html" title="Service requirements">Service</a><span class="special">&gt;</span>
@@ -29,10 +29,10 @@
     <span class="identifier">Service</span> <span class="special">*</span> <span class="identifier">svc</span><span class="special">);</span>
 </pre>
 <p>
-        This function is used to add a service to the io_service.
+        This function is used to add a service to the <a class="link" href="io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>.
       </p>
 <a name="asio.reference.add_service.parameters"></a><h5>
-<a name="id641165"></a>
+<a name="id490986"></a>
         <a class="link" href="add_service.html#asio.reference.add_service.parameters">Parameters</a>
       </h5>
 <div class="variablelist">
@@ -40,14 +40,17 @@
 <dl>
 <dt><span class="term">ios</span></dt>
 <dd><p>
-            The io_service object that owns the service.
+            The <a class="link" href="io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>
+            object that owns the service.
           </p></dd>
 <dt><span class="term">svc</span></dt>
 <dd>
 <p>
             The service object. On success, ownership of the service object is transferred
-            to the io_service. When the io_service object is destroyed, it will destroy
-            the service object by performing: 
+            to the <a class="link" href="io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>.
+            When the <a class="link" href="io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>
+            object is destroyed, it will destroy the service object by performing:
+            
 </p>
 <pre class="programlisting"><span class="keyword">delete</span> <span class="keyword">static_cast</span><span class="special">&lt;</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">service</span><span class="special">*&gt;(</span><span class="identifier">svc</span><span class="special">)</span> 
 </pre>
@@ -57,7 +60,7 @@
 </dl>
 </div>
 <a name="asio.reference.add_service.exceptions"></a><h5>
-<a name="id641265"></a>
+<a name="id491131"></a>
         <a class="link" href="add_service.html#asio.reference.add_service.exceptions">Exceptions</a>
       </h5>
 <div class="variablelist">
@@ -65,15 +68,25 @@
 <dl>
 <dt><span class="term">asio::service_already_exists</span></dt>
 <dd><p>
-            Thrown if a service of the given type is already present in the io_service.
+            Thrown if a service of the given type is already present in the <a class="link" href="io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>.
           </p></dd>
 <dt><span class="term">asio::invalid_service_owner</span></dt>
 <dd><p>
-            Thrown if the service's owning io_service is not the io_service object
-            specified by the ios parameter.
+            Thrown if the service's owning <a class="link" href="io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> is not the <a class="link" href="io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>
+            object specified by the ios parameter.
           </p></dd>
 </dl>
 </div>
+<a name="asio.reference.add_service.requirements"></a><h5>
+<a name="id491227"></a>
+        <a class="link" href="add_service.html#asio.reference.add_service.requirements">Requirements</a>
+      </h5>
+<p>
+        <span class="bold"><strong>Header: </strong></span><code class="literal">asio/io_service.hpp</code>
+      </p>
+<p>
+        <span class="bold"><strong>Convenience header: </strong></span><code class="literal">asio.hpp</code>
+      </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

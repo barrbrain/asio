@@ -28,10 +28,11 @@
 <p>
             This function causes all outstanding asynchronous connect, send and receive
             operations to finish immediately, and the handlers for cancelled operations
-            will be passed the asio::error::operation_aborted error.
+            will be passed the <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error</span><span class="special">::</span><span class="identifier">operation_aborted</span></code>
+            error.
           </p>
 <a name="asio.reference.basic_socket.cancel.overload1.exceptions"></a><h6>
-<a name="id746255"></a>
+<a name="id606371"></a>
             <a class="link" href="overload1.html#asio.reference.basic_socket.cancel.overload1.exceptions">Exceptions</a>
           </h6>
 <div class="variablelist">
@@ -44,11 +45,12 @@
 </dl>
 </div>
 <a name="asio.reference.basic_socket.cancel.overload1.remarks"></a><h6>
-<a name="id746293"></a>
+<a name="id606409"></a>
             <a class="link" href="overload1.html#asio.reference.basic_socket.cancel.overload1.remarks">Remarks</a>
           </h6>
 <p>
-            Calls to cancel() will always fail with asio::error::operation_not_supported
+            Calls to <code class="computeroutput"><span class="identifier">cancel</span><span class="special">()</span></code>
+            will always fail with <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error</span><span class="special">::</span><span class="identifier">operation_not_supported</span></code>
             when run on Windows XP, Windows Server 2003, and earlier versions of
             Windows, unless ASIO_ENABLE_CANCELIO is defined. However, the CancelIo
             function has two issues that should be considered before enabling its
@@ -74,8 +76,9 @@
               Disable asio's I/O completion port backend by defining ASIO_DISABLE_IOCP.
             </li>
 <li>
-              Use the close() function to simultaneously cancel the outstanding operations
-              and close the socket.
+              Use the <code class="computeroutput"><span class="identifier">close</span><span class="special">()</span></code>
+              function to simultaneously cancel the outstanding operations and close
+              the socket.
             </li>
 </ul></div>
 <p>

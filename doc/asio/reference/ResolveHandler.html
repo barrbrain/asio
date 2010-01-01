@@ -31,6 +31,50 @@
         is the template parameter of the <a class="link" href="ip__resolver_service.html" title="ip::resolver_service"><code class="computeroutput"><span class="identifier">resolver_service</span></code></a> which is used to
         initiate the asynchronous operation.
       </p>
+<a name="asio.reference.ResolveHandler.examples"></a><h5>
+<a name="id467739"></a>
+        <a class="link" href="ResolveHandler.html#asio.reference.ResolveHandler.examples">Examples</a>
+      </h5>
+<p>
+        A free function as a resolve handler:
+      </p>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">resolve_handler</span><span class="special">(</span>
+    <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">,</span>
+    <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">resolver</span><span class="special">::</span><span class="identifier">iterator</span> <span class="identifier">iterator</span><span class="special">)</span>
+<span class="special">{</span>
+  <span class="special">...</span>
+<span class="special">}</span>
+</pre>
+<p>
+        A resolve handler function object:
+      </p>
+<pre class="programlisting"><span class="keyword">struct</span> <span class="identifier">resolve_handler</span>
+<span class="special">{</span>
+  <span class="special">...</span>
+  <span class="keyword">void</span> <span class="keyword">operator</span><span class="special">()(</span>
+      <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">,</span>
+      <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">resolver</span><span class="special">::</span><span class="identifier">iterator</span> <span class="identifier">iterator</span><span class="special">)</span>
+  <span class="special">{</span>
+    <span class="special">...</span>
+  <span class="special">}</span>
+  <span class="special">...</span>
+<span class="special">};</span>
+</pre>
+<p>
+        A non-static class member function adapted to a resolve handler using <code class="computeroutput"><span class="identifier">bind</span><span class="special">()</span></code>:
+      </p>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">my_class</span><span class="special">::</span><span class="identifier">resolve_handler</span><span class="special">(</span>
+    <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">,</span>
+    <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">resolver</span><span class="special">::</span><span class="identifier">iterator</span> <span class="identifier">iterator</span><span class="special">)</span>
+<span class="special">{</span>
+  <span class="special">...</span>
+<span class="special">}</span>
+<span class="special">...</span>
+<span class="identifier">resolver</span><span class="special">.</span><span class="identifier">async_resolve</span><span class="special">(...,</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">my_class</span><span class="special">::</span><span class="identifier">resolve_handler</span><span class="special">,</span>
+      <span class="keyword">this</span><span class="special">,</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">error</span><span class="special">,</span>
+      <span class="identifier">asio</span><span class="special">::</span><span class="identifier">placeholders</span><span class="special">::</span><span class="identifier">iterator</span><span class="special">));</span>
+</pre>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

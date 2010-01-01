@@ -31,18 +31,19 @@
     <span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">max_size_in_bytes</span><span class="special">);</span>
 </pre>
 <a name="asio.reference.buffer.overload20.return_value"></a><h6>
-<a name="id845202"></a>
+<a name="id714098"></a>
           <a class="link" href="overload20.html#asio.reference.buffer.overload20.return_value">Return Value</a>
         </h6>
 <p>
-          A const_buffers_1 value equivalent to:
+          A <a class="link" href="../const_buffers_1.html" title="const_buffers_1"><code class="computeroutput"><span class="identifier">const_buffers_1</span></code></a>
+          value equivalent to:
         </p>
 <pre class="programlisting"><span class="identifier">const_buffers_1</span><span class="special">(</span>
     <span class="identifier">data</span><span class="special">.</span><span class="identifier">size</span><span class="special">()</span> <span class="special">?</span> <span class="special">&amp;</span><span class="identifier">data</span><span class="special">[</span><span class="number">0</span><span class="special">]</span> <span class="special">:</span> <span class="number">0</span><span class="special">,</span>
     <span class="identifier">min</span><span class="special">(</span><span class="identifier">data</span><span class="special">.</span><span class="identifier">size</span><span class="special">()</span> <span class="special">*</span> <span class="keyword">sizeof</span><span class="special">(</span><span class="identifier">PodType</span><span class="special">),</span> <span class="identifier">max_size_in_bytes</span><span class="special">));</span> 
 </pre>
 <a name="asio.reference.buffer.overload20.remarks"></a><h6>
-<a name="id845368"></a>
+<a name="id714280"></a>
           <a class="link" href="overload20.html#asio.reference.buffer.overload20.remarks">Remarks</a>
         </h6>
 <p>

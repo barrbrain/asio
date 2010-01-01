@@ -20,7 +20,8 @@
 <a name="asio.reference.ip__multicast__enable_loopback"></a><a class="link" href="ip__multicast__enable_loopback.html" title="ip::multicast::enable_loopback"> ip::multicast::enable_loopback</a>
 </h3></div></div></div>
 <p>
-        <a class="indexterm" name="id913847"></a> Socket option determining whether outgoing
+        <a class="indexterm" name="id794322"></a> 
+Socket option determining whether outgoing
         multicast packets will be received on the same socket if it is a member of
         the multicast group.
       </p>
@@ -30,7 +31,7 @@
         Implements the IPPROTO_IP/IP_MULTICAST_LOOP socket option.
       </p>
 <a name="asio.reference.ip__multicast__enable_loopback.examples"></a><h5>
-<a name="id913894"></a>
+<a name="id794370"></a>
         <a class="link" href="ip__multicast__enable_loopback.html#asio.reference.ip__multicast__enable_loopback.examples">Examples</a>
       </h5>
 <p>
@@ -50,6 +51,16 @@
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">get_option</span><span class="special">(</span><span class="identifier">option</span><span class="special">);</span>
 <span class="keyword">bool</span> <span class="identifier">is_set</span> <span class="special">=</span> <span class="identifier">option</span><span class="special">.</span><span class="identifier">value</span><span class="special">();</span>
 </pre>
+<a name="asio.reference.ip__multicast__enable_loopback.requirements"></a><h5>
+<a name="id794710"></a>
+        <a class="link" href="ip__multicast__enable_loopback.html#asio.reference.ip__multicast__enable_loopback.requirements">Requirements</a>
+      </h5>
+<p>
+        <span class="bold"><strong>Header: </strong></span><code class="literal">asio/ip/multicast.hpp</code>
+      </p>
+<p>
+        <span class="bold"><strong>Convenience header: </strong></span><code class="literal">asio.hpp</code>
+      </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

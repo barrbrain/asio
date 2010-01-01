@@ -49,7 +49,7 @@
           write_some function.
         </p>
 <a name="asio.reference.write.overload2.parameters"></a><h6>
-<a name="id1066727"></a>
+<a name="id962995"></a>
           <a class="link" href="overload2.html#asio.reference.write.overload2.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -89,14 +89,14 @@
 </dl>
 </div>
 <a name="asio.reference.write.overload2.return_value"></a><h6>
-<a name="id1066899"></a>
+<a name="id963167"></a>
           <a class="link" href="overload2.html#asio.reference.write.overload2.return_value">Return Value</a>
         </h6>
 <p>
           The number of bytes transferred.
         </p>
 <a name="asio.reference.write.overload2.exceptions"></a><h6>
-<a name="id1066923"></a>
+<a name="id963191"></a>
           <a class="link" href="overload2.html#asio.reference.write.overload2.exceptions">Exceptions</a>
         </h6>
 <div class="variablelist">
@@ -109,20 +109,19 @@
 </dl>
 </div>
 <a name="asio.reference.write.overload2.example"></a><h6>
-<a name="id1066961"></a>
+<a name="id963229"></a>
           <a class="link" href="overload2.html#asio.reference.write.overload2.example">Example</a>
         </h6>
 <p>
-          To write a single data buffer use the <a class="link" href="../buffer.html" title="buffer">buffer</a>
-          function as follows:
+          To write a single data buffer use the <a class="link" href="../buffer.html" title="buffer"><code class="computeroutput"><span class="identifier">buffer</span></code></a> function as follows:
         </p>
 <pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">write</span><span class="special">(</span><span class="identifier">s</span><span class="special">,</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">transfer_at_least</span><span class="special">(</span><span class="number">32</span><span class="special">));</span> 
 </pre>
 <p>
-          See the <a class="link" href="../buffer.html" title="buffer">buffer</a> documentation
-          for information on writing multiple buffers in one go, and how to use it
-          with arrays, boost::array or std::vector.
+          See the <a class="link" href="../buffer.html" title="buffer"><code class="computeroutput"><span class="identifier">buffer</span></code></a>
+          documentation for information on writing multiple buffers in one go, and
+          how to use it with arrays, boost::array or std::vector.
         </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

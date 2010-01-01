@@ -20,7 +20,8 @@
 <a name="asio.reference.ip__multicast__hops"></a><a class="link" href="ip__multicast__hops.html" title="ip::multicast::hops"> ip::multicast::hops</a>
 </h3></div></div></div>
 <p>
-        <a class="indexterm" name="id914245"></a> Socket option for time-to-live associated with outgoing
+        <a class="indexterm" name="id794768"></a> 
+Socket option for time-to-live associated with outgoing
         multicast packets.
       </p>
 <pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">implementation_defined</span> <span class="identifier">hops</span><span class="special">;</span>
@@ -29,7 +30,7 @@
         Implements the IPPROTO_IP/IP_MULTICAST_TTL socket option.
       </p>
 <a name="asio.reference.ip__multicast__hops.examples"></a><h5>
-<a name="id914291"></a>
+<a name="id794815"></a>
         <a class="link" href="ip__multicast__hops.html#asio.reference.ip__multicast__hops.examples">Examples</a>
       </h5>
 <p>
@@ -49,6 +50,16 @@
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">get_option</span><span class="special">(</span><span class="identifier">option</span><span class="special">);</span>
 <span class="keyword">int</span> <span class="identifier">ttl</span> <span class="special">=</span> <span class="identifier">option</span><span class="special">.</span><span class="identifier">value</span><span class="special">();</span>
 </pre>
+<a name="asio.reference.ip__multicast__hops.requirements"></a><h5>
+<a name="id795155"></a>
+        <a class="link" href="ip__multicast__hops.html#asio.reference.ip__multicast__hops.requirements">Requirements</a>
+      </h5>
+<p>
+        <span class="bold"><strong>Header: </strong></span><code class="literal">asio/ip/multicast.hpp</code>
+      </p>
+<p>
+        <span class="bold"><strong>Convenience header: </strong></span><code class="literal">asio.hpp</code>
+      </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

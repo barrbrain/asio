@@ -52,7 +52,7 @@
           </li>
 </ul></div>
 <a name="asio.reference.async_read_at.overload2.parameters"></a><h6>
-<a name="id646928"></a>
+<a name="id497436"></a>
           <a class="link" href="overload2.html#asio.reference.async_read_at.overload2.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -116,18 +116,17 @@
               Regardless of whether the asynchronous operation completes immediately
               or not, the handler will not be invoked from within this function.
               Invocation of the handler will be performed in a manner equivalent
-              to using asio::io_service::post().
+              to using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">post</span><span class="special">()</span></code>.
             </p>
 </dd>
 </dl>
 </div>
 <a name="asio.reference.async_read_at.overload2.example"></a><h6>
-<a name="id647236"></a>
+<a name="id497777"></a>
           <a class="link" href="overload2.html#asio.reference.async_read_at.overload2.example">Example</a>
         </h6>
 <p>
-          To read into a single data buffer use the <a class="link" href="../buffer.html" title="buffer">buffer</a>
-          function as follows:
+          To read into a single data buffer use the <a class="link" href="../buffer.html" title="buffer"><code class="computeroutput"><span class="identifier">buffer</span></code></a> function as follows:
         </p>
 <pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">async_read_at</span><span class="special">(</span><span class="identifier">d</span><span class="special">,</span> <span class="number">42</span><span class="special">,</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span>
@@ -135,9 +134,9 @@
     <span class="identifier">handler</span><span class="special">);</span> 
 </pre>
 <p>
-          See the <a class="link" href="../buffer.html" title="buffer">buffer</a> documentation
-          for information on reading into multiple buffers in one go, and how to
-          use it with arrays, boost::array or std::vector.
+          See the <a class="link" href="../buffer.html" title="buffer"><code class="computeroutput"><span class="identifier">buffer</span></code></a>
+          documentation for information on reading into multiple buffers in one go,
+          and how to use it with arrays, boost::array or std::vector.
         </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

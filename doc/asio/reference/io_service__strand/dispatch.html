@@ -20,7 +20,8 @@
 <a name="asio.reference.io_service__strand.dispatch"></a><a class="link" href="dispatch.html" title="io_service::strand::dispatch"> io_service::strand::dispatch</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id882077"></a> Request the strand to invoke the given handler.
+          <a class="indexterm" name="id758603"></a> 
+Request the strand to invoke the given handler.
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../Handler.html" title="Handlers">Handler</a><span class="special">&gt;</span>
@@ -39,12 +40,13 @@
         </p>
 <p>
           The strand's guarantee is in addition to the guarantee provided by the
-          underlying io_service. The io_service guarantees that the handler will
-          only be called in a thread in which the io_service's run member function
-          is currently being invoked.
+          underlying <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>.
+          The <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>
+          guarantees that the handler will only be called in a thread in which the
+          io_service's run member function is currently being invoked.
         </p>
 <a name="asio.reference.io_service__strand.dispatch.parameters"></a><h6>
-<a name="id882176"></a>
+<a name="id758732"></a>
           <a class="link" href="dispatch.html#asio.reference.io_service__strand.dispatch.parameters">Parameters</a>
         </h6>
 <div class="variablelist">

@@ -20,7 +20,8 @@
 <a name="asio.reference.ssl__stream.async_read_some"></a><a class="link" href="async_read_some.html" title="ssl::stream::async_read_some"> ssl::stream::async_read_some</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id1020501"></a> Start an asynchronous read.
+          <a class="indexterm" name="id911224"></a> 
+Start an asynchronous read.
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../MutableBufferSequence.html" title="Mutable buffer sequence requirements">MutableBufferSequence</a><span class="special">,</span>
@@ -34,7 +35,7 @@
           from the stream. The function call always returns immediately.
         </p>
 <a name="asio.reference.ssl__stream.async_read_some.parameters"></a><h6>
-<a name="id1020633"></a>
+<a name="id911355"></a>
           <a class="link" href="async_read_some.html#asio.reference.ssl__stream.async_read_some.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -65,14 +66,14 @@
 </dl>
 </div>
 <a name="asio.reference.ssl__stream.async_read_some.remarks"></a><h6>
-<a name="id1020780"></a>
+<a name="id911502"></a>
           <a class="link" href="async_read_some.html#asio.reference.ssl__stream.async_read_some.remarks">Remarks</a>
         </h6>
 <p>
           The async_read_some operation may not read all of the requested number
-          of bytes. Consider using the <a class="link" href="../async_read.html" title="async_read">async_read</a>
-          function if you need to ensure that the requested amount of data is read
-          before the asynchronous operation completes.
+          of bytes. Consider using the <a class="link" href="../async_read.html" title="async_read"><code class="computeroutput"><span class="identifier">async_read</span></code></a> function if you need
+          to ensure that the requested amount of data is read before the asynchronous
+          operation completes.
         </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

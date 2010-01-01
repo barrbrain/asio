@@ -29,10 +29,10 @@
 <p>
             This function is used to close the socket. Any asynchronous send, receive
             or connect operations will be cancelled immediately, and will complete
-            with the asio::error::operation_aborted error.
+            with the <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error</span><span class="special">::</span><span class="identifier">operation_aborted</span></code> error.
           </p>
 <a name="asio.reference.basic_socket.close.overload2.parameters"></a><h6>
-<a name="id746839"></a>
+<a name="id607190"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket.close.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -45,7 +45,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_socket.close.overload2.example"></a><h6>
-<a name="id746876"></a>
+<a name="id607227"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket.close.overload2.example">Example</a>
           </h6>
 <pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span> <span class="identifier">socket</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">);</span>
@@ -58,12 +58,12 @@
 </span><span class="special">}</span>
 </pre>
 <a name="asio.reference.basic_socket.close.overload2.remarks"></a><h6>
-<a name="id747046"></a>
+<a name="id607398"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket.close.overload2.remarks">Remarks</a>
           </h6>
 <p>
             For portable behaviour with respect to graceful closure of a connected
-            socket, call shutdown() before closing the socket.
+            socket, call <code class="computeroutput"><span class="identifier">shutdown</span><span class="special">()</span></code> before closing the socket.
           </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

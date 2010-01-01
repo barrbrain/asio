@@ -20,7 +20,8 @@
 <a name="asio.reference.basic_deadline_timer.async_wait"></a><a class="link" href="async_wait.html" title="basic_deadline_timer::async_wait"> basic_deadline_timer::async_wait</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id693114"></a> Start an asynchronous wait on the timer.
+          <a class="indexterm" name="id547503"></a> 
+Start an asynchronous wait on the timer.
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../WaitHandler.html" title="Wait handler requirements">WaitHandler</a><span class="special">&gt;</span>
@@ -32,8 +33,8 @@
           timer. It always returns immediately.
         </p>
 <p>
-          For each call to async_wait(), the supplied handler will be called exactly
-          once. The handler will be called when:
+          For each call to <code class="computeroutput"><span class="identifier">async_wait</span><span class="special">()</span></code>, the supplied handler will be called
+          exactly once. The handler will be called when:
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
@@ -41,11 +42,11 @@
           </li>
 <li>
             The timer was cancelled, in which case the handler is passed the error
-            code asio::error::operation_aborted.
+            code <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error</span><span class="special">::</span><span class="identifier">operation_aborted</span></code>.
           </li>
 </ul></div>
 <a name="asio.reference.basic_deadline_timer.async_wait.parameters"></a><h6>
-<a name="id693218"></a>
+<a name="id547650"></a>
           <a class="link" href="async_wait.html#asio.reference.basic_deadline_timer.async_wait.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -66,7 +67,7 @@
               Regardless of whether the asynchronous operation completes immediately
               or not, the handler will not be invoked from within this function.
               Invocation of the handler will be performed in a manner equivalent
-              to using asio::io_service::post().
+              to using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">post</span><span class="special">()</span></code>.
             </p>
 </dd>
 </dl>

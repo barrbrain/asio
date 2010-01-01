@@ -30,7 +30,7 @@
   <span class="keyword">public</span> <span class="identifier">basic_io_object</span><span class="special">&lt;</span> <span class="identifier">TimerService</span> <span class="special">&gt;</span>
 </pre>
 <a name="asio.reference.basic_deadline_timer.types"></a><h5>
-<a name="id691753"></a>
+<a name="id545949"></a>
         <a class="link" href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.types">Types</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -114,7 +114,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.basic_deadline_timer.member_functions"></a><h5>
-<a name="id691943"></a>
+<a name="id546139"></a>
         <a class="link" href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.member_functions">Member
         Functions</a>
       </h5>
@@ -248,7 +248,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.basic_deadline_timer.protected_data_members"></a><h5>
-<a name="id692231"></a>
+<a name="id546428"></a>
         <a class="link" href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.protected_data_members">Protected
         Data Members</a>
       </h5>
@@ -297,14 +297,21 @@
 </tbody>
 </table></div>
 <p>
-        The basic_deadline_timer class template provides the ability to perform a
-        blocking or asynchronous wait for a timer to expire.
+        The <a class="link" href="basic_deadline_timer.html" title="basic_deadline_timer"><code class="computeroutput"><span class="identifier">basic_deadline_timer</span></code></a>
+        class template provides the ability to perform a blocking or asynchronous
+        wait for a timer to expire.
       </p>
 <p>
-        Most applications will use the asio::deadline_timer typedef.
+        A deadline timer is always in one of two states: "expired" or "not
+        expired". If the <code class="computeroutput"><span class="identifier">wait</span><span class="special">()</span></code> or <code class="computeroutput"><span class="identifier">async_wait</span><span class="special">()</span></code> function is called on an expired timer,
+        the wait operation will complete immediately.
+      </p>
+<p>
+        Most applications will use the <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">deadline_timer</span></code>
+        typedef.
       </p>
 <a name="asio.reference.basic_deadline_timer.thread_safety"></a><h5>
-<a name="id692349"></a>
+<a name="id546614"></a>
         <a class="link" href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.thread_safety">Thread
         Safety</a>
       </h5>
@@ -317,7 +324,7 @@
         Unsafe.
       </p>
 <a name="asio.reference.basic_deadline_timer.examples"></a><h5>
-<a name="id692399"></a>
+<a name="id546664"></a>
         <a class="link" href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.examples">Examples</a>
       </h5>
 <p>
@@ -353,7 +360,7 @@
 </span><span class="identifier">timer</span><span class="special">.</span><span class="identifier">async_wait</span><span class="special">(</span><span class="identifier">handler</span><span class="special">);</span>
 </pre>
 <a name="asio.reference.basic_deadline_timer.changing_an_active_deadline_timer_s_expiry_time"></a><h5>
-<a name="id692774"></a>
+<a name="id547040"></a>
         <a class="link" href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.changing_an_active_deadline_timer_s_expiry_time">Changing
         an active deadline_timer's expiry time</a>
       </h5>
@@ -386,17 +393,27 @@
 </pre>
 <div class="itemizedlist"><ul type="disc">
 <li>
-          The asio::basic_deadline_timer::expires_from_now() function cancels any
-          pending asynchronous waits, and returns the number of asynchronous waits
-          that were cancelled. If it returns 0 then you were too late and the wait
-          handler has already been executed, or will soon be executed. If it returns
-          1 then the wait handler was successfully cancelled.
+          The <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">basic_deadline_timer</span><span class="special">::</span><span class="identifier">expires_from_now</span><span class="special">()</span></code>
+          function cancels any pending asynchronous waits, and returns the number
+          of asynchronous waits that were cancelled. If it returns 0 then you were
+          too late and the wait handler has already been executed, or will soon be
+          executed. If it returns 1 then the wait handler was successfully cancelled.
         </li>
 <li>
-          If a wait handler is cancelled, the asio::error_code passed to it contains
-          the value asio::error::operation_aborted.
+          If a wait handler is cancelled, the <a class="link" href="error_code.html" title="error_code"><code class="computeroutput"><span class="identifier">error_code</span></code></a> passed to it contains
+          the value <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error</span><span class="special">::</span><span class="identifier">operation_aborted</span></code>.
         </li>
 </ul></div>
+<a name="asio.reference.basic_deadline_timer.requirements"></a><h5>
+<a name="id547445"></a>
+        <a class="link" href="basic_deadline_timer.html#asio.reference.basic_deadline_timer.requirements">Requirements</a>
+      </h5>
+<p>
+        <span class="bold"><strong>Header: </strong></span><code class="literal">asio/basic_deadline_timer.hpp</code>
+      </p>
+<p>
+        <span class="bold"><strong>Convenience header: </strong></span><code class="literal">asio.hpp</code>
+      </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

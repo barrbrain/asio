@@ -25,6 +25,42 @@
         A value <code class="computeroutput"><span class="identifier">h</span></code> of a completion
         handler class should work correctly in the expression <code class="computeroutput"><span class="identifier">h</span><span class="special">()</span></code>.
       </p>
+<a name="asio.reference.CompletionHandler.examples"></a><h5>
+<a name="id446969"></a>
+        <a class="link" href="CompletionHandler.html#asio.reference.CompletionHandler.examples">Examples</a>
+      </h5>
+<p>
+        A free function as a completion handler:
+      </p>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">completion_handler</span><span class="special">()</span>
+<span class="special">{</span>
+  <span class="special">...</span>
+<span class="special">}</span>
+</pre>
+<p>
+        A completion handler function object:
+      </p>
+<pre class="programlisting"><span class="keyword">struct</span> <span class="identifier">completion_handler</span>
+<span class="special">{</span>
+  <span class="special">...</span>
+  <span class="keyword">void</span> <span class="keyword">operator</span><span class="special">()()</span>
+  <span class="special">{</span>
+    <span class="special">...</span>
+  <span class="special">}</span>
+  <span class="special">...</span>
+<span class="special">};</span>
+</pre>
+<p>
+        A non-static class member function adapted to a completion handler using
+        <code class="computeroutput"><span class="identifier">bind</span><span class="special">()</span></code>:
+      </p>
+<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">my_class</span><span class="special">::</span><span class="identifier">completion_handler</span><span class="special">()</span>
+<span class="special">{</span>
+  <span class="special">...</span>
+<span class="special">}</span>
+<span class="special">...</span>
+<span class="identifier">my_io_service</span><span class="special">.</span><span class="identifier">post</span><span class="special">(</span><span class="identifier">boost</span><span class="special">::</span><span class="identifier">bind</span><span class="special">(&amp;</span><span class="identifier">my_class</span><span class="special">::</span><span class="identifier">completion_handler</span><span class="special">,</span> <span class="keyword">this</span><span class="special">));</span>
+</pre>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

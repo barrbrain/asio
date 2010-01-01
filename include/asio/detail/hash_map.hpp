@@ -214,6 +214,9 @@ private:
   // Re-initialise the hash from the values already contained in the list.
   void rehash(std::size_t num_buckets)
   {
+    if (num_buckets == buckets_.size())
+      return;
+
     iterator end = values_.end();
 
     // Update number of buckets and initialise all buckets to empty.
@@ -230,9 +233,13 @@ private:
       {
         buckets_[bucket].first = buckets_[bucket].last = iter++;
       }
+      else if (++buckets_[bucket].last == iter)
+      {
+        ++iter;
+      }
       else
       {
-        values_.splice(++buckets_[bucket].last, values_, iter++);
+        values_.splice(buckets_[bucket].last, values_, iter++);
         --buckets_[bucket].last;
       }
     }
@@ -274,6 +281,8 @@ private:
   // The type for a bucket in the hash table.
   struct bucket_type
   {
+    bucket_type() {}
+    bucket_type(const bucket_type&) { /* noop */ }
     iterator first;
     iterator last;
   };

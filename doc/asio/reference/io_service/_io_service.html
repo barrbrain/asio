@@ -20,10 +20,59 @@
 <a name="asio.reference.io_service._io_service"></a><a class="link" href="_io_service.html" title="io_service::~io_service"> io_service::~io_service</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id880967"></a> Destructor.
+          <a class="indexterm" name="id756933"></a> 
+Destructor.
         </p>
 <pre class="programlisting"><span class="special">~</span><span class="identifier">io_service</span><span class="special">();</span>
 </pre>
+<p>
+          On destruction, the <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> performs the following
+          sequence of operations:
+        </p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+            For each service object <code class="computeroutput"><span class="identifier">svc</span></code>
+            in the <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>
+            set, in reverse order of the beginning of service object lifetime, performs
+            <code class="computeroutput"><span class="identifier">svc</span><span class="special">-&gt;</span><span class="identifier">shutdown_service</span><span class="special">()</span></code>.
+          </li>
+<li>
+            Uninvoked handler objects that were scheduled for deferred invocation
+            on the <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>,
+            or any associated strand, are destroyed.
+          </li>
+<li>
+            For each service object <code class="computeroutput"><span class="identifier">svc</span></code>
+            in the <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>
+            set, in reverse order of the beginning of service object lifetime, performs
+            <code class="computeroutput"><span class="keyword">delete</span> <span class="keyword">static_cast</span><span class="special">&lt;</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">service</span><span class="special">*&gt;(</span><span class="identifier">svc</span><span class="special">)</span></code>.
+          </li>
+</ul></div>
+<a name="asio.reference.io_service._io_service.remarks"></a><h6>
+<a name="id757143"></a>
+          <a class="link" href="_io_service.html#asio.reference.io_service._io_service.remarks">Remarks</a>
+        </h6>
+<p>
+          The destruction sequence described above permits programs to simplify their
+          resource management by using <code class="computeroutput"><span class="identifier">shared_ptr</span><span class="special">&lt;&gt;</span></code>. Where an object's lifetime is
+          tied to the lifetime of a connection (or some other sequence of asynchronous
+          operations), a <code class="computeroutput"><span class="identifier">shared_ptr</span></code>
+          to the object would be bound into the handlers for all asynchronous operations
+          associated with it. This works as follows:
+        </p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+            When a single connection ends, all associated asynchronous operations
+            complete. The corresponding handler objects are destroyed, and all <code class="computeroutput"><span class="identifier">shared_ptr</span></code> references to the objects
+            are destroyed.
+          </li>
+<li>
+            To shut down the whole program, the <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> function <code class="computeroutput"><span class="identifier">stop</span><span class="special">()</span></code>
+            is called to terminate any <code class="computeroutput"><span class="identifier">run</span><span class="special">()</span></code> calls as soon as possible. The <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>
+            destructor defined above destroys all handlers, causing all <code class="computeroutput"><span class="identifier">shared_ptr</span></code> references to all connection
+            objects to be destroyed.
+          </li>
+</ul></div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

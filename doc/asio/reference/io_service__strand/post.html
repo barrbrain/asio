@@ -20,7 +20,8 @@
 <a name="asio.reference.io_service__strand.post"></a><a class="link" href="post.html" title="io_service::strand::post"> io_service::strand::post</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id882436"></a> Request the strand to invoke the given handler and
+          <a class="indexterm" name="id759096"></a> 
+Request the strand to invoke the given handler and
           return immediately.
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
@@ -35,12 +36,12 @@
 <p>
           The strand object guarantees that handlers posted or dispatched through
           the strand will not be executed concurrently. The strand's guarantee is
-          in addition to the guarantee provided by the underlying io_service. The
-          io_service guarantees that the handler will only be called in a thread
-          in which the io_service's run member function is currently being invoked.
+          in addition to the guarantee provided by the underlying <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>. The <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> guarantees that the
+          handler will only be called in a thread in which the io_service's run member
+          function is currently being invoked.
         </p>
 <a name="asio.reference.io_service__strand.post.parameters"></a><h6>
-<a name="id882530"></a>
+<a name="id759220"></a>
           <a class="link" href="post.html#asio.reference.io_service__strand.post.parameters">Parameters</a>
         </h6>
 <div class="variablelist">

@@ -20,15 +20,22 @@
 <a name="asio.reference.io_service.stop"></a><a class="link" href="stop.html" title="io_service::stop"> io_service::stop</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id880280"></a> Stop the io_service's event processing loop.
+          <a class="indexterm" name="id755976"></a> 
+Stop the <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> object's event processing
+          loop.
         </p>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">stop</span><span class="special">();</span>
 </pre>
 <p>
-          This function does not block, but instead simply signals the io_service
-          to stop. All invocations of its run() or run_one() member functions should
-          return as soon as possible. Subsequent calls to run(), run_one(), poll()
-          or poll_one() will return immediately until reset() is called.
+          This function does not block, but instead simply signals the <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> to stop. All invocations
+          of its <code class="computeroutput"><span class="identifier">run</span><span class="special">()</span></code>
+          or <code class="computeroutput"><span class="identifier">run_one</span><span class="special">()</span></code>
+          member functions should return as soon as possible. Subsequent calls to
+          <code class="computeroutput"><span class="identifier">run</span><span class="special">()</span></code>,
+          <code class="computeroutput"><span class="identifier">run_one</span><span class="special">()</span></code>,
+          <code class="computeroutput"><span class="identifier">poll</span><span class="special">()</span></code>
+          or <code class="computeroutput"><span class="identifier">poll_one</span><span class="special">()</span></code>
+          will return immediately until <code class="computeroutput"><span class="identifier">reset</span><span class="special">()</span></code> is called.
         </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

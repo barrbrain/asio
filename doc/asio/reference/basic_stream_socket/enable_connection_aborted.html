@@ -24,18 +24,19 @@
           <span class="emphasis"><em>Inherited from socket_base.</em></span>
         </p>
 <p>
-          <a class="indexterm" name="id816056"></a> Socket option to report aborted
+          <a class="indexterm" name="id682548"></a> 
+Socket option to report aborted
           connections on accept.
         </p>
 <pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">implementation_defined</span> <span class="identifier">enable_connection_aborted</span><span class="special">;</span>
 </pre>
 <p>
           Implements a custom socket option that determines whether or not an accept
-          operation is permitted to fail with asio::error::connection_aborted. By
-          default the option is false.
+          operation is permitted to fail with <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error</span><span class="special">::</span><span class="identifier">connection_aborted</span></code>.
+          By default the option is false.
         </p>
 <a name="asio.reference.basic_stream_socket.enable_connection_aborted.examples"></a><h6>
-<a name="id816106"></a>
+<a name="id682627"></a>
           <a class="link" href="enable_connection_aborted.html#asio.reference.basic_stream_socket.enable_connection_aborted.examples">Examples</a>
         </h6>
 <p>
@@ -55,6 +56,16 @@
 <span class="identifier">acceptor</span><span class="special">.</span><span class="identifier">get_option</span><span class="special">(</span><span class="identifier">option</span><span class="special">);</span>
 <span class="keyword">bool</span> <span class="identifier">is_set</span> <span class="special">=</span> <span class="identifier">option</span><span class="special">.</span><span class="identifier">value</span><span class="special">();</span>
 </pre>
+<a name="asio.reference.basic_stream_socket.enable_connection_aborted.requirements"></a><h6>
+<a name="id682950"></a>
+          <a class="link" href="enable_connection_aborted.html#asio.reference.basic_stream_socket.enable_connection_aborted.requirements">Requirements</a>
+        </h6>
+<p>
+          <span class="bold"><strong>Header: </strong></span><code class="literal">asio/basic_stream_socket.hpp</code>
+        </p>
+<p>
+          <span class="bold"><strong>Convenience header: </strong></span><code class="literal">asio.hpp</code>
+        </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

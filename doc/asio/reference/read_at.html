@@ -20,7 +20,8 @@
 <a name="asio.reference.read_at"></a><a class="link" href="read_at.html" title="read_at"> read_at</a>
 </h3></div></div></div>
 <p>
-        <a class="indexterm" name="id976738"></a> Attempt to read a certain amount of data at the specified offset before
+        <a class="indexterm" name="id864001"></a> 
+Attempt to read a certain amount of data at the specified offset before
         returning.
       </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
@@ -30,6 +31,7 @@
     <span class="identifier">SyncRandomAccessReadDevice</span> <span class="special">&amp;</span> <span class="identifier">d</span><span class="special">,</span>
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">uint64_t</span> <span class="identifier">offset</span><span class="special">,</span>
     <span class="keyword">const</span> <span class="identifier">MutableBufferSequence</span> <span class="special">&amp;</span> <span class="identifier">buffers</span><span class="special">);</span>
+  <span class="emphasis"><em>» <a class="link" href="read_at/overload1.html" title="read_at (1 of 6 overloads)">more...</a></em></span>
 
 <span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="SyncRandomAccessReadDevice.html" title="Buffer-oriented synchronous random-access read device requirements">SyncRandomAccessReadDevice</a><span class="special">,</span>
@@ -40,6 +42,7 @@
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">uint64_t</span> <span class="identifier">offset</span><span class="special">,</span>
     <span class="keyword">const</span> <span class="identifier">MutableBufferSequence</span> <span class="special">&amp;</span> <span class="identifier">buffers</span><span class="special">,</span>
     <span class="identifier">CompletionCondition</span> <span class="identifier">completion_condition</span><span class="special">);</span>
+  <span class="emphasis"><em>» <a class="link" href="read_at/overload2.html" title="read_at (2 of 6 overloads)">more...</a></em></span>
 
 <span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="SyncRandomAccessReadDevice.html" title="Buffer-oriented synchronous random-access read device requirements">SyncRandomAccessReadDevice</a><span class="special">,</span>
@@ -51,6 +54,7 @@
     <span class="keyword">const</span> <span class="identifier">MutableBufferSequence</span> <span class="special">&amp;</span> <span class="identifier">buffers</span><span class="special">,</span>
     <span class="identifier">CompletionCondition</span> <span class="identifier">completion_condition</span><span class="special">,</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">);</span>
+  <span class="emphasis"><em>» <a class="link" href="read_at/overload3.html" title="read_at (3 of 6 overloads)">more...</a></em></span>
 
 <span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="SyncRandomAccessReadDevice.html" title="Buffer-oriented synchronous random-access read device requirements">SyncRandomAccessReadDevice</a><span class="special">,</span>
@@ -59,6 +63,7 @@
     <span class="identifier">SyncRandomAccessReadDevice</span> <span class="special">&amp;</span> <span class="identifier">d</span><span class="special">,</span>
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">uint64_t</span> <span class="identifier">offset</span><span class="special">,</span>
     <span class="identifier">basic_streambuf</span><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">b</span><span class="special">);</span>
+  <span class="emphasis"><em>» <a class="link" href="read_at/overload4.html" title="read_at (4 of 6 overloads)">more...</a></em></span>
 
 <span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="SyncRandomAccessReadDevice.html" title="Buffer-oriented synchronous random-access read device requirements">SyncRandomAccessReadDevice</a><span class="special">,</span>
@@ -69,6 +74,7 @@
     <span class="identifier">boost</span><span class="special">::</span><span class="identifier">uint64_t</span> <span class="identifier">offset</span><span class="special">,</span>
     <span class="identifier">basic_streambuf</span><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">b</span><span class="special">,</span>
     <span class="identifier">CompletionCondition</span> <span class="identifier">completion_condition</span><span class="special">);</span>
+  <span class="emphasis"><em>» <a class="link" href="read_at/overload5.html" title="read_at (5 of 6 overloads)">more...</a></em></span>
 
 <span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="SyncRandomAccessReadDevice.html" title="Buffer-oriented synchronous random-access read device requirements">SyncRandomAccessReadDevice</a><span class="special">,</span>
@@ -80,7 +86,18 @@
     <span class="identifier">basic_streambuf</span><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">b</span><span class="special">,</span>
     <span class="identifier">CompletionCondition</span> <span class="identifier">completion_condition</span><span class="special">,</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">);</span>
+  <span class="emphasis"><em>» <a class="link" href="read_at/overload6.html" title="read_at (6 of 6 overloads)">more...</a></em></span>
 </pre>
+<a name="asio.reference.read_at.requirements"></a><h5>
+<a name="id865168"></a>
+        <a class="link" href="read_at.html#asio.reference.read_at.requirements">Requirements</a>
+      </h5>
+<p>
+        <span class="bold"><strong>Header: </strong></span><code class="literal">asio/read_at.hpp</code>
+      </p>
+<p>
+        <span class="bold"><strong>Convenience header: </strong></span><code class="literal">asio.hpp</code>
+      </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

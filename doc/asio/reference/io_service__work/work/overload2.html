@@ -21,15 +21,15 @@
           io_service::work::work (2 of 2 overloads)</a>
 </h5></div></div></div>
 <p>
-            Copy constructor notifies the io_service that work is starting.
+            Copy constructor notifies the <a class="link" href="../../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> that work is starting.
           </p>
 <pre class="programlisting"><span class="identifier">work</span><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">work</span> <span class="special">&amp;</span> <span class="identifier">other</span><span class="special">);</span>
 </pre>
 <p>
-            The constructor is used to inform the io_service that some work has begun.
-            This ensures that the io_service's run() function will not exit while
-            the work is underway.
+            The constructor is used to inform the <a class="link" href="../../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> that some work has
+            begun. This ensures that the <a class="link" href="../../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> object's <code class="computeroutput"><span class="identifier">run</span><span class="special">()</span></code>
+            function will not exit while the work is underway.
           </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

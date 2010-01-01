@@ -30,18 +30,19 @@
     <span class="keyword">const</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span> <span class="identifier">PodType</span><span class="special">,</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">data</span><span class="special">);</span>
 </pre>
 <a name="asio.reference.buffer.overload19.return_value"></a><h6>
-<a name="id844861"></a>
+<a name="id713742"></a>
           <a class="link" href="overload19.html#asio.reference.buffer.overload19.return_value">Return Value</a>
         </h6>
 <p>
-          A const_buffers_1 value equivalent to:
+          A <a class="link" href="../const_buffers_1.html" title="const_buffers_1"><code class="computeroutput"><span class="identifier">const_buffers_1</span></code></a>
+          value equivalent to:
         </p>
 <pre class="programlisting"><span class="identifier">const_buffers_1</span><span class="special">(</span>
     <span class="identifier">data</span><span class="special">.</span><span class="identifier">size</span><span class="special">()</span> <span class="special">?</span> <span class="special">&amp;</span><span class="identifier">data</span><span class="special">[</span><span class="number">0</span><span class="special">]</span> <span class="special">:</span> <span class="number">0</span><span class="special">,</span>
     <span class="identifier">data</span><span class="special">.</span><span class="identifier">size</span><span class="special">()</span> <span class="special">*</span> <span class="keyword">sizeof</span><span class="special">(</span><span class="identifier">PodType</span><span class="special">));</span> 
 </pre>
 <a name="asio.reference.buffer.overload19.remarks"></a><h6>
-<a name="id845008"></a>
+<a name="id713904"></a>
           <a class="link" href="overload19.html#asio.reference.buffer.overload19.remarks">Remarks</a>
         </h6>
 <p>

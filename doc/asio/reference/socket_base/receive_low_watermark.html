@@ -21,7 +21,8 @@
         socket_base::receive_low_watermark</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id1003631"></a> Socket option for the receive low watermark.
+          <a class="indexterm" name="id892830"></a> 
+Socket option for the receive low watermark.
         </p>
 <pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">implementation_defined</span> <span class="identifier">receive_low_watermark</span><span class="special">;</span>
 </pre>
@@ -29,7 +30,7 @@
           Implements the SOL_SOCKET/SO_RCVLOWAT socket option.
         </p>
 <a name="asio.reference.socket_base.receive_low_watermark.examples"></a><h6>
-<a name="id1003680"></a>
+<a name="id892878"></a>
           <a class="link" href="receive_low_watermark.html#asio.reference.socket_base.receive_low_watermark.examples">Examples</a>
         </h6>
 <p>
@@ -49,6 +50,16 @@
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">get_option</span><span class="special">(</span><span class="identifier">option</span><span class="special">);</span>
 <span class="keyword">int</span> <span class="identifier">size</span> <span class="special">=</span> <span class="identifier">option</span><span class="special">.</span><span class="identifier">value</span><span class="special">();</span>
 </pre>
+<a name="asio.reference.socket_base.receive_low_watermark.requirements"></a><h6>
+<a name="id893200"></a>
+          <a class="link" href="receive_low_watermark.html#asio.reference.socket_base.receive_low_watermark.requirements">Requirements</a>
+        </h6>
+<p>
+          <span class="bold"><strong>Header: </strong></span><code class="literal">asio/socket_base.hpp</code>
+        </p>
+<p>
+          <span class="bold"><strong>Convenience header: </strong></span><code class="literal">asio.hpp</code>
+        </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

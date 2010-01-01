@@ -20,7 +20,8 @@
 <a name="asio.reference.ssl__stream.async_write_some"></a><a class="link" href="async_write_some.html" title="ssl::stream::async_write_some"> ssl::stream::async_write_some</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id1021024"></a> Start an asynchronous write.
+          <a class="indexterm" name="id911754"></a> 
+Start an asynchronous write.
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../ConstBufferSequence.html" title="Constant buffer sequence requirements">ConstBufferSequence</a><span class="special">,</span>
@@ -34,7 +35,7 @@
           to the stream. The function call always returns immediately.
         </p>
 <a name="asio.reference.ssl__stream.async_write_some.parameters"></a><h6>
-<a name="id1021156"></a>
+<a name="id911886"></a>
           <a class="link" href="async_write_some.html#asio.reference.ssl__stream.async_write_some.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -65,14 +66,13 @@
 </dl>
 </div>
 <a name="asio.reference.ssl__stream.async_write_some.remarks"></a><h6>
-<a name="id1021303"></a>
+<a name="id912033"></a>
           <a class="link" href="async_write_some.html#asio.reference.ssl__stream.async_write_some.remarks">Remarks</a>
         </h6>
 <p>
           The async_write_some operation may not transmit all of the data to the
-          peer. Consider using the <a class="link" href="../async_write.html" title="async_write">async_write</a>
-          function if you need to ensure that all data is written before the blocking
-          operation completes.
+          peer. Consider using the <a class="link" href="../async_write.html" title="async_write"><code class="computeroutput"><span class="identifier">async_write</span></code></a> function if you need
+          to ensure that all data is written before the blocking operation completes.
         </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

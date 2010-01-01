@@ -53,7 +53,7 @@
           read_some_at function.
         </p>
 <a name="asio.reference.read_at.overload2.parameters"></a><h6>
-<a name="id978609"></a>
+<a name="id865990"></a>
           <a class="link" href="overload2.html#asio.reference.read_at.overload2.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -97,14 +97,14 @@
 </dl>
 </div>
 <a name="asio.reference.read_at.overload2.return_value"></a><h6>
-<a name="id978793"></a>
+<a name="id866174"></a>
           <a class="link" href="overload2.html#asio.reference.read_at.overload2.return_value">Return Value</a>
         </h6>
 <p>
           The number of bytes transferred.
         </p>
 <a name="asio.reference.read_at.overload2.exceptions"></a><h6>
-<a name="id978816"></a>
+<a name="id866199"></a>
           <a class="link" href="overload2.html#asio.reference.read_at.overload2.exceptions">Exceptions</a>
         </h6>
 <div class="variablelist">
@@ -117,20 +117,19 @@
 </dl>
 </div>
 <a name="asio.reference.read_at.overload2.example"></a><h6>
-<a name="id978854"></a>
+<a name="id866236"></a>
           <a class="link" href="overload2.html#asio.reference.read_at.overload2.example">Example</a>
         </h6>
 <p>
-          To read into a single data buffer use the <a class="link" href="../buffer.html" title="buffer">buffer</a>
-          function as follows:
+          To read into a single data buffer use the <a class="link" href="../buffer.html" title="buffer"><code class="computeroutput"><span class="identifier">buffer</span></code></a> function as follows:
         </p>
 <pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">read_at</span><span class="special">(</span><span class="identifier">d</span><span class="special">,</span> <span class="number">42</span><span class="special">,</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">transfer_at_least</span><span class="special">(</span><span class="number">32</span><span class="special">));</span> 
 </pre>
 <p>
-          See the <a class="link" href="../buffer.html" title="buffer">buffer</a> documentation
-          for information on reading into multiple buffers in one go, and how to
-          use it with arrays, boost::array or std::vector.
+          See the <a class="link" href="../buffer.html" title="buffer"><code class="computeroutput"><span class="identifier">buffer</span></code></a>
+          documentation for information on reading into multiple buffers in one go,
+          and how to use it with arrays, boost::array or std::vector.
         </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

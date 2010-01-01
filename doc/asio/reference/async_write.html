@@ -20,7 +20,8 @@
 <a name="asio.reference.async_write"></a><a class="link" href="async_write.html" title="async_write"> async_write</a>
 </h3></div></div></div>
 <p>
-        <a class="indexterm" name="id653749"></a> Start an asynchronous operation to write a certain amount of data
+        <a class="indexterm" name="id504685"></a> 
+Start an asynchronous operation to write a certain amount of data
         to a stream.
       </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
@@ -31,6 +32,7 @@
     <span class="identifier">AsyncWriteStream</span> <span class="special">&amp;</span> <span class="identifier">s</span><span class="special">,</span>
     <span class="keyword">const</span> <span class="identifier">ConstBufferSequence</span> <span class="special">&amp;</span> <span class="identifier">buffers</span><span class="special">,</span>
     <span class="identifier">WriteHandler</span> <span class="identifier">handler</span><span class="special">);</span>
+  <span class="emphasis"><em>» <a class="link" href="async_write/overload1.html" title="async_write (1 of 4 overloads)">more...</a></em></span>
 
 <span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="AsyncWriteStream.html" title="Buffer-oriented asynchronous write stream requirements">AsyncWriteStream</a><span class="special">,</span>
@@ -42,6 +44,7 @@
     <span class="keyword">const</span> <span class="identifier">ConstBufferSequence</span> <span class="special">&amp;</span> <span class="identifier">buffers</span><span class="special">,</span>
     <span class="identifier">CompletionCondition</span> <span class="identifier">completion_condition</span><span class="special">,</span>
     <span class="identifier">WriteHandler</span> <span class="identifier">handler</span><span class="special">);</span>
+  <span class="emphasis"><em>» <a class="link" href="async_write/overload2.html" title="async_write (2 of 4 overloads)">more...</a></em></span>
 
 <span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="AsyncWriteStream.html" title="Buffer-oriented asynchronous write stream requirements">AsyncWriteStream</a><span class="special">,</span>
@@ -51,6 +54,7 @@
     <span class="identifier">AsyncWriteStream</span> <span class="special">&amp;</span> <span class="identifier">s</span><span class="special">,</span>
     <span class="identifier">basic_streambuf</span><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">b</span><span class="special">,</span>
     <span class="identifier">WriteHandler</span> <span class="identifier">handler</span><span class="special">);</span>
+  <span class="emphasis"><em>» <a class="link" href="async_write/overload3.html" title="async_write (3 of 4 overloads)">more...</a></em></span>
 
 <span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="AsyncWriteStream.html" title="Buffer-oriented asynchronous write stream requirements">AsyncWriteStream</a><span class="special">,</span>
@@ -62,7 +66,18 @@
     <span class="identifier">basic_streambuf</span><span class="special">&lt;</span> <span class="identifier">Allocator</span> <span class="special">&gt;</span> <span class="special">&amp;</span> <span class="identifier">b</span><span class="special">,</span>
     <span class="identifier">CompletionCondition</span> <span class="identifier">completion_condition</span><span class="special">,</span>
     <span class="identifier">WriteHandler</span> <span class="identifier">handler</span><span class="special">);</span>
+  <span class="emphasis"><em>» <a class="link" href="async_write/overload4.html" title="async_write (4 of 4 overloads)">more...</a></em></span>
 </pre>
+<a name="asio.reference.async_write.requirements"></a><h5>
+<a name="id505402"></a>
+        <a class="link" href="async_write.html#asio.reference.async_write.requirements">Requirements</a>
+      </h5>
+<p>
+        <span class="bold"><strong>Header: </strong></span><code class="literal">asio/write.hpp</code>
+      </p>
+<p>
+        <span class="bold"><strong>Convenience header: </strong></span><code class="literal">asio.hpp</code>
+      </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

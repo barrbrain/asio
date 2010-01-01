@@ -26,7 +26,7 @@
   <span class="identifier">noncopyable</span>
 </pre>
 <a name="asio.reference.thread.member_functions"></a><h5>
-<a name="id1036836"></a>
+<a name="id928869"></a>
         <a class="link" href="thread.html#asio.reference.thread.member_functions">Member Functions</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -86,14 +86,14 @@
 </tbody>
 </table></div>
 <p>
-        The <a class="link" href="thread.html" title="thread">thread</a> class implements
-        the smallest possible subset of the functionality of boost::thread. It is
-        intended to be used only for starting a thread and waiting for it to exit.
-        If more extensive threading capabilities are required, you are strongly advised
-        to use something else.
+        The <a class="link" href="thread.html" title="thread"><code class="computeroutput"><span class="identifier">thread</span></code></a>
+        class implements the smallest possible subset of the functionality of boost::thread.
+        It is intended to be used only for starting a thread and waiting for it to
+        exit. If more extensive threading capabilities are required, you are strongly
+        advised to use something else.
       </p>
 <a name="asio.reference.thread.thread_safety"></a><h5>
-<a name="id1036982"></a>
+<a name="id929024"></a>
         <a class="link" href="thread.html#asio.reference.thread.thread_safety">Thread Safety</a>
       </h5>
 <p>
@@ -105,12 +105,12 @@
         Unsafe.
       </p>
 <a name="asio.reference.thread.example"></a><h5>
-<a name="id1037032"></a>
+<a name="id929074"></a>
         <a class="link" href="thread.html#asio.reference.thread.example">Example</a>
       </h5>
 <p>
-        A typical use of <a class="link" href="thread.html" title="thread">thread</a> would
-        be to launch a thread to run an io_service's event processing loop:
+        A typical use of <a class="link" href="thread.html" title="thread"><code class="computeroutput"><span class="identifier">thread</span></code></a>
+        would be to launch a thread to run an io_service's event processing loop:
       </p>
 <pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span> <span class="identifier">io_service</span><span class="special">;</span>
 <span class="comment">// ...
@@ -118,6 +118,16 @@
 <span class="comment">// ...
 </span><span class="identifier">t</span><span class="special">.</span><span class="identifier">join</span><span class="special">();</span> 
 </pre>
+<a name="asio.reference.thread.requirements"></a><h5>
+<a name="id929256"></a>
+        <a class="link" href="thread.html#asio.reference.thread.requirements">Requirements</a>
+      </h5>
+<p>
+        <span class="bold"><strong>Header: </strong></span><code class="literal">asio/thread.hpp</code>
+      </p>
+<p>
+        <span class="bold"><strong>Convenience header: </strong></span><code class="literal">asio.hpp</code>
+      </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

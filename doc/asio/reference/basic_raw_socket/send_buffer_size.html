@@ -24,7 +24,8 @@
           <span class="emphasis"><em>Inherited from socket_base.</em></span>
         </p>
 <p>
-          <a class="indexterm" name="id725914"></a> Socket option for the send buffer size
+          <a class="indexterm" name="id584076"></a> 
+Socket option for the send buffer size
           of a socket.
         </p>
 <pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">implementation_defined</span> <span class="identifier">send_buffer_size</span><span class="special">;</span>
@@ -33,7 +34,7 @@
           Implements the SOL_SOCKET/SO_SNDBUF socket option.
         </p>
 <a name="asio.reference.basic_raw_socket.send_buffer_size.examples"></a><h6>
-<a name="id725963"></a>
+<a name="id584125"></a>
           <a class="link" href="send_buffer_size.html#asio.reference.basic_raw_socket.send_buffer_size.examples">Examples</a>
         </h6>
 <p>
@@ -53,6 +54,16 @@
 <span class="identifier">socket</span><span class="special">.</span><span class="identifier">get_option</span><span class="special">(</span><span class="identifier">option</span><span class="special">);</span>
 <span class="keyword">int</span> <span class="identifier">size</span> <span class="special">=</span> <span class="identifier">option</span><span class="special">.</span><span class="identifier">value</span><span class="special">();</span>
 </pre>
+<a name="asio.reference.basic_raw_socket.send_buffer_size.requirements"></a><h6>
+<a name="id584447"></a>
+          <a class="link" href="send_buffer_size.html#asio.reference.basic_raw_socket.send_buffer_size.requirements">Requirements</a>
+        </h6>
+<p>
+          <span class="bold"><strong>Header: </strong></span><code class="literal">asio/basic_raw_socket.hpp</code>
+        </p>
+<p>
+          <span class="bold"><strong>Convenience header: </strong></span><code class="literal">asio.hpp</code>
+        </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

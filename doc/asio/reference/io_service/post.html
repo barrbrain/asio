@@ -20,8 +20,9 @@
 <a name="asio.reference.io_service.post"></a><a class="link" href="post.html" title="io_service::post"> io_service::post</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id879226"></a> Request the io_service to invoke the given handler and return
-          immediately.
+          <a class="indexterm" name="id753998"></a> 
+Request the <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> to invoke the given
+          handler and return immediately.
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
     <span class="keyword">typename</span> <a class="link" href="../CompletionHandler.html" title="Completion handler requirements">CompletionHandler</a><span class="special">&gt;</span>
@@ -29,17 +30,21 @@
     <span class="identifier">CompletionHandler</span> <span class="identifier">handler</span><span class="special">);</span>
 </pre>
 <p>
-          This function is used to ask the io_service to execute the given handler,
-          but without allowing the io_service to call the handler from inside this
-          function.
+          This function is used to ask the <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> to execute the given
+          handler, but without allowing the <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> to call the handler
+          from inside this function.
         </p>
 <p>
-          The io_service guarantees that the handler will only be called in a thread
-          in which the run(), run_one(), poll() or poll_one() member functions is
-          currently being invoked.
+          The <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>
+          guarantees that the handler will only be called in a thread in which the
+          <code class="computeroutput"><span class="identifier">run</span><span class="special">()</span></code>,
+          <code class="computeroutput"><span class="identifier">run_one</span><span class="special">()</span></code>,
+          <code class="computeroutput"><span class="identifier">poll</span><span class="special">()</span></code>
+          or <code class="computeroutput"><span class="identifier">poll_one</span><span class="special">()</span></code>
+          member functions is currently being invoked.
         </p>
 <a name="asio.reference.io_service.post.parameters"></a><h6>
-<a name="id879319"></a>
+<a name="id754210"></a>
           <a class="link" href="post.html#asio.reference.io_service.post.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -48,9 +53,9 @@
 <dt><span class="term">handler</span></dt>
 <dd>
 <p>
-              The handler to be called. The io_service will make a copy of the handler
-              object as required. The function signature of the handler must be:
-              
+              The handler to be called. The <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> will make a copy
+              of the handler object as required. The function signature of the handler
+              must be: 
 </p>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">();</span> 
 </pre>

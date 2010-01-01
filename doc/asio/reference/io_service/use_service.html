@@ -20,7 +20,8 @@
 <a name="asio.reference.io_service.use_service"></a><a class="link" href="use_service.html" title="io_service::use_service"> io_service::use_service</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id880335"></a> Obtain the service object corresponding to the given
+          <a class="indexterm" name="id756164"></a> 
+Obtain the service object corresponding to the given
           type.
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
@@ -31,10 +32,11 @@
 <p>
           This function is used to locate a service object that corresponds to the
           given service type. If there is no existing implementation of the service,
-          then the io_service will create a new instance of the service.
+          then the <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>
+          will create a new instance of the service.
         </p>
 <a name="asio.reference.io_service.use_service.parameters"></a><h6>
-<a name="id880440"></a>
+<a name="id756284"></a>
           <a class="link" href="use_service.html#asio.reference.io_service.use_service.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -42,18 +44,29 @@
 <dl>
 <dt><span class="term">ios</span></dt>
 <dd><p>
-              The io_service object that owns the service.
+              The <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a>
+              object that owns the service.
             </p></dd>
 </dl>
 </div>
 <a name="asio.reference.io_service.use_service.return_value"></a><h6>
-<a name="id880478"></a>
+<a name="id756336"></a>
           <a class="link" href="use_service.html#asio.reference.io_service.use_service.return_value">Return
           Value</a>
         </h6>
 <p>
           The service interface implementing the specified service type. Ownership
           of the service interface is not transferred to the caller.
+        </p>
+<a name="asio.reference.io_service.use_service.requirements"></a><h6>
+<a name="id756362"></a>
+          <a class="link" href="use_service.html#asio.reference.io_service.use_service.requirements">Requirements</a>
+        </h6>
+<p>
+          <span class="bold"><strong>Header: </strong></span><code class="literal">asio/io_service.hpp</code>
+        </p>
+<p>
+          <span class="bold"><strong>Convenience header: </strong></span><code class="literal">asio.hpp</code>
         </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

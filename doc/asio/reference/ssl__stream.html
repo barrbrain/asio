@@ -29,7 +29,7 @@
   <span class="keyword">public</span> <span class="identifier">ssl</span><span class="special">::</span><span class="identifier">stream_base</span>
 </pre>
 <a name="asio.reference.ssl__stream.types"></a><h5>
-<a name="id1019277"></a>
+<a name="id909923"></a>
         <a class="link" href="ssl__stream.html#asio.reference.ssl__stream.types">Types</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -113,7 +113,7 @@
 </tbody>
 </table></div>
 <a name="asio.reference.ssl__stream.member_functions"></a><h5>
-<a name="id1019467"></a>
+<a name="id910113"></a>
         <a class="link" href="ssl__stream.html#asio.reference.ssl__stream.member_functions">Member Functions</a>
       </h5>
 <div class="informaltable"><table class="table">
@@ -349,7 +349,7 @@
         functionality using SSL.
       </p>
 <a name="asio.reference.ssl__stream.thread_safety"></a><h5>
-<a name="id1019986"></a>
+<a name="id910633"></a>
         <a class="link" href="ssl__stream.html#asio.reference.ssl__stream.thread_safety">Thread Safety</a>
       </h5>
 <p>
@@ -361,16 +361,26 @@
         Unsafe.
       </p>
 <a name="asio.reference.ssl__stream.example"></a><h5>
-<a name="id1020036"></a>
+<a name="id910682"></a>
         <a class="link" href="ssl__stream.html#asio.reference.ssl__stream.example">Example</a>
       </h5>
 <p>
-        To use the SSL stream template with an ip::tcp::socket, you would write:
+        To use the SSL stream template with an <code class="computeroutput"><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span></code>, you would write:
       </p>
 <pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span> <span class="identifier">io_service</span><span class="special">;</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ssl</span><span class="special">::</span><span class="identifier">context</span> <span class="identifier">context</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">,</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ssl</span><span class="special">::</span><span class="identifier">context</span><span class="special">::</span><span class="identifier">sslv23</span><span class="special">);</span>
 <span class="identifier">asio</span><span class="special">::</span><span class="identifier">ssl</span><span class="special">::</span><span class="identifier">stream</span><span class="special">&lt;</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span><span class="special">&gt;</span> <span class="identifier">sock</span><span class="special">(</span><span class="identifier">io_service</span><span class="special">,</span> <span class="identifier">context</span><span class="special">);</span>
 </pre>
+<a name="asio.reference.ssl__stream.requirements"></a><h5>
+<a name="id910938"></a>
+        <a class="link" href="ssl__stream.html#asio.reference.ssl__stream.requirements">Requirements</a>
+      </h5>
+<p>
+        <span class="bold"><strong>Header: </strong></span><code class="literal">asio/ssl/stream.hpp</code>
+      </p>
+<p>
+        <span class="bold"><strong>Convenience header: </strong></span><code class="literal">asio/ssl.hpp</code>
+      </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
 <td align="left"></td>

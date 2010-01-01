@@ -20,7 +20,8 @@
 <a name="asio.reference.ip__basic_resolver.cancel"></a><a class="link" href="cancel.html" title="ip::basic_resolver::cancel"> ip::basic_resolver::cancel</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id901830"></a> Cancel any asynchronous operations that are waiting
+          <a class="indexterm" name="id780881"></a> 
+Cancel any asynchronous operations that are waiting
           on the resolver.
         </p>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">cancel</span><span class="special">();</span>
@@ -28,7 +29,7 @@
 <p>
           This function forces the completion of any pending asynchronous operations
           on the host resolver. The handler for each cancelled operation will be
-          invoked with the asio::error::operation_aborted error code.
+          invoked with the <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error</span><span class="special">::</span><span class="identifier">operation_aborted</span></code> error code.
         </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

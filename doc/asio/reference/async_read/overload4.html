@@ -49,7 +49,7 @@
           async_read_some function.
         </p>
 <a name="asio.reference.async_read.overload4.parameters"></a><h6>
-<a name="id644943"></a>
+<a name="id495270"></a>
           <a class="link" href="overload4.html#asio.reference.async_read.overload4.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -62,9 +62,10 @@
             </p></dd>
 <dt><span class="term">b</span></dt>
 <dd><p>
-              A basic_streambuf object into which the data will be read. Ownership
-              of the streambuf is retained by the caller, which must guarantee that
-              it remains valid until the handler is called.
+              A <a class="link" href="../basic_streambuf.html" title="basic_streambuf"><code class="computeroutput"><span class="identifier">basic_streambuf</span></code></a>
+              object into which the data will be read. Ownership of the streambuf
+              is retained by the caller, which must guarantee that it remains valid
+              until the handler is called.
             </p></dd>
 <dt><span class="term">completion_condition</span></dt>
 <dd>
@@ -107,7 +108,7 @@
               Regardless of whether the asynchronous operation completes immediately
               or not, the handler will not be invoked from within this function.
               Invocation of the handler will be performed in a manner equivalent
-              to using asio::io_service::post().
+              to using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">post</span><span class="special">()</span></code>.
             </p>
 </dd>
 </dl>

@@ -35,7 +35,7 @@
             or until an error occurs.
           </p>
 <a name="asio.reference.basic_stream_socket.receive.overload2.parameters"></a><h6>
-<a name="id825758"></a>
+<a name="id693176"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -52,7 +52,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_stream_socket.receive.overload2.return_value"></a><h6>
-<a name="id825809"></a>
+<a name="id693227"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.return_value">Return
             Value</a>
           </h6>
@@ -60,7 +60,7 @@
             The number of bytes received.
           </p>
 <a name="asio.reference.basic_stream_socket.receive.overload2.exceptions"></a><h6>
-<a name="id825833"></a>
+<a name="id693251"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.exceptions">Exceptions</a>
           </h6>
 <div class="variablelist">
@@ -68,35 +68,34 @@
 <dl>
 <dt><span class="term">asio::system_error</span></dt>
 <dd><p>
-                Thrown on failure. An error code of asio::error::eof indicates that
-                the connection was closed by the peer.
+                Thrown on failure. An error code of <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error</span><span class="special">::</span><span class="identifier">eof</span></code>
+                indicates that the connection was closed by the peer.
               </p></dd>
 </dl>
 </div>
 <a name="asio.reference.basic_stream_socket.receive.overload2.remarks"></a><h6>
-<a name="id825873"></a>
+<a name="id693319"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.remarks">Remarks</a>
           </h6>
 <p>
             The receive operation may not receive all of the requested number of
-            bytes. Consider using the <a class="link" href="../../read.html" title="read">read</a>
-            function if you need to ensure that the requested amount of data is read
-            before the blocking operation completes.
+            bytes. Consider using the <a class="link" href="../../read.html" title="read"><code class="computeroutput"><span class="identifier">read</span></code></a> function if you need to
+            ensure that the requested amount of data is read before the blocking
+            operation completes.
           </p>
 <a name="asio.reference.basic_stream_socket.receive.overload2.example"></a><h6>
-<a name="id825906"></a>
+<a name="id693360"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.receive.overload2.example">Example</a>
           </h6>
 <p>
-            To receive into a single data buffer use the <a class="link" href="../../buffer.html" title="buffer">buffer</a>
-            function as follows:
+            To receive into a single data buffer use the <a class="link" href="../../buffer.html" title="buffer"><code class="computeroutput"><span class="identifier">buffer</span></code></a> function as follows:
           </p>
 <pre class="programlisting"><span class="identifier">socket</span><span class="special">.</span><span class="identifier">receive</span><span class="special">(</span><span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffer</span><span class="special">(</span><span class="identifier">data</span><span class="special">,</span> <span class="identifier">size</span><span class="special">),</span> <span class="number">0</span><span class="special">);</span>
 </pre>
 <p>
-            See the <a class="link" href="../../buffer.html" title="buffer">buffer</a> documentation
-            for information on receiving into multiple buffers in one go, and how
-            to use it with arrays, boost::array or std::vector.
+            See the <a class="link" href="../../buffer.html" title="buffer"><code class="computeroutput"><span class="identifier">buffer</span></code></a>
+            documentation for information on receiving into multiple buffers in one
+            go, and how to use it with arrays, boost::array or std::vector.
           </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
