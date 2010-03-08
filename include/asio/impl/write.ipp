@@ -2,7 +2,7 @@
 // write.ipp
 // ~~~~~~~~~
 //
-// Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2010 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -69,6 +69,8 @@ inline std::size_t write(SyncWriteStream& s, const ConstBufferSequence& buffers,
   return bytes_transferred;
 }
 
+#if !defined(BOOST_NO_IOSTREAM)
+
 template <typename SyncWriteStream, typename Allocator,
     typename CompletionCondition>
 std::size_t write(SyncWriteStream& s,
@@ -101,6 +103,8 @@ inline std::size_t write(SyncWriteStream& s,
   asio::detail::throw_error(ec);
   return bytes_transferred;
 }
+
+#endif // !defined(BOOST_NO_IOSTREAM)
 
 namespace detail
 {
@@ -154,7 +158,7 @@ namespace detail
         CompletionCondition, WriteHandler>* this_handler)
   {
     return asio_handler_alloc_helpers::allocate(
-        size, &this_handler->handler_);
+        size, this_handler->handler_);
   }
 
   template <typename AsyncWriteStream, typename ConstBufferSequence,
@@ -164,7 +168,7 @@ namespace detail
         CompletionCondition, WriteHandler>* this_handler)
   {
     asio_handler_alloc_helpers::deallocate(
-        pointer, size, &this_handler->handler_);
+        pointer, size, this_handler->handler_);
   }
 
   template <typename Function, typename AsyncWriteStream,
@@ -175,7 +179,7 @@ namespace detail
         CompletionCondition, WriteHandler>* this_handler)
   {
     asio_handler_invoke_helpers::invoke(
-        function, &this_handler->handler_);
+        function, this_handler->handler_);
   }
 } // namespace detail
 
@@ -212,6 +216,8 @@ inline void async_write(AsyncWriteStream& s, const ConstBufferSequence& buffers,
   async_write(s, buffers, transfer_all(), handler);
 }
 
+#if !defined(BOOST_NO_IOSTREAM)
+
 namespace detail
 {
   template <typename AsyncWriteStream, typename Allocator,
@@ -245,7 +251,7 @@ namespace detail
         Allocator, WriteHandler>* this_handler)
   {
     return asio_handler_alloc_helpers::allocate(
-        size, &this_handler->handler_);
+        size, this_handler->handler_);
   }
 
   template <typename AsyncWriteStream, typename Allocator,
@@ -255,7 +261,7 @@ namespace detail
         Allocator, WriteHandler>* this_handler)
   {
     asio_handler_alloc_helpers::deallocate(
-        pointer, size, &this_handler->handler_);
+        pointer, size, this_handler->handler_);
   }
 
   template <typename Function, typename AsyncWriteStream, typename Allocator,
@@ -265,7 +271,7 @@ namespace detail
         Allocator, WriteHandler>* this_handler)
   {
     asio_handler_invoke_helpers::invoke(
-        function, &this_handler->handler_);
+        function, this_handler->handler_);
   }
 } // namespace detail
 
@@ -286,6 +292,8 @@ inline void async_write(AsyncWriteStream& s,
 {
   async_write(s, b, transfer_all(), handler);
 }
+
+#endif // !defined(BOOST_NO_IOSTREAM)
 
 } // namespace asio
 

@@ -5,7 +5,7 @@ BOOSTDIR = ../../boost_1_34_1
 COMMON_CXXFLAGS = -nologo -EHac -GR -I. -I../include -I$(BOOSTDIR)
 
 !ifdef WARNINGS
-WARNINGS_CXXFLAGS = -W4 -Wp64
+WARNINGS_CXXFLAGS = -W4
 !endif
 
 !ifdef STATICRTL
@@ -137,12 +137,15 @@ EXAMPLE_EXES = \
 	examples\http\server\http_server.exe \
 	examples\http\server2\http_server.exe \
 	examples\http\server3\http_server.exe \
+	examples\http\server4\http_server.exe \
 	examples\icmp\ping.exe \
 	examples\invocation\prioritised_handlers.exe \
 	examples\iostreams\daytime_client.exe \
 	examples\iostreams\daytime_server.exe \
 	examples\multicast\receiver.exe \
 	examples\multicast\sender.exe \
+	examples\porthopper\client.exe \
+	examples\porthopper\server.exe \
 	examples\services\daytime_client.exe \
 	examples\socks4\sync_client.exe \
 	examples\timeouts\accept_timeout.exe \
@@ -232,6 +235,9 @@ check: $(UNIT_TEST_EXES)
 {examples\multicast}.cpp{examples\multicast}.exe:
 	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
 
+{examples\porthopper}.cpp{examples\porthopper}.exe:
+	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
+
 {examples\socks4}.cpp{examples\socks4}.exe:
 	cl -Fe$@ -Fo$(<:.cpp=.obj) $(CXXFLAGS) $(DEFINES) $< -link -opt:ref
 
@@ -314,6 +320,15 @@ examples\http\server3\http_server.exe: \
 		examples\http\server3\server.cpp \
 		examples\http\server3\win_main.cpp
 	cl -Fe$@ -Foexamples\http\server3\ $(CXXFLAGS) $(DEFINES) $** -link -opt:ref
+
+examples\http\server4\http_server.exe: \
+		examples\http\server4\file_handler.cpp \
+		examples\http\server4\mime_types.cpp \
+		examples\http\server4\reply.cpp \
+		examples\http\server4\request_parser.cpp \
+		examples\http\server4\server.cpp \
+		examples\http\server4\win_main.cpp
+	cl -Fe$@ -Foexamples\http\server4\ $(CXXFLAGS) $(DEFINES) $** -link -opt:ref
 
 examples\services\daytime_client.exe: \
 		examples\services\daytime_client.cpp \

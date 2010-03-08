@@ -2,7 +2,7 @@
 // stream_descriptor_service.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2010 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -24,11 +24,7 @@
 
 #include "asio/error.hpp"
 #include "asio/io_service.hpp"
-#include "asio/detail/epoll_reactor.hpp"
-#include "asio/detail/kqueue_reactor.hpp"
-#include "asio/detail/select_reactor.hpp"
 #include "asio/detail/service_base.hpp"
-#include "asio/detail/reactive_descriptor_service.hpp"
 
 #if !defined(ASIO_DISABLE_POSIX_STREAM_DESCRIPTOR)
 # if !defined(BOOST_WINDOWS) && !defined(__CYGWIN__)
@@ -38,6 +34,20 @@
 
 #if defined(ASIO_HAS_POSIX_STREAM_DESCRIPTOR) \
   || defined(GENERATING_DOCUMENTATION)
+
+#if defined(ASIO_HAS_EPOLL)
+# include "asio/detail/epoll_reactor.hpp"
+# include "asio/detail/reactive_descriptor_service.hpp"
+#elif defined(ASIO_HAS_KQUEUE)
+# include "asio/detail/kqueue_reactor.hpp"
+# include "asio/detail/reactive_descriptor_service.hpp"
+#elif defined(ASIO_HAS_DEV_POLL)
+# include "asio/detail/dev_poll_reactor.hpp"
+# include "asio/detail/reactive_descriptor_service.hpp"
+#else
+# include "asio/detail/select_reactor.hpp"
+# include "asio/detail/reactive_descriptor_service.hpp"
+#endif
 
 namespace asio {
 namespace posix {

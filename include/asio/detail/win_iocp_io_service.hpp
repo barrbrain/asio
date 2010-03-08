@@ -2,7 +2,7 @@
 // win_iocp_io_service.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2010 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -22,7 +22,7 @@
 #if defined(ASIO_HAS_IOCP)
 
 #include "asio/detail/push_options.hpp"
-#include <limits>
+#include <boost/limits.hpp>
 #include <boost/throw_exception.hpp>
 #include "asio/detail/pop_options.hpp"
 
@@ -49,6 +49,8 @@ public:
   // This class inherits from OVERLAPPED so that we can downcast to get back to
   // the operation pointer from the LPOVERLAPPED out parameter of
   // GetQueuedCompletionStatus.
+  class operation;
+  friend class operation;
   class operation
     : public OVERLAPPED
   {
@@ -58,7 +60,10 @@ public:
 
     operation(win_iocp_io_service& iocp_service,
         invoke_func_type invoke_func, destroy_func_type destroy_func)
-      : outstanding_operations_(&iocp_service.outstanding_operations_),
+      : iocp_service_(iocp_service),
+        ready_(0),
+        last_error_(~DWORD(0)),
+        bytes_transferred_(0),
         invoke_func_(invoke_func),
         destroy_func_(destroy_func)
     {
@@ -68,12 +73,48 @@ public:
       OffsetHigh = 0;
       hEvent = 0;
 
-      ::InterlockedIncrement(outstanding_operations_);
+      ::InterlockedIncrement(&iocp_service_.outstanding_operations_);
     }
 
-    void do_completion(DWORD last_error, size_t bytes_transferred)
+    void reset()
     {
-      invoke_func_(this, last_error, bytes_transferred);
+      Internal = 0;
+      InternalHigh = 0;
+      Offset = 0;
+      OffsetHigh = 0;
+      hEvent = 0;
+      ready_ = 0;
+      last_error_ = ~DWORD(0);
+      bytes_transferred_ = 0;
+    }
+
+    void on_pending()
+    {
+      if (::InterlockedCompareExchange(&ready_, 1, 0) == 1)
+        iocp_service_.post_completion(this, last_error_, bytes_transferred_);
+    }
+
+    void on_immediate_completion(DWORD last_error, DWORD bytes_transferred)
+    {
+      ready_ = 1;
+      iocp_service_.post_completion(this, last_error, bytes_transferred);
+    }
+
+    bool on_completion(DWORD last_error, DWORD bytes_transferred)
+    {
+      if (last_error_ == ~DWORD(0))
+      {
+        last_error_ = last_error;
+        bytes_transferred_ = bytes_transferred;
+      }
+
+      if (::InterlockedCompareExchange(&ready_, 1, 0) == 1)
+      {
+        invoke_func_(this, last_error_, bytes_transferred_);
+        return true;
+      }
+
+      return false;
     }
 
     void destroy()
@@ -85,15 +126,17 @@ public:
     // Prevent deletion through this type.
     ~operation()
     {
-      ::InterlockedDecrement(outstanding_operations_);
+      ::InterlockedDecrement(&iocp_service_.outstanding_operations_);
     }
 
   private:
-    long* outstanding_operations_;
+    win_iocp_io_service& iocp_service_;
+    long ready_;
+    DWORD last_error_;
+    DWORD bytes_transferred_;
     invoke_func_type invoke_func_;
     destroy_func_type destroy_func_;
   };
-
 
   // Constructor.
   win_iocp_io_service(asio::io_service& io_service)
@@ -275,7 +318,7 @@ public:
   void dispatch(Handler handler)
   {
     if (call_stack<win_iocp_io_service>::contains(this))
-      asio_handler_invoke_helpers::invoke(handler, &handler);
+      asio_handler_invoke_helpers::invoke(handler, handler);
     else
       post(handler);
   }
@@ -295,15 +338,7 @@ public:
     handler_ptr<alloc_traits> ptr(raw_ptr, *this, handler);
 
     // Enqueue the operation on the I/O completion port.
-    if (!::PostQueuedCompletionStatus(iocp_.handle, 0, 0, ptr.get()))
-    {
-      DWORD last_error = ::GetLastError();
-      asio::system_error e(
-          asio::error_code(last_error,
-            asio::error::get_system_category()),
-          "pqcs");
-      boost::throw_exception(e);
-    }
+    ptr.get()->on_immediate_completion(0, 0);
 
     // Operation has been successfully posted.
     ptr.release();
@@ -506,10 +541,11 @@ private:
 
         // Dispatch the operation.
         operation* op = static_cast<operation*>(overlapped);
-        op->do_completion(last_error, bytes_transferred);
-
-        ec = asio::error_code();
-        return 1;
+        if (op->on_completion(last_error, bytes_transferred))
+        {
+          ec = asio::error_code();
+          return 1;
+        }
       }
       else if (completion_key == transfer_timer_dispatching)
       {
@@ -647,7 +683,7 @@ private:
       ptr.reset();
 
       // Make the upcall.
-      asio_handler_invoke_helpers::invoke(handler, &handler);
+      asio_handler_invoke_helpers::invoke(handler, handler);
     }
 
     static void destroy_impl(operation* op)

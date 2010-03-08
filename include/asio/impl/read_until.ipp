@@ -2,7 +2,7 @@
 // read_until.ipp
 // ~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2010 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -19,9 +19,9 @@
 
 #include "asio/detail/push_options.hpp"
 #include <algorithm>
-#include <limits>
 #include <string>
 #include <utility>
+#include <boost/limits.hpp>
 #include "asio/detail/pop_options.hpp"
 
 #include "asio/buffer.hpp"
@@ -403,7 +403,7 @@ namespace detail
         Allocator, ReadHandler>* this_handler)
   {
     return asio_handler_alloc_helpers::allocate(
-        size, &this_handler->handler_);
+        size, this_handler->handler_);
   }
 
   template <typename AsyncReadStream, typename Allocator, typename ReadHandler>
@@ -412,7 +412,7 @@ namespace detail
         Allocator, ReadHandler>* this_handler)
   {
     asio_handler_alloc_helpers::deallocate(
-        pointer, size, &this_handler->handler_);
+        pointer, size, this_handler->handler_);
   }
 
   template <typename Function, typename AsyncReadStream, typename Allocator,
@@ -422,7 +422,7 @@ namespace detail
         Allocator, ReadHandler>* this_handler)
   {
     asio_handler_invoke_helpers::invoke(
-        function, &this_handler->handler_);
+        function, this_handler->handler_);
   }
 } // namespace detail
 
@@ -559,7 +559,7 @@ namespace detail
         Allocator, ReadHandler>* this_handler)
   {
     return asio_handler_alloc_helpers::allocate(
-        size, &this_handler->handler_);
+        size, this_handler->handler_);
   }
 
   template <typename AsyncReadStream, typename Allocator, typename ReadHandler>
@@ -568,7 +568,7 @@ namespace detail
         Allocator, ReadHandler>* this_handler)
   {
     asio_handler_alloc_helpers::deallocate(
-        pointer, size, &this_handler->handler_);
+        pointer, size, this_handler->handler_);
   }
 
   template <typename Function, typename AsyncReadStream,
@@ -578,7 +578,7 @@ namespace detail
         Allocator, ReadHandler>* this_handler)
   {
     asio_handler_invoke_helpers::invoke(
-        function, &this_handler->handler_);
+        function, this_handler->handler_);
   }
 } // namespace detail
 
@@ -732,7 +732,7 @@ namespace detail
         Allocator, ReadHandler>* this_handler)
   {
     return asio_handler_alloc_helpers::allocate(
-        size, &this_handler->handler_);
+        size, this_handler->handler_);
   }
 
   template <typename AsyncReadStream, typename Allocator, typename ReadHandler>
@@ -741,7 +741,7 @@ namespace detail
         Allocator, ReadHandler>* this_handler)
   {
     asio_handler_alloc_helpers::deallocate(
-        pointer, size, &this_handler->handler_);
+        pointer, size, this_handler->handler_);
   }
 
   template <typename Function, typename AsyncReadStream, typename Allocator,
@@ -751,7 +751,7 @@ namespace detail
         Allocator, ReadHandler>* this_handler)
   {
     asio_handler_invoke_helpers::invoke(
-        function, &this_handler->handler_);
+        function, this_handler->handler_);
   }
 } // namespace detail
 
@@ -902,7 +902,7 @@ namespace detail
         Allocator, MatchCondition, ReadHandler>* this_handler)
   {
     return asio_handler_alloc_helpers::allocate(
-        size, &this_handler->handler_);
+        size, this_handler->handler_);
   }
 
   template <typename AsyncReadStream, typename Allocator,
@@ -912,7 +912,7 @@ namespace detail
         Allocator, MatchCondition, ReadHandler>* this_handler)
   {
     asio_handler_alloc_helpers::deallocate(
-        pointer, size, &this_handler->handler_);
+        pointer, size, this_handler->handler_);
   }
 
   template <typename Function, typename AsyncReadStream, typename Allocator,
@@ -922,7 +922,7 @@ namespace detail
         Allocator, MatchCondition, ReadHandler>* this_handler)
   {
     asio_handler_invoke_helpers::invoke(
-        function, &this_handler->handler_);
+        function, this_handler->handler_);
   }
 } // namespace detail
 

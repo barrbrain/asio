@@ -2,7 +2,7 @@
 // io_service.ipp
 // ~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2010 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -18,17 +18,27 @@
 #include "asio/detail/push_options.hpp"
 
 #include "asio/detail/push_options.hpp"
-#include <limits>
+#include <boost/limits.hpp>
 #include "asio/detail/pop_options.hpp"
 
-#include "asio/detail/dev_poll_reactor.hpp"
-#include "asio/detail/epoll_reactor.hpp"
-#include "asio/detail/kqueue_reactor.hpp"
-#include "asio/detail/select_reactor.hpp"
 #include "asio/detail/service_registry.hpp"
-#include "asio/detail/task_io_service.hpp"
 #include "asio/detail/throw_error.hpp"
-#include "asio/detail/win_iocp_io_service.hpp"
+
+#if defined(ASIO_HAS_IOCP)
+# include "asio/detail/win_iocp_io_service.hpp"
+#elif defined(ASIO_HAS_EPOLL)
+# include "asio/detail/epoll_reactor.hpp"
+# include "asio/detail/task_io_service.hpp"
+#elif defined(ASIO_HAS_KQUEUE)
+# include "asio/detail/kqueue_reactor.hpp"
+# include "asio/detail/task_io_service.hpp"
+#elif defined(ASIO_HAS_DEV_POLL)
+# include "asio/detail/dev_poll_reactor.hpp"
+# include "asio/detail/task_io_service.hpp"
+#else
+# include "asio/detail/select_reactor.hpp"
+# include "asio/detail/task_io_service.hpp"
+#endif
 
 namespace asio {
 

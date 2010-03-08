@@ -2,7 +2,7 @@
 // socket_acceptor_service.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// Copyright (c) 2003-2008 Christopher M. Kohlhoff (chris at kohlhoff dot com)
+// Copyright (c) 2003-2010 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -20,12 +20,23 @@
 #include "asio/basic_socket.hpp"
 #include "asio/error.hpp"
 #include "asio/io_service.hpp"
-#include "asio/detail/epoll_reactor.hpp"
-#include "asio/detail/kqueue_reactor.hpp"
-#include "asio/detail/select_reactor.hpp"
 #include "asio/detail/service_base.hpp"
-#include "asio/detail/reactive_socket_service.hpp"
-#include "asio/detail/win_iocp_socket_service.hpp"
+
+#if defined(ASIO_HAS_IOCP)
+# include "asio/detail/win_iocp_socket_service.hpp"
+#elif defined(ASIO_HAS_EPOLL)
+# include "asio/detail/epoll_reactor.hpp"
+# include "asio/detail/reactive_socket_service.hpp"
+#elif defined(ASIO_HAS_KQUEUE)
+# include "asio/detail/kqueue_reactor.hpp"
+# include "asio/detail/reactive_socket_service.hpp"
+#elif defined(ASIO_HAS_DEV_POLL)
+# include "asio/detail/dev_poll_reactor.hpp"
+# include "asio/detail/reactive_socket_service.hpp"
+#else
+# include "asio/detail/select_reactor.hpp"
+# include "asio/detail/reactive_socket_service.hpp"
+#endif
 
 namespace asio {
 
