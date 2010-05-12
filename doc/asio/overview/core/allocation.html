@@ -74,22 +74,11 @@
           Custom memory allocation support is currently implemented for all asynchronous
           operations with the following exceptions:
         </p>
-<div class="itemizedlist"><ul type="disc">
-<li>
-<code class="computeroutput"><span class="identifier">ip</span><span class="special">::</span><span class="identifier">basic_resolver</span><span class="special">::</span><span class="identifier">async_resolve</span><span class="special">()</span></code>
-            on all platforms.
-          </li>
-<li>
-<code class="computeroutput"><span class="identifier">basic_socket</span><span class="special">::</span><span class="identifier">async_connect</span><span class="special">()</span></code>
-            on Windows.
-          </li>
-<li>
-            Any operation involving <code class="computeroutput"><span class="identifier">null_buffers</span><span class="special">()</span></code> on Windows, other than an asynchronous
-            read performed on a stream-oriented socket.
-          </li>
-</ul></div>
+<div class="itemizedlist"><ul type="disc"><li>
+            Asynchronous SSL operations.
+          </li></ul></div>
 <a name="asio.overview.core.allocation.see_also"></a><h6>
-<a name="id597615"></a>
+<a name="id480647"></a>
           <a class="link" href="allocation.html#asio.overview.core.allocation.see_also">See Also</a>
         </h6>
 <p>

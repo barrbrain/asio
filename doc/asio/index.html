@@ -18,7 +18,7 @@
 <div class="titlepage"></div>
 <div class="index">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id1173955"></a>Index</h3></div></div></div>
+<a name="id1067566"></a>Index</h3></div></div></div>
 <div class="index">
 <div class="indexdiv">
 <h3>Symbols</h3>
@@ -1339,6 +1339,13 @@
 <dt>buffered_read_stream, <a class="indexterm" href="reference/buffered_read_stream/fill.html"> buffered_read_stream::fill</a>
 </dt>
 <dt>buffered_stream, <a class="indexterm" href="reference/buffered_stream/fill.html"> buffered_stream::fill</a>
+</dt>
+</dl></dd>
+<dt>flags</dt>
+<dd><dl>
+<dt>ip::basic_resolver_query, <a class="indexterm" href="reference/ip__basic_resolver_query/flags.html"> ip::basic_resolver_query::flags</a>
+</dt>
+<dt>ip::resolver_query_base, <a class="indexterm" href="reference/ip__resolver_query_base/flags.html"> ip::resolver_query_base::flags</a>
 </dt>
 </dl></dd>
 <dt>flow_control</dt>
@@ -2700,6 +2707,15 @@
 <dt>operation_not_supported</dt>
 <dd><dl><dt>error::basic_errors, <a class="indexterm" href="reference/error__basic_errors.html"> error::basic_errors</a>
 </dt></dl></dd>
+<dt>operator *</dt>
+<dd><dl>
+<dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator__star_.html"> buffers_iterator::operator
+        *</a>
+</dt>
+<dt>ip::basic_resolver_iterator, <a class="indexterm" href="reference/ip__basic_resolver_iterator/operator__star_.html">
+        ip::basic_resolver_iterator::operator *</a>
+</dt>
+</dl></dd>
 <dt>operator endpoint_type</dt>
 <dd><dl><dt>ip::basic_resolver_entry, <a class="indexterm" href="reference/ip__basic_resolver_entry/operator_endpoint_type.html">
         ip::basic_resolver_entry::operator endpoint_type</a>
@@ -2713,6 +2729,9 @@
 </dt></dl></dd>
 <dt>operator!=</dt>
 <dd><dl>
+<dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_not__eq_.html">
+        buffers_iterator::operator!=</a>
+</dt>
 <dt>error_code, <a class="indexterm" href="reference/error_code/operator_not__eq_.html"> error_code::operator!=</a>
 </dt>
 <dt>ip::address, <a class="indexterm" href="reference/ip__address/operator_not__eq_.html"> ip::address::operator!=</a>
@@ -2723,6 +2742,9 @@
 </dt>
 <dt>ip::basic_endpoint, <a class="indexterm" href="reference/ip__basic_endpoint/operator_not__eq_.html">
         ip::basic_endpoint::operator!=</a>
+</dt>
+<dt>ip::basic_resolver_iterator, <a class="indexterm" href="reference/ip__basic_resolver_iterator/operator_not__eq_.html">
+        ip::basic_resolver_iterator::operator!=</a>
 </dt>
 <dt>ip::icmp, <a class="indexterm" href="reference/ip__icmp/operator_not__eq_.html"> ip::icmp::operator!=</a>
 </dt>
@@ -2736,6 +2758,8 @@
 </dl></dd>
 <dt>operator+</dt>
 <dd><dl>
+<dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_plus_.html"> buffers_iterator::operator+</a>
+</dt>
 <dt>const_buffer, <a class="indexterm" href="reference/const_buffer/operator_plus_.html"> const_buffer::operator+</a>
 </dt>
 <dt>const_buffers_1, <a class="indexterm" href="reference/const_buffers_1/operator_plus_.html"> const_buffers_1::operator+</a>
@@ -2745,8 +2769,42 @@
 <dt>mutable_buffers_1, <a class="indexterm" href="reference/mutable_buffers_1/operator_plus_.html"> mutable_buffers_1::operator+</a>
 </dt>
 </dl></dd>
+<dt>operator++</dt>
+<dd><dl>
+<dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_plus__plus_.html">
+        buffers_iterator::operator++</a>
+</dt>
+<dt>ip::basic_resolver_iterator, <a class="indexterm" href="reference/ip__basic_resolver_iterator/operator_plus__plus_.html">
+        ip::basic_resolver_iterator::operator++</a>
+</dt>
+</dl></dd>
+<dt>operator+=</dt>
+<dd><dl><dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_plus__eq_.html">
+        buffers_iterator::operator+=</a>
+</dt></dl></dd>
+<dt>operator-</dt>
+<dd><dl><dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_minus_.html"> buffers_iterator::operator-</a>
+</dt></dl></dd>
+<dt>operator--</dt>
+<dd><dl><dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_minus__minus_.html">
+        buffers_iterator::operator--</a>
+</dt></dl></dd>
+<dt>operator-=</dt>
+<dd><dl><dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_minus__eq_.html">
+        buffers_iterator::operator-=</a>
+</dt></dl></dd>
+<dt>operator-&gt;</dt>
+<dd><dl>
+<dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_arrow_.html"> buffers_iterator::operator-&gt;</a>
+</dt>
+<dt>ip::basic_resolver_iterator, <a class="indexterm" href="reference/ip__basic_resolver_iterator/operator_arrow_.html">
+        ip::basic_resolver_iterator::operator-&gt;</a>
+</dt>
+</dl></dd>
 <dt>operator&lt;</dt>
 <dd><dl>
+<dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_lt_.html"> buffers_iterator::operator&lt;</a>
+</dt>
 <dt>ip::address, <a class="indexterm" href="reference/ip__address/operator_lt_.html"> ip::address::operator&lt;</a>
 </dt>
 <dt>ip::address_v4, <a class="indexterm" href="reference/ip__address_v4/operator_lt_.html"> ip::address_v4::operator&lt;</a>
@@ -2776,6 +2834,9 @@
 </dl></dd>
 <dt>operator&lt;=</dt>
 <dd><dl>
+<dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_lt__eq_.html">
+        buffers_iterator::operator&lt;=</a>
+</dt>
 <dt>ip::address_v4, <a class="indexterm" href="reference/ip__address_v4/operator_lt__eq_.html"> ip::address_v4::operator&lt;=</a>
 </dt>
 <dt>ip::address_v6, <a class="indexterm" href="reference/ip__address_v6/operator_lt__eq_.html"> ip::address_v6::operator&lt;=</a>
@@ -2799,6 +2860,9 @@
 </dl></dd>
 <dt>operator==</dt>
 <dd><dl>
+<dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_eq__eq_.html">
+        buffers_iterator::operator==</a>
+</dt>
 <dt>error_code, <a class="indexterm" href="reference/error_code/operator_eq__eq_.html"> error_code::operator==</a>
 </dt>
 <dt>ip::address, <a class="indexterm" href="reference/ip__address/operator_eq__eq_.html"> ip::address::operator==</a>
@@ -2809,6 +2873,9 @@
 </dt>
 <dt>ip::basic_endpoint, <a class="indexterm" href="reference/ip__basic_endpoint/operator_eq__eq_.html">
         ip::basic_endpoint::operator==</a>
+</dt>
+<dt>ip::basic_resolver_iterator, <a class="indexterm" href="reference/ip__basic_resolver_iterator/operator_eq__eq_.html">
+        ip::basic_resolver_iterator::operator==</a>
 </dt>
 <dt>ip::icmp, <a class="indexterm" href="reference/ip__icmp/operator_eq__eq_.html"> ip::icmp::operator==</a>
 </dt>
@@ -2822,6 +2889,8 @@
 </dl></dd>
 <dt>operator&gt;</dt>
 <dd><dl>
+<dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_gt_.html"> buffers_iterator::operator&gt;</a>
+</dt>
 <dt>ip::address_v4, <a class="indexterm" href="reference/ip__address_v4/operator_gt_.html"> ip::address_v4::operator&gt;</a>
 </dt>
 <dt>ip::address_v6, <a class="indexterm" href="reference/ip__address_v6/operator_gt_.html"> ip::address_v6::operator&gt;</a>
@@ -2829,11 +2898,18 @@
 </dl></dd>
 <dt>operator&gt;=</dt>
 <dd><dl>
+<dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_gt__eq_.html">
+        buffers_iterator::operator&gt;=</a>
+</dt>
 <dt>ip::address_v4, <a class="indexterm" href="reference/ip__address_v4/operator_gt__eq_.html"> ip::address_v4::operator&gt;=</a>
 </dt>
 <dt>ip::address_v6, <a class="indexterm" href="reference/ip__address_v6/operator_gt__eq_.html"> ip::address_v6::operator&gt;=</a>
 </dt>
 </dl></dd>
+<dt>operator[]</dt>
+<dd><dl><dt>buffers_iterator, <a class="indexterm" href="reference/buffers_iterator/operator_lb__rb_.html">
+        buffers_iterator::operator[]</a>
+</dt></dl></dd>
 <dt>options</dt>
 <dd><dl>
 <dt>ssl::basic_context, <a class="indexterm" href="reference/ssl__basic_context/options.html"> ssl::basic_context::options</a>

@@ -50,10 +50,14 @@
 </ul></div>
 <p>
           This operation is implemented in terms of zero or more calls to the stream's
-          async_read_some function.
+          async_read_some function, and is known as a <span class="bold"><strong>composed
+          operation</strong></span>. The program must ensure that the stream performs
+          no other read operations (such as async_read, the stream's async_read_some
+          function, or any other composed operations that perform reads) until this
+          operation completes.
         </p>
 <a name="asio.reference.async_read.overload1.parameters"></a><h6>
-<a name="id696494"></a>
+<a name="id579604"></a>
           <a class="link" href="overload1.html#asio.reference.async_read.overload1.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -99,7 +103,7 @@
 </dl>
 </div>
 <a name="asio.reference.async_read.overload1.example"></a><h6>
-<a name="id696717"></a>
+<a name="id579824"></a>
           <a class="link" href="overload1.html#asio.reference.async_read.overload1.example">Example</a>
         </h6>
 <p>
@@ -113,7 +117,7 @@
           and how to use it with arrays, boost::array or std::vector.
         </p>
 <a name="asio.reference.async_read.overload1.remarks"></a><h6>
-<a name="id696858"></a>
+<a name="id579964"></a>
           <a class="link" href="overload1.html#asio.reference.async_read.overload1.remarks">Remarks</a>
         </h6>
 <p>

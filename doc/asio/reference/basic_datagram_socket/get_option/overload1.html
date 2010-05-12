@@ -26,14 +26,16 @@
 <p>
             Get an option from the socket.
           </p>
-<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">get_option</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
+    <span class="keyword">typename</span> <a class="link" href="../../GettableSocketOption.html" title="Gettable socket option requirements">GettableSocketOption</a><span class="special">&gt;</span>
+<span class="keyword">void</span> <span class="identifier">get_option</span><span class="special">(</span>
     <span class="identifier">GettableSocketOption</span> <span class="special">&amp;</span> <span class="identifier">option</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
 </pre>
 <p>
             This function is used to get the current value of an option on the socket.
           </p>
 <a name="asio.reference.basic_datagram_socket.get_option.overload1.parameters"></a><h6>
-<a name="id730307"></a>
+<a name="id614419"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.get_option.overload1.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -46,7 +48,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_datagram_socket.get_option.overload1.exceptions"></a><h6>
-<a name="id730346"></a>
+<a name="id614456"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.get_option.overload1.exceptions">Exceptions</a>
           </h6>
 <div class="variablelist">
@@ -59,7 +61,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_datagram_socket.get_option.overload1.example"></a><h6>
-<a name="id730384"></a>
+<a name="id614495"></a>
             <a class="link" href="overload1.html#asio.reference.basic_datagram_socket.get_option.overload1.example">Example</a>
           </h6>
 <p>

@@ -20,7 +20,7 @@
 <a name="asio.overview.core.threads"></a><a class="link" href="threads.html" title="Threads and Asio"> Threads and Asio</a>
 </h4></div></div></div>
 <a name="asio.overview.core.threads.thread_safety"></a><h6>
-<a name="id592698"></a>
+<a name="id475804"></a>
           <a class="link" href="threads.html#asio.overview.core.threads.thread_safety">Thread Safety</a>
         </h6>
 <p>
@@ -30,7 +30,7 @@
           guarantee that it is safe to use a single object concurrently.
         </p>
 <a name="asio.overview.core.threads.thread_pools"></a><h6>
-<a name="id592727"></a>
+<a name="id475833"></a>
           <a class="link" href="threads.html#asio.overview.core.threads.thread_pools">Thread Pools</a>
         </h6>
 <p>
@@ -45,7 +45,7 @@
           may distribute work across them in an arbitrary fashion.
         </p>
 <a name="asio.overview.core.threads.internal_threads"></a><h6>
-<a name="id592808"></a>
+<a name="id475914"></a>
           <a class="link" href="threads.html#asio.overview.core.threads.internal_threads">Internal Threads</a>
         </h6>
 <p>
@@ -62,30 +62,6 @@
             must block all signals.
           </li>
 </ul></div>
-<div class="note"><table border="0" summary="Note">
-<tr>
-<td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="../../../note.png"></td>
-<th align="left">Note</th>
-</tr>
-<tr><td align="left" valign="top">
-<p>
-            The implementation currently violates the first of these rules for the
-            following functions:
-          </p>
-<p>
-            &#8212; <code class="computeroutput"><span class="identifier">ip</span><span class="special">::</span><span class="identifier">basic_resolver</span><span class="special">::</span><span class="identifier">async_resolve</span><span class="special">()</span></code>
-            on all platforms.
-          </p>
-<p>
-            &#8212; <code class="computeroutput"><span class="identifier">basic_socket</span><span class="special">::</span><span class="identifier">async_connect</span><span class="special">()</span></code>
-            on Windows.
-          </p>
-<p>
-            &#8212; Any operation involving <code class="computeroutput"><span class="identifier">null_buffers</span><span class="special">()</span></code> on Windows, other than an asynchronous
-            read performed on a stream-oriented socket.
-          </p>
-</td></tr>
-</table></div>
 <p>
           This approach is complemented by the following guarantee:
         </p>
@@ -120,7 +96,7 @@
           </li>
 </ul></div>
 <a name="asio.overview.core.threads.see_also"></a><h6>
-<a name="id593010"></a>
+<a name="id476034"></a>
           <a class="link" href="threads.html#asio.overview.core.threads.see_also">See Also</a>
         </h6>
 <p>

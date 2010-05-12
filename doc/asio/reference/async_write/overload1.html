@@ -50,10 +50,14 @@
 </ul></div>
 <p>
           This operation is implemented in terms of zero or more calls to the stream's
-          async_write_some function.
+          async_write_some function, and is known as a <span class="bold"><strong>composed
+          operation</strong></span>. The program must ensure that the stream performs
+          no other write operations (such as async_write, the stream's async_write_some
+          function, or any other composed operations that perform writes) until this
+          operation completes.
         </p>
 <a name="asio.reference.async_write.overload1.parameters"></a><h6>
-<a name="id708729"></a>
+<a name="id592761"></a>
           <a class="link" href="overload1.html#asio.reference.async_write.overload1.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -97,7 +101,7 @@
 </dl>
 </div>
 <a name="asio.reference.async_write.overload1.example"></a><h6>
-<a name="id708942"></a>
+<a name="id592975"></a>
           <a class="link" href="overload1.html#asio.reference.async_write.overload1.example">Example</a>
         </h6>
 <p>

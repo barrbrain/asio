@@ -1,4 +1,4 @@
-AC_INIT(asio, [1.4.4])
+AC_INIT(asio, [1.4.5])
 AC_CONFIG_SRCDIR(include/asio.hpp)
 AM_MAINTAINER_MODE
 AM_INIT_AUTOMAKE([tar-ustar])
@@ -110,7 +110,7 @@ case $host in
     ;;
   *-*-solaris*)
     if test "$GXX" = yes; then
-      CXXFLAGS="$CXXFLAGS"
+      CXXFLAGS="$CXXFLAGS -D_PTHREADS"
     else
       # We'll assume Sun's CC.
       CXXFLAGS="$CXXFLAGS -mt"

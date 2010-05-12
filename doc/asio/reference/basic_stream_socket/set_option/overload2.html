@@ -26,7 +26,9 @@
 <p>
             Set an option on the socket.
           </p>
-<pre class="programlisting"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">set_option</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
+    <span class="keyword">typename</span> <a class="link" href="../../SettableSocketOption.html" title="Settable socket option requirements">SettableSocketOption</a><span class="special">&gt;</span>
+<span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="identifier">set_option</span><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">SettableSocketOption</span> <span class="special">&amp;</span> <span class="identifier">option</span><span class="special">,</span>
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span> <span class="special">&amp;</span> <span class="identifier">ec</span><span class="special">);</span>
 </pre>
@@ -34,7 +36,7 @@
             This function is used to set an option on the socket.
           </p>
 <a name="asio.reference.basic_stream_socket.set_option.overload2.parameters"></a><h6>
-<a name="id902194"></a>
+<a name="id786916"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.set_option.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -51,7 +53,7 @@
 </dl>
 </div>
 <a name="asio.reference.basic_stream_socket.set_option.overload2.example"></a><h6>
-<a name="id902244"></a>
+<a name="id786966"></a>
             <a class="link" href="overload2.html#asio.reference.basic_stream_socket.set_option.overload2.example">Example</a>
           </h6>
 <p>

@@ -20,7 +20,7 @@
 <a name="asio.using"></a><a class="link" href="using.html" title="Using Asio"> Using Asio</a>
 </h2></div></div></div>
 <a name="asio.using.supported_platforms"></a><h4>
-<a name="id608468"></a>
+<a name="id491457"></a>
       <a class="link" href="using.html#asio.using.supported_platforms">Supported Platforms</a>
     </h4>
 <p>
@@ -71,7 +71,7 @@
       </li>
 </ul></div>
 <a name="asio.using.dependencies"></a><h4>
-<a name="id608557"></a>
+<a name="id491546"></a>
       <a class="link" href="using.html#asio.using.dependencies">Dependencies</a>
     </h4>
 <p>
@@ -105,7 +105,7 @@
       </p></td></tr>
 </table></div>
 <a name="asio.using.building_the_tests_and_examples_on_linux_or_unix"></a><h4>
-<a name="id608698"></a>
+<a name="id491688"></a>
       <a class="link" href="using.html#asio.using.building_the_tests_and_examples_on_linux_or_unix">Building
       the tests and examples on Linux or UNIX</a>
     </h4>
@@ -138,7 +138,7 @@
       after a successful build.
     </p>
 <a name="asio.using.building_the_tests_and_examples_with_msvc"></a><h4>
-<a name="id608836"></a>
+<a name="id491826"></a>
       <a class="link" href="using.html#asio.using.building_the_tests_and_examples_with_msvc">Building
       the tests and examples with MSVC</a>
     </h4>
@@ -166,7 +166,7 @@
       </li>
 </ul></div>
 <a name="asio.using.building_the_test_and_examples_with_borland_c__"></a><h4>
-<a name="id608986"></a>
+<a name="id491974"></a>
       <a class="link" href="using.html#asio.using.building_the_test_and_examples_with_borland_c__">Building
       the test and examples with Borland C++</a>
     </h4>
@@ -194,7 +194,7 @@
       </li>
 </ul></div>
 <a name="asio.using.building_the_tests_and_examples_with_mingw"></a><h4>
-<a name="id609136"></a>
+<a name="id492124"></a>
       <a class="link" href="using.html#asio.using.building_the_tests_and_examples_with_mingw">Building
       the tests and examples with MinGW</a>
     </h4>
@@ -234,7 +234,7 @@
       </p></td></tr>
 </table></div>
 <a name="asio.using.macros"></a><h4>
-<a name="id609365"></a>
+<a name="id492354"></a>
       <a class="link" href="using.html#asio.using.macros">Macros</a>
     </h4>
 <p>
@@ -368,6 +368,19 @@
 <tr>
 <td>
             <p>
+              <code class="computeroutput"><span class="identifier">ASIO_DISABLE_THREADS</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              Explicitly disables Asio's threading support, independent of whether
+              or not Boost supports threads.
+            </p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p>
               <code class="computeroutput"><span class="identifier">ASIO_NO_WIN32_LEAN_AND_MEAN</span></code>
             </p>
             </td>
@@ -378,6 +391,23 @@
               files and features that are included. The presence of <code class="computeroutput"><span class="identifier">ASIO_NO_WIN32_LEAN_AND_MEAN</span></code> prevents
               <code class="computeroutput"><span class="identifier">WIN32_LEAN_AND_MEAN</span></code>
               from being defined.
+            </p>
+            </td>
+</tr>
+<tr>
+<td>
+            <p>
+              <code class="computeroutput"><span class="identifier">ASIO_NO_NOMINMAX</span></code>
+            </p>
+            </td>
+<td>
+            <p>
+              By default, Asio will automatically define <code class="computeroutput"><span class="identifier">NOMINMAX</span></code>
+              when compiling for Windows, to suppress the definition of the <code class="computeroutput"><span class="identifier">min</span><span class="special">()</span></code>
+              and <code class="computeroutput"><span class="identifier">max</span><span class="special">()</span></code>
+              macros. The presence of <code class="computeroutput"><span class="identifier">ASIO_NO_NOMINMAX</span></code>
+              prevents <code class="computeroutput"><span class="identifier">NOMINMAX</span></code> from
+              being defined.
             </p>
             </td>
 </tr>
@@ -518,7 +548,7 @@
 </tbody>
 </table></div>
 <a name="asio.using.mailing_list"></a><h4>
-<a name="id610261"></a>
+<a name="id493365"></a>
       <a class="link" href="using.html#asio.using.mailing_list">Mailing List</a>
     </h4>
 <p>
@@ -526,12 +556,12 @@
       Newsgroup access is provided via <a href="http://dir.gmane.org/gmane.comp.lib.boost.asio.user" target="_top">Gmane</a>.
     </p>
 <a name="asio.using.wiki"></a><h4>
-<a name="id610297"></a>
+<a name="id493401"></a>
       <a class="link" href="using.html#asio.using.wiki">Wiki</a>
     </h4>
 <p>
       Users are encouraged to share examples, tips and FAQs on the Asio wiki, which
-      is located at <a href="http://asio.sourceforge.net" target="_top">http://asio.sourceforge.net</a>.
+      is located at <a href="http://think-async.com/Asio/" target="_top">http://think-async.com/Asio/</a>.
     </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

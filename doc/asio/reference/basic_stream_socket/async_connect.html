@@ -24,10 +24,12 @@
           <span class="emphasis"><em>Inherited from basic_socket.</em></span>
         </p>
 <p>
-          <a class="indexterm" name="id874278"></a> 
+          <a class="indexterm" name="id758881"></a> 
 Start an asynchronous connect.
         </p>
-<pre class="programlisting"><span class="keyword">void</span> <span class="identifier">async_connect</span><span class="special">(</span>
+<pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
+    <span class="keyword">typename</span> <a class="link" href="../ConnectHandler.html" title="Connect handler requirements">ConnectHandler</a><span class="special">&gt;</span>
+<span class="keyword">void</span> <span class="identifier">async_connect</span><span class="special">(</span>
     <span class="keyword">const</span> <span class="identifier">endpoint_type</span> <span class="special">&amp;</span> <span class="identifier">peer_endpoint</span><span class="special">,</span>
     <span class="identifier">ConnectHandler</span> <span class="identifier">handler</span><span class="special">);</span>
 </pre>
@@ -41,7 +43,7 @@ Start an asynchronous connect.
           to the closed state.
         </p>
 <a name="asio.reference.basic_stream_socket.async_connect.parameters"></a><h6>
-<a name="id874370"></a>
+<a name="id759001"></a>
           <a class="link" href="async_connect.html#asio.reference.basic_stream_socket.async_connect.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -73,7 +75,7 @@ Start an asynchronous connect.
 </dl>
 </div>
 <a name="asio.reference.basic_stream_socket.async_connect.example"></a><h6>
-<a name="id874521"></a>
+<a name="id759151"></a>
           <a class="link" href="async_connect.html#asio.reference.basic_stream_socket.async_connect.example">Example</a>
         </h6>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">connect_handler</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span><span class="special">)</span>

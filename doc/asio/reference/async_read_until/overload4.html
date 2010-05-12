@@ -54,11 +54,16 @@
 </ul></div>
 <p>
           This operation is implemented in terms of zero or more calls to the stream's
-          async_read_some function. If the match condition function object already
-          indicates a match, the operation completes immediately.
+          async_read_some function, and is known as a <span class="bold"><strong>composed
+          operation</strong></span>. If the match condition function object already indicates
+          a match, this asynchronous operation completes immediately. The program
+          must ensure that the stream performs no other read operations (such as
+          async_read, async_read_until, the stream's async_read_some function, or
+          any other composed operations that perform reads) until this operation
+          completes.
         </p>
 <a name="asio.reference.async_read_until.overload4.parameters"></a><h6>
-<a name="id706066"></a>
+<a name="id590092"></a>
           <a class="link" href="overload4.html#asio.reference.async_read_until.overload4.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -127,7 +132,7 @@
 </dl>
 </div>
 <a name="asio.reference.async_read_until.overload4.remarks"></a><h6>
-<a name="id706473"></a>
+<a name="id590498"></a>
           <a class="link" href="overload4.html#asio.reference.async_read_until.overload4.remarks">Remarks</a>
         </h6>
 <p>
@@ -143,7 +148,7 @@
           It must be specialised for other user-defined function objects.
         </p>
 <a name="asio.reference.async_read_until.overload4.examples"></a><h6>
-<a name="id706525"></a>
+<a name="id590550"></a>
           <a class="link" href="overload4.html#asio.reference.async_read_until.overload4.examples">Examples</a>
         </h6>
 <p>
