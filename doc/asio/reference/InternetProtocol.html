@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="asio.reference.InternetProtocol"></a><a class="link" href="InternetProtocol.html" title="Internet protocol requirements"> Internet protocol requirements</a>
+<a name="asio.reference.InternetProtocol"></a><a class="link" href="InternetProtocol.html" title="Internet protocol requirements">Internet protocol requirements</a>
 </h3></div></div></div>
 <p>
         An internet protocol must meet the requirements for a <a class="link" href="Protocol.html" title="Protocol requirements">protocol</a>
@@ -31,7 +31,7 @@
         type <code class="computeroutput"><span class="identifier">X</span></code>.
       </p>
 <div class="table">
-<a name="id546557"></a><p class="title"><b>Table&#160;15.&#160;InternetProtocol requirements</b></p>
+<a name="id632415"></a><p class="title"><b>Table&#160;15.&#160;InternetProtocol requirements</b></p>
 <div class="table-contents"><table class="table" summary="InternetProtocol requirements">
 <colgroup>
 <col>
@@ -40,109 +40,109 @@
 </colgroup>
 <thead><tr>
 <th>
-            <p>
-              expression
-            </p>
-            </th>
+                <p>
+                  expression
+                </p>
+              </th>
 <th>
-            <p>
-              return type
-            </p>
-            </th>
+                <p>
+                  return type
+                </p>
+              </th>
 <th>
-            <p>
-              assertion/note<br> pre/post-conditions
-            </p>
-            </th>
+                <p>
+                  assertion/note\npre/post-conditions
+                </p>
+              </th>
 </tr></thead>
 <tbody>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">X</span><span class="special">::</span><span class="identifier">resolver</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">X</span><span class="special">::</span><span class="identifier">resolver</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ip</span><span class="special">::</span><span class="identifier">basic_resolver</span><span class="special">&lt;</span><span class="identifier">X</span><span class="special">&gt;</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">ip</span><span class="special">::</span><span class="identifier">basic_resolver</span><span class="special">&lt;</span><span class="identifier">X</span><span class="special">&gt;</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              The type of a resolver for the protocol.
-            </p>
-            </td>
+                <p>
+                  The type of a resolver for the protocol.
+                </p>
+              </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">X</span><span class="special">::</span><span class="identifier">v4</span><span class="special">()</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">X</span><span class="special">::</span><span class="identifier">v4</span><span class="special">()</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">X</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">X</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              Returns an object representing the IP version 4 protocol.
-            </p>
-            </td>
+                <p>
+                  Returns an object representing the IP version 4 protocol.
+                </p>
+              </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">X</span><span class="special">::</span><span class="identifier">v6</span><span class="special">()</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">X</span><span class="special">::</span><span class="identifier">v6</span><span class="special">()</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">X</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">X</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              Returns an object representing the IP version 6 protocol.
-            </p>
-            </td>
+                <p>
+                  Returns an object representing the IP version 6 protocol.
+                </p>
+              </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">a</span> <span class="special">==</span>
-              <span class="identifier">b</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">a</span> <span class="special">==</span>
+                  <span class="identifier">b</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              convertible to <code class="computeroutput"><span class="keyword">bool</span></code>
-            </p>
-            </td>
+                <p>
+                  convertible to <code class="computeroutput"><span class="keyword">bool</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              Returns whether two protocol objects are equal.
-            </p>
-            </td>
+                <p>
+                  Returns whether two protocol objects are equal.
+                </p>
+              </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">a</span> <span class="special">!=</span>
-              <span class="identifier">b</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">a</span> <span class="special">!=</span>
+                  <span class="identifier">b</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              convertible to <code class="computeroutput"><span class="keyword">bool</span></code>
-            </p>
-            </td>
+                <p>
+                  convertible to <code class="computeroutput"><span class="keyword">bool</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              Returns <code class="computeroutput"><span class="special">!(</span><span class="identifier">a</span>
-              <span class="special">==</span> <span class="identifier">b</span><span class="special">)</span></code>.
-            </p>
-            </td>
+                <p>
+                  Returns <code class="computeroutput"><span class="special">!(</span><span class="identifier">a</span>
+                  <span class="special">==</span> <span class="identifier">b</span><span class="special">)</span></code>.
+                </p>
+              </td>
 </tr>
 </tbody>
 </table></div>

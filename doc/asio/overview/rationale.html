@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="asio.overview.rationale"></a><a class="link" href="rationale.html" title="Rationale"> Rationale</a>
+<a name="asio.overview.rationale"></a><a class="link" href="rationale.html" title="Rationale">Rationale</a>
 </h3></div></div></div>
 <p>
         Most programs interact with the outside world in some way, whether it be
@@ -37,42 +37,42 @@
       </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-<span class="bold"><strong>Portability.</strong></span> The library should support
-          a range of commonly used operating systems, and provide consistent behaviour
-          across these operating systems.
-        </li>
+            <span class="bold"><strong>Portability.</strong></span> The library should support
+            a range of commonly used operating systems, and provide consistent behaviour
+            across these operating systems.
+          </li>
 <li>
-<span class="bold"><strong>Scalability.</strong></span> The library should facilitate
-          the development of network applications that scale to thousands of concurrent
-          connections. The library implementation for each operating system should
-          use the mechanism that best enables this scalability.
-        </li>
+            <span class="bold"><strong>Scalability.</strong></span> The library should facilitate
+            the development of network applications that scale to thousands of concurrent
+            connections. The library implementation for each operating system should
+            use the mechanism that best enables this scalability.
+          </li>
 <li>
-<span class="bold"><strong>Efficiency.</strong></span> The library should support
-          techniques such as scatter-gather I/O, and allow programs to minimise data
-          copying.
-        </li>
+            <span class="bold"><strong>Efficiency.</strong></span> The library should support
+            techniques such as scatter-gather I/O, and allow programs to minimise
+            data copying.
+          </li>
 <li>
-<span class="bold"><strong>Model concepts from established APIs, such as BSD
-          sockets.</strong></span> The BSD socket API is widely implemented and understood,
-          and is covered in much literature. Other programming languages often use
-          a similar interface for networking APIs. As far as is reasonable, Asio
-          should leverage existing practice.
-        </li>
+            <span class="bold"><strong>Model concepts from established APIs, such as BSD
+            sockets.</strong></span> The BSD socket API is widely implemented and understood,
+            and is covered in much literature. Other programming languages often
+            use a similar interface for networking APIs. As far as is reasonable,
+            Asio should leverage existing practice.
+          </li>
 <li>
-<span class="bold"><strong>Ease of use.</strong></span> The library should provide
-          a lower entry barrier for new users by taking a toolkit, rather than framework,
-          approach. That is, it should try to minimise the up-front investment in
-          time to just learning a few basic rules and guidelines. After that, a library
-          user should only need to understand the specific functions that are being
-          used.
-        </li>
+            <span class="bold"><strong>Ease of use.</strong></span> The library should provide
+            a lower entry barrier for new users by taking a toolkit, rather than
+            framework, approach. That is, it should try to minimise the up-front
+            investment in time to just learning a few basic rules and guidelines.
+            After that, a library user should only need to understand the specific
+            functions that are being used.
+          </li>
 <li>
-<span class="bold"><strong>Basis for further abstraction.</strong></span> The library
-          should permit the development of other libraries that provide higher levels
-          of abstraction. For example, implementations of commonly used protocols
-          such as HTTP.
-        </li>
+            <span class="bold"><strong>Basis for further abstraction.</strong></span> The library
+            should permit the development of other libraries that provide higher
+            levels of abstraction. For example, implementations of commonly used
+            protocols such as HTTP.
+          </li>
 </ul></div>
 <p>
         Although Asio started life focused primarily on networking, its concepts

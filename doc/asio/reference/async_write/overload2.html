@@ -17,8 +17,8 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.reference.async_write.overload2"></a><a class="link" href="overload2.html" title="async_write (2 of 4 overloads)"> async_write
-        (2 of 4 overloads)</a>
+<a name="asio.reference.async_write.overload2"></a><a class="link" href="overload2.html" title="async_write (2 of 4 overloads)">async_write (2
+        of 4 overloads)</a>
 </h4></div></div></div>
 <p>
           Start an asynchronous operation to write a certain amount of data to a
@@ -43,12 +43,12 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            All of the data in the supplied buffers has been written. That is, the
-            bytes transferred is equal to the sum of the buffer sizes.
-          </li>
+              All of the data in the supplied buffers has been written. That is,
+              the bytes transferred is equal to the sum of the buffer sizes.
+            </li>
 <li>
-            The completion_condition function object returns 0.
-          </li>
+              The completion_condition function object returns 0.
+            </li>
 </ul></div>
 <p>
           This operation is implemented in terms of zero or more calls to the stream's
@@ -59,7 +59,7 @@
           operation completes.
         </p>
 <a name="asio.reference.async_write.overload2.parameters"></a><h6>
-<a name="id593345"></a>
+<a name="id678922"></a>
           <a class="link" href="overload2.html#asio.reference.async_write.overload2.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -67,21 +67,21 @@
 <dl>
 <dt><span class="term">s</span></dt>
 <dd><p>
-              The stream to which the data is to be written. The type must support
-              the AsyncWriteStream concept.
-            </p></dd>
+                The stream to which the data is to be written. The type must support
+                the AsyncWriteStream concept.
+              </p></dd>
 <dt><span class="term">buffers</span></dt>
 <dd><p>
-              One or more buffers containing the data to be written. Although the
-              buffers object may be copied as necessary, ownership of the underlying
-              memory blocks is retained by the caller, which must guarantee that
-              they remain valid until the handler is called.
-            </p></dd>
+                One or more buffers containing the data to be written. Although the
+                buffers object may be copied as necessary, ownership of the underlying
+                memory blocks is retained by the caller, which must guarantee that
+                they remain valid until the handler is called.
+              </p></dd>
 <dt><span class="term">completion_condition</span></dt>
 <dd>
 <p>
-              The function object to be called to determine whether the write operation
-              is complete. The signature of the function object must be: 
+                The function object to be called to determine whether the write operation
+                is complete. The signature of the function object must be: 
 </p>
 <pre class="programlisting"><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">completion_condition</span><span class="special">(</span>
   <span class="comment">// Result of latest async_write_some operation.
@@ -92,17 +92,17 @@
 <span class="special">);</span> 
 </pre>
 <p>
-              A return value of 0 indicates that the write operation is complete.
-              A non-zero return value indicates the maximum number of bytes to be
-              written on the next call to the stream's async_write_some function.
-            </p>
+                A return value of 0 indicates that the write operation is complete.
+                A non-zero return value indicates the maximum number of bytes to
+                be written on the next call to the stream's async_write_some function.
+              </p>
 </dd>
 <dt><span class="term">handler</span></dt>
 <dd>
 <p>
-              The handler to be called when the write operation completes. Copies
-              will be made of the handler as required. The function signature of
-              the handler must be: 
+                The handler to be called when the write operation completes. Copies
+                will be made of the handler as required. The function signature of
+                the handler must be: 
 </p>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span><span class="special">,</span> <span class="comment">// Result of operation.
@@ -114,16 +114,16 @@
 </span><span class="special">);</span> 
 </pre>
 <p>
-              Regardless of whether the asynchronous operation completes immediately
-              or not, the handler will not be invoked from within this function.
-              Invocation of the handler will be performed in a manner equivalent
-              to using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">post</span><span class="special">()</span></code>.
-            </p>
+                Regardless of whether the asynchronous operation completes immediately
+                or not, the handler will not be invoked from within this function.
+                Invocation of the handler will be performed in a manner equivalent
+                to using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">post</span><span class="special">()</span></code>.
+              </p>
 </dd>
 </dl>
 </div>
 <a name="asio.reference.async_write.overload2.example"></a><h6>
-<a name="id593678"></a>
+<a name="id679259"></a>
           <a class="link" href="overload2.html#asio.reference.async_write.overload2.example">Example</a>
         </h6>
 <p>

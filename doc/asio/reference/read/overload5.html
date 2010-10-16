@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.reference.read.overload5"></a><a class="link" href="overload5.html" title="read (5 of 6 overloads)"> read (5 of 6 overloads)</a>
+<a name="asio.reference.read.overload5"></a><a class="link" href="overload5.html" title="read (5 of 6 overloads)">read (5 of 6 overloads)</a>
 </h4></div></div></div>
 <p>
           Attempt to read a certain amount of data from a stream before returning.
@@ -36,14 +36,14 @@
           stream. The call will block until one of the following conditions is true:
         </p>
 <div class="itemizedlist"><ul type="disc"><li>
-            The completion_condition function object returns 0.
-          </li></ul></div>
+              The completion_condition function object returns 0.
+            </li></ul></div>
 <p>
           This operation is implemented in terms of zero or more calls to the stream's
           read_some function.
         </p>
 <a name="asio.reference.read.overload5.parameters"></a><h6>
-<a name="id959857"></a>
+<a name="id1051469"></a>
           <a class="link" href="overload5.html#asio.reference.read.overload5.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -51,19 +51,19 @@
 <dl>
 <dt><span class="term">s</span></dt>
 <dd><p>
-              The stream from which the data is to be read. The type must support
-              the SyncReadStream concept.
-            </p></dd>
+                The stream from which the data is to be read. The type must support
+                the SyncReadStream concept.
+              </p></dd>
 <dt><span class="term">b</span></dt>
 <dd><p>
-              The <a class="link" href="../basic_streambuf.html" title="basic_streambuf"><code class="computeroutput"><span class="identifier">basic_streambuf</span></code></a>
-              object into which the data will be read.
-            </p></dd>
+                The <a class="link" href="../basic_streambuf.html" title="basic_streambuf"><code class="computeroutput"><span class="identifier">basic_streambuf</span></code></a> object into
+                which the data will be read.
+              </p></dd>
 <dt><span class="term">completion_condition</span></dt>
 <dd>
 <p>
-              The function object to be called to determine whether the read operation
-              is complete. The signature of the function object must be: 
+                The function object to be called to determine whether the read operation
+                is complete. The signature of the function object must be: 
 </p>
 <pre class="programlisting"><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">completion_condition</span><span class="special">(</span>
   <span class="comment">// Result of latest read_some operation.
@@ -74,22 +74,22 @@
 <span class="special">);</span> 
 </pre>
 <p>
-              A return value of 0 indicates that the read operation is complete.
-              A non-zero return value indicates the maximum number of bytes to be
-              read on the next call to the stream's read_some function.
-            </p>
+                A return value of 0 indicates that the read operation is complete.
+                A non-zero return value indicates the maximum number of bytes to
+                be read on the next call to the stream's read_some function.
+              </p>
 </dd>
 </dl>
 </div>
 <a name="asio.reference.read.overload5.return_value"></a><h6>
-<a name="id960043"></a>
+<a name="id1051658"></a>
           <a class="link" href="overload5.html#asio.reference.read.overload5.return_value">Return Value</a>
         </h6>
 <p>
           The number of bytes transferred.
         </p>
 <a name="asio.reference.read.overload5.exceptions"></a><h6>
-<a name="id960067"></a>
+<a name="id1051682"></a>
           <a class="link" href="overload5.html#asio.reference.read.overload5.exceptions">Exceptions</a>
         </h6>
 <div class="variablelist">
@@ -97,8 +97,8 @@
 <dl>
 <dt><span class="term">asio::system_error</span></dt>
 <dd><p>
-              Thrown on failure.
-            </p></dd>
+                Thrown on failure.
+              </p></dd>
 </dl>
 </div>
 </div>

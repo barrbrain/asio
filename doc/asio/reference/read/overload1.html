@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.reference.read.overload1"></a><a class="link" href="overload1.html" title="read (1 of 6 overloads)"> read (1 of 6 overloads)</a>
+<a name="asio.reference.read.overload1"></a><a class="link" href="overload1.html" title="read (1 of 6 overloads)">read (1 of 6 overloads)</a>
 </h4></div></div></div>
 <p>
           Attempt to read a certain amount of data from a stream before returning.
@@ -35,19 +35,19 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            The supplied buffers are full. That is, the bytes transferred is equal
-            to the sum of the buffer sizes.
-          </li>
+              The supplied buffers are full. That is, the bytes transferred is equal
+              to the sum of the buffer sizes.
+            </li>
 <li>
-            An error occurred.
-          </li>
+              An error occurred.
+            </li>
 </ul></div>
 <p>
           This operation is implemented in terms of zero or more calls to the stream's
           read_some function.
         </p>
 <a name="asio.reference.read.overload1.parameters"></a><h6>
-<a name="id957923"></a>
+<a name="id1049500"></a>
           <a class="link" href="overload1.html#asio.reference.read.overload1.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -55,26 +55,26 @@
 <dl>
 <dt><span class="term">s</span></dt>
 <dd><p>
-              The stream from which the data is to be read. The type must support
-              the SyncReadStream concept.
-            </p></dd>
+                The stream from which the data is to be read. The type must support
+                the SyncReadStream concept.
+              </p></dd>
 <dt><span class="term">buffers</span></dt>
 <dd><p>
-              One or more buffers into which the data will be read. The sum of the
-              buffer sizes indicates the maximum number of bytes to read from the
-              stream.
-            </p></dd>
+                One or more buffers into which the data will be read. The sum of
+                the buffer sizes indicates the maximum number of bytes to read from
+                the stream.
+              </p></dd>
 </dl>
 </div>
 <a name="asio.reference.read.overload1.return_value"></a><h6>
-<a name="id957975"></a>
+<a name="id1049554"></a>
           <a class="link" href="overload1.html#asio.reference.read.overload1.return_value">Return Value</a>
         </h6>
 <p>
           The number of bytes transferred.
         </p>
 <a name="asio.reference.read.overload1.exceptions"></a><h6>
-<a name="id957999"></a>
+<a name="id1049578"></a>
           <a class="link" href="overload1.html#asio.reference.read.overload1.exceptions">Exceptions</a>
         </h6>
 <div class="variablelist">
@@ -82,12 +82,12 @@
 <dl>
 <dt><span class="term">asio::system_error</span></dt>
 <dd><p>
-              Thrown on failure.
-            </p></dd>
+                Thrown on failure.
+              </p></dd>
 </dl>
 </div>
 <a name="asio.reference.read.overload1.example"></a><h6>
-<a name="id958037"></a>
+<a name="id1049617"></a>
           <a class="link" href="overload1.html#asio.reference.read.overload1.example">Example</a>
         </h6>
 <p>
@@ -101,7 +101,7 @@
           and how to use it with arrays, boost::array or std::vector.
         </p>
 <a name="asio.reference.read.overload1.remarks"></a><h6>
-<a name="id958167"></a>
+<a name="id1049748"></a>
           <a class="link" href="overload1.html#asio.reference.read.overload1.remarks">Remarks</a>
         </h6>
 <p>

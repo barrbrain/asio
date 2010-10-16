@@ -1,6 +1,6 @@
 //
-// operation.hpp
-// ~~~~~~~~~~~~~
+// detail/operation.hpp
+// ~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2003-2010 Christopher M. Kohlhoff (chris at kohlhoff dot com)
 //
@@ -15,14 +15,11 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
-#include "asio/detail/push_options.hpp"
-
-#include "asio/detail/win_iocp_io_service_fwd.hpp"
+#include "asio/detail/config.hpp"
 
 #if defined(ASIO_HAS_IOCP)
 # include "asio/detail/win_iocp_operation.hpp"
 #else
-# include "asio/detail/reactor_fwd.hpp"
 # include "asio/detail/task_io_service_operation.hpp"
 #endif
 
@@ -32,12 +29,10 @@ namespace detail {
 #if defined(ASIO_HAS_IOCP)
 typedef win_iocp_operation operation;
 #else
-typedef task_io_service_operation<reactor> operation;
+typedef task_io_service_operation operation;
 #endif
 
 } // namespace detail
 } // namespace asio
-
-#include "asio/detail/pop_options.hpp"
 
 #endif // ASIO_DETAIL_OPERATION_HPP

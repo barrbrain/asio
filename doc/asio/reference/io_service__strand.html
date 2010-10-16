@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="asio.reference.io_service__strand"></a><a class="link" href="io_service__strand.html" title="io_service::strand"> io_service::strand</a>
+<a name="asio.reference.io_service__strand"></a><a class="link" href="io_service__strand.html" title="io_service::strand">io_service::strand</a>
 </h3></div></div></div>
 <p>
         Provides serialised handler execution.
@@ -25,7 +25,7 @@
 <pre class="programlisting"><span class="keyword">class</span> <span class="identifier">strand</span>
 </pre>
 <a name="asio.reference.io_service__strand.member_functions"></a><h5>
-<a name="id849102"></a>
+<a name="id936985"></a>
         <a class="link" href="io_service__strand.html#asio.reference.io_service__strand.member_functions">Member
         Functions</a>
       </h5>
@@ -36,101 +36,101 @@
 </colgroup>
 <thead><tr>
 <th>
-              <p>
-                Name
-              </p>
+                <p>
+                  Name
+                </p>
               </th>
 <th>
-              <p>
-                Description
-              </p>
+                <p>
+                  Description
+                </p>
               </th>
 </tr></thead>
 <tbody>
 <tr>
 <td>
-              <p>
-                <a class="link" href="io_service__strand/dispatch.html" title="io_service::strand::dispatch"><span class="bold"><strong>dispatch</strong></span></a>
-              </p>
+                <p>
+                  <a class="link" href="io_service__strand/dispatch.html" title="io_service::strand::dispatch"><span class="bold"><strong>dispatch</strong></span></a>
+                </p>
               </td>
 <td>
-              <p>
-                Request the strand to invoke the given handler.
-              </p>
-              </td>
-</tr>
-<tr>
-<td>
-              <p>
-                <a class="link" href="io_service__strand/get_io_service.html" title="io_service::strand::get_io_service"><span class="bold"><strong>get_io_service</strong></span></a>
-              </p>
-              </td>
-<td>
-              <p>
-                Get the io_service associated with the strand.
-              </p>
+                <p>
+                  Request the strand to invoke the given handler.
+                </p>
               </td>
 </tr>
 <tr>
 <td>
-              <p>
-                <a class="link" href="io_service__strand/io_service.html" title="io_service::strand::io_service"><span class="bold"><strong>io_service</strong></span></a>
-              </p>
+                <p>
+                  <a class="link" href="io_service__strand/get_io_service.html" title="io_service::strand::get_io_service"><span class="bold"><strong>get_io_service</strong></span></a>
+                </p>
               </td>
 <td>
-              <p>
-                (Deprecated: use get_io_service().) Get the io_service associated
-                with the strand.
-              </p>
-              </td>
-</tr>
-<tr>
-<td>
-              <p>
-                <a class="link" href="io_service__strand/post.html" title="io_service::strand::post"><span class="bold"><strong>post</strong></span></a>
-              </p>
-              </td>
-<td>
-              <p>
-                Request the strand to invoke the given handler and return immediately.
-              </p>
+                <p>
+                  Get the io_service associated with the strand.
+                </p>
               </td>
 </tr>
 <tr>
 <td>
-              <p>
-                <a class="link" href="io_service__strand/strand.html" title="io_service::strand::strand"><span class="bold"><strong>strand</strong></span></a>
-              </p>
+                <p>
+                  <a class="link" href="io_service__strand/io_service.html" title="io_service::strand::io_service"><span class="bold"><strong>io_service</strong></span></a>
+                </p>
               </td>
 <td>
-              <p>
-                Constructor.
-              </p>
-              </td>
-</tr>
-<tr>
-<td>
-              <p>
-                <a class="link" href="io_service__strand/wrap.html" title="io_service::strand::wrap"><span class="bold"><strong>wrap</strong></span></a>
-              </p>
-              </td>
-<td>
-              <p>
-                Create a new handler that automatically dispatches the wrapped handler
-                on the strand.
-              </p>
+                <p>
+                  (Deprecated: use get_io_service().) Get the io_service associated
+                  with the strand.
+                </p>
               </td>
 </tr>
 <tr>
 <td>
-              <p>
-                <a class="link" href="io_service__strand/_strand.html" title="io_service::strand::~strand"><span class="bold"><strong>~strand</strong></span></a>
-              </p>
+                <p>
+                  <a class="link" href="io_service__strand/post.html" title="io_service::strand::post"><span class="bold"><strong>post</strong></span></a>
+                </p>
               </td>
 <td>
-              <p>
-                Destructor.
-              </p>
+                <p>
+                  Request the strand to invoke the given handler and return immediately.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <a class="link" href="io_service__strand/strand.html" title="io_service::strand::strand"><span class="bold"><strong>strand</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Constructor.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <a class="link" href="io_service__strand/wrap.html" title="io_service::strand::wrap"><span class="bold"><strong>wrap</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Create a new handler that automatically dispatches the wrapped
+                  handler on the strand.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <a class="link" href="io_service__strand/_strand.html" title="io_service::strand::~strand"><span class="bold"><strong>~strand</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Destructor.
+                </p>
               </td>
 </tr>
 </tbody>
@@ -141,7 +141,7 @@
         that none of those handlers will execute concurrently.
       </p>
 <a name="asio.reference.io_service__strand.order_of_handler_invocation"></a><h5>
-<a name="id849375"></a>
+<a name="id937267"></a>
         <a class="link" href="io_service__strand.html#asio.reference.io_service__strand.order_of_handler_invocation">Order
         of handler invocation</a>
       </h5>
@@ -150,50 +150,50 @@
       </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-          a strand object <code class="computeroutput"><span class="identifier">s</span></code>
-</li>
+            a strand object <code class="computeroutput"><span class="identifier">s</span></code>
+          </li>
 <li>
-          an object <code class="computeroutput"><span class="identifier">a</span></code> meeting completion
-          handler requirements
-        </li>
+            an object <code class="computeroutput"><span class="identifier">a</span></code> meeting completion
+            handler requirements
+          </li>
 <li>
-          an object <code class="computeroutput"><span class="identifier">a1</span></code> which is an
-          arbitrary copy of <code class="computeroutput"><span class="identifier">a</span></code> made
-          by the implementation
-        </li>
+            an object <code class="computeroutput"><span class="identifier">a1</span></code> which is
+            an arbitrary copy of <code class="computeroutput"><span class="identifier">a</span></code>
+            made by the implementation
+          </li>
 <li>
-          an object <code class="computeroutput"><span class="identifier">b</span></code> meeting completion
-          handler requirements
-        </li>
+            an object <code class="computeroutput"><span class="identifier">b</span></code> meeting completion
+            handler requirements
+          </li>
 <li>
-          an object <code class="computeroutput"><span class="identifier">b1</span></code> which is an
-          arbitrary copy of <code class="computeroutput"><span class="identifier">b</span></code> made
-          by the implementation
-        </li>
+            an object <code class="computeroutput"><span class="identifier">b1</span></code> which is
+            an arbitrary copy of <code class="computeroutput"><span class="identifier">b</span></code>
+            made by the implementation
+          </li>
 </ul></div>
 <p>
         if any of the following conditions are true:
       </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-<code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">post</span><span class="special">(</span><span class="identifier">a</span><span class="special">)</span></code> happens-before
-          <code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">post</span><span class="special">(</span><span class="identifier">b</span><span class="special">)</span></code>
-</li>
+            <code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">post</span><span class="special">(</span><span class="identifier">a</span><span class="special">)</span></code>
+            happens-before <code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">post</span><span class="special">(</span><span class="identifier">b</span><span class="special">)</span></code>
+          </li>
 <li>
-<code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">post</span><span class="special">(</span><span class="identifier">a</span><span class="special">)</span></code> happens-before
-          <code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">dispatch</span><span class="special">(</span><span class="identifier">b</span><span class="special">)</span></code>, where
-          the latter is performed outside the strand
-        </li>
+            <code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">post</span><span class="special">(</span><span class="identifier">a</span><span class="special">)</span></code>
+            happens-before <code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">dispatch</span><span class="special">(</span><span class="identifier">b</span><span class="special">)</span></code>,
+            where the latter is performed outside the strand
+          </li>
 <li>
-<code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">dispatch</span><span class="special">(</span><span class="identifier">a</span><span class="special">)</span></code> happens-before
-          <code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">post</span><span class="special">(</span><span class="identifier">b</span><span class="special">)</span></code>, where
-          the former is performed outside the strand
-        </li>
+            <code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">dispatch</span><span class="special">(</span><span class="identifier">a</span><span class="special">)</span></code>
+            happens-before <code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">post</span><span class="special">(</span><span class="identifier">b</span><span class="special">)</span></code>,
+            where the former is performed outside the strand
+          </li>
 <li>
-<code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">dispatch</span><span class="special">(</span><span class="identifier">a</span><span class="special">)</span></code> happens-before
-          <code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">dispatch</span><span class="special">(</span><span class="identifier">b</span><span class="special">)</span></code>, where
-          both are performed outside the strand
-        </li>
+            <code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">dispatch</span><span class="special">(</span><span class="identifier">a</span><span class="special">)</span></code>
+            happens-before <code class="computeroutput"><span class="identifier">s</span><span class="special">.</span><span class="identifier">dispatch</span><span class="special">(</span><span class="identifier">b</span><span class="special">)</span></code>,
+            where both are performed outside the strand
+          </li>
 </ul></div>
 <p>
         then <code class="computeroutput"><span class="identifier">asio_handler_invoke</span><span class="special">(</span><span class="identifier">a1</span><span class="special">,</span>
@@ -214,7 +214,7 @@
         are met and no ordering guarantee is made.
       </p>
 <a name="asio.reference.io_service__strand.thread_safety"></a><h5>
-<a name="id850011"></a>
+<a name="id937931"></a>
         <a class="link" href="io_service__strand.html#asio.reference.io_service__strand.thread_safety">Thread Safety</a>
       </h5>
 <p>
@@ -226,7 +226,7 @@
         Safe.
       </p>
 <a name="asio.reference.io_service__strand.requirements"></a><h5>
-<a name="id850061"></a>
+<a name="id937981"></a>
         <a class="link" href="io_service__strand.html#asio.reference.io_service__strand.requirements">Requirements</a>
       </h5>
 <p>

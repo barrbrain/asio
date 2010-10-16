@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="asio.reference.asynchronous_operations"></a><a class="link" href="asynchronous_operations.html" title="Requirements on asynchronous operations"> Requirements
+<a name="asio.reference.asynchronous_operations"></a><a class="link" href="asynchronous_operations.html" title="Requirements on asynchronous operations">Requirements
       on asynchronous operations</a>
 </h3></div></div></div>
 <p>
@@ -138,14 +138,13 @@
       </p>
 <div class="orderedlist"><ol type="1">
 <li>
-          Constructing a bound completion handler <code class="computeroutput"><span class="identifier">bch</span></code>
-          for the handler, as described below.
-        </li>
+            Constructing a bound completion handler <code class="computeroutput"><span class="identifier">bch</span></code>
+            for the handler, as described below.
+          </li>
 <li>
-          Calling <code class="computeroutput"><span class="identifier">ios</span><span class="special">.</span><span class="identifier">post</span><span class="special">(</span><span class="identifier">bch</span><span class="special">)</span></code>
-          to schedule the handler for deferred invocation, where <code class="computeroutput"><span class="identifier">ios</span></code>
-          is the associated <code class="computeroutput"><span class="identifier">io_service</span></code>.
-        </li>
+            Calling <code class="computeroutput"><span class="identifier">ios</span><span class="special">.</span><span class="identifier">post</span><span class="special">(</span><span class="identifier">bch</span><span class="special">)</span></code>
+            to schedule the handler for deferred invocation, where <code class="computeroutput"><span class="identifier">ios</span></code> is the associated <code class="computeroutput"><span class="identifier">io_service</span></code>.
+          </li>
 </ol></div>
 <p>
         This implies that the handler must not be called directly from within the

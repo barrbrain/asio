@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.overview.core.buffers"></a><a class="link" href="buffers.html" title="Buffers"> Buffers</a>
+<a name="asio.overview.core.buffers"></a><a class="link" href="buffers.html" title="Buffers">Buffers</a>
 </h4></div></div></div>
 <p>
           Fundamentally, I/O involves the transfer of data to and from contiguous
@@ -28,11 +28,11 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            A scatter-read receives data into multiple buffers.
-          </li>
+              A scatter-read receives data into multiple buffers.
+            </li>
 <li>
-            A gather-write transmits multiple buffers.
-          </li>
+              A gather-write transmits multiple buffers.
+            </li>
 </ul></div>
 <p>
           Therefore we require an abstraction to represent a collection of buffers.
@@ -61,25 +61,25 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            Types behave as std::pair would in conversions. That is, a <code class="computeroutput"><span class="identifier">mutable_buffer</span></code> is convertible to a
-            <code class="computeroutput"><span class="identifier">const_buffer</span></code>, but the
-            opposite conversion is disallowed.
-          </li>
+              Types behave as std::pair would in conversions. That is, a <code class="computeroutput"><span class="identifier">mutable_buffer</span></code> is convertible to
+              a <code class="computeroutput"><span class="identifier">const_buffer</span></code>, but
+              the opposite conversion is disallowed.
+            </li>
 <li>
-            There is protection against buffer overruns. Given a buffer instance,
-            a user can only create another buffer representing the same range of
-            memory or a sub-range of it. To provide further safety, the library also
-            includes mechanisms for automatically determining the size of a buffer
-            from an array, <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">array</span></code>
-            or <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span></code> of POD elements, or from a
-            <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span></code>.
-          </li>
+              There is protection against buffer overruns. Given a buffer instance,
+              a user can only create another buffer representing the same range of
+              memory or a sub-range of it. To provide further safety, the library
+              also includes mechanisms for automatically determining the size of
+              a buffer from an array, <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">array</span></code>
+              or <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">vector</span></code> of POD elements, or from a
+              <code class="computeroutput"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span></code>.
+            </li>
 <li>
-            Type safety violations must be explicitly requested using the <code class="computeroutput"><span class="identifier">buffer_cast</span></code> function. In general an
-            application should never need to do this, but it is required by the library
-            implementation to pass the raw memory to the underlying operating system
-            functions.
-          </li>
+              Type safety violations must be explicitly requested using the <code class="computeroutput"><span class="identifier">buffer_cast</span></code> function. In general
+              an application should never need to do this, but it is required by
+              the library implementation to pass the raw memory to the underlying
+              operating system functions.
+            </li>
 </ul></div>
 <p>
           Finally, multiple buffers can be passed to scatter-gather operations (such
@@ -91,7 +91,7 @@
           or <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">array</span></code> can be used.
         </p>
 <a name="asio.overview.core.buffers.streambuf_for_integration_with_iostreams"></a><h6>
-<a name="id476805"></a>
+<a name="id562112"></a>
           <a class="link" href="buffers.html#asio.overview.core.buffers.streambuf_for_integration_with_iostreams">Streambuf
           for Integration with Iostreams</a>
         </h6>
@@ -105,23 +105,23 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            The input sequence of the streambuf is accessible via the <a class="link" href="../../reference/basic_streambuf/data.html" title="basic_streambuf::data">data()</a>
-            member function. The return type of this function meets the <code class="computeroutput"><span class="identifier">ConstBufferSequence</span></code> requirements.
-          </li>
+              The input sequence of the streambuf is accessible via the <a class="link" href="../../reference/basic_streambuf/data.html" title="basic_streambuf::data">data()</a>
+              member function. The return type of this function meets the <code class="computeroutput"><span class="identifier">ConstBufferSequence</span></code> requirements.
+            </li>
 <li>
-            The output sequence of the streambuf is accessible via the <a class="link" href="../../reference/basic_streambuf/data.html" title="basic_streambuf::data">prepare()</a>
-            member function. The return type of this function meets the <code class="computeroutput"><span class="identifier">MutableBufferSequence</span></code> requirements.
-          </li>
+              The output sequence of the streambuf is accessible via the <a class="link" href="../../reference/basic_streambuf/data.html" title="basic_streambuf::data">prepare()</a>
+              member function. The return type of this function meets the <code class="computeroutput"><span class="identifier">MutableBufferSequence</span></code> requirements.
+            </li>
 <li>
-            Data is transferred from the front of the output sequence to the back
-            of the input sequence by calling the <a class="link" href="../../reference/basic_streambuf/commit.html" title="basic_streambuf::commit">commit()</a>
-            member function.
-          </li>
+              Data is transferred from the front of the output sequence to the back
+              of the input sequence by calling the <a class="link" href="../../reference/basic_streambuf/commit.html" title="basic_streambuf::commit">commit()</a>
+              member function.
+            </li>
 <li>
-            Data is removed from the front of the input sequence by calling the
-            <a class="link" href="../../reference/basic_streambuf/consume.html" title="basic_streambuf::consume">consume()</a>
-            member function.
-          </li>
+              Data is removed from the front of the input sequence by calling the
+              <a class="link" href="../../reference/basic_streambuf/consume.html" title="basic_streambuf::consume">consume()</a>
+              member function.
+            </li>
 </ul></div>
 <p>
           The streambuf constructor accepts a <code class="computeroutput"><span class="identifier">size_t</span></code>
@@ -131,7 +131,7 @@
           exception.
         </p>
 <a name="asio.overview.core.buffers.bytewise_traversal_of_buffer_sequences"></a><h6>
-<a name="id476950"></a>
+<a name="id562271"></a>
           <a class="link" href="buffers.html#asio.overview.core.buffers.bytewise_traversal_of_buffer_sequences">Bytewise
           Traversal of Buffer Sequences</a>
         </h6>
@@ -154,7 +154,7 @@
     <span class="identifier">asio</span><span class="special">::</span><span class="identifier">buffers_begin</span><span class="special">(</span><span class="identifier">bufs</span><span class="special">)</span> <span class="special">+</span> <span class="identifier">n</span><span class="special">);</span>
 </pre>
 <a name="asio.overview.core.buffers.buffer_debugging"></a><h6>
-<a name="id477262"></a>
+<a name="id562582"></a>
           <a class="link" href="buffers.html#asio.overview.core.buffers.buffer_debugging">Buffer Debugging</a>
         </h6>
 <p>
@@ -203,7 +203,7 @@
           It can also be explicitly disabled by defining <code class="computeroutput"><span class="identifier">ASIO_DISABLE_BUFFER_DEBUGGING</span></code>.
         </p>
 <a name="asio.overview.core.buffers.see_also"></a><h6>
-<a name="id477636"></a>
+<a name="id562956"></a>
           <a class="link" href="buffers.html#asio.overview.core.buffers.see_also">See Also</a>
         </h6>
 <p>

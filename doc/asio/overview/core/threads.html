@@ -17,10 +17,10 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.overview.core.threads"></a><a class="link" href="threads.html" title="Threads and Asio"> Threads and Asio</a>
+<a name="asio.overview.core.threads"></a><a class="link" href="threads.html" title="Threads and Asio">Threads and Asio</a>
 </h4></div></div></div>
 <a name="asio.overview.core.threads.thread_safety"></a><h6>
-<a name="id475804"></a>
+<a name="id561065"></a>
           <a class="link" href="threads.html#asio.overview.core.threads.thread_safety">Thread Safety</a>
         </h6>
 <p>
@@ -30,7 +30,7 @@
           guarantee that it is safe to use a single object concurrently.
         </p>
 <a name="asio.overview.core.threads.thread_pools"></a><h6>
-<a name="id475833"></a>
+<a name="id561095"></a>
           <a class="link" href="threads.html#asio.overview.core.threads.thread_pools">Thread Pools</a>
         </h6>
 <p>
@@ -45,7 +45,7 @@
           may distribute work across them in an arbitrary fashion.
         </p>
 <a name="asio.overview.core.threads.internal_threads"></a><h6>
-<a name="id475914"></a>
+<a name="id561176"></a>
           <a class="link" href="threads.html#asio.overview.core.threads.internal_threads">Internal Threads</a>
         </h6>
 <p>
@@ -56,19 +56,19 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            must not call the user's code directly; and
-          </li>
+              must not call the user's code directly; and
+            </li>
 <li>
-            must block all signals.
-          </li>
+              must block all signals.
+            </li>
 </ul></div>
 <p>
           This approach is complemented by the following guarantee:
         </p>
 <div class="itemizedlist"><ul type="disc"><li>
-            Asynchronous completion handlers will only be called from threads that
-            are currently calling <code class="computeroutput"><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">run</span><span class="special">()</span></code>.
-          </li></ul></div>
+              Asynchronous completion handlers will only be called from threads that
+              are currently calling <code class="computeroutput"><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">run</span><span class="special">()</span></code>.
+            </li></ul></div>
 <p>
           Consequently, it is the library user's responsibility to create and manage
           all threads to which the notifications will be delivered.
@@ -78,25 +78,25 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            By only calling <code class="computeroutput"><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">run</span><span class="special">()</span></code> from a single thread, the user's code
-            can avoid the development complexity associated with synchronisation.
-            For example, a library user can implement scalable servers that are single-threaded
-            (from the user's point of view).
-          </li>
+              By only calling <code class="computeroutput"><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">run</span><span class="special">()</span></code> from a single thread, the user's
+              code can avoid the development complexity associated with synchronisation.
+              For example, a library user can implement scalable servers that are
+              single-threaded (from the user's point of view).
+            </li>
 <li>
-            A library user may need to perform initialisation in a thread shortly
-            after the thread starts and before any other application code is executed.
-            For example, users of Microsoft's COM must call <code class="computeroutput"><span class="identifier">CoInitializeEx</span></code>
-            before any other COM operations can be called from that thread.
-          </li>
+              A library user may need to perform initialisation in a thread shortly
+              after the thread starts and before any other application code is executed.
+              For example, users of Microsoft's COM must call <code class="computeroutput"><span class="identifier">CoInitializeEx</span></code>
+              before any other COM operations can be called from that thread.
+            </li>
 <li>
-            The library interface is decoupled from interfaces for thread creation
-            and management, and permits implementations on platforms where threads
-            are not available.
-          </li>
+              The library interface is decoupled from interfaces for thread creation
+              and management, and permits implementations on platforms where threads
+              are not available.
+            </li>
 </ul></div>
 <a name="asio.overview.core.threads.see_also"></a><h6>
-<a name="id476034"></a>
+<a name="id561316"></a>
           <a class="link" href="threads.html#asio.overview.core.threads.see_also">See Also</a>
         </h6>
 <p>

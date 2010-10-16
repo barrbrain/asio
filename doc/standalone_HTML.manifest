@@ -938,6 +938,8 @@ asio/reference/buffers_iterator/end.html
 asio/reference/buffers_iterator/operator__star_.html
 asio/reference/buffers_iterator/operator_not__eq_.html
 asio/reference/buffers_iterator/operator_plus_.html
+asio/reference/buffers_iterator/operator_plus_/overload1.html
+asio/reference/buffers_iterator/operator_plus_/overload2.html
 asio/reference/buffers_iterator/operator_plus__plus_.html
 asio/reference/buffers_iterator/operator_plus__plus_/overload1.html
 asio/reference/buffers_iterator/operator_plus__plus_/overload2.html
@@ -1138,11 +1140,14 @@ asio/reference/ip__address/is_v6.html
 asio/reference/ip__address/operator_not__eq_.html
 asio/reference/ip__address/operator_lt_.html
 asio/reference/ip__address/operator_lt__lt_.html
+asio/reference/ip__address/operator_lt__eq_.html
 asio/reference/ip__address/operator_eq_.html
 asio/reference/ip__address/operator_eq_/overload1.html
 asio/reference/ip__address/operator_eq_/overload2.html
 asio/reference/ip__address/operator_eq_/overload3.html
 asio/reference/ip__address/operator_eq__eq_.html
+asio/reference/ip__address/operator_gt_.html
+asio/reference/ip__address/operator_gt__eq_.html
 asio/reference/ip__address/to_string.html
 asio/reference/ip__address/to_string/overload1.html
 asio/reference/ip__address/to_string/overload2.html
@@ -1243,8 +1248,11 @@ asio/reference/ip__basic_endpoint/data_type.html
 asio/reference/ip__basic_endpoint/operator_not__eq_.html
 asio/reference/ip__basic_endpoint/operator_lt_.html
 asio/reference/ip__basic_endpoint/operator_lt__lt_.html
+asio/reference/ip__basic_endpoint/operator_lt__eq_.html
 asio/reference/ip__basic_endpoint/operator_eq_.html
 asio/reference/ip__basic_endpoint/operator_eq__eq_.html
+asio/reference/ip__basic_endpoint/operator_gt_.html
+asio/reference/ip__basic_endpoint/operator_gt__eq_.html
 asio/reference/ip__basic_endpoint/port.html
 asio/reference/ip__basic_endpoint/port/overload1.html
 asio/reference/ip__basic_endpoint/port/overload2.html
@@ -1415,8 +1423,11 @@ asio/reference/local__basic_endpoint/data_type.html
 asio/reference/local__basic_endpoint/operator_not__eq_.html
 asio/reference/local__basic_endpoint/operator_lt_.html
 asio/reference/local__basic_endpoint/operator_lt__lt_.html
+asio/reference/local__basic_endpoint/operator_lt__eq_.html
 asio/reference/local__basic_endpoint/operator_eq_.html
 asio/reference/local__basic_endpoint/operator_eq__eq_.html
+asio/reference/local__basic_endpoint/operator_gt_.html
+asio/reference/local__basic_endpoint/operator_gt__eq_.html
 asio/reference/local__basic_endpoint/path.html
 asio/reference/local__basic_endpoint/path/overload1.html
 asio/reference/local__basic_endpoint/path/overload2.html

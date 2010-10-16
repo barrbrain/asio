@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="asio.reference.windows__overlapped_ptr"></a><a class="link" href="windows__overlapped_ptr.html" title="windows::overlapped_ptr"> windows::overlapped_ptr</a>
+<a name="asio.reference.windows__overlapped_ptr"></a><a class="link" href="windows__overlapped_ptr.html" title="windows::overlapped_ptr">windows::overlapped_ptr</a>
 </h3></div></div></div>
 <p>
         Wraps a handler to create an OVERLAPPED object for use with overlapped I/O.
@@ -26,7 +26,7 @@
   <span class="identifier">noncopyable</span>
 </pre>
 <a name="asio.reference.windows__overlapped_ptr.member_functions"></a><h5>
-<a name="id1050540"></a>
+<a name="id1143016"></a>
         <a class="link" href="windows__overlapped_ptr.html#asio.reference.windows__overlapped_ptr.member_functions">Member
         Functions</a>
       </h5>
@@ -37,94 +37,95 @@
 </colgroup>
 <thead><tr>
 <th>
-              <p>
-                Name
-              </p>
+                <p>
+                  Name
+                </p>
               </th>
 <th>
-              <p>
-                Description
-              </p>
+                <p>
+                  Description
+                </p>
               </th>
 </tr></thead>
 <tbody>
 <tr>
 <td>
-              <p>
-                <a class="link" href="windows__overlapped_ptr/complete.html" title="windows::overlapped_ptr::complete"><span class="bold"><strong>complete</strong></span></a>
-              </p>
+                <p>
+                  <a class="link" href="windows__overlapped_ptr/complete.html" title="windows::overlapped_ptr::complete"><span class="bold"><strong>complete</strong></span></a>
+                </p>
               </td>
 <td>
-              <p>
-                Post completion notification for overlapped operation. Releases ownership.
-              </p>
-              </td>
-</tr>
-<tr>
-<td>
-              <p>
-                <a class="link" href="windows__overlapped_ptr/get.html" title="windows::overlapped_ptr::get"><span class="bold"><strong>get</strong></span></a>
-              </p>
-              </td>
-<td>
-              <p>
-                Get the contained OVERLAPPED object.
-              </p>
+                <p>
+                  Post completion notification for overlapped operation. Releases
+                  ownership.
+                </p>
               </td>
 </tr>
 <tr>
 <td>
-              <p>
-                <a class="link" href="windows__overlapped_ptr/overlapped_ptr.html" title="windows::overlapped_ptr::overlapped_ptr"><span class="bold"><strong>overlapped_ptr</strong></span></a>
-              </p>
+                <p>
+                  <a class="link" href="windows__overlapped_ptr/get.html" title="windows::overlapped_ptr::get"><span class="bold"><strong>get</strong></span></a>
+                </p>
               </td>
 <td>
-              <p>
-                Construct an empty overlapped_ptr.
-              </p>
-              <p>
-                Construct an overlapped_ptr to contain the specified handler.
-              </p>
+                <p>
+                  Get the contained OVERLAPPED object.
+                </p>
               </td>
 </tr>
 <tr>
 <td>
-              <p>
-                <a class="link" href="windows__overlapped_ptr/release.html" title="windows::overlapped_ptr::release"><span class="bold"><strong>release</strong></span></a>
-              </p>
+                <p>
+                  <a class="link" href="windows__overlapped_ptr/overlapped_ptr.html" title="windows::overlapped_ptr::overlapped_ptr"><span class="bold"><strong>overlapped_ptr</strong></span></a>
+                </p>
               </td>
 <td>
-              <p>
-                Release ownership of the OVERLAPPED object.
-              </p>
-              </td>
-</tr>
-<tr>
-<td>
-              <p>
-                <a class="link" href="windows__overlapped_ptr/reset.html" title="windows::overlapped_ptr::reset"><span class="bold"><strong>reset</strong></span></a>
-              </p>
-              </td>
-<td>
-              <p>
-                Reset to empty.
-              </p>
-              <p>
-                Reset to contain the specified handler, freeing any current OVERLAPPED
-                object.
-              </p>
+                <p>
+                  Construct an empty overlapped_ptr.
+                </p>
+                <p>
+                  Construct an overlapped_ptr to contain the specified handler.
+                </p>
               </td>
 </tr>
 <tr>
 <td>
-              <p>
-                <a class="link" href="windows__overlapped_ptr/_overlapped_ptr.html" title="windows::overlapped_ptr::~overlapped_ptr"><span class="bold"><strong>~overlapped_ptr</strong></span></a>
-              </p>
+                <p>
+                  <a class="link" href="windows__overlapped_ptr/release.html" title="windows::overlapped_ptr::release"><span class="bold"><strong>release</strong></span></a>
+                </p>
               </td>
 <td>
-              <p>
-                Destructor automatically frees the OVERLAPPED object unless released.
-              </p>
+                <p>
+                  Release ownership of the OVERLAPPED object.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <a class="link" href="windows__overlapped_ptr/reset.html" title="windows::overlapped_ptr::reset"><span class="bold"><strong>reset</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Reset to empty.
+                </p>
+                <p>
+                  Reset to contain the specified handler, freeing any current OVERLAPPED
+                  object.
+                </p>
+              </td>
+</tr>
+<tr>
+<td>
+                <p>
+                  <a class="link" href="windows__overlapped_ptr/_overlapped_ptr.html" title="windows::overlapped_ptr::~overlapped_ptr"><span class="bold"><strong>~overlapped_ptr</strong></span></a>
+                </p>
+              </td>
+<td>
+                <p>
+                  Destructor automatically frees the OVERLAPPED object unless released.
+                </p>
               </td>
 </tr>
 </tbody>
@@ -134,7 +135,7 @@
         it can be passed as the LPOVERLAPPED argument to overlapped I/O functions.
       </p>
 <a name="asio.reference.windows__overlapped_ptr.thread_safety"></a><h5>
-<a name="id1050771"></a>
+<a name="id1143255"></a>
         <a class="link" href="windows__overlapped_ptr.html#asio.reference.windows__overlapped_ptr.thread_safety">Thread
         Safety</a>
       </h5>
@@ -147,7 +148,7 @@
         Unsafe.
       </p>
 <a name="asio.reference.windows__overlapped_ptr.requirements"></a><h5>
-<a name="id1050821"></a>
+<a name="id1143305"></a>
         <a class="link" href="windows__overlapped_ptr.html#asio.reference.windows__overlapped_ptr.requirements">Requirements</a>
       </h5>
 <p>

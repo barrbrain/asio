@@ -17,14 +17,13 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.reference.basic_datagram_socket.async_connect"></a><a class="link" href="async_connect.html" title="basic_datagram_socket::async_connect">
-        basic_datagram_socket::async_connect</a>
+<a name="asio.reference.basic_datagram_socket.async_connect"></a><a class="link" href="async_connect.html" title="basic_datagram_socket::async_connect">basic_datagram_socket::async_connect</a>
 </h4></div></div></div>
 <p>
           <span class="emphasis"><em>Inherited from basic_socket.</em></span>
         </p>
 <p>
-          <a class="indexterm" name="id600728"></a> 
+          <a class="indexterm" name="id686443"></a> 
 Start an asynchronous connect.
         </p>
 <pre class="programlisting"><span class="keyword">template</span><span class="special">&lt;</span>
@@ -43,7 +42,7 @@ Start an asynchronous connect.
           to the closed state.
         </p>
 <a name="asio.reference.basic_datagram_socket.async_connect.parameters"></a><h6>
-<a name="id600849"></a>
+<a name="id686563"></a>
           <a class="link" href="async_connect.html#asio.reference.basic_datagram_socket.async_connect.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -51,31 +50,31 @@ Start an asynchronous connect.
 <dl>
 <dt><span class="term">peer_endpoint</span></dt>
 <dd><p>
-              The remote endpoint to which the socket will be connected. Copies will
-              be made of the endpoint object as required.
-            </p></dd>
+                The remote endpoint to which the socket will be connected. Copies
+                will be made of the endpoint object as required.
+              </p></dd>
 <dt><span class="term">handler</span></dt>
 <dd>
 <p>
-              The handler to be called when the connection operation completes. Copies
-              will be made of the handler as required. The function signature of
-              the handler must be: 
+                The handler to be called when the connection operation completes.
+                Copies will be made of the handler as required. The function signature
+                of the handler must be: 
 </p>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span> <span class="comment">// Result of operation
 </span><span class="special">);</span> 
 </pre>
 <p>
-              Regardless of whether the asynchronous operation completes immediately
-              or not, the handler will not be invoked from within this function.
-              Invocation of the handler will be performed in a manner equivalent
-              to using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">post</span><span class="special">()</span></code>.
-            </p>
+                Regardless of whether the asynchronous operation completes immediately
+                or not, the handler will not be invoked from within this function.
+                Invocation of the handler will be performed in a manner equivalent
+                to using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">post</span><span class="special">()</span></code>.
+              </p>
 </dd>
 </dl>
 </div>
 <a name="asio.reference.basic_datagram_socket.async_connect.example"></a><h6>
-<a name="id601000"></a>
+<a name="id686716"></a>
           <a class="link" href="async_connect.html#asio.reference.basic_datagram_socket.async_connect.example">Example</a>
         </h6>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">connect_handler</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span><span class="special">)</span>

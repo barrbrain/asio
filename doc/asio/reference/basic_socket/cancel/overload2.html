@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="asio.reference.basic_socket.cancel.overload2"></a><a class="link" href="overload2.html" title="basic_socket::cancel (2 of 2 overloads)"> basic_socket::cancel
+<a name="asio.reference.basic_socket.cancel.overload2"></a><a class="link" href="overload2.html" title="basic_socket::cancel (2 of 2 overloads)">basic_socket::cancel
           (2 of 2 overloads)</a>
 </h5></div></div></div>
 <p>
@@ -33,7 +33,7 @@
             error.
           </p>
 <a name="asio.reference.basic_socket.cancel.overload2.parameters"></a><h6>
-<a name="id694157"></a>
+<a name="id780659"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket.cancel.overload2.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -41,12 +41,12 @@
 <dl>
 <dt><span class="term">ec</span></dt>
 <dd><p>
-                Set to indicate what error occurred, if any.
-              </p></dd>
+                  Set to indicate what error occurred, if any.
+                </p></dd>
 </dl>
 </div>
 <a name="asio.reference.basic_socket.cancel.overload2.remarks"></a><h6>
-<a name="id694194"></a>
+<a name="id780696"></a>
             <a class="link" href="overload2.html#asio.reference.basic_socket.cancel.overload2.remarks">Remarks</a>
           </h6>
 <p>
@@ -59,28 +59,28 @@
           </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-              It will only cancel asynchronous operations that were initiated in
-              the current thread.
-            </li>
+                It will only cancel asynchronous operations that were initiated in
+                the current thread.
+              </li>
 <li>
-              It can appear to complete without error, but the request to cancel
-              the unfinished operations may be silently ignored by the operating
-              system. Whether it works or not seems to depend on the drivers that
-              are installed.
-            </li>
+                It can appear to complete without error, but the request to cancel
+                the unfinished operations may be silently ignored by the operating
+                system. Whether it works or not seems to depend on the drivers that
+                are installed.
+              </li>
 </ul></div>
 <p>
             For portable cancellation, consider using one of the following alternatives:
           </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-              Disable asio's I/O completion port backend by defining ASIO_DISABLE_IOCP.
-            </li>
+                Disable asio's I/O completion port backend by defining ASIO_DISABLE_IOCP.
+              </li>
 <li>
-              Use the <code class="computeroutput"><span class="identifier">close</span><span class="special">()</span></code>
-              function to simultaneously cancel the outstanding operations and close
-              the socket.
-            </li>
+                Use the <code class="computeroutput"><span class="identifier">close</span><span class="special">()</span></code>
+                function to simultaneously cancel the outstanding operations and
+                close the socket.
+              </li>
 </ul></div>
 <p>
             When running on Windows Vista, Windows Server 2008, and later, the CancelIoEx

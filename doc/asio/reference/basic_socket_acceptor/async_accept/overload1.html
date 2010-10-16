@@ -17,8 +17,8 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h5 class="title">
-<a name="asio.reference.basic_socket_acceptor.async_accept.overload1"></a><a class="link" href="overload1.html" title="basic_socket_acceptor::async_accept (1 of 2 overloads)">
-          basic_socket_acceptor::async_accept (1 of 2 overloads)</a>
+<a name="asio.reference.basic_socket_acceptor.async_accept.overload1"></a><a class="link" href="overload1.html" title="basic_socket_acceptor::async_accept (1 of 2 overloads)">basic_socket_acceptor::async_accept
+          (1 of 2 overloads)</a>
 </h5></div></div></div>
 <p>
             Start an asynchronous accept.
@@ -35,7 +35,7 @@
             a socket. The function call always returns immediately.
           </p>
 <a name="asio.reference.basic_socket_acceptor.async_accept.overload1.parameters"></a><h6>
-<a name="id716145"></a>
+<a name="id802816"></a>
             <a class="link" href="overload1.html#asio.reference.basic_socket_acceptor.async_accept.overload1.parameters">Parameters</a>
           </h6>
 <div class="variablelist">
@@ -43,32 +43,32 @@
 <dl>
 <dt><span class="term">peer</span></dt>
 <dd><p>
-                The socket into which the new connection will be accepted. Ownership
-                of the peer object is retained by the caller, which must guarantee
-                that it is valid until the handler is called.
-              </p></dd>
+                  The socket into which the new connection will be accepted. Ownership
+                  of the peer object is retained by the caller, which must guarantee
+                  that it is valid until the handler is called.
+                </p></dd>
 <dt><span class="term">handler</span></dt>
 <dd>
 <p>
-                The handler to be called when the accept operation completes. Copies
-                will be made of the handler as required. The function signature of
-                the handler must be: 
+                  The handler to be called when the accept operation completes. Copies
+                  will be made of the handler as required. The function signature
+                  of the handler must be: 
 </p>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
   <span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span> <span class="comment">// Result of operation.
 </span><span class="special">);</span> 
 </pre>
 <p>
-                Regardless of whether the asynchronous operation completes immediately
-                or not, the handler will not be invoked from within this function.
-                Invocation of the handler will be performed in a manner equivalent
-                to using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">post</span><span class="special">()</span></code>.
-              </p>
+                  Regardless of whether the asynchronous operation completes immediately
+                  or not, the handler will not be invoked from within this function.
+                  Invocation of the handler will be performed in a manner equivalent
+                  to using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">post</span><span class="special">()</span></code>.
+                </p>
 </dd>
 </dl>
 </div>
 <a name="asio.reference.basic_socket_acceptor.async_accept.overload1.example"></a><h6>
-<a name="id716297"></a>
+<a name="id802972"></a>
             <a class="link" href="overload1.html#asio.reference.basic_socket_acceptor.async_accept.overload1.example">Example</a>
           </h6>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">accept_handler</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">asio</span><span class="special">::</span><span class="identifier">error_code</span><span class="special">&amp;</span> <span class="identifier">error</span><span class="special">)</span>

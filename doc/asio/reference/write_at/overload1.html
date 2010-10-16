@@ -17,8 +17,8 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.reference.write_at.overload1"></a><a class="link" href="overload1.html" title="write_at (1 of 6 overloads)"> write_at (1 of
-        6 overloads)</a>
+<a name="asio.reference.write_at.overload1"></a><a class="link" href="overload1.html" title="write_at (1 of 6 overloads)">write_at (1 of 6
+        overloads)</a>
 </h4></div></div></div>
 <p>
           Write all of the supplied data at the specified offset before returning.
@@ -38,19 +38,19 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            All of the data in the supplied buffers has been written. That is, the
-            bytes transferred is equal to the sum of the buffer sizes.
-          </li>
+              All of the data in the supplied buffers has been written. That is,
+              the bytes transferred is equal to the sum of the buffer sizes.
+            </li>
 <li>
-            An error occurred.
-          </li>
+              An error occurred.
+            </li>
 </ul></div>
 <p>
           This operation is implemented in terms of zero or more calls to the device's
           write_some_at function.
         </p>
 <a name="asio.reference.write_at.overload1.parameters"></a><h6>
-<a name="id1064620"></a>
+<a name="id1157280"></a>
           <a class="link" href="overload1.html#asio.reference.write_at.overload1.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -58,30 +58,30 @@
 <dl>
 <dt><span class="term">d</span></dt>
 <dd><p>
-              The device to which the data is to be written. The type must support
-              the SyncRandomAccessWriteDevice concept.
-            </p></dd>
+                The device to which the data is to be written. The type must support
+                the SyncRandomAccessWriteDevice concept.
+              </p></dd>
 <dt><span class="term">offset</span></dt>
 <dd><p>
-              The offset at which the data will be written.
-            </p></dd>
+                The offset at which the data will be written.
+              </p></dd>
 <dt><span class="term">buffers</span></dt>
 <dd><p>
-              One or more buffers containing the data to be written. The sum of the
-              buffer sizes indicates the maximum number of bytes to write to the
-              device.
-            </p></dd>
+                One or more buffers containing the data to be written. The sum of
+                the buffer sizes indicates the maximum number of bytes to write to
+                the device.
+              </p></dd>
 </dl>
 </div>
 <a name="asio.reference.write_at.overload1.return_value"></a><h6>
-<a name="id1064685"></a>
+<a name="id1157347"></a>
           <a class="link" href="overload1.html#asio.reference.write_at.overload1.return_value">Return Value</a>
         </h6>
 <p>
           The number of bytes transferred.
         </p>
 <a name="asio.reference.write_at.overload1.exceptions"></a><h6>
-<a name="id1064709"></a>
+<a name="id1157371"></a>
           <a class="link" href="overload1.html#asio.reference.write_at.overload1.exceptions">Exceptions</a>
         </h6>
 <div class="variablelist">
@@ -89,12 +89,12 @@
 <dl>
 <dt><span class="term">asio::system_error</span></dt>
 <dd><p>
-              Thrown on failure.
-            </p></dd>
+                Thrown on failure.
+              </p></dd>
 </dl>
 </div>
 <a name="asio.reference.write_at.overload1.example"></a><h6>
-<a name="id1064748"></a>
+<a name="id1157411"></a>
           <a class="link" href="overload1.html#asio.reference.write_at.overload1.example">Example</a>
         </h6>
 <p>
@@ -108,7 +108,7 @@
           how to use it with arrays, boost::array or std::vector.
         </p>
 <a name="asio.reference.write_at.overload1.remarks"></a><h6>
-<a name="id1064889"></a>
+<a name="id1157552"></a>
           <a class="link" href="overload1.html#asio.reference.write_at.overload1.remarks">Remarks</a>
         </h6>
 <p>

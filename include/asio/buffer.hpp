@@ -15,16 +15,12 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
-#include "asio/detail/push_options.hpp"
-
-#include "asio/detail/push_options.hpp"
+#include "asio/detail/config.hpp"
 #include <cstddef>
-#include <boost/config.hpp>
-#include <boost/array.hpp>
-#include <boost/type_traits/is_const.hpp>
 #include <string>
 #include <vector>
-#include "asio/detail/pop_options.hpp"
+#include <boost/detail/workaround.hpp>
+#include "asio/detail/array_fwd.hpp"
 
 #if defined(BOOST_MSVC)
 # if defined(_HAS_ITERATOR_DEBUGGING) && (_HAS_ITERATOR_DEBUGGING != 0)
@@ -43,10 +39,16 @@
 #endif // defined(__GNUC__)
 
 #if defined(ASIO_ENABLE_BUFFER_DEBUGGING)
-# include "asio/detail/push_options.hpp"
 # include <boost/function.hpp>
-# include "asio/detail/pop_options.hpp"
 #endif // ASIO_ENABLE_BUFFER_DEBUGGING
+
+#if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x582)) \
+  || BOOST_WORKAROUND(__SUNPRO_CC, BOOST_TESTED_AT(0x590))
+# include <boost/type_traits/is_const.hpp>
+#endif // BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x582))
+       // || BOOST_WORKAROUND(__SUNPRO_CC, BOOST_TESTED_AT(0x590))
+
+#include "asio/detail/push_options.hpp"
 
 namespace asio {
 

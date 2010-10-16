@@ -16,6 +16,7 @@
 @SET_MAKE@
 
 
+
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
@@ -35,9 +36,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
-	tests/performance/server$(EXEEXT) \
-	tests/unit/basic_datagram_socket$(EXEEXT) \
+check_PROGRAMS = tests/unit/basic_datagram_socket$(EXEEXT) \
 	tests/unit/basic_deadline_timer$(EXEEXT) \
 	tests/unit/basic_serial_port$(EXEEXT) \
 	tests/unit/basic_socket_acceptor$(EXEEXT) \
@@ -94,6 +93,13 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	tests/unit/windows/stream_handle$(EXEEXT) \
 	tests/unit/windows/stream_handle_service$(EXEEXT) \
 	tests/unit/write$(EXEEXT) tests/unit/write_at$(EXEEXT) \
+	$(am__EXEEXT_1)
+noinst_PROGRAMS = tests/latency/tcp_client$(EXEEXT) \
+	tests/latency/tcp_server$(EXEEXT) \
+	tests/latency/udp_client$(EXEEXT) \
+	tests/latency/udp_server$(EXEEXT) \
+	tests/performance/client$(EXEEXT) \
+	tests/performance/server$(EXEEXT) \
 	examples/allocation/server$(EXEEXT) \
 	examples/buffers/reference_counted$(EXEEXT) \
 	examples/chat/chat_client$(EXEEXT) \
@@ -121,10 +127,10 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	examples/porthopper/server$(EXEEXT) \
 	examples/services/daytime_client$(EXEEXT) \
 	examples/socks4/sync_client$(EXEEXT) \
-	examples/timeouts/accept_timeout$(EXEEXT) \
-	examples/timeouts/connect_timeout$(EXEEXT) \
-	examples/timeouts/datagram_receive_timeout$(EXEEXT) \
-	examples/timeouts/stream_receive_timeout$(EXEEXT) \
+	examples/timeouts/async_tcp_client$(EXEEXT) \
+	examples/timeouts/blocking_tcp_client$(EXEEXT) \
+	examples/timeouts/blocking_udp_client$(EXEEXT) \
+	examples/timeouts/server$(EXEEXT) \
 	examples/timers/time_t_timer$(EXEEXT) \
 	examples/tutorial/timer1/timer$(EXEEXT) \
 	examples/tutorial/timer2/timer$(EXEEXT) \
@@ -137,8 +143,8 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 	examples/tutorial/daytime4/client$(EXEEXT) \
 	examples/tutorial/daytime5/server$(EXEEXT) \
 	examples/tutorial/daytime6/server$(EXEEXT) \
-	examples/tutorial/daytime7/server$(EXEEXT) $(am__EXEEXT_1) \
-	$(am__EXEEXT_2) $(am__EXEEXT_3)
+	examples/tutorial/daytime7/server$(EXEEXT) $(am__EXEEXT_2) \
+	$(am__EXEEXT_3) $(am__EXEEXT_4)
 @WINDOWS_TARGET_FALSE@am__append_1 = \
 @WINDOWS_TARGET_FALSE@	examples/chat/posix_chat_client \
 @WINDOWS_TARGET_FALSE@	examples/local/connect_pair \
@@ -156,7 +162,9 @@ noinst_PROGRAMS = tests/performance/client$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream_base \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream_service \
-@HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream \
+@HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream
+
+@HAVE_OPENSSL_TRUE@am__append_4 = \
 @HAVE_OPENSSL_TRUE@	examples/ssl/client \
 @HAVE_OPENSSL_TRUE@	examples/ssl/server
 
@@ -217,8 +225,8 @@ TESTS = tests/unit/basic_datagram_socket$(EXEEXT) \
 	tests/unit/windows/stream_handle$(EXEEXT) \
 	tests/unit/windows/stream_handle_service$(EXEEXT) \
 	tests/unit/write$(EXEEXT) tests/unit/write_at$(EXEEXT) \
-	$(am__EXEEXT_4)
-@HAVE_OPENSSL_TRUE@am__append_4 = \
+	$(am__EXEEXT_1)
+@HAVE_OPENSSL_TRUE@am__append_5 = \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/basic_context \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_base \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_service \
@@ -227,28 +235,28 @@ TESTS = tests/unit/basic_datagram_socket$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream_service \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream
 
-@WINDOWS_TARGET_TRUE@am__append_5 = \
+@WINDOWS_TARGET_TRUE@am__append_6 = \
 @WINDOWS_TARGET_TRUE@	examples/http/server/win_main.cpp
 
-@WINDOWS_TARGET_FALSE@am__append_6 = \
+@WINDOWS_TARGET_FALSE@am__append_7 = \
 @WINDOWS_TARGET_FALSE@	examples/http/server/posix_main.cpp
 
-@WINDOWS_TARGET_TRUE@am__append_7 = \
+@WINDOWS_TARGET_TRUE@am__append_8 = \
 @WINDOWS_TARGET_TRUE@	examples/http/server2/win_main.cpp
 
-@WINDOWS_TARGET_FALSE@am__append_8 = \
+@WINDOWS_TARGET_FALSE@am__append_9 = \
 @WINDOWS_TARGET_FALSE@	examples/http/server2/posix_main.cpp
 
-@WINDOWS_TARGET_TRUE@am__append_9 = \
+@WINDOWS_TARGET_TRUE@am__append_10 = \
 @WINDOWS_TARGET_TRUE@	examples/http/server3/win_main.cpp
 
-@WINDOWS_TARGET_FALSE@am__append_10 = \
+@WINDOWS_TARGET_FALSE@am__append_11 = \
 @WINDOWS_TARGET_FALSE@	examples/http/server3/posix_main.cpp
 
-@WINDOWS_TARGET_TRUE@am__append_11 = \
+@WINDOWS_TARGET_TRUE@am__append_12 = \
 @WINDOWS_TARGET_TRUE@	examples/http/server4/win_main.cpp
 
-@WINDOWS_TARGET_FALSE@am__append_12 = \
+@WINDOWS_TARGET_FALSE@am__append_13 = \
 @WINDOWS_TARGET_FALSE@	examples/http/server4/posix_main.cpp
 
 subdir = src
@@ -261,91 +269,126 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-@WINDOWS_TARGET_FALSE@am__EXEEXT_1 = examples/chat/posix_chat_client$(EXEEXT) \
-@WINDOWS_TARGET_FALSE@	examples/local/connect_pair$(EXEEXT) \
-@WINDOWS_TARGET_FALSE@	examples/local/iostream_client$(EXEEXT) \
-@WINDOWS_TARGET_FALSE@	examples/local/stream_server$(EXEEXT) \
-@WINDOWS_TARGET_FALSE@	examples/local/stream_client$(EXEEXT)
-@WINDOWS_TARGET_TRUE@am__EXEEXT_2 =  \
-@WINDOWS_TARGET_TRUE@	examples/windows/transmit_file$(EXEEXT)
-@HAVE_OPENSSL_TRUE@am__EXEEXT_3 =  \
+LIBRARIES = $(noinst_LIBRARIES)
+AR = ar
+ARFLAGS = cru
+libasio_a_AR = $(AR) $(ARFLAGS)
+libasio_a_LIBADD =
+am__libasio_a_SOURCES_DIST = ../include/asio/impl/src.cpp
+am__dirstamp = $(am__leading_dot)dirstamp
+@SEPARATE_COMPILATION_TRUE@am_libasio_a_OBJECTS =  \
+@SEPARATE_COMPILATION_TRUE@	../include/asio/impl/src.$(OBJEXT)
+libasio_a_OBJECTS = $(am_libasio_a_OBJECTS)
+@HAVE_OPENSSL_TRUE@am__EXEEXT_1 =  \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/basic_context$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_base$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_service$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream_base$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream_service$(EXEEXT) \
-@HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream$(EXEEXT) \
-@HAVE_OPENSSL_TRUE@	examples/ssl/client$(EXEEXT) \
+@HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream$(EXEEXT)
+@WINDOWS_TARGET_FALSE@am__EXEEXT_2 = examples/chat/posix_chat_client$(EXEEXT) \
+@WINDOWS_TARGET_FALSE@	examples/local/connect_pair$(EXEEXT) \
+@WINDOWS_TARGET_FALSE@	examples/local/iostream_client$(EXEEXT) \
+@WINDOWS_TARGET_FALSE@	examples/local/stream_server$(EXEEXT) \
+@WINDOWS_TARGET_FALSE@	examples/local/stream_client$(EXEEXT)
+@WINDOWS_TARGET_TRUE@am__EXEEXT_3 =  \
+@WINDOWS_TARGET_TRUE@	examples/windows/transmit_file$(EXEEXT)
+@HAVE_OPENSSL_TRUE@am__EXEEXT_4 = examples/ssl/client$(EXEEXT) \
 @HAVE_OPENSSL_TRUE@	examples/ssl/server$(EXEEXT)
 PROGRAMS = $(noinst_PROGRAMS)
-am__dirstamp = $(am__leading_dot)dirstamp
 am_examples_allocation_server_OBJECTS =  \
 	examples/allocation/server.$(OBJEXT)
 examples_allocation_server_OBJECTS =  \
 	$(am_examples_allocation_server_OBJECTS)
 examples_allocation_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_allocation_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_buffers_reference_counted_OBJECTS =  \
 	examples/buffers/reference_counted.$(OBJEXT)
 examples_buffers_reference_counted_OBJECTS =  \
 	$(am_examples_buffers_reference_counted_OBJECTS)
 examples_buffers_reference_counted_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_buffers_reference_counted_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_chat_chat_client_OBJECTS =  \
 	examples/chat/chat_client.$(OBJEXT)
 examples_chat_chat_client_OBJECTS =  \
 	$(am_examples_chat_chat_client_OBJECTS)
 examples_chat_chat_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_chat_chat_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_chat_chat_server_OBJECTS =  \
 	examples/chat/chat_server.$(OBJEXT)
 examples_chat_chat_server_OBJECTS =  \
 	$(am_examples_chat_chat_server_OBJECTS)
 examples_chat_chat_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_chat_chat_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__examples_chat_posix_chat_client_SOURCES_DIST =  \
 	examples/chat/posix_chat_client.cpp
 @WINDOWS_TARGET_FALSE@am_examples_chat_posix_chat_client_OBJECTS = examples/chat/posix_chat_client.$(OBJEXT)
 examples_chat_posix_chat_client_OBJECTS =  \
 	$(am_examples_chat_posix_chat_client_OBJECTS)
 examples_chat_posix_chat_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_chat_posix_chat_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_echo_async_tcp_echo_server_OBJECTS =  \
 	examples/echo/async_tcp_echo_server.$(OBJEXT)
 examples_echo_async_tcp_echo_server_OBJECTS =  \
 	$(am_examples_echo_async_tcp_echo_server_OBJECTS)
 examples_echo_async_tcp_echo_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_echo_async_tcp_echo_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_echo_async_udp_echo_server_OBJECTS =  \
 	examples/echo/async_udp_echo_server.$(OBJEXT)
 examples_echo_async_udp_echo_server_OBJECTS =  \
 	$(am_examples_echo_async_udp_echo_server_OBJECTS)
 examples_echo_async_udp_echo_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_echo_async_udp_echo_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_echo_blocking_tcp_echo_client_OBJECTS =  \
 	examples/echo/blocking_tcp_echo_client.$(OBJEXT)
 examples_echo_blocking_tcp_echo_client_OBJECTS =  \
 	$(am_examples_echo_blocking_tcp_echo_client_OBJECTS)
 examples_echo_blocking_tcp_echo_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_echo_blocking_tcp_echo_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_echo_blocking_tcp_echo_server_OBJECTS =  \
 	examples/echo/blocking_tcp_echo_server.$(OBJEXT)
 examples_echo_blocking_tcp_echo_server_OBJECTS =  \
 	$(am_examples_echo_blocking_tcp_echo_server_OBJECTS)
 examples_echo_blocking_tcp_echo_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_echo_blocking_tcp_echo_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_echo_blocking_udp_echo_client_OBJECTS =  \
 	examples/echo/blocking_udp_echo_client.$(OBJEXT)
 examples_echo_blocking_udp_echo_client_OBJECTS =  \
 	$(am_examples_echo_blocking_udp_echo_client_OBJECTS)
 examples_echo_blocking_udp_echo_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_echo_blocking_udp_echo_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_echo_blocking_udp_echo_server_OBJECTS =  \
 	examples/echo/blocking_udp_echo_server.$(OBJEXT)
 examples_echo_blocking_udp_echo_server_OBJECTS =  \
 	$(am_examples_echo_blocking_udp_echo_server_OBJECTS)
 examples_echo_blocking_udp_echo_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_echo_blocking_udp_echo_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_http_client_async_client_OBJECTS =  \
 	examples/http/client/async_client.$(OBJEXT)
 examples_http_client_async_client_OBJECTS =  \
 	$(am_examples_http_client_async_client_OBJECTS)
 examples_http_client_async_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_http_client_async_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_http_client_sync_client_OBJECTS =  \
 	examples/http/client/sync_client.$(OBJEXT)
 examples_http_client_sync_client_OBJECTS =  \
 	$(am_examples_http_client_sync_client_OBJECTS)
 examples_http_client_sync_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_http_client_sync_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__examples_http_server_http_server_SOURCES_DIST =  \
 	examples/http/server/connection.cpp \
 	examples/http/server/connection_manager.cpp \
@@ -371,6 +414,8 @@ am_examples_http_server_http_server_OBJECTS =  \
 examples_http_server_http_server_OBJECTS =  \
 	$(am_examples_http_server_http_server_OBJECTS)
 examples_http_server_http_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_http_server_http_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__examples_http_server2_http_server_SOURCES_DIST =  \
 	examples/http/server2/connection.cpp \
 	examples/http/server2/io_service_pool.cpp \
@@ -396,6 +441,8 @@ am_examples_http_server2_http_server_OBJECTS =  \
 examples_http_server2_http_server_OBJECTS =  \
 	$(am_examples_http_server2_http_server_OBJECTS)
 examples_http_server2_http_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_http_server2_http_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__examples_http_server3_http_server_SOURCES_DIST =  \
 	examples/http/server3/connection.cpp \
 	examples/http/server3/mime_types.cpp \
@@ -419,6 +466,8 @@ am_examples_http_server3_http_server_OBJECTS =  \
 examples_http_server3_http_server_OBJECTS =  \
 	$(am_examples_http_server3_http_server_OBJECTS)
 examples_http_server3_http_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_http_server3_http_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__examples_http_server4_http_server_SOURCES_DIST =  \
 	examples/http/server4/file_handler.cpp \
 	examples/http/server4/mime_types.cpp \
@@ -440,24 +489,34 @@ am_examples_http_server4_http_server_OBJECTS =  \
 examples_http_server4_http_server_OBJECTS =  \
 	$(am_examples_http_server4_http_server_OBJECTS)
 examples_http_server4_http_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_http_server4_http_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_icmp_ping_OBJECTS = examples/icmp/ping.$(OBJEXT)
 examples_icmp_ping_OBJECTS = $(am_examples_icmp_ping_OBJECTS)
 examples_icmp_ping_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_icmp_ping_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_invocation_prioritised_handlers_OBJECTS =  \
 	examples/invocation/prioritised_handlers.$(OBJEXT)
 examples_invocation_prioritised_handlers_OBJECTS =  \
 	$(am_examples_invocation_prioritised_handlers_OBJECTS)
 examples_invocation_prioritised_handlers_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_invocation_prioritised_handlers_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_iostreams_daytime_client_OBJECTS =  \
 	examples/iostreams/daytime_client.$(OBJEXT)
 examples_iostreams_daytime_client_OBJECTS =  \
 	$(am_examples_iostreams_daytime_client_OBJECTS)
 examples_iostreams_daytime_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_iostreams_daytime_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_iostreams_daytime_server_OBJECTS =  \
 	examples/iostreams/daytime_server.$(OBJEXT)
 examples_iostreams_daytime_server_OBJECTS =  \
 	$(am_examples_iostreams_daytime_server_OBJECTS)
 examples_iostreams_daytime_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_iostreams_daytime_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__examples_local_connect_pair_SOURCES_DIST =  \
 	examples/local/connect_pair.cpp
 @WINDOWS_TARGET_FALSE@am_examples_local_connect_pair_OBJECTS =  \
@@ -465,12 +524,16 @@ am__examples_local_connect_pair_SOURCES_DIST =  \
 examples_local_connect_pair_OBJECTS =  \
 	$(am_examples_local_connect_pair_OBJECTS)
 examples_local_connect_pair_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_local_connect_pair_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__examples_local_iostream_client_SOURCES_DIST =  \
 	examples/local/iostream_client.cpp
 @WINDOWS_TARGET_FALSE@am_examples_local_iostream_client_OBJECTS = examples/local/iostream_client.$(OBJEXT)
 examples_local_iostream_client_OBJECTS =  \
 	$(am_examples_local_iostream_client_OBJECTS)
 examples_local_iostream_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_local_iostream_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__examples_local_stream_client_SOURCES_DIST =  \
 	examples/local/stream_client.cpp
 @WINDOWS_TARGET_FALSE@am_examples_local_stream_client_OBJECTS =  \
@@ -478,6 +541,8 @@ am__examples_local_stream_client_SOURCES_DIST =  \
 examples_local_stream_client_OBJECTS =  \
 	$(am_examples_local_stream_client_OBJECTS)
 examples_local_stream_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_local_stream_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__examples_local_stream_server_SOURCES_DIST =  \
 	examples/local/stream_server.cpp
 @WINDOWS_TARGET_FALSE@am_examples_local_stream_server_OBJECTS =  \
@@ -485,137 +550,191 @@ am__examples_local_stream_server_SOURCES_DIST =  \
 examples_local_stream_server_OBJECTS =  \
 	$(am_examples_local_stream_server_OBJECTS)
 examples_local_stream_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_local_stream_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_multicast_receiver_OBJECTS =  \
 	examples/multicast/receiver.$(OBJEXT)
 examples_multicast_receiver_OBJECTS =  \
 	$(am_examples_multicast_receiver_OBJECTS)
 examples_multicast_receiver_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_multicast_receiver_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_multicast_sender_OBJECTS =  \
 	examples/multicast/sender.$(OBJEXT)
 examples_multicast_sender_OBJECTS =  \
 	$(am_examples_multicast_sender_OBJECTS)
 examples_multicast_sender_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_multicast_sender_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_nonblocking_third_party_lib_OBJECTS =  \
 	examples/nonblocking/third_party_lib.$(OBJEXT)
 examples_nonblocking_third_party_lib_OBJECTS =  \
 	$(am_examples_nonblocking_third_party_lib_OBJECTS)
 examples_nonblocking_third_party_lib_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_nonblocking_third_party_lib_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_porthopper_client_OBJECTS =  \
 	examples/porthopper/client.$(OBJEXT)
 examples_porthopper_client_OBJECTS =  \
 	$(am_examples_porthopper_client_OBJECTS)
 examples_porthopper_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_porthopper_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_porthopper_server_OBJECTS =  \
 	examples/porthopper/server.$(OBJEXT)
 examples_porthopper_server_OBJECTS =  \
 	$(am_examples_porthopper_server_OBJECTS)
 examples_porthopper_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_porthopper_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_services_daytime_client_OBJECTS =  \
 	examples/services/daytime_client.$(OBJEXT) \
 	examples/services/logger_service.$(OBJEXT)
 examples_services_daytime_client_OBJECTS =  \
 	$(am_examples_services_daytime_client_OBJECTS)
 examples_services_daytime_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_services_daytime_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_socks4_sync_client_OBJECTS =  \
 	examples/socks4/sync_client.$(OBJEXT)
 examples_socks4_sync_client_OBJECTS =  \
 	$(am_examples_socks4_sync_client_OBJECTS)
 examples_socks4_sync_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_socks4_sync_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__examples_ssl_client_SOURCES_DIST = examples/ssl/client.cpp
 @HAVE_OPENSSL_TRUE@am_examples_ssl_client_OBJECTS =  \
 @HAVE_OPENSSL_TRUE@	examples/ssl/client.$(OBJEXT)
 examples_ssl_client_OBJECTS = $(am_examples_ssl_client_OBJECTS)
 examples_ssl_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_ssl_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__examples_ssl_server_SOURCES_DIST = examples/ssl/server.cpp
 @HAVE_OPENSSL_TRUE@am_examples_ssl_server_OBJECTS =  \
 @HAVE_OPENSSL_TRUE@	examples/ssl/server.$(OBJEXT)
 examples_ssl_server_OBJECTS = $(am_examples_ssl_server_OBJECTS)
 examples_ssl_server_LDADD = $(LDADD)
-am_examples_timeouts_accept_timeout_OBJECTS =  \
-	examples/timeouts/accept_timeout.$(OBJEXT)
-examples_timeouts_accept_timeout_OBJECTS =  \
-	$(am_examples_timeouts_accept_timeout_OBJECTS)
-examples_timeouts_accept_timeout_LDADD = $(LDADD)
-am_examples_timeouts_connect_timeout_OBJECTS =  \
-	examples/timeouts/connect_timeout.$(OBJEXT)
-examples_timeouts_connect_timeout_OBJECTS =  \
-	$(am_examples_timeouts_connect_timeout_OBJECTS)
-examples_timeouts_connect_timeout_LDADD = $(LDADD)
-am_examples_timeouts_datagram_receive_timeout_OBJECTS =  \
-	examples/timeouts/datagram_receive_timeout.$(OBJEXT)
-examples_timeouts_datagram_receive_timeout_OBJECTS =  \
-	$(am_examples_timeouts_datagram_receive_timeout_OBJECTS)
-examples_timeouts_datagram_receive_timeout_LDADD = $(LDADD)
-am_examples_timeouts_stream_receive_timeout_OBJECTS =  \
-	examples/timeouts/stream_receive_timeout.$(OBJEXT)
-examples_timeouts_stream_receive_timeout_OBJECTS =  \
-	$(am_examples_timeouts_stream_receive_timeout_OBJECTS)
-examples_timeouts_stream_receive_timeout_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_ssl_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
+am_examples_timeouts_async_tcp_client_OBJECTS =  \
+	examples/timeouts/async_tcp_client.$(OBJEXT)
+examples_timeouts_async_tcp_client_OBJECTS =  \
+	$(am_examples_timeouts_async_tcp_client_OBJECTS)
+examples_timeouts_async_tcp_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_timeouts_async_tcp_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
+am_examples_timeouts_blocking_tcp_client_OBJECTS =  \
+	examples/timeouts/blocking_tcp_client.$(OBJEXT)
+examples_timeouts_blocking_tcp_client_OBJECTS =  \
+	$(am_examples_timeouts_blocking_tcp_client_OBJECTS)
+examples_timeouts_blocking_tcp_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_timeouts_blocking_tcp_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
+am_examples_timeouts_blocking_udp_client_OBJECTS =  \
+	examples/timeouts/blocking_udp_client.$(OBJEXT)
+examples_timeouts_blocking_udp_client_OBJECTS =  \
+	$(am_examples_timeouts_blocking_udp_client_OBJECTS)
+examples_timeouts_blocking_udp_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_timeouts_blocking_udp_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
+am_examples_timeouts_server_OBJECTS =  \
+	examples/timeouts/server.$(OBJEXT)
+examples_timeouts_server_OBJECTS =  \
+	$(am_examples_timeouts_server_OBJECTS)
+examples_timeouts_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_timeouts_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_timers_time_t_timer_OBJECTS =  \
 	examples/timers/time_t_timer.$(OBJEXT)
 examples_timers_time_t_timer_OBJECTS =  \
 	$(am_examples_timers_time_t_timer_OBJECTS)
 examples_timers_time_t_timer_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_timers_time_t_timer_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_tutorial_daytime1_client_OBJECTS =  \
 	examples/tutorial/daytime1/client.$(OBJEXT)
 examples_tutorial_daytime1_client_OBJECTS =  \
 	$(am_examples_tutorial_daytime1_client_OBJECTS)
 examples_tutorial_daytime1_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_tutorial_daytime1_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_tutorial_daytime2_server_OBJECTS =  \
 	examples/tutorial/daytime2/server.$(OBJEXT)
 examples_tutorial_daytime2_server_OBJECTS =  \
 	$(am_examples_tutorial_daytime2_server_OBJECTS)
 examples_tutorial_daytime2_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_tutorial_daytime2_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_tutorial_daytime3_server_OBJECTS =  \
 	examples/tutorial/daytime3/server.$(OBJEXT)
 examples_tutorial_daytime3_server_OBJECTS =  \
 	$(am_examples_tutorial_daytime3_server_OBJECTS)
 examples_tutorial_daytime3_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_tutorial_daytime3_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_tutorial_daytime4_client_OBJECTS =  \
 	examples/tutorial/daytime4/client.$(OBJEXT)
 examples_tutorial_daytime4_client_OBJECTS =  \
 	$(am_examples_tutorial_daytime4_client_OBJECTS)
 examples_tutorial_daytime4_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_tutorial_daytime4_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_tutorial_daytime5_server_OBJECTS =  \
 	examples/tutorial/daytime5/server.$(OBJEXT)
 examples_tutorial_daytime5_server_OBJECTS =  \
 	$(am_examples_tutorial_daytime5_server_OBJECTS)
 examples_tutorial_daytime5_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_tutorial_daytime5_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_tutorial_daytime6_server_OBJECTS =  \
 	examples/tutorial/daytime6/server.$(OBJEXT)
 examples_tutorial_daytime6_server_OBJECTS =  \
 	$(am_examples_tutorial_daytime6_server_OBJECTS)
 examples_tutorial_daytime6_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_tutorial_daytime6_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_tutorial_daytime7_server_OBJECTS =  \
 	examples/tutorial/daytime7/server.$(OBJEXT)
 examples_tutorial_daytime7_server_OBJECTS =  \
 	$(am_examples_tutorial_daytime7_server_OBJECTS)
 examples_tutorial_daytime7_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_tutorial_daytime7_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_tutorial_timer1_timer_OBJECTS =  \
 	examples/tutorial/timer1/timer.$(OBJEXT)
 examples_tutorial_timer1_timer_OBJECTS =  \
 	$(am_examples_tutorial_timer1_timer_OBJECTS)
 examples_tutorial_timer1_timer_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_tutorial_timer1_timer_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_tutorial_timer2_timer_OBJECTS =  \
 	examples/tutorial/timer2/timer.$(OBJEXT)
 examples_tutorial_timer2_timer_OBJECTS =  \
 	$(am_examples_tutorial_timer2_timer_OBJECTS)
 examples_tutorial_timer2_timer_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_tutorial_timer2_timer_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_tutorial_timer3_timer_OBJECTS =  \
 	examples/tutorial/timer3/timer.$(OBJEXT)
 examples_tutorial_timer3_timer_OBJECTS =  \
 	$(am_examples_tutorial_timer3_timer_OBJECTS)
 examples_tutorial_timer3_timer_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_tutorial_timer3_timer_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_tutorial_timer4_timer_OBJECTS =  \
 	examples/tutorial/timer4/timer.$(OBJEXT)
 examples_tutorial_timer4_timer_OBJECTS =  \
 	$(am_examples_tutorial_timer4_timer_OBJECTS)
 examples_tutorial_timer4_timer_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_tutorial_timer4_timer_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_examples_tutorial_timer5_timer_OBJECTS =  \
 	examples/tutorial/timer5/timer.$(OBJEXT)
 examples_tutorial_timer5_timer_OBJECTS =  \
 	$(am_examples_tutorial_timer5_timer_OBJECTS)
 examples_tutorial_timer5_timer_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_tutorial_timer5_timer_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__examples_windows_transmit_file_SOURCES_DIST =  \
 	examples/windows/transmit_file.cpp
 @WINDOWS_TARGET_TRUE@am_examples_windows_transmit_file_OBJECTS =  \
@@ -623,250 +742,383 @@ am__examples_windows_transmit_file_SOURCES_DIST =  \
 examples_windows_transmit_file_OBJECTS =  \
 	$(am_examples_windows_transmit_file_OBJECTS)
 examples_windows_transmit_file_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@examples_windows_transmit_file_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
+am_tests_latency_tcp_client_OBJECTS =  \
+	tests/latency/tcp_client.$(OBJEXT)
+tests_latency_tcp_client_OBJECTS =  \
+	$(am_tests_latency_tcp_client_OBJECTS)
+tests_latency_tcp_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_latency_tcp_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
+am_tests_latency_tcp_server_OBJECTS =  \
+	tests/latency/tcp_server.$(OBJEXT)
+tests_latency_tcp_server_OBJECTS =  \
+	$(am_tests_latency_tcp_server_OBJECTS)
+tests_latency_tcp_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_latency_tcp_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
+am_tests_latency_udp_client_OBJECTS =  \
+	tests/latency/udp_client.$(OBJEXT)
+tests_latency_udp_client_OBJECTS =  \
+	$(am_tests_latency_udp_client_OBJECTS)
+tests_latency_udp_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_latency_udp_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
+am_tests_latency_udp_server_OBJECTS =  \
+	tests/latency/udp_server.$(OBJEXT)
+tests_latency_udp_server_OBJECTS =  \
+	$(am_tests_latency_udp_server_OBJECTS)
+tests_latency_udp_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_latency_udp_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_performance_client_OBJECTS =  \
 	tests/performance/client.$(OBJEXT)
 tests_performance_client_OBJECTS =  \
 	$(am_tests_performance_client_OBJECTS)
 tests_performance_client_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_performance_client_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_performance_server_OBJECTS =  \
 	tests/performance/server.$(OBJEXT)
 tests_performance_server_OBJECTS =  \
 	$(am_tests_performance_server_OBJECTS)
 tests_performance_server_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_performance_server_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_basic_datagram_socket_OBJECTS =  \
 	tests/unit/basic_datagram_socket.$(OBJEXT)
 tests_unit_basic_datagram_socket_OBJECTS =  \
 	$(am_tests_unit_basic_datagram_socket_OBJECTS)
 tests_unit_basic_datagram_socket_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_basic_datagram_socket_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_basic_deadline_timer_OBJECTS =  \
 	tests/unit/basic_deadline_timer.$(OBJEXT)
 tests_unit_basic_deadline_timer_OBJECTS =  \
 	$(am_tests_unit_basic_deadline_timer_OBJECTS)
 tests_unit_basic_deadline_timer_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_basic_deadline_timer_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_basic_serial_port_OBJECTS =  \
 	tests/unit/basic_serial_port.$(OBJEXT)
 tests_unit_basic_serial_port_OBJECTS =  \
 	$(am_tests_unit_basic_serial_port_OBJECTS)
 tests_unit_basic_serial_port_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_basic_serial_port_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_basic_socket_acceptor_OBJECTS =  \
 	tests/unit/basic_socket_acceptor.$(OBJEXT)
 tests_unit_basic_socket_acceptor_OBJECTS =  \
 	$(am_tests_unit_basic_socket_acceptor_OBJECTS)
 tests_unit_basic_socket_acceptor_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_basic_socket_acceptor_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_basic_stream_socket_OBJECTS =  \
 	tests/unit/basic_stream_socket.$(OBJEXT)
 tests_unit_basic_stream_socket_OBJECTS =  \
 	$(am_tests_unit_basic_stream_socket_OBJECTS)
 tests_unit_basic_stream_socket_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_basic_stream_socket_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_buffer_OBJECTS = tests/unit/buffer.$(OBJEXT)
 tests_unit_buffer_OBJECTS = $(am_tests_unit_buffer_OBJECTS)
 tests_unit_buffer_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_buffer_DEPENDENCIES = libasio.a
 am_tests_unit_buffered_read_stream_OBJECTS =  \
 	tests/unit/buffered_read_stream.$(OBJEXT)
 tests_unit_buffered_read_stream_OBJECTS =  \
 	$(am_tests_unit_buffered_read_stream_OBJECTS)
 tests_unit_buffered_read_stream_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_buffered_read_stream_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_buffered_stream_OBJECTS =  \
 	tests/unit/buffered_stream.$(OBJEXT)
 tests_unit_buffered_stream_OBJECTS =  \
 	$(am_tests_unit_buffered_stream_OBJECTS)
 tests_unit_buffered_stream_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_buffered_stream_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_buffered_write_stream_OBJECTS =  \
 	tests/unit/buffered_write_stream.$(OBJEXT)
 tests_unit_buffered_write_stream_OBJECTS =  \
 	$(am_tests_unit_buffered_write_stream_OBJECTS)
 tests_unit_buffered_write_stream_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_buffered_write_stream_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_buffers_iterator_OBJECTS =  \
 	tests/unit/buffers_iterator.$(OBJEXT)
 tests_unit_buffers_iterator_OBJECTS =  \
 	$(am_tests_unit_buffers_iterator_OBJECTS)
 tests_unit_buffers_iterator_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_buffers_iterator_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_completion_condition_OBJECTS =  \
 	tests/unit/completion_condition.$(OBJEXT)
 tests_unit_completion_condition_OBJECTS =  \
 	$(am_tests_unit_completion_condition_OBJECTS)
 tests_unit_completion_condition_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_completion_condition_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_datagram_socket_service_OBJECTS =  \
 	tests/unit/datagram_socket_service.$(OBJEXT)
 tests_unit_datagram_socket_service_OBJECTS =  \
 	$(am_tests_unit_datagram_socket_service_OBJECTS)
 tests_unit_datagram_socket_service_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_datagram_socket_service_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_deadline_timer_OBJECTS =  \
 	tests/unit/deadline_timer.$(OBJEXT)
 tests_unit_deadline_timer_OBJECTS =  \
 	$(am_tests_unit_deadline_timer_OBJECTS)
 tests_unit_deadline_timer_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_deadline_timer_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_deadline_timer_service_OBJECTS =  \
 	tests/unit/deadline_timer_service.$(OBJEXT)
 tests_unit_deadline_timer_service_OBJECTS =  \
 	$(am_tests_unit_deadline_timer_service_OBJECTS)
 tests_unit_deadline_timer_service_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_deadline_timer_service_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_error_OBJECTS = tests/unit/error.$(OBJEXT)
 tests_unit_error_OBJECTS = $(am_tests_unit_error_OBJECTS)
 tests_unit_error_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_error_DEPENDENCIES = libasio.a
 am_tests_unit_io_service_OBJECTS = tests/unit/io_service.$(OBJEXT)
 tests_unit_io_service_OBJECTS = $(am_tests_unit_io_service_OBJECTS)
 tests_unit_io_service_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_io_service_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_address_OBJECTS = tests/unit/ip/address.$(OBJEXT)
 tests_unit_ip_address_OBJECTS = $(am_tests_unit_ip_address_OBJECTS)
 tests_unit_ip_address_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_address_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_address_v4_OBJECTS =  \
 	tests/unit/ip/address_v4.$(OBJEXT)
 tests_unit_ip_address_v4_OBJECTS =  \
 	$(am_tests_unit_ip_address_v4_OBJECTS)
 tests_unit_ip_address_v4_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_address_v4_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_address_v6_OBJECTS =  \
 	tests/unit/ip/address_v6.$(OBJEXT)
 tests_unit_ip_address_v6_OBJECTS =  \
 	$(am_tests_unit_ip_address_v6_OBJECTS)
 tests_unit_ip_address_v6_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_address_v6_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_basic_endpoint_OBJECTS =  \
 	tests/unit/ip/basic_endpoint.$(OBJEXT)
 tests_unit_ip_basic_endpoint_OBJECTS =  \
 	$(am_tests_unit_ip_basic_endpoint_OBJECTS)
 tests_unit_ip_basic_endpoint_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_basic_endpoint_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_basic_resolver_OBJECTS =  \
 	tests/unit/ip/basic_resolver.$(OBJEXT)
 tests_unit_ip_basic_resolver_OBJECTS =  \
 	$(am_tests_unit_ip_basic_resolver_OBJECTS)
 tests_unit_ip_basic_resolver_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_basic_resolver_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_basic_resolver_entry_OBJECTS =  \
 	tests/unit/ip/basic_resolver_entry.$(OBJEXT)
 tests_unit_ip_basic_resolver_entry_OBJECTS =  \
 	$(am_tests_unit_ip_basic_resolver_entry_OBJECTS)
 tests_unit_ip_basic_resolver_entry_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_basic_resolver_entry_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_basic_resolver_iterator_OBJECTS =  \
 	tests/unit/ip/basic_resolver_iterator.$(OBJEXT)
 tests_unit_ip_basic_resolver_iterator_OBJECTS =  \
 	$(am_tests_unit_ip_basic_resolver_iterator_OBJECTS)
 tests_unit_ip_basic_resolver_iterator_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_basic_resolver_iterator_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_basic_resolver_query_OBJECTS =  \
 	tests/unit/ip/basic_resolver_query.$(OBJEXT)
 tests_unit_ip_basic_resolver_query_OBJECTS =  \
 	$(am_tests_unit_ip_basic_resolver_query_OBJECTS)
 tests_unit_ip_basic_resolver_query_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_basic_resolver_query_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_host_name_OBJECTS =  \
 	tests/unit/ip/host_name.$(OBJEXT)
 tests_unit_ip_host_name_OBJECTS =  \
 	$(am_tests_unit_ip_host_name_OBJECTS)
 tests_unit_ip_host_name_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_host_name_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_multicast_OBJECTS =  \
 	tests/unit/ip/multicast.$(OBJEXT)
 tests_unit_ip_multicast_OBJECTS =  \
 	$(am_tests_unit_ip_multicast_OBJECTS)
 tests_unit_ip_multicast_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_multicast_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_resolver_query_base_OBJECTS =  \
 	tests/unit/ip/resolver_query_base.$(OBJEXT)
 tests_unit_ip_resolver_query_base_OBJECTS =  \
 	$(am_tests_unit_ip_resolver_query_base_OBJECTS)
 tests_unit_ip_resolver_query_base_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_resolver_query_base_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_resolver_service_OBJECTS =  \
 	tests/unit/ip/resolver_service.$(OBJEXT)
 tests_unit_ip_resolver_service_OBJECTS =  \
 	$(am_tests_unit_ip_resolver_service_OBJECTS)
 tests_unit_ip_resolver_service_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_resolver_service_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_tcp_OBJECTS = tests/unit/ip/tcp.$(OBJEXT)
 tests_unit_ip_tcp_OBJECTS = $(am_tests_unit_ip_tcp_OBJECTS)
 tests_unit_ip_tcp_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_tcp_DEPENDENCIES = libasio.a
 am_tests_unit_ip_udp_OBJECTS = tests/unit/ip/udp.$(OBJEXT)
 tests_unit_ip_udp_OBJECTS = $(am_tests_unit_ip_udp_OBJECTS)
 tests_unit_ip_udp_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_udp_DEPENDENCIES = libasio.a
 am_tests_unit_ip_unicast_OBJECTS = tests/unit/ip/unicast.$(OBJEXT)
 tests_unit_ip_unicast_OBJECTS = $(am_tests_unit_ip_unicast_OBJECTS)
 tests_unit_ip_unicast_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_unicast_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_ip_v6_only_OBJECTS = tests/unit/ip/v6_only.$(OBJEXT)
 tests_unit_ip_v6_only_OBJECTS = $(am_tests_unit_ip_v6_only_OBJECTS)
 tests_unit_ip_v6_only_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ip_v6_only_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_is_read_buffered_OBJECTS =  \
 	tests/unit/is_read_buffered.$(OBJEXT)
 tests_unit_is_read_buffered_OBJECTS =  \
 	$(am_tests_unit_is_read_buffered_OBJECTS)
 tests_unit_is_read_buffered_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_is_read_buffered_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_is_write_buffered_OBJECTS =  \
 	tests/unit/is_write_buffered.$(OBJEXT)
 tests_unit_is_write_buffered_OBJECTS =  \
 	$(am_tests_unit_is_write_buffered_OBJECTS)
 tests_unit_is_write_buffered_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_is_write_buffered_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_local_basic_endpoint_OBJECTS =  \
 	tests/unit/local/basic_endpoint.$(OBJEXT)
 tests_unit_local_basic_endpoint_OBJECTS =  \
 	$(am_tests_unit_local_basic_endpoint_OBJECTS)
 tests_unit_local_basic_endpoint_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_local_basic_endpoint_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_local_connect_pair_OBJECTS =  \
 	tests/unit/local/connect_pair.$(OBJEXT)
 tests_unit_local_connect_pair_OBJECTS =  \
 	$(am_tests_unit_local_connect_pair_OBJECTS)
 tests_unit_local_connect_pair_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_local_connect_pair_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_local_datagram_protocol_OBJECTS =  \
 	tests/unit/local/datagram_protocol.$(OBJEXT)
 tests_unit_local_datagram_protocol_OBJECTS =  \
 	$(am_tests_unit_local_datagram_protocol_OBJECTS)
 tests_unit_local_datagram_protocol_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_local_datagram_protocol_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_local_stream_protocol_OBJECTS =  \
 	tests/unit/local/stream_protocol.$(OBJEXT)
 tests_unit_local_stream_protocol_OBJECTS =  \
 	$(am_tests_unit_local_stream_protocol_OBJECTS)
 tests_unit_local_stream_protocol_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_local_stream_protocol_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_placeholders_OBJECTS =  \
 	tests/unit/placeholders.$(OBJEXT)
 tests_unit_placeholders_OBJECTS =  \
 	$(am_tests_unit_placeholders_OBJECTS)
 tests_unit_placeholders_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_placeholders_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_posix_basic_descriptor_OBJECTS =  \
 	tests/unit/posix/basic_descriptor.$(OBJEXT)
 tests_unit_posix_basic_descriptor_OBJECTS =  \
 	$(am_tests_unit_posix_basic_descriptor_OBJECTS)
 tests_unit_posix_basic_descriptor_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_posix_basic_descriptor_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_posix_basic_stream_descriptor_OBJECTS =  \
 	tests/unit/posix/basic_stream_descriptor.$(OBJEXT)
 tests_unit_posix_basic_stream_descriptor_OBJECTS =  \
 	$(am_tests_unit_posix_basic_stream_descriptor_OBJECTS)
 tests_unit_posix_basic_stream_descriptor_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_posix_basic_stream_descriptor_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_posix_descriptor_base_OBJECTS =  \
 	tests/unit/posix/descriptor_base.$(OBJEXT)
 tests_unit_posix_descriptor_base_OBJECTS =  \
 	$(am_tests_unit_posix_descriptor_base_OBJECTS)
 tests_unit_posix_descriptor_base_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_posix_descriptor_base_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_posix_stream_descriptor_OBJECTS =  \
 	tests/unit/posix/stream_descriptor.$(OBJEXT)
 tests_unit_posix_stream_descriptor_OBJECTS =  \
 	$(am_tests_unit_posix_stream_descriptor_OBJECTS)
 tests_unit_posix_stream_descriptor_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_posix_stream_descriptor_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_posix_stream_descriptor_service_OBJECTS =  \
 	tests/unit/posix/stream_descriptor_service.$(OBJEXT)
 tests_unit_posix_stream_descriptor_service_OBJECTS =  \
 	$(am_tests_unit_posix_stream_descriptor_service_OBJECTS)
 tests_unit_posix_stream_descriptor_service_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_posix_stream_descriptor_service_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_read_OBJECTS = tests/unit/read.$(OBJEXT)
 tests_unit_read_OBJECTS = $(am_tests_unit_read_OBJECTS)
 tests_unit_read_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_read_DEPENDENCIES = libasio.a
 am_tests_unit_read_at_OBJECTS = tests/unit/read_at.$(OBJEXT)
 tests_unit_read_at_OBJECTS = $(am_tests_unit_read_at_OBJECTS)
 tests_unit_read_at_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_read_at_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_read_until_OBJECTS = tests/unit/read_until.$(OBJEXT)
 tests_unit_read_until_OBJECTS = $(am_tests_unit_read_until_OBJECTS)
 tests_unit_read_until_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_read_until_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_serial_port_OBJECTS = tests/unit/serial_port.$(OBJEXT)
 tests_unit_serial_port_OBJECTS = $(am_tests_unit_serial_port_OBJECTS)
 tests_unit_serial_port_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_serial_port_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_serial_port_base_OBJECTS =  \
 	tests/unit/serial_port_base.$(OBJEXT)
 tests_unit_serial_port_base_OBJECTS =  \
 	$(am_tests_unit_serial_port_base_OBJECTS)
 tests_unit_serial_port_base_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_serial_port_base_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_serial_port_service_OBJECTS =  \
 	tests/unit/serial_port_service.$(OBJEXT)
 tests_unit_serial_port_service_OBJECTS =  \
 	$(am_tests_unit_serial_port_service_OBJECTS)
 tests_unit_serial_port_service_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_serial_port_service_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_socket_acceptor_service_OBJECTS =  \
 	tests/unit/socket_acceptor_service.$(OBJEXT)
 tests_unit_socket_acceptor_service_OBJECTS =  \
 	$(am_tests_unit_socket_acceptor_service_OBJECTS)
 tests_unit_socket_acceptor_service_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_socket_acceptor_service_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_socket_base_OBJECTS = tests/unit/socket_base.$(OBJEXT)
 tests_unit_socket_base_OBJECTS = $(am_tests_unit_socket_base_OBJECTS)
 tests_unit_socket_base_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_socket_base_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__tests_unit_ssl_basic_context_SOURCES_DIST =  \
 	tests/unit/ssl/basic_context.cpp
 @HAVE_OPENSSL_TRUE@am_tests_unit_ssl_basic_context_OBJECTS =  \
@@ -874,11 +1126,15 @@ am__tests_unit_ssl_basic_context_SOURCES_DIST =  \
 tests_unit_ssl_basic_context_OBJECTS =  \
 	$(am_tests_unit_ssl_basic_context_OBJECTS)
 tests_unit_ssl_basic_context_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ssl_basic_context_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__tests_unit_ssl_context_SOURCES_DIST = tests/unit/ssl/context.cpp
 @HAVE_OPENSSL_TRUE@am_tests_unit_ssl_context_OBJECTS =  \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/context.$(OBJEXT)
 tests_unit_ssl_context_OBJECTS = $(am_tests_unit_ssl_context_OBJECTS)
 tests_unit_ssl_context_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ssl_context_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__tests_unit_ssl_context_base_SOURCES_DIST =  \
 	tests/unit/ssl/context_base.cpp
 @HAVE_OPENSSL_TRUE@am_tests_unit_ssl_context_base_OBJECTS =  \
@@ -886,6 +1142,8 @@ am__tests_unit_ssl_context_base_SOURCES_DIST =  \
 tests_unit_ssl_context_base_OBJECTS =  \
 	$(am_tests_unit_ssl_context_base_OBJECTS)
 tests_unit_ssl_context_base_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ssl_context_base_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__tests_unit_ssl_context_service_SOURCES_DIST =  \
 	tests/unit/ssl/context_service.cpp
 @HAVE_OPENSSL_TRUE@am_tests_unit_ssl_context_service_OBJECTS =  \
@@ -893,11 +1151,15 @@ am__tests_unit_ssl_context_service_SOURCES_DIST =  \
 tests_unit_ssl_context_service_OBJECTS =  \
 	$(am_tests_unit_ssl_context_service_OBJECTS)
 tests_unit_ssl_context_service_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ssl_context_service_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__tests_unit_ssl_stream_SOURCES_DIST = tests/unit/ssl/stream.cpp
 @HAVE_OPENSSL_TRUE@am_tests_unit_ssl_stream_OBJECTS =  \
 @HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream.$(OBJEXT)
 tests_unit_ssl_stream_OBJECTS = $(am_tests_unit_ssl_stream_OBJECTS)
 tests_unit_ssl_stream_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ssl_stream_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__tests_unit_ssl_stream_base_SOURCES_DIST =  \
 	tests/unit/ssl/stream_base.cpp
 @HAVE_OPENSSL_TRUE@am_tests_unit_ssl_stream_base_OBJECTS =  \
@@ -905,6 +1167,8 @@ am__tests_unit_ssl_stream_base_SOURCES_DIST =  \
 tests_unit_ssl_stream_base_OBJECTS =  \
 	$(am_tests_unit_ssl_stream_base_OBJECTS)
 tests_unit_ssl_stream_base_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ssl_stream_base_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am__tests_unit_ssl_stream_service_SOURCES_DIST =  \
 	tests/unit/ssl/stream_service.cpp
 @HAVE_OPENSSL_TRUE@am_tests_unit_ssl_stream_service_OBJECTS =  \
@@ -912,66 +1176,93 @@ am__tests_unit_ssl_stream_service_SOURCES_DIST =  \
 tests_unit_ssl_stream_service_OBJECTS =  \
 	$(am_tests_unit_ssl_stream_service_OBJECTS)
 tests_unit_ssl_stream_service_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_ssl_stream_service_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_strand_OBJECTS = tests/unit/strand.$(OBJEXT)
 tests_unit_strand_OBJECTS = $(am_tests_unit_strand_OBJECTS)
 tests_unit_strand_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_strand_DEPENDENCIES = libasio.a
 am_tests_unit_stream_socket_service_OBJECTS =  \
 	tests/unit/stream_socket_service.$(OBJEXT)
 tests_unit_stream_socket_service_OBJECTS =  \
 	$(am_tests_unit_stream_socket_service_OBJECTS)
 tests_unit_stream_socket_service_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_stream_socket_service_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_thread_OBJECTS = tests/unit/thread.$(OBJEXT)
 tests_unit_thread_OBJECTS = $(am_tests_unit_thread_OBJECTS)
 tests_unit_thread_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_thread_DEPENDENCIES = libasio.a
 am_tests_unit_time_traits_OBJECTS = tests/unit/time_traits.$(OBJEXT)
 tests_unit_time_traits_OBJECTS = $(am_tests_unit_time_traits_OBJECTS)
 tests_unit_time_traits_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_time_traits_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_windows_basic_handle_OBJECTS =  \
 	tests/unit/windows/basic_handle.$(OBJEXT)
 tests_unit_windows_basic_handle_OBJECTS =  \
 	$(am_tests_unit_windows_basic_handle_OBJECTS)
 tests_unit_windows_basic_handle_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_windows_basic_handle_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_windows_basic_random_access_handle_OBJECTS =  \
 	tests/unit/windows/basic_random_access_handle.$(OBJEXT)
 tests_unit_windows_basic_random_access_handle_OBJECTS =  \
 	$(am_tests_unit_windows_basic_random_access_handle_OBJECTS)
 tests_unit_windows_basic_random_access_handle_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_windows_basic_random_access_handle_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_windows_basic_stream_handle_OBJECTS =  \
 	tests/unit/windows/basic_stream_handle.$(OBJEXT)
 tests_unit_windows_basic_stream_handle_OBJECTS =  \
 	$(am_tests_unit_windows_basic_stream_handle_OBJECTS)
 tests_unit_windows_basic_stream_handle_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_windows_basic_stream_handle_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_windows_overlapped_ptr_OBJECTS =  \
 	tests/unit/windows/overlapped_ptr.$(OBJEXT)
 tests_unit_windows_overlapped_ptr_OBJECTS =  \
 	$(am_tests_unit_windows_overlapped_ptr_OBJECTS)
 tests_unit_windows_overlapped_ptr_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_windows_overlapped_ptr_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_windows_random_access_handle_OBJECTS =  \
 	tests/unit/windows/random_access_handle.$(OBJEXT)
 tests_unit_windows_random_access_handle_OBJECTS =  \
 	$(am_tests_unit_windows_random_access_handle_OBJECTS)
 tests_unit_windows_random_access_handle_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_windows_random_access_handle_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_windows_random_access_handle_service_OBJECTS =  \
 	tests/unit/windows/random_access_handle_service.$(OBJEXT)
 tests_unit_windows_random_access_handle_service_OBJECTS =  \
 	$(am_tests_unit_windows_random_access_handle_service_OBJECTS)
 tests_unit_windows_random_access_handle_service_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_windows_random_access_handle_service_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_windows_stream_handle_OBJECTS =  \
 	tests/unit/windows/stream_handle.$(OBJEXT)
 tests_unit_windows_stream_handle_OBJECTS =  \
 	$(am_tests_unit_windows_stream_handle_OBJECTS)
 tests_unit_windows_stream_handle_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_windows_stream_handle_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_windows_stream_handle_service_OBJECTS =  \
 	tests/unit/windows/stream_handle_service.$(OBJEXT)
 tests_unit_windows_stream_handle_service_OBJECTS =  \
 	$(am_tests_unit_windows_stream_handle_service_OBJECTS)
 tests_unit_windows_stream_handle_service_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_windows_stream_handle_service_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 am_tests_unit_write_OBJECTS = tests/unit/write.$(OBJEXT)
 tests_unit_write_OBJECTS = $(am_tests_unit_write_OBJECTS)
 tests_unit_write_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_write_DEPENDENCIES = libasio.a
 am_tests_unit_write_at_OBJECTS = tests/unit/write_at.$(OBJEXT)
 tests_unit_write_at_OBJECTS = $(am_tests_unit_write_at_OBJECTS)
 tests_unit_write_at_LDADD = $(LDADD)
+@SEPARATE_COMPILATION_TRUE@tests_unit_write_at_DEPENDENCIES =  \
+@SEPARATE_COMPILATION_TRUE@	libasio.a
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -981,7 +1272,7 @@ CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
-SOURCES = $(examples_allocation_server_SOURCES) \
+SOURCES = $(libasio_a_SOURCES) $(examples_allocation_server_SOURCES) \
 	$(examples_buffers_reference_counted_SOURCES) \
 	$(examples_chat_chat_client_SOURCES) \
 	$(examples_chat_chat_server_SOURCES) \
@@ -1014,10 +1305,10 @@ SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_services_daytime_client_SOURCES) \
 	$(examples_socks4_sync_client_SOURCES) \
 	$(examples_ssl_client_SOURCES) $(examples_ssl_server_SOURCES) \
-	$(examples_timeouts_accept_timeout_SOURCES) \
-	$(examples_timeouts_connect_timeout_SOURCES) \
-	$(examples_timeouts_datagram_receive_timeout_SOURCES) \
-	$(examples_timeouts_stream_receive_timeout_SOURCES) \
+	$(examples_timeouts_async_tcp_client_SOURCES) \
+	$(examples_timeouts_blocking_tcp_client_SOURCES) \
+	$(examples_timeouts_blocking_udp_client_SOURCES) \
+	$(examples_timeouts_server_SOURCES) \
 	$(examples_timers_time_t_timer_SOURCES) \
 	$(examples_tutorial_daytime1_client_SOURCES) \
 	$(examples_tutorial_daytime2_server_SOURCES) \
@@ -1032,6 +1323,10 @@ SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_tutorial_timer4_timer_SOURCES) \
 	$(examples_tutorial_timer5_timer_SOURCES) \
 	$(examples_windows_transmit_file_SOURCES) \
+	$(tests_latency_tcp_client_SOURCES) \
+	$(tests_latency_tcp_server_SOURCES) \
+	$(tests_latency_udp_client_SOURCES) \
+	$(tests_latency_udp_server_SOURCES) \
 	$(tests_performance_client_SOURCES) \
 	$(tests_performance_server_SOURCES) \
 	$(tests_unit_basic_datagram_socket_SOURCES) \
@@ -1102,7 +1397,8 @@ SOURCES = $(examples_allocation_server_SOURCES) \
 	$(tests_unit_windows_stream_handle_SOURCES) \
 	$(tests_unit_windows_stream_handle_service_SOURCES) \
 	$(tests_unit_write_SOURCES) $(tests_unit_write_at_SOURCES)
-DIST_SOURCES = $(examples_allocation_server_SOURCES) \
+DIST_SOURCES = $(am__libasio_a_SOURCES_DIST) \
+	$(examples_allocation_server_SOURCES) \
 	$(examples_buffers_reference_counted_SOURCES) \
 	$(examples_chat_chat_client_SOURCES) \
 	$(examples_chat_chat_server_SOURCES) \
@@ -1136,10 +1432,10 @@ DIST_SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_socks4_sync_client_SOURCES) \
 	$(am__examples_ssl_client_SOURCES_DIST) \
 	$(am__examples_ssl_server_SOURCES_DIST) \
-	$(examples_timeouts_accept_timeout_SOURCES) \
-	$(examples_timeouts_connect_timeout_SOURCES) \
-	$(examples_timeouts_datagram_receive_timeout_SOURCES) \
-	$(examples_timeouts_stream_receive_timeout_SOURCES) \
+	$(examples_timeouts_async_tcp_client_SOURCES) \
+	$(examples_timeouts_blocking_tcp_client_SOURCES) \
+	$(examples_timeouts_blocking_udp_client_SOURCES) \
+	$(examples_timeouts_server_SOURCES) \
 	$(examples_timers_time_t_timer_SOURCES) \
 	$(examples_tutorial_daytime1_client_SOURCES) \
 	$(examples_tutorial_daytime2_server_SOURCES) \
@@ -1154,6 +1450,10 @@ DIST_SOURCES = $(examples_allocation_server_SOURCES) \
 	$(examples_tutorial_timer4_timer_SOURCES) \
 	$(examples_tutorial_timer5_timer_SOURCES) \
 	$(am__examples_windows_transmit_file_SOURCES_DIST) \
+	$(tests_latency_tcp_client_SOURCES) \
+	$(tests_latency_tcp_server_SOURCES) \
+	$(tests_latency_udp_client_SOURCES) \
+	$(tests_latency_udp_server_SOURCES) \
 	$(tests_performance_client_SOURCES) \
 	$(tests_performance_server_SOURCES) \
 	$(tests_unit_basic_datagram_socket_SOURCES) \
@@ -1229,14 +1529,6 @@ ETAGS = etags
 CTAGS = ctags
 am__tty_colors = \
 red=; grn=; lgn=; blu=; std=
-@HAVE_OPENSSL_TRUE@am__EXEEXT_4 =  \
-@HAVE_OPENSSL_TRUE@	tests/unit/ssl/basic_context$(EXEEXT) \
-@HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_base$(EXEEXT) \
-@HAVE_OPENSSL_TRUE@	tests/unit/ssl/context_service$(EXEEXT) \
-@HAVE_OPENSSL_TRUE@	tests/unit/ssl/context$(EXEEXT) \
-@HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream_base$(EXEEXT) \
-@HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream_service$(EXEEXT) \
-@HAVE_OPENSSL_TRUE@	tests/unit/ssl/stream$(EXEEXT)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
@@ -1339,7 +1631,14 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
+@SEPARATE_COMPILATION_TRUE@noinst_LIBRARIES = libasio.a
+@SEPARATE_COMPILATION_TRUE@libasio_a_SOURCES = ../include/asio/impl/src.cpp
+@SEPARATE_COMPILATION_TRUE@LDADD = libasio.a
 noinst_HEADERS = \
+	tests/latency/coroutine.hpp \
+	tests/latency/high_res_clock.hpp \
+	tests/latency/unyield.hpp \
+	tests/latency/yield.hpp \
 	tests/unit/unit_test.hpp \
 	examples/chat/chat_message.hpp \
 	examples/services/basic_logger.hpp \
@@ -1348,6 +1647,10 @@ noinst_HEADERS = \
 	examples/services/stream_socket_service.hpp
 
 AM_CXXFLAGS = -I$(srcdir)/../include
+tests_latency_tcp_client_SOURCES = tests/latency/tcp_client.cpp
+tests_latency_tcp_server_SOURCES = tests/latency/tcp_server.cpp
+tests_latency_udp_client_SOURCES = tests/latency/udp_client.cpp
+tests_latency_udp_server_SOURCES = tests/latency/udp_server.cpp
 tests_performance_client_SOURCES = tests/performance/client.cpp
 tests_performance_server_SOURCES = tests/performance/server.cpp
 tests_unit_basic_datagram_socket_SOURCES = tests/unit/basic_datagram_socket.cpp
@@ -1435,8 +1738,8 @@ examples_http_server_http_server_SOURCES =  \
 	examples/http/server/reply.cpp \
 	examples/http/server/request_handler.cpp \
 	examples/http/server/request_parser.cpp \
-	examples/http/server/server.cpp $(am__append_5) \
-	$(am__append_6)
+	examples/http/server/server.cpp $(am__append_6) \
+	$(am__append_7)
 examples_http_server2_http_server_SOURCES =  \
 	examples/http/server2/connection.cpp \
 	examples/http/server2/io_service_pool.cpp \
@@ -1444,23 +1747,23 @@ examples_http_server2_http_server_SOURCES =  \
 	examples/http/server2/reply.cpp \
 	examples/http/server2/request_handler.cpp \
 	examples/http/server2/request_parser.cpp \
-	examples/http/server2/server.cpp $(am__append_7) \
-	$(am__append_8)
+	examples/http/server2/server.cpp $(am__append_8) \
+	$(am__append_9)
 examples_http_server3_http_server_SOURCES =  \
 	examples/http/server3/connection.cpp \
 	examples/http/server3/mime_types.cpp \
 	examples/http/server3/reply.cpp \
 	examples/http/server3/request_handler.cpp \
 	examples/http/server3/request_parser.cpp \
-	examples/http/server3/server.cpp $(am__append_9) \
-	$(am__append_10)
+	examples/http/server3/server.cpp $(am__append_10) \
+	$(am__append_11)
 examples_http_server4_http_server_SOURCES =  \
 	examples/http/server4/file_handler.cpp \
 	examples/http/server4/mime_types.cpp \
 	examples/http/server4/reply.cpp \
 	examples/http/server4/request_parser.cpp \
-	examples/http/server4/server.cpp $(am__append_11) \
-	$(am__append_12)
+	examples/http/server4/server.cpp $(am__append_12) \
+	$(am__append_13)
 examples_icmp_ping_SOURCES = examples/icmp/ping.cpp
 examples_invocation_prioritised_handlers_SOURCES = examples/invocation/prioritised_handlers.cpp
 examples_iostreams_daytime_client_SOURCES = examples/iostreams/daytime_client.cpp
@@ -1475,10 +1778,10 @@ examples_services_daytime_client_SOURCES = \
 	examples/services/logger_service.cpp
 
 examples_socks4_sync_client_SOURCES = examples/socks4/sync_client.cpp
-examples_timeouts_accept_timeout_SOURCES = examples/timeouts/accept_timeout.cpp
-examples_timeouts_connect_timeout_SOURCES = examples/timeouts/connect_timeout.cpp
-examples_timeouts_datagram_receive_timeout_SOURCES = examples/timeouts/datagram_receive_timeout.cpp
-examples_timeouts_stream_receive_timeout_SOURCES = examples/timeouts/stream_receive_timeout.cpp
+examples_timeouts_async_tcp_client_SOURCES = examples/timeouts/async_tcp_client.cpp
+examples_timeouts_blocking_tcp_client_SOURCES = examples/timeouts/blocking_tcp_client.cpp
+examples_timeouts_blocking_udp_client_SOURCES = examples/timeouts/blocking_udp_client.cpp
+examples_timeouts_server_SOURCES = examples/timeouts/server.cpp
 examples_timers_time_t_timer_SOURCES = examples/timers/time_t_timer.cpp
 examples_tutorial_timer1_timer_SOURCES = examples/tutorial/timer1/timer.cpp
 examples_tutorial_timer2_timer_SOURCES = examples/tutorial/timer2/timer.cpp
@@ -1608,6 +1911,25 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
+
+clean-noinstLIBRARIES:
+	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
+../include/asio/impl/$(am__dirstamp):
+	@$(MKDIR_P) ../include/asio/impl
+	@: > ../include/asio/impl/$(am__dirstamp)
+../include/asio/impl/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ../include/asio/impl/$(DEPDIR)
+	@: > ../include/asio/impl/$(DEPDIR)/$(am__dirstamp)
+../include/asio/impl/src.$(OBJEXT):  \
+	../include/asio/impl/$(am__dirstamp) \
+	../include/asio/impl/$(DEPDIR)/$(am__dirstamp)
+libasio.a: $(libasio_a_OBJECTS) $(libasio_a_DEPENDENCIES) 
+	-rm -f libasio.a
+	$(libasio_a_AR) libasio.a $(libasio_a_OBJECTS) $(libasio_a_LIBADD)
+	$(RANLIB) libasio.a
+
+clean-checkPROGRAMS:
+	-test -z "$(check_PROGRAMS)" || rm -f $(check_PROGRAMS)
 
 clean-noinstPROGRAMS:
 	-test -z "$(noinst_PROGRAMS)" || rm -f $(noinst_PROGRAMS)
@@ -2019,30 +2341,29 @@ examples/timeouts/$(am__dirstamp):
 examples/timeouts/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) examples/timeouts/$(DEPDIR)
 	@: > examples/timeouts/$(DEPDIR)/$(am__dirstamp)
-examples/timeouts/accept_timeout.$(OBJEXT):  \
+examples/timeouts/async_tcp_client.$(OBJEXT):  \
 	examples/timeouts/$(am__dirstamp) \
 	examples/timeouts/$(DEPDIR)/$(am__dirstamp)
-examples/timeouts/accept_timeout$(EXEEXT): $(examples_timeouts_accept_timeout_OBJECTS) $(examples_timeouts_accept_timeout_DEPENDENCIES) examples/timeouts/$(am__dirstamp)
-	@rm -f examples/timeouts/accept_timeout$(EXEEXT)
-	$(CXXLINK) $(examples_timeouts_accept_timeout_OBJECTS) $(examples_timeouts_accept_timeout_LDADD) $(LIBS)
-examples/timeouts/connect_timeout.$(OBJEXT):  \
+examples/timeouts/async_tcp_client$(EXEEXT): $(examples_timeouts_async_tcp_client_OBJECTS) $(examples_timeouts_async_tcp_client_DEPENDENCIES) examples/timeouts/$(am__dirstamp)
+	@rm -f examples/timeouts/async_tcp_client$(EXEEXT)
+	$(CXXLINK) $(examples_timeouts_async_tcp_client_OBJECTS) $(examples_timeouts_async_tcp_client_LDADD) $(LIBS)
+examples/timeouts/blocking_tcp_client.$(OBJEXT):  \
 	examples/timeouts/$(am__dirstamp) \
 	examples/timeouts/$(DEPDIR)/$(am__dirstamp)
-examples/timeouts/connect_timeout$(EXEEXT): $(examples_timeouts_connect_timeout_OBJECTS) $(examples_timeouts_connect_timeout_DEPENDENCIES) examples/timeouts/$(am__dirstamp)
-	@rm -f examples/timeouts/connect_timeout$(EXEEXT)
-	$(CXXLINK) $(examples_timeouts_connect_timeout_OBJECTS) $(examples_timeouts_connect_timeout_LDADD) $(LIBS)
-examples/timeouts/datagram_receive_timeout.$(OBJEXT):  \
+examples/timeouts/blocking_tcp_client$(EXEEXT): $(examples_timeouts_blocking_tcp_client_OBJECTS) $(examples_timeouts_blocking_tcp_client_DEPENDENCIES) examples/timeouts/$(am__dirstamp)
+	@rm -f examples/timeouts/blocking_tcp_client$(EXEEXT)
+	$(CXXLINK) $(examples_timeouts_blocking_tcp_client_OBJECTS) $(examples_timeouts_blocking_tcp_client_LDADD) $(LIBS)
+examples/timeouts/blocking_udp_client.$(OBJEXT):  \
 	examples/timeouts/$(am__dirstamp) \
 	examples/timeouts/$(DEPDIR)/$(am__dirstamp)
-examples/timeouts/datagram_receive_timeout$(EXEEXT): $(examples_timeouts_datagram_receive_timeout_OBJECTS) $(examples_timeouts_datagram_receive_timeout_DEPENDENCIES) examples/timeouts/$(am__dirstamp)
-	@rm -f examples/timeouts/datagram_receive_timeout$(EXEEXT)
-	$(CXXLINK) $(examples_timeouts_datagram_receive_timeout_OBJECTS) $(examples_timeouts_datagram_receive_timeout_LDADD) $(LIBS)
-examples/timeouts/stream_receive_timeout.$(OBJEXT):  \
-	examples/timeouts/$(am__dirstamp) \
+examples/timeouts/blocking_udp_client$(EXEEXT): $(examples_timeouts_blocking_udp_client_OBJECTS) $(examples_timeouts_blocking_udp_client_DEPENDENCIES) examples/timeouts/$(am__dirstamp)
+	@rm -f examples/timeouts/blocking_udp_client$(EXEEXT)
+	$(CXXLINK) $(examples_timeouts_blocking_udp_client_OBJECTS) $(examples_timeouts_blocking_udp_client_LDADD) $(LIBS)
+examples/timeouts/server.$(OBJEXT): examples/timeouts/$(am__dirstamp) \
 	examples/timeouts/$(DEPDIR)/$(am__dirstamp)
-examples/timeouts/stream_receive_timeout$(EXEEXT): $(examples_timeouts_stream_receive_timeout_OBJECTS) $(examples_timeouts_stream_receive_timeout_DEPENDENCIES) examples/timeouts/$(am__dirstamp)
-	@rm -f examples/timeouts/stream_receive_timeout$(EXEEXT)
-	$(CXXLINK) $(examples_timeouts_stream_receive_timeout_OBJECTS) $(examples_timeouts_stream_receive_timeout_LDADD) $(LIBS)
+examples/timeouts/server$(EXEEXT): $(examples_timeouts_server_OBJECTS) $(examples_timeouts_server_DEPENDENCIES) examples/timeouts/$(am__dirstamp)
+	@rm -f examples/timeouts/server$(EXEEXT)
+	$(CXXLINK) $(examples_timeouts_server_OBJECTS) $(examples_timeouts_server_LDADD) $(LIBS)
 examples/timers/$(am__dirstamp):
 	@$(MKDIR_P) examples/timers
 	@: > examples/timers/$(am__dirstamp)
@@ -2211,6 +2532,32 @@ examples/windows/transmit_file.$(OBJEXT):  \
 examples/windows/transmit_file$(EXEEXT): $(examples_windows_transmit_file_OBJECTS) $(examples_windows_transmit_file_DEPENDENCIES) examples/windows/$(am__dirstamp)
 	@rm -f examples/windows/transmit_file$(EXEEXT)
 	$(CXXLINK) $(examples_windows_transmit_file_OBJECTS) $(examples_windows_transmit_file_LDADD) $(LIBS)
+tests/latency/$(am__dirstamp):
+	@$(MKDIR_P) tests/latency
+	@: > tests/latency/$(am__dirstamp)
+tests/latency/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) tests/latency/$(DEPDIR)
+	@: > tests/latency/$(DEPDIR)/$(am__dirstamp)
+tests/latency/tcp_client.$(OBJEXT): tests/latency/$(am__dirstamp) \
+	tests/latency/$(DEPDIR)/$(am__dirstamp)
+tests/latency/tcp_client$(EXEEXT): $(tests_latency_tcp_client_OBJECTS) $(tests_latency_tcp_client_DEPENDENCIES) tests/latency/$(am__dirstamp)
+	@rm -f tests/latency/tcp_client$(EXEEXT)
+	$(CXXLINK) $(tests_latency_tcp_client_OBJECTS) $(tests_latency_tcp_client_LDADD) $(LIBS)
+tests/latency/tcp_server.$(OBJEXT): tests/latency/$(am__dirstamp) \
+	tests/latency/$(DEPDIR)/$(am__dirstamp)
+tests/latency/tcp_server$(EXEEXT): $(tests_latency_tcp_server_OBJECTS) $(tests_latency_tcp_server_DEPENDENCIES) tests/latency/$(am__dirstamp)
+	@rm -f tests/latency/tcp_server$(EXEEXT)
+	$(CXXLINK) $(tests_latency_tcp_server_OBJECTS) $(tests_latency_tcp_server_LDADD) $(LIBS)
+tests/latency/udp_client.$(OBJEXT): tests/latency/$(am__dirstamp) \
+	tests/latency/$(DEPDIR)/$(am__dirstamp)
+tests/latency/udp_client$(EXEEXT): $(tests_latency_udp_client_OBJECTS) $(tests_latency_udp_client_DEPENDENCIES) tests/latency/$(am__dirstamp)
+	@rm -f tests/latency/udp_client$(EXEEXT)
+	$(CXXLINK) $(tests_latency_udp_client_OBJECTS) $(tests_latency_udp_client_LDADD) $(LIBS)
+tests/latency/udp_server.$(OBJEXT): tests/latency/$(am__dirstamp) \
+	tests/latency/$(DEPDIR)/$(am__dirstamp)
+tests/latency/udp_server$(EXEEXT): $(tests_latency_udp_server_OBJECTS) $(tests_latency_udp_server_DEPENDENCIES) tests/latency/$(am__dirstamp)
+	@rm -f tests/latency/udp_server$(EXEEXT)
+	$(CXXLINK) $(tests_latency_udp_server_OBJECTS) $(tests_latency_udp_server_LDADD) $(LIBS)
 tests/performance/$(am__dirstamp):
 	@$(MKDIR_P) tests/performance
 	@: > tests/performance/$(am__dirstamp)
@@ -2663,6 +3010,7 @@ tests/unit/write_at$(EXEEXT): $(tests_unit_write_at_OBJECTS) $(tests_unit_write_
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f ../include/asio/impl/src.$(OBJEXT)
 	-rm -f examples/allocation/server.$(OBJEXT)
 	-rm -f examples/buffers/reference_counted.$(OBJEXT)
 	-rm -f examples/chat/chat_client.$(OBJEXT)
@@ -2727,10 +3075,10 @@ mostlyclean-compile:
 	-rm -f examples/socks4/sync_client.$(OBJEXT)
 	-rm -f examples/ssl/client.$(OBJEXT)
 	-rm -f examples/ssl/server.$(OBJEXT)
-	-rm -f examples/timeouts/accept_timeout.$(OBJEXT)
-	-rm -f examples/timeouts/connect_timeout.$(OBJEXT)
-	-rm -f examples/timeouts/datagram_receive_timeout.$(OBJEXT)
-	-rm -f examples/timeouts/stream_receive_timeout.$(OBJEXT)
+	-rm -f examples/timeouts/async_tcp_client.$(OBJEXT)
+	-rm -f examples/timeouts/blocking_tcp_client.$(OBJEXT)
+	-rm -f examples/timeouts/blocking_udp_client.$(OBJEXT)
+	-rm -f examples/timeouts/server.$(OBJEXT)
 	-rm -f examples/timers/time_t_timer.$(OBJEXT)
 	-rm -f examples/tutorial/daytime1/client.$(OBJEXT)
 	-rm -f examples/tutorial/daytime2/server.$(OBJEXT)
@@ -2745,6 +3093,10 @@ mostlyclean-compile:
 	-rm -f examples/tutorial/timer4/timer.$(OBJEXT)
 	-rm -f examples/tutorial/timer5/timer.$(OBJEXT)
 	-rm -f examples/windows/transmit_file.$(OBJEXT)
+	-rm -f tests/latency/tcp_client.$(OBJEXT)
+	-rm -f tests/latency/tcp_server.$(OBJEXT)
+	-rm -f tests/latency/udp_client.$(OBJEXT)
+	-rm -f tests/latency/udp_server.$(OBJEXT)
 	-rm -f tests/performance/client.$(OBJEXT)
 	-rm -f tests/performance/server.$(OBJEXT)
 	-rm -f tests/unit/basic_datagram_socket.$(OBJEXT)
@@ -2824,6 +3176,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@../include/asio/impl/$(DEPDIR)/src.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/allocation/$(DEPDIR)/server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/buffers/$(DEPDIR)/reference_counted.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/chat/$(DEPDIR)/chat_client.Po@am__quote@
@@ -2888,10 +3241,10 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@examples/socks4/$(DEPDIR)/sync_client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/ssl/$(DEPDIR)/client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/ssl/$(DEPDIR)/server.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@examples/timeouts/$(DEPDIR)/accept_timeout.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@examples/timeouts/$(DEPDIR)/connect_timeout.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@examples/timeouts/$(DEPDIR)/datagram_receive_timeout.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@examples/timeouts/$(DEPDIR)/stream_receive_timeout.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/timeouts/$(DEPDIR)/async_tcp_client.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/timeouts/$(DEPDIR)/blocking_tcp_client.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/timeouts/$(DEPDIR)/blocking_udp_client.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@examples/timeouts/$(DEPDIR)/server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/timers/$(DEPDIR)/time_t_timer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/tutorial/daytime1/$(DEPDIR)/client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/tutorial/daytime2/$(DEPDIR)/server.Po@am__quote@
@@ -2906,6 +3259,10 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@examples/tutorial/timer4/$(DEPDIR)/timer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/tutorial/timer5/$(DEPDIR)/timer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@examples/windows/$(DEPDIR)/transmit_file.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/latency/$(DEPDIR)/tcp_client.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/latency/$(DEPDIR)/tcp_server.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/latency/$(DEPDIR)/udp_client.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/latency/$(DEPDIR)/udp_server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/performance/$(DEPDIR)/client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/performance/$(DEPDIR)/server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/unit/$(DEPDIR)/basic_datagram_socket.Po@am__quote@
@@ -3173,9 +3530,10 @@ distdir: $(DISTFILES)
 	  fi; \
 	done
 check-am: all-am
+	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
 check: check-am
-all-am: Makefile $(PROGRAMS) $(HEADERS)
+all-am: Makefile $(LIBRARIES) $(PROGRAMS) $(HEADERS)
 installdirs:
 install: install-am
 install-exec: install-exec-am
@@ -3198,6 +3556,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f ../include/asio/impl/$(DEPDIR)/$(am__dirstamp)
+	-rm -f ../include/asio/impl/$(am__dirstamp)
 	-rm -f examples/allocation/$(DEPDIR)/$(am__dirstamp)
 	-rm -f examples/allocation/$(am__dirstamp)
 	-rm -f examples/buffers/$(DEPDIR)/$(am__dirstamp)
@@ -3266,6 +3626,8 @@ distclean-generic:
 	-rm -f examples/tutorial/timer5/$(am__dirstamp)
 	-rm -f examples/windows/$(DEPDIR)/$(am__dirstamp)
 	-rm -f examples/windows/$(am__dirstamp)
+	-rm -f tests/latency/$(DEPDIR)/$(am__dirstamp)
+	-rm -f tests/latency/$(am__dirstamp)
 	-rm -f tests/performance/$(DEPDIR)/$(am__dirstamp)
 	-rm -f tests/performance/$(am__dirstamp)
 	-rm -f tests/unit/$(DEPDIR)/$(am__dirstamp)
@@ -3287,10 +3649,11 @@ maintainer-clean-generic:
 	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
 clean: clean-am
 
-clean-am: clean-generic clean-noinstPROGRAMS mostlyclean-am
+clean-am: clean-checkPROGRAMS clean-generic clean-noinstLIBRARIES \
+	clean-noinstPROGRAMS mostlyclean-am
 
 distclean: distclean-am
-	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/http/server4/$(DEPDIR) examples/icmp/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/local/$(DEPDIR) examples/multicast/$(DEPDIR) examples/nonblocking/$(DEPDIR) examples/porthopper/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) examples/windows/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/local/$(DEPDIR) tests/unit/posix/$(DEPDIR) tests/unit/ssl/$(DEPDIR) tests/unit/windows/$(DEPDIR)
+	-rm -rf ../include/asio/impl/$(DEPDIR) examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/http/server4/$(DEPDIR) examples/icmp/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/local/$(DEPDIR) examples/multicast/$(DEPDIR) examples/nonblocking/$(DEPDIR) examples/porthopper/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) examples/windows/$(DEPDIR) tests/latency/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/local/$(DEPDIR) tests/unit/posix/$(DEPDIR) tests/unit/ssl/$(DEPDIR) tests/unit/windows/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -3336,7 +3699,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-	-rm -rf examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/http/server4/$(DEPDIR) examples/icmp/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/local/$(DEPDIR) examples/multicast/$(DEPDIR) examples/nonblocking/$(DEPDIR) examples/porthopper/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) examples/windows/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/local/$(DEPDIR) tests/unit/posix/$(DEPDIR) tests/unit/ssl/$(DEPDIR) tests/unit/windows/$(DEPDIR)
+	-rm -rf ../include/asio/impl/$(DEPDIR) examples/allocation/$(DEPDIR) examples/buffers/$(DEPDIR) examples/chat/$(DEPDIR) examples/echo/$(DEPDIR) examples/http/client/$(DEPDIR) examples/http/server/$(DEPDIR) examples/http/server2/$(DEPDIR) examples/http/server3/$(DEPDIR) examples/http/server4/$(DEPDIR) examples/icmp/$(DEPDIR) examples/invocation/$(DEPDIR) examples/iostreams/$(DEPDIR) examples/local/$(DEPDIR) examples/multicast/$(DEPDIR) examples/nonblocking/$(DEPDIR) examples/porthopper/$(DEPDIR) examples/services/$(DEPDIR) examples/socks4/$(DEPDIR) examples/ssl/$(DEPDIR) examples/timeouts/$(DEPDIR) examples/timers/$(DEPDIR) examples/tutorial/daytime1/$(DEPDIR) examples/tutorial/daytime2/$(DEPDIR) examples/tutorial/daytime3/$(DEPDIR) examples/tutorial/daytime4/$(DEPDIR) examples/tutorial/daytime5/$(DEPDIR) examples/tutorial/daytime6/$(DEPDIR) examples/tutorial/daytime7/$(DEPDIR) examples/tutorial/timer1/$(DEPDIR) examples/tutorial/timer2/$(DEPDIR) examples/tutorial/timer3/$(DEPDIR) examples/tutorial/timer4/$(DEPDIR) examples/tutorial/timer5/$(DEPDIR) examples/windows/$(DEPDIR) tests/latency/$(DEPDIR) tests/performance/$(DEPDIR) tests/unit/$(DEPDIR) tests/unit/ip/$(DEPDIR) tests/unit/local/$(DEPDIR) tests/unit/posix/$(DEPDIR) tests/unit/ssl/$(DEPDIR) tests/unit/windows/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -3357,14 +3720,15 @@ uninstall-am:
 .MAKE: check-am install-am install-strip
 
 .PHONY: CTAGS GTAGS all all-am check check-TESTS check-am clean \
-	clean-generic clean-noinstPROGRAMS ctags distclean \
-	distclean-compile distclean-generic distclean-tags distdir dvi \
-	dvi-am html html-am info info-am install install-am \
-	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
+	clean-checkPROGRAMS clean-generic clean-noinstLIBRARIES \
+	clean-noinstPROGRAMS ctags distclean distclean-compile \
+	distclean-generic distclean-tags distdir dvi dvi-am html \
+	html-am info info-am install install-am install-data \
+	install-data-am install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
 	uninstall-am

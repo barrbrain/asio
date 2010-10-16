@@ -17,8 +17,8 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.reference.write_at.overload6"></a><a class="link" href="overload6.html" title="write_at (6 of 6 overloads)"> write_at (6 of
-        6 overloads)</a>
+<a name="asio.reference.write_at.overload6"></a><a class="link" href="overload6.html" title="write_at (6 of 6 overloads)">write_at (6 of 6
+        overloads)</a>
 </h4></div></div></div>
 <p>
           Write a certain amount of data at a specified offset before returning.
@@ -41,18 +41,18 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            All of the data in the supplied <a class="link" href="../basic_streambuf.html" title="basic_streambuf"><code class="computeroutput"><span class="identifier">basic_streambuf</span></code></a> has been written.
-          </li>
+              All of the data in the supplied <a class="link" href="../basic_streambuf.html" title="basic_streambuf"><code class="computeroutput"><span class="identifier">basic_streambuf</span></code></a> has been written.
+            </li>
 <li>
-            The completion_condition function object returns 0.
-          </li>
+              The completion_condition function object returns 0.
+            </li>
 </ul></div>
 <p>
           This operation is implemented in terms of zero or more calls to the device's
           write_some_at function.
         </p>
 <a name="asio.reference.write_at.overload6.parameters"></a><h6>
-<a name="id1067329"></a>
+<a name="id1160046"></a>
           <a class="link" href="overload6.html#asio.reference.write_at.overload6.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -60,23 +60,23 @@
 <dl>
 <dt><span class="term">d</span></dt>
 <dd><p>
-              The device to which the data is to be written. The type must support
-              the SyncRandomAccessWriteDevice concept.
-            </p></dd>
+                The device to which the data is to be written. The type must support
+                the SyncRandomAccessWriteDevice concept.
+              </p></dd>
 <dt><span class="term">offset</span></dt>
 <dd><p>
-              The offset at which the data will be written.
-            </p></dd>
+                The offset at which the data will be written.
+              </p></dd>
 <dt><span class="term">b</span></dt>
 <dd><p>
-              The <a class="link" href="../basic_streambuf.html" title="basic_streambuf"><code class="computeroutput"><span class="identifier">basic_streambuf</span></code></a>
-              object from which data will be written.
-            </p></dd>
+                The <a class="link" href="../basic_streambuf.html" title="basic_streambuf"><code class="computeroutput"><span class="identifier">basic_streambuf</span></code></a> object from
+                which data will be written.
+              </p></dd>
 <dt><span class="term">completion_condition</span></dt>
 <dd>
 <p>
-              The function object to be called to determine whether the write operation
-              is complete. The signature of the function object must be: 
+                The function object to be called to determine whether the write operation
+                is complete. The signature of the function object must be: 
 </p>
 <pre class="programlisting"><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">completion_condition</span><span class="special">(</span>
   <span class="comment">// Result of latest write_some_at operation.
@@ -87,19 +87,19 @@
 <span class="special">);</span> 
 </pre>
 <p>
-              A return value of 0 indicates that the write operation is complete.
-              A non-zero return value indicates the maximum number of bytes to be
-              written on the next call to the device's write_some_at function.
-            </p>
+                A return value of 0 indicates that the write operation is complete.
+                A non-zero return value indicates the maximum number of bytes to
+                be written on the next call to the device's write_some_at function.
+              </p>
 </dd>
 <dt><span class="term">ec</span></dt>
 <dd><p>
-              Set to indicate what error occurred, if any.
-            </p></dd>
+                Set to indicate what error occurred, if any.
+              </p></dd>
 </dl>
 </div>
 <a name="asio.reference.write_at.overload6.return_value"></a><h6>
-<a name="id1067540"></a>
+<a name="id1160262"></a>
           <a class="link" href="overload6.html#asio.reference.write_at.overload6.return_value">Return Value</a>
         </h6>
 <p>

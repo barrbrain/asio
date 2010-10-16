@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="asio.reference.GettableSocketOption"></a><a class="link" href="GettableSocketOption.html" title="Gettable socket option requirements"> Gettable socket
+<a name="asio.reference.GettableSocketOption"></a><a class="link" href="GettableSocketOption.html" title="Gettable socket option requirements">Gettable socket
       option requirements</a>
 </h3></div></div></div>
 <p>
@@ -26,7 +26,7 @@
         denotes a value of <code class="computeroutput"><span class="identifier">X</span></code>, <code class="computeroutput"><span class="identifier">p</span></code> denotes a value that meets the <a class="link" href="Protocol.html" title="Protocol requirements">protocol</a> requirements, and <code class="computeroutput"><span class="identifier">u</span></code> denotes an identifier.
       </p>
 <div class="table">
-<a name="id544043"></a><p class="title"><b>Table&#160;12.&#160;GettableSocketOption requirements</b></p>
+<a name="id629916"></a><p class="title"><b>Table&#160;12.&#160;GettableSocketOption requirements</b></p>
 <div class="table-contents"><table class="table" summary="GettableSocketOption requirements">
 <colgroup>
 <col>
@@ -35,118 +35,119 @@
 </colgroup>
 <thead><tr>
 <th>
-            <p>
-              expression
-            </p>
-            </th>
+                <p>
+                  expression
+                </p>
+              </th>
 <th>
-            <p>
-              type
-            </p>
-            </th>
+                <p>
+                  type
+                </p>
+              </th>
 <th>
-            <p>
-              assertion/note<br> pre/post-conditions
-            </p>
-            </th>
+                <p>
+                  assertion/note\npre/post-conditions
+                </p>
+              </th>
 </tr></thead>
 <tbody>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">level</span><span class="special">(</span><span class="identifier">p</span><span class="special">);</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">level</span><span class="special">(</span><span class="identifier">p</span><span class="special">);</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              <code class="computeroutput"><span class="keyword">int</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="keyword">int</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              Returns a value suitable for passing as the <span class="emphasis"><em>level</em></span>
-              argument to <span class="emphasis"><em>POSIX</em></span> <a href="http://www.opengroup.org/onlinepubs/000095399/functions/getsockopt.html" target="_top"><code class="computeroutput"><span class="identifier">getsockopt</span><span class="special">()</span></code></a>
-              (or equivalent).
-            </p>
-            </td>
+                <p>
+                  Returns a value suitable for passing as the <span class="emphasis"><em>level</em></span>
+                  argument to <span class="emphasis"><em>POSIX</em></span> <a href="http://www.opengroup.org/onlinepubs/000095399/functions/getsockopt.html" target="_top"><code class="computeroutput"><span class="identifier">getsockopt</span><span class="special">()</span></code></a>
+                  (or equivalent).
+                </p>
+              </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">name</span><span class="special">(</span><span class="identifier">p</span><span class="special">);</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">name</span><span class="special">(</span><span class="identifier">p</span><span class="special">);</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              <code class="computeroutput"><span class="keyword">int</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="keyword">int</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              Returns a value suitable for passing as the <span class="emphasis"><em>option_name</em></span>
-              argument to <span class="emphasis"><em>POSIX</em></span> <a href="http://www.opengroup.org/onlinepubs/000095399/functions/getsockopt.html" target="_top"><code class="computeroutput"><span class="identifier">getsockopt</span><span class="special">()</span></code></a>
-              (or equivalent).
-            </p>
-            </td>
+                <p>
+                  Returns a value suitable for passing as the <span class="emphasis"><em>option_name</em></span>
+                  argument to <span class="emphasis"><em>POSIX</em></span> <a href="http://www.opengroup.org/onlinepubs/000095399/functions/getsockopt.html" target="_top"><code class="computeroutput"><span class="identifier">getsockopt</span><span class="special">()</span></code></a>
+                  (or equivalent).
+                </p>
+              </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">data</span><span class="special">(</span><span class="identifier">p</span><span class="special">);</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">data</span><span class="special">(</span><span class="identifier">p</span><span class="special">);</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              a pointer, convertible to <code class="computeroutput"><span class="keyword">void</span><span class="special">*</span></code>
-            </p>
-            </td>
+                <p>
+                  a pointer, convertible to <code class="computeroutput"><span class="keyword">void</span><span class="special">*</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              Returns a pointer suitable for passing as the <span class="emphasis"><em>option_value</em></span>
-              argument to <span class="emphasis"><em>POSIX</em></span> <a href="http://www.opengroup.org/onlinepubs/000095399/functions/getsockopt.html" target="_top"><code class="computeroutput"><span class="identifier">getsockopt</span><span class="special">()</span></code></a>
-              (or equivalent).
-            </p>
-            </td>
+                <p>
+                  Returns a pointer suitable for passing as the <span class="emphasis"><em>option_value</em></span>
+                  argument to <span class="emphasis"><em>POSIX</em></span> <a href="http://www.opengroup.org/onlinepubs/000095399/functions/getsockopt.html" target="_top"><code class="computeroutput"><span class="identifier">getsockopt</span><span class="special">()</span></code></a>
+                  (or equivalent).
+                </p>
+              </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">size</span><span class="special">(</span><span class="identifier">p</span><span class="special">);</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">size</span><span class="special">(</span><span class="identifier">p</span><span class="special">);</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">size_t</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">size_t</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-              Returns a value suitable for passing as the <span class="emphasis"><em>option_len</em></span>
-              argument to <span class="emphasis"><em>POSIX</em></span> <a href="http://www.opengroup.org/onlinepubs/000095399/functions/getsockopt.html" target="_top"><code class="computeroutput"><span class="identifier">getsockopt</span><span class="special">()</span></code></a>
-              (or equivalent), after appropriate integer conversion has been performed.
-            </p>
-            </td>
+                <p>
+                  Returns a value suitable for passing as the <span class="emphasis"><em>option_len</em></span>
+                  argument to <span class="emphasis"><em>POSIX</em></span> <a href="http://www.opengroup.org/onlinepubs/000095399/functions/getsockopt.html" target="_top"><code class="computeroutput"><span class="identifier">getsockopt</span><span class="special">()</span></code></a>
+                  (or equivalent), after appropriate integer conversion has been
+                  performed.
+                </p>
+              </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">resize</span><span class="special">(</span><span class="identifier">p</span><span class="special">,</span> <span class="identifier">s</span><span class="special">);</span></code>
-            </p>
-            </td>
+                <p>
+                  <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">resize</span><span class="special">(</span><span class="identifier">p</span><span class="special">,</span>
+                  <span class="identifier">s</span><span class="special">);</span></code>
+                </p>
+              </td>
 <td>
-            <p>
-            </p>
-            </td>
+              </td>
 <td>
-            <p>
-              post: <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">size</span><span class="special">(</span><span class="identifier">p</span><span class="special">)</span> <span class="special">==</span> <span class="identifier">s</span></code>.<br>
-              Passed the value contained in the <span class="emphasis"><em>option_len</em></span> argument
-              to <span class="emphasis"><em>POSIX</em></span> <a href="http://www.opengroup.org/onlinepubs/000095399/functions/getsockopt.html" target="_top"><code class="computeroutput"><span class="identifier">getsockopt</span><span class="special">()</span></code></a>
-              (or equivalent) after successful completion of the function. Permitted
-              to throw an exception if the socket option object <code class="computeroutput"><span class="identifier">a</span></code>
-              does not support the specified size.
-            </p>
-            </td>
+                <p>
+                  post: <code class="computeroutput"><span class="identifier">a</span><span class="special">.</span><span class="identifier">size</span><span class="special">(</span><span class="identifier">p</span><span class="special">)</span>
+                  <span class="special">==</span> <span class="identifier">s</span></code>.\n
+                  Passed the value contained in the <span class="emphasis"><em>option_len</em></span>
+                  argument to <span class="emphasis"><em>POSIX</em></span> <a href="http://www.opengroup.org/onlinepubs/000095399/functions/getsockopt.html" target="_top"><code class="computeroutput"><span class="identifier">getsockopt</span><span class="special">()</span></code></a>
+                  (or equivalent) after successful completion of the function. Permitted
+                  to throw an exception if the socket option object <code class="computeroutput"><span class="identifier">a</span></code> does not support the specified
+                  size.
+                </p>
+              </td>
 </tr>
 </tbody>
 </table></div>

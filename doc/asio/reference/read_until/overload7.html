@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.reference.read_until.overload7"></a><a class="link" href="overload7.html" title="read_until (7 of 8 overloads)"> read_until (7
+<a name="asio.reference.read_until.overload7"></a><a class="link" href="overload7.html" title="read_until (7 of 8 overloads)">read_until (7
         of 8 overloads)</a>
 </h4></div></div></div>
 <p>
@@ -41,12 +41,12 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            The match condition function object returns a std::pair where the second
-            element evaluates to true.
-          </li>
+              The match condition function object returns a std::pair where the second
+              element evaluates to true.
+            </li>
 <li>
-            An error occurred.
-          </li>
+              An error occurred.
+            </li>
 </ul></div>
 <p>
           This operation is implemented in terms of zero or more calls to the stream's
@@ -54,7 +54,7 @@
           a match, the function returns immediately.
         </p>
 <a name="asio.reference.read_until.overload7.parameters"></a><h6>
-<a name="id970604"></a>
+<a name="id1062360"></a>
           <a class="link" href="overload7.html#asio.reference.read_until.overload7.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -62,44 +62,44 @@
 <dl>
 <dt><span class="term">s</span></dt>
 <dd><p>
-              The stream from which the data is to be read. The type must support
-              the SyncReadStream concept.
-            </p></dd>
+                The stream from which the data is to be read. The type must support
+                the SyncReadStream concept.
+              </p></dd>
 <dt><span class="term">b</span></dt>
 <dd><p>
-              A streambuf object into which the data will be read.
-            </p></dd>
+                A streambuf object into which the data will be read.
+              </p></dd>
 <dt><span class="term">match_condition</span></dt>
 <dd>
 <p>
-              The function object to be called to determine whether a match exists.
-              The signature of the function object must be: 
+                The function object to be called to determine whether a match exists.
+                The signature of the function object must be: 
 </p>
 <pre class="programlisting"><span class="identifier">pair</span><span class="special">&lt;</span><span class="identifier">iterator</span><span class="special">,</span> <span class="keyword">bool</span><span class="special">&gt;</span> <span class="identifier">match_condition</span><span class="special">(</span><span class="identifier">iterator</span> <span class="identifier">begin</span><span class="special">,</span> <span class="identifier">iterator</span> <span class="identifier">end</span><span class="special">);</span>
 </pre>
 <p>
-              where <code class="computeroutput"><span class="identifier">iterator</span></code> represents
-              the type: 
+                where <code class="computeroutput"><span class="identifier">iterator</span></code> represents
+                the type: 
 </p>
 <pre class="programlisting"><span class="identifier">buffers_iterator</span><span class="special">&lt;</span><span class="identifier">basic_streambuf</span><span class="special">&lt;</span><span class="identifier">Allocator</span><span class="special">&gt;::</span><span class="identifier">const_buffers_type</span><span class="special">&gt;</span>
 </pre>
 <p>
-              The iterator parameters <code class="computeroutput"><span class="identifier">begin</span></code>
-              and <code class="computeroutput"><span class="identifier">end</span></code> define the
-              range of bytes to be scanned to determine whether there is a match.
-              The <code class="computeroutput"><span class="identifier">first</span></code> member of
-              the return value is an iterator marking one-past-the-end of the bytes
-              that have been consumed by the match function. This iterator is used
-              to calculate the <code class="computeroutput"><span class="identifier">begin</span></code>
-              parameter for any subsequent invocation of the match condition. The
-              <code class="computeroutput"><span class="identifier">second</span></code> member of the
-              return value is true if a match has been found, false otherwise.
-            </p>
+                The iterator parameters <code class="computeroutput"><span class="identifier">begin</span></code>
+                and <code class="computeroutput"><span class="identifier">end</span></code> define the
+                range of bytes to be scanned to determine whether there is a match.
+                The <code class="computeroutput"><span class="identifier">first</span></code> member
+                of the return value is an iterator marking one-past-the-end of the
+                bytes that have been consumed by the match function. This iterator
+                is used to calculate the <code class="computeroutput"><span class="identifier">begin</span></code>
+                parameter for any subsequent invocation of the match condition. The
+                <code class="computeroutput"><span class="identifier">second</span></code> member of
+                the return value is true if a match has been found, false otherwise.
+              </p>
 </dd>
 </dl>
 </div>
 <a name="asio.reference.read_until.overload7.return_value"></a><h6>
-<a name="id970856"></a>
+<a name="id1062615"></a>
           <a class="link" href="overload7.html#asio.reference.read_until.overload7.return_value">Return
           Value</a>
         </h6>
@@ -108,7 +108,7 @@
           by the match function.
         </p>
 <a name="asio.reference.read_until.overload7.exceptions"></a><h6>
-<a name="id970880"></a>
+<a name="id1062639"></a>
           <a class="link" href="overload7.html#asio.reference.read_until.overload7.exceptions">Exceptions</a>
         </h6>
 <div class="variablelist">
@@ -116,12 +116,12 @@
 <dl>
 <dt><span class="term">asio::system_error</span></dt>
 <dd><p>
-              Thrown on failure.
-            </p></dd>
+                Thrown on failure.
+              </p></dd>
 </dl>
 </div>
 <a name="asio.reference.read_until.overload7.remarks"></a><h6>
-<a name="id970918"></a>
+<a name="id1062678"></a>
           <a class="link" href="overload7.html#asio.reference.read_until.overload7.remarks">Remarks</a>
         </h6>
 <p>
@@ -136,7 +136,7 @@
           It must be specialised for other user-defined function objects.
         </p>
 <a name="asio.reference.read_until.overload7.examples"></a><h6>
-<a name="id970969"></a>
+<a name="id1062729"></a>
           <a class="link" href="overload7.html#asio.reference.read_until.overload7.examples">Examples</a>
         </h6>
 <p>

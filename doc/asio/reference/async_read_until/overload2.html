@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.reference.async_read_until.overload2"></a><a class="link" href="overload2.html" title="async_read_until (2 of 4 overloads)"> async_read_until
+<a name="asio.reference.async_read_until.overload2"></a><a class="link" href="overload2.html" title="async_read_until (2 of 4 overloads)">async_read_until
         (2 of 4 overloads)</a>
 </h4></div></div></div>
 <p>
@@ -42,11 +42,11 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            The get area of the streambuf contains the specified delimiter.
-          </li>
+              The get area of the streambuf contains the specified delimiter.
+            </li>
 <li>
-            An error occurred.
-          </li>
+              An error occurred.
+            </li>
 </ul></div>
 <p>
           This operation is implemented in terms of zero or more calls to the stream's
@@ -59,7 +59,7 @@
           completes.
         </p>
 <a name="asio.reference.async_read_until.overload2.parameters"></a><h6>
-<a name="id587721"></a>
+<a name="id673256"></a>
           <a class="link" href="overload2.html#asio.reference.async_read_until.overload2.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -67,25 +67,25 @@
 <dl>
 <dt><span class="term">s</span></dt>
 <dd><p>
-              The stream from which the data is to be read. The type must support
-              the AsyncReadStream concept.
-            </p></dd>
+                The stream from which the data is to be read. The type must support
+                the AsyncReadStream concept.
+              </p></dd>
 <dt><span class="term">b</span></dt>
 <dd><p>
-              A streambuf object into which the data will be read. Ownership of the
-              streambuf is retained by the caller, which must guarantee that it remains
-              valid until the handler is called.
-            </p></dd>
+                A streambuf object into which the data will be read. Ownership of
+                the streambuf is retained by the caller, which must guarantee that
+                it remains valid until the handler is called.
+              </p></dd>
 <dt><span class="term">delim</span></dt>
 <dd><p>
-              The delimiter string.
-            </p></dd>
+                The delimiter string.
+              </p></dd>
 <dt><span class="term">handler</span></dt>
 <dd>
 <p>
-              The handler to be called when the read operation completes. Copies
-              will be made of the handler as required. The function signature of
-              the handler must be: 
+                The handler to be called when the read operation completes. Copies
+                will be made of the handler as required. The function signature of
+                the handler must be: 
 </p>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
   <span class="comment">// Result of operation.
@@ -98,16 +98,16 @@
 <span class="special">);</span> 
 </pre>
 <p>
-              Regardless of whether the asynchronous operation completes immediately
-              or not, the handler will not be invoked from within this function.
-              Invocation of the handler will be performed in a manner equivalent
-              to using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">post</span><span class="special">()</span></code>.
-            </p>
+                Regardless of whether the asynchronous operation completes immediately
+                or not, the handler will not be invoked from within this function.
+                Invocation of the handler will be performed in a manner equivalent
+                to using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">post</span><span class="special">()</span></code>.
+              </p>
 </dd>
 </dl>
 </div>
 <a name="asio.reference.async_read_until.overload2.remarks"></a><h6>
-<a name="id587942"></a>
+<a name="id673482"></a>
           <a class="link" href="overload2.html#asio.reference.async_read_until.overload2.remarks">Remarks</a>
         </h6>
 <p>
@@ -117,7 +117,7 @@
           to examine.
         </p>
 <a name="asio.reference.async_read_until.overload2.example"></a><h6>
-<a name="id587968"></a>
+<a name="id673508"></a>
           <a class="link" href="overload2.html#asio.reference.async_read_until.overload2.example">Example</a>
         </h6>
 <p>

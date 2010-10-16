@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.overview.core.streams"></a><a class="link" href="streams.html" title="Streams, Short Reads and Short Writes"> Streams, Short Reads and
+<a name="asio.overview.core.streams"></a><a class="link" href="streams.html" title="Streams, Short Reads and Short Writes">Streams, Short Reads and
         Short Writes</a>
 </h4></div></div></div>
 <p>
@@ -25,13 +25,13 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            There are no message boundaries. The data being transferred is a continuous
-            sequence of bytes.
-          </li>
+              There are no message boundaries. The data being transferred is a continuous
+              sequence of bytes.
+            </li>
 <li>
-            Read or write operations may transfer fewer bytes than requested. This
-            is referred to as a short read or short write.
-          </li>
+              Read or write operations may transfer fewer bytes than requested. This
+              is referred to as a short read or short write.
+            </li>
 </ul></div>
 <p>
           Objects that provide stream-oriented I/O model one or more of the following
@@ -39,25 +39,25 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-<code class="computeroutput"><span class="identifier">SyncReadStream</span></code>, where
-            synchronous read operations are performed using a member function called
-            <code class="computeroutput"><span class="identifier">read_some</span><span class="special">()</span></code>.
-          </li>
+              <code class="computeroutput"><span class="identifier">SyncReadStream</span></code>, where
+              synchronous read operations are performed using a member function called
+              <code class="computeroutput"><span class="identifier">read_some</span><span class="special">()</span></code>.
+            </li>
 <li>
-<code class="computeroutput"><span class="identifier">AsyncReadStream</span></code>, where
-            asynchronous read operations are performed using a member function called
-            <code class="computeroutput"><span class="identifier">async_read_some</span><span class="special">()</span></code>.
-          </li>
+              <code class="computeroutput"><span class="identifier">AsyncReadStream</span></code>, where
+              asynchronous read operations are performed using a member function
+              called <code class="computeroutput"><span class="identifier">async_read_some</span><span class="special">()</span></code>.
+            </li>
 <li>
-<code class="computeroutput"><span class="identifier">SyncWriteStream</span></code>, where
-            synchronous write operations are performed using a member function called
-            <code class="computeroutput"><span class="identifier">write_some</span><span class="special">()</span></code>.
-          </li>
+              <code class="computeroutput"><span class="identifier">SyncWriteStream</span></code>, where
+              synchronous write operations are performed using a member function
+              called <code class="computeroutput"><span class="identifier">write_some</span><span class="special">()</span></code>.
+            </li>
 <li>
-<code class="computeroutput"><span class="identifier">AsyncWriteStream</span></code>, where
-            synchronous write operations are performed using a member function called
-            <code class="computeroutput"><span class="identifier">async_write_some</span><span class="special">()</span></code>.
-          </li>
+              <code class="computeroutput"><span class="identifier">AsyncWriteStream</span></code>, where
+              synchronous write operations are performed using a member function
+              called <code class="computeroutput"><span class="identifier">async_write_some</span><span class="special">()</span></code>.
+            </li>
 </ul></div>
 <p>
           Examples of stream-oriented I/O objects include <code class="computeroutput"><span class="identifier">ip</span><span class="special">::</span><span class="identifier">tcp</span><span class="special">::</span><span class="identifier">socket</span></code>,
@@ -75,24 +75,24 @@
           and <code class="computeroutput"><span class="identifier">async_write</span><span class="special">()</span></code>.
         </p>
 <a name="asio.overview.core.streams.why_eof_is_an_error"></a><h6>
-<a name="id477989"></a>
+<a name="id563329"></a>
           <a class="link" href="streams.html#asio.overview.core.streams.why_eof_is_an_error">Why EOF
           is an Error</a>
         </h6>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            The end of a stream can cause <code class="computeroutput"><span class="identifier">read</span></code>,
-            <code class="computeroutput"><span class="identifier">async_read</span></code>, <code class="computeroutput"><span class="identifier">read_until</span></code> or <code class="computeroutput"><span class="identifier">async_read_until</span></code>
-            functions to violate their contract. E.g. a read of N bytes may finish
-            early due to EOF.
-          </li>
+              The end of a stream can cause <code class="computeroutput"><span class="identifier">read</span></code>,
+              <code class="computeroutput"><span class="identifier">async_read</span></code>, <code class="computeroutput"><span class="identifier">read_until</span></code> or <code class="computeroutput"><span class="identifier">async_read_until</span></code>
+              functions to violate their contract. E.g. a read of N bytes may finish
+              early due to EOF.
+            </li>
 <li>
-            An EOF error may be used to distinguish the end of a stream from a successful
-            read of size 0.
-          </li>
+              An EOF error may be used to distinguish the end of a stream from a
+              successful read of size 0.
+            </li>
 </ul></div>
 <a name="asio.overview.core.streams.see_also"></a><h6>
-<a name="id478049"></a>
+<a name="id563395"></a>
           <a class="link" href="streams.html#asio.overview.core.streams.see_also">See Also</a>
         </h6>
 <p>

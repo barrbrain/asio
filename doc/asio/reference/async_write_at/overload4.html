@@ -17,7 +17,7 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.reference.async_write_at.overload4"></a><a class="link" href="overload4.html" title="async_write_at (4 of 4 overloads)"> async_write_at
+<a name="asio.reference.async_write_at.overload4"></a><a class="link" href="overload4.html" title="async_write_at (4 of 4 overloads)">async_write_at
         (4 of 4 overloads)</a>
 </h4></div></div></div>
 <p>
@@ -44,18 +44,18 @@
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            All of the data in the supplied <a class="link" href="../basic_streambuf.html" title="basic_streambuf"><code class="computeroutput"><span class="identifier">basic_streambuf</span></code></a> has been written.
-          </li>
+              All of the data in the supplied <a class="link" href="../basic_streambuf.html" title="basic_streambuf"><code class="computeroutput"><span class="identifier">basic_streambuf</span></code></a> has been written.
+            </li>
 <li>
-            The completion_condition function object returns 0.
-          </li>
+              The completion_condition function object returns 0.
+            </li>
 </ul></div>
 <p>
           This operation is implemented in terms of zero or more calls to the device's
           async_write_some_at function.
         </p>
 <a name="asio.reference.async_write_at.overload4.parameters"></a><h6>
-<a name="id597852"></a>
+<a name="id683494"></a>
           <a class="link" href="overload4.html#asio.reference.async_write_at.overload4.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -63,25 +63,25 @@
 <dl>
 <dt><span class="term">d</span></dt>
 <dd><p>
-              The device to which the data is to be written. The type must support
-              the AsyncRandomAccessWriteDevice concept.
-            </p></dd>
+                The device to which the data is to be written. The type must support
+                the AsyncRandomAccessWriteDevice concept.
+              </p></dd>
 <dt><span class="term">offset</span></dt>
 <dd><p>
-              The offset at which the data will be written.
-            </p></dd>
+                The offset at which the data will be written.
+              </p></dd>
 <dt><span class="term">b</span></dt>
 <dd><p>
-              A <a class="link" href="../basic_streambuf.html" title="basic_streambuf"><code class="computeroutput"><span class="identifier">basic_streambuf</span></code></a>
-              object from which data will be written. Ownership of the streambuf
-              is retained by the caller, which must guarantee that it remains valid
-              until the handler is called.
-            </p></dd>
+                A <a class="link" href="../basic_streambuf.html" title="basic_streambuf"><code class="computeroutput"><span class="identifier">basic_streambuf</span></code></a>
+                object from which data will be written. Ownership of the streambuf
+                is retained by the caller, which must guarantee that it remains valid
+                until the handler is called.
+              </p></dd>
 <dt><span class="term">completion_condition</span></dt>
 <dd>
 <p>
-              The function object to be called to determine whether the write operation
-              is complete. The signature of the function object must be: 
+                The function object to be called to determine whether the write operation
+                is complete. The signature of the function object must be: 
 </p>
 <pre class="programlisting"><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">completion_condition</span><span class="special">(</span>
   <span class="comment">// Result of latest async_write_some_at operation.
@@ -92,17 +92,17 @@
 <span class="special">);</span> 
 </pre>
 <p>
-              A return value of 0 indicates that the write operation is complete.
-              A non-zero return value indicates the maximum number of bytes to be
-              written on the next call to the device's async_write_some_at function.
-            </p>
+                A return value of 0 indicates that the write operation is complete.
+                A non-zero return value indicates the maximum number of bytes to
+                be written on the next call to the device's async_write_some_at function.
+              </p>
 </dd>
 <dt><span class="term">handler</span></dt>
 <dd>
 <p>
-              The handler to be called when the write operation completes. Copies
-              will be made of the handler as required. The function signature of
-              the handler must be: 
+                The handler to be called when the write operation completes. Copies
+                will be made of the handler as required. The function signature of
+                the handler must be: 
 </p>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">(</span>
   <span class="comment">// Result of operation.
@@ -114,11 +114,11 @@
 <span class="special">);</span> 
 </pre>
 <p>
-              Regardless of whether the asynchronous operation completes immediately
-              or not, the handler will not be invoked from within this function.
-              Invocation of the handler will be performed in a manner equivalent
-              to using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">post</span><span class="special">()</span></code>.
-            </p>
+                Regardless of whether the asynchronous operation completes immediately
+                or not, the handler will not be invoked from within this function.
+                Invocation of the handler will be performed in a manner equivalent
+                to using <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">io_service</span><span class="special">::</span><span class="identifier">post</span><span class="special">()</span></code>.
+              </p>
 </dd>
 </dl>
 </div>

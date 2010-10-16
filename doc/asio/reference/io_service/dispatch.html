@@ -17,10 +17,10 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h4 class="title">
-<a name="asio.reference.io_service.dispatch"></a><a class="link" href="dispatch.html" title="io_service::dispatch"> io_service::dispatch</a>
+<a name="asio.reference.io_service.dispatch"></a><a class="link" href="dispatch.html" title="io_service::dispatch">io_service::dispatch</a>
 </h4></div></div></div>
 <p>
-          <a class="indexterm" name="id842995"></a> 
+          <a class="indexterm" name="id930824"></a> 
 Request the <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> to invoke the given
           handler.
         </p>
@@ -44,7 +44,7 @@ Request the <a class="link" href="../io_service.html" title="io_service"><code c
           inside this function if the guarantee can be met.
         </p>
 <a name="asio.reference.io_service.dispatch.parameters"></a><h6>
-<a name="id843192"></a>
+<a name="id931021"></a>
           <a class="link" href="dispatch.html#asio.reference.io_service.dispatch.parameters">Parameters</a>
         </h6>
 <div class="variablelist">
@@ -53,19 +53,19 @@ Request the <a class="link" href="../io_service.html" title="io_service"><code c
 <dt><span class="term">handler</span></dt>
 <dd>
 <p>
-              The handler to be called. The <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> will make a copy
-              of the handler object as required. The function signature of the handler
-              must be: 
+                The handler to be called. The <a class="link" href="../io_service.html" title="io_service"><code class="computeroutput"><span class="identifier">io_service</span></code></a> will make a copy
+                of the handler object as required. The function signature of the
+                handler must be: 
 </p>
 <pre class="programlisting"><span class="keyword">void</span> <span class="identifier">handler</span><span class="special">();</span> 
 </pre>
 <p>
-            </p>
+              </p>
 </dd>
 </dl>
 </div>
 <a name="asio.reference.io_service.dispatch.remarks"></a><h6>
-<a name="id843267"></a>
+<a name="id931097"></a>
           <a class="link" href="dispatch.html#asio.reference.io_service.dispatch.remarks">Remarks</a>
         </h6>
 <p>
@@ -73,12 +73,12 @@ Request the <a class="link" href="../io_service.html" title="io_service"><code c
         </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-            the handler's <code class="computeroutput"><span class="identifier">asio_handler_allocate</span></code>
-            function; or
-          </li>
+              the handler's <code class="computeroutput"><span class="identifier">asio_handler_allocate</span></code>
+              function; or
+            </li>
 <li>
-            the handler's copy constructor
-          </li>
+              the handler's copy constructor
+            </li>
 </ul></div>
 <p>
           throws an exception.

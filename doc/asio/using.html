@@ -17,10 +17,10 @@
 </div>
 <div class="section" lang="en">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="asio.using"></a><a class="link" href="using.html" title="Using Asio"> Using Asio</a>
+<a name="asio.using"></a><a class="link" href="using.html" title="Using Asio">Using Asio</a>
 </h2></div></div></div>
 <a name="asio.using.supported_platforms"></a><h4>
-<a name="id491457"></a>
+<a name="id576979"></a>
       <a class="link" href="using.html#asio.using.supported_platforms">Supported Platforms</a>
     </h4>
 <p>
@@ -28,50 +28,50 @@
     </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-        Win32 and Win64 using Visual C++ 7.1 and Visual C++ 8.0.
-      </li>
+          Win32 and Win64 using Visual C++ 7.1 and Visual C++ 8.0.
+        </li>
 <li>
-        Win32 using Borland C++Builder 6 patch 4.
-      </li>
+          Win32 using Borland C++Builder 6 patch 4.
+        </li>
 <li>
-        Win32 using MinGW.
-      </li>
+          Win32 using MinGW.
+        </li>
 <li>
-        Win32 using Cygwin. (<code class="computeroutput"><span class="identifier">__USE_W32_SOCKETS</span></code>
-        must be defined.)
-      </li>
+          Win32 using Cygwin. (<code class="computeroutput"><span class="identifier">__USE_W32_SOCKETS</span></code>
+          must be defined.)
+        </li>
 <li>
-        Linux (2.4 or 2.6 kernels) using g++ 3.3 or later.
-      </li>
+          Linux (2.4 or 2.6 kernels) using g++ 3.3 or later.
+        </li>
 <li>
-        Solaris using g++ 3.3 or later.
-      </li>
+          Solaris using g++ 3.3 or later.
+        </li>
 <li>
-        Mac OS X 10.4 using g++ 3.3 or later.
-      </li>
+          Mac OS X 10.4 using g++ 3.3 or later.
+        </li>
 </ul></div>
 <p>
       The following platforms may also work:
     </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-        AIX 5.3 using XL C/C++ v9.
-      </li>
+          AIX 5.3 using XL C/C++ v9.
+        </li>
 <li>
-        HP-UX 11i v3 using patched aC++ A.06.14.
-      </li>
+          HP-UX 11i v3 using patched aC++ A.06.14.
+        </li>
 <li>
-        QNX Neutrino 6.3 using g++ 3.3 or later.
-      </li>
+          QNX Neutrino 6.3 using g++ 3.3 or later.
+        </li>
 <li>
-        Solaris using Sun Studio 11 or later.
-      </li>
+          Solaris using Sun Studio 11 or later.
+        </li>
 <li>
-        Tru64 v5.1 using Compaq C++ v7.1.
-      </li>
+          Tru64 v5.1 using Compaq C++ v7.1.
+        </li>
 </ul></div>
 <a name="asio.using.dependencies"></a><h4>
-<a name="id491546"></a>
+<a name="id577106"></a>
       <a class="link" href="using.html#asio.using.dependencies">Dependencies</a>
     </h4>
 <p>
@@ -80,13 +80,13 @@
     </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-        Boost.Regex (optional) if you use any of the <a class="link" href="reference/read_until.html" title="read_until"><code class="computeroutput"><span class="identifier">read_until</span><span class="special">()</span></code></a>
-        or <a class="link" href="reference/async_read_until.html" title="async_read_until"><code class="computeroutput"><span class="identifier">async_read_until</span><span class="special">()</span></code></a> overloads that take a <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">regex</span></code> parameter.
-      </li>
+          Boost.Regex (optional) if you use any of the <a class="link" href="reference/read_until.html" title="read_until"><code class="computeroutput"><span class="identifier">read_until</span><span class="special">()</span></code></a>
+          or <a class="link" href="reference/async_read_until.html" title="async_read_until"><code class="computeroutput"><span class="identifier">async_read_until</span><span class="special">()</span></code></a> overloads that take a <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">regex</span></code> parameter.
+        </li>
 <li>
-<a href="http://www.openssl.org" target="_top">OpenSSL</a> (optional) if you use
-        Asio's SSL support.
-      </li>
+          <a href="http://www.openssl.org" target="_top">OpenSSL</a> (optional) if you use
+          Asio's SSL support.
+        </li>
 </ul></div>
 <p>
       Furthermore, some of the examples also require Boost.Date_Time or Boost.Serialization
@@ -105,7 +105,7 @@
       </p></td></tr>
 </table></div>
 <a name="asio.using.building_the_tests_and_examples_on_linux_or_unix"></a><h4>
-<a name="id491688"></a>
+<a name="id577254"></a>
       <a class="link" href="using.html#asio.using.building_the_tests_and_examples_on_linux_or_unix">Building
       the tests and examples on Linux or UNIX</a>
     </h4>
@@ -132,13 +132,13 @@
       use an absolute path.
     </p>
 <p>
-      To build, simply run <code class="computeroutput"><span class="identifier">make</span></code> in
-      the root directory of the asio source kit. To test that asio is working correctly,
-      run <code class="computeroutput"><span class="identifier">make</span> <span class="identifier">check</span></code>
-      after a successful build.
+      To build the examples, simply run <code class="computeroutput"><span class="identifier">make</span></code>
+      in the root directory of the asio source kit. To also build and run the unit
+      tests, to confirm that asio is working correctly, run <code class="computeroutput"><span class="identifier">make</span>
+      <span class="identifier">check</span></code>.
     </p>
 <a name="asio.using.building_the_tests_and_examples_with_msvc"></a><h4>
-<a name="id491826"></a>
+<a name="id577393"></a>
       <a class="link" href="using.html#asio.using.building_the_tests_and_examples_with_msvc">Building
       the tests and examples with MSVC</a>
     </h4>
@@ -148,25 +148,26 @@
     </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-        If you are using a version of boost other than 1.34.1, or if the boost directory
-        (i.e. the directory called <code class="computeroutput"><span class="identifier">boost_1_34_1</span></code>)
-        is not in the same directory as the asio source kit, then specify the location
-        of boost by running a command similar to <code class="literal">set BOOSTDIR=<span class="emphasis"><em>path_to_boost</em></span></code>.
-        Ensure that you specify an absolute path.
-      </li>
+          If you are using a version of boost other than 1.34.1, or if the boost
+          directory (i.e. the directory called <code class="computeroutput"><span class="identifier">boost_1_34_1</span></code>)
+          is not in the same directory as the asio source kit, then specify the location
+          of boost by running a command similar to <code class="literal">set BOOSTDIR=<span class="emphasis"><em>path_to_boost</em></span></code>.
+          Ensure that you specify an absolute path.
+        </li>
 <li>
-        Change to the asio <code class="computeroutput"><span class="identifier">src</span></code> directory.
-      </li>
+          Change to the asio <code class="computeroutput"><span class="identifier">src</span></code>
+          directory.
+        </li>
 <li>
-        Execute the command <code class="computeroutput"><span class="identifier">nmake</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">msc</span></code>.
-      </li>
+          Execute the command <code class="computeroutput"><span class="identifier">nmake</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">msc</span></code>.
+        </li>
 <li>
-        Execute the command <code class="computeroutput"><span class="identifier">nmake</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">msc</span> <span class="identifier">check</span></code>
-        to run a suite of tests to confirm that asio is working correctly.
-      </li>
+          Execute the command <code class="computeroutput"><span class="identifier">nmake</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">msc</span> <span class="identifier">check</span></code> to run a suite of tests to confirm
+          that asio is working correctly.
+        </li>
 </ul></div>
 <a name="asio.using.building_the_test_and_examples_with_borland_c__"></a><h4>
-<a name="id491974"></a>
+<a name="id577554"></a>
       <a class="link" href="using.html#asio.using.building_the_test_and_examples_with_borland_c__">Building
       the test and examples with Borland C++</a>
     </h4>
@@ -176,25 +177,26 @@
     </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-        If you are using a version of boost other than 1.34.1, or if the boost directory
-        (i.e. the directory called <code class="computeroutput"><span class="identifier">boost_1_34_1</span></code>)
-        is not in the same directory as the asio source kit, then specify the location
-        of boost by running a command similar to <code class="literal">set BOOSTDIR=<span class="emphasis"><em>path_to_boost</em></span></code>.
-        Ensure that you specify an absolute path.
-      </li>
+          If you are using a version of boost other than 1.34.1, or if the boost
+          directory (i.e. the directory called <code class="computeroutput"><span class="identifier">boost_1_34_1</span></code>)
+          is not in the same directory as the asio source kit, then specify the location
+          of boost by running a command similar to <code class="literal">set BOOSTDIR=<span class="emphasis"><em>path_to_boost</em></span></code>.
+          Ensure that you specify an absolute path.
+        </li>
 <li>
-        Change to the asio <code class="computeroutput"><span class="identifier">src</span></code> directory.
-      </li>
+          Change to the asio <code class="computeroutput"><span class="identifier">src</span></code>
+          directory.
+        </li>
 <li>
-        Execute the command <code class="computeroutput"><span class="identifier">make</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">bor</span></code>.
-      </li>
+          Execute the command <code class="computeroutput"><span class="identifier">make</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">bor</span></code>.
+        </li>
 <li>
-        Execute the command <code class="computeroutput"><span class="identifier">make</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">bor</span> <span class="identifier">check</span></code>
-        to run a suite of tests to confirm that asio is working correctly.
-      </li>
+          Execute the command <code class="computeroutput"><span class="identifier">make</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">bor</span> <span class="identifier">check</span></code> to run a suite of tests to confirm
+          that asio is working correctly.
+        </li>
 </ul></div>
 <a name="asio.using.building_the_tests_and_examples_with_mingw"></a><h4>
-<a name="id492124"></a>
+<a name="id577717"></a>
       <a class="link" href="using.html#asio.using.building_the_tests_and_examples_with_mingw">Building
       the tests and examples with MinGW</a>
     </h4>
@@ -204,23 +206,24 @@
     </p>
 <div class="itemizedlist"><ul type="disc">
 <li>
-        If you are using a version of boost other than 1.34.1, or if the boost directory
-        (i.e. the directory called <code class="computeroutput"><span class="identifier">boost_1_34_1</span></code>)
-        is not in the same directory as the asio source kit, then specify the location
-        of boost by running a command similar to <code class="literal">set BOOSTDIR=<span class="emphasis"><em>path_to_boost</em></span></code>.
-        Ensure that you specify an absolute path using <span class="emphasis"><em>forward slashes</em></span>
-        (i.e. <code class="computeroutput"><span class="identifier">c</span><span class="special">:/</span><span class="identifier">projects</span><span class="special">/</span><span class="identifier">boost_1_34_1</span></code> rather than <code class="computeroutput"><span class="identifier">c</span><span class="special">:\</span><span class="identifier">projects</span><span class="special">\</span><span class="identifier">boost_1_34_1</span></code>).
-      </li>
+          If you are using a version of boost other than 1.34.1, or if the boost
+          directory (i.e. the directory called <code class="computeroutput"><span class="identifier">boost_1_34_1</span></code>)
+          is not in the same directory as the asio source kit, then specify the location
+          of boost by running a command similar to <code class="literal">set BOOSTDIR=<span class="emphasis"><em>path_to_boost</em></span></code>.
+          Ensure that you specify an absolute path using <span class="emphasis"><em>forward slashes</em></span>
+          (i.e. <code class="computeroutput"><span class="identifier">c</span><span class="special">:/</span><span class="identifier">projects</span><span class="special">/</span><span class="identifier">boost_1_34_1</span></code> rather than <code class="computeroutput"><span class="identifier">c</span><span class="special">:\</span><span class="identifier">projects</span><span class="special">\</span><span class="identifier">boost_1_34_1</span></code>).
+        </li>
 <li>
-        Change to the asio <code class="computeroutput"><span class="identifier">src</span></code> directory.
-      </li>
+          Change to the asio <code class="computeroutput"><span class="identifier">src</span></code>
+          directory.
+        </li>
 <li>
-        Execute the command <code class="computeroutput"><span class="identifier">make</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">mgw</span></code>.
-      </li>
+          Execute the command <code class="computeroutput"><span class="identifier">make</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">mgw</span></code>.
+        </li>
 <li>
-        Execute the command <code class="computeroutput"><span class="identifier">make</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">mgw</span> <span class="identifier">check</span></code>
-        to run a suite of tests to confirm that asio is working correctly.
-      </li>
+          Execute the command <code class="computeroutput"><span class="identifier">make</span> <span class="special">-</span><span class="identifier">f</span> <span class="identifier">Makefile</span><span class="special">.</span><span class="identifier">mgw</span> <span class="identifier">check</span></code> to run a suite of tests to confirm
+          that asio is working correctly.
+        </li>
 </ul></div>
 <div class="note"><table border="0" summary="Note">
 <tr>
@@ -234,7 +237,7 @@
       </p></td></tr>
 </table></div>
 <a name="asio.using.macros"></a><h4>
-<a name="id492354"></a>
+<a name="id577960"></a>
       <a class="link" href="using.html#asio.using.macros">Macros</a>
     </h4>
 <p>
@@ -248,307 +251,312 @@
 </colgroup>
 <thead><tr>
 <th>
-            <p>
-              Macro
-            </p>
+              <p>
+                Macro
+              </p>
             </th>
 <th>
-            <p>
-              Description
-            </p>
+              <p>
+                Description
+              </p>
             </th>
 </tr></thead>
 <tbody>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_ENABLE_BUFFER_DEBUGGING</span></code>
-            </p>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_ENABLE_BUFFER_DEBUGGING</span></code>
+              </p>
             </td>
 <td>
-            <p>
-              Enables Asio's buffer debugging support, which can help identify when
-              invalid buffers are used in read or write operations (e.g. if a std::string
-              object being written is destroyed before the write operation completes).
-            </p>
-            <p>
-              When using Microsoft Visual C++, this macro is defined automatically
-              if the compiler's iterator debugging support is enabled, unless <code class="computeroutput"><span class="identifier">ASIO_DISABLE_BUFFER_DEBUGGING</span></code> has
-              been defined.
-            </p>
-            <p>
-              When using g++, this macro is defined automatically if standard library
-              debugging is enabled (<code class="computeroutput"><span class="identifier">_GLIBCXX_DEBUG</span></code>
-              is defined), unless <code class="computeroutput"><span class="identifier">ASIO_DISABLE_BUFFER_DEBUGGING</span></code>
-              has been defined.
-            </p>
-            </td>
-</tr>
-<tr>
-<td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_DISABLE_BUFFER_DEBUGGING</span></code>
-            </p>
-            </td>
-<td>
-            <p>
-              Explictly disables Asio's buffer debugging support.
-            </p>
+              <p>
+                Enables Asio's buffer debugging support, which can help identify
+                when invalid buffers are used in read or write operations (e.g. if
+                a std::string object being written is destroyed before the write
+                operation completes).
+              </p>
+              <p>
+                When using Microsoft Visual C++, this macro is defined automatically
+                if the compiler's iterator debugging support is enabled, unless
+                <code class="computeroutput"><span class="identifier">ASIO_DISABLE_BUFFER_DEBUGGING</span></code>
+                has been defined.
+              </p>
+              <p>
+                When using g++, this macro is defined automatically if standard library
+                debugging is enabled (<code class="computeroutput"><span class="identifier">_GLIBCXX_DEBUG</span></code>
+                is defined), unless <code class="computeroutput"><span class="identifier">ASIO_DISABLE_BUFFER_DEBUGGING</span></code>
+                has been defined.
+              </p>
             </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_DISABLE_DEV_POLL</span></code>
-            </p>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_DISABLE_BUFFER_DEBUGGING</span></code>
+              </p>
             </td>
 <td>
-            <p>
-              Explicitly disables <code class="literal">/dev/poll</code> support on Solaris,
-              forcing the use of a <code class="computeroutput"><span class="identifier">select</span></code>-based
-              implementation.
-            </p>
+              <p>
+                Explictly disables Asio's buffer debugging support.
+              </p>
             </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_DISABLE_EPOLL</span></code>
-            </p>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_DISABLE_DEV_POLL</span></code>
+              </p>
             </td>
 <td>
-            <p>
-              Explicitly disables <code class="computeroutput"><span class="identifier">epoll</span></code>
-              support on Linux, forcing the use of a <code class="computeroutput"><span class="identifier">select</span></code>-based
-              implementation.
-            </p>
-            </td>
-</tr>
-<tr>
-<td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_DISABLE_EVENTFD</span></code>
-            </p>
-            </td>
-<td>
-            <p>
-              Explicitly disables <code class="computeroutput"><span class="identifier">eventfd</span></code>
-              support on Linux, forcing the use of a pipe to interrupt blocked epoll/select
-              system calls.
-            </p>
+              <p>
+                Explicitly disables <code class="literal">/dev/poll</code> support on Solaris,
+                forcing the use of a <code class="computeroutput"><span class="identifier">select</span></code>-based
+                implementation.
+              </p>
             </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_DISABLE_KQUEUE</span></code>
-            </p>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_DISABLE_EPOLL</span></code>
+              </p>
             </td>
 <td>
-            <p>
-              Explicitly disables <code class="computeroutput"><span class="identifier">kqueue</span></code>
-              support on Mac OS X and BSD variants, forcing the use of a <code class="computeroutput"><span class="identifier">select</span></code>-based implementation.
-            </p>
-            </td>
-</tr>
-<tr>
-<td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_DISABLE_IOCP</span></code>
-            </p>
-            </td>
-<td>
-            <p>
-              Explicitly disables I/O completion ports support on Windows, forcing
-              the use of a <code class="computeroutput"><span class="identifier">select</span></code>-based
-              implementation.
-            </p>
+              <p>
+                Explicitly disables <code class="computeroutput"><span class="identifier">epoll</span></code>
+                support on Linux, forcing the use of a <code class="computeroutput"><span class="identifier">select</span></code>-based
+                implementation.
+              </p>
             </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_DISABLE_THREADS</span></code>
-            </p>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_DISABLE_EVENTFD</span></code>
+              </p>
             </td>
 <td>
-            <p>
-              Explicitly disables Asio's threading support, independent of whether
-              or not Boost supports threads.
-            </p>
-            </td>
-</tr>
-<tr>
-<td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_NO_WIN32_LEAN_AND_MEAN</span></code>
-            </p>
-            </td>
-<td>
-            <p>
-              By default, Asio will automatically define <code class="computeroutput"><span class="identifier">WIN32_LEAN_AND_MEAN</span></code>
-              when compiling for Windows, to minimise the number of Windows SDK header
-              files and features that are included. The presence of <code class="computeroutput"><span class="identifier">ASIO_NO_WIN32_LEAN_AND_MEAN</span></code> prevents
-              <code class="computeroutput"><span class="identifier">WIN32_LEAN_AND_MEAN</span></code>
-              from being defined.
-            </p>
+              <p>
+                Explicitly disables <code class="computeroutput"><span class="identifier">eventfd</span></code>
+                support on Linux, forcing the use of a pipe to interrupt blocked
+                epoll/select system calls.
+              </p>
             </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_NO_NOMINMAX</span></code>
-            </p>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_DISABLE_KQUEUE</span></code>
+              </p>
             </td>
 <td>
-            <p>
-              By default, Asio will automatically define <code class="computeroutput"><span class="identifier">NOMINMAX</span></code>
-              when compiling for Windows, to suppress the definition of the <code class="computeroutput"><span class="identifier">min</span><span class="special">()</span></code>
-              and <code class="computeroutput"><span class="identifier">max</span><span class="special">()</span></code>
-              macros. The presence of <code class="computeroutput"><span class="identifier">ASIO_NO_NOMINMAX</span></code>
-              prevents <code class="computeroutput"><span class="identifier">NOMINMAX</span></code> from
-              being defined.
-            </p>
+              <p>
+                Explicitly disables <code class="computeroutput"><span class="identifier">kqueue</span></code>
+                support on Mac OS X and BSD variants, forcing the use of a <code class="computeroutput"><span class="identifier">select</span></code>-based implementation.
+              </p>
             </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_NO_DEFAULT_LINKED_LIBS</span></code>
-            </p>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_DISABLE_IOCP</span></code>
+              </p>
             </td>
 <td>
-            <p>
-              When compiling for Windows using Microsoft Visual C++ or Borland C++,
-              Asio will automatically link in the necessary Windows SDK libraries
-              for sockets support (i.e. <code class="literal">ws2_32.lib</code> and <code class="literal">mswsock.lib</code>,
-              or <code class="literal">ws2.lib</code> when building for Windows CE). The <code class="computeroutput"><span class="identifier">ASIO_NO_DEFAULT_LINKED_LIBS</span></code> macro
-              prevents these libraries from being linked.
-            </p>
+              <p>
+                Explicitly disables I/O completion ports support on Windows, forcing
+                the use of a <code class="computeroutput"><span class="identifier">select</span></code>-based
+                implementation.
+              </p>
             </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_SOCKET_STREAMBUF_MAX_ARITY</span></code>
-            </p>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_DISABLE_THREADS</span></code>
+              </p>
             </td>
 <td>
-            <p>
-              Determines the maximum number of arguments that may be passed to the
-              <code class="computeroutput"><span class="identifier">basic_socket_streambuf</span></code>
-              class template's <code class="computeroutput"><span class="identifier">connect</span></code>
-              member function. Defaults to 5.
-            </p>
+              <p>
+                Explicitly disables Asio's threading support, independent of whether
+                or not Boost supports threads.
+              </p>
             </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_SOCKET_IOSTREAM_MAX_ARITY</span></code>
-            </p>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_NO_WIN32_LEAN_AND_MEAN</span></code>
+              </p>
             </td>
 <td>
-            <p>
-              Determines the maximum number of arguments that may be passed to the
-              <code class="computeroutput"><span class="identifier">basic_socket_iostream</span></code>
-              class template's constructor and <code class="computeroutput"><span class="identifier">connect</span></code>
-              member function. Defaults to 5.
-            </p>
-            </td>
-</tr>
-<tr>
-<td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_ENABLE_CANCELIO</span></code>
-            </p>
-            </td>
-<td>
-            <p>
-              Enables use of the <code class="computeroutput"><span class="identifier">CancelIo</span></code>
-              function on older versions of Windows. If not enabled, calls to <code class="computeroutput"><span class="identifier">cancel</span><span class="special">()</span></code>
-              on a socket object will always fail with <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error</span><span class="special">::</span><span class="identifier">operation_not_supported</span></code>
-              when run on Windows XP, Windows Server 2003, and earlier versions of
-              Windows. When running on Windows Vista, Windows Server 2008, and later,
-              the <code class="computeroutput"><span class="identifier">CancelIoEx</span></code> function
-              is always used.
-            </p>
-            <p>
-              The <code class="computeroutput"><span class="identifier">CancelIo</span></code> function
-              has two issues that should be considered before enabling its use:
-            </p>
-            <p>
-              * It will only cancel asynchronous operations that were initiated in
-              the current thread.
-            </p>
-            <p>
-              * It can appear to complete without error, but the request to cancel
-              the unfinished operations may be silently ignored by the operating
-              system. Whether it works or not seems to depend on the drivers that
-              are installed.
-            </p>
-            <p>
-              For portable cancellation, consider using one of the following alternatives:
-            </p>
-            <p>
-              * Disable asio's I/O completion port backend by defining ASIO_DISABLE_IOCP.
-            </p>
-            <p>
-              * Use the socket object's close() function to simultaneously cancel
-              the outstanding operations and close the socket.
-            </p>
+              <p>
+                By default, Asio will automatically define <code class="computeroutput"><span class="identifier">WIN32_LEAN_AND_MEAN</span></code>
+                when compiling for Windows, to minimise the number of Windows SDK
+                header files and features that are included. The presence of <code class="computeroutput"><span class="identifier">ASIO_NO_WIN32_LEAN_AND_MEAN</span></code> prevents
+                <code class="computeroutput"><span class="identifier">WIN32_LEAN_AND_MEAN</span></code>
+                from being defined.
+              </p>
             </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_NO_TYPEID</span></code>
-            </p>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_NO_NOMINMAX</span></code>
+              </p>
             </td>
 <td>
-            <p>
-              Disables uses of the <code class="computeroutput"><span class="keyword">typeid</span></code>
-              operator in asio. Defined automatically if <code class="computeroutput"><span class="identifier">BOOST_NO_TYPEID</span></code>
-              is defined.
-            </p>
+              <p>
+                By default, Asio will automatically define <code class="computeroutput"><span class="identifier">NOMINMAX</span></code>
+                when compiling for Windows, to suppress the definition of the <code class="computeroutput"><span class="identifier">min</span><span class="special">()</span></code>
+                and <code class="computeroutput"><span class="identifier">max</span><span class="special">()</span></code>
+                macros. The presence of <code class="computeroutput"><span class="identifier">ASIO_NO_NOMINMAX</span></code>
+                prevents <code class="computeroutput"><span class="identifier">NOMINMAX</span></code>
+                from being defined.
+              </p>
             </td>
 </tr>
 <tr>
 <td>
-            <p>
-              <code class="computeroutput"><span class="identifier">ASIO_HASH_MAP_BUCKETS</span></code>
-            </p>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_NO_DEFAULT_LINKED_LIBS</span></code>
+              </p>
             </td>
 <td>
-            <p>
-              Determines the number of buckets in asio's internal <code class="computeroutput"><span class="identifier">hash_map</span></code>
-              objects. The value should be a comma separated list of prime numbers,
-              in ascending order. The <code class="computeroutput"><span class="identifier">hash_map</span></code>
-              implementation will automatically increase the number of buckets as
-              the number of elements in the map increases.
-            </p>
-            <p>
-              Some examples:
-            </p>
-            <p>
-              * Defining <code class="computeroutput"><span class="identifier">ASIO_HASH_MAP_BUCKETS</span></code>
-              to <code class="computeroutput"><span class="number">1021</span></code> means that the
-              <code class="computeroutput"><span class="identifier">hash_map</span></code> objects will
-              always contain 1021 buckets, irrespective of the number of elements
-              in the map.
-            </p>
-            <p>
-              * Defining <code class="computeroutput"><span class="identifier">ASIO_HASH_MAP_BUCKETS</span></code>
-              to <code class="computeroutput"><span class="number">53</span><span class="special">,</span><span class="number">389</span><span class="special">,</span><span class="number">1543</span></code> means that the <code class="computeroutput"><span class="identifier">hash_map</span></code>
-              objects will initially contain 53 buckets. The number of buckets will
-              be increased to 389 and then 1543 as elements are added to the map.
-            </p>
+              <p>
+                When compiling for Windows using Microsoft Visual C++ or Borland
+                C++, Asio will automatically link in the necessary Windows SDK libraries
+                for sockets support (i.e. <code class="literal">ws2_32.lib</code> and <code class="literal">mswsock.lib</code>,
+                or <code class="literal">ws2.lib</code> when building for Windows CE). The
+                <code class="computeroutput"><span class="identifier">ASIO_NO_DEFAULT_LINKED_LIBS</span></code>
+                macro prevents these libraries from being linked.
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_SOCKET_STREAMBUF_MAX_ARITY</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                Determines the maximum number of arguments that may be passed to
+                the <code class="computeroutput"><span class="identifier">basic_socket_streambuf</span></code>
+                class template's <code class="computeroutput"><span class="identifier">connect</span></code>
+                member function. Defaults to 5.
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_SOCKET_IOSTREAM_MAX_ARITY</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                Determines the maximum number of arguments that may be passed to
+                the <code class="computeroutput"><span class="identifier">basic_socket_iostream</span></code>
+                class template's constructor and <code class="computeroutput"><span class="identifier">connect</span></code>
+                member function. Defaults to 5.
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_ENABLE_CANCELIO</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                Enables use of the <code class="computeroutput"><span class="identifier">CancelIo</span></code>
+                function on older versions of Windows. If not enabled, calls to
+                <code class="computeroutput"><span class="identifier">cancel</span><span class="special">()</span></code>
+                on a socket object will always fail with <code class="computeroutput"><span class="identifier">asio</span><span class="special">::</span><span class="identifier">error</span><span class="special">::</span><span class="identifier">operation_not_supported</span></code>
+                when run on Windows XP, Windows Server 2003, and earlier versions
+                of Windows. When running on Windows Vista, Windows Server 2008, and
+                later, the <code class="computeroutput"><span class="identifier">CancelIoEx</span></code>
+                function is always used.
+              </p>
+              <p>
+                The <code class="computeroutput"><span class="identifier">CancelIo</span></code> function
+                has two issues that should be considered before enabling its use:
+              </p>
+              <p>
+                * It will only cancel asynchronous operations that were initiated
+                in the current thread.
+              </p>
+              <p>
+                * It can appear to complete without error, but the request to cancel
+                the unfinished operations may be silently ignored by the operating
+                system. Whether it works or not seems to depend on the drivers that
+                are installed.
+              </p>
+              <p>
+                For portable cancellation, consider using one of the following alternatives:
+              </p>
+              <p>
+                * Disable asio's I/O completion port backend by defining ASIO_DISABLE_IOCP.
+              </p>
+              <p>
+                * Use the socket object's close() function to simultaneously cancel
+                the outstanding operations and close the socket.
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_NO_TYPEID</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                Disables uses of the <code class="computeroutput"><span class="keyword">typeid</span></code>
+                operator in asio. Defined automatically if <code class="computeroutput"><span class="identifier">BOOST_NO_TYPEID</span></code>
+                is defined.
+              </p>
+            </td>
+</tr>
+<tr>
+<td>
+              <p>
+                <code class="computeroutput"><span class="identifier">ASIO_HASH_MAP_BUCKETS</span></code>
+              </p>
+            </td>
+<td>
+              <p>
+                Determines the number of buckets in asio's internal <code class="computeroutput"><span class="identifier">hash_map</span></code> objects. The value should
+                be a comma separated list of prime numbers, in ascending order. The
+                <code class="computeroutput"><span class="identifier">hash_map</span></code> implementation
+                will automatically increase the number of buckets as the number of
+                elements in the map increases.
+              </p>
+              <p>
+                Some examples:
+              </p>
+              <p>
+                * Defining <code class="computeroutput"><span class="identifier">ASIO_HASH_MAP_BUCKETS</span></code>
+                to <code class="computeroutput"><span class="number">1021</span></code> means that the
+                <code class="computeroutput"><span class="identifier">hash_map</span></code> objects
+                will always contain 1021 buckets, irrespective of the number of elements
+                in the map.
+              </p>
+              <p>
+                * Defining <code class="computeroutput"><span class="identifier">ASIO_HASH_MAP_BUCKETS</span></code>
+                to <code class="computeroutput"><span class="number">53</span><span class="special">,</span><span class="number">389</span><span class="special">,</span><span class="number">1543</span></code> means that the <code class="computeroutput"><span class="identifier">hash_map</span></code>
+                objects will initially contain 53 buckets. The number of buckets
+                will be increased to 389 and then 1543 as elements are added to the
+                map.
+              </p>
             </td>
 </tr>
 </tbody>
 </table></div>
 <a name="asio.using.mailing_list"></a><h4>
-<a name="id493365"></a>
+<a name="id578992"></a>
       <a class="link" href="using.html#asio.using.mailing_list">Mailing List</a>
     </h4>
 <p>
@@ -556,7 +564,7 @@
       Newsgroup access is provided via <a href="http://dir.gmane.org/gmane.comp.lib.boost.asio.user" target="_top">Gmane</a>.
     </p>
 <a name="asio.using.wiki"></a><h4>
-<a name="id493401"></a>
+<a name="id579028"></a>
       <a class="link" href="using.html#asio.using.wiki">Wiki</a>
     </h4>
 <p>

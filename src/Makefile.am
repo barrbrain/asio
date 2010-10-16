@@ -1,8 +1,16 @@
 AUTOMAKE_OPTIONS = subdir-objects
 
-noinst_PROGRAMS = \
-	tests/performance/client \
-	tests/performance/server \
+if SEPARATE_COMPILATION
+
+noinst_LIBRARIES = libasio.a
+
+libasio_a_SOURCES = ../include/asio/impl/src.cpp
+
+LDADD = libasio.a
+
+endif
+
+check_PROGRAMS = \
 	tests/unit/basic_datagram_socket \
 	tests/unit/basic_deadline_timer \
 	tests/unit/basic_serial_port \
@@ -68,7 +76,15 @@ noinst_PROGRAMS = \
 	tests/unit/windows/stream_handle \
 	tests/unit/windows/stream_handle_service \
 	tests/unit/write \
-	tests/unit/write_at \
+	tests/unit/write_at
+
+noinst_PROGRAMS = \
+	tests/latency/tcp_client \
+	tests/latency/tcp_server \
+	tests/latency/udp_client \
+	tests/latency/udp_server \
+	tests/performance/client \
+	tests/performance/server \
 	examples/allocation/server \
 	examples/buffers/reference_counted \
 	examples/chat/chat_client \
@@ -96,10 +112,10 @@ noinst_PROGRAMS = \
 	examples/porthopper/server \
 	examples/services/daytime_client \
 	examples/socks4/sync_client \
-	examples/timeouts/accept_timeout \
-	examples/timeouts/connect_timeout \
-	examples/timeouts/datagram_receive_timeout \
-	examples/timeouts/stream_receive_timeout \
+	examples/timeouts/async_tcp_client \
+	examples/timeouts/blocking_tcp_client \
+	examples/timeouts/blocking_udp_client \
+	examples/timeouts/server \
 	examples/timers/time_t_timer \
 	examples/tutorial/timer1/timer \
 	examples/tutorial/timer2/timer \
@@ -130,14 +146,16 @@ endif
 
 if HAVE_OPENSSL
 
-noinst_PROGRAMS += \
+check_PROGRAMS += \
 	tests/unit/ssl/basic_context \
 	tests/unit/ssl/context_base \
 	tests/unit/ssl/context_service \
 	tests/unit/ssl/context \
 	tests/unit/ssl/stream_base \
 	tests/unit/ssl/stream_service \
-	tests/unit/ssl/stream \
+	tests/unit/ssl/stream
+
+noinst_PROGRAMS += \
 	examples/ssl/client \
 	examples/ssl/server
 
@@ -225,6 +243,10 @@ TESTS += \
 endif
 
 noinst_HEADERS = \
+	tests/latency/coroutine.hpp \
+	tests/latency/high_res_clock.hpp \
+	tests/latency/unyield.hpp \
+	tests/latency/yield.hpp \
 	tests/unit/unit_test.hpp \
 	examples/chat/chat_message.hpp \
 	examples/services/basic_logger.hpp \
@@ -234,6 +256,10 @@ noinst_HEADERS = \
 
 AM_CXXFLAGS = -I$(srcdir)/../include
 
+tests_latency_tcp_client_SOURCES = tests/latency/tcp_client.cpp
+tests_latency_tcp_server_SOURCES = tests/latency/tcp_server.cpp
+tests_latency_udp_client_SOURCES = tests/latency/udp_client.cpp
+tests_latency_udp_server_SOURCES = tests/latency/udp_server.cpp
 tests_performance_client_SOURCES = tests/performance/client.cpp
 tests_performance_server_SOURCES = tests/performance/server.cpp
 tests_unit_basic_datagram_socket_SOURCES = tests/unit/basic_datagram_socket.cpp
@@ -384,10 +410,10 @@ examples_services_daytime_client_SOURCES = \
 	examples/services/daytime_client.cpp \
 	examples/services/logger_service.cpp
 examples_socks4_sync_client_SOURCES = examples/socks4/sync_client.cpp
-examples_timeouts_accept_timeout_SOURCES = examples/timeouts/accept_timeout.cpp
-examples_timeouts_connect_timeout_SOURCES = examples/timeouts/connect_timeout.cpp
-examples_timeouts_datagram_receive_timeout_SOURCES = examples/timeouts/datagram_receive_timeout.cpp
-examples_timeouts_stream_receive_timeout_SOURCES = examples/timeouts/stream_receive_timeout.cpp
+examples_timeouts_async_tcp_client_SOURCES = examples/timeouts/async_tcp_client.cpp
+examples_timeouts_blocking_tcp_client_SOURCES = examples/timeouts/blocking_tcp_client.cpp
+examples_timeouts_blocking_udp_client_SOURCES = examples/timeouts/blocking_udp_client.cpp
+examples_timeouts_server_SOURCES = examples/timeouts/server.cpp
 examples_timers_time_t_timer_SOURCES = examples/timers/time_t_timer.cpp
 examples_tutorial_timer1_timer_SOURCES = examples/tutorial/timer1/timer.cpp
 examples_tutorial_timer2_timer_SOURCES = examples/tutorial/timer2/timer.cpp
