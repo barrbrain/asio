@@ -118,7 +118,7 @@ socket_type sync_accept(socket_type s, state_type state,
     socket_type new_socket = socket_ops::accept(s, addr, addrlen, ec);
 
     // Check if operation succeeded.
-    if (new_socket >= 0)
+    if (new_socket != invalid_socket)
       return new_socket;
 
     // Operation failed.
@@ -209,7 +209,7 @@ bool non_blocking_accept(socket_type s,
     new_socket = socket_ops::accept(s, addr, addrlen, ec);
 
     // Check if operation succeeded.
-    if (new_socket >= 0)
+    if (new_socket != invalid_socket)
       return true;
 
     // Retry operation if interrupted by signal.
@@ -311,14 +311,14 @@ int close(socket_type s, state_type& state,
 
     clear_last_error();
 #if defined(BOOST_WINDOWS) || defined(__CYGWIN__)
-    int result = error_wrapper(::closesocket(s), ec);
+    result = error_wrapper(::closesocket(s), ec);
 #else // defined(BOOST_WINDOWS) || defined(__CYGWIN__)
-    int result = error_wrapper(::close(s), ec);
+    result = error_wrapper(::close(s), ec);
 #endif // defined(BOOST_WINDOWS) || defined(__CYGWIN__)
-    if (result == 0)
-      ec = asio::error_code();
   }
 
+  if (result == 0)
+    ec = asio::error_code();
   return result;
 }
 
@@ -1413,7 +1413,7 @@ int getsockname(socket_type s, socket_addr_type* addr,
   return result;
 }
 
-int ioctl(socket_type s, state_type& state, long cmd,
+int ioctl(socket_type s, state_type& state, int cmd,
     ioctl_arg_type* arg, asio::error_code& ec)
 {
   if (s == invalid_socket)
@@ -1425,9 +1425,13 @@ int ioctl(socket_type s, state_type& state, long cmd,
   clear_last_error();
 #if defined(BOOST_WINDOWS) || defined(__CYGWIN__)
   int result = error_wrapper(::ioctlsocket(s, cmd, arg), ec);
-#else // defined(BOOST_WINDOWS) || defined(__CYGWIN__)
+#elif defined(__MACH__) && defined(__APPLE__) \
+  || defined(__NetBSD__) || defined(__FreeBSD__) || defined(__OpenBSD__)
+  int result = error_wrapper(::ioctl(s,
+        static_cast<unsigned int>(cmd), arg), ec);
+#else
   int result = error_wrapper(::ioctl(s, cmd, arg), ec);
-#endif // defined(BOOST_WINDOWS) || defined(__CYGWIN__)
+#endif
   if (result >= 0)
   {
     ec = asio::error_code();
@@ -1437,7 +1441,7 @@ int ioctl(socket_type s, state_type& state, long cmd,
     // the correct state. This ensures that the underlying socket is put into
     // the state that has been requested by the user. If the ioctl syscall was
     // successful then we need to update the flags to match.
-    if (cmd == static_cast<long>(FIONBIO))
+    if (cmd == static_cast<int>(FIONBIO))
     {
       if (*arg)
       {
@@ -1482,7 +1486,7 @@ int select(int nfds, fd_set* readfds, fd_set* writefds,
     timeout->tv_usec = 1000;
 #endif // defined(BOOST_WINDOWS) || defined(__CYGWIN__)
 
-#if defined(__hpux) && defined(__HP_aCC)
+#if defined(__hpux) && defined(__SELECT)
   timespec ts;
   ts.tv_sec = timeout ? timeout->tv_sec : 0;
   ts.tv_nsec = timeout ? timeout->tv_usec * 1000 : 0;
@@ -2668,6 +2672,7 @@ asio::error_code getaddrinfo(const char* host,
     addrinfo_type** result, asio::error_code& ec)
 {
   host = (host && *host) ? host : 0;
+  service = (service && *service) ? service : 0;
   clear_last_error();
 #if defined(BOOST_WINDOWS) || defined(__CYGWIN__)
 # if defined(_WIN32_WINNT) && (_WIN32_WINNT >= 0x0501) || defined(UNDER_CE)

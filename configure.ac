@@ -1,4 +1,4 @@
-AC_INIT(asio, [1.4.6])
+AC_INIT(asio, [1.4.7])
 AC_CONFIG_SRCDIR(include/asio.hpp)
 AM_MAINTAINER_MODE
 AM_INIT_AUTOMAKE([tar-ustar])
@@ -149,6 +149,10 @@ case $host in
     LDFLAGS="$LDFLAGS"
     ;;
   *-*-freebsd*)
+    CXXFLAGS="$CXXFLAGS -pthread"
+    LDFLAGS="$LDFLAGS -pthread"
+    ;;
+  *-*-netbsd*)
     CXXFLAGS="$CXXFLAGS -pthread"
     LDFLAGS="$LDFLAGS -pthread"
     ;;
